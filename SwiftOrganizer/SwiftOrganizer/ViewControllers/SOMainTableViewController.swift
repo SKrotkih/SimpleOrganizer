@@ -1,25 +1,20 @@
 //
 //  SOMainTableViewController.swift
-//  SimpleTable
+//  SwiftOrganizer
 //
-//  Created by Domenico on 22.04.15.
-//  Copyright (c) 2015 Domenico Solazzo. All rights reserved.
+//  Created by Sergey Krotkih on 5/28/15.
+//  Copyright (c) 2015 Sergey Krotkih. All rights reserved.
 //
 
 import UIKit
+import CoreData
 
 class SOMainTableViewController: NSObject, UITableViewDataSource, UITableViewDelegate {
 
     let tableView : UITableView
     
-    private let dwarves = [
-        "Sleepy", "Sneezy", "Bashful", "Happy",
-        "Doc", "Grumpy", "Dopey",
-        "Thorin", "Dorin", "Nori", "Ori",
-        "Balin", "Dwalin", "Fili", "Kili",
-        "Oin", "Gloin", "Bifur", "Bofur",
-        "Bombur"
-    ]
+    var tasks : [SOTask] = []
+    
     let mainTableViewCellIdentifier = "MainTableViewCell"
     let mainHeaderTableViewCellIdentifier = "HeaderTableViewCell"
     
@@ -30,30 +25,43 @@ class SOMainTableViewController: NSObject, UITableViewDataSource, UITableViewDel
         self.tableView.dataSource = self
     }
 
+
+//    func fetchRequestAllTasks(data: [Task], error: NSErrorPointer) -> Void {
+//
+//        self.tableView.reloadData()
+//    }
+//    func getAllTasks(successBlock: (allTaskData: [Task], error: NSErrorPointer) -> Void){
+//        SOLocalDataBase.sharedInstance.fetchAllTasksInBackground(self.fetchRequestAllTasks)
+//    }
+    
     func reloadData(){
-        
-        self.tableView.reloadData()
+        SOLocalDataBase.sharedInstance.fetchAllTasksInBackground({
+            (allCurrentTasks: [SOTask], error: NSErrorPointer) in
+            self.tasks = allCurrentTasks
+            self.tableView.reloadData()
+        })
     }
     
     //- MARK: UITableViewDataSource
-    /// Number of row in a section
+    /// Number of rows in a section
     @objc func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return dwarves.count
+        return self.tasks.count
     }
     
-    /// It is called by the table view when it needs to draw one of its rows.
     @objc func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        // Reuse a cell of the specified type
-        
         if indexPath.row == 0{
+            // Header Cell
             var cell = self.tableView.dequeueReusableCellWithIdentifier(mainHeaderTableViewCellIdentifier) as? UITableViewCell
             
             return cell!
         }
         else
         {
+            // Task Cell
             var cell = self.tableView.dequeueReusableCellWithIdentifier(mainTableViewCellIdentifier) as? SOMainTableViewCell
-            cell!.titleTextLabel!.text = dwarves[indexPath.row]
+            let row = indexPath.row - 1
+            let currentTask : SOTask = self.tasks[row]
+            cell!.fillTaskData(currentTask)
             
             return cell!
         }
@@ -63,28 +71,25 @@ class SOMainTableViewController: NSObject, UITableViewDataSource, UITableViewDel
     func tableView(tableView: UITableView, indentationLevelForRowAtIndexPath indexPath: NSIndexPath) -> Int {
             return indexPath.row % 4
     }
+
     // Before the row is selected
-    func tableView(tableView: UITableView, willSelectRowAtIndexPath indexPath: NSIndexPath)
-        -> NSIndexPath? {
-            if indexPath.row == 0 {
-                return nil
-            } else {
-                return indexPath
-            }
+    func tableView(tableView: UITableView, willSelectRowAtIndexPath indexPath: NSIndexPath) -> NSIndexPath? {
+        if indexPath.row == 0 {
+            return nil
+        } else {
+            return indexPath
+        }
     }
     
     // After the row is selected
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-            let rowValue = dwarves[indexPath.row]
-            let message = "You selected \(rowValue)"
-            
+        let currentTask : SOTask = self.tasks[indexPath.row]
+        let title  = currentTask.title
+        let message = "You selected \(title)"
     }
     
     // Customizing the row height
-    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath)
-        -> CGFloat {
+    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
             return indexPath.row == 0 ? 44 : 47
     }
-
-
 }

@@ -1,9 +1,9 @@
 //
-//  NameAndColorCell.swift
-//  TableCells
+//  SOMainTableViewCell.swift
+//  SwiftOrganizer
 //
-//  Created by Domenico on 22.04.15.
-//  Copyright (c) 2015 Domenico Solazzo. All rights reserved.
+//  Created by Sergey Krotkih on 5/28/15.
+//  Copyright (c) 2015 Sergey Krotkih. All rights reserved.
 //
 
 import UIKit
@@ -21,35 +21,17 @@ class SOMainTableViewCell: UITableViewCell {
     @IBOutlet weak var icon5ImageView: UIImageView!
     @IBOutlet weak var icon6ImageView: UIImageView!
     
-    var name: String = "" {
-        didSet {
-            if (name != oldValue) {
-                nameLabel.text = name
-            }
-        }
-    }
-    var color: String = "" {
-        didSet {
-            if (color != oldValue) {
-                colorLabel.text = color
-            }
-        }
-    }
-    var nameLabel: UILabel!
-    var colorLabel: UILabel!
-    
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        
-
     }
     
     override func awakeFromNib() {
         super.awakeFromNib()
+
         // Initialization code
     }
 
@@ -59,6 +41,18 @@ class SOMainTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
-  
+    //- MARK: Fill DATA
+    func fillTaskData(task: SOTask){
 
+        self.titleTextLabel!.text = task.title
+        self.categoryNameLabel!.text = task.category
+        
+        self.icon1ImageView.image = task.ico(0)
+        self.icon2ImageView.image = task.ico(1)
+        self.icon3ImageView.image = task.ico(2)
+        self.icon4ImageView.image = task.ico(3)
+        self.icon5ImageView.image = task.ico(4)
+        self.icon6ImageView.image = task.ico(5)
+        
+    }
 }

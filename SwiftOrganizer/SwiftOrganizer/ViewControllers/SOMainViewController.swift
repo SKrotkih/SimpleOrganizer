@@ -1,8 +1,9 @@
 //
 //  SOMainViewController.swift
-//  SlideMenuControllerSwift
+//  SwiftOrganizer
 //
-//  Created by Yuji Hato on 12/3/14.
+//  Created by Sergey Krotkih on 5/28/15.
+//  Copyright (c) 2015 Sergey Krotkih. All rights reserved.
 //
 
 import UIKit
@@ -27,10 +28,4 @@ class SOMainViewController: UIViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
-
-    
-    
-    
-
 }
-
