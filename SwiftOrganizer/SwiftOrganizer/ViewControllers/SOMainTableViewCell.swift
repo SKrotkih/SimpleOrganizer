@@ -43,10 +43,8 @@ class SOMainTableViewCell: UITableViewCell {
     
     //- MARK: Fill DATA
     func fillTaskData(task: SOTask){
-
         self.titleTextLabel!.text = task.title
         self.categoryNameLabel!.text = task.category
-        
         self.icon1ImageView.image = task.ico(0)
         self.icon2ImageView.image = task.ico(1)
         self.icon3ImageView.image = task.ico(2)

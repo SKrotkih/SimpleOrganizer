@@ -9,7 +9,13 @@
 import UIKit
 import CoreData
 
-class SOMainTableViewController: NSObject, UITableViewDataSource, UITableViewDelegate {
+
+protocol SOChangeFilterStateDelegate{
+    func didSelectCategory(category: Category, select: Bool)
+    func didSelectIcon(icon: Ico, select: Bool)
+}
+
+class SOMainTableViewController: NSObject, UITableViewDataSource, UITableViewDelegate, SOChangeFilterStateDelegate{
 
     let tableView : UITableView
     
@@ -31,12 +37,11 @@ class SOMainTableViewController: NSObject, UITableViewDataSource, UITableViewDel
 //        self.tableView.reloadData()
 //    }
 //    func getAllTasks(successBlock: (allTaskData: [Task], error: NSErrorPointer) -> Void){
-//        SOLocalDataBase.sharedInstance.fetchAllTasksInBackground(self.fetchRequestAllTasks)
+//        SOLocalDataBase.sharedInstance.fetchAllTasks(self.fetchRequestAllTasks)
 //    }
     
     func reloadData(){
-        SOLocalDataBase.sharedInstance.fetchAllTasksInBackground({
-            (allCurrentTasks: [SOTask], error: NSErrorPointer) in
+        SOLocalDataBase.sharedInstance.fetchAllTasks({ (allCurrentTasks: [SOTask], error: NSErrorPointer) in
             self.tasks = allCurrentTasks
             self.tableView.reloadData()
         })
@@ -45,7 +50,7 @@ class SOMainTableViewController: NSObject, UITableViewDataSource, UITableViewDel
     //- MARK: UITableViewDataSource
     /// Number of rows in a section
     @objc func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.tasks.count
+        return self.tasks.count + 1
     }
     
     @objc func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -83,13 +88,33 @@ class SOMainTableViewController: NSObject, UITableViewDataSource, UITableViewDel
     
     // After the row is selected
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        let currentTask : SOTask = self.tasks[indexPath.row]
+        let row = indexPath.row - 1
+        let currentTask : SOTask = self.tasks[row]
         let title  = currentTask.title
         let message = "You selected \(title)"
     }
     
     // Customizing the row height
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-            return indexPath.row == 0 ? 44 : 47
+            return indexPath.row == 0 ? 28 : 47
     }
+    
+    
+    // - MARK: SOChangeFilterStateDelegate
+    
+    func didSelectCategory(category: Category, select: Bool){
+        SOLocalDataBase.sharedInstance.updateCategory(category, fieldName: "selected", value: select)
+        dispatch_async(dispatch_get_main_queue(), {
+            self.reloadData()
+        })
+    }
+    
+    func didSelectIcon(icon: Ico, select: Bool){
+        SOLocalDataBase.sharedInstance.updateIcon(icon, fieldName: "selected", value: select)
+        dispatch_async(dispatch_get_main_queue(), {
+            self.reloadData()
+        })
+    }
+    
+    // - MARK:     
 }

@@ -15,5 +15,6 @@ class Ico: NSManagedObject {
     @NSManaged var id: String
     @NSManaged var name: String
     @NSManaged var imagename: String
+    @NSManaged var selected: Bool    
 
 }

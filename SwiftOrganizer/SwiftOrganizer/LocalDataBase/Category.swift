@@ -14,5 +14,6 @@ class Category: NSManagedObject {
 
     @NSManaged var id: String
     @NSManaged var name: String
+    @NSManaged var selected: Bool
 
 }

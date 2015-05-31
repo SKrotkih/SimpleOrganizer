@@ -34,7 +34,7 @@ class SOLocalDataBase: NSObject {
         task.ico4 = "2"
         task.ico5 = ""
         task.ico6 = ""
-        task.title = "Nask 1"
+        task.title = "Task 1"
 
 
         let task2 = NSEntityDescription.insertNewObjectForEntityForName(entityName, inManagedObjectContext: managedObjectContext!) as! Task
@@ -45,7 +45,7 @@ class SOLocalDataBase: NSObject {
         task2.ico4 = "2"
         task2.ico5 = "1"
         task2.ico6 = ""
-        task2.title = "Nask 2"
+        task2.title = "Task 2"
 
         let task3 = NSEntityDescription.insertNewObjectForEntityForName(entityName, inManagedObjectContext: managedObjectContext!) as! Task
         task3.category = "3"
@@ -55,7 +55,7 @@ class SOLocalDataBase: NSObject {
         task3.ico4 = "2"
         task3.ico5 = ""
         task3.ico6 = ""
-        task3.title = "Nask 3"
+        task3.title = "Task 3"
         
         var savingError: NSError?
         if managedObjectContext!.save(&savingError){
@@ -80,6 +80,7 @@ class SOLocalDataBase: NSObject {
             ico.id = iconDict["id"]!
             ico.name = iconDict["name"]!
             ico.imagename = iconDict["img"]!
+            ico.selected = true
         }
         
         var savingError: NSError?
@@ -106,6 +107,7 @@ class SOLocalDataBase: NSObject {
             let category = NSEntityDescription.insertNewObjectForEntityForName(entityName, inManagedObjectContext: managedObjectContext!) as! Category
             category.id = "\(categoryId++)"
             category.name = catagoryName as String
+            category.selected = true
         }
         var savingError: NSError?
 
@@ -136,6 +138,10 @@ class SOLocalDataBase: NSObject {
             var requestError: NSError?
             let categories = managedObjectContext!.executeFetchRequest(fetchRequest, error: &requestError) as! [Category]
             
+            if let error = requestError{
+                println("Failed to fetch of Category data. Error = \(error)")
+            }
+            
             if categories.count > 0{
                 for category in categories{
                     _allCategories.append(category)
@@ -152,6 +158,42 @@ class SOLocalDataBase: NSObject {
         }
     }
     
+    func updateCategory(category: Category, fieldName: String, value: AnyObject){
+        _allCategories.removeAll(keepCapacity: false)
+        category.setValue(value, forKey: fieldName);
+        self.saveContext()
+    }
+
+    func updateIcon(icon: Ico, fieldName: String, value: AnyObject){
+        _allIcons.removeAll(keepCapacity: false)
+        icon.setValue(value, forKey: fieldName);
+        self.saveContext()
+    }
+
+    func updateTask(){
+        //       let batch = NSBatchUpdateRequest(entityName: "Category")
+        //        batch.propertiesToUpdate = [fieldName: value]
+        //        // Predicate
+        //        batch.predicate = NSPredicate(format: "id = %@", category.id)
+        //        // Result type
+        //        batch.resultType = NSBatchUpdateRequestResultType.UpdatedObjectsCountResultType
+        //
+        //        var batchError: NSError?
+        //        let result = managedObjectContext!.executeRequest(batch, error: &batchError)
+        //
+        //        if result != nil{
+        //            if let theResult = result as? NSBatchUpdateResult{
+        //                if let numberOfAffectedPersons = theResult.result as? Int{
+        //                    println("Number of categories which were updated is \(numberOfAffectedPersons)")
+        //                }
+        //            }
+        //        }else{
+        //            if let error = batchError{
+        //                println("Could not perform batch request. Error = \(error)")
+        //            }
+        //        }
+    }
+    
     subscript(index: Int) -> Category  {
         assert(allCategories.count > 0 && index < allCategories.count)
         
@@ -165,15 +207,24 @@ class SOLocalDataBase: NSObject {
     }
     
     func categoryName(id : String) -> String{
-        for category in self.allCategories{
-            if category.id == id{
-                return category.name
-            }
+        let categoryOpt: Category? = self.categoryById(id)
+        if let category = categoryOpt{
+            return category.name
         }
         
         return ""
     }
 
+    func categoryById(id : String) -> Category?{
+        for category in self.allCategories{
+            if category.id == id{
+                return category
+            }
+        }
+        
+        return nil
+    }
+    
     // - MARK: Icons
     var allIcons: [Ico]{
         get{
@@ -186,6 +237,10 @@ class SOLocalDataBase: NSObject {
             
             var requestError: NSError?
             let icons = managedObjectContext!.executeFetchRequest(fetchRequest, error: &requestError) as! [Ico]
+            
+            if let error = requestError{
+                println("Failed to fetch of Icons data. Error = \(error)")
+            }
             
             if icons.count > 0{
                 for ico in icons{
@@ -210,17 +265,27 @@ class SOLocalDataBase: NSObject {
     }
 
     func iconsImageName(id : String) -> String{
-        for ico in self.allIcons{
-            if ico.id == id{
-                return ico.imagename
-            }
+        let icoOpt: Ico? = self.iconById(id)
+        if let ico = icoOpt{
+            return ico.imagename
         }
         
         return ""
     }
     
+    func iconById(id : String) -> Ico?{
+        for ico in self.allIcons{
+            if ico.id == id{
+                return ico
+            }
+        }
+        
+        return nil
+    }
+    
+    
     // - MARK: Tasks
-    func fetchAllTasksInBackground(successBlock: (allTaskData: [SOTask], error: NSErrorPointer) -> Void) {
+    func fetchAllTasks(successBlock: (allTaskData: [SOTask], error: NSErrorPointer) -> Void) {
         let backgroundContext = NSManagedObjectContext(concurrencyType: NSManagedObjectContextConcurrencyType.PrivateQueueConcurrencyType)
         backgroundContext.persistentStoreCoordinator = persistentStoreCoordinator
 
@@ -234,11 +299,30 @@ class SOLocalDataBase: NSObject {
                 if fetchError == nil{
                     if tasks.count > 0 {
                         dispatch_async(dispatch_get_main_queue(), {
-                            self!._allTasks.removeAll(keepCapacity: true)
+                            self!._allTasks.removeAll(keepCapacity: false)
 
                             for task in tasks{
-                                let sotask = SOTask(task: task)
-                                self!._allTasks.append(sotask)
+                                var categorySelected: Bool = false
+                                let categoryOpt: Category? = self?.categoryById(task.category)
+                                if let category = categoryOpt{
+                                    categorySelected = category.selected
+                                }
+                                
+                                let icons = [task.ico1, task.ico2, task.ico3, task.ico4, task.ico5, task.ico6]
+                                var iconsSelected: Bool = true
+                                
+                                for iconId in icons{
+                                    let iconOpt: Ico? = self?.iconById(iconId)
+                                    if let ico = iconOpt{
+                                        iconsSelected = iconsSelected && ico.selected
+                                    }
+                                }
+                                
+                                if categorySelected && iconsSelected{
+                                    let sotask = SOTask(task: task)
+                                    self!._allTasks.append(sotask)
+                                }
+                                
                             }
                             var fetchError: NSError?
                             successBlock(allTaskData: self!._allTasks, error: &fetchError)
@@ -274,9 +358,6 @@ class SOLocalDataBase: NSObject {
     
     lazy var managedObjectModel: NSManagedObjectModel = {
         // The managed object model for the application. This property is not optional. It is a fatal error for the application not to be able to find and load its model.
-        
-        println("\(DatabaseName)")
-        
         let modelURL = NSBundle.mainBundle().URLForResource(DatabaseName, withExtension: "momd")!
         return NSManagedObjectModel(contentsOfURL: modelURL)!
         }()
@@ -318,7 +399,7 @@ class SOLocalDataBase: NSObject {
     
     // MARK: - Core Data Saving support
     
-    func saveContext () {
+    func saveContext() {
         if let moc = self.managedObjectContext {
             var error: NSError? = nil
             if moc.hasChanges && !moc.save(&error) {
