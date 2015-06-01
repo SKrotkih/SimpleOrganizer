@@ -24,7 +24,7 @@
 		7F5725661B0F5DDA003DBDEB /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7F5725651B0F5DDA003DBDEB /* Images.xcassets */; };
 		7F5725751B0F5DDB003DBDEB /* SwiftOrganizerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F5725741B0F5DDB003DBDEB /* SwiftOrganizerTests.swift */; };
 		7F5725921B0F6114003DBDEB /* GoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F57258B1B0F6114003DBDEB /* GoViewController.swift */; };
-		7F5725931B0F6114003DBDEB /* JavaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F57258C1B0F6114003DBDEB /* JavaViewController.swift */; };
+		7F5725931B0F6114003DBDEB /* SOEditTaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F57258C1B0F6114003DBDEB /* SOEditTaskViewController.swift */; };
 		7F5725941B0F6114003DBDEB /* LeftViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F57258D1B0F6114003DBDEB /* LeftViewController.swift */; };
 		7F5725951B0F6114003DBDEB /* SOMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F57258E1B0F6114003DBDEB /* SOMainViewController.swift */; };
 		7F5725961B0F6114003DBDEB /* NonMenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F57258F1B0F6114003DBDEB /* NonMenuController.swift */; };
@@ -89,7 +89,7 @@
 		7F5725731B0F5DDB003DBDEB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7F5725741B0F5DDB003DBDEB /* SwiftOrganizerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftOrganizerTests.swift; sourceTree = "<group>"; };
 		7F57258B1B0F6114003DBDEB /* GoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoViewController.swift; sourceTree = "<group>"; };
-		7F57258C1B0F6114003DBDEB /* JavaViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JavaViewController.swift; sourceTree = "<group>"; };
+		7F57258C1B0F6114003DBDEB /* SOEditTaskViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SOEditTaskViewController.swift; sourceTree = "<group>"; };
 		7F57258D1B0F6114003DBDEB /* LeftViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LeftViewController.swift; sourceTree = "<group>"; };
 		7F57258E1B0F6114003DBDEB /* SOMainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SOMainViewController.swift; sourceTree = "<group>"; };
 		7F57258F1B0F6114003DBDEB /* NonMenuController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NonMenuController.swift; sourceTree = "<group>"; };
@@ -232,11 +232,10 @@
 			children = (
 				7F5A6D1D1B14A115009665C7 /* MainViewController */,
 				7F0D37831B0F67B1008B785B /* SlideMenuController.swift */,
-				7F57258B1B0F6114003DBDEB /* GoViewController.swift */,
-				7F57258F1B0F6114003DBDEB /* NonMenuController.swift */,
-				7F57258C1B0F6114003DBDEB /* JavaViewController.swift */,
 				7F57258D1B0F6114003DBDEB /* LeftViewController.swift */,
+				7F57258F1B0F6114003DBDEB /* NonMenuController.swift */,
 				7F5725901B0F6114003DBDEB /* RightViewController.swift */,
+				7F57258B1B0F6114003DBDEB /* GoViewController.swift */,
 				7F5725911B0F6114003DBDEB /* SwiftViewController.swift */,
 			);
 			path = ViewControllers;
@@ -297,6 +296,7 @@
 				7F57258E1B0F6114003DBDEB /* SOMainViewController.swift */,
 				7F5A6D1E1B14A75A009665C7 /* SOMainTableViewController.swift */,
 				7F5A6D201B14B61B009665C7 /* SOMainTableViewCell.swift */,
+				7F57258C1B0F6114003DBDEB /* SOEditTaskViewController.swift */,
 				7F497D501B1AA20D00F95BA9 /* TabBar */,
 			);
 			name = MainViewController;
@@ -313,12 +313,13 @@
 		7F5A6D231B14C388009665C7 /* Images */ = {
 			isa = PBXGroup;
 			children = (
-				7F5A6D241B14C390009665C7 /* Icons */,
+				7F6E98131B1C87E50048ED7A /* Images */,
+				7F5A6D241B14C390009665C7 /* TasksIcons */,
 			);
 			name = Images;
 			sourceTree = "<group>";
 		};
-		7F5A6D241B14C390009665C7 /* Icons */ = {
+		7F5A6D241B14C390009665C7 /* TasksIcons */ = {
 			isa = PBXGroup;
 			children = (
 				7F5A6D251B14C42C009665C7 /* ico1@2x.png */,
@@ -334,7 +335,14 @@
 				7F5A6D2F1B14C42C009665C7 /* ico11@2x.png */,
 				7F5A6D301B14C42C009665C7 /* ico12@2x.png */,
 			);
-			name = Icons;
+			name = TasksIcons;
+			sourceTree = "<group>";
+		};
+		7F6E98131B1C87E50048ED7A /* Images */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Images;
 			sourceTree = "<group>";
 		};
 		A3B5FA19EA2224987AAFA3C6 /* Pods */ = {
@@ -463,7 +471,7 @@
 				7F9B772A1B189E67006D3434 /* SwiftOrganizer.xcdatamodeld in Sources */,
 				7F497D5A1B1AAF7700F95BA9 /* SOCategoryTabView.swift in Sources */,
 				7F0D37841B0F67B1008B785B /* SlideMenuController.swift in Sources */,
-				7F5725931B0F6114003DBDEB /* JavaViewController.swift in Sources */,
+				7F5725931B0F6114003DBDEB /* SOEditTaskViewController.swift in Sources */,
 				7F497D4B1B18A63200F95BA9 /* Task.swift in Sources */,
 				7F57255C1B0F5DDA003DBDEB /* AppDelegate.swift in Sources */,
 				7F497D561B1AAA9900F95BA9 /* SOCategoryTabBarController.swift in Sources */,

@@ -18,11 +18,13 @@ protocol SOChangeFilterStateDelegate{
 class SOMainTableViewController: NSObject, UITableViewDataSource, UITableViewDelegate, SOChangeFilterStateDelegate{
 
     let tableView : UITableView
+    var taskEditingDelegate: SOEditTaskController?
     
     var tasks : [SOTask] = []
     
     let mainTableViewCellIdentifier = "MainTableViewCell"
     let mainHeaderTableViewCellIdentifier = "HeaderTableViewCell"
+    let newRecordTableViewCellIdentifier = "NewRecordTableViewCell"
     
     init(tableView aTavleView: UITableView){
         self.tableView = aTavleView
@@ -54,15 +56,14 @@ class SOMainTableViewController: NSObject, UITableViewDataSource, UITableViewDel
     }
     
     @objc func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        if indexPath.row == 0{
-            // Header Cell
+
+        switch indexPath.row{
+        case 0:
             var cell = self.tableView.dequeueReusableCellWithIdentifier(mainHeaderTableViewCellIdentifier) as? UITableViewCell
             
             return cell!
-        }
-        else
-        {
-            // Task Cell
+            
+        default:
             var cell = self.tableView.dequeueReusableCellWithIdentifier(mainTableViewCellIdentifier) as? SOMainTableViewCell
             let row = indexPath.row - 1
             let currentTask : SOTask = self.tasks[row]
@@ -88,17 +89,24 @@ class SOMainTableViewController: NSObject, UITableViewDataSource, UITableViewDel
     
     // After the row is selected
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        let row = indexPath.row - 1
-        let currentTask : SOTask = self.tasks[row]
-        let title  = currentTask.title
-        let message = "You selected \(title)"
+
+        switch indexPath.row{
+        case 0:
+            println("Oh headar of the table was pressed!")
+
+        default:
+            let row = indexPath.row - 1
+            let currentTask : SOTask = self.tasks[row]
+            if let delegate = taskEditingDelegate{
+                delegate.startEditingTask(currentTask)
+            }
+        }
     }
     
     // Customizing the row height
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
             return indexPath.row == 0 ? 28 : 47
     }
-    
     
     // - MARK: SOChangeFilterStateDelegate
     

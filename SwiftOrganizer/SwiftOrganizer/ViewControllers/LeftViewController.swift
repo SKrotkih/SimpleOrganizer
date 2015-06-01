@@ -21,13 +21,10 @@ protocol LeftMenuProtocol : class {
 
 class LeftViewController : UIViewController, LeftMenuProtocol {
     
-
-    
     @IBOutlet weak var tableView: UITableView!
-    var menus = ["Main", "Swift", "Java", "Go", "NonMenu"]
+    var menus = ["Main", "Swift", "Go", "NonMenu"]
     var mainViewController: UIViewController!
     var swiftViewController: UIViewController!
-    var javaViewController: UIViewController!
     var goViewController: UIViewController!
     var nonMenuViewController: UIViewController!
     
@@ -42,9 +39,6 @@ class LeftViewController : UIViewController, LeftMenuProtocol {
         var storyboard = UIStoryboard(name: "Main", bundle: nil)
         let swiftViewController = storyboard.instantiateViewControllerWithIdentifier("SwiftViewController") as! SwiftViewController
         self.swiftViewController = UINavigationController(rootViewController: swiftViewController)
-        
-        let javaViewController = storyboard.instantiateViewControllerWithIdentifier("JavaViewController") as! JavaViewController
-        self.javaViewController = UINavigationController(rootViewController: javaViewController)
         
         let goViewController = storyboard.instantiateViewControllerWithIdentifier("GoViewController") as! GoViewController
         self.goViewController = UINavigationController(rootViewController: goViewController)
@@ -85,9 +79,6 @@ class LeftViewController : UIViewController, LeftMenuProtocol {
             self.slideMenuController()?.changeMainViewController(self.mainViewController, close: true)
         case .Swift:
             self.slideMenuController()?.changeMainViewController(self.swiftViewController, close: true)
-            break
-        case .Java:
-            self.slideMenuController()?.changeMainViewController(self.javaViewController, close: true)
             break
         case .Go:
             self.slideMenuController()?.changeMainViewController(self.goViewController, close: true)

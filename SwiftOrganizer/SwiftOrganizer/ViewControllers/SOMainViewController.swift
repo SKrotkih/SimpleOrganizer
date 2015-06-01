@@ -8,7 +8,11 @@
 
 import UIKit
 
-class SOMainViewController: UIViewController{
+protocol SOEditTaskController{
+    func startEditingTask(task: SOTask?)
+}
+
+class SOMainViewController: UIViewController, SOEditTaskController{
 
     @IBOutlet weak var mainTableView: UITableView!
     var mainTableViewController: SOMainTableViewController!
@@ -29,6 +33,7 @@ class SOMainViewController: UIViewController{
         iconsTabBarController = SOIconsTabBarController(scrollView: iconsScrollView, containerView: iconsTabBarView)
         
         mainTableViewController = SOMainTableViewController(tableView: self.mainTableView)
+        mainTableViewController.taskEditingDelegate = self
         
         categoryTabBarController.filterStateDelegate = mainTableViewController
         iconsTabBarController.filterStateDelegate = mainTableViewController
@@ -40,10 +45,32 @@ class SOMainViewController: UIViewController{
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        self.setNavigationBarItem()
-    }
+        self.addLeftBarButtonWithImage(UIImage(named: "ic_menu_black_24dp")!)
+        self.slideMenuController()?.removeLeftGestures()
+        self.slideMenuController()?.removeRightGestures()
 
+        let buttonImage : UIImage! = UIImage(named: "add_task")
+        var rightButton: UIBarButtonItem = UIBarButtonItem(image: buttonImage, style: UIBarButtonItemStyle.Plain, target: self, action: "addNewTask")
+            navigationItem.rightBarButtonItem = rightButton;
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
+
+    func addNewTask(){
+        self.startEditingTask(nil)
+    }
+
+    func editTask(task: SOTask?){
+        self.startEditingTask(task)
+    }
+
+    func startEditingTask(task: SOTask?){
+        var storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let newTaskRecordViewController = storyboard.instantiateViewControllerWithIdentifier("SOEditTaskViewController") as! SOEditTaskViewController
+        newTaskRecordViewController.task = task
+        self.navigationController!.pushViewController(newTaskRecordViewController, animated: true)
+    }
+    
 }
