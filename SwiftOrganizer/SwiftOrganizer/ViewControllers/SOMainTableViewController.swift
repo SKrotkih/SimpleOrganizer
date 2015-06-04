@@ -44,6 +44,7 @@ class SOMainTableViewController: NSObject, UITableViewDataSource, UITableViewDel
     
     func reloadData(){
         SOLocalDataBase.sharedInstance.fetchAllTasks({ (allCurrentTasks: [SOTask], error: NSErrorPointer) in
+            error.memory = NSError(domain: "LocalDataBaseErrors", code: 0, userInfo: [:])
             self.tasks = allCurrentTasks
             self.tableView.reloadData()
         })

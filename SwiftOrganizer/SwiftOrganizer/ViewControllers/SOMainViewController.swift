@@ -38,9 +38,6 @@ class SOMainViewController: UIViewController, SOEditTaskController{
         categoryTabBarController.filterStateDelegate = mainTableViewController
         iconsTabBarController.filterStateDelegate = mainTableViewController
         
-        categoryTabBarController.reloadTabs()
-        iconsTabBarController.reloadTabs()
-        mainTableViewController.reloadData()
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -52,6 +49,10 @@ class SOMainViewController: UIViewController, SOEditTaskController{
         let buttonImage : UIImage! = UIImage(named: "add_task")
         var rightButton: UIBarButtonItem = UIBarButtonItem(image: buttonImage, style: UIBarButtonItemStyle.Plain, target: self, action: "addNewTask")
             navigationItem.rightBarButtonItem = rightButton;
+        
+        categoryTabBarController.reloadTabs()
+        iconsTabBarController.reloadTabs()
+        mainTableViewController.reloadData()
     }
     
     override func didReceiveMemoryWarning() {

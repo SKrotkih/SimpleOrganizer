@@ -12,4 +12,9 @@ extension String {
     static func className(aClass: AnyClass) -> String {
         return NSStringFromClass(aClass).componentsSeparatedByString(".").last!
     }
+    
+    var localized: String {
+        return NSLocalizedString(self, tableName: nil, bundle: NSBundle.mainBundle(), value: "", comment: "")
+    }
+    
 }

@@ -20,13 +20,18 @@ class SOLocalDataBase: NSObject {
     var _allIcons = [Ico]()
     
     //- MARK: Helper methods
+    func newTaskManagedObject() -> Task!{
+        let entityName = NSStringFromClass(Task.classForCoder())
+        let task  = NSEntityDescription.insertNewObjectForEntityForName(entityName, inManagedObjectContext: managedObjectContext!) as! Task
+        
+        return task
+    }
+    
     func populateTasks(){
         
         println("\(applicationDocumentsDirectory)")
         
-        let entityName = NSStringFromClass(Task.classForCoder())
-        let task  = NSEntityDescription.insertNewObjectForEntityForName(entityName, inManagedObjectContext: managedObjectContext!) as! Task
-        
+        let task  = self.newTaskManagedObject()
         task.category = "1"
         task.ico1 = "1"
         task.ico2 = "3"
@@ -37,7 +42,7 @@ class SOLocalDataBase: NSObject {
         task.title = "Task 1"
 
 
-        let task2 = NSEntityDescription.insertNewObjectForEntityForName(entityName, inManagedObjectContext: managedObjectContext!) as! Task
+        let task2  = self.newTaskManagedObject()
         task2.category = "2"
         task2.ico1 = "6"
         task2.ico2 = "4"
@@ -47,7 +52,7 @@ class SOLocalDataBase: NSObject {
         task2.ico6 = ""
         task2.title = "Task 2"
 
-        let task3 = NSEntityDescription.insertNewObjectForEntityForName(entityName, inManagedObjectContext: managedObjectContext!) as! Task
+        let task3  = self.newTaskManagedObject()
         task3.category = "3"
         task3.ico1 = "10"
         task3.ico2 = "12"
@@ -57,21 +62,23 @@ class SOLocalDataBase: NSObject {
         task3.ico6 = ""
         task3.title = "Task 3"
         
-        var savingError: NSError?
-        if managedObjectContext!.save(&savingError){
-            println("Managed to populate the database")
-        } else {
-            if let error = savingError{
-                println("Failed to populate the database. Error = \(error)")
-            }
-        }
+        saveContext()
     }
 
-    func populateIcons() -> Bool{
-        let icons : [Dictionary<String, String>] = [["id":"1","name":"ico1","img":"ico1"],["id":"2","name":"ico2","img":"ico2"],["id":"3","name":"ico3","img":"ico3"],["id":"4","name":"ico4","img":"ico4"],
-            ["id":"5","name":"ico5","img":"ico5"],["id":"6","name":"ico6","img":"ico6"],["id":"7","name":"ico7","img":"ico7"],["id":"8","name":"ico8","img":"ico8"],
-            ["id":"9","name":"ico9","img":"ico9"],["id":"10","name":"ico10","img":"ico10"],["id":"11","name":"ico11","img":"ico11"],["id":"12","name":"ico12","img":"ico12"],
-            ["id":"1","name":"ico1","img":"ico1"]]
+    func populateIcons(){
+        let icons : [Dictionary<String, String>] = [["id":"1","name":"ico1","img":"ico1"],
+            ["id":"2","name":"ico2","img":"ico2"],
+            ["id":"3","name":"ico3","img":"ico3"],
+            ["id":"4","name":"ico4","img":"ico4"],
+            ["id":"5","name":"ico5","img":"ico5"],
+            ["id":"6","name":"ico6","img":"ico6"],
+            ["id":"7","name":"ico7","img":"ico7"],
+            ["id":"8","name":"ico8","img":"ico8"],
+            ["id":"9","name":"ico9","img":"ico9"],
+            ["id":"10","name":"ico10","img":"ico10"],
+            ["id":"11","name":"ico11","img":"ico11"],
+            ["id":"12","name":"ico12","img":"ico12"],
+            ["id":"13","name":"ico1","img":"ico1"]]
         let entityName = NSStringFromClass(Ico.classForCoder())
 
         for dict in icons{
@@ -82,23 +89,11 @@ class SOLocalDataBase: NSObject {
             ico.imagename = iconDict["img"]!
             ico.selected = true
         }
-        
-        var savingError: NSError?
-        
-        if managedObjectContext!.save(&savingError){
-            println("Managed to populate the database")
-            
-            return true
-        } else {
-            if let error = savingError{
-                println("Failed to populate the database. Error = \(error)")
-            }
-            
-            return false
-        }
+
+        saveContext()
     }
     
-    func populateCategories() -> Bool{
+    func populateCategories(){
         let categories = ["ToDo", "Events", "Life", "Work"]
         var categoryId = 0
         let entityName = NSStringFromClass(Category.classForCoder())
@@ -109,19 +104,8 @@ class SOLocalDataBase: NSObject {
             category.name = catagoryName as String
             category.selected = true
         }
-        var savingError: NSError?
-
-        if managedObjectContext!.save(&savingError){
-            println("Managed to populate the database")
-            
-            return true
-        } else {
-            if let error = savingError{
-                println("Failed to populate the database. Error = \(error)")
-            }
-            
-            return false
-        }
+        
+        saveContext()
     }
 
     // - MARK: Categories
@@ -149,11 +133,9 @@ class SOLocalDataBase: NSObject {
                 
                 return _allCategories
             } else {
-                if populateCategories(){
-                    return self.allCategories
-                } else {
-                    assert(false, "Failed to populate the database.")
-                }
+                populateCategories()
+
+                return self.allCategories
             }
         }
     }
@@ -240,6 +222,8 @@ class SOLocalDataBase: NSObject {
             
             if let error = requestError{
                 println("Failed to fetch of Icons data. Error = \(error)")
+
+                abort()
             }
             
             if icons.count > 0{
@@ -249,11 +233,9 @@ class SOLocalDataBase: NSObject {
                 
                 return _allIcons
             } else {
-                if populateIcons(){
-                    return self.allIcons
-                } else {
-                    assert(false, "Failed to populate the database.")
-                }
+                populateIcons()
+
+                return self.allIcons
             }
         }
     }
@@ -296,7 +278,11 @@ class SOLocalDataBase: NSObject {
                 var fetchError: NSError?
                 let tasks = self!.managedObjectContext!.executeFetchRequest(fetchRequest, error: &fetchError) as! [Task]
                 
-                if fetchError == nil{
+                if  let error = fetchError{
+                    assert(false, "Failed to execute the fetch request \(error.localizedDescription)")
+                        
+                    return false
+                } else {
                     if tasks.count > 0 {
                         dispatch_async(dispatch_get_main_queue(), {
                             self!._allTasks.removeAll(keepCapacity: false)
@@ -326,6 +312,12 @@ class SOLocalDataBase: NSObject {
                             }
                             var fetchError: NSError?
                             successBlock(allTaskData: self!._allTasks, error: &fetchError)
+                            
+                            if let error = fetchError{
+                                if error.code > 0{
+                                    assert(false, "Failed to execute the fetch request \(error.localizedDescription)")
+                                }
+                            }
                         })
                         
                         return true
@@ -333,15 +325,10 @@ class SOLocalDataBase: NSObject {
                     else {
                         return false
                     }
-                } else {
-                    println("Failed to execute the fetch request")
-                    assert(false, "Failed to execute the fetch request")
-
-                    return false
                 }
             }
 
-            if fetchAllTasks() == false {
+            if !fetchAllTasks() {
                 self!.populateTasks()
                 
                 fetchAllTasks()

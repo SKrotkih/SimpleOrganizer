@@ -11,6 +11,8 @@ import UIKit
 class SOMainTableViewCell: UITableViewCell {
 
     @IBOutlet weak var titleTextLabel: UILabel!
+    @IBOutlet weak var dateTextLabel: UILabel!
+    
     @IBOutlet weak var categoryNameView: UIView!
     @IBOutlet weak var categoryNameLabel: UILabel!
 
@@ -51,6 +53,6 @@ class SOMainTableViewCell: UITableViewCell {
         self.icon4ImageView.image = task.ico(3)
         self.icon5ImageView.image = task.ico(4)
         self.icon6ImageView.image = task.ico(5)
-        
+        self.dateTextLabel.text = task.dateString()
     }
 }
