@@ -22,7 +22,7 @@ protocol LeftMenuProtocol : class {
 class LeftViewController : UIViewController, LeftMenuProtocol {
     
     @IBOutlet weak var tableView: UITableView!
-    var menus = ["Main", "Swift", "Go", "NonMenu"]
+    var menus = ["My Organizer".localized, "Settings".localized, "Extension".localized, "About".localized]
     var mainViewController: UIViewController!
     var swiftViewController: UIViewController!
     var goViewController: UIViewController!
