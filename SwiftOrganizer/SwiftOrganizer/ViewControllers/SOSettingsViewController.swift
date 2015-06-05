@@ -1,5 +1,5 @@
 //
-//  SwiftViewController.swift
+//  SOSettingsViewController.swift
 //  SlideMenuControllerSwift
 //
 //  Created by Yuji Hato on 1/19/15.
@@ -10,7 +10,7 @@
 
 import UIKit
 
-class SwiftViewController: UIViewController {
+class SOSettingsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()

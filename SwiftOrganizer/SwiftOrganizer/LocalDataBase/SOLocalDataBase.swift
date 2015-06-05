@@ -398,4 +398,14 @@ class SOLocalDataBase: NSObject {
         }
     }
     
+    func deleteObject(objectForDeleting: NSManagedObject?)
+    {
+        if let moc = self.managedObjectContext {
+            if let object = objectForDeleting{
+                moc.deleteObject(object)
+                self.saveContext()
+            }
+        }
+    }
+    
 }

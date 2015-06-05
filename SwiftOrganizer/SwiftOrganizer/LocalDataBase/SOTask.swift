@@ -82,7 +82,7 @@ class SOTask: NSObject {
     
     func ico(number : Int) -> UIImage?{
         switch number{
-            case 0...MaxIconsCount - 1:
+            case 0..<MaxIconsCount:
 
                 let icoIds : [String] = [_ico1, _ico2, _ico3, _ico4, _ico5, _ico6]
                 
@@ -127,6 +127,10 @@ class SOTask: NSObject {
         
     }
     
+    func remove(){
+        SOLocalDataBase.sharedInstance.deleteObject(_taskObject)
+    }
+    
     func copyTaskToObject(object: Task!){
         object.title = self._title
         object.category = self._category
@@ -136,7 +140,9 @@ class SOTask: NSObject {
         object.ico4 = self._ico4
         object.ico5 = self._ico5
         object.ico6 = self._ico6
-        object.date = self._date!
+        if let date = self._date{
+            object.date = date
+        }
     }
     
 }

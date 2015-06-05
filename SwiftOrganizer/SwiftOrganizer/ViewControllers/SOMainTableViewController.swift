@@ -15,7 +15,7 @@ protocol SOChangeFilterStateDelegate{
     func didSelectIcon(icon: Ico, select: Bool)
 }
 
-class SOMainTableViewController: NSObject, UITableViewDataSource, UITableViewDelegate, SOChangeFilterStateDelegate{
+class SOMainTableViewController: NSObject, UITableViewDataSource, UITableViewDelegate, SOChangeFilterStateDelegate, SORemoveTaskDelegate{
 
     let tableView : UITableView
     var taskEditingDelegate: SOEditTaskController?
@@ -60,17 +60,18 @@ class SOMainTableViewController: NSObject, UITableViewDataSource, UITableViewDel
 
         switch indexPath.row{
         case 0:
-            var cell = self.tableView.dequeueReusableCellWithIdentifier(mainHeaderTableViewCellIdentifier) as? UITableViewCell
+            var cell = self.tableView.dequeueReusableCellWithIdentifier(mainHeaderTableViewCellIdentifier) as! UITableViewCell
             
-            return cell!
+            return cell
             
         default:
-            var cell = self.tableView.dequeueReusableCellWithIdentifier(mainTableViewCellIdentifier) as? SOMainTableViewCell
+            var cell = self.tableView.dequeueReusableCellWithIdentifier(mainTableViewCellIdentifier) as! SOMainTableViewCell
             let row = indexPath.row - 1
             let currentTask : SOTask = self.tasks[row]
-            cell!.fillTaskData(currentTask)
+            cell.fillTaskData(currentTask)
+            cell.removeTaskDelegate = self
             
-            return cell!
+            return cell
         }
     }
 
@@ -90,7 +91,6 @@ class SOMainTableViewController: NSObject, UITableViewDataSource, UITableViewDel
     
     // After the row is selected
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-
         switch indexPath.row{
         case 0:
             println("Oh headar of the table was pressed!")
@@ -125,5 +125,11 @@ class SOMainTableViewController: NSObject, UITableViewDataSource, UITableViewDel
         })
     }
     
-    // - MARK:     
+    // - MARK: SORemoveTaskDelegate
+    
+    func removeTask(task: SOTask!){
+        task.remove()
+        self.reloadData()
+    }
+    
 }

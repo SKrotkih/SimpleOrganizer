@@ -1,5 +1,5 @@
 //
-//  NonMenuController.swift
+//  SOAboutViewController.swift
 //  SlideMenuControllerSwift
 //
 //  Created by Yuji Hato on 1/22/15.
@@ -10,7 +10,7 @@ import UIKit
 
 
 
-class NonMenuController: UIViewController {
+class SOAboutViewController: UIViewController {
     
     weak var delegate: LeftMenuProtocol?
     
@@ -20,13 +20,13 @@ class NonMenuController: UIViewController {
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        self.removeNavigationBarItem()
+        self.setNavigationBarItem()
     }
     
     override func didRotateFromInterfaceOrientation(fromInterfaceOrientation: UIInterfaceOrientation) {
         super.didRotateFromInterfaceOrientation(fromInterfaceOrientation)
         if let viewController = self.slideMenuController()?.mainViewController as? UINavigationController {
-            if viewController.topViewController.isKindOfClass(NonMenuController) {
+            if viewController.topViewController.isKindOfClass(SOAboutViewController) {
                 self.slideMenuController()?.removeLeftGestures()
                 self.slideMenuController()?.removeRightGestures()
             }

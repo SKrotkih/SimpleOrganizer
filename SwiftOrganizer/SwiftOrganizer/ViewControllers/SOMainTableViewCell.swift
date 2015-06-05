@@ -8,8 +8,17 @@
 
 import UIKit
 
+protocol SORemoveTaskDelegate{
+    func removeTask(task: SOTask!)
+}
+
 class SOMainTableViewCell: UITableViewCell {
 
+    var removeTaskDelegate: SORemoveTaskDelegate?
+    var task: SOTask?
+    
+    @IBOutlet weak var swipeGestureView: UIView!
+    
     @IBOutlet weak var titleTextLabel: UILabel!
     @IBOutlet weak var dateTextLabel: UILabel!
     
@@ -23,6 +32,8 @@ class SOMainTableViewCell: UITableViewCell {
     @IBOutlet weak var icon5ImageView: UIImageView!
     @IBOutlet weak var icon6ImageView: UIImageView!
     
+    weak var leftGestureRecognizer: UIGestureRecognizer?
+    
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
@@ -34,9 +45,19 @@ class SOMainTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
 
-        // Initialization code
+        let horizontal = UISwipeGestureRecognizer(target: self, action: "leftHorizontalSwipe:")
+        horizontal.direction = .Left
+        horizontal.numberOfTouchesRequired = 1
+        swipeGestureView.addGestureRecognizer(horizontal)
+        
     }
 
+    func leftHorizontalSwipe(recognizer:UIGestureRecognizer) {
+        if let removeDelegate = removeTaskDelegate{
+            removeDelegate.removeTask(self.task)
+        }
+    }
+    
     override func setSelected(selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
@@ -45,6 +66,7 @@ class SOMainTableViewCell: UITableViewCell {
     
     //- MARK: Fill DATA
     func fillTaskData(task: SOTask){
+        self.task = task
         self.titleTextLabel!.text = task.title
         self.categoryNameLabel!.text = task.category
         self.icon1ImageView.image = task.ico(0)

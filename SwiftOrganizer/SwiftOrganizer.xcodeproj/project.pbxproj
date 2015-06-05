@@ -26,9 +26,9 @@
 		7F5725931B0F6114003DBDEB /* SOEditTaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F57258C1B0F6114003DBDEB /* SOEditTaskViewController.swift */; };
 		7F5725941B0F6114003DBDEB /* LeftViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F57258D1B0F6114003DBDEB /* LeftViewController.swift */; };
 		7F5725951B0F6114003DBDEB /* SOMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F57258E1B0F6114003DBDEB /* SOMainViewController.swift */; };
-		7F5725961B0F6114003DBDEB /* NonMenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F57258F1B0F6114003DBDEB /* NonMenuController.swift */; };
+		7F5725961B0F6114003DBDEB /* SOAboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F57258F1B0F6114003DBDEB /* SOAboutViewController.swift */; };
 		7F5725971B0F6114003DBDEB /* RightViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F5725901B0F6114003DBDEB /* RightViewController.swift */; };
-		7F5725981B0F6114003DBDEB /* SwiftViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F5725911B0F6114003DBDEB /* SwiftViewController.swift */; };
+		7F5725981B0F6114003DBDEB /* SOSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F5725911B0F6114003DBDEB /* SOSettingsViewController.swift */; };
 		7F57259D1B0F61AC003DBDEB /* BaseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F57259C1B0F61AC003DBDEB /* BaseTableViewCell.swift */; };
 		7F5725A21B0F61F7003DBDEB /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F57259F1B0F61F7003DBDEB /* StringExtension.swift */; };
 		7F5725A31B0F61F7003DBDEB /* UITableViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F5725A01B0F61F7003DBDEB /* UITableViewExtension.swift */; };
@@ -102,9 +102,9 @@
 		7F57258C1B0F6114003DBDEB /* SOEditTaskViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SOEditTaskViewController.swift; sourceTree = "<group>"; };
 		7F57258D1B0F6114003DBDEB /* LeftViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LeftViewController.swift; sourceTree = "<group>"; };
 		7F57258E1B0F6114003DBDEB /* SOMainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SOMainViewController.swift; sourceTree = "<group>"; };
-		7F57258F1B0F6114003DBDEB /* NonMenuController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NonMenuController.swift; sourceTree = "<group>"; };
+		7F57258F1B0F6114003DBDEB /* SOAboutViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SOAboutViewController.swift; sourceTree = "<group>"; };
 		7F5725901B0F6114003DBDEB /* RightViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RightViewController.swift; sourceTree = "<group>"; };
-		7F5725911B0F6114003DBDEB /* SwiftViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftViewController.swift; sourceTree = "<group>"; };
+		7F5725911B0F6114003DBDEB /* SOSettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SOSettingsViewController.swift; sourceTree = "<group>"; };
 		7F57259C1B0F61AC003DBDEB /* BaseTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseTableViewCell.swift; sourceTree = "<group>"; };
 		7F57259F1B0F61F7003DBDEB /* StringExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
 		7F5725A01B0F61F7003DBDEB /* UITableViewExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UITableViewExtension.swift; sourceTree = "<group>"; };
@@ -256,10 +256,10 @@
 				7F5A6D1D1B14A115009665C7 /* MainViewController */,
 				7F0D37831B0F67B1008B785B /* SlideMenuController.swift */,
 				7F57258D1B0F6114003DBDEB /* LeftViewController.swift */,
-				7F57258F1B0F6114003DBDEB /* NonMenuController.swift */,
+				7F5725911B0F6114003DBDEB /* SOSettingsViewController.swift */,
+				7F57258F1B0F6114003DBDEB /* SOAboutViewController.swift */,
 				7F5725901B0F6114003DBDEB /* RightViewController.swift */,
 				7F57258B1B0F6114003DBDEB /* GoViewController.swift */,
-				7F5725911B0F6114003DBDEB /* SwiftViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -562,11 +562,11 @@
 				7F5866381B16FB6000BB32AA /* Ico.swift in Sources */,
 				7F5725921B0F6114003DBDEB /* GoViewController.swift in Sources */,
 				7F6E98201B1E23F20048ED7A /* SOEnterCategoryViewController.swift in Sources */,
-				7F5725961B0F6114003DBDEB /* NonMenuController.swift in Sources */,
+				7F5725961B0F6114003DBDEB /* SOAboutViewController.swift in Sources */,
 				7F5725A21B0F61F7003DBDEB /* StringExtension.swift in Sources */,
 				7F6E98261B1E24590048ED7A /* SOEnterDescriptionViewController.swift in Sources */,
 				7F6E98601B1EF3180048ED7A /* SOSelectCategoryCell.swift in Sources */,
-				7F5725981B0F6114003DBDEB /* SwiftViewController.swift in Sources */,
+				7F5725981B0F6114003DBDEB /* SOSettingsViewController.swift in Sources */,
 				7F5725A41B0F61F7003DBDEB /* UIViewControllerExtension.swift in Sources */,
 				7F497D541B1AA2C300F95BA9 /* SOTabBarContainerView.swift in Sources */,
 				7F497D4F1B18B6E800F95BA9 /* SOTask.swift in Sources */,

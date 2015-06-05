@@ -9,10 +9,8 @@ import UIKit
 
 enum LeftMenu: Int {
     case Main = 0
-    case Swift
-    case Java
-    case Go
-    case NonMenu
+    case Settings
+    case About
 }
 
 protocol LeftMenuProtocol : class {
@@ -22,11 +20,11 @@ protocol LeftMenuProtocol : class {
 class LeftViewController : UIViewController, LeftMenuProtocol {
     
     @IBOutlet weak var tableView: UITableView!
-    var menus = ["My Organizer".localized, "Settings".localized, "Extension".localized, "About".localized]
+    var menus = ["Organizer".localized, "Settings".localized, "About".localized]
     var mainViewController: UIViewController!
-    var swiftViewController: UIViewController!
+    var settingsViewController: UIViewController!
     var goViewController: UIViewController!
-    var nonMenuViewController: UIViewController!
+    var aboutViewController: UIViewController!
     
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -37,15 +35,11 @@ class LeftViewController : UIViewController, LeftMenuProtocol {
         self.tableView.separatorColor = UIColor(red: 224/255, green: 224/255, blue: 224/255, alpha: 1.0)
         
         var storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let swiftViewController = storyboard.instantiateViewControllerWithIdentifier("SwiftViewController") as! SwiftViewController
-        self.swiftViewController = UINavigationController(rootViewController: swiftViewController)
+        let settingsViewController = storyboard.instantiateViewControllerWithIdentifier("SOSettingsViewController") as! SOSettingsViewController
+        self.settingsViewController = UINavigationController(rootViewController: settingsViewController)
         
-        let goViewController = storyboard.instantiateViewControllerWithIdentifier("GoViewController") as! GoViewController
-        self.goViewController = UINavigationController(rootViewController: goViewController)
-        
-        let nonMenuController = storyboard.instantiateViewControllerWithIdentifier("NonMenuController") as! NonMenuController
-        nonMenuController.delegate = self
-        self.nonMenuViewController = UINavigationController(rootViewController: nonMenuController)
+        let aboutViewController = storyboard.instantiateViewControllerWithIdentifier("SOAboutViewController") as! SOAboutViewController
+        self.aboutViewController = UINavigationController(rootViewController: aboutViewController)
         
         self.tableView.registerCellClass(BaseTableViewCell.self)
     }
@@ -60,7 +54,7 @@ class LeftViewController : UIViewController, LeftMenuProtocol {
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell: BaseTableViewCell = BaseTableViewCell(style: UITableViewCellStyle.Subtitle, reuseIdentifier: BaseTableViewCell.identifier)
-        cell.backgroundColor = UIColor(red: 64/255, green: 170/255, blue: 239/255, alpha: 1.0)
+        cell.backgroundColor = UIColor.lightGrayColor()
         cell.textLabel?.font = UIFont.italicSystemFontOfSize(18)
         cell.textLabel?.textColor = UIColor(red: 255/255, green: 255/255, blue: 255/255, alpha: 1.0)
         cell.textLabel?.text = menus[indexPath.row]
@@ -77,14 +71,11 @@ class LeftViewController : UIViewController, LeftMenuProtocol {
         switch menu {
         case .Main:
             self.slideMenuController()?.changeMainViewController(self.mainViewController, close: true)
-        case .Swift:
-            self.slideMenuController()?.changeMainViewController(self.swiftViewController, close: true)
+        case .Settings:
+            self.slideMenuController()?.changeMainViewController(self.settingsViewController, close: true)
             break
-        case .Go:
-            self.slideMenuController()?.changeMainViewController(self.goViewController, close: true)
-            break
-        case .NonMenu:
-            self.slideMenuController()?.changeMainViewController(self.nonMenuViewController, close: true)
+        case .About:
+            self.slideMenuController()?.changeMainViewController(self.aboutViewController, close: true)
             break
         default:
             break
