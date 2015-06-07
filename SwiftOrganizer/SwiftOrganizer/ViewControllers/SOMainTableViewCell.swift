@@ -53,6 +53,10 @@ class SOMainTableViewCell: UITableViewCell {
     }
 
     func leftHorizontalSwipe(recognizer:UIGestureRecognizer) {
+        removeTask()
+    }
+    
+    func removeTask(){
         if let removeDelegate = removeTaskDelegate{
             removeDelegate.removeTask(self.task)
         }

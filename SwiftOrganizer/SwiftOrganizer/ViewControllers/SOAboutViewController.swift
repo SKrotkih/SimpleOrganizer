@@ -16,6 +16,8 @@ class SOAboutViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.title = "About Autors".localized                
     }
     
     override func viewWillAppear(animated: Bool) {

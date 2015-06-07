@@ -9,11 +9,9 @@
 import UIKit
 
 class SOCategoryTabView: UIView {
-
+    @IBOutlet weak var tabBackgroundView: UIView!
     var filterStateDelegate: SOChangeFilterStateDelegate?
-
     var _selected: Bool = false
-    
     var _category: Category?
     
     var category: Category? {
@@ -36,11 +34,11 @@ class SOCategoryTabView: UIView {
             _selected = newValue
             
             if _selected == true{
-                self.backgroundColor = colorWithRGBHex(0xC0C0C0)
+                self.tabBackgroundView.backgroundColor = colorWithRGBHex(0xF39030)
             }
             else
             {
-                self.backgroundColor = colorWithRGBHex(0xCCCCCC)
+                self.tabBackgroundView.backgroundColor = colorWithRGBHex(0xCCCCCC)
             }
         }
     }

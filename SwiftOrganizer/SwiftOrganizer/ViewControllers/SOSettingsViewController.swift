@@ -14,6 +14,8 @@ class SOSettingsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.title = "Settings".localized        
     }
     
     override func viewWillAppear(animated: Bool) {

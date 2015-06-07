@@ -38,6 +38,8 @@ class SOMainViewController: UIViewController, SOEditTaskController{
         categoryTabBarController.filterStateDelegate = mainTableViewController
         iconsTabBarController.filterStateDelegate = mainTableViewController
         
+        self.title = "Organizer".localized
+        
     }
     
     override func viewWillAppear(animated: Bool) {

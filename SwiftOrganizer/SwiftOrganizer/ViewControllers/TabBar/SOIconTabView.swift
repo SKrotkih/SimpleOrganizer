@@ -36,7 +36,7 @@ class SOIconTabView: UIView {
             _selected = newValue
             
             if _selected == true{
-                self.backgroundColor = colorWithRGBHex(0xC0C0C0)
+                self.backgroundColor = colorWithRGBHex(0xF39030)
             }
             else
             {
