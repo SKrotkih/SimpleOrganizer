@@ -1,7 +1,7 @@
 # SwiftOrganizer
 This is a simple organizer for iPhone. 
 Is written in Swift.
-I implemented this application for trying out the new newest language Swift.  
+I implemented this application for trying out the new language Swift.  
 
 Here was used the next things:
 - Core Data

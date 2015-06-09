@@ -78,7 +78,11 @@ class SOLocalDataBase: NSObject {
             ["id":"10","name":"ico10","img":"ico10"],
             ["id":"11","name":"ico11","img":"ico11"],
             ["id":"12","name":"ico12","img":"ico12"],
-            ["id":"13","name":"ico1","img":"ico1"]]
+            ["id":"13","name":"ico17","img":"ico1"],
+        ["id":"14","name":"ico13","img":"ico10"],
+        ["id":"15","name":"ico14","img":"ico11"],
+        ["id":"16","name":"ico15","img":"ico12"],
+        ["id":"17","name":"ico16","img":"ico1"]]
         let entityName = NSStringFromClass(Ico.classForCoder())
 
         for dict in icons{

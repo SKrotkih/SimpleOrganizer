@@ -48,6 +48,11 @@
 		7F5A6D3A1B14C42C009665C7 /* ico10@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7F5A6D2E1B14C42C009665C7 /* ico10@2x.png */; };
 		7F5A6D3B1B14C42C009665C7 /* ico11@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7F5A6D2F1B14C42C009665C7 /* ico11@2x.png */; };
 		7F5A6D3C1B14C42C009665C7 /* ico12@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7F5A6D301B14C42C009665C7 /* ico12@2x.png */; };
+		7F64749F1B2730D700B3D75C /* ico13@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7F64749A1B2730D700B3D75C /* ico13@2x.png */; };
+		7F6474A01B2730D700B3D75C /* ico14@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7F64749B1B2730D700B3D75C /* ico14@2x.png */; };
+		7F6474A11B2730D700B3D75C /* ico15@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7F64749C1B2730D700B3D75C /* ico15@2x.png */; };
+		7F6474A21B2730D700B3D75C /* ico16@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7F64749D1B2730D700B3D75C /* ico16@2x.png */; };
+		7F6474A31B2730D700B3D75C /* ico17@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7F64749E1B2730D700B3D75C /* ico17@2x.png */; };
 		7F6E98161B1DD9F70048ED7A /* SOEditTaskCategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6E98151B1DD9F70048ED7A /* SOEditTaskCategoryCell.swift */; };
 		7F6E98181B1DDD930048ED7A /* SOEditTaskIconsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6E98171B1DDD930048ED7A /* SOEditTaskIconsCell.swift */; };
 		7F6E981A1B1DDED30048ED7A /* SOEditTaskDateCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6E98191B1DDED30048ED7A /* SOEditTaskDateCell.swift */; };
@@ -123,6 +128,11 @@
 		7F5A6D2E1B14C42C009665C7 /* ico10@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ico10@2x.png"; path = "Resources/Images/Icons/ico10@2x.png"; sourceTree = "<group>"; };
 		7F5A6D2F1B14C42C009665C7 /* ico11@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ico11@2x.png"; path = "Resources/Images/Icons/ico11@2x.png"; sourceTree = "<group>"; };
 		7F5A6D301B14C42C009665C7 /* ico12@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ico12@2x.png"; path = "Resources/Images/Icons/ico12@2x.png"; sourceTree = "<group>"; };
+		7F64749A1B2730D700B3D75C /* ico13@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ico13@2x.png"; path = "Resources/Images/Icons/ico13@2x.png"; sourceTree = "<group>"; };
+		7F64749B1B2730D700B3D75C /* ico14@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ico14@2x.png"; path = "Resources/Images/Icons/ico14@2x.png"; sourceTree = "<group>"; };
+		7F64749C1B2730D700B3D75C /* ico15@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ico15@2x.png"; path = "Resources/Images/Icons/ico15@2x.png"; sourceTree = "<group>"; };
+		7F64749D1B2730D700B3D75C /* ico16@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ico16@2x.png"; path = "Resources/Images/Icons/ico16@2x.png"; sourceTree = "<group>"; };
+		7F64749E1B2730D700B3D75C /* ico17@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ico17@2x.png"; path = "Resources/Images/Icons/ico17@2x.png"; sourceTree = "<group>"; };
 		7F6E98151B1DD9F70048ED7A /* SOEditTaskCategoryCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SOEditTaskCategoryCell.swift; path = EditTaskViewController/SOEditTaskCategoryCell.swift; sourceTree = "<group>"; };
 		7F6E98171B1DDD930048ED7A /* SOEditTaskIconsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SOEditTaskIconsCell.swift; path = EditTaskViewController/SOEditTaskIconsCell.swift; sourceTree = "<group>"; };
 		7F6E98191B1DDED30048ED7A /* SOEditTaskDateCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SOEditTaskDateCell.swift; path = EditTaskViewController/SOEditTaskDateCell.swift; sourceTree = "<group>"; };
@@ -353,6 +363,11 @@
 				7F5A6D2E1B14C42C009665C7 /* ico10@2x.png */,
 				7F5A6D2F1B14C42C009665C7 /* ico11@2x.png */,
 				7F5A6D301B14C42C009665C7 /* ico12@2x.png */,
+				7F64749A1B2730D700B3D75C /* ico13@2x.png */,
+				7F64749B1B2730D700B3D75C /* ico14@2x.png */,
+				7F64749C1B2730D700B3D75C /* ico15@2x.png */,
+				7F64749D1B2730D700B3D75C /* ico16@2x.png */,
+				7F64749E1B2730D700B3D75C /* ico17@2x.png */,
 			);
 			name = TasksIcons;
 			sourceTree = "<group>";
@@ -506,15 +521,20 @@
 				7F497D5E1B1AF0D800F95BA9 /* SOCategoryTabView.xib in Resources */,
 				7F5A6D351B14C42C009665C7 /* ico5@2x.png in Resources */,
 				7F5A6D331B14C42C009665C7 /* ico3@2x.png in Resources */,
+				7F6474A01B2730D700B3D75C /* ico14@2x.png in Resources */,
+				7F6474A31B2730D700B3D75C /* ico17@2x.png in Resources */,
 				7F5A6D381B14C42C009665C7 /* ico8@2x.png in Resources */,
 				7F5A6D341B14C42C009665C7 /* ico4@2x.png in Resources */,
 				7F497D621B1AF9B600F95BA9 /* SOIconTabView.xib in Resources */,
+				7F6474A21B2730D700B3D75C /* ico16@2x.png in Resources */,
 				7F5A6D361B14C42C009665C7 /* ico6@2x.png in Resources */,
 				7F5A6D311B14C42C009665C7 /* ico1@2x.png in Resources */,
+				7F64749F1B2730D700B3D75C /* ico13@2x.png in Resources */,
 				7F5A6D321B14C42C009665C7 /* ico2@2x.png in Resources */,
 				7F5A6D3A1B14C42C009665C7 /* ico10@2x.png in Resources */,
 				7F5A6D371B14C42C009665C7 /* ico7@2x.png in Resources */,
 				7F5A6D391B14C42C009665C7 /* ico9@2x.png in Resources */,
+				7F6474A11B2730D700B3D75C /* ico15@2x.png in Resources */,
 				7F9B77261B189C54006D3434 /* Main.storyboard in Resources */,
 				7F9B77271B189C58006D3434 /* LaunchScreen.xib in Resources */,
 				7F5A6D3B1B14C42C009665C7 /* ico11@2x.png in Resources */,
