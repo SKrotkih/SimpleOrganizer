@@ -15,9 +15,9 @@
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                 </view>
                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SSZ-Uo-gIr">
-                    <rect key="frame" x="7" y="3" width="36" height="36"/>
+                    <rect key="frame" x="5" y="1" width="40" height="40"/>
                     <fontDescription key="fontDescription" name="HelveticaNeue-CondensedBold" family="Helvetica Neue" pointSize="14"/>
-                    <state key="normal" image="ico1.png">
+                    <state key="normal" image="ico10.png">
                         <color key="titleColor" red="0.027450980390000001" green="0.0" blue="0.41960784309999999" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
@@ -36,7 +36,7 @@
         </view>
     </objects>
     <resources>
-        <image name="ico1.png" width="16" height="18"/>
+        <image name="ico10.png" width="53" height="52"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
