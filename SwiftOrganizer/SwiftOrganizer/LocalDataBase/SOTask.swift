@@ -12,20 +12,30 @@ let MaxIconsCount = 6
 
 class SOTask: NSObject {
 
-    var _taskObject: Task?
-    var _title: String = ""
-    var _category: String = ""
-    var _ico1: String = ""
-    var _ico2: String = ""
-    var _ico3: String = ""
-    var _ico4: String = ""
-    var _ico5: String = ""
-    var _ico6: String = ""
-    var _date: NSDate?
+    private var _taskObject: Task?
+    private var _title: String
+    private var _category: String
+    private var _ico1: String
+    private var _ico2: String
+    private var _ico3: String
+    private var _ico4: String
+    private var _ico5: String
+    private var _ico6: String
+    private var _date: NSDate?
 
     override init() {
-        super.init()
+        _taskObject = nil
+        _title = ""
+        _category = ""
+        _ico1 = ""
+        _ico2 = ""
+        _ico3 = ""
+        _ico4 = ""
+        _ico5 = ""
+        _ico6 = ""
+        _date = nil
         
+        super.init()
     }
     
     convenience init(task: Task ) {
@@ -43,6 +53,20 @@ class SOTask: NSObject {
         self._date = task.date
     }
 
+    func copyToObject(object: Task){
+        object.title = self._title
+        object.category = self._category
+        object.ico1 = self._ico1
+        object.ico2 = self._ico2
+        object.ico3 = self._ico3
+        object.ico4 = self._ico4
+        object.ico5 = self._ico5
+        object.ico6 = self._ico6
+        if let date = self._date{
+            object.date = date
+        }
+    }
+    
     var maxIconsCount: Int{
         get{
             return MaxIconsCount;
@@ -60,7 +84,11 @@ class SOTask: NSObject {
     
     var category: String{
         get{
-            return SOLocalDataBase.sharedInstance.categoryName(self._category)
+            if let returnValue = SOLocalDataBase.sharedInstance.categoryName(self._category){
+                return returnValue
+            }
+            
+            return ""
         }
         set{
             self._category = newValue
@@ -80,25 +108,44 @@ class SOTask: NSObject {
         }
     }
     
-    func ico(number : Int) -> UIImage?{
-        switch number{
-            case 0..<MaxIconsCount:
-
-                let icoIds : [String] = [_ico1, _ico2, _ico3, _ico4, _ico5, _ico6]
-                
-                let imageName : String = SOLocalDataBase.sharedInstance.iconsImageName(icoIds[number])
-                
-                if imageName == "" {
-                    return nil
+    func ico(index: Int) -> UIImage?{
+        if index < MaxIconsCount{
+            let icoIds : [String] = [_ico1, _ico2, _ico3, _ico4, _ico5, _ico6]
+            
+            if let imageName : String = SOLocalDataBase.sharedInstance.iconsImageName(icoIds[index]){
+                if let image : UIImage = UIImage(named: imageName){
+                    return image
                 }
-                
-                let image : UIImage = UIImage(named: imageName)!
-                
-                return image
-            
-        default:
-            
-            return nil
+            }
+        }
+        
+        return nil
+    }
+
+    func icoId(index: Int) -> String?{
+        let icoIds = [_ico1, _ico2, _ico3, _ico4, _ico5, _ico6]
+
+        if index < icoIds.count{
+            let icoId = icoIds[index]
+            if icoId != ""{
+                return icoId
+            }
+        }
+        
+        return nil
+    }
+    
+    func putIco(index: Int, newValue: String){
+        if index < MaxIconsCount{
+            switch index{
+            case 0: _ico1 = newValue
+            case 1: _ico2 = newValue
+            case 2: _ico3 = newValue
+            case 3: _ico4 = newValue
+            case 4: _ico5 = newValue
+            case 5: _ico6 = newValue
+            default: break
+            }
         }
     }
     
@@ -116,11 +163,11 @@ class SOTask: NSObject {
     func save() -> Void{
         
         if let object = _taskObject{
-            self.copyTaskToObject(object)
+            self.copyToObject(object)
         }
         else{
             let object = SOLocalDataBase.sharedInstance.newTaskManagedObject()
-            self.copyTaskToObject(object)
+            self.copyToObject(object)
         }
         
        SOLocalDataBase.sharedInstance.saveContext()
@@ -129,20 +176,6 @@ class SOTask: NSObject {
     
     func remove(){
         SOLocalDataBase.sharedInstance.deleteObject(_taskObject)
-    }
-    
-    func copyTaskToObject(object: Task!){
-        object.title = self._title
-        object.category = self._category
-        object.ico1 = self._ico1
-        object.ico2 = self._ico2
-        object.ico3 = self._ico3
-        object.ico4 = self._ico4
-        object.ico5 = self._ico5
-        object.ico6 = self._ico6
-        if let date = self._date{
-            object.date = date
-        }
     }
     
 }

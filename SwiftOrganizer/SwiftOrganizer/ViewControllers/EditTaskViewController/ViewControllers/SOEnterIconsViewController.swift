@@ -12,8 +12,8 @@ class SOEnterIconsViewController: SOEnterBaseViewController, UITableViewDataSour
     
     @IBOutlet weak var tableView: UITableView!
 
-    var icons: [Ico]!
-    var taskIcons: [String]! = Array()
+    var icons = [Ico]()
+    var taskIcons = [String]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,11 +29,10 @@ class SOEnterIconsViewController: SOEnterBaseViewController, UITableViewDataSour
         navigationItem.rightBarButtonItem = rightButton;
         
         if let editTask = self.task{
-            let icons: [String] = [editTask._ico1, editTask._ico2,editTask._ico3,editTask._ico4,editTask._ico5,editTask._ico6]
             taskIcons.removeAll(keepCapacity: false)
-            for i in 0..<icons.count{
-                if icons[i] != ""{
-                    taskIcons.append(icons[i])
+            for i in 0..<editTask.maxIconsCount{
+                if let icoId = editTask.icoId(i){
+                    taskIcons.append(icoId)
                 }
             }
         }
@@ -41,23 +40,12 @@ class SOEnterIconsViewController: SOEnterBaseViewController, UITableViewDataSour
     
     func doneButtonWasPressed() {
         if let editTask = self.task{
-            editTask._ico1 = ""
-            editTask._ico2 = ""
-            editTask._ico3 = ""
-            editTask._ico4 = ""
-            editTask._ico5 = ""
-            editTask._ico6 = ""
+            for i in 0..<editTask.maxIconsCount{
+                editTask.putIco(i, newValue: "")
+            }
             
             for i in 0..<taskIcons.count{
-                switch i{
-                case 0: editTask._ico1 = taskIcons[0]
-                case 1: editTask._ico2 = taskIcons[1]
-                case 2: editTask._ico3 = taskIcons[2]
-                case 3: editTask._ico4 = taskIcons[3]
-                case 4: editTask._ico5 = taskIcons[4]
-                case 5: editTask._ico6 = taskIcons[5]
-                default: break
-                }
+                editTask.putIco(i, newValue: taskIcons[i])
             }
         }
         
@@ -76,12 +64,6 @@ class SOEnterIconsViewController: SOEnterBaseViewController, UITableViewDataSour
         return icons.count
     }
     
-    // Customizing the row height
-    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) ->
-        CGFloat {
-            return 44
-    }
-    
     @objc func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         let selectIconsCell = "selectIconsCell"
@@ -90,19 +72,21 @@ class SOEnterIconsViewController: SOEnterBaseViewController, UITableViewDataSour
 
         let ico: Ico = icons[row]
         let icoId: String = ico.id
-        let icoImageName = SOLocalDataBase.sharedInstance.iconsImageName(icoId)
-        cell.icoImageView.image = UIImage(named: icoImageName)
         
-        var imageName: String = "uncheck_box"
+        if let icoImageName = SOLocalDataBase.sharedInstance.iconsImageName(icoId){
+            cell.icoImageView.image = UIImage(named: icoImageName)
+        }
+        
+        var checkBoxImageName: String = "uncheck_box"
         
         for i in 0..<taskIcons.count{
             if icoId == taskIcons[i]{
-                imageName =  "check_box"
+                checkBoxImageName =  "check_box"
 
                 break
             }
         }
-        cell.checkImageView.image = UIImage(named: imageName)
+        cell.checkImageView.image = UIImage(named: checkBoxImageName)
         
         return cell
     }
@@ -123,7 +107,7 @@ class SOEnterIconsViewController: SOEnterBaseViewController, UITableViewDataSour
                 break
             }
         }
-
+        
         if needAdd && taskIcons.count <= task?.maxIconsCount{
             taskIcons.append(icoId)
         }

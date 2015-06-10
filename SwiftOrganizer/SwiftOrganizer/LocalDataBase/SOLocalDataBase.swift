@@ -11,13 +11,13 @@ import CoreData
 
 let DatabaseName = "SwiftOrganizer"
 
-class SOLocalDataBase: NSObject {
+public class SOLocalDataBase: NSObject {
     
     static let sharedInstance = SOLocalDataBase()
     
-    var _allTasks = [SOTask]()
-    var _allCategories = [Category]()
-    var _allIcons = [Ico]()
+    lazy var _allTasks = [SOTask]()
+    lazy var _allCategories = [Category]()
+    lazy var _allIcons = [Ico]()
     
     //- MARK: Helper methods
     func newTaskManagedObject() -> Task!{
@@ -27,7 +27,7 @@ class SOLocalDataBase: NSObject {
         return task
     }
     
-    func populateTasks(){
+    private func populateTasks(){
         
         println("\(applicationDocumentsDirectory)")
         
@@ -39,7 +39,7 @@ class SOLocalDataBase: NSObject {
         task.ico4 = "2"
         task.ico5 = ""
         task.ico6 = ""
-        task.title = "Task 1"
+        task.title = "ToDo task"
 
 
         let task2  = self.newTaskManagedObject()
@@ -50,7 +50,7 @@ class SOLocalDataBase: NSObject {
         task2.ico4 = "2"
         task2.ico5 = "1"
         task2.ico6 = ""
-        task2.title = "Task 2"
+        task2.title = "Event task"
 
         let task3  = self.newTaskManagedObject()
         task3.category = "3"
@@ -60,12 +60,22 @@ class SOLocalDataBase: NSObject {
         task3.ico4 = "2"
         task3.ico5 = ""
         task3.ico6 = ""
-        task3.title = "Task 3"
+        task3.title = "Life task"
+
+        let task4  = self.newTaskManagedObject()
+        task4.category = "4"
+        task4.ico1 = "1"
+        task4.ico2 = "17"
+        task4.ico3 = ""
+        task4.ico4 = "2"
+        task4.ico5 = ""
+        task4.ico6 = ""
+        task4.title = "Work task"
         
         saveContext()
     }
 
-    func populateIcons(){
+    private func populateIcons(){
         let icons : [Dictionary<String, String>] = [["id":"1","name":"ico1","img":"ico1"],
             ["id":"2","name":"ico2","img":"ico2"],
             ["id":"3","name":"ico3","img":"ico3"],
@@ -78,33 +88,33 @@ class SOLocalDataBase: NSObject {
             ["id":"10","name":"ico10","img":"ico10"],
             ["id":"11","name":"ico11","img":"ico11"],
             ["id":"12","name":"ico12","img":"ico12"],
-            ["id":"13","name":"ico17","img":"ico1"],
-        ["id":"14","name":"ico13","img":"ico10"],
-        ["id":"15","name":"ico14","img":"ico11"],
-        ["id":"16","name":"ico15","img":"ico12"],
-        ["id":"17","name":"ico16","img":"ico1"]]
+            ["id":"13","name":"ico13","img":"ico13"],
+        ["id":"14","name":"ico14","img":"ico14"],
+        ["id":"15","name":"ico15","img":"ico15"],
+        ["id":"16","name":"ico16","img":"ico16"],
+        ["id":"17","name":"ico17","img":"ico17"]]
         let entityName = NSStringFromClass(Ico.classForCoder())
 
         for dict in icons{
-            let iconDict = dict as Dictionary<String, String>
             let ico = NSEntityDescription.insertNewObjectForEntityForName(entityName, inManagedObjectContext: managedObjectContext!) as! Ico
-            ico.id = iconDict["id"]!
-            ico.name = iconDict["name"]!
-            ico.imagename = iconDict["img"]!
+            ico.id = dict["id"]!
+            ico.name = dict["name"]!
+            ico.imagename = dict["img"]!
             ico.selected = true
         }
 
         saveContext()
     }
     
-    func populateCategories(){
-        let categories = ["ToDo", "Events", "Life", "Work"]
-        var categoryId = 0
+    private func populateCategories(){
+        let categories = ["ToDo".localized, "Events".localized, "Life".localized, "Work".localized]
+        var categoryId = 1
         let entityName = NSStringFromClass(Category.classForCoder())
         
         for catagoryName in categories{
             let category = NSEntityDescription.insertNewObjectForEntityForName(entityName, inManagedObjectContext: managedObjectContext!) as! Category
-            category.id = "\(categoryId++)"
+            let newCategoryId = "\(categoryId++)"
+            category.id = newCategoryId
             category.name = catagoryName as String
             category.selected = true
         }
@@ -132,6 +142,9 @@ class SOLocalDataBase: NSObject {
             
             if categories.count > 0{
                 for category in categories{
+                    
+                    println("\(category.id)")
+                    
                     _allCategories.append(category)
                 }
                 
@@ -180,25 +193,28 @@ class SOLocalDataBase: NSObject {
         //        }
     }
     
-    subscript(index: Int) -> Category  {
-        assert(allCategories.count > 0 && index < allCategories.count)
+    subscript(index: Int) -> Category? {
+        if allCategories.count > 0 && index < allCategories.count{
+            return allCategories[index]
+        }
         
-        return allCategories[index]
+        return nil
     }
     
-    func categoryForIndex(index: Int) -> Category{
-        assert(allCategories.count > 0 && index < allCategories.count)
+    func categoryForIndex(index: Int) -> Category?{
+        if allCategories.count > 0 && index < allCategories.count{
+            return allCategories[index]
+        }
         
-        return allCategories[index]
+        return nil
     }
     
-    func categoryName(id : String) -> String{
-        let categoryOpt: Category? = self.categoryById(id)
-        if let category = categoryOpt{
+    func categoryName(id : String) -> String?{
+        if let category = self.categoryById(id){
             return category.name
         }
         
-        return ""
+        return nil
     }
 
     func categoryById(id : String) -> Category?{
@@ -244,19 +260,21 @@ class SOLocalDataBase: NSObject {
         }
     }
     
-    func iconForIndex(index: Int) -> Ico{
-        assert(allIcons.count > 0 && index < allIcons.count)
+    func iconForIndex(index: Int) -> Ico?{
+        if allIcons.count > 0 && index < allIcons.count{
+            return allIcons[index]
+        }
         
-        return allIcons[index]
+        return nil
     }
 
-    func iconsImageName(id : String) -> String{
+    func iconsImageName(id : String) -> String?{
         let icoOpt: Ico? = self.iconById(id)
         if let ico = icoOpt{
             return ico.imagename
         }
         
-        return ""
+        return nil
     }
     
     func iconById(id : String) -> Ico?{
@@ -293,8 +311,7 @@ class SOLocalDataBase: NSObject {
 
                             for task in tasks{
                                 var categorySelected: Bool = false
-                                let categoryOpt: Category? = self?.categoryById(task.category)
-                                if let category = categoryOpt{
+                                if let category = self?.categoryById(task.category){
                                     categorySelected = category.selected
                                 }
                                 
@@ -347,13 +364,13 @@ class SOLocalDataBase: NSObject {
         return urls[urls.count-1] as! NSURL
         }()
     
-    lazy var managedObjectModel: NSManagedObjectModel = {
+    private lazy var managedObjectModel: NSManagedObjectModel = {
         // The managed object model for the application. This property is not optional. It is a fatal error for the application not to be able to find and load its model.
         let modelURL = NSBundle.mainBundle().URLForResource(DatabaseName, withExtension: "momd")!
         return NSManagedObjectModel(contentsOfURL: modelURL)!
         }()
     
-    lazy var persistentStoreCoordinator: NSPersistentStoreCoordinator? = {
+    private lazy var persistentStoreCoordinator: NSPersistentStoreCoordinator? = {
         // The persistent store coordinator for the application. This implementation creates and return a coordinator, having added the store for the application to it. This property is optional since there are legitimate error conditions that could cause the creation of the store to fail.
         // Create the coordinator and store
         var coordinator: NSPersistentStoreCoordinator? = NSPersistentStoreCoordinator(managedObjectModel: self.managedObjectModel)
@@ -377,7 +394,7 @@ class SOLocalDataBase: NSObject {
         return coordinator
         }()
     
-    lazy var managedObjectContext: NSManagedObjectContext? = {
+    private lazy var managedObjectContext: NSManagedObjectContext? = {
         // Returns the managed object context for the application (which is already bound to the persistent store coordinator for the application.) This property is optional since there are legitimate error conditions that could cause the creation of the context to fail.
         let coordinator = self.persistentStoreCoordinator
         if coordinator == nil {

@@ -3,11 +3,6 @@ This is a simple organizer for iPhone.
 Is written in Swift.
 I implemented this application for trying out the new language Swift.  
 
-Here was used the next things:
-- Core Data
-- Storyboard
-- Autolayout
-
 On first start are created some tasks by default. 
 You can add a new task by pressing on button '+' on the navigator bar. 
 You can select row in tableview for start editing task. 
