@@ -6,7 +6,10 @@ source 'https://github.com/CocoaPods/Specs.git'
 xcodeproj 'SwiftOrganizer/SwiftOrganizer.xcodeproj'
 
 target 'SwiftOrganizer' do
-    # pod 'SlideMenuControllerSwift', git: 'https://github.com/dekatotoro/SlideMenuControllerSwift.git'
+    # pod ‘SwiftOrganizer’, git: 'https://github.com/SKrotkih/SimpleOrganizer.git'
+
+pod 'Parse-iOS-SDK', '~&gt; 1.3'
+
 end
 
 target 'SwiftOrganizerTests' do

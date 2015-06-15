@@ -954,11 +954,11 @@
         </scene>
     </scenes>
     <resources>
-        <image name="ico1.png" width="16" height="18"/>
-        <image name="ico2.png" width="15" height="17"/>
-        <image name="ico3.png" width="16" height="17"/>
-        <image name="ico4.png" width="16" height="18"/>
-        <image name="ico5.png" width="16" height="18"/>
-        <image name="ico6.png" width="17" height="18"/>
+        <image name="ico1.png" width="52" height="51"/>
+        <image name="ico2.png" width="52" height="52"/>
+        <image name="ico3.png" width="51" height="52"/>
+        <image name="ico4.png" width="51" height="51"/>
+        <image name="ico5.png" width="50" height="50"/>
+        <image name="ico6.png" width="52" height="51"/>
     </resources>
 </document>

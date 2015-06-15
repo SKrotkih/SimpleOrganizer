@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		7F0D37841B0F67B1008B785B /* SlideMenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F0D37831B0F67B1008B785B /* SlideMenuController.swift */; };
+		7F441A591B2EB3EA004DAA5D /* SOParseComManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F441A581B2EB3EA004DAA5D /* SOParseComManager.swift */; };
 		7F497D4D1B18A6AF00F95BA9 /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F497D4C1B18A6AF00F95BA9 /* Category.swift */; };
 		7F497D4F1B18B6E800F95BA9 /* SOTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F497D4E1B18B6E800F95BA9 /* SOTask.swift */; };
 		7F497D521B1AA25500F95BA9 /* SOTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F497D511B1AA25500F95BA9 /* SOTabBarController.swift */; };
@@ -82,6 +83,7 @@
 
 /* Begin PBXFileReference section */
 		7F0D37831B0F67B1008B785B /* SlideMenuController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlideMenuController.swift; sourceTree = "<group>"; };
+		7F441A581B2EB3EA004DAA5D /* SOParseComManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SOParseComManager.swift; sourceTree = "<group>"; };
 		7F497D4C1B18A6AF00F95BA9 /* Category.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Category.swift; path = LocalDataBase/Category.swift; sourceTree = "<group>"; };
 		7F497D4E1B18B6E800F95BA9 /* SOTask.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SOTask.swift; path = LocalDataBase/SOTask.swift; sourceTree = "<group>"; };
 		7F497D511B1AA25500F95BA9 /* SOTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SOTabBarController.swift; path = TabBar/SOTabBarController.swift; sourceTree = "<group>"; };
@@ -173,6 +175,14 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		7F441A571B2EB3EA004DAA5D /* Parse.com */ = {
+			isa = PBXGroup;
+			children = (
+				7F441A581B2EB3EA004DAA5D /* SOParseComManager.swift */,
+			);
+			path = Parse.com;
+			sourceTree = "<group>";
+		};
 		7F497D501B1AA20D00F95BA9 /* TabBar */ = {
 			isa = PBXGroup;
 			children = (
@@ -203,7 +213,6 @@
 				7F5725711B0F5DDB003DBDEB /* SwiftOrganizerTests */,
 				7F5725571B0F5DDA003DBDEB /* Products */,
 				3E56BF08CFAD1B72B51AAB1A /* Frameworks */,
-				A3B5FA19EA2224987AAFA3C6 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -219,6 +228,7 @@
 		7F5725581B0F5DDA003DBDEB /* SwiftOrganizer */ = {
 			isa = PBXGroup;
 			children = (
+				7F441A571B2EB3EA004DAA5D /* Parse.com */,
 				7F5866341B16CB3700BB32AA /* LocalDataBase */,
 				7F5725991B0F61AC003DBDEB /* Common */,
 				7F57258A1B0F6114003DBDEB /* ViewControllers */,
@@ -430,13 +440,6 @@
 			name = Description;
 			sourceTree = "<group>";
 		};
-		A3B5FA19EA2224987AAFA3C6 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Pods;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -587,6 +590,7 @@
 				7F497D541B1AA2C300F95BA9 /* SOTabBarContainerView.swift in Sources */,
 				7F497D4F1B18B6E800F95BA9 /* SOTask.swift in Sources */,
 				7F6E981C1B1DE04C0048ED7A /* SOEditTaskDescriptionCell.swift in Sources */,
+				7F441A591B2EB3EA004DAA5D /* SOParseComManager.swift in Sources */,
 				7F5A6D1F1B14A75A009665C7 /* SOMainTableViewController.swift in Sources */,
 				7F5725971B0F6114003DBDEB /* RightViewController.swift in Sources */,
 				7F497D581B1AAAB400F95BA9 /* SOIconsTabBarController.swift in Sources */,
