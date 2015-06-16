@@ -12,9 +12,9 @@ class SOCategoryTabView: UIView {
     @IBOutlet weak var tabBackgroundView: UIView!
     var filterStateDelegate: SOChangeFilterStateDelegate?
     var _selected: Bool = false
-    var _category: Category?
+    var _category: SOCategory?
     
-    var category: Category? {
+    var category: SOCategory? {
         get{
             return _category
         }

@@ -39,7 +39,11 @@ class SOTabBarController: NSObject {
             
             if let scrollView = self.scrollView{
                 let h: CGFloat = CGRectGetHeight(scrollView.frame)
-                scrollView.contentSize = CGSizeMake(x, h)
+                var contentSize: CGSize = CGSizeMake(x, h)
+                var containerFrame: CGRect = containerView.frame
+                containerFrame.size = contentSize
+                containerView.frame = containerFrame
+                scrollView.contentSize = contentSize
             }
         }
     }

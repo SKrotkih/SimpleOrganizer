@@ -29,7 +29,7 @@ class SOEditTaskIconsCell: UITableViewCell {
             var count: Int = 0;
             
             for i in 0...(imagesView.count - 1) {
-                let currImage: UIImage? = newValue.ico(i)
+                let currImage: UIImage? = newValue.iconImage(i)
                 let imageView: UIImageView = imagesView[i]
                 
                 if let image = currImage{

@@ -12,13 +12,13 @@ class SOEnterIconsViewController: SOEnterBaseViewController, UITableViewDataSour
     
     @IBOutlet weak var tableView: UITableView!
 
-    var icons = [Ico]()
+    var icons = [SOIco]()
     var taskIcons = [String]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        icons = SOLocalDataBase.sharedInstance.allIcons
+        icons = SODataFetching.sharedInstance.allIcons
     }
 
     override func viewWillAppear(animated: Bool) {
@@ -30,8 +30,12 @@ class SOEnterIconsViewController: SOEnterBaseViewController, UITableViewDataSour
         
         if let editTask = self.task{
             taskIcons.removeAll(keepCapacity: false)
-            for i in 0..<editTask.maxIconsCount{
-                if let icoId = editTask.icoId(i){
+            let icons = editTask.icons
+
+            for i in 0..<icons.count{
+                let icoId = icons[i]
+
+                if icoId != ""{
                     taskIcons.append(icoId)
                 }
             }
@@ -40,12 +44,13 @@ class SOEnterIconsViewController: SOEnterBaseViewController, UITableViewDataSour
     
     func doneButtonWasPressed() {
         if let editTask = self.task{
-            for i in 0..<editTask.maxIconsCount{
-                editTask.putIco(i, newValue: "")
-            }
-            
-            for i in 0..<taskIcons.count{
-                editTask.putIco(i, newValue: taskIcons[i])
+            let icons = editTask.icons
+            for i in 0..<icons.count{
+                var newIconValue = ""
+                if i < taskIcons.count{
+                    newIconValue = taskIcons[i]
+                }
+                editTask.setIcon(i, newValue: newIconValue)
             }
         }
         
@@ -70,10 +75,10 @@ class SOEnterIconsViewController: SOEnterBaseViewController, UITableViewDataSour
         let row = indexPath.row
         var cell = self.tableView.dequeueReusableCellWithIdentifier(selectIconsCell) as! SOSelectIconsCell
 
-        let ico: Ico = icons[row]
+        let ico: SOIco = icons[row]
         let icoId: String = ico.id
         
-        if let icoImageName = SOLocalDataBase.sharedInstance.iconsImageName(icoId){
+        if let icoImageName = SODataFetching.sharedInstance.iconsImageName(icoId){
             cell.icoImageView.image = UIImage(named: icoImageName)
         }
         
@@ -95,7 +100,7 @@ class SOEnterIconsViewController: SOEnterBaseViewController, UITableViewDataSour
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let row = indexPath.row
-        let ico: Ico = icons[row]
+        let ico: SOIco = icons[row]
         let icoId: String = ico.id
         var needAdd: Bool = true
 

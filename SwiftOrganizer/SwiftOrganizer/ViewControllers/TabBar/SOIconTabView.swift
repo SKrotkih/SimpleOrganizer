@@ -14,15 +14,15 @@ class SOIconTabView: UIView {
     
     var _selected: Bool = false
     
-    var _ico: Ico?
+    var _ico: SOIco?
     
-    var ico: Ico? {
+    var ico: SOIco? {
         get{
             return _ico
         }
         set{
             _ico = newValue
-            if let imageName = newValue?.imagename, let image = UIImage(named: imageName){
+            if let imageName = newValue?.imageName, let image = UIImage(named: imageName){
                 self.button.setImage(image, forState: .Normal)
             }
         }

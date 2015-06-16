@@ -10,14 +10,14 @@ import UIKit
 import CoreData
 
 let DatabaseName = "SwiftOrganizer"
+let DataBaseErrorDomain = "SwiftOrganizerErrorDomain"
+let CategoryEntityName = "Category"
+let IcoEntityName = "Ico"
+let TaskEntityName = "Task"
 
 public class SOLocalDataBase: NSObject {
     
     static let sharedInstance = SOLocalDataBase()
-    
-    lazy var _allTasks = [SOTask]()
-    lazy var _allCategories = [Category]()
-    lazy var _allIcons = [Ico]()
     
     //- MARK: Helper methods
     func newTaskManagedObject() -> Task!{
@@ -123,170 +123,109 @@ public class SOLocalDataBase: NSObject {
     }
 
     // - MARK: Categories
-
-    var allCategories: [Category]{
-        get{
-
-            if _allCategories.count > 0{
-                return _allCategories
+    func allCategories() -> [SOCategory]{
+        let fetchRequest = NSFetchRequest(entityName: CategoryEntityName)
+        
+        var requestError: NSError?
+        let categories = managedObjectContext!.executeFetchRequest(fetchRequest, error: &requestError) as! [Category]
+        
+        if let error = requestError{
+            println("Failed to fetch of Category data. Error = \(error)")
+        }
+        
+        var _allCategories: [SOCategory] = []
+        
+        if categories.count > 0{
+            for category: Category in categories{
+                let categoryItem = self.newCategory(category)
+                _allCategories.append(categoryItem)
             }
             
-            let fetchRequest = NSFetchRequest(entityName: "Category")
+            return _allCategories
+        } else {
+            populateCategories()
             
-            var requestError: NSError?
-            let categories = managedObjectContext!.executeFetchRequest(fetchRequest, error: &requestError) as! [Category]
-            
-            if let error = requestError{
-                println("Failed to fetch of Category data. Error = \(error)")
-            }
-            
-            if categories.count > 0{
-                for category in categories{
-                    
-                    println("\(category.id)")
-                    
-                    _allCategories.append(category)
-                }
-                
-                return _allCategories
-            } else {
-                populateCategories()
-
-                return self.allCategories
-            }
+            return allCategories()
         }
     }
     
-    func updateCategory(category: Category, fieldName: String, value: AnyObject){
-        _allCategories.removeAll(keepCapacity: false)
-        category.setValue(value, forKey: fieldName);
+    private func newCategory(category: Category) -> SOCategory{
+        var newCategory = SOCategory()
+        newCategory.databaseObject = category
+        newCategory.id = category.id
+        newCategory.name = category.name
+        newCategory.selected = category.selected
+        
+        return newCategory
+    }
+    
+    func saveCategory(category: SOCategory, fieldName: String, value: AnyObject){
+        let categoryObject = category.databaseObject as? Ico
+        
+        if let object = categoryObject{
+            object.setValue(value, forKey: fieldName);
+        }
+        else{
+            
+        }
+        
         self.saveContext()
-    }
-
-    func updateIcon(icon: Ico, fieldName: String, value: AnyObject){
-        _allIcons.removeAll(keepCapacity: false)
-        icon.setValue(value, forKey: fieldName);
-        self.saveContext()
-    }
-
-    func updateTask(){
-        //       let batch = NSBatchUpdateRequest(entityName: "Category")
-        //        batch.propertiesToUpdate = [fieldName: value]
-        //        // Predicate
-        //        batch.predicate = NSPredicate(format: "id = %@", category.id)
-        //        // Result type
-        //        batch.resultType = NSBatchUpdateRequestResultType.UpdatedObjectsCountResultType
-        //
-        //        var batchError: NSError?
-        //        let result = managedObjectContext!.executeRequest(batch, error: &batchError)
-        //
-        //        if result != nil{
-        //            if let theResult = result as? NSBatchUpdateResult{
-        //                if let numberOfAffectedPersons = theResult.result as? Int{
-        //                    println("Number of categories which were updated is \(numberOfAffectedPersons)")
-        //                }
-        //            }
-        //        }else{
-        //            if let error = batchError{
-        //                println("Could not perform batch request. Error = \(error)")
-        //            }
-        //        }
-    }
-    
-    subscript(index: Int) -> Category? {
-        if allCategories.count > 0 && index < allCategories.count{
-            return allCategories[index]
-        }
-        
-        return nil
-    }
-    
-    func categoryForIndex(index: Int) -> Category?{
-        if allCategories.count > 0 && index < allCategories.count{
-            return allCategories[index]
-        }
-        
-        return nil
-    }
-    
-    func categoryName(id : String) -> String?{
-        if let category = self.categoryById(id){
-            return category.name
-        }
-        
-        return nil
-    }
-
-    func categoryById(id : String) -> Category?{
-        for category in self.allCategories{
-            if category.id == id{
-                return category
-            }
-        }
-        
-        return nil
     }
     
     // - MARK: Icons
-    var allIcons: [Ico]{
-        get{
+    func allIcons() -> [SOIco]{
+        let fetchRequest = NSFetchRequest(entityName: IcoEntityName)
+        
+        var requestError: NSError?
+        let icons = managedObjectContext!.executeFetchRequest(fetchRequest, error: &requestError) as! [Ico]
+        
+        if let error = requestError{
+            println("Failed to fetch of Icons data. Error = \(error)")
             
-            if _allIcons.count > 0{
-                return _allIcons
+            abort()
+        }
+        
+        var _allIcon: [SOIco] = []
+        
+        if icons.count > 0{
+            for ico: Ico in icons{
+                let icoItem = self.newIco(ico)
+                _allIcon.append(icoItem)
             }
             
-            let fetchRequest = NSFetchRequest(entityName: "Ico")
+            return _allIcon
+        } else {
+            populateIcons()
             
-            var requestError: NSError?
-            let icons = managedObjectContext!.executeFetchRequest(fetchRequest, error: &requestError) as! [Ico]
-            
-            if let error = requestError{
-                println("Failed to fetch of Icons data. Error = \(error)")
-
-                abort()
-            }
-            
-            if icons.count > 0{
-                for ico in icons{
-                    _allIcons.append(ico)
-                }
-                
-                return _allIcons
-            } else {
-                populateIcons()
-
-                return self.allIcons
-            }
+            return allIcons()
         }
     }
     
-    func iconForIndex(index: Int) -> Ico?{
-        if allIcons.count > 0 && index < allIcons.count{
-            return allIcons[index]
-        }
+    // MARK: Ico
+    private func newIco(ico: Ico) -> SOIco{
+        var newIco = SOIco()
         
-        return nil
-    }
-
-    func iconsImageName(id : String) -> String?{
-        let icoOpt: Ico? = self.iconById(id)
-        if let ico = icoOpt{
-            return ico.imagename
-        }
+        newIco.databaseObject = ico
+        newIco.id = ico.id
+        newIco.name = ico.name
+        newIco.imageName = ico.imagename
+        newIco.selected = ico.selected
         
-        return nil
+        return newIco
     }
     
-    func iconById(id : String) -> Ico?{
-        for ico in self.allIcons{
-            if ico.id == id{
-                return ico
-            }
+    func saveIco(ico: SOIco, fieldName: String, value: AnyObject){
+        let icoObject = ico.databaseObject as? Ico
+        
+        if let object = icoObject{
+            object.setValue(value, forKey: fieldName);
+        }
+        else{
+            
         }
         
-        return nil
+        self.saveContext()
     }
-    
     
     // - MARK: Tasks
     func fetchAllTasks(successBlock: (allTaskData: [SOTask], error: NSErrorPointer) -> Void) {
@@ -296,7 +235,7 @@ public class SOLocalDataBase: NSObject {
         backgroundContext.performBlock{[weak self] in
             
             func fetchAllTasks() -> Bool{
-                let fetchRequest = NSFetchRequest(entityName: "Task")
+                let fetchRequest = NSFetchRequest(entityName: TaskEntityName)
                 var fetchError: NSError?
                 let tasks = self!.managedObjectContext!.executeFetchRequest(fetchRequest, error: &fetchError) as! [Task]
                 
@@ -307,11 +246,12 @@ public class SOLocalDataBase: NSObject {
                 } else {
                     if tasks.count > 0 {
                         dispatch_async(dispatch_get_main_queue(), {
-                            self!._allTasks.removeAll(keepCapacity: false)
+                            
+                            var _allTasks: [SOTask] = []
 
                             for task in tasks{
                                 var categorySelected: Bool = false
-                                if let category = self?.categoryById(task.category){
+                                if let category = SODataFetching.sharedInstance.categoryById(task.category){
                                     categorySelected = category.selected
                                 }
                                 
@@ -319,20 +259,20 @@ public class SOLocalDataBase: NSObject {
                                 var iconsSelected: Bool = true
                                 
                                 for iconId in icons{
-                                    let iconOpt: Ico? = self?.iconById(iconId)
+                                    let iconOpt: SOIco? = SODataFetching.sharedInstance.iconById(iconId)
                                     if let ico = iconOpt{
                                         iconsSelected = iconsSelected && ico.selected
                                     }
                                 }
                                 
                                 if categorySelected && iconsSelected{
-                                    let sotask = SOTask(task: task)
-                                    self!._allTasks.append(sotask)
+                                    let sotask = self!.newTask(task)
+                                    _allTasks.append(sotask)
                                 }
                                 
                             }
                             var fetchError: NSError?
-                            successBlock(allTaskData: self!._allTasks, error: &fetchError)
+                            successBlock(allTaskData: _allTasks, error: &fetchError)
                             
                             if let error = fetchError{
                                 if error.code > 0{
@@ -355,6 +295,58 @@ public class SOLocalDataBase: NSObject {
                 fetchAllTasks()
             }
         }
+    }
+    
+    // MARK: Task
+    private func newTask(task: Task) -> SOTask{
+        var newTask: SOTask = SOTask()
+        
+        newTask.databaseObject = task
+        newTask.title = task.title
+        newTask.category = task.category
+        newTask.date = task.date
+        
+        let taskIcons = [task.ico1, task.ico2, task.ico3, task.ico4, task.ico5, task.ico6]
+        var _icons = [String](count: MaxIconsCount, repeatedValue: "")
+        for i in 0..<MaxIconsCount{
+            _icons[i] = taskIcons[i]
+        }
+        newTask.icons = _icons
+        
+        return newTask
+    }
+    
+    private func copyTask(object: Task, srcTask: SOTask){
+        object.title = srcTask.title
+        object.category = srcTask.category
+        let icons = srcTask.icons
+        object.ico1 = icons[0]
+        object.ico2 = icons[1]
+        object.ico3 = icons[2]
+        object.ico4 = icons[3]
+        object.ico5 = icons[4]
+        object.ico6 = icons[5]
+        if let date = srcTask.date{
+            object.date = date
+        }
+    }
+    
+    func saveTask(task: SOTask){
+        let taskObject: Task? = task.databaseObject as? Task
+        
+        if let object = taskObject{
+            self.copyTask(object, srcTask: task)
+        }
+        else{
+            let object = self.newTaskManagedObject()
+            self.copyTask(object, srcTask: task)
+        }
+        self.saveContext()
+    }
+    
+    func removeTask(task: SOTask){
+        let taskObject: Task? = task.databaseObject as? Task
+        self.deleteObject(taskObject)
     }
     
     // MARK: - Core Data stack
@@ -384,7 +376,7 @@ public class SOLocalDataBase: NSObject {
             dict[NSLocalizedDescriptionKey] = "Failed to initialize the application's saved data"
             dict[NSLocalizedFailureReasonErrorKey] = failureReason
             dict[NSUnderlyingErrorKey] = error
-            error = NSError(domain: "YOUR_ERROR_DOMAIN", code: 9999, userInfo: dict)
+            error = NSError(domain: DataBaseErrorDomain, code: 9999, userInfo: dict)
             // Replace this with code to handle the error appropriately.
             // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
             NSLog("Unresolved error \(error), \(error!.userInfo)")

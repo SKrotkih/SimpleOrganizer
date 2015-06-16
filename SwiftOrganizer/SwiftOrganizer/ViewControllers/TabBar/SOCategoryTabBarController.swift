@@ -14,7 +14,7 @@ class SOCategoryTabBarController: SOTabBarController {
     
     override func reloadTabs(){
 
-        let allCategories: [Category] = SOLocalDataBase.sharedInstance.allCategories
+        let allCategories: [SOCategory] = SODataFetching.sharedInstance.allCategories
         self.tabsCount = allCategories.count
 
         if self.tabsCount > 0{
@@ -26,7 +26,7 @@ class SOCategoryTabBarController: SOTabBarController {
             }
             
             for var i = 0; i < self.tabsCount; i++ {
-                let category: Category = allCategories[i]
+                let category: SOCategory = allCategories[i]
                 let tabView: SOCategoryTabView = tabs[i] as! SOCategoryTabView
                 tabView.filterStateDelegate = self.filterStateDelegate
                 tabView.category = category

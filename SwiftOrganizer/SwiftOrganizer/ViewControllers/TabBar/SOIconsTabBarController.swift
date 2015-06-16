@@ -14,7 +14,7 @@ class SOIconsTabBarController: SOTabBarController {
     
     override func reloadTabs(){
         
-        let allIcons: [Ico] = SOLocalDataBase.sharedInstance.allIcons
+        let allIcons: [SOIco] = SODataFetching.sharedInstance.allIcons
         self.tabsCount = allIcons.count
         
         if self.tabsCount > 0{
@@ -26,7 +26,7 @@ class SOIconsTabBarController: SOTabBarController {
             }
             
             for var i = 0; i < self.tabsCount; i++ {
-                let ico: Ico = allIcons[i]
+                let ico: SOIco = allIcons[i]
                 let tabView: SOIconTabView = tabs[i] as! SOIconTabView
                 tabView.filterStateDelegate = self.filterStateDelegate                
                 tabView.ico = ico

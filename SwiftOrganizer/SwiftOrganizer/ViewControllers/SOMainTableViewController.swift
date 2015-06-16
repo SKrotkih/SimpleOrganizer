@@ -11,8 +11,8 @@ import CoreData
 
 
 protocol SOChangeFilterStateDelegate{
-    func didSelectCategory(category: Category, select: Bool)
-    func didSelectIcon(icon: Ico, select: Bool)
+    func didSelectCategory(category: SOCategory, select: Bool)
+    func didSelectIcon(icon: SOIco, select: Bool)
 }
 
 class SOMainTableViewController: NSObject, UITableViewDataSource, UITableViewDelegate, SOChangeFilterStateDelegate, SORemoveTaskDelegate{
@@ -33,18 +33,8 @@ class SOMainTableViewController: NSObject, UITableViewDataSource, UITableViewDel
         self.tableView.dataSource = self
     }
 
-
-//    func fetchRequestAllTasks(data: [Task], error: NSErrorPointer) -> Void {
-//
-//        self.tableView.reloadData()
-//    }
-//    func getAllTasks(successBlock: (allTaskData: [Task], error: NSErrorPointer) -> Void){
-//        SOLocalDataBase.sharedInstance.fetchAllTasks(self.fetchRequestAllTasks)
-//    }
-    
     func reloadData(){
-        SOLocalDataBase.sharedInstance.fetchAllTasks({ (allCurrentTasks: [SOTask], error: NSErrorPointer) in
-            error.memory = NSError(domain: "LocalDataBaseErrors", code: 0, userInfo: [:])
+        SODataFetching.sharedInstance.fetchAllTasks({ (allCurrentTasks: [SOTask], error: NSErrorPointer) in
             self.tasks = allCurrentTasks
             self.tableView.reloadData()
         })
@@ -111,15 +101,15 @@ class SOMainTableViewController: NSObject, UITableViewDataSource, UITableViewDel
     
     // - MARK: SOChangeFilterStateDelegate
     
-    func didSelectCategory(category: Category, select: Bool){
-        SOLocalDataBase.sharedInstance.updateCategory(category, fieldName: "selected", value: select)
+    func didSelectCategory(category: SOCategory, select: Bool){
+        SODataFetching.sharedInstance.updateCategory(category, fieldName: "selected", value: select)
         dispatch_async(dispatch_get_main_queue(), {
             self.reloadData()
         })
     }
     
-    func didSelectIcon(icon: Ico, select: Bool){
-        SOLocalDataBase.sharedInstance.updateIcon(icon, fieldName: "selected", value: select)
+    func didSelectIcon(icon: SOIco, select: Bool){
+        SODataFetching.sharedInstance.updateIcon(icon, fieldName: "selected", value: select)
         dispatch_async(dispatch_get_main_queue(), {
             self.reloadData()
         })

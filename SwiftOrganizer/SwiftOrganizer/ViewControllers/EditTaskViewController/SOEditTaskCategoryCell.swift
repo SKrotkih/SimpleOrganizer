@@ -17,11 +17,11 @@ class SOEditTaskCategoryCell: UITableViewCell {
             return SOTask()            
         }
         set{
-            if newValue.category == "" {
+            if newValue.categoryName == "" {
                 self.categoryNameLabel.text = "Category".localized
             }
             else{
-                self.categoryNameLabel.text = newValue.category
+                self.categoryNameLabel.text = newValue.categoryName
             }
         }
     }

@@ -17,7 +17,13 @@ class SOEditTaskDateCell: UITableViewCell {
             return SOTask()            
         }
         set{
-            self.dateTextLabel.text = newValue.dateString()
+            if let dateEvent = newValue.date{
+                let dateFormatter = NSDateFormatter()
+                dateFormatter.dateFormat = "dd-MM-yyyy HH:mm:ss"
+                self.dateTextLabel.text = dateFormatter.stringFromDate(dateEvent)
+            } else{
+                self.dateTextLabel.text = ""
+            }
         }
     }
 

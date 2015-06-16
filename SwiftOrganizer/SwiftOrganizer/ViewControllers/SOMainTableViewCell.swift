@@ -72,13 +72,20 @@ class SOMainTableViewCell: UITableViewCell {
     func fillTaskData(task: SOTask){
         self.task = task
         self.titleTextLabel!.text = task.title
-        self.categoryNameLabel!.text = task.category
-        self.icon1ImageView.image = task.ico(0)
-        self.icon2ImageView.image = task.ico(1)
-        self.icon3ImageView.image = task.ico(2)
-        self.icon4ImageView.image = task.ico(3)
-        self.icon5ImageView.image = task.ico(4)
-        self.icon6ImageView.image = task.ico(5)
-        self.dateTextLabel.text = task.dateString()
+        self.categoryNameLabel!.text = task.categoryName
+        let imegeViews = [self.icon1ImageView, self.icon2ImageView, self.icon3ImageView, self.icon4ImageView, self.icon5ImageView, self.icon6ImageView]
+
+        for i in 0..<imegeViews.count{
+            let imageView = imegeViews[i]
+            imageView.image = task.iconImage(i)
+        }
+        
+        if let dateEvent = task.date{
+            let dateFormatter = NSDateFormatter()
+            dateFormatter.dateFormat = "dd-MM-yyyy HH:mm:ss"
+            self.dateTextLabel.text = dateFormatter.stringFromDate(dateEvent)
+        } else{
+            self.dateTextLabel.text = ""
+        }
     }
 }

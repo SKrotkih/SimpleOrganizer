@@ -10,14 +10,14 @@ import UIKit
 
 class SOEnterCategoryViewController: SOEnterBaseViewController, UITableViewDataSource, UITableViewDelegate {
 
-    var categories: [Category]!
+    var categories: [SOCategory]!
     
     @IBOutlet weak var tableView: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        categories = SOLocalDataBase.sharedInstance.allCategories
+        categories = SODataFetching.sharedInstance.allCategories
     }
 
     override func didReceiveMemoryWarning() {
