@@ -44,19 +44,23 @@ class SOEditTaskViewController: UIViewController, UITableViewDataSource, UITable
     }
     
     func doneButtonWasPressed() {
-        self.saveTask()
-        self.navigationController?.popViewControllerAnimated(true)
+        if let editTask = task{
+            editTask.save{(error: NSError?) in
+                if let saveError = error{
+                    showAlertWithTitle("Update task error".localized, saveError.description)
+                } else {
+                    self.navigationController?.popViewControllerAnimated(true)
+                }
+            }
+        } else {
+            self.navigationController?.popViewControllerAnimated(true)
+        }
     }
     
     func closeButtonWasPressed() {
         self.navigationController?.popViewControllerAnimated(true)
     }
 
-    func saveTask(){
-        if let editTask = task{
-            editTask.save()
-        }
-    }
 
     //- MARK: UITableViewDataSource
     /// Number of rows in a section

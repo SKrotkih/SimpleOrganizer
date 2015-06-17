@@ -5,6 +5,8 @@
 #ifndef SwiftOrganizer_Bridging_Header_h
 #define SwiftOrganizer_Bridging_Header_h
 
+#import <Parse/Parse.h>
+
 // If you are using Facebook, uncomment this line to get automatic import of the header inside your project.
 //#import <ParseFacebookUtils/PFFacebookUtils.h>
 

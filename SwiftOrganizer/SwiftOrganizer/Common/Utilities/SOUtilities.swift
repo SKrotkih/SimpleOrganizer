@@ -17,3 +17,7 @@ func colorWithRGBHex(hex: UInt32) -> UIColor{
     return UIColor(red: r/255.0, green: g/255.0, blue: b/255.0, alpha: 1.0)
 }
 
+func showAlertWithTitle(title:String, message:String){
+    let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+    appDelegate.showAlertWithTitle(title, message: message)
+}

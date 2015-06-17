@@ -62,6 +62,6 @@ class SOIco: NSObject {
     }
     
     func save(fieldName: String, value: AnyObject){
-        SOLocalDataBase.sharedInstance.saveIco(self, fieldName: fieldName, value: value)
+        SODataBaseFactory.sharedInstance.dataBase.saveIco(self, fieldName: fieldName, value: value)
     }
 }

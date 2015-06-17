@@ -52,6 +52,6 @@ class SOCategory: NSObject {
     }
     
     func save(fieldName: String, value: AnyObject){
-        SOLocalDataBase.sharedInstance.saveCategory(self, fieldName: fieldName, value: value)
+        SODataBaseFactory.sharedInstance.dataBase.saveCategory(self, fieldName: fieldName, value: value)
     }
 }

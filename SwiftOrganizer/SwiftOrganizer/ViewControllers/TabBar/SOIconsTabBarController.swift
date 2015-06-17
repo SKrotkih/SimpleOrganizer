@@ -13,27 +13,34 @@ class SOIconsTabBarController: SOTabBarController {
     let tabViewXibName = "SOIconTabView"
     
     override func reloadTabs(){
-        
-        let allIcons: [SOIco] = SODataFetching.sharedInstance.allIcons
-        self.tabsCount = allIcons.count
-        
-        if self.tabsCount > 0{
-            
-            while tabs.count < self.tabsCount{
-                var xibItems: NSArray = NSBundle.mainBundle().loadNibNamed(tabViewXibName, owner: nil, options: nil)
-                let tabView: SOIconTabView = xibItems[0] as! SOIconTabView
-                tabs.append(tabView)
-            }
-            
-            for var i = 0; i < self.tabsCount; i++ {
-                let ico: SOIco = allIcons[i]
-                let tabView: SOIconTabView = tabs[i] as! SOIconTabView
-                tabView.filterStateDelegate = self.filterStateDelegate                
-                tabView.ico = ico
-                tabView.selected = ico.selected
+
+        SODataFetching.sharedInstance.allIcons{(icons: [SOIco], fetchError: NSError?) in
+            if let error = fetchError{
+                showAlertWithTitle("Error reading icons data", error.description)
+            } else if icons.count > 0{
+                self.tabsCount = icons.count
+                
+                if self.tabsCount > 0{
+                    
+                    while self.tabs.count < self.tabsCount{
+                        var xibItems: NSArray = NSBundle.mainBundle().loadNibNamed(self.tabViewXibName, owner: nil, options: nil)
+                        let tabView: SOIconTabView = xibItems[0] as! SOIconTabView
+                        self.tabs.append(tabView)
+                    }
+                    
+                    for var i = 0; i < self.tabsCount; i++ {
+                        let ico: SOIco = icons[i]
+                        let tabView: SOIconTabView = self.tabs[i] as! SOIconTabView
+                        tabView.filterStateDelegate = self.filterStateDelegate
+                        tabView.ico = ico
+                        tabView.selected = ico.selected
+                    }
+                }
+                
+                super.reloadTabs()
+            } else {
+                showAlertWithTitle("Warning!", "Icons data are not presented on the Parse.com Server.")
             }
         }
-        
-        super.reloadTabs()
     }
 }

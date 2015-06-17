@@ -12,13 +12,20 @@ class SOEnterIconsViewController: SOEnterBaseViewController, UITableViewDataSour
     
     @IBOutlet weak var tableView: UITableView!
 
-    var icons = [SOIco]()
-    var taskIcons = [String]()
+    private var icons = [SOIco]()
+    private var taskIcons = [String]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        icons = SODataFetching.sharedInstance.allIcons
+        SODataFetching.sharedInstance.allIcons{(icons: [SOIco], fetchError: NSError?) in
+            if let error = fetchError{
+                showAlertWithTitle("Error reading icons data", error.description)
+            } else {
+                self.icons = icons
+                self.tableView.reloadData()
+            }
+        }
     }
 
     override func viewWillAppear(animated: Bool) {

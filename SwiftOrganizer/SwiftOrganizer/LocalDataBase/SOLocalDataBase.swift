@@ -15,9 +15,7 @@ let CategoryEntityName = "Category"
 let IcoEntityName = "Ico"
 let TaskEntityName = "Task"
 
-public class SOLocalDataBase: NSObject {
-    
-    static let sharedInstance = SOLocalDataBase()
+public class SOLocalDataBase: NSObject, SODataBaseProtocol {
     
     //- MARK: Helper methods
     func newTaskManagedObject() -> Task!{
@@ -123,29 +121,28 @@ public class SOLocalDataBase: NSObject {
     }
 
     // - MARK: Categories
-    func allCategories() -> [SOCategory]{
+    func allCategories(successBlock: (resultBuffer: [SOCategory], error: NSError?) -> Void){
+        var _allCategories: [SOCategory] = []
+        
         let fetchRequest = NSFetchRequest(entityName: CategoryEntityName)
         
         var requestError: NSError?
         let categories = managedObjectContext!.executeFetchRequest(fetchRequest, error: &requestError) as! [Category]
         
         if let error = requestError{
-            println("Failed to fetch of Category data. Error = \(error)")
-        }
-        
-        var _allCategories: [SOCategory] = []
-        
-        if categories.count > 0{
-            for category: Category in categories{
-                let categoryItem = self.newCategory(category)
-                _allCategories.append(categoryItem)
-            }
-            
-            return _allCategories
+            successBlock(resultBuffer: _allCategories, error: error)
         } else {
-            populateCategories()
-            
-            return allCategories()
+            if categories.count > 0{
+                for category: Category in categories{
+                    let categoryItem = self.newCategory(category)
+                    _allCategories.append(categoryItem)
+                }
+                successBlock(resultBuffer: _allCategories, error: nil)
+            } else {
+                populateCategories()
+                
+                return self.allCategories(successBlock)
+            }
         }
     }
     
@@ -173,31 +170,28 @@ public class SOLocalDataBase: NSObject {
     }
     
     // - MARK: Icons
-    func allIcons() -> [SOIco]{
+    func allIcons(successBlock: (resultBuffer: [SOIco], error: NSError?) -> Void){
+        var _allIcon: [SOIco] = []
+        
         let fetchRequest = NSFetchRequest(entityName: IcoEntityName)
         
         var requestError: NSError?
         let icons = managedObjectContext!.executeFetchRequest(fetchRequest, error: &requestError) as! [Ico]
         
         if let error = requestError{
-            println("Failed to fetch of Icons data. Error = \(error)")
-            
-            abort()
-        }
-        
-        var _allIcon: [SOIco] = []
-        
-        if icons.count > 0{
-            for ico: Ico in icons{
-                let icoItem = self.newIco(ico)
-                _allIcon.append(icoItem)
-            }
-            
-            return _allIcon
+            successBlock(resultBuffer: _allIcon, error: error)
         } else {
-            populateIcons()
-            
-            return allIcons()
+            if icons.count > 0{
+                for ico: Ico in icons{
+                    let icoItem = self.newIco(ico)
+                    _allIcon.append(icoItem)
+                }
+                successBlock(resultBuffer: _allIcon, error: nil)
+            } else {
+                populateIcons()
+                
+                return self.allIcons(successBlock)
+            }
         }
     }
     
@@ -228,7 +222,7 @@ public class SOLocalDataBase: NSObject {
     }
     
     // - MARK: Tasks
-    func fetchAllTasks(successBlock: (allTaskData: [SOTask], error: NSErrorPointer) -> Void) {
+    func fetchAllTasks(successBlock: (resultBuffer: [SOTask], error: NSError?) -> Void) {
         let backgroundContext = NSManagedObjectContext(concurrencyType: NSManagedObjectContextConcurrencyType.PrivateQueueConcurrencyType)
         backgroundContext.persistentStoreCoordinator = persistentStoreCoordinator
 
@@ -271,14 +265,7 @@ public class SOLocalDataBase: NSObject {
                                 }
                                 
                             }
-                            var fetchError: NSError?
-                            successBlock(allTaskData: _allTasks, error: &fetchError)
-                            
-                            if let error = fetchError{
-                                if error.code > 0{
-                                    assert(false, "Failed to execute the fetch request \(error.localizedDescription)")
-                                }
-                            }
+                            successBlock(resultBuffer: _allTasks, error: nil)
                         })
                         
                         return true
@@ -331,7 +318,7 @@ public class SOLocalDataBase: NSObject {
         }
     }
     
-    func saveTask(task: SOTask){
+    func saveTask(task: SOTask, successBlock: (error: NSError?) -> Void){
         let taskObject: Task? = task.databaseObject as? Task
         
         if let object = taskObject{
@@ -342,6 +329,8 @@ public class SOLocalDataBase: NSObject {
             self.copyTask(object, srcTask: task)
         }
         self.saveContext()
+        
+        successBlock(error: nil)
     }
     
     func removeTask(task: SOTask){

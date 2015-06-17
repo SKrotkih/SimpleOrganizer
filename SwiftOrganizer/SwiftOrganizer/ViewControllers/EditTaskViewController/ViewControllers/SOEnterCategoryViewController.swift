@@ -17,7 +17,14 @@ class SOEnterCategoryViewController: SOEnterBaseViewController, UITableViewDataS
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        categories = SODataFetching.sharedInstance.allCategories
+        SODataFetching.sharedInstance.allCategories{(categories: [SOCategory], fetchError: NSError?) in
+            if let error = fetchError{
+                showAlertWithTitle("Error reading categories data", error.description)
+            } else {
+                self.categories = categories
+                self.tableView.reloadData()
+            }
+        }
     }
 
     override func didReceiveMemoryWarning() {

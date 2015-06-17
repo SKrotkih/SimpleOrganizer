@@ -34,10 +34,14 @@ class SOMainTableViewController: NSObject, UITableViewDataSource, UITableViewDel
     }
 
     func reloadData(){
-        SODataFetching.sharedInstance.fetchAllTasks({ (allCurrentTasks: [SOTask], error: NSErrorPointer) in
-            self.tasks = allCurrentTasks
-            self.tableView.reloadData()
-        })
+        SODataFetching.sharedInstance.fetchAllTasks{(allCurrentTasks: [SOTask], fetchError: NSError?) in
+            if let error = fetchError{
+                showAlertWithTitle("Error while reading task data!", error.description)
+            } else {
+                self.tasks = allCurrentTasks
+                self.tableView.reloadData()
+            }
+        }
     }
     
     //- MARK: UITableViewDataSource
@@ -121,5 +125,4 @@ class SOMainTableViewController: NSObject, UITableViewDataSource, UITableViewDel
         task.remove()
         self.reloadData()
     }
-    
 }

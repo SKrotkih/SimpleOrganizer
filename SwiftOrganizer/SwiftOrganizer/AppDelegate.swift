@@ -12,13 +12,13 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
+    var mainViewController: SOMainViewController!
 
     private func createMenuView() {
         
-        // create viewController code...
         var storyboard = UIStoryboard(name: "Main", bundle: nil)
         
-        let mainViewController = storyboard.instantiateViewControllerWithIdentifier("SOMainViewController") as! SOMainViewController
+        mainViewController = storyboard.instantiateViewControllerWithIdentifier("SOMainViewController") as! SOMainViewController
         let leftViewController = storyboard.instantiateViewControllerWithIdentifier("LeftViewController") as! LeftViewController
         let rightViewController = storyboard.instantiateViewControllerWithIdentifier("RightViewController") as! RightViewController
         
@@ -35,6 +35,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         self.createMenuView()
+        
         return SOParseInitManager.application(application, didFinishLaunchingWithOptions: launchOptions)
     }
 
@@ -90,7 +91,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationWillTerminate(application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
         // Saves changes in the application's managed object context before the application terminates.
-        SOLocalDataBase.sharedInstance.saveContext()
+        SODataBaseFactory.sharedInstance.dataBase.saveContext()
+    }
+    
+    func showAlertWithTitle(title:String, message:String){
+        self.mainViewController.showAlertWithTitle(title, message: message)
     }
 
 }

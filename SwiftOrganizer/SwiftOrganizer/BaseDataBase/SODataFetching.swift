@@ -12,57 +12,54 @@ class SODataFetching: NSObject {
 
     static let sharedInstance = SODataFetching()
     
-    lazy var _allTasks = [SOTask]()
-    lazy var _allCategories = [SOCategory]()
-    lazy var _allIcons = [SOIco]()
+    private lazy var _allTasks = [SOTask]()
+    private lazy var _allCategories = [SOCategory]()
+    private lazy var _allIcons = [SOIco]()
     
     // - MARK: Categories
-    var allCategories: [SOCategory]{
-        get{
-            
-            if _allCategories.count > 0{
-                return _allCategories
+    func allCategories(successBlock: (categories: [SOCategory], error: NSError?) -> Void){
+        if _allCategories.count > 0{
+            successBlock(categories: _allCategories, error: nil)
+        } else {
+            SODataBaseFactory.sharedInstance.dataBase.allCategories{(categories: [SOCategory], error: NSError?) in
+                self._allCategories = categories
+                successBlock(categories: self._allCategories, error: error)
             }
-            _allCategories = SOLocalDataBase.sharedInstance.allCategories()
-            
-            return _allCategories
         }
     }
     
     // - MARK: Icons
-    var allIcons: [SOIco]{
-        get{
-            
-            if _allIcons.count > 0{
-                return _allIcons
+    func allIcons(successBlock: (resultBuffer: [SOIco], error: NSError?) -> Void){
+        if self._allIcons.count > 0{
+            successBlock(resultBuffer: self._allIcons, error: nil)
+        } else {
+            SODataBaseFactory.sharedInstance.dataBase.allIcons{(icons: [SOIco], error: NSError?) in
+                self._allIcons = icons
+                successBlock(resultBuffer: self._allIcons, error: error)
             }
-            _allIcons = SOLocalDataBase.sharedInstance.allIcons()
-
-            return _allIcons
         }
     }
     
     // - MARK: Tasks
-    func fetchAllTasks(successBlock: (allTaskData: [SOTask], error: NSErrorPointer) -> Void) {
-        SOLocalDataBase.sharedInstance.fetchAllTasks({ (allCurrentTasks: [SOTask], error: NSErrorPointer) in
-            error.memory = NSError(domain: "LocalDataBaseErrors", code: 0, userInfo: [:])
+    func fetchAllTasks(successBlock: (resultBuffer: [SOTask], error: NSError?) -> Void) {
+        SODataBaseFactory.sharedInstance.dataBase.fetchAllTasks{(allCurrentTasks: [SOTask], error: NSError?) in
             self._allTasks = allCurrentTasks
-            successBlock(allTaskData: self._allTasks, error: error)
-        })
+            successBlock(resultBuffer: self._allTasks, error: error)
+        }
     }
     
     // - MARK: Fetch Of The Data Instance Fields
     subscript(index: Int) -> SOCategory? {
-        if allCategories.count > 0 && index < allCategories.count{
-            return allCategories[index]
+        if self._allCategories.count > 0 && index < self._allCategories.count{
+            return self._allCategories[index]
         }
         
         return nil
     }
     
     func categoryForIndex(index: Int) -> SOCategory?{
-        if allCategories.count > 0 && index < allCategories.count{
-            return allCategories[index]
+        if self._allCategories.count > 0 && index < self._allCategories.count{
+            return self._allCategories[index]
         }
         
         return nil
@@ -77,7 +74,7 @@ class SODataFetching: NSObject {
     }
     
     func categoryById(id : String) -> SOCategory?{
-        for category in self.allCategories{
+        for category in self._allCategories{
             if category.id == id{
                 return category
             }
@@ -87,8 +84,8 @@ class SODataFetching: NSObject {
     }
     
     func iconForIndex(index: Int) -> SOIco?{
-        if allIcons.count > 0 && index < allIcons.count{
-            return allIcons[index]
+        if self._allIcons.count > 0 && index < self._allIcons.count{
+            return self._allIcons[index]
         }
         
         return nil
@@ -104,7 +101,7 @@ class SODataFetching: NSObject {
     }
     
     func iconById(id : String) -> SOIco?{
-        for ico in self.allIcons{
+        for ico in self._allIcons{
             if ico.id == id{
                 return ico
             }
