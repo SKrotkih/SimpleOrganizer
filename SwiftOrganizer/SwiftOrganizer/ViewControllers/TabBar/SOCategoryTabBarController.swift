@@ -12,33 +12,37 @@ class SOCategoryTabBarController: SOTabBarController {
 
     private let tabViewXibName = "SOCategoryTabView"
     
-    override func reloadTabs(){
+    override func reloadTabs(successBlock: (error: NSError?) -> Void){
         SODataFetching.sharedInstance.allCategories{(categories: [SOCategory], fetchError: NSError?) in
+            self.tabsCount = 0
+            
             if let error = fetchError{
                 showAlertWithTitle("Error reading categories data", error.description)
             } else if categories.count > 0{
                 self.tabsCount = categories.count
-                
-                if self.tabsCount > 0{
+
+                for i in 0..<self.tabsCount {
+                    var tabView: SOCategoryTabView!
                     
-                    while self.tabs.count < self.tabsCount{
+                    if i < self.tabs.count{
+                        tabView = self.tabs[i] as! SOCategoryTabView
+                    } else {
                         var xibItems: NSArray = NSBundle.mainBundle().loadNibNamed(self.tabViewXibName, owner: nil, options: nil)
-                        let tabView: SOCategoryTabView = xibItems[0] as! SOCategoryTabView
+                        tabView = xibItems[0] as! SOCategoryTabView
+                        tabView.filterStateDelegate = self.filterStateDelegate
                         self.tabs.append(tabView)
                     }
                     
-                    for var i = 0; i < self.tabsCount; i++ {
-                        let category: SOCategory = categories[i]
-                        let tabView: SOCategoryTabView = self.tabs[i] as! SOCategoryTabView
-                        tabView.filterStateDelegate = self.filterStateDelegate
-                        tabView.category = category
-                        tabView.selected = category.selected
-                    }
+                    let category: SOCategory = categories[i]
+                    tabView.category = category
+                    tabView.selected = category.selected
                 }
-                
-                super.reloadTabs()
+                super.reloadTabs{(error: NSError?) in
+                    successBlock(error: error)
+                }
             } else {
                 showAlertWithTitle("Warning!", "Categories data are not presented on the Parse.com Server.")
+                successBlock(error: nil)
             }
         }
     }

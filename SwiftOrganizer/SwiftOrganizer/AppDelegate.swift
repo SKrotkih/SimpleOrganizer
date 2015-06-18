@@ -36,7 +36,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         self.createMenuView()
         
-        return SOParseInitManager.application(application, didFinishLaunchingWithOptions: launchOptions)
+        return SOParseComManager.application(application, didFinishLaunchingWithOptions: launchOptions)
     }
 
     //--------------------------------------
@@ -44,21 +44,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     //--------------------------------------
 
     func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData){
-        SOParseInitManager.application(application, didRegisterForRemoteNotificationsWithDeviceToken: deviceToken)
+        SOParseComManager.application(application, didRegisterForRemoteNotificationsWithDeviceToken: deviceToken)
     }
     
     func application(application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: NSError) {
-        SOParseInitManager.application(application, didFailToRegisterForRemoteNotificationsWithError: error)
+        SOParseComManager.application(application, didFailToRegisterForRemoteNotificationsWithError: error)
     }
     
     func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject]) {
-        SOParseInitManager.application(application, didReceiveRemoteNotification: userInfo)
+        SOParseComManager.application(application, didReceiveRemoteNotification: userInfo)
     }
     
     //-------------------------------------
 
     func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject], fetchCompletionHandler completionHandler: (UIBackgroundFetchResult) -> Void) {
-        SOParseInitManager.application(application, didReceiveRemoteNotification: userInfo, fetchCompletionHandler: completionHandler)
+        SOParseComManager.application(application, didReceiveRemoteNotification: userInfo, fetchCompletionHandler: completionHandler)
     }
     
     //--------------------------------------
@@ -66,7 +66,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     //--------------------------------------
     
     func application(application: UIApplication, openURL url: NSURL, sourceApplication srcApp: String?, annotation annot: AnyObject?) -> Bool {
-        return SOParseInitManager.application(application, openURL: url, sourceApplication: srcApp, annotation: annot)
+        return SOParseComManager.application(application, openURL: url, sourceApplication: srcApp, annotation: annot)
     }
     
     

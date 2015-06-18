@@ -1,5 +1,5 @@
 //
-//  SOParseInitManager.swift
+//  SOParseComManager.swift
 //  SwiftOrganizer
 //
 //  Created by Sergey Krotkih on 6/15/15.
@@ -16,8 +16,13 @@ import Parse
 let ApplicationId: String = "opRyZz4AOrPBTv2RgKX0s64PNKBS2hT38qeIVQcF"
 let ClientKey: String = "73VaFVVZm2Q8CQp6nYHsSzFcrj2quw7INLtI7KYG"
 
-class SOParseInitManager: NSObject {
+let DefaultUsername = "organizer"
+let DefaultUserPassword = "1234"
 
+let SOUsernameKey = "UsernameKey"
+let SOPasswordKey = "PasswordKey"
+
+class SOParseComManager: NSObject {
     
     //--------------------------------------
     // MARK: - UIApplicationDelegate
@@ -42,7 +47,7 @@ class SOParseInitManager: NSObject {
         // PFFacebookUtils.initializeFacebook()
         // ****************************************************************************
         
-        PFUser.enableAutomaticUser()
+        //PFUser.enableAutomaticUser()
         
         let defaultACL = PFACL();
         
@@ -75,7 +80,7 @@ class SOParseInitManager: NSObject {
             let types = UIRemoteNotificationType.Badge | UIRemoteNotificationType.Alert | UIRemoteNotificationType.Sound
             application.registerForRemoteNotificationTypes(types)
         }
-    
+        
         return true
     }
     
@@ -132,5 +137,43 @@ class SOParseInitManager: NSObject {
         // return FBAppCall.handleOpenURL(url, sourceApplication:sourceApplication, session:PFFacebookUtils.session())
         return true
     }
+
+    class func checkUser(successBlock: (error: NSError?) -> Void){
+        var currentUser = PFUser.currentUser()
+        if currentUser != nil {
+            successBlock(error: nil)
+        } else {
+            self.login{(error: NSError?) in
+                successBlock(error: error)
+            }
+        }
+    }
+
+    class func login(successBlock: (error: NSError?) -> Void){
+        
+        let defaults = NSUserDefaults.standardUserDefaults()
+        var username: String = DefaultUsername
+        var password: String = DefaultUserPassword
+        
+        if let name = defaults.stringForKey(SOUsernameKey)
+        {
+            username = name
+            password = defaults.stringForKey(SOPasswordKey)!
+        }
+        
+        PFUser.logInWithUsernameInBackground(username, password: password){(user: PFUser?, error: NSError?) -> Void in
+            if let currentUser = user {
+                println("Hi, \(currentUser.username!)!")
+                let defaults = NSUserDefaults.standardUserDefaults()
+                defaults.setObject(username, forKey: SOUsernameKey)
+                defaults.setObject(password, forKey: SOPasswordKey)
+                successBlock(error: nil)
+            } else {
+                successBlock(error: error)
+                println("The login failed. \(error?.description)")
+            }
+        }
+    }
     
 }
+

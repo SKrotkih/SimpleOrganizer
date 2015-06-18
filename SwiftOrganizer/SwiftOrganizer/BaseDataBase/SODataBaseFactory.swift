@@ -46,8 +46,12 @@ public class SODataBaseFactory: NSObject {
             case SOParseDataBaseType:
                 _dataBase = SORemoteDataBase()
             default:
+//                _dataBase = SOLocalDataBase()
+//                defaults.setObject(SOLocalDataBaseType, forKey: SODataBaseType)
+
                 _dataBase = SORemoteDataBase()
                 defaults.setObject(SOParseDataBaseType, forKey: SODataBaseType)
+                
             }
         }
         

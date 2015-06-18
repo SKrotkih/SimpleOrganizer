@@ -52,9 +52,11 @@ class SOMainViewController: UIViewController, SOEditTaskController{
         var rightButton: UIBarButtonItem = UIBarButtonItem(image: buttonImage, style: UIBarButtonItemStyle.Plain, target: self, action: "addNewTask")
             navigationItem.rightBarButtonItem = rightButton;
         
-        categoryTabBarController.reloadTabs()
-        iconsTabBarController.reloadTabs()
-        mainTableViewController.reloadData()
+        self.categoryTabBarController.reloadTabs{(error: NSError?) in
+            self.iconsTabBarController.reloadTabs{(error: NSError?) in
+                self.mainTableViewController.reloadData()
+            }
+        }
     }
     
     override func didReceiveMemoryWarning() {
