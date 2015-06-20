@@ -50,8 +50,4 @@ class SOCategory: NSObject {
             _databaseObject = newValue
         }
     }
-    
-    func save(fieldName: String, value: AnyObject){
-        SODataBaseFactory.sharedInstance.dataBase.saveCategory(self, fieldName: fieldName, value: value)
-    }
 }

@@ -110,14 +110,16 @@ class SODataFetching: NSObject {
         return nil
     }
     
-    func updateCategory(category: SOCategory, fieldName: String, value: AnyObject){
-        _allCategories.removeAll(keepCapacity: false)
-        category.save(fieldName, value: value)
+    func updateCategory(category: SOCategory, fieldName: String, value: AnyObject, block: (error: NSError?) -> Void){
+        SODataBaseFactory.sharedInstance.dataBase.saveToObject(category.databaseObject, fieldName: fieldName, value: value, block: {(error: NSError?) in
+            block(error: error)
+        })
     }
     
-    func updateIcon(icon: SOIco, fieldName: String, value: AnyObject){
-        _allIcons.removeAll(keepCapacity: false)
-        icon.save(fieldName, value: value)
+    func updateIcon(icon: SOIco, fieldName: String, value: AnyObject, block: (error: NSError?) -> Void){
+        SODataBaseFactory.sharedInstance.dataBase.saveToObject(icon.databaseObject, fieldName: fieldName, value: value, block: {(error: NSError?) in
+            block(error: error)
+        })
     }
     
     func updateTask(){

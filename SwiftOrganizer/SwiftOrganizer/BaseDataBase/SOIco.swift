@@ -15,6 +15,15 @@ class SOIco: NSObject {
     private var _name: String = ""
     private var _imagename: String = ""
     private var _selected = false
+
+    var databaseObject: AnyObject?{
+        get{
+            return _databaseObject
+        }
+        set{
+            _databaseObject = newValue
+        }
+    }
     
     var id: String{
         get{
@@ -52,16 +61,4 @@ class SOIco: NSObject {
         }
     }
 
-    var databaseObject: AnyObject?{
-        get{
-            return _databaseObject
-        }
-        set{
-            _databaseObject = newValue
-        }
-    }
-    
-    func save(fieldName: String, value: AnyObject){
-        SODataBaseFactory.sharedInstance.dataBase.saveIco(self, fieldName: fieldName, value: value)
-    }
 }

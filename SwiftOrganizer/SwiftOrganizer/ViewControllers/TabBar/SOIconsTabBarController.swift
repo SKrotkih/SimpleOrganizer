@@ -30,6 +30,7 @@ class SOIconsTabBarController: SOTabBarController {
                     } else {
                         var xibItems: NSArray = NSBundle.mainBundle().loadNibNamed(self.tabViewXibName, owner: nil, options: nil)
                         tabView = xibItems[0] as! SOIconTabView
+                        tabView.autoresizingMask = UIViewAutoresizing.FlexibleHeight;
                         tabView.filterStateDelegate = self.filterStateDelegate
                         self.tabs.append(tabView)                        
                     }
@@ -41,7 +42,7 @@ class SOIconsTabBarController: SOTabBarController {
                     successBlock(error: error)
                 }
             } else {
-                showAlertWithTitle("Warning!", "Icons data are not presented on the Parse.com Server.")
+                showAlertWithTitle("Warning:", "Icons data are not presented on the Parse.com Server.")
                 successBlock(error: nil)
             }
         }

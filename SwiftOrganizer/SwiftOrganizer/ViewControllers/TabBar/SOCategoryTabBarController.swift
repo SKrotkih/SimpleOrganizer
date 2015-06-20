@@ -29,6 +29,7 @@ class SOCategoryTabBarController: SOTabBarController {
                     } else {
                         var xibItems: NSArray = NSBundle.mainBundle().loadNibNamed(self.tabViewXibName, owner: nil, options: nil)
                         tabView = xibItems[0] as! SOCategoryTabView
+                        tabView.autoresizingMask = UIViewAutoresizing.FlexibleHeight;                        
                         tabView.filterStateDelegate = self.filterStateDelegate
                         self.tabs.append(tabView)
                     }
@@ -41,7 +42,7 @@ class SOCategoryTabBarController: SOTabBarController {
                     successBlock(error: error)
                 }
             } else {
-                showAlertWithTitle("Warning!", "Categories data are not presented on the Parse.com Server.")
+                showAlertWithTitle("Warning:", "Categories data are not presented on the Parse.com Server.")
                 successBlock(error: nil)
             }
         }

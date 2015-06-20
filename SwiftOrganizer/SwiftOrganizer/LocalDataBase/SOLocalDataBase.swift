@@ -156,19 +156,6 @@ public class SOLocalDataBase: NSObject, SODataBaseProtocol {
         return newCategory
     }
     
-    func saveCategory(category: SOCategory, fieldName: String, value: AnyObject){
-        let categoryObject = category.databaseObject as? Ico
-        
-        if let object = categoryObject{
-            object.setValue(value, forKey: fieldName);
-        }
-        else{
-            
-        }
-        
-        self.saveContext()
-    }
-    
     // - MARK: Icons
     func allIcons(successBlock: (resultBuffer: [SOIco], error: NSError?) -> Void){
         var _allIcon: [SOIco] = []
@@ -207,11 +194,11 @@ public class SOLocalDataBase: NSObject, SODataBaseProtocol {
         
         return newIco
     }
-    
-    func saveIco(ico: SOIco, fieldName: String, value: AnyObject){
-        let icoObject = ico.databaseObject as? Ico
+
+    func saveToObject(object: AnyObject?, fieldName: String, value: AnyObject, block: (error: NSError?) -> Void){
+        let managedObject = object as? NSManagedObject
         
-        if let object = icoObject{
+        if let object = managedObject{
             object.setValue(value, forKey: fieldName);
         }
         else{
@@ -219,6 +206,7 @@ public class SOLocalDataBase: NSObject, SODataBaseProtocol {
         }
         
         self.saveContext()
+        block(error: nil)
     }
     
     // - MARK: Tasks

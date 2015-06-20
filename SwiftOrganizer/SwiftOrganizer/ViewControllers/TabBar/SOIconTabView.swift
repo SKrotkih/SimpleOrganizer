@@ -49,8 +49,13 @@ class SOIconTabView: UIView {
     
     @IBAction func buttonPressedHandler(sender: AnyObject) {
         if let delegate = self.filterStateDelegate, ico = _ico{
-            self.selected = !self.selected
-            delegate.didSelectIcon(ico, select: self.selected)
+            let newValue: Bool = !self.selected
+            delegate.didSelectIcon(ico, select: newValue, block: {(error: NSError?) in
+                if error == nil{
+                    ico.selected = newValue
+                    self.selected = newValue
+                }
+            })
         }
     }
 }

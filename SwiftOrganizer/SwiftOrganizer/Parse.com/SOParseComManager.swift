@@ -52,7 +52,7 @@ class SOParseComManager: NSObject {
         let defaultACL = PFACL();
         
         // If you would like all objects to be private by default, remove this line.
-        defaultACL.setPublicReadAccess(true)
+        //defaultACL.setPublicReadAccess(true)
         
         PFACL.setDefaultACL(defaultACL, withAccessForCurrentUser:true)
         
@@ -72,12 +72,16 @@ class SOParseComManager: NSObject {
             }
         }
         if application.respondsToSelector("registerUserNotificationSettings:") {
-            let userNotificationTypes = UIUserNotificationType.Alert | UIUserNotificationType.Badge | UIUserNotificationType.Sound
+            let userNotificationTypes = UIUserNotificationType.Alert |
+                UIUserNotificationType.Badge |
+                UIUserNotificationType.Sound
             let settings = UIUserNotificationSettings(forTypes: userNotificationTypes, categories: nil)
             application.registerUserNotificationSettings(settings)
             application.registerForRemoteNotifications()
         } else {
-            let types = UIRemoteNotificationType.Badge | UIRemoteNotificationType.Alert | UIRemoteNotificationType.Sound
+            let types = UIRemoteNotificationType.Badge |
+                UIRemoteNotificationType.Alert |
+                UIRemoteNotificationType.Sound
             application.registerForRemoteNotificationTypes(types)
         }
         
@@ -95,9 +99,9 @@ class SOParseComManager: NSObject {
         
         PFPush.subscribeToChannelInBackground("", block: { (succeeded: Bool, error: NSError?) -> Void in
             if succeeded {
-                println("ParseStarterProject successfully subscribed to push notifications on the broadcast channel.");
+                println("SwiftOrganizer successfully subscribed to push notifications on the broadcast channel.");
             } else {
-                println("ParseStarterProject failed to subscribe to push notifications on the broadcast channel with error = %@.", error)
+                println("SwiftOrganizer failed to subscribe to push notifications on the broadcast channel with error = \(error?.description).")
             }
         })
     }
@@ -117,14 +121,28 @@ class SOParseComManager: NSObject {
         }
     }
     
-    class func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject], fetchCompletionHandler completionHandler: (UIBackgroundFetchResult) -> Void) {
-        ///////////////////////////////////////////////////////////
-        // Uncomment this method if you want to use Push Notifications with Background App Refresh
-        ///////////////////////////////////////////////////////////
-        // if application.applicationState == UIApplicationState.Inactive {
-        //    PFAnalytics.trackAppOpenedWithRemoteNotificationPayload(userInfo)
-        // }
-     }
+    class func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject],
+        fetchCompletionHandler completionHandler: (UIBackgroundFetchResult) -> Void) {
+            if application.applicationState == UIApplicationState.Active {
+                if let aps = userInfo["aps"] as? NSDictionary {
+                    if let alert = aps["alert"] as? NSDictionary {
+                        if let message = alert["message"] as? NSString {
+                            showAlertWithTitle("Remote message was received:", message as String)
+                        }
+                    } else if let alert = aps["alert"] as? NSString {
+                        showAlertWithTitle("Remote alert was received:", alert as String)
+                    }
+                }
+                completionHandler(UIBackgroundFetchResult.NewData)
+            } else if application.applicationState == UIApplicationState.Inactive {
+                println("Inactive");
+                PFAnalytics.trackAppOpenedWithRemoteNotificationPayload(userInfo)
+                completionHandler(UIBackgroundFetchResult.NewData)
+            } else if application.applicationState == UIApplicationState.Background {
+                println("Background");
+                completionHandler(UIBackgroundFetchResult.NewData)
+            }
+    }
     
     //--------------------------------------
     // MARK: Facebook SDK Integration

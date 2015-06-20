@@ -1,9 +1,9 @@
 //
 //  SOAboutViewController.swift
-//  SlideMenuControllerSwift
+//  SwiftOrganizer
 //
-//  Created by Yuji Hato on 1/22/15.
-//  Copyright (c) 2015 Yuji Hato. All rights reserved.
+//  Created by Sergey Krotkih on 5/28/15.
+//  Copyright (c) 2015 Sergey Krotkih. All rights reserved.
 //
 
 import UIKit

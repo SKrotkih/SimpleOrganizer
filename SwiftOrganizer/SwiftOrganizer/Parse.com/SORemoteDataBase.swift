@@ -17,7 +17,7 @@ public class SORemoteDataBase: NSObject, SODataBaseProtocol {
     private var currentIcoIndex = 0
     private var currentTaskIndex = 0
     
-    private let defaultCategories = [["id":"1","name":"ToDo".localized],["id":"1","name":"Events".localized], ["id":"1","name":"Life".localized], ["id":"1","name":"Work".localized]]
+    private let defaultCategories = [["id":"1","name":"ToDo".localized],["id":"2","name":"Events".localized], ["id":"3","name":"Life".localized], ["id":"4","name":"Work".localized]]
     private let defaultIcons : [Dictionary<String, String>] = [["id":"1","name":"ico1","img":"ico1"],
         ["id":"2","name":"ico2","img":"ico2"],
         ["id":"3","name":"ico3","img":"ico3"],
@@ -143,10 +143,6 @@ public class SORemoteDataBase: NSObject, SODataBaseProtocol {
         })
     }
     
-    func saveCategory(category: SOCategory, fieldName: String, value: AnyObject){
-        
-    }
-    
     // - MARK: Icons
     private func populateIcons(successBlock: (error: NSError?) -> Void){
         self.currentIcoIndex = 0
@@ -176,10 +172,6 @@ public class SORemoteDataBase: NSObject, SODataBaseProtocol {
         })
     }
     
-    func saveIco(ico: SOIco, fieldName: String, value: AnyObject){
-        
-    }
-    
     // - MARK: Tasks
     private func populateTasks(successBlock: (error: NSError?) -> Void){
         self.currentTaskIndex = 0
@@ -203,9 +195,46 @@ public class SORemoteDataBase: NSObject, SODataBaseProtocol {
     }
     
     func fetchAllTasks(successBlock: (resultBuffer: [SOTask], error: NSError?) -> Void) {
-        self.fetchAllDataOfClassName(TaskClassName, successBlock: {(resultBuffer: [AnyObject], error: NSError?) in
-            let buffer = resultBuffer as! [SOTask]
-            successBlock(resultBuffer: buffer, error: error)
+        self.fetchAllDataOfClassName(TaskClassName, successBlock: {(resultBuffer: [AnyObject], fetchError: NSError?) in
+            if let error = fetchError{
+                successBlock(resultBuffer: [], error: error)
+            }
+            
+            let tasks = resultBuffer as! [SOTask]
+            
+            if tasks.count > 0 {
+                dispatch_async(dispatch_get_main_queue(), {
+                    
+                    var _allTasks: [SOTask] = []
+                    
+                    for task in tasks{
+                        var categorySelected: Bool = false
+
+                        if let category = SODataFetching.sharedInstance.categoryById(task.category){
+                            categorySelected = category.selected
+                        }
+                        
+                        let icons = task.icons
+                        var iconsSelected: Bool = true
+                        
+                        for iconId in icons{
+                            let iconOpt: SOIco? = SODataFetching.sharedInstance.iconById(iconId)
+                            if let ico = iconOpt{
+                                iconsSelected = iconsSelected && ico.selected
+                            }
+                        }
+                        
+                        if categorySelected && iconsSelected{
+                            _allTasks.append(task)
+                        }
+                        
+                    }
+                    successBlock(resultBuffer: _allTasks, error: nil)
+                })
+            }
+            else {
+                successBlock(resultBuffer: [], error: nil)
+            }
         })
     }
     
@@ -234,9 +263,7 @@ public class SORemoteDataBase: NSObject, SODataBaseProtocol {
         object["ico4"] = icons[3]
         object["ico5"] = icons[4]
         object["ico6"] = icons[5]
-        if let date = srcTask.date{
-            object["date"] = date
-        }
+        object["date"] = srcTask.date
     }
     
     func removeTask(task: SOTask){
@@ -309,6 +336,7 @@ public class SORemoteDataBase: NSObject, SODataBaseProtocol {
             newInstance.icons[4] = object["ico5"] as! String
             newInstance.icons[5] = object["ico6"] as! String
             newInstance.title = object["title"] as! String
+            newInstance.date = object["date"] as! NSDate?
             
             return newInstance
         default:
@@ -349,6 +377,15 @@ public class SORemoteDataBase: NSObject, SODataBaseProtocol {
                     }
                 }
             }
+        }
+    }
+
+    func saveToObject(object: AnyObject?, fieldName: String, value: AnyObject, block: (error: NSError?) -> Void){
+        if let pfObject = object as? PFObject{
+            pfObject[fieldName] = value
+            self.saveObject(pfObject, successBlock: {(error: NSError?) in
+                block(error: error)
+            })
         }
     }
     

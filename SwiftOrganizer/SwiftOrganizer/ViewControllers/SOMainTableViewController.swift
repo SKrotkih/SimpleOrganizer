@@ -11,8 +11,8 @@ import CoreData
 
 
 protocol SOChangeFilterStateDelegate{
-    func didSelectCategory(category: SOCategory, select: Bool)
-    func didSelectIcon(icon: SOIco, select: Bool)
+    func didSelectCategory(category: SOCategory, select: Bool, block: (error: NSError?) -> Void)
+    func didSelectIcon(icon: SOIco, select: Bool, block: (error: NSError?) -> Void)
 }
 
 class SOMainTableViewController: NSObject, UITableViewDataSource, UITableViewDelegate, SOChangeFilterStateDelegate, SORemoveTaskDelegate{
@@ -104,23 +104,33 @@ class SOMainTableViewController: NSObject, UITableViewDataSource, UITableViewDel
     }
     
     // - MARK: SOChangeFilterStateDelegate
-    
-    func didSelectCategory(category: SOCategory, select: Bool){
-        SODataFetching.sharedInstance.updateCategory(category, fieldName: "selected", value: select)
-        dispatch_async(dispatch_get_main_queue(), {
-            self.reloadData()
+    func didSelectCategory(category: SOCategory, select: Bool, block: (error: NSError?) -> Void){
+        SODataFetching.sharedInstance.updateCategory(category, fieldName: "selected", value: select, block: {(error: NSError?) in
+            if error == nil {
+                dispatch_async(dispatch_get_main_queue(), {
+                    self.reloadData()
+                })
+            } else {
+                showAlertWithTitle("Error saving data", error!.description)
+            }
+            block(error: error)
         })
     }
     
-    func didSelectIcon(icon: SOIco, select: Bool){
-        SODataFetching.sharedInstance.updateIcon(icon, fieldName: "selected", value: select)
-        dispatch_async(dispatch_get_main_queue(), {
-            self.reloadData()
-        })
+    func didSelectIcon(icon: SOIco, select: Bool, block: (error: NSError?) -> Void){
+        SODataFetching.sharedInstance.updateIcon(icon, fieldName: "selected", value: select, block: {(error: NSError?) in
+            if error == nil {
+                dispatch_async(dispatch_get_main_queue(), {
+                    self.reloadData()
+                })
+            } else {
+                showAlertWithTitle("Error saving data", error!.description)
+            }
+            block(error: error)
+         })
     }
     
     // - MARK: SORemoveTaskDelegate
-    
     func removeTask(task: SOTask!){
         task.remove()
         self.reloadData()
