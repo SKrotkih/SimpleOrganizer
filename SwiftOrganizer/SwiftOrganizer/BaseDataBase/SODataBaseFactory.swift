@@ -8,25 +8,49 @@
 
 import UIKit
 
-let SODataBaseType = "DataBaseType"
-let SOLocalDataBaseType = "LocalDataBase"
-let SOParseDataBaseType = "ParseDataBase"
+let SODataBaseTypeKey = "DataBaseType"
+
+enum SODataBaseType{
+    case CoreData, ParseCom, Undefined
+    func toString() -> String{
+        switch self{
+        case .CoreData:
+            return "LocalDataBase"
+        case .ParseCom:
+            return "ParseDataBase"
+        case .Undefined:
+            return "Undefined"
+        }
+    }
+}
+
+extension String{
+    func dataBaseType() -> SODataBaseType{
+        switch self{
+        case "LocalDataBase":
+            return .CoreData
+        case "ParseDataBase":
+            return .ParseCom
+        default:
+            return .Undefined
+        }
+    }
+}
 
 public class SODataBaseFactory: NSObject {
-
     private var _dataBase: SODataBaseProtocol?
-    private var _dataBaseType: String = ""
+    private var _dataBaseType: SODataBaseType = .Undefined
     
     static let sharedInstance = SODataBaseFactory()
 
     var dataBase: SODataBaseProtocol!{
         let defaults = NSUserDefaults.standardUserDefaults()
         
-        var dataBaseType: String = ""
+        var dataBaseType: SODataBaseType = .Undefined
         
-        if let name = defaults.stringForKey(SODataBaseType)
+        if let name = defaults.stringForKey(SODataBaseTypeKey)
         {
-            dataBaseType = name
+            dataBaseType = name.dataBaseType()
         }
 
         if dataBaseType != _dataBaseType{
@@ -41,13 +65,13 @@ public class SODataBaseFactory: NSObject {
             _dataBaseType = dataBaseType
             
             switch _dataBaseType{
-            case SOLocalDataBaseType:
+            case .CoreData:
                 _dataBase = SOLocalDataBase()
-            case SOParseDataBaseType:
+            case .ParseCom:
                 _dataBase = SORemoteDataBase()
             default:
                 _dataBase = SOLocalDataBase()
-                defaults.setObject(SOLocalDataBaseType, forKey: SODataBaseType)
+                defaults.setObject(SODataBaseType.CoreData.toString(), forKey: SODataBaseTypeKey)
             }
         }
         

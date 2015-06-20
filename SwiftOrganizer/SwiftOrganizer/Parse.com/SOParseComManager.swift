@@ -78,11 +78,6 @@ class SOParseComManager: NSObject {
             let settings = UIUserNotificationSettings(forTypes: userNotificationTypes, categories: nil)
             application.registerUserNotificationSettings(settings)
             application.registerForRemoteNotifications()
-        } else {
-            let types = UIRemoteNotificationType.Badge |
-                UIRemoteNotificationType.Alert |
-                UIRemoteNotificationType.Sound
-            application.registerForRemoteNotificationTypes(types)
         }
         
         return true
@@ -156,18 +151,18 @@ class SOParseComManager: NSObject {
         return true
     }
 
-    class func checkUser(successBlock: (error: NSError?) -> Void){
+    class func checkUser(block: (error: NSError?) -> Void){
         var currentUser = PFUser.currentUser()
         if currentUser != nil {
-            successBlock(error: nil)
+            block(error: nil)
         } else {
             self.login{(error: NSError?) in
-                successBlock(error: error)
+                block(error: error)
             }
         }
     }
 
-    class func login(successBlock: (error: NSError?) -> Void){
+    class func login(block: (error: NSError?) -> Void){
         
         let defaults = NSUserDefaults.standardUserDefaults()
         var username: String = DefaultUsername
@@ -185,9 +180,9 @@ class SOParseComManager: NSObject {
                 let defaults = NSUserDefaults.standardUserDefaults()
                 defaults.setObject(username, forKey: SOUsernameKey)
                 defaults.setObject(password, forKey: SOPasswordKey)
-                successBlock(error: nil)
+                block(error: nil)
             } else {
-                successBlock(error: error)
+                block(error: error)
                 println("The login failed. \(error?.description)")
             }
         }

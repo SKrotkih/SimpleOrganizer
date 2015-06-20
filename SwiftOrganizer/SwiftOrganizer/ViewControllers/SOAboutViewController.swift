@@ -25,8 +25,8 @@ class SOAboutViewController: UIViewController {
         self.setNavigationBarItem()
     }
     
-    override func didRotateFromInterfaceOrientation(fromInterfaceOrientation: UIInterfaceOrientation) {
-        super.didRotateFromInterfaceOrientation(fromInterfaceOrientation)
+    override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransitionToSize(size, withTransitionCoordinator: coordinator)
         if let viewController = self.slideMenuController()?.mainViewController as? UINavigationController {
             if viewController.topViewController.isKindOfClass(SOAboutViewController) {
                 self.slideMenuController()?.removeLeftGestures()

@@ -61,7 +61,7 @@ public class SORemoteDataBase: NSObject, SODataBaseProtocol {
             "ico6": "",
             "title": "Life task"]]
 
-    private func populateNextCategoryInBackground(successBlock: (error: NSError?) -> Void){
+    private func populateNextCategoryInBackground(block: (error: NSError?) -> Void){
         let dict: Dictionary<String, String> = defaultCategories[self.currentCategoryIndex++]
         var object = PFObject(className: CategoryClassName)
         object["recordid"] = dict["id"]
@@ -69,14 +69,14 @@ public class SORemoteDataBase: NSObject, SODataBaseProtocol {
         object["selected"] = true
         object.saveInBackgroundWithBlock {(success: Bool, error: NSError?) -> Void in
             if (success) {
-                successBlock(error: nil)
+                block(error: nil)
             } else {
-                successBlock(error: error)
+                block(error: error)
             }
         }
     }
     
-    private func populateNextIcoInBackground(successBlock: (error: NSError?) -> Void){
+    private func populateNextIcoInBackground(block: (error: NSError?) -> Void){
         let icoDict: Dictionary<String, String> = self.defaultIcons[self.currentIcoIndex++]
         var object = PFObject(className: IcoClassName)
         object["recordid"] = icoDict["id"]
@@ -85,14 +85,14 @@ public class SORemoteDataBase: NSObject, SODataBaseProtocol {
         object["selected"] = true
         object.saveInBackgroundWithBlock {(success: Bool, error: NSError?) -> Void in
             if (success) {
-                successBlock(error: nil)
+                block(error: nil)
             } else {
-                successBlock(error: error)
+                block(error: error)
             }
         }
     }
 
-    private func populateNextTaskInBackground(successBlock: (error: NSError?) -> Void){
+    private func populateNextTaskInBackground(block: (error: NSError?) -> Void){
         var object = PFObject(className: TaskClassName)
         let dict: Dictionary<String, String> = self.defaultTasks[self.currentTaskIndex++]
         object["category"] = dict["category"]
@@ -106,98 +106,98 @@ public class SORemoteDataBase: NSObject, SODataBaseProtocol {
         object["date"] = NSDate()
         object.saveInBackgroundWithBlock {(success: Bool, error: NSError?) -> Void in
             if (success) {
-                successBlock(error: nil)
+                block(error: nil)
             } else {
-                successBlock(error: error)
+                block(error: error)
             }
         }
         
     }
     
     // - MARK: Categories
-    private func populateCategories(successBlock: (error: NSError?) -> Void){
+    private func populateCategories(block: (error: NSError?) -> Void){
         self.currentCategoryIndex = 0
         self.populateNextCategory{(error: NSError?) -> Void in
-            successBlock(error: error)
+            block(error: error)
         }
     }
 
-    private func populateNextCategory(successBlock: (error: NSError?) -> Void){
+    private func populateNextCategory(block: (error: NSError?) -> Void){
         self.populateNextCategoryInBackground{(error: NSError?) -> Void in
             if error == nil{
                 if self.currentCategoryIndex < self.defaultCategories.count{
-                    self.populateNextCategory(successBlock)
+                    self.populateNextCategory(block)
                 } else {
-                    successBlock(error: nil)
+                    block(error: nil)
                 }
             } else {
-                successBlock(error: error)
+                block(error: error)
             }
         }
     }
     
-    func allCategories(successBlock: (resultBuffer: [SOCategory], error: NSError?) -> Void){
-        self.fetchAllDataOfClassName(CategoryClassName, successBlock: {(resultBuffer: [AnyObject], error: NSError?) in
+    func allCategories(block: (resultBuffer: [SOCategory], error: NSError?) -> Void){
+        self.fetchAllDataOfClassName(CategoryClassName, block: {(resultBuffer: [AnyObject], error: NSError?) in
             let buffer = resultBuffer as! [SOCategory]
-            successBlock(resultBuffer: buffer, error: error)
+            block(resultBuffer: buffer, error: error)
         })
     }
     
     // - MARK: Icons
-    private func populateIcons(successBlock: (error: NSError?) -> Void){
+    private func populateIcons(block: (error: NSError?) -> Void){
         self.currentIcoIndex = 0
         self.populateNextIco{(error: NSError?) -> Void in
-            successBlock(error: error)
+            block(error: error)
         }
     }
     
-    private func populateNextIco(successBlock: (error: NSError?) -> Void){
+    private func populateNextIco(block: (error: NSError?) -> Void){
         self.populateNextIcoInBackground{(error: NSError?) -> Void in
             if error == nil{
                 if self.currentIcoIndex < self.defaultIcons.count{
-                    self.populateNextIco(successBlock)
+                    self.populateNextIco(block)
                 } else {
-                    successBlock(error: nil)
+                    block(error: nil)
                 }
             } else {
-                successBlock(error: error)
+                block(error: error)
             }
         }
     }
 
-    func allIcons(successBlock: (resultBuffer: [SOIco], error: NSError?) -> Void){
-        self.fetchAllDataOfClassName(IcoClassName, successBlock: {(resultBuffer: [AnyObject], error: NSError?) in
+    func allIcons(block: (resultBuffer: [SOIco], error: NSError?) -> Void){
+        self.fetchAllDataOfClassName(IcoClassName, block: {(resultBuffer: [AnyObject], error: NSError?) in
             let buffer: [SOIco] = resultBuffer as! [SOIco]
-            successBlock(resultBuffer: buffer, error: error)
+            block(resultBuffer: buffer, error: error)
         })
     }
     
     // - MARK: Tasks
-    private func populateTasks(successBlock: (error: NSError?) -> Void){
+    private func populateTasks(block: (error: NSError?) -> Void){
         self.currentTaskIndex = 0
         self.populateNextTask{(error: NSError?) -> Void in
-            successBlock(error: error)
+            block(error: error)
         }
     }
     
-    private func populateNextTask(successBlock: (error: NSError?) -> Void){
+    private func populateNextTask(block: (error: NSError?) -> Void){
         self.populateNextTaskInBackground{(error: NSError?) -> Void in
             if error == nil{
                 if self.currentTaskIndex < self.defaultTasks.count{
-                    self.populateNextTask(successBlock)
+                    self.populateNextTask(block)
                 } else {
-                    successBlock(error: nil)
+                    block(error: nil)
                 }
             } else {
-                successBlock(error: error)
+                block(error: error)
             }
         }
     }
     
-    func fetchAllTasks(successBlock: (resultBuffer: [SOTask], error: NSError?) -> Void) {
-        self.fetchAllDataOfClassName(TaskClassName, successBlock: {(resultBuffer: [AnyObject], fetchError: NSError?) in
+    func fetchAllTasks(block: (resultBuffer: [SOTask], error: NSError?) -> Void) {
+        self.fetchAllDataOfClassName(TaskClassName, block: {(resultBuffer: [AnyObject], fetchError: NSError?) in
             if let error = fetchError{
-                successBlock(resultBuffer: [], error: error)
+                block(resultBuffer: [], error: error)
             }
             
             let tasks = resultBuffer as! [SOTask]
@@ -229,16 +229,16 @@ public class SORemoteDataBase: NSObject, SODataBaseProtocol {
                         }
                         
                     }
-                    successBlock(resultBuffer: _allTasks, error: nil)
+                    block(resultBuffer: _allTasks, error: nil)
                 })
             }
             else {
-                successBlock(resultBuffer: [], error: nil)
+                block(resultBuffer: [], error: nil)
             }
         })
     }
     
-    func saveTask(task: SOTask, successBlock: (error: NSError?) -> Void){
+    func saveTask(task: SOTask, block: (error: NSError?) -> Void){
         var object: PFObject? = task.databaseObject as? PFObject
         
         if let taskObject = object{
@@ -248,8 +248,8 @@ public class SORemoteDataBase: NSObject, SODataBaseProtocol {
             self.copyTaskObject(object!, srcTask: task)
         }
         
-        self.saveObject(object!, successBlock: {(error: NSError?) in
-            successBlock(error: error)
+        self.saveObject(object!, block: {(error: NSError?) in
+            block(error: error)
         })
     }
 
@@ -267,20 +267,22 @@ public class SORemoteDataBase: NSObject, SODataBaseProtocol {
     }
     
     func removeTask(task: SOTask){
-        
+        if let taskObject: PFObject = task.databaseObject as? PFObject{
+            self.deleteObject(taskObject)
+        }
     }
 
     // - MARK: Private
-    private func fetchAllDataOfClassName(className: String, successBlock: (resultBuffer: [AnyObject], error: NSError?) -> Void){
+    private func fetchAllDataOfClassName(className: String, block: (resultBuffer: [AnyObject], error: NSError?) -> Void){
         SOParseComManager.checkUser { (checkError) -> Void in
             if let error = checkError{
-                successBlock(resultBuffer: [], error: error)
+                block(resultBuffer: [], error: error)
             } else {
                 let query = PFQuery(className: className)
                 query.findObjectsInBackgroundWithBlock {(objects, fetchError) in
                     var resultBuffer: [AnyObject] = []
                     if let anError = fetchError {
-                        successBlock(resultBuffer: resultBuffer, error: anError)
+                        block(resultBuffer: resultBuffer, error: anError)
                     } else {
                         if let pfObjects: [PFObject] = objects as? [PFObject]{
                             if pfObjects.count > 0{
@@ -289,13 +291,13 @@ public class SORemoteDataBase: NSObject, SODataBaseProtocol {
                                         resultBuffer.append(instance)
                                     }
                                 }
-                                successBlock(resultBuffer: resultBuffer, error: nil)
+                                block(resultBuffer: resultBuffer, error: nil)
                             } else {
-                                self.populateDefaultData(className, successBlock: {(populateError: NSError?) -> Void in
+                                self.populateDefaultData(className, block: {(populateError: NSError?) -> Void in
                                     if let anError = populateError{
-                                        successBlock(resultBuffer: resultBuffer, error: anError)
+                                        block(resultBuffer: resultBuffer, error: anError)
                                     } else {
-                                        self.fetchAllDataOfClassName(className, successBlock: successBlock)
+                                        self.fetchAllDataOfClassName(className, block: block)
                                     }
                                 })
                             }
@@ -344,19 +346,19 @@ public class SORemoteDataBase: NSObject, SODataBaseProtocol {
         }
     }
     
-    private func populateDefaultData(className: String, successBlock: (error: NSError?) -> Void){
+    private func populateDefaultData(className: String, block: (error: NSError?) -> Void){
         switch className{
         case IcoClassName:
             self.populateIcons{(populateError: NSError?) -> Void in
-                successBlock(error: populateError)
+                block(error: populateError)
             }
         case CategoryClassName:
             self.populateCategories{(populateError: NSError?) -> Void in
-                successBlock(error: populateError)
+                block(error: populateError)
             }
         case TaskClassName:
             self.populateTasks{(populateError: NSError?) -> Void in
-                successBlock(error: populateError)
+                block(error: populateError)
             }
         default:
             return
@@ -364,16 +366,16 @@ public class SORemoteDataBase: NSObject, SODataBaseProtocol {
     }
 
     // MARK: - Saving support
-    private func saveObject(object: PFObject, successBlock: (error: NSError?) -> Void){
+    private func saveObject(object: PFObject, block: (error: NSError?) -> Void){
         SOParseComManager.checkUser { (checkError) -> Void in
             if let error = checkError{
-                successBlock(error: error)
+                block(error: error)
             } else {
                 object.saveInBackgroundWithBlock {(success: Bool, error: NSError?) -> Void in
                     if (success) {
-                        successBlock(error: nil)
+                        block(error: nil)
                     } else {
-                        successBlock(error: error)
+                        block(error: error)
                     }
                 }
             }
@@ -383,7 +385,7 @@ public class SORemoteDataBase: NSObject, SODataBaseProtocol {
     func saveToObject(object: AnyObject?, fieldName: String, value: AnyObject, block: (error: NSError?) -> Void){
         if let pfObject = object as? PFObject{
             pfObject[fieldName] = value
-            self.saveObject(pfObject, successBlock: {(error: NSError?) in
+            self.saveObject(pfObject, block: {(error: NSError?) in
                 block(error: error)
             })
         }
@@ -393,9 +395,9 @@ public class SORemoteDataBase: NSObject, SODataBaseProtocol {
     
     }
 
-    func deleteObject()
+    private func deleteObject(object: PFObject)
     {
-
+        object.deleteInBackground()
     }
     
 }

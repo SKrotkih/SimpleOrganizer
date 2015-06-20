@@ -21,7 +21,7 @@ class SOTabBarController: NSObject {
         super.init()
     }
 
-    func reloadTabs(successBlock: (error: NSError?) -> Void){
+    func reloadTabs(block: (error: NSError?) -> Void){
         if let containerView = self.containerView, scrollView = self.scrollView{
             if self.tabsCount > 0{
                 dispatch_async(dispatch_get_main_queue(), {
@@ -48,15 +48,15 @@ class SOTabBarController: NSObject {
                     containerView.frame = containerFrame
                     scrollView.contentSize = contentSize
 
-                    successBlock(error: nil)
+                    block(error: nil)
                 })
             } else {
                 println("TabBarController: No one bar is presented!")
-                successBlock(error: nil)
+                block(error: nil)
             }
         } else {
             println("TabBarController: ContainerView does not exist!")
-            successBlock(error: nil)
+            block(error: nil)
         }
     }
 }

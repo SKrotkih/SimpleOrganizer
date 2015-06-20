@@ -121,7 +121,7 @@ public class SOLocalDataBase: NSObject, SODataBaseProtocol {
     }
 
     // - MARK: Categories
-    func allCategories(successBlock: (resultBuffer: [SOCategory], error: NSError?) -> Void){
+    func allCategories(block: (resultBuffer: [SOCategory], error: NSError?) -> Void){
         var _allCategories: [SOCategory] = []
         
         let fetchRequest = NSFetchRequest(entityName: CategoryEntityName)
@@ -130,18 +130,18 @@ public class SOLocalDataBase: NSObject, SODataBaseProtocol {
         let categories = managedObjectContext!.executeFetchRequest(fetchRequest, error: &requestError) as! [Category]
         
         if let error = requestError{
-            successBlock(resultBuffer: _allCategories, error: error)
+            block(resultBuffer: _allCategories, error: error)
         } else {
             if categories.count > 0{
                 for category: Category in categories{
                     let categoryItem = self.newCategory(category)
                     _allCategories.append(categoryItem)
                 }
-                successBlock(resultBuffer: _allCategories, error: nil)
+                block(resultBuffer: _allCategories, error: nil)
             } else {
                 populateCategories()
                 
-                return self.allCategories(successBlock)
+                return self.allCategories(block)
             }
         }
     }
@@ -157,7 +157,7 @@ public class SOLocalDataBase: NSObject, SODataBaseProtocol {
     }
     
     // - MARK: Icons
-    func allIcons(successBlock: (resultBuffer: [SOIco], error: NSError?) -> Void){
+    func allIcons(block: (resultBuffer: [SOIco], error: NSError?) -> Void){
         var _allIcon: [SOIco] = []
         
         let fetchRequest = NSFetchRequest(entityName: IcoEntityName)
@@ -166,18 +166,18 @@ public class SOLocalDataBase: NSObject, SODataBaseProtocol {
         let icons = managedObjectContext!.executeFetchRequest(fetchRequest, error: &requestError) as! [Ico]
         
         if let error = requestError{
-            successBlock(resultBuffer: _allIcon, error: error)
+            block(resultBuffer: _allIcon, error: error)
         } else {
             if icons.count > 0{
                 for ico: Ico in icons{
                     let icoItem = self.newIco(ico)
                     _allIcon.append(icoItem)
                 }
-                successBlock(resultBuffer: _allIcon, error: nil)
+                block(resultBuffer: _allIcon, error: nil)
             } else {
                 populateIcons()
                 
-                return self.allIcons(successBlock)
+                return self.allIcons(block)
             }
         }
     }
@@ -210,7 +210,7 @@ public class SOLocalDataBase: NSObject, SODataBaseProtocol {
     }
     
     // - MARK: Tasks
-    func fetchAllTasks(successBlock: (resultBuffer: [SOTask], error: NSError?) -> Void) {
+    func fetchAllTasks(block: (resultBuffer: [SOTask], error: NSError?) -> Void) {
         let backgroundContext = NSManagedObjectContext(concurrencyType: NSManagedObjectContextConcurrencyType.PrivateQueueConcurrencyType)
         backgroundContext.persistentStoreCoordinator = persistentStoreCoordinator
 
@@ -253,7 +253,7 @@ public class SOLocalDataBase: NSObject, SODataBaseProtocol {
                                 }
                                 
                             }
-                            successBlock(resultBuffer: _allTasks, error: nil)
+                            block(resultBuffer: _allTasks, error: nil)
                         })
                         
                         return true
@@ -306,7 +306,7 @@ public class SOLocalDataBase: NSObject, SODataBaseProtocol {
         }
     }
     
-    func saveTask(task: SOTask, successBlock: (error: NSError?) -> Void){
+    func saveTask(task: SOTask, block: (error: NSError?) -> Void){
         let taskObject: Task? = task.databaseObject as? Task
         
         if let object = taskObject{
@@ -318,7 +318,7 @@ public class SOLocalDataBase: NSObject, SODataBaseProtocol {
         }
         self.saveContext()
         
-        successBlock(error: nil)
+        block(error: nil)
     }
     
     func removeTask(task: SOTask){

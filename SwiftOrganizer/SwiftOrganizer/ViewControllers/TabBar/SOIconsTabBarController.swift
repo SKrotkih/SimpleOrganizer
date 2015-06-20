@@ -12,7 +12,7 @@ class SOIconsTabBarController: SOTabBarController {
 
     let tabViewXibName = "SOIconTabView"
     
-    override func reloadTabs(successBlock: (error: NSError?) -> Void){
+    override func reloadTabs(block: (error: NSError?) -> Void){
 
         SODataFetching.sharedInstance.allIcons{(icons: [SOIco], fetchError: NSError?) in
             self.tabsCount = 0
@@ -39,11 +39,11 @@ class SOIconsTabBarController: SOTabBarController {
                     tabView.selected = ico.selected
                 }
                 super.reloadTabs{(error: NSError?) in
-                    successBlock(error: error)
+                    block(error: error)
                 }
             } else {
                 showAlertWithTitle("Warning:", "Icons data are not presented on the Parse.com Server.")
-                successBlock(error: nil)
+                block(error: nil)
             }
         }
     }

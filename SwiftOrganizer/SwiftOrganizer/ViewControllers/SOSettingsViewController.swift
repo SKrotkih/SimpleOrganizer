@@ -19,10 +19,12 @@ class SOSettingsViewController: UIViewController {
 
         let defaults = NSUserDefaults.standardUserDefaults()
         
-        if let dataBaseType: String = defaults.stringForKey(SODataBaseType){
-            if dataBaseType == SOLocalDataBaseType{
+        if let stringValue: String = defaults.stringForKey(SODataBaseTypeKey){
+            let dataBaseType: SODataBaseType = stringValue.dataBaseType()
+
+            if dataBaseType == .CoreData{
                 self.segmentedControl.selectedSegmentIndex = 0
-            } else if dataBaseType == SOParseDataBaseType{
+            } else if dataBaseType == .ParseCom{
                 self.segmentedControl.selectedSegmentIndex = 1
             }
         }
@@ -38,9 +40,9 @@ class SOSettingsViewController: UIViewController {
         let index = self.segmentedControl.selectedSegmentIndex
         
         if index == 0{
-            defaults.setObject(SOLocalDataBaseType, forKey: SODataBaseType)
+            defaults.setObject(SODataBaseType.CoreData.toString(), forKey: SODataBaseTypeKey)
         } else if index == 1{
-            defaults.setObject(SOParseDataBaseType, forKey: SODataBaseType)
+            defaults.setObject(SODataBaseType.ParseCom.toString(), forKey: SODataBaseTypeKey)
         }
     }
 }

@@ -100,9 +100,9 @@ class SOTask: NSObject{
         }
     }
 
-    func save(successBlock: (error: NSError?) -> Void){
-        SODataBaseFactory.sharedInstance.dataBase.saveTask(self, successBlock: {(error: NSError?) in
-            successBlock(error: error)
+    func save(block: (error: NSError?) -> Void){
+        SODataBaseFactory.sharedInstance.dataBase.saveTask(self, block: {(error: NSError?) in
+            block(error: error)
         })
     }
     

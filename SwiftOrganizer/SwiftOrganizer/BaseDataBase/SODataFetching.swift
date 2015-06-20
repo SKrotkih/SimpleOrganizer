@@ -17,34 +17,34 @@ class SODataFetching: NSObject {
     private lazy var _allIcons = [SOIco]()
     
     // - MARK: Categories
-    func allCategories(successBlock: (categories: [SOCategory], error: NSError?) -> Void){
+    func allCategories(block: (categories: [SOCategory], error: NSError?) -> Void){
         if _allCategories.count > 0{
-            successBlock(categories: _allCategories, error: nil)
+            block(categories: _allCategories, error: nil)
         } else {
             SODataBaseFactory.sharedInstance.dataBase.allCategories{(categories: [SOCategory], error: NSError?) in
                 self._allCategories = categories
-                successBlock(categories: self._allCategories, error: error)
+                block(categories: self._allCategories, error: error)
             }
         }
     }
     
     // - MARK: Icons
-    func allIcons(successBlock: (resultBuffer: [SOIco], error: NSError?) -> Void){
+    func allIcons(block: (resultBuffer: [SOIco], error: NSError?) -> Void){
         if self._allIcons.count > 0{
-            successBlock(resultBuffer: self._allIcons, error: nil)
+            block(resultBuffer: self._allIcons, error: nil)
         } else {
             SODataBaseFactory.sharedInstance.dataBase.allIcons{(icons: [SOIco], error: NSError?) in
                 self._allIcons = icons
-                successBlock(resultBuffer: self._allIcons, error: error)
+                block(resultBuffer: self._allIcons, error: error)
             }
         }
     }
     
     // - MARK: Tasks
-    func fetchAllTasks(successBlock: (resultBuffer: [SOTask], error: NSError?) -> Void) {
+    func fetchAllTasks(block: (resultBuffer: [SOTask], error: NSError?) -> Void) {
         SODataBaseFactory.sharedInstance.dataBase.fetchAllTasks{(allCurrentTasks: [SOTask], error: NSError?) in
             self._allTasks = allCurrentTasks
-            successBlock(resultBuffer: self._allTasks, error: error)
+            block(resultBuffer: self._allTasks, error: error)
         }
     }
     
