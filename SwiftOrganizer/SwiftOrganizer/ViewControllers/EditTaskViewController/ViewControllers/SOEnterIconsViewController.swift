@@ -85,7 +85,7 @@ class SOEnterIconsViewController: SOEnterBaseViewController, UITableViewDataSour
         let ico: SOIco = icons[row]
         let icoId: String = ico.id
         
-        if let icoImageName = SODataFetching.sharedInstance.iconsImageName(icoId){
+        if let icoImageName = SODataFetching.sharedInstance.iconImageName(icoId){
             cell.icoImageView.image = UIImage(named: icoImageName)
         }
         

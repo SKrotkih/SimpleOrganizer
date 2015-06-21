@@ -194,7 +194,7 @@ public class SORemoteDataBase: NSObject, SODataBaseProtocol {
         }
     }
     
-    func fetchAllTasks(block: (resultBuffer: [SOTask], error: NSError?) -> Void) {
+    func allTasks(block: (resultBuffer: [SOTask], error: NSError?) -> Void) {
         self.fetchAllDataOfClassName(TaskClassName, block: {(resultBuffer: [AnyObject], fetchError: NSError?) in
             if let error = fetchError{
                 block(resultBuffer: [], error: error)
@@ -242,10 +242,10 @@ public class SORemoteDataBase: NSObject, SODataBaseProtocol {
         var object: PFObject? = task.databaseObject as? PFObject
         
         if let taskObject = object{
-            self.copyTaskObject(taskObject, srcTask: task)
+            task.copyToParseObject(taskObject)
         } else {
             object = PFObject(className: TaskClassName)
-            self.copyTaskObject(object!, srcTask: task)
+            task.copyToParseObject(object!)
         }
         
         self.saveObject(object!, block: {(error: NSError?) in
@@ -253,19 +253,6 @@ public class SORemoteDataBase: NSObject, SODataBaseProtocol {
         })
     }
 
-    private func copyTaskObject(object: PFObject, srcTask: SOTask){
-        object["title"] = srcTask.title
-        object["category"] = srcTask.category
-        let icons = srcTask.icons
-        object["ico1"] = icons[0]
-        object["ico2"] = icons[1]
-        object["ico3"] = icons[2]
-        object["ico4"] = icons[3]
-        object["ico5"] = icons[4]
-        object["ico6"] = icons[5]
-        object["date"] = srcTask.date
-    }
-    
     func removeTask(task: SOTask){
         if let taskObject: PFObject = task.databaseObject as? PFObject{
             self.deleteObject(taskObject)
@@ -312,33 +299,17 @@ public class SORemoteDataBase: NSObject, SODataBaseProtocol {
         switch className{
         case IcoClassName:
             var newInstance = SOIco()
-            newInstance.databaseObject = object
-            newInstance.id = object["recordid"] as! String
-            newInstance.name = object["name"] as! String
-            newInstance.imageName = object["imageName"] as! String
-            newInstance.selected = object["selected"] as! Bool
+            newInstance.initFromParseObject(object)
             
             return newInstance
         case CategoryClassName:
             var newInstance = SOCategory()
-            newInstance.databaseObject = object
-            newInstance.id = object["recordid"] as! String
-            newInstance.name = object["name"] as! String
-            newInstance.selected = object["selected"] as! Bool
+            newInstance.initFromParseObject(object)
             
             return newInstance
         case TaskClassName:
             var newInstance = SOTask()
-            newInstance.databaseObject = object
-            newInstance.category = object["category"] as! String
-            newInstance.icons[0] = object["ico1"] as! String
-            newInstance.icons[1] = object["ico2"] as! String
-            newInstance.icons[2] = object["ico3"] as! String
-            newInstance.icons[3] = object["ico4"] as! String
-            newInstance.icons[4] = object["ico5"] as! String
-            newInstance.icons[5] = object["ico6"] as! String
-            newInstance.title = object["title"] as! String
-            newInstance.date = object["date"] as! NSDate?
+            newInstance.initFromParseObject(object)
             
             return newInstance
         default:
@@ -382,7 +353,7 @@ public class SORemoteDataBase: NSObject, SODataBaseProtocol {
         }
     }
 
-    func saveToObject(object: AnyObject?, fieldName: String, value: AnyObject, block: (error: NSError?) -> Void){
+    func saveFieldToObject(object: AnyObject?, fieldName: String, value: AnyObject, block: (error: NSError?) -> Void){
         if let pfObject = object as? PFObject{
             pfObject[fieldName] = value
             self.saveObject(pfObject, block: {(error: NSError?) in

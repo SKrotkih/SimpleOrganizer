@@ -9,7 +9,7 @@
 import UIKit
 
 protocol SOEditTaskController{
-    func startEditingTask(task: SOTask?)
+    func startEditingOfTask(task: SOTask?)
 }
 
 class SOMainViewController: UIViewController, SOEditTaskController{
@@ -64,14 +64,14 @@ class SOMainViewController: UIViewController, SOEditTaskController{
     }
 
     func addNewTask(){
-        self.startEditingTask(nil)
+        self.startEditingOfTask(nil)
     }
 
     func editTask(task: SOTask?){
-        self.startEditingTask(task)
+        self.startEditingOfTask(task)
     }
 
-    func startEditingTask(task: SOTask?){
+    func startEditingOfTask(task: SOTask?){
         var storyboard = UIStoryboard(name: "Main", bundle: nil)
         let newTaskRecordViewController = storyboard.instantiateViewControllerWithIdentifier("SOEditTaskViewController") as! SOEditTaskViewController
         newTaskRecordViewController.task = task

@@ -26,9 +26,6 @@ public class SOLocalDataBase: NSObject, SODataBaseProtocol {
     }
     
     private func populateTasks(){
-        
-        println("\(applicationDocumentsDirectory)")
-        
         let task  = self.newTaskManagedObject()
         task.category = "1"
         task.ico1 = "1"
@@ -148,10 +145,7 @@ public class SOLocalDataBase: NSObject, SODataBaseProtocol {
     
     private func newCategory(category: Category) -> SOCategory{
         var newCategory = SOCategory()
-        newCategory.databaseObject = category
-        newCategory.id = category.id
-        newCategory.name = category.name
-        newCategory.selected = category.selected
+        newCategory.initFromCoreDataObject(category)
         
         return newCategory
     }
@@ -185,17 +179,12 @@ public class SOLocalDataBase: NSObject, SODataBaseProtocol {
     // MARK: Ico
     private func newIco(ico: Ico) -> SOIco{
         var newIco = SOIco()
-        
-        newIco.databaseObject = ico
-        newIco.id = ico.id
-        newIco.name = ico.name
-        newIco.imageName = ico.imagename
-        newIco.selected = ico.selected
+        newIco.initFromCoreDataObject(ico)
         
         return newIco
     }
 
-    func saveToObject(object: AnyObject?, fieldName: String, value: AnyObject, block: (error: NSError?) -> Void){
+    func saveFieldToObject(object: AnyObject?, fieldName: String, value: AnyObject, block: (error: NSError?) -> Void){
         let managedObject = object as? NSManagedObject
         
         if let object = managedObject{
@@ -210,7 +199,7 @@ public class SOLocalDataBase: NSObject, SODataBaseProtocol {
     }
     
     // - MARK: Tasks
-    func fetchAllTasks(block: (resultBuffer: [SOTask], error: NSError?) -> Void) {
+    func allTasks(block: (resultBuffer: [SOTask], error: NSError?) -> Void) {
         let backgroundContext = NSManagedObjectContext(concurrencyType: NSManagedObjectContextConcurrencyType.PrivateQueueConcurrencyType)
         backgroundContext.persistentStoreCoordinator = persistentStoreCoordinator
 
@@ -275,46 +264,20 @@ public class SOLocalDataBase: NSObject, SODataBaseProtocol {
     // MARK: Task
     private func newTask(task: Task) -> SOTask{
         var newTask: SOTask = SOTask()
-        
-        newTask.databaseObject = task
-        newTask.title = task.title
-        newTask.category = task.category
-        newTask.date = task.date
-        
-        let taskIcons = [task.ico1, task.ico2, task.ico3, task.ico4, task.ico5, task.ico6]
-        var _icons = [String](count: MaxIconsCount, repeatedValue: "")
-        for i in 0..<MaxIconsCount{
-            _icons[i] = taskIcons[i]
-        }
-        newTask.icons = _icons
+        newTask.initFromCoreDataObject(task)
         
         return newTask
-    }
-    
-    private func copyTask(object: Task, srcTask: SOTask){
-        object.title = srcTask.title
-        object.category = srcTask.category
-        let icons = srcTask.icons
-        object.ico1 = icons[0]
-        object.ico2 = icons[1]
-        object.ico3 = icons[2]
-        object.ico4 = icons[3]
-        object.ico5 = icons[4]
-        object.ico6 = icons[5]
-        if let date = srcTask.date{
-            object.date = date
-        }
     }
     
     func saveTask(task: SOTask, block: (error: NSError?) -> Void){
         let taskObject: Task? = task.databaseObject as? Task
         
         if let object = taskObject{
-            self.copyTask(object, srcTask: task)
+            task.copyToCoreDataObject(object)
         }
         else{
             let object = self.newTaskManagedObject()
-            self.copyTask(object, srcTask: task)
+            task.copyToCoreDataObject(object)
         }
         self.saveContext()
         

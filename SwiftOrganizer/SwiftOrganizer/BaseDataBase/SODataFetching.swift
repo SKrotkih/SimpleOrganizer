@@ -17,13 +17,13 @@ class SODataFetching: NSObject {
     private lazy var _allIcons = [SOIco]()
     
     // - MARK: Categories
-    func allCategories(block: (categories: [SOCategory], error: NSError?) -> Void){
+    func allCategories(block: (resultBuffer: [SOCategory], error: NSError?) -> Void){
         if _allCategories.count > 0{
-            block(categories: _allCategories, error: nil)
+            block(resultBuffer: _allCategories, error: nil)
         } else {
             SODataBaseFactory.sharedInstance.dataBase.allCategories{(categories: [SOCategory], error: NSError?) in
                 self._allCategories = categories
-                block(categories: self._allCategories, error: error)
+                block(resultBuffer: self._allCategories, error: error)
             }
         }
     }
@@ -41,8 +41,8 @@ class SODataFetching: NSObject {
     }
     
     // - MARK: Tasks
-    func fetchAllTasks(block: (resultBuffer: [SOTask], error: NSError?) -> Void) {
-        SODataBaseFactory.sharedInstance.dataBase.fetchAllTasks{(allCurrentTasks: [SOTask], error: NSError?) in
+    func allTasks(block: (resultBuffer: [SOTask], error: NSError?) -> Void) {
+        SODataBaseFactory.sharedInstance.dataBase.allTasks{(allCurrentTasks: [SOTask], error: NSError?) in
             self._allTasks = allCurrentTasks
             block(resultBuffer: self._allTasks, error: error)
         }
@@ -91,7 +91,7 @@ class SODataFetching: NSObject {
         return nil
     }
     
-    func iconsImageName(id : String) -> String?{
+    func iconImageName(id : String) -> String?{
         let icoOpt: SOIco? = self.iconById(id)
         if let ico = icoOpt{
             return ico.imageName
@@ -109,41 +109,4 @@ class SODataFetching: NSObject {
         
         return nil
     }
-    
-    func updateCategory(category: SOCategory, fieldName: String, value: AnyObject, block: (error: NSError?) -> Void){
-        SODataBaseFactory.sharedInstance.dataBase.saveToObject(category.databaseObject, fieldName: fieldName, value: value, block: {(error: NSError?) in
-            block(error: error)
-        })
-    }
-    
-    func updateIcon(icon: SOIco, fieldName: String, value: AnyObject, block: (error: NSError?) -> Void){
-        SODataBaseFactory.sharedInstance.dataBase.saveToObject(icon.databaseObject, fieldName: fieldName, value: value, block: {(error: NSError?) in
-            block(error: error)
-        })
-    }
-    
-    func updateTask(){
-        //       let batch = NSBatchUpdateRequest(entityName: "Category")
-        //        batch.propertiesToUpdate = [fieldName: value]
-        //        // Predicate
-        //        batch.predicate = NSPredicate(format: "id = %@", category.id)
-        //        // Result type
-        //        batch.resultType = NSBatchUpdateRequestResultType.UpdatedObjectsCountResultType
-        //
-        //        var batchError: NSError?
-        //        let result = managedObjectContext!.executeRequest(batch, error: &batchError)
-        //
-        //        if result != nil{
-        //            if let theResult = result as? NSBatchUpdateResult{
-        //                if let numberOfAffectedPersons = theResult.result as? Int{
-        //                    println("Number of categories which were updated is \(numberOfAffectedPersons)")
-        //                }
-        //            }
-        //        }else{
-        //            if let error = batchError{
-        //                println("Could not perform batch request. Error = \(error)")
-        //            }
-        //        }
-    }
-    
 }

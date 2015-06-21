@@ -8,6 +8,25 @@
 
 import UIKit
 
+enum SOEditTaskCellId: Int {
+    case CategoryCell = 0
+    case IconsCell, DateCell, DescriptionCell, Undefined
+    func toString() -> String{
+        switch self{
+        case .CategoryCell:
+            return "categoryCell"
+        case .IconsCell:
+            return "iconsCell"
+        case .DateCell:
+            return "dateCell"
+        case .DescriptionCell:
+            return "descriptionCell"
+        case .Undefined:
+            return "undefinedCell"
+        }
+    }
+}
+
 class SOEditTaskViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     var task: SOTask?
@@ -65,7 +84,7 @@ class SOEditTaskViewController: UIViewController, UITableViewDataSource, UITable
     //- MARK: UITableViewDataSource
     /// Number of rows in a section
     @objc func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 4
+        return SOEditTaskCellId.Undefined.rawValue
     }
     
     // Customizing the row height
@@ -75,40 +94,37 @@ class SOEditTaskViewController: UIViewController, UITableViewDataSource, UITable
     }
     
     @objc func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let row: SOEditTaskCellId = SOEditTaskCellId(rawValue: indexPath.row)!
+        let cellId: String = row.toString()
 
-        let editTaskCategoryCellIdentifier = "categoryCell"
-        let editTaskIconsCellIdentifier = "iconsCell"
-        let editTaskDateCellIdentifier = "dateCell"
-        let editTaskDescriptionCellIdentifier = "descriptionCell"
-        
-        switch indexPath.row{
-        case 0:
-            var cell = self.tableView.dequeueReusableCellWithIdentifier(editTaskCategoryCellIdentifier) as! SOEditTaskCategoryCell
+        switch row{
+        case .CategoryCell:
+            var cell = self.tableView.dequeueReusableCellWithIdentifier(cellId) as! SOEditTaskCategoryCell
             cell.task = task!
             
             return cell
 
-        case 1:
-            var cell = self.tableView.dequeueReusableCellWithIdentifier(editTaskIconsCellIdentifier) as! SOEditTaskIconsCell
+        case .IconsCell:
+            var cell = self.tableView.dequeueReusableCellWithIdentifier(cellId) as! SOEditTaskIconsCell
             cell.task = task!
             
             return cell
 
-        case 2:
-            var cell = self.tableView.dequeueReusableCellWithIdentifier(editTaskDateCellIdentifier) as! SOEditTaskDateCell
+        case .DateCell:
+            var cell = self.tableView.dequeueReusableCellWithIdentifier(cellId) as! SOEditTaskDateCell
             cell.task = task!
             
             return cell
 
-        case 3:
-            var cell = self.tableView.dequeueReusableCellWithIdentifier(editTaskDescriptionCellIdentifier) as! SOEditTaskDescriptionCell
+        case .DescriptionCell:
+            var cell = self.tableView.dequeueReusableCellWithIdentifier(cellId) as! SOEditTaskDescriptionCell
             cell.task = task!
 
             return cell
             
         default:
             assert(false, "Rows is too much!")
-            var cell = self.tableView.dequeueReusableCellWithIdentifier(editTaskCategoryCellIdentifier) as? SOEditTaskCategoryCell
+            var cell = self.tableView.dequeueReusableCellWithIdentifier(SOEditTaskCellId.Undefined.toString()) as? SOEditTaskCategoryCell
             
             return cell!
         }
@@ -118,26 +134,27 @@ class SOEditTaskViewController: UIViewController, UITableViewDataSource, UITable
     // After the row is selected
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         var storyboard = UIStoryboard(name: "Main", bundle: nil)
-        
-        switch indexPath.row{
-        case 0:
+
+        let row: SOEditTaskCellId = SOEditTaskCellId(rawValue: indexPath.row)!
+        switch row{
+        case .CategoryCell:
             let enterCategoryVC = storyboard.instantiateViewControllerWithIdentifier("EnterCategoryVC") as! SOEnterCategoryViewController
             enterCategoryVC.task = task
             self.navigationController!.pushViewController(enterCategoryVC, animated: true)
-        case 1:
+        case .IconsCell:
             let enterIconsVC = storyboard.instantiateViewControllerWithIdentifier("EnterIconsVC") as! SOEnterIconsViewController
             enterIconsVC.task = task
             self.navigationController!.pushViewController(enterIconsVC, animated: true)
-        case 2:
+        case .DateCell:
             let enterDateVC = storyboard.instantiateViewControllerWithIdentifier("EnterDateVC") as! SOEnterDateViewController
             enterDateVC.task = task
             self.navigationController!.pushViewController(enterDateVC, animated: true)
-        case 3:
+        case .DescriptionCell:
             let enterDescrVC = storyboard.instantiateViewControllerWithIdentifier("EnterDescriptionVC") as! SOEnterDescriptionViewController
             enterDescrVC.task = task
             self.navigationController!.pushViewController(enterDescrVC, animated: true)
         default:
-                println("")
+            assert(false, "Rows is too much!")
         }
     }
     

@@ -50,4 +50,31 @@ class SOCategory: NSObject {
             _databaseObject = newValue
         }
     }
+    
+    func didSelect(select: Bool, block: (error: NSError?) -> Void){
+        SODataBaseFactory.sharedInstance.dataBase.saveFieldToObject(self.databaseObject, fieldName: "selected", value: select, block: {(error: NSError?) in
+            block(error: error)
+        })
+    }
+}
+
+extension SOCategory{
+    func initFromParseObject(object: PFObject)
+    {
+        self.databaseObject = object
+        self.id = object["recordid"] as! String
+        self.name = object["name"] as! String
+        self.selected = object["selected"] as! Bool
+    }
+    
+    func copyToParseObject(object: PFObject){
+    }
+
+    func initFromCoreDataObject(object: Category)
+    {
+        self.databaseObject = object
+        self.id = object.id
+        self.name = object.name
+        self.selected = object.selected
+    }
 }

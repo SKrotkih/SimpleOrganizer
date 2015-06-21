@@ -10,8 +10,9 @@ import UIKit
 
 let SODataBaseTypeKey = "DataBaseType"
 
-enum SODataBaseType{
-    case CoreData, ParseCom, Undefined
+enum SODataBaseType: Int{
+    case Undefined = 0
+    case CoreData, ParseCom
     func toString() -> String{
         switch self{
         case .CoreData:

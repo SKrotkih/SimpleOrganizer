@@ -7,8 +7,6 @@
 //
 
 import UIKit
-import CoreData
-
 
 protocol SOChangeFilterStateDelegate{
     func didSelectCategory(category: SOCategory, select: Bool, block: (error: NSError?) -> Void)
@@ -34,9 +32,9 @@ class SOMainTableViewController: NSObject, UITableViewDataSource, UITableViewDel
     }
 
     func reloadData(){
-        SODataFetching.sharedInstance.fetchAllTasks{(allCurrentTasks: [SOTask], fetchError: NSError?) in
+        SODataFetching.sharedInstance.allTasks{(allCurrentTasks: [SOTask], fetchError: NSError?) in
             if let error = fetchError{
-                showAlertWithTitle("Error while reading task data!", error.description)
+                showAlertWithTitle("Error of reading task data!".localized, error.description)
             } else {
                 self.tasks = allCurrentTasks
                 self.tableView.reloadData()
@@ -87,13 +85,13 @@ class SOMainTableViewController: NSObject, UITableViewDataSource, UITableViewDel
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         switch indexPath.row{
         case 0:
-            println("Oh headar of the table was pressed!")
+            println("On the table headar was pressed!")
 
         default:
             let row = indexPath.row - 1
             let currentTask : SOTask = self.tasks[row]
             if let delegate = taskEditingDelegate{
-                delegate.startEditingTask(currentTask)
+                delegate.startEditingOfTask(currentTask)
             }
         }
     }
@@ -105,29 +103,29 @@ class SOMainTableViewController: NSObject, UITableViewDataSource, UITableViewDel
     
     // - MARK: SOChangeFilterStateDelegate
     func didSelectCategory(category: SOCategory, select: Bool, block: (error: NSError?) -> Void){
-        SODataFetching.sharedInstance.updateCategory(category, fieldName: "selected", value: select, block: {(error: NSError?) in
+        category.didSelect(select, block: { (error) -> Void in
             if error == nil {
                 dispatch_async(dispatch_get_main_queue(), {
                     self.reloadData()
                 })
             } else {
-                showAlertWithTitle("Error saving data", error!.description)
+                showAlertWithTitle("Error of saving data".localized, error!.description)
             }
             block(error: error)
         })
     }
     
     func didSelectIcon(icon: SOIco, select: Bool, block: (error: NSError?) -> Void){
-        SODataFetching.sharedInstance.updateIcon(icon, fieldName: "selected", value: select, block: {(error: NSError?) in
+        icon.didSelect(select, block: { (error) -> Void in
             if error == nil {
                 dispatch_async(dispatch_get_main_queue(), {
                     self.reloadData()
                 })
             } else {
-                showAlertWithTitle("Error saving data", error!.description)
+                showAlertWithTitle("Error of saving data".localized, error!.description)
             }
             block(error: error)
-         })
+        })
     }
     
     // - MARK: SORemoveTaskDelegate
