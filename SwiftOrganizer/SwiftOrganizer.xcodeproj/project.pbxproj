@@ -147,6 +147,7 @@
 		7F5A6D2E1B14C42C009665C7 /* ico10@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ico10@2x.png"; path = "Resources/Images/Icons/ico10@2x.png"; sourceTree = "<group>"; };
 		7F5A6D2F1B14C42C009665C7 /* ico11@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ico11@2x.png"; path = "Resources/Images/Icons/ico11@2x.png"; sourceTree = "<group>"; };
 		7F5A6D301B14C42C009665C7 /* ico12@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ico12@2x.png"; path = "Resources/Images/Icons/ico12@2x.png"; sourceTree = "<group>"; };
+		7F5D20EA1B3942B500926392 /* SwiftOrganizer.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = SwiftOrganizer.playground; sourceTree = "<group>"; };
 		7F625EE21B2ED3DC004B7C16 /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Bolts.framework; path = Frameworks/Bolts.framework; sourceTree = "<group>"; };
 		7F625EE31B2ED3DC004B7C16 /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Parse.framework; path = Frameworks/Parse.framework; sourceTree = "<group>"; };
 		7F625EE41B2ED3DC004B7C16 /* ParseCrashReporting.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ParseCrashReporting.framework; path = Frameworks/ParseCrashReporting.framework; sourceTree = "<group>"; };
@@ -274,6 +275,7 @@
 				7F5725621B0F5DDA003DBDEB /* Main.storyboard */,
 				7F5725651B0F5DDA003DBDEB /* Images.xcassets */,
 				7F5725671B0F5DDA003DBDEB /* LaunchScreen.xib */,
+				7F5D20EA1B3942B500926392 /* SwiftOrganizer.playground */,
 				7F625EEE1B2ED3EE004B7C16 /* Frameworks */,
 				7F5A6D221B14C37C009665C7 /* Resources */,
 				7F5725591B0F5DDA003DBDEB /* Supporting Files */,

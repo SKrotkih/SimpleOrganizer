@@ -17,7 +17,6 @@ public class SORemoteDataBase: NSObject, SODataBaseProtocol {
     private var currentIcoIndex = 0
     private var currentTaskIndex = 0
     
-    private let defaultCategories = [["id":"1","name":"ToDo".localized],["id":"2","name":"Events".localized], ["id":"3","name":"Life".localized], ["id":"4","name":"Work".localized]]
     private let defaultIcons : [Dictionary<String, String>] = [["id":"1","name":"ico1","img":"ico1"],
         ["id":"2","name":"ico2","img":"ico2"],
         ["id":"3","name":"ico3","img":"ico3"],
@@ -61,18 +60,42 @@ public class SORemoteDataBase: NSObject, SODataBaseProtocol {
             "ico6": "",
             "title": "Life task"]]
 
-    private func populateNextCategoryInBackground(block: (error: NSError?) -> Void){
-        let dict: Dictionary<String, String> = defaultCategories[self.currentCategoryIndex++]
-        var object = PFObject(className: CategoryClassName)
-        object["recordid"] = dict["id"]
-        object["name"] = dict["name"]
-        object["selected"] = true
-        object.saveInBackgroundWithBlock {(success: Bool, error: NSError?) -> Void in
-            if (success) {
-                block(error: nil)
+    private func populateNextCategoryInBackground(block: (error: NSError?) -> Void) -> Bool{
+        let defaultCategories = [
+            SOCategory(id:"1", name:"ToDo".localized, selected: true),
+            SOCategory(id:"2", name:"Events".localized, selected: true),
+            SOCategory(id:"3", name:"Life".localized, selected: true),
+            SOCategory(id:"4", name:"Work".localized, selected: true)]
+
+        if self.currentCategoryIndex < defaultCategories.count{
+            let category: SOCategory = defaultCategories[self.currentCategoryIndex++]
+            var object = PFObject(className: CategoryClassName)
+            object["recordid"] = category.id
+            object["name"] = category.name
+            object["selected"] = category.selected
+            object.saveInBackgroundWithBlock {(success: Bool, error: NSError?) -> Void in
+                if (success) {
+                    block(error: nil)
+                } else {
+                    block(error: error)
+                }
+            }
+        } else {
+            return false
+        }
+        
+        return true
+    }
+    
+    private func populateNextCategory(block: (error: NSError?) -> Void){
+        if !(self.populateNextCategoryInBackground{(error: NSError?) -> Void in
+            if error == nil{
+                self.populateNextCategory(block)
             } else {
                 block(error: error)
             }
+            }){
+                block(error: nil)
         }
     }
     
@@ -122,19 +145,6 @@ public class SORemoteDataBase: NSObject, SODataBaseProtocol {
         }
     }
 
-    private func populateNextCategory(block: (error: NSError?) -> Void){
-        self.populateNextCategoryInBackground{(error: NSError?) -> Void in
-            if error == nil{
-                if self.currentCategoryIndex < self.defaultCategories.count{
-                    self.populateNextCategory(block)
-                } else {
-                    block(error: nil)
-                }
-            } else {
-                block(error: error)
-            }
-        }
-    }
     
     func allCategories(block: (resultBuffer: [SOCategory], error: NSError?) -> Void){
         self.fetchAllDataOfClassName(CategoryClassName, block: {(resultBuffer: [AnyObject], error: NSError?) in

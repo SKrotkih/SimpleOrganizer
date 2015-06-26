@@ -15,6 +15,18 @@ class SOCategory: NSObject {
     private var _name: String = ""
     private var _selected = false
 
+    override init() {
+        super.init()
+    }
+    
+    convenience init(id: String, name: String, selected: Bool) {
+        self.init()
+        
+        self.id = id
+        self.name = name
+        self.selected = selected
+    }
+    
     var id: String{
         get{
             return _id

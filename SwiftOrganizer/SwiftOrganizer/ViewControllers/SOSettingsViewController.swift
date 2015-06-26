@@ -16,18 +16,28 @@ class SOSettingsViewController: UIViewController {
         super.viewDidLoad()
         
         self.title = "Settings".localized
-
+        self.setUpCurrentDataBaseType()
+    }
+    
+    private func setUpCurrentDataBaseType()
+    {
+        var selectedIndex: Int!
         let defaults = NSUserDefaults.standardUserDefaults()
         
-        if let stringValue: String = defaults.stringForKey(SODataBaseTypeKey){
-            let dataBaseType: SODataBaseType = stringValue.dataBaseType()
-
-            if dataBaseType == .CoreData{
-                self.segmentedControl.selectedSegmentIndex = 0
-            } else if dataBaseType == .ParseCom{
-                self.segmentedControl.selectedSegmentIndex = 1
+        if let name = defaults.stringForKey(SODataBaseTypeKey){
+            switch name{
+            case SODataBaseType.CoreData.rawValue:
+                selectedIndex = 0
+            case SODataBaseType.ParseCom.rawValue:
+                selectedIndex = 1
+            default:
+                selectedIndex = 0
             }
+        } else {
+            selectedIndex = 0
         }
+
+        self.segmentedControl.selectedSegmentIndex = selectedIndex
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -36,13 +46,14 @@ class SOSettingsViewController: UIViewController {
     }
     
     @IBAction func changeOfDataBase(sender: AnyObject) {
-        let defaults = NSUserDefaults.standardUserDefaults()
         let index = self.segmentedControl.selectedSegmentIndex
         
+        let defaults = NSUserDefaults.standardUserDefaults()
+
         if index == 0{
-            defaults.setObject(SODataBaseType.CoreData.toString(), forKey: SODataBaseTypeKey)
+            defaults.setObject(SODataBaseType.CoreData.rawValue, forKey: SODataBaseTypeKey)
         } else if index == 1{
-            defaults.setObject(SODataBaseType.ParseCom.toString(), forKey: SODataBaseTypeKey)
+            defaults.setObject(SODataBaseType.ParseCom.rawValue, forKey: SODataBaseTypeKey)
         }
     }
 }

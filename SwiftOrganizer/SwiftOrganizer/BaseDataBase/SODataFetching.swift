@@ -8,13 +8,21 @@
 
 import UIKit
 
-class SODataFetching: NSObject {
-
-    static let sharedInstance = SODataFetching()
-    
+public final class SODataFetching{
     private lazy var _allTasks = [SOTask]()
     private lazy var _allCategories = [SOCategory]()
     private lazy var _allIcons = [SOIco]()
+
+    class var sharedInstance: SODataFetching {
+        struct SingletonWrapper {
+        static let sharedInstance = SODataFetching()
+        }
+        return SingletonWrapper.sharedInstance;
+    }
+    
+    private init() {
+            
+    }
     
     // - MARK: Categories
     func allCategories(block: (resultBuffer: [SOCategory], error: NSError?) -> Void){

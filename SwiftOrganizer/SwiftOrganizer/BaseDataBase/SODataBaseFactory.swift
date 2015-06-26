@@ -10,73 +10,66 @@ import UIKit
 
 let SODataBaseTypeKey = "DataBaseType"
 
-enum SODataBaseType: Int{
-    case Undefined = 0
-    case CoreData, ParseCom
-    func toString() -> String{
-        switch self{
-        case .CoreData:
-            return "LocalDataBase"
-        case .ParseCom:
-            return "ParseDataBase"
-        case .Undefined:
-            return "Undefined"
-        }
-    }
+enum SODataBaseType: String{
+    case Undefined = "Undefined"
+    case CoreData = "LocalDataBase"
+    case ParseCom = "ParseDataBase"
 }
 
-extension String{
-    func dataBaseType() -> SODataBaseType{
-        switch self{
-        case "LocalDataBase":
-            return .CoreData
-        case "ParseDataBase":
-            return .ParseCom
-        default:
-            return .Undefined
-        }
-    }
-}
-
-public class SODataBaseFactory: NSObject {
+public final class SODataBaseFactory {
     private var _dataBase: SODataBaseProtocol?
-    private var _dataBaseType: SODataBaseType = .Undefined
+
+    class var sharedInstance: SODataBaseFactory {
+        struct SingletonWrapper {
+        static let sharedInstance = SODataBaseFactory()
+        }
+        return SingletonWrapper.sharedInstance;
+    }
     
-    static let sharedInstance = SODataBaseFactory()
+    private init() {
+        
+    }
 
     var dataBase: SODataBaseProtocol!{
-        let defaults = NSUserDefaults.standardUserDefaults()
+        if _dataBase != nil{
+            return _dataBase
+        }
         
-        var dataBaseType: SODataBaseType = .Undefined
+        let defaults = NSUserDefaults.standardUserDefaults()
         
         if let name = defaults.stringForKey(SODataBaseTypeKey)
         {
-            dataBaseType = name.dataBaseType()
-        }
-
-        if dataBaseType != _dataBaseType{
-            _dataBase = nil
-        }
-        
-        if let dataBase = _dataBase{
-            
-        }
-        else
-        {
-            _dataBaseType = dataBaseType
-            
-            switch _dataBaseType{
-            case .CoreData:
+            switch name{
+            case SODataBaseType.CoreData.rawValue:
                 _dataBase = SOLocalDataBase()
-            case .ParseCom:
+            case SODataBaseType.ParseCom.rawValue:
                 _dataBase = SORemoteDataBase()
             default:
-                _dataBase = SOLocalDataBase()
-                defaults.setObject(SODataBaseType.CoreData.toString(), forKey: SODataBaseTypeKey)
+                _dataBase = defaultDataBase()
             }
+        } else {
+            _dataBase = defaultDataBase()
         }
-        
+
         return _dataBase
     }
+}
+
+private func defaultDataBase() -> SODataBaseProtocol{
+    let defaults = NSUserDefaults.standardUserDefaults()
+    defaults.setObject(SODataBaseType.CoreData.rawValue, forKey: SODataBaseTypeKey)
+
+    return SOLocalDataBase()
+}
+
+
+    // MARK: - Example!
+private let arrayQ = dispatch_queue_create("arrayQ", DISPATCH_QUEUE_SERIAL);
+
+private func syncFunc(){
     
+    dispatch_sync(arrayQ, {() in
+//        self.data.append(item);
+//        globalLogger.log(
+        })
 }
