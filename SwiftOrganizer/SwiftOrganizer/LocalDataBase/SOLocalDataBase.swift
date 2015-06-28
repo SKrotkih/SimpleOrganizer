@@ -15,7 +15,17 @@ let CategoryEntityName = "Category"
 let IcoEntityName = "Ico"
 let TaskEntityName = "Task"
 
-public class SOLocalDataBase: NSObject, SODataBaseProtocol {
+public class SOLocalDataBase: SODataBaseProtocol {
+
+    class var sharedInstance: SOLocalDataBase {
+        struct SingletonWrapper {
+            static let sharedInstance = SOLocalDataBase()
+        }
+        return SingletonWrapper.sharedInstance;
+    }
+    
+    private init() {
+    }
     
     //- MARK: Helper methods
     func newTaskManagedObject() -> Task!{

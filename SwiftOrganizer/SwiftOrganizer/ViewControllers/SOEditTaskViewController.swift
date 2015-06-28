@@ -148,6 +148,7 @@ class SOEditTaskViewController: UIViewController, UITableViewDataSource, UITable
         case .DateCell:
             let enterDateVC = storyboard.instantiateViewControllerWithIdentifier("EnterDateVC") as! SOEnterDateViewController
             enterDateVC.task = task
+            enterDateVC.date = task?.date
             self.navigationController!.pushViewController(enterDateVC, animated: true)
         case .DescriptionCell:
             let enterDescrVC = storyboard.instantiateViewControllerWithIdentifier("EnterDescriptionVC") as! SOEnterDescriptionViewController

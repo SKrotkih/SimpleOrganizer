@@ -12,7 +12,7 @@ protocol SOEditTaskController{
     func startEditingOfTask(task: SOTask?)
 }
 
-class SOMainViewController: UIViewController, SOEditTaskController{
+class SOMainViewController: UIViewController, SOEditTaskController, SOObserverProtocol{
 
     @IBOutlet weak var mainTableView: UITableView!
     var mainTableViewController: SOMainTableViewController!
@@ -40,6 +40,15 @@ class SOMainViewController: UIViewController, SOEditTaskController{
         
         self.title = "Organizer".localized
         
+        SOObserversManager.sharedInstance.addObserver(self, type: .SODataBaseTypeChanged)
+    }
+
+    deinit {
+        SOObserversManager.sharedInstance.removeObserver(self, type: .SODataBaseTypeChanged)
+    }
+    
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -52,15 +61,15 @@ class SOMainViewController: UIViewController, SOEditTaskController{
         var rightButton: UIBarButtonItem = UIBarButtonItem(image: buttonImage, style: UIBarButtonItemStyle.Plain, target: self, action: "addNewTask")
             navigationItem.rightBarButtonItem = rightButton;
         
+        self.reloadData()
+    }
+
+    private func reloadData(){
         self.categoryTabBarController.reloadTabs{(error: NSError?) in
             self.iconsTabBarController.reloadTabs{(error: NSError?) in
                 self.mainTableViewController.reloadData()
             }
         }
-    }
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
     }
 
     func addNewTask(){
@@ -83,6 +92,16 @@ class SOMainViewController: UIViewController, SOEditTaskController{
         var controller = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.Alert)
         controller.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
         presentViewController(controller, animated: true, completion: nil)
+    }
+
+    //- MARK: SOObserverProtocol implementation
+    func notify(notification: SOObserverNotification){
+        switch notification.type{
+        case .SODataBaseTypeChanged:
+            self.reloadData()
+        default:
+            assert(false, "That observer type is absent!")
+        }
     }
     
 }

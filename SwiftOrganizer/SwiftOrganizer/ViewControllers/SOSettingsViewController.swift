@@ -55,5 +55,8 @@ class SOSettingsViewController: UIViewController {
         } else if index == 1{
             defaults.setObject(SODataBaseType.ParseCom.rawValue, forKey: SODataBaseTypeKey)
         }
+        
+        let notification: SOObserverNotification = SOObserverNotification(type: .SODataBaseTypeChanged, data: nil)
+        SOObserversManager.sharedInstance.sendNotification(notification)
     }
 }

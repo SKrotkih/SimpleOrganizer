@@ -8,10 +8,12 @@
 
 import UIKit
 
-public final class SODataFetching{
+public final class SODataFetching: SOObserverProtocol{
     private lazy var _allTasks = [SOTask]()
     private lazy var _allCategories = [SOCategory]()
     private lazy var _allIcons = [SOIco]()
+    
+    private var collectionQueue = dispatch_queue_create("fetchDataQ", DISPATCH_QUEUE_CONCURRENT);
 
     class var sharedInstance: SODataFetching {
         struct SingletonWrapper {
@@ -21,13 +23,18 @@ public final class SODataFetching{
     }
     
     private init() {
-            
+        SOObserversManager.sharedInstance.addObserver(self, type: .SODataBaseTypeChanged)
     }
+
+    deinit{
+        SOObserversManager.sharedInstance.removeObserver(self, type: .SODataBaseTypeChanged)
+    }
+    
     
     // - MARK: Categories
     func allCategories(block: (resultBuffer: [SOCategory], error: NSError?) -> Void){
-        if _allCategories.count > 0{
-            block(resultBuffer: _allCategories, error: nil)
+        if self._allCategories.count > 0{
+            block(resultBuffer: self._allCategories, error: nil)
         } else {
             SODataBaseFactory.sharedInstance.dataBase.allCategories{(categories: [SOCategory], error: NSError?) in
                 self._allCategories = categories
@@ -117,4 +124,19 @@ public final class SODataFetching{
         
         return nil
     }
+    
+    //- MARK: SOObserverProtocol implementation
+    func notify(notification: SOObserverNotification){
+        switch notification.type{
+        case .SODataBaseTypeChanged:
+            dispatch_barrier_sync(self.collectionQueue, { () in
+                self._allCategories.removeAll(keepCapacity: false)
+                self._allTasks.removeAll(keepCapacity: false)
+                self._allIcons.removeAll(keepCapacity: false)
+            });
+        default:
+            assert(false, "That observer type is absent!")
+        }
+    }
+    
 }

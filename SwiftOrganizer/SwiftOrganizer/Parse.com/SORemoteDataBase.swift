@@ -12,54 +12,21 @@ let CategoryClassName = "Category"
 let IcoClassName = "Ico"
 let TaskClassName = "Task"
 
-public class SORemoteDataBase: NSObject, SODataBaseProtocol {
+public class SORemoteDataBase: SODataBaseProtocol {
     private var currentCategoryIndex = 0
     private var currentIcoIndex = 0
     private var currentTaskIndex = 0
-    
-    private let defaultIcons : [Dictionary<String, String>] = [["id":"1","name":"ico1","img":"ico1"],
-        ["id":"2","name":"ico2","img":"ico2"],
-        ["id":"3","name":"ico3","img":"ico3"],
-        ["id":"4","name":"ico4","img":"ico4"],
-        ["id":"5","name":"ico5","img":"ico5"],
-        ["id":"6","name":"ico6","img":"ico6"],
-        ["id":"7","name":"ico7","img":"ico7"],
-        ["id":"8","name":"ico8","img":"ico8"],
-        ["id":"9","name":"ico9","img":"ico9"],
-        ["id":"10","name":"ico10","img":"ico10"],
-        ["id":"11","name":"ico11","img":"ico11"],
-        ["id":"12","name":"ico12","img":"ico12"],
-        ["id":"13","name":"ico13","img":"ico13"],
-        ["id":"14","name":"ico14","img":"ico14"],
-        ["id":"15","name":"ico15","img":"ico15"],
-        ["id":"16","name":"ico16","img":"ico16"],
-        ["id":"17","name":"ico17","img":"ico17"]]
-    private let defaultTasks : [Dictionary<String, String>] = [
-            ["category": "1",
-            "ico1": "1",
-            "ico2": "3",
-            "ico3": "6",
-            "ico4": "2",
-            "ico5": "",
-            "ico6": "",
-            "title": "ToDo task"],
-        ["category": "2",
-            "ico1": "12",
-            "ico2": "11",
-            "ico3": "2",
-            "ico4": "1",
-            "ico5": "",
-            "ico6": "",
-            "title": "Events task"],
-        ["category": "3",
-            "ico1": "1",
-            "ico2": "3",
-            "ico3": "6",
-            "ico4": "2",
-            "ico5": "",
-            "ico6": "",
-            "title": "Life task"]]
 
+    class var sharedInstance: SORemoteDataBase {
+        struct SingletonWrapper {
+            static let sharedInstance = SORemoteDataBase()
+        }
+        return SingletonWrapper.sharedInstance;
+    }
+    
+    private init() {
+    }
+    
     private func populateNextCategoryInBackground(block: (error: NSError?) -> Void) -> Bool{
         let defaultCategories = [
             SOCategory(id:"1", name:"ToDo".localized, selected: true),
@@ -99,22 +66,85 @@ public class SORemoteDataBase: NSObject, SODataBaseProtocol {
         }
     }
     
-    private func populateNextIcoInBackground(block: (error: NSError?) -> Void){
-        let icoDict: Dictionary<String, String> = self.defaultIcons[self.currentIcoIndex++]
-        var object = PFObject(className: IcoClassName)
-        object["recordid"] = icoDict["id"]
-        object["name"] = icoDict["name"]
-        object["imageName"] = icoDict["img"]
-        object["selected"] = true
-        object.saveInBackgroundWithBlock {(success: Bool, error: NSError?) -> Void in
-            if (success) {
-                block(error: nil)
+    private func populateNextIcoInBackground(block: (error: NSError?) -> Void) -> Bool{
+        let defaultIcons = [
+            SOIco(id:"1", name:"ico1".localized, imageName: "ico1", selected: true),
+            SOIco(id:"2", name:"ico2".localized, imageName: "ico2", selected: true),
+            SOIco(id:"3", name:"ico3".localized, imageName: "ico3", selected: true),
+            SOIco(id:"4", name:"ico4".localized, imageName: "ico4", selected: true),
+            SOIco(id:"5", name:"ico5".localized, imageName: "ico5", selected: true),
+            SOIco(id:"6", name:"ico6".localized, imageName: "ico6", selected: true),
+            SOIco(id:"7", name:"ico7".localized, imageName: "ico7", selected: true),
+            SOIco(id:"8", name:"ico8".localized, imageName: "ico8", selected: true),
+            SOIco(id:"9", name:"ico9".localized, imageName: "ico9", selected: true),
+            SOIco(id:"10", name:"ico10".localized, imageName: "ico10", selected: true),
+            SOIco(id:"11", name:"ico11".localized, imageName: "ico11", selected: true),
+            SOIco(id:"12", name:"ico12".localized, imageName: "ico12", selected: true),
+            SOIco(id:"13", name:"ico13".localized, imageName: "ico13", selected: true),
+            SOIco(id:"14", name:"ico14".localized, imageName: "ico14", selected: true),
+            SOIco(id:"15", name:"ico15".localized, imageName: "ico15", selected: true),
+            SOIco(id:"16", name:"ico16".localized, imageName: "ico16", selected: true),
+            SOIco(id:"17", name:"ico17".localized, imageName: "ico17", selected: true)]
+
+        if self.currentIcoIndex < defaultIcons.count{
+            let ico: SOIco = defaultIcons[self.currentIcoIndex++]
+            var object = PFObject(className: IcoClassName)
+            object["recordid"] = ico.id
+            object["name"] = ico.name
+            object["imageName"] = ico.imageName
+            object["selected"] = ico.selected
+            object.saveInBackgroundWithBlock {(success: Bool, error: NSError?) -> Void in
+                if (success) {
+                    block(error: nil)
+                } else {
+                    block(error: error)
+                }
+            }
+        } else {
+            return false
+        }
+        
+        return true
+    }
+
+    private func populateNextIco(block: (error: NSError?) -> Void){
+        if !(self.populateNextIcoInBackground{(error: NSError?) -> Void in
+            if error == nil{
+                self.populateNextIco(block)
             } else {
                 block(error: error)
             }
+            }){
+                block(error: nil)
         }
     }
 
+    private let defaultTasks : [Dictionary<String, String>] = [
+        ["category": "1",
+            "ico1": "1",
+            "ico2": "3",
+            "ico3": "6",
+            "ico4": "2",
+            "ico5": "",
+            "ico6": "",
+            "title": "ToDo task"],
+        ["category": "2",
+            "ico1": "12",
+            "ico2": "11",
+            "ico3": "2",
+            "ico4": "1",
+            "ico5": "",
+            "ico6": "",
+            "title": "Events task"],
+        ["category": "3",
+            "ico1": "1",
+            "ico2": "3",
+            "ico3": "6",
+            "ico4": "2",
+            "ico5": "",
+            "ico6": "",
+            "title": "Life task"]]
+    
     private func populateNextTaskInBackground(block: (error: NSError?) -> Void){
         var object = PFObject(className: TaskClassName)
         let dict: Dictionary<String, String> = self.defaultTasks[self.currentTaskIndex++]
@@ -134,7 +164,6 @@ public class SORemoteDataBase: NSObject, SODataBaseProtocol {
                 block(error: error)
             }
         }
-        
     }
     
     // - MARK: Categories
@@ -158,20 +187,6 @@ public class SORemoteDataBase: NSObject, SODataBaseProtocol {
         self.currentIcoIndex = 0
         self.populateNextIco{(error: NSError?) -> Void in
             block(error: error)
-        }
-    }
-    
-    private func populateNextIco(block: (error: NSError?) -> Void){
-        self.populateNextIcoInBackground{(error: NSError?) -> Void in
-            if error == nil{
-                if self.currentIcoIndex < self.defaultIcons.count{
-                    self.populateNextIco(block)
-                } else {
-                    block(error: nil)
-                }
-            } else {
-                block(error: error)
-            }
         }
     }
 
@@ -380,5 +395,9 @@ public class SORemoteDataBase: NSObject, SODataBaseProtocol {
     {
         object.deleteInBackground()
     }
+    
+    
+    
+    
     
 }

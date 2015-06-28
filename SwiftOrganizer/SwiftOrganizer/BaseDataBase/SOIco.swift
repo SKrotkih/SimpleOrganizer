@@ -13,9 +13,18 @@ class SOIco: NSObject {
     private var _databaseObject: AnyObject?
     private var _id: String = ""
     private var _name: String = ""
-    private var _imagename: String = ""
+    private var _imageName: String = ""
     private var _selected = false
 
+    convenience init(id: String, name: String, imageName: String, selected: Bool) {
+        self.init()
+        
+        self.id = id
+        self.name = name
+        self.imageName = imageName
+        self.selected = selected
+    }
+    
     var databaseObject: AnyObject?{
         get{
             return _databaseObject
@@ -45,10 +54,10 @@ class SOIco: NSObject {
     
     var imageName: String{
         get{
-            return _imagename
+            return _imageName
         }
         set{
-            self._imagename = newValue
+            self._imageName = newValue
         }
     }
     

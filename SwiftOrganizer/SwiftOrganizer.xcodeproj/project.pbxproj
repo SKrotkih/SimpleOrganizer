@@ -48,6 +48,8 @@
 		7F5A6D3A1B14C42C009665C7 /* ico10@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7F5A6D2E1B14C42C009665C7 /* ico10@2x.png */; };
 		7F5A6D3B1B14C42C009665C7 /* ico11@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7F5A6D2F1B14C42C009665C7 /* ico11@2x.png */; };
 		7F5A6D3C1B14C42C009665C7 /* ico12@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7F5A6D301B14C42C009665C7 /* ico12@2x.png */; };
+		7F5C2C3A1B400B2400506320 /* SOObserversManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F5C2C391B400B2400506320 /* SOObserversManager.swift */; };
+		7F5C2C3C1B40143600506320 /* ArrayExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F5C2C3B1B40143600506320 /* ArrayExtension.swift */; };
 		7F625EE81B2ED3DC004B7C16 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F625EE21B2ED3DC004B7C16 /* Bolts.framework */; };
 		7F625EE91B2ED3DC004B7C16 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F625EE31B2ED3DC004B7C16 /* Parse.framework */; };
 		7F625EEA1B2ED3DC004B7C16 /* ParseCrashReporting.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F625EE41B2ED3DC004B7C16 /* ParseCrashReporting.framework */; };
@@ -147,6 +149,8 @@
 		7F5A6D2E1B14C42C009665C7 /* ico10@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ico10@2x.png"; path = "Resources/Images/Icons/ico10@2x.png"; sourceTree = "<group>"; };
 		7F5A6D2F1B14C42C009665C7 /* ico11@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ico11@2x.png"; path = "Resources/Images/Icons/ico11@2x.png"; sourceTree = "<group>"; };
 		7F5A6D301B14C42C009665C7 /* ico12@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ico12@2x.png"; path = "Resources/Images/Icons/ico12@2x.png"; sourceTree = "<group>"; };
+		7F5C2C391B400B2400506320 /* SOObserversManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SOObserversManager.swift; path = SwiftOrganizer/ObserverManager/SOObserversManager.swift; sourceTree = SOURCE_ROOT; };
+		7F5C2C3B1B40143600506320 /* ArrayExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArrayExtension.swift; sourceTree = "<group>"; };
 		7F5D20EA1B3942B500926392 /* SwiftOrganizer.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = SwiftOrganizer.playground; sourceTree = "<group>"; };
 		7F625EE21B2ED3DC004B7C16 /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Bolts.framework; path = Frameworks/Bolts.framework; sourceTree = "<group>"; };
 		7F625EE31B2ED3DC004B7C16 /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Parse.framework; path = Frameworks/Parse.framework; sourceTree = "<group>"; };
@@ -270,6 +274,7 @@
 			children = (
 				7F625EFA1B2EE10D004B7C16 /* DataBase */,
 				7F5725991B0F61AC003DBDEB /* Common */,
+				7F5C2C381B400AC300506320 /* ObserverManager */,
 				7F57258A1B0F6114003DBDEB /* ViewControllers */,
 				7F57255B1B0F5DDA003DBDEB /* AppDelegate.swift */,
 				7F5725621B0F5DDA003DBDEB /* Main.storyboard */,
@@ -355,6 +360,7 @@
 				7F57259F1B0F61F7003DBDEB /* StringExtension.swift */,
 				7F5725A01B0F61F7003DBDEB /* UITableViewExtension.swift */,
 				7F5725A11B0F61F7003DBDEB /* UIViewControllerExtension.swift */,
+				7F5C2C3B1B40143600506320 /* ArrayExtension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -421,6 +427,15 @@
 				7F64749E1B2730D700B3D75C /* ico17@2x.png */,
 			);
 			name = TasksIcons;
+			sourceTree = "<group>";
+		};
+		7F5C2C381B400AC300506320 /* ObserverManager */ = {
+			isa = PBXGroup;
+			children = (
+				7F5C2C391B400B2400506320 /* SOObserversManager.swift */,
+			);
+			name = ObserverManager;
+			path = ViewControllers;
 			sourceTree = "<group>";
 		};
 		7F625EEE1B2ED3EE004B7C16 /* Frameworks */ = {
@@ -651,6 +666,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7F5725951B0F6114003DBDEB /* SOMainViewController.swift in Sources */,
+				7F5C2C3A1B400B2400506320 /* SOObserversManager.swift in Sources */,
 				7F6E98181B1DDD930048ED7A /* SOEditTaskIconsCell.swift in Sources */,
 				7F6E98221B1E24210048ED7A /* SOEnterIconsViewController.swift in Sources */,
 				7F9B772A1B189E67006D3434 /* SwiftOrganizer.xcdatamodeld in Sources */,
@@ -669,6 +685,7 @@
 				7F625F0B1B2FDF5F004B7C16 /* SOTask.swift in Sources */,
 				7F625F0D1B30274C004B7C16 /* SODataBaseProtocol.swift in Sources */,
 				7F5725A31B0F61F7003DBDEB /* UITableViewExtension.swift in Sources */,
+				7F5C2C3C1B40143600506320 /* ArrayExtension.swift in Sources */,
 				7F497D4D1B18A6AF00F95BA9 /* Category.swift in Sources */,
 				7F6E981A1B1DDED30048ED7A /* SOEditTaskDateCell.swift in Sources */,
 				7F6E98621B1F28650048ED7A /* SOSelectIconsCell.swift in Sources */,
