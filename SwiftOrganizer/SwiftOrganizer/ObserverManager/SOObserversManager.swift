@@ -56,7 +56,7 @@ class SOObserversManager {
                 self._dataBaseTypeChangeObservers.append(WeakObserverReference(observer: observer));
             });
         default:
-            assert(false, "That observer type is absent!")
+            assert(false, "The observer code notification is wrong!")
         }
     }
 
@@ -69,7 +69,7 @@ class SOObserversManager {
                 });
             });
         default:
-            assert(false, "That observer type is absent!")
+            assert(false, "The observer code notification is wrong!")
         }
     }
     
@@ -82,7 +82,7 @@ class SOObserversManager {
                 }
             });
         default:
-            assert(false, "That observer type is absent!")
+            assert(false, "The observer code notification is wrong!")
         }
     }
 }

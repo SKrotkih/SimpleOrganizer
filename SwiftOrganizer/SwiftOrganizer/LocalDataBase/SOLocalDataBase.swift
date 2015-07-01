@@ -17,7 +17,7 @@ let TaskEntityName = "Task"
 
 public class SOLocalDataBase: SODataBaseProtocol {
 
-    class var sharedInstance: SOLocalDataBase {
+    class func sharedInstance() -> SODataBaseProtocol{
         struct SingletonWrapper {
             static let sharedInstance = SOLocalDataBase()
         }
@@ -297,6 +297,14 @@ public class SOLocalDataBase: SODataBaseProtocol {
     func removeTask(task: SOTask){
         let taskObject: Task? = task.databaseObject as? Task
         self.deleteObject(taskObject)
+    }
+    
+    func areObjectsEqual(object1: AnyObject?, object2: AnyObject?) -> Bool{
+        if let obj1: Task = object1 as? Task, let obj2: Task = object2 as? Task{
+            return obj1 == obj2
+        }
+        
+        return true
     }
     
     // MARK: - Core Data stack

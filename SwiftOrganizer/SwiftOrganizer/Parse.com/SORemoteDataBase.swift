@@ -17,7 +17,7 @@ public class SORemoteDataBase: SODataBaseProtocol {
     private var currentIcoIndex = 0
     private var currentTaskIndex = 0
 
-    class var sharedInstance: SORemoteDataBase {
+    class func sharedInstance() -> SODataBaseProtocol{
         struct SingletonWrapper {
             static let sharedInstance = SORemoteDataBase()
         }
@@ -284,6 +284,14 @@ public class SORemoteDataBase: SODataBaseProtocol {
         }
     }
 
+    func areObjectsEqual(object1: AnyObject?, object2: AnyObject?) -> Bool{
+        if let obj1: PFObject = object1 as? PFObject, let obj2: PFObject = object2 as? PFObject{
+            return obj1 == obj2
+        }
+
+        return true
+    }
+    
     // - MARK: Private
     private func fetchAllDataOfClassName(className: String, block: (resultBuffer: [AnyObject], error: NSError?) -> Void){
         SOParseComManager.checkUser { (checkError) -> Void in

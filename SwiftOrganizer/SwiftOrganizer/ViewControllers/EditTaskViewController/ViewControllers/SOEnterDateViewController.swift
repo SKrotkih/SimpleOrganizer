@@ -41,11 +41,6 @@ class SOEnterDateViewController: SOEnterBaseViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    func doneButtonWasPressed() {
-        self.date = self.datePicker.date
-        self.closeButtonWasPressed()
-    }
-    
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
@@ -59,6 +54,11 @@ class SOEnterDateViewController: SOEnterBaseViewController {
     
     }
 
+    func doneButtonWasPressed() {
+        self.date = self.datePicker.date
+        self.closeButtonWasPressed()
+    }
+    
     override func closeButtonWasPressed() {
         if self.date == self.datePicker.date{
             self.saveData()

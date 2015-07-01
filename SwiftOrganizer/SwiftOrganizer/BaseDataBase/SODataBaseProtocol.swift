@@ -10,6 +10,8 @@ import UIKit
 
 protocol SODataBaseProtocol{
 
+    static func sharedInstance() -> SODataBaseProtocol
+    
     func allCategories(block: (resultBuffer: [SOCategory], error: NSError?) -> Void)
     func allIcons(block: (resultBuffer: [SOIco], error: NSError?) -> Void)
     func allTasks(block: (resultBuffer: [SOTask], error: NSError?) -> Void)
@@ -19,4 +21,6 @@ protocol SODataBaseProtocol{
 
     func saveFieldToObject(object: AnyObject?, fieldName: String, value: AnyObject, block: (error: NSError?) -> Void)
     func saveContext()
+    
+    func areObjectsEqual(object1: AnyObject?, object2: AnyObject?) -> Bool
 }

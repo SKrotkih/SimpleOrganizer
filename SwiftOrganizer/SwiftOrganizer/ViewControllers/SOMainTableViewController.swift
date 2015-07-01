@@ -91,7 +91,7 @@ class SOMainTableViewController: NSObject, UITableViewDataSource, UITableViewDel
             let row = indexPath.row - 1
             let currentTask : SOTask = self.tasks[row]
             if let delegate = taskEditingDelegate{
-                delegate.startEditingOfTask(currentTask)
+                delegate.startEditingTask(currentTask)
             }
         }
     }

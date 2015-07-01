@@ -8,6 +8,13 @@
 
 import UIKit
 
+enum SOEditTaskViewControllerId: String {
+    case Category = "EnterCategoryVC"
+    case Icons = "EnterIconsVC"
+    case Date = "EnterDateVC"
+    case Description = "EnterDescriptionVC"
+}
+
 enum SOEditTaskCellId: Int {
     case CategoryCell = 0
     case IconsCell, DateCell, DescriptionCell, Undefined
@@ -28,23 +35,40 @@ enum SOEditTaskCellId: Int {
 }
 
 class SOEditTaskViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
-    
-    var task: SOTask?
+
+    private var _task: SOTask
+    private var _orgTask: SOTask?
+    private var isItNewTask: Bool
     
     @IBOutlet weak var tableView: UITableView!
+
+    required init(coder aDecoder: NSCoder) {
+        _task = SOTask()
+        isItNewTask = true
+        
+        super.init(coder: aDecoder)
+    }
+    
+    var task: SOTask?{
+        get{
+          return _task
+        }
+        set{
+            isItNewTask = (newValue == nil)
+            
+            if isItNewTask{
+                _task.clearTask()
+            } else {
+                self._orgTask = newValue
+                _task.cloneTask(newValue!)
+            }
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        if let editTask = task{
-
-        }
-        else
-        {
-            task = SOTask()
-        }
     }
-
+    
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
@@ -63,23 +87,49 @@ class SOEditTaskViewController: UIViewController, UITableViewDataSource, UITable
     }
     
     func doneButtonWasPressed() {
-        if let editTask = task{
-            editTask.save{(error: NSError?) in
-                if let saveError = error{
-                    showAlertWithTitle("Update task error".localized, saveError.description)
-                } else {
-                    self.navigationController?.popViewControllerAnimated(true)
-                }
-            }
-        } else {
-            self.navigationController?.popViewControllerAnimated(true)
-        }
+        self.buildObject()
     }
     
     func closeButtonWasPressed() {
-        self.navigationController?.popViewControllerAnimated(true)
+        if dataWasChanged() {
+
+            let controller = UIAlertController(title: "Data was chenged!".localized, message: nil, preferredStyle: .ActionSheet)
+            let skeepDateAction = UIAlertAction(title: "Close".localized, style: .Cancel, handler: { action in
+                self.closeWindow()
+            })
+            let saveDateAction = UIAlertAction(title: "Save".localized, style: .Default, handler: { action in
+                self.buildObject()
+                self.closeWindow()
+            })
+            controller.addAction(skeepDateAction)
+            controller.addAction(saveDateAction)
+            
+            self.presentViewController(controller, animated: true, completion: nil)
+        } else {
+            self.closeWindow()
+        }
+    }
+    
+    func dataWasChanged() -> Bool{
+        return self._orgTask != self.task
     }
 
+    // This method builds an object, which properties were changed before in separated views
+    // Builder is presented by just one class
+    private func buildObject(){
+        self.task!.save{(error: NSError?) in
+            if let saveError = error{
+                showAlertWithTitle("Update task error".localized, saveError.description)
+            } else if let orgTask = self._orgTask{
+                orgTask.cloneTask(self.task!)
+            }
+        }
+    }
+
+    func closeWindow() {
+        self.navigationController?.popViewControllerAnimated(true)
+    }
+    
 
     //- MARK: UITableViewDataSource
     /// Number of rows in a section
@@ -138,20 +188,20 @@ class SOEditTaskViewController: UIViewController, UITableViewDataSource, UITable
         let row: SOEditTaskCellId = SOEditTaskCellId(rawValue: indexPath.row)!
         switch row{
         case .CategoryCell:
-            let enterCategoryVC = storyboard.instantiateViewControllerWithIdentifier("EnterCategoryVC") as! SOEnterCategoryViewController
+            let enterCategoryVC = storyboard.instantiateViewControllerWithIdentifier(SOEditTaskViewControllerId.Category.rawValue) as! SOEnterCategoryViewController
             enterCategoryVC.task = task
             self.navigationController!.pushViewController(enterCategoryVC, animated: true)
         case .IconsCell:
-            let enterIconsVC = storyboard.instantiateViewControllerWithIdentifier("EnterIconsVC") as! SOEnterIconsViewController
+            let enterIconsVC = storyboard.instantiateViewControllerWithIdentifier(SOEditTaskViewControllerId.Icons.rawValue) as! SOEnterIconsViewController
             enterIconsVC.task = task
             self.navigationController!.pushViewController(enterIconsVC, animated: true)
         case .DateCell:
-            let enterDateVC = storyboard.instantiateViewControllerWithIdentifier("EnterDateVC") as! SOEnterDateViewController
+            let enterDateVC = storyboard.instantiateViewControllerWithIdentifier(SOEditTaskViewControllerId.Date.rawValue) as! SOEnterDateViewController
             enterDateVC.task = task
             enterDateVC.date = task?.date
             self.navigationController!.pushViewController(enterDateVC, animated: true)
         case .DescriptionCell:
-            let enterDescrVC = storyboard.instantiateViewControllerWithIdentifier("EnterDescriptionVC") as! SOEnterDescriptionViewController
+            let enterDescrVC = storyboard.instantiateViewControllerWithIdentifier(SOEditTaskViewControllerId.Description.rawValue) as! SOEnterDescriptionViewController
             enterDescrVC.task = task
             self.navigationController!.pushViewController(enterDescrVC, animated: true)
         default:

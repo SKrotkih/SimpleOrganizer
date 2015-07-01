@@ -9,7 +9,7 @@
 import UIKit
 
 protocol SOEditTaskController{
-    func startEditingOfTask(task: SOTask?)
+    func startEditingTask(task: SOTask?)
 }
 
 class SOMainViewController: UIViewController, SOEditTaskController, SOObserverProtocol{
@@ -25,9 +25,14 @@ class SOMainViewController: UIViewController, SOEditTaskController, SOObserverPr
     
     var categoryTabBarController: SOCategoryTabBarController!
     var iconsTabBarController: SOIconsTabBarController!
+
+    var allTimes = [NSDate]()
+    private var refreshControl: UIRefreshControl?
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        allTimes.append(NSDate())
         
         categoryTabBarController = SOCategoryTabBarController(scrollView: categoryScrollView, containerView: categoryTabBarView)
         iconsTabBarController = SOIconsTabBarController(scrollView: iconsScrollView, containerView: iconsTabBarView)
@@ -41,6 +46,11 @@ class SOMainViewController: UIViewController, SOEditTaskController, SOObserverPr
         self.title = "Organizer".localized
         
         SOObserversManager.sharedInstance.addObserver(self, type: .SODataBaseTypeChanged)
+        
+        /* Create the refresh control */
+        refreshControl = UIRefreshControl()
+        refreshControl!.addTarget(self, action: "handleRefresh:", forControlEvents: .ValueChanged)
+        mainTableView.addSubview(refreshControl!)
     }
 
     deinit {
@@ -61,26 +71,41 @@ class SOMainViewController: UIViewController, SOEditTaskController, SOObserverPr
         var rightButton: UIBarButtonItem = UIBarButtonItem(image: buttonImage, style: UIBarButtonItemStyle.Plain, target: self, action: "addNewTask")
             navigationItem.rightBarButtonItem = rightButton;
         
-        self.reloadData()
+        self.reloadData({(error: NSError?) in })
     }
-
-    private func reloadData(){
+    
+    func handleRefresh(paramSender: AnyObject){
+        /* Put a bit of delay between when the refresh control is released
+        and when we actually do the refreshing to make the UI look a bit
+        smoother than just doing the update without the animation */
+        let popTime = dispatch_time(DISPATCH_TIME_NOW, Int64(NSEC_PER_SEC))
+        
+        dispatch_after(popTime, dispatch_get_main_queue(), {
+            self.reloadData({(error: NSError?) in
+                self.allTimes.append(NSDate())
+                self.refreshControl!.endRefreshing()
+            })
+        })
+    }
+    
+    private func reloadData(block: (error: NSError?) -> Void){
         self.categoryTabBarController.reloadTabs{(error: NSError?) in
             self.iconsTabBarController.reloadTabs{(error: NSError?) in
                 self.mainTableViewController.reloadData()
+                block(error: error)
             }
         }
     }
 
     func addNewTask(){
-        self.startEditingOfTask(nil)
+        self.startEditingTask(nil)
     }
 
     func editTask(task: SOTask?){
-        self.startEditingOfTask(task)
+        self.startEditingTask(task)
     }
 
-    func startEditingOfTask(task: SOTask?){
+    func startEditingTask(task: SOTask?){
         var storyboard = UIStoryboard(name: "Main", bundle: nil)
         let newTaskRecordViewController = storyboard.instantiateViewControllerWithIdentifier("SOEditTaskViewController") as! SOEditTaskViewController
         newTaskRecordViewController.task = task
@@ -98,9 +123,11 @@ class SOMainViewController: UIViewController, SOEditTaskController, SOObserverPr
     func notify(notification: SOObserverNotification){
         switch notification.type{
         case .SODataBaseTypeChanged:
-            self.reloadData()
+            self.reloadData({(error: NSError?) in
+            
+            })
         default:
-            assert(false, "That observer type is absent!")
+            assert(false, "The observer code notification is wrong!")
         }
     }
     

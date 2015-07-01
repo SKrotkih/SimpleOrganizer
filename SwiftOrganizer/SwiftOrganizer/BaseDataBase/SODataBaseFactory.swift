@@ -46,46 +46,33 @@ public final class SODataBaseFactory: SOObserverProtocol {
         {
             switch name{
             case SODataBaseType.CoreData.rawValue:
-                _dataBase = SOLocalDataBase.sharedInstance
+                _dataBase = SOLocalDataBase.sharedInstance()
             case SODataBaseType.ParseCom.rawValue:
-                _dataBase = SORemoteDataBase.sharedInstance
+                _dataBase = SORemoteDataBase.sharedInstance()
             default:
                 _dataBase = defaultDataBase()
             }
         } else {
             _dataBase = defaultDataBase()
         }
-
+        
         return _dataBase
     }
 
+    private func defaultDataBase() -> SODataBaseProtocol{
+        let defaults = NSUserDefaults.standardUserDefaults()
+        defaults.setObject(SODataBaseType.CoreData.rawValue, forKey: SODataBaseTypeKey)
+        
+        return SOLocalDataBase.sharedInstance()
+    }
+    
     //- MARK: SOObserverProtocol implementation
     func notify(notification: SOObserverNotification){
         switch notification.type{
         case .SODataBaseTypeChanged:
             self._dataBase = nil
         default:
-            assert(false, "That observer type is absent!")
+            assert(false, "The observer code notification is wrong!")
         }
     }
-
-}
-
-private func defaultDataBase() -> SODataBaseProtocol{
-    let defaults = NSUserDefaults.standardUserDefaults()
-    defaults.setObject(SODataBaseType.CoreData.rawValue, forKey: SODataBaseTypeKey)
-
-    return SOLocalDataBase.sharedInstance
-}
-
-
-    // MARK: - Example!
-private let arrayQ = dispatch_queue_create("arrayQ", DISPATCH_QUEUE_SERIAL);
-
-private func syncFunc(){
-    
-    dispatch_sync(arrayQ, {() in
-//        self.data.append(item);
-//        globalLogger.log(
-        })
 }

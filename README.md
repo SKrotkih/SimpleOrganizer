@@ -13,6 +13,7 @@ In design were used the next patterns:
 - abstract method;
 - observer;
 - singleton;
+- builder;
 
 On first start are created some tasks by default. 
 You can add a new task by pressing on button '+' on the navigator bar. 

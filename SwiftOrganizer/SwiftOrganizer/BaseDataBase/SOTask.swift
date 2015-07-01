@@ -18,6 +18,51 @@ class SOTask: NSObject{
     private var _icons = [String](count: MaxIconsCount, repeatedValue: "")
     private var _date: NSDate?
 
+    func clearTask(){
+        self.databaseObject = nil
+        self.title = ""
+        self.category = ""
+        self.icons = [String](count: MaxIconsCount, repeatedValue: "")
+        self.date = nil
+    }
+
+    func cloneTask(task: SOTask){
+        self.databaseObject = task.databaseObject
+        self.title = task.title
+        self.category = task.category
+        self.icons = task.icons
+        self.date = task.date
+    }
+    
+    override func isEqual(object: AnyObject?) -> Bool {
+        if let anotherTask: SOTask = object as? SOTask{
+            var isEqual: Bool = true
+            isEqual = isEqual && SODataBaseFactory.sharedInstance.dataBase.areObjectsEqual(self.databaseObject, object2: anotherTask.databaseObject)
+            isEqual = isEqual && self.title == anotherTask.title
+            isEqual = isEqual && self.category == anotherTask.category
+
+            if let date1: NSDate = self.date, let date2: NSDate = self.date {
+                isEqual = isEqual && (date1 == date2)
+            }
+
+            if self.icons.count == anotherTask.icons.count{
+                for index in 0..<self.icons.count{
+                    let s1: String = self.icons[index]
+                    let s2: String = self.icons[index]
+                    isEqual = isEqual && (s1 == s2)
+                }
+            } else {
+                isEqual = isEqual && false
+            }
+            
+            isEqual = isEqual || self.title == anotherTask.title
+            
+            return isEqual
+        } else {
+            return false
+        }
+    }
+    
     var maxIconsCount: Int{
         get{
             return MaxIconsCount;

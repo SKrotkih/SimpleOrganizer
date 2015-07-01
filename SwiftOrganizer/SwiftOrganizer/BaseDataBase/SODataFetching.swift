@@ -135,7 +135,7 @@ public final class SODataFetching: SOObserverProtocol{
                 self._allIcons.removeAll(keepCapacity: false)
             });
         default:
-            assert(false, "That observer type is absent!")
+            assert(false, "The observer code notification is wrong!")
         }
     }
     
