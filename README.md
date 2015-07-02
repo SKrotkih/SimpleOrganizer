@@ -1,15 +1,18 @@
 # SwiftOrganizer
-This is a simple organizer for iPhone. 
+This is a simple organizer application for iPhone. 
 It is developed in Swift.
-This application is for trying out the new language and new iOS 8 opportunity.  
+Was implemented just for example of using Swift.
 
-Database has implemented on two technologies:
-- Core Data
-- Parse.com
-There is possible to switch types (Core Data - Parse.com) in real time.
-There are push notifications via Parse.com server.
+Were realised two type of database:
+- Core Data (local database on SQLite)
+- Parse.com (remote database on Parse.com server)
 
-In design were used the next patterns:
+Were realised the next features:
+- switching of the database types from CoreData to Parse.com remote database and vice versa in real time.
+- push notifications via Parse.com server.
+- events can be saved to the Calendar.
+
+Were used next design patterns:
 - abstract method;
 - observer;
 - singleton;
@@ -26,5 +29,5 @@ Category - is the entity which you can use for logical separating tasks.
 There are some predefined category: 'ToDo', 'Work', 'Life', 'Events'.
 Some icons are predefined too.
 
-The Project is in progress.
+The Project is in progressing.
 For instance, in plan is to add or to remove icons and categories, to make login (at now is used login with default user and password on the parse.com).
