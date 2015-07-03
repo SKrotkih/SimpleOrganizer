@@ -14,7 +14,6 @@ class SOEnterDateViewController: SOEnterBaseViewController {
     private var _date: NSDate?
     
     @IBOutlet weak var datePicker: UIDatePicker!
-    @IBOutlet weak var saveToCalendarSwitch: UISwitch!
     
     convenience init(date: NSDate){
         self.init()
@@ -52,7 +51,6 @@ class SOEnterDateViewController: SOEnterBaseViewController {
         if let currTaskDate = self.date{
             self.datePicker.date = currTaskDate
         }
-        self.saveToCalendarSwitch.on = false
     }
 
     func doneButtonWasPressed() {
@@ -64,50 +62,43 @@ class SOEnterDateViewController: SOEnterBaseViewController {
         self.datePicker.date = NSDate()
     }
     
-    
-    @IBAction func saveToCalendarSwitchWasChengedValue(sender: AnyObject) {
-        let saveToCalendarSwitch: UISwitch = sender as! UISwitch
+    @IBAction func saveToCalendarOnButtonPressed(sender: AnyObject) {
+        var store = EKEventStore()
         
-        if saveToCalendarSwitch.on == true{
-            var store = EKEventStore()
-
-            store.requestAccessToEntityType(EKEntityTypeEvent) { (success: Bool, error: NSError!) in
+        store.requestAccessToEntityType(EKEntityTypeEvent) { (success: Bool, error: NSError!) in
+            if success{
+                println("Got permission = \(success)")
+                //                    var reminderCalendars =
+                //                    store.calendarsForEntityType(EKEntityTypeReminder) as! [EKCalendar]
                 
-                if success{
-                    println("Got permission = \(success)")
-                    //                    var reminderCalendars =
-                    //                    store.calendarsForEntityType(EKEntityTypeReminder) as! [EKCalendar]
+                var eventCalendars = store.calendarsForEntityType(EKEntityTypeEvent) as! [EKCalendar]
+                
+                if eventCalendars.count > 0 {
+                    var theEvent = EKEvent(eventStore: store)
                     
-                    var eventCalendars = store.calendarsForEntityType(EKEntityTypeEvent) as! [EKCalendar]
-                    
-                    if eventCalendars.count > 0 {
-                        var theEvent = EKEvent(eventStore: store)
-                        
-                        for i in 0..<eventCalendars.count{
-                            let calendar: EKCalendar! = eventCalendars[i]
-                            println("Calendar \(i):"+calendar.title)
-                        }
-                        
-                        theEvent.calendar = eventCalendars[0]
-                        theEvent.startDate = self.datePicker.date
-                        theEvent.endDate = self.datePicker.date
-                        theEvent.title = self.task?.title
-                        var error : NSError? = nil
-                        store.saveEvent(theEvent, span: EKSpanThisEvent, commit: true, error: &error)
-                        
-                        if error == nil{
-                            println("Event was saved to the Calendar successfully!")
-                        } else {
-                            println("Event was saved to the Calendar with Error = \(error)")
-                        }
+                    for i in 0..<eventCalendars.count{
+                        let calendar: EKCalendar! = eventCalendars[i]
+                        println("Calendar \(i):"+calendar.title)
                     }
-                } else {
-                    println("Got error = \(error)")
+                    
+                    theEvent.calendar = eventCalendars[0]
+                    theEvent.startDate = self.datePicker.date
+                    theEvent.endDate = self.datePicker.date
+                    theEvent.title = self.task?.title
+                    var error : NSError? = nil
+                    store.saveEvent(theEvent, span: EKSpanThisEvent, commit: true, error: &error)
+                    
+                    if error == nil{
+                        println("Event was saved to the Calendar successfully!")
+                    } else {
+                        println("Event was saved to the Calendar with Error = \(error)")
+                    }
                 }
+            } else {
+                println("Got error = \(error)")
             }
         }
     }
-    
     
     override func closeButtonWasPressed() {
         if self.date == self.datePicker.date{
