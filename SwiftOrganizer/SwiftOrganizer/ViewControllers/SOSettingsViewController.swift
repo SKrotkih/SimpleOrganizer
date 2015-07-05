@@ -49,14 +49,19 @@ class SOSettingsViewController: UIViewController {
         let index = self.segmentedControl.selectedSegmentIndex
         
         let defaults = NSUserDefaults.standardUserDefaults()
+        var dbType: String
 
         if index == 0{
-            defaults.setObject(SODataBaseType.CoreData.rawValue, forKey: SODataBaseTypeKey)
+            dbType = SODataBaseType.CoreData.rawValue
         } else if index == 1{
-            defaults.setObject(SODataBaseType.ParseCom.rawValue, forKey: SODataBaseTypeKey)
+            dbType = SODataBaseType.ParseCom.rawValue
+        } else {
+            return
         }
         
-        let notification: SOObserverNotification = SOObserverNotification(type: .SODataBaseTypeChanged, data: nil)
+        defaults.setObject(dbType, forKey: SODataBaseTypeKey)
+        defaults.synchronize()
+        let notification: SOObserverNotification = SOObserverNotification(type: .SODataBaseTypeChanged, data: dbType)
         SOObserversManager.sharedInstance.sendNotification(notification)
     }
 }

@@ -36,6 +36,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         self.createMenuView()
         
+        SOiCloudManager.sharedInstance.prepareKeyValueStoreObserver()
+        
         return SOParseComManager.application(application, didFinishLaunchingWithOptions: launchOptions)
     }
 

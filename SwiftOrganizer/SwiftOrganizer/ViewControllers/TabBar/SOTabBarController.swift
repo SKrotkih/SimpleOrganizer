@@ -21,11 +21,18 @@ class SOTabBarController: NSObject {
         super.init()
     }
 
+    func clearTabs(){
+        if self.tabsCount > 0{
+            if let containerView = self.containerView{
+                containerView.subviews.map({$0.removeFromSuperview()})
+            }
+        }
+    }
+    
     func reloadTabs(block: (error: NSError?) -> Void){
         if let containerView = self.containerView, scrollView = self.scrollView{
             if self.tabsCount > 0{
                 dispatch_async(dispatch_get_main_queue(), {
-                    //containerView.subviews.map({$0.removeFromSuperview()})
                     let subViews = containerView.subviews
                     var x : CGFloat = 0
                     

@@ -19,6 +19,8 @@ class SOCategoryTabBarController: SOTabBarController {
             if let error = fetchError{
                 showAlertWithTitle("Error reading categories data", error.description)
             } else if categories.count > 0{
+                super.clearTabs()
+
                 self.tabsCount = categories.count
 
                 for i in 0..<self.tabsCount {

@@ -28,7 +28,7 @@ public final class SODataBaseFactory: SOObserverProtocol {
     }
     
     private init() {
-        SOObserversManager.sharedInstance.addObserver(self, type: .SODataBaseTypeChanged)
+        SOObserversManager.sharedInstance.addObserver(self, type: .SODataBaseTypeChanged, priority: 999)
     }
 
     deinit{

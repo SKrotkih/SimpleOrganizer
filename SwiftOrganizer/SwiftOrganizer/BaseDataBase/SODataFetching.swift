@@ -23,7 +23,7 @@ public final class SODataFetching: SOObserverProtocol{
     }
     
     private init() {
-        SOObserversManager.sharedInstance.addObserver(self, type: .SODataBaseTypeChanged)
+        SOObserversManager.sharedInstance.addObserver(self, type: .SODataBaseTypeChanged, priority: 998)
     }
 
     deinit{
