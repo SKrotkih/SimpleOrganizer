@@ -144,9 +144,6 @@ public class SOLocalDataBase: SODataBaseProtocol {
                     let categoryItem = self.newCategory(category)
                     _allCategories.append(categoryItem)
                 }
-                
-                println("CATEGORIES=\(_allCategories.count)")
-                
                 block(resultBuffer: _allCategories, error: nil)
             } else {
                 populateCategories()

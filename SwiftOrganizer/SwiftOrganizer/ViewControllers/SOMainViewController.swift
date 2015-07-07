@@ -10,6 +10,7 @@ import UIKit
 
 protocol SOEditTaskController{
     func startEditingTask(task: SOTask?)
+    func editTaskList()
 }
 
 class SOMainViewController: UIViewController, SOEditTaskController, SOObserverProtocol{
@@ -26,6 +27,8 @@ class SOMainViewController: UIViewController, SOEditTaskController, SOObserverPr
     var categoryTabBarController: SOCategoryTabBarController!
     var iconsTabBarController: SOIconsTabBarController!
 
+    var rightButton: UIBarButtonItem!
+    
     var allTimes = [NSDate]()
     private var refreshControl: UIRefreshControl?
     
@@ -37,8 +40,7 @@ class SOMainViewController: UIViewController, SOEditTaskController, SOObserverPr
         categoryTabBarController = SOCategoryTabBarController(scrollView: categoryScrollView, containerView: categoryTabBarView)
         iconsTabBarController = SOIconsTabBarController(scrollView: iconsScrollView, containerView: iconsTabBarView)
         
-        mainTableViewController = SOMainTableViewController(tableView: self.mainTableView)
-        mainTableViewController.taskEditingDelegate = self
+        mainTableViewController = SOMainTableViewController(tableView: self.mainTableView, delegate: self)
         
         categoryTabBarController.filterStateDelegate = mainTableViewController
         iconsTabBarController.filterStateDelegate = mainTableViewController
@@ -51,8 +53,9 @@ class SOMainViewController: UIViewController, SOEditTaskController, SOObserverPr
         refreshControl = UIRefreshControl()
         refreshControl!.addTarget(self, action: "handleRefresh:", forControlEvents: .ValueChanged)
         mainTableView.addSubview(refreshControl!)
+        
     }
-
+    
     deinit {
         SOObserversManager.sharedInstance.removeObserver(self, type: .SODataBaseTypeChanged)
     }
@@ -68,8 +71,9 @@ class SOMainViewController: UIViewController, SOEditTaskController, SOObserverPr
         self.slideMenuController()?.removeRightGestures()
 
         let buttonImage : UIImage! = UIImage(named: "add_task")
-        var rightButton: UIBarButtonItem = UIBarButtonItem(image: buttonImage, style: UIBarButtonItemStyle.Plain, target: self, action: "addNewTask")
-            navigationItem.rightBarButtonItem = rightButton;
+        //var rightButton: UIBarButtonItem = UIBarButtonItem(image: buttonImage, style: UIBarButtonItemStyle.Plain, target: self, action: "addNewTask")
+        rightButton = UIBarButtonItem(title: "Add".localized, style: UIBarButtonItemStyle.Plain, target: self, action: "addNewTask")
+        navigationItem.rightBarButtonItem = rightButton;
         
         self.reloadData({(error: NSError?) in })
     }
@@ -98,18 +102,29 @@ class SOMainViewController: UIViewController, SOEditTaskController, SOObserverPr
     }
 
     func addNewTask(){
-        self.startEditingTask(nil)
+        if self.mainTableView.editing == true{
+           self.mainTableView.editing = false
+            self.rightButton.title = "Add".localized
+        } else {
+            self.startEditingTask(nil)
+        }
     }
 
     func editTask(task: SOTask?){
         self.startEditingTask(task)
     }
-
+    
+    //- MARK: SOEditTaskController protocol implementation
     func startEditingTask(task: SOTask?){
         var storyboard = UIStoryboard(name: "Main", bundle: nil)
         let newTaskRecordViewController = storyboard.instantiateViewControllerWithIdentifier("SOEditTaskViewController") as! SOEditTaskViewController
         newTaskRecordViewController.task = task
         self.navigationController!.pushViewController(newTaskRecordViewController, animated: true)
+    }
+    
+    func editTaskList(){
+        self.rightButton.title = "Done".localized
+        self.mainTableView.editing = true
     }
     
     //- MARK: Helper Methods

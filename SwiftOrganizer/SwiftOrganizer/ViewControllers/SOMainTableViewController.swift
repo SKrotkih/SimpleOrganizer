@@ -16,7 +16,7 @@ protocol SOChangeFilterStateDelegate{
 class SOMainTableViewController: NSObject, UITableViewDataSource, UITableViewDelegate, SOChangeFilterStateDelegate, SORemoveTaskDelegate{
 
     let tableView : UITableView
-    var taskEditingDelegate: SOEditTaskController?
+    var taskEditingDelegate: SOEditTaskController
     
     var tasks : [SOTask] = []
     
@@ -24,8 +24,9 @@ class SOMainTableViewController: NSObject, UITableViewDataSource, UITableViewDel
     let mainHeaderTableViewCellIdentifier = "HeaderTableViewCell"
     let newRecordTableViewCellIdentifier = "NewRecordTableViewCell"
     
-    init(tableView aTavleView: UITableView){
+    init(tableView aTavleView: UITableView, delegate: SOEditTaskController){
         self.tableView = aTavleView
+        self.taskEditingDelegate = delegate
         super.init()
         self.tableView.delegate = self;
         self.tableView.dataSource = self
@@ -69,9 +70,33 @@ class SOMainTableViewController: NSObject, UITableViewDataSource, UITableViewDel
 
     //- MARK: UITableViewDelegate
     func tableView(tableView: UITableView, indentationLevelForRowAtIndexPath indexPath: NSIndexPath) -> Int {
-            return indexPath.row % 4
+        return indexPath.row % 4
     }
 
+    func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+        return indexPath.row > 0
+    }
+    
+    func tableView(tableView: UITableView, editingStyleForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCellEditingStyle {
+        if (self.tableView.editing) {
+            return UITableViewCellEditingStyle.Delete
+        }
+        
+        return UITableViewCellEditingStyle.None
+    }
+    
+    func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+        if editingStyle == .Delete{
+            self.tableView.beginUpdates()
+            let row = indexPath.row - 1
+            let currentTask : SOTask = self.tasks[row]
+            currentTask.remove()
+            self.tasks.removeAtIndex(row)
+            self.tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Automatic)
+            self.tableView.endUpdates()
+        }
+    }
+    
     // Before the row is selected
     func tableView(tableView: UITableView, willSelectRowAtIndexPath indexPath: NSIndexPath) -> NSIndexPath? {
         if indexPath.row == 0 {
@@ -90,15 +115,13 @@ class SOMainTableViewController: NSObject, UITableViewDataSource, UITableViewDel
         default:
             let row = indexPath.row - 1
             let currentTask : SOTask = self.tasks[row]
-            if let delegate = taskEditingDelegate{
-                delegate.startEditingTask(currentTask)
-            }
+            self.taskEditingDelegate.startEditingTask(currentTask)
         }
     }
     
     // Customizing the row height
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-            return indexPath.row == 0 ? 28 : 47
+        return indexPath.row == 0 ? 28 : 47
     }
     
     // - MARK: SOChangeFilterStateDelegate
@@ -130,7 +153,6 @@ class SOMainTableViewController: NSObject, UITableViewDataSource, UITableViewDel
     
     // - MARK: SORemoveTaskDelegate
     func removeTask(task: SOTask!){
-        task.remove()
-        self.reloadData()
+        self.taskEditingDelegate.editTaskList()
     }
 }

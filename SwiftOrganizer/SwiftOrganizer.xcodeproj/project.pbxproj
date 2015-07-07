@@ -32,6 +32,7 @@
 		7F5725A21B0F61F7003DBDEB /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F57259F1B0F61F7003DBDEB /* StringExtension.swift */; };
 		7F5725A31B0F61F7003DBDEB /* UITableViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F5725A01B0F61F7003DBDEB /* UITableViewExtension.swift */; };
 		7F5725A41B0F61F7003DBDEB /* UIViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F5725A11B0F61F7003DBDEB /* UIViewControllerExtension.swift */; };
+		7F57E00F1B4ACEF700789FBD /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F57E00E1B4ACEF700789FBD /* CloudKit.framework */; };
 		7F5826BD1B482D6C00C0B179 /* SOiCloudManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F5826BC1B482D6C00C0B179 /* SOiCloudManager.swift */; };
 		7F5866381B16FB6000BB32AA /* Ico.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F5866351B16FB6000BB32AA /* Ico.swift */; };
 		7F58663C1B16FCC700BB32AA /* SOLocalDataBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F58663B1B16FCC700BB32AA /* SOLocalDataBase.swift */; };
@@ -135,6 +136,7 @@
 		7F57259F1B0F61F7003DBDEB /* StringExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
 		7F5725A01B0F61F7003DBDEB /* UITableViewExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UITableViewExtension.swift; sourceTree = "<group>"; };
 		7F5725A11B0F61F7003DBDEB /* UIViewControllerExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewControllerExtension.swift; sourceTree = "<group>"; };
+		7F57E00E1B4ACEF700789FBD /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		7F5826BA1B481E2C00C0B179 /* SwiftOrganizer.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = SwiftOrganizer.entitlements; path = ../SwiftOrganizer.entitlements; sourceTree = "<group>"; };
 		7F5826BC1B482D6C00C0B179 /* SOiCloudManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SOiCloudManager.swift; path = SwiftOrganizer/iCloud/SOiCloudManager.swift; sourceTree = SOURCE_ROOT; };
 		7F5866351B16FB6000BB32AA /* Ico.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Ico.swift; path = LocalDataBase/Ico.swift; sourceTree = "<group>"; };
@@ -209,6 +211,7 @@
 				7F625EE91B2ED3DC004B7C16 /* Parse.framework in Frameworks */,
 				7F625EEA1B2ED3DC004B7C16 /* ParseCrashReporting.framework in Frameworks */,
 				7F625EEB1B2ED3DC004B7C16 /* ParseFacebookUtils.framework in Frameworks */,
+				7F57E00F1B4ACEF700789FBD /* CloudKit.framework in Frameworks */,
 				7F625EEC1B2ED3DC004B7C16 /* ParseFacebookUtilsV4.framework in Frameworks */,
 				7F625EED1B2ED3DC004B7C16 /* ParseUI.framework in Frameworks */,
 			);
@@ -259,6 +262,7 @@
 		7F57254D1B0F5DDA003DBDEB = {
 			isa = PBXGroup;
 			children = (
+				7F57E00E1B4ACEF700789FBD /* CloudKit.framework */,
 				7F5725581B0F5DDA003DBDEB /* SwiftOrganizer */,
 				7F5725711B0F5DDB003DBDEB /* SwiftOrganizerTests */,
 				7F5725571B0F5DDA003DBDEB /* Products */,

@@ -4,16 +4,16 @@ Was implemented as example of using Swift language at free time.
 
 Were realised two type of database:
 - Core Data (local database on device)
-- Parse.com (remote database on Parse.com server)
+- Remote database (on Parse.com server)
 
 Were realised the next features:
 - autolayout (on Interfase Builder Level only)
 - switching of the database types from CoreData to remote database and vice versa.
-- switching is syncronised by iCloud (you are changing database type on your iPad - on your iPhone database is changing too after some secunds)
+- used iCloud key-value storage for switching database types (if you change database type on your iPad, on your iPhone is changing database type  after some seconds)
 - push notifications via Parse.com server.
 - events can be saved to the Calendar (then you can see your events in the Calendar app on your device).
 
-Were used next design patterns:
+Used design patterns:
 - abstract method;
 - observer;
 - singleton;
@@ -31,7 +31,7 @@ There are some predefined category: 'ToDo', 'Work', 'Life', 'Events'.
 Some icons are predefined too.
 
 The Project is in progress.
-Is planned:
+In future:
 - add or remove icons and categories
 - make login (now is used login with default user and password on the parse.com).
 - add events to the Reminder app

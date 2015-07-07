@@ -48,8 +48,8 @@ class SOMainTableViewCell: UITableViewCell {
         let horizontal = UISwipeGestureRecognizer(target: self, action: "leftHorizontalSwipe:")
         horizontal.direction = .Left
         horizontal.numberOfTouchesRequired = 1
-        swipeGestureView.addGestureRecognizer(horizontal)
         
+        swipeGestureView.addGestureRecognizer(horizontal)
     }
 
     func leftHorizontalSwipe(recognizer:UIGestureRecognizer) {

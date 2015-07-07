@@ -10,6 +10,7 @@
 import UIKit
 
 let SODataBaseTypeKey = "DataBaseType"
+let SOEnableiCloudForCoreDataKey = "EnableiCloudForCoreData"
 
 enum SODataBaseType: String{
     case Undefined = "Undefined"

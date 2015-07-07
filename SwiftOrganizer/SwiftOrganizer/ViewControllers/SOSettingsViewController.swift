@@ -8,15 +8,22 @@
 
 import UIKit
 
-class SOSettingsViewController: UIViewController {
+class SOSettingsViewController: UIViewController, SOObserverProtocol {
     
     @IBOutlet weak var segmentedControl: UISegmentedControl!
+    @IBOutlet weak var useiCloudSwitch: UISwitch!
+    
+    deinit{
+        SOObserversManager.sharedInstance.removeObserver(self, type: .SODataBaseTypeChanged)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.title = "Settings".localized
         self.setUpCurrentDataBaseType()
+        
+        SOObserversManager.sharedInstance.addObserver(self, type: .SODataBaseTypeChanged)
     }
     
     private func setUpCurrentDataBaseType()
@@ -28,8 +35,17 @@ class SOSettingsViewController: UIViewController {
             switch name{
             case SODataBaseType.CoreData.rawValue:
                 selectedIndex = 0
+                let useiCloudOpt: Bool? = defaults.boolForKey(SOEnableiCloudForCoreDataKey)
+
+                if let useiCloud = useiCloudOpt{
+                    self.useiCloudSwitch.on = useiCloud
+                } else {
+                    self.useiCloudSwitch.on = false
+                }
+                self.useiCloudSwitch.enabled = true
             case SODataBaseType.ParseCom.rawValue:
                 selectedIndex = 1
+                self.useiCloudSwitch.enabled = false
             default:
                 selectedIndex = 0
             }
@@ -64,4 +80,22 @@ class SOSettingsViewController: UIViewController {
         let notification: SOObserverNotification = SOObserverNotification(type: .SODataBaseTypeChanged, data: dbType)
         SOObserversManager.sharedInstance.sendNotification(notification)
     }
+    
+    @IBAction func changeOfUsingiCloud(sender: AnyObject) {
+        let useiCloudValue = self.useiCloudSwitch.on
+        let defaults = NSUserDefaults.standardUserDefaults()
+        defaults.setBool(useiCloudValue, forKey: SOEnableiCloudForCoreDataKey)
+        defaults.synchronize()
+    }
+    
+    //- MARK: SOObserverProtocol implementation
+    func notify(notification: SOObserverNotification){
+        switch notification.type{
+        case .SODataBaseTypeChanged:
+            setUpCurrentDataBaseType()            
+        default:
+            assert(false, "The observer code notification is wrong!")
+        }
+    }
+    
 }

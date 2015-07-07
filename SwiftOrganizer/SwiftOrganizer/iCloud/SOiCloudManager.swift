@@ -73,14 +73,17 @@ public final class SOiCloudManager: SOObserverProtocol {
                             if key == expectedKey{
 
                                 if let currDataBaseName = userDefaults.stringForKey(SODataBaseTypeKey){
+                                
                                     if currDataBaseName == value as! String{
                                         continue
                                     }
                                 }
                                 userDefaults.setObject(value, forKey: SODataBaseTypeKey)
-                                userDefaults.synchronize()
-                                let notification: SOObserverNotification = SOObserverNotification(type: .SODataBaseTypeChanged, data: nil)
-                                SOObserversManager.sharedInstance.sendNotification(notification)
+
+                                if  userDefaults.synchronize(){
+                                    let notification: SOObserverNotification = SOObserverNotification(type: .SODataBaseTypeChanged, data: nil)
+                                    SOObserversManager.sharedInstance.sendNotification(notification)
+                                }
                             }
                         }
                     }
