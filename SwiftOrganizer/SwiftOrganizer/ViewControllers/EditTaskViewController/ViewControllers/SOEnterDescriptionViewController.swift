@@ -11,11 +11,13 @@ import UIKit
 class SOEnterDescriptionViewController: SOEnterBaseViewController {
     
     @IBOutlet weak var textView: UITextView!
+    @IBOutlet weak var heightTextViewConstraint: NSLayoutConstraint!
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardDidShow:", name: UIKeyboardDidShowNotification,
+            object: nil)
     }
 
     override func viewWillAppear(animated: Bool) {
@@ -28,7 +30,7 @@ class SOEnterDescriptionViewController: SOEnterBaseViewController {
         if let editTask = self.task{
             textView.text = editTask.title
         }
-        
+        textView.becomeFirstResponder()
     }
     
     func doneButtonWasPressed() {
@@ -39,20 +41,16 @@ class SOEnterDescriptionViewController: SOEnterBaseViewController {
         super.closeButtonWasPressed()
     }
     
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    func keyboardDidShow(notification: NSNotification){
+        dispatch_async(dispatch_get_main_queue(), {
+            if let userInfo = notification.userInfo {
+                if let keyboardSize: CGSize = userInfo[UIKeyboardFrameEndUserInfoKey]?.CGRectValue().size {
+                    let keyboardHeight: CGFloat = keyboardSize.height
+                    let textViewHeight = CGRectGetHeight(self.view.frame) - (CGRectGetMinY(self.textView.frame) + 16.0 + keyboardHeight)
+                    self.heightTextViewConstraint.constant = textViewHeight
+                    self.textView.layoutIfNeeded()
+                }
+            }
+        })
     }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }

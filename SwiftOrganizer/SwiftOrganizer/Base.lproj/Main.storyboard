@@ -967,8 +967,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="Rvd-Nc-2wN">
-                                <rect key="frame" x="16" y="64" width="568" height="162"/>
+                            <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="5" translatesAutoresizingMaskIntoConstraints="NO" id="Rvd-Nc-2wN">
+                                <rect key="frame" x="16" y="90" width="568" height="162"/>
                                 <date key="date" timeIntervalSinceReferenceDate="455108897.07518899">
                                     <!--2015-06-04 11:08:17 +0000-->
                                 </date>
@@ -995,7 +995,7 @@
                                 </connections>
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Hqg-2q-nBP">
-                                <rect key="frame" x="124" y="225" width="353" height="231"/>
+                                <rect key="frame" x="124" y="293" width="353" height="231"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UXo-Or-4Pz">
                                         <rect key="frame" x="85" y="33" width="182" height="30"/>
@@ -1020,8 +1020,8 @@
                         <constraints>
                             <constraint firstAttribute="centerX" secondItem="iWm-wM-yf0" secondAttribute="centerX" id="4IJ-9Q-x3S"/>
                             <constraint firstItem="iWm-wM-yf0" firstAttribute="top" secondItem="a5y-AI-L7M" secondAttribute="bottom" constant="4" id="AJB-Ic-WHQ"/>
-                            <constraint firstItem="Hqg-2q-nBP" firstAttribute="top" secondItem="iWm-wM-yf0" secondAttribute="bottom" constant="171" id="OTL-NM-B51"/>
-                            <constraint firstItem="Rvd-Nc-2wN" firstAttribute="top" secondItem="a5y-AI-L7M" secondAttribute="bottom" constant="44" id="PkG-TD-ECt"/>
+                            <constraint firstItem="Hqg-2q-nBP" firstAttribute="top" secondItem="iWm-wM-yf0" secondAttribute="bottom" constant="239" id="OTL-NM-B51"/>
+                            <constraint firstItem="Rvd-Nc-2wN" firstAttribute="top" secondItem="a5y-AI-L7M" secondAttribute="bottom" constant="70" id="PkG-TD-ECt"/>
                             <constraint firstItem="Rvd-Nc-2wN" firstAttribute="leading" secondItem="mpT-DJ-SpD" secondAttribute="leadingMargin" id="Qda-L3-ha0"/>
                             <constraint firstAttribute="trailingMargin" secondItem="Rvd-Nc-2wN" secondAttribute="trailing" id="Td6-RB-zxr"/>
                             <constraint firstAttribute="centerX" secondItem="Hqg-2q-nBP" secondAttribute="centerX" constant="-0.5" id="zLr-hY-rWN"/>
@@ -1047,22 +1047,25 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dAr-QD-wFY">
-                                <rect key="frame" x="16" y="0.0" width="568" height="600"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="123" translatesAutoresizingMaskIntoConstraints="NO" id="dAr-QD-wFY">
+                                <rect key="frame" x="16" y="28" width="568" height="305"/>
+                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="305" id="sJQ-iF-aid"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-CondensedBold" family="Helvetica Neue" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                         </subviews>
                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="zAu-fn-Df6" firstAttribute="top" secondItem="dAr-QD-wFY" secondAttribute="bottom" id="1VM-EZ-ZSg"/>
-                            <constraint firstItem="dAr-QD-wFY" firstAttribute="leading" secondItem="ww9-LH-sre" secondAttribute="leadingMargin" id="1pU-9V-RjH"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="dAr-QD-wFY" secondAttribute="trailing" id="LPJ-W6-V5Q"/>
-                            <constraint firstItem="dAr-QD-wFY" firstAttribute="top" secondItem="ww9-LH-sre" secondAttribute="topMargin" id="fTP-UW-9mH"/>
+                            <constraint firstItem="dAr-QD-wFY" firstAttribute="trailing" secondItem="ww9-LH-sre" secondAttribute="trailingMargin" id="2KV-MH-DKN"/>
+                            <constraint firstItem="dAr-QD-wFY" firstAttribute="leading" secondItem="ww9-LH-sre" secondAttribute="leadingMargin" id="hvW-NM-r2j"/>
+                            <constraint firstItem="dAr-QD-wFY" firstAttribute="top" secondItem="oEP-rl-Ize" secondAttribute="bottom" constant="8" id="pTa-QQ-BPu"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="heightTextViewConstraint" destination="sJQ-iF-aid" id="pqQ-92-v1r"/>
                         <outlet property="textView" destination="dAr-QD-wFY" id="SUn-XI-SpW"/>
                     </connections>
                 </viewController>

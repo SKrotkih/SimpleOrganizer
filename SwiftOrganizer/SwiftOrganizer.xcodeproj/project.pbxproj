@@ -262,7 +262,6 @@
 		7F57254D1B0F5DDA003DBDEB = {
 			isa = PBXGroup;
 			children = (
-				7F57E00E1B4ACEF700789FBD /* CloudKit.framework */,
 				7F5725581B0F5DDA003DBDEB /* SwiftOrganizer */,
 				7F5725711B0F5DDB003DBDEB /* SwiftOrganizerTests */,
 				7F5725571B0F5DDA003DBDEB /* Products */,
@@ -463,6 +462,7 @@
 			isa = PBXGroup;
 			children = (
 				7F625EF91B2ED4CF004B7C16 /* SystemFrameworks */,
+				7F57E00E1B4ACEF700789FBD /* CloudKit.framework */,
 				7F625EE21B2ED3DC004B7C16 /* Bolts.framework */,
 				7F625EE31B2ED3DC004B7C16 /* Parse.framework */,
 				7F625EE41B2ED3DC004B7C16 /* ParseCrashReporting.framework */,

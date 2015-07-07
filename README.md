@@ -6,12 +6,12 @@ Were realised two type of database:
 - Core Data (local database on device)
 - Remote database (on Parse.com server)
 
-Were realised the next features:
+Features, which were realised:
 - autolayout (on Interfase Builder Level only) have done
 - switching of the database types from Core Data to remote database and vice versa works
-- is used iCloud key-value storage for switching database types (if you change database type on your iPad, on your iPhone is changing database type  after some seconds)
-- Core Data iCloud works
-- push notifications via Parse.com server work
+- used iCloud key-value storage for switching database types (if you change database type on your iPad, on your iPhone is changing database type  after some seconds)
+- Core Data iCloud (fallback store) works
+- push notifications via Parse.com server are working
 - events can be saved to the Calendar (then you can see your events in the Calendar app on your device).
 
 Used design patterns:
@@ -36,3 +36,4 @@ In future:
 - add or remove icons and categories
 - make login (now is used login with default user and password on the parse.com).
 - add events to the Reminder app
+- Core Data iCloud (backend)
