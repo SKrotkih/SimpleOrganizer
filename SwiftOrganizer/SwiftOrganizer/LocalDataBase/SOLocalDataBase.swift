@@ -16,7 +16,7 @@ let IcoEntityName = "Ico"
 let TaskEntityName = "Task"
 
 public class SOLocalDataBase: SODataBaseProtocol {
-
+    
     class func sharedInstance() -> SODataBaseProtocol{
         struct SingletonWrapper {
             static let sharedInstance = SOLocalDataBase()
@@ -45,8 +45,8 @@ public class SOLocalDataBase: SODataBaseProtocol {
         task.ico5 = ""
         task.ico6 = ""
         task.title = "ToDo task"
-
-
+        
+        
         let task2  = self.newTaskManagedObject()
         task2.category = "2"
         task2.ico1 = "6"
@@ -56,7 +56,7 @@ public class SOLocalDataBase: SODataBaseProtocol {
         task2.ico5 = "1"
         task2.ico6 = ""
         task2.title = "Event task"
-
+        
         let task3  = self.newTaskManagedObject()
         task3.category = "3"
         task3.ico1 = "10"
@@ -66,7 +66,7 @@ public class SOLocalDataBase: SODataBaseProtocol {
         task3.ico5 = ""
         task3.ico6 = ""
         task3.title = "Life task"
-
+        
         let task4  = self.newTaskManagedObject()
         task4.category = "4"
         task4.ico1 = "1"
@@ -79,7 +79,7 @@ public class SOLocalDataBase: SODataBaseProtocol {
         
         saveContext()
     }
-
+    
     private func populateIcons(){
         let icons : [Dictionary<String, String>] = [["id":"1","name":"ico1","img":"ico1"],
             ["id":"2","name":"ico2","img":"ico2"],
@@ -94,12 +94,12 @@ public class SOLocalDataBase: SODataBaseProtocol {
             ["id":"11","name":"ico11","img":"ico11"],
             ["id":"12","name":"ico12","img":"ico12"],
             ["id":"13","name":"ico13","img":"ico13"],
-        ["id":"14","name":"ico14","img":"ico14"],
-        ["id":"15","name":"ico15","img":"ico15"],
-        ["id":"16","name":"ico16","img":"ico16"],
-        ["id":"17","name":"ico17","img":"ico17"]]
+            ["id":"14","name":"ico14","img":"ico14"],
+            ["id":"15","name":"ico15","img":"ico15"],
+            ["id":"16","name":"ico16","img":"ico16"],
+            ["id":"17","name":"ico17","img":"ico17"]]
         let entityName = NSStringFromClass(Ico.classForCoder())
-
+        
         for dict in icons{
             let ico = NSEntityDescription.insertNewObjectForEntityForName(entityName, inManagedObjectContext: managedObjectContext!) as! Ico
             ico.id = dict["id"]!
@@ -107,7 +107,7 @@ public class SOLocalDataBase: SODataBaseProtocol {
             ico.imagename = dict["img"]!
             ico.selected = true
         }
-
+        
         saveContext()
     }
     
@@ -126,7 +126,7 @@ public class SOLocalDataBase: SODataBaseProtocol {
         
         saveContext()
     }
-
+    
     // - MARK: Categories
     func allCategories(block: (resultBuffer: [SOCategory], error: NSError?) -> Void){
         var _allCategories: [SOCategory] = []
@@ -193,7 +193,7 @@ public class SOLocalDataBase: SODataBaseProtocol {
         
         return newIco
     }
-
+    
     func saveFieldToObject(object: AnyObject?, fieldName: String, value: AnyObject, block: (error: NSError?) -> Void){
         let managedObject = object as? NSManagedObject
         
@@ -212,7 +212,7 @@ public class SOLocalDataBase: SODataBaseProtocol {
     func allTasks(block: (resultBuffer: [SOTask], error: NSError?) -> Void) {
         let backgroundContext = NSManagedObjectContext(concurrencyType: NSManagedObjectContextConcurrencyType.PrivateQueueConcurrencyType)
         backgroundContext.persistentStoreCoordinator = persistentStoreCoordinator
-
+        
         backgroundContext.performBlock{[weak self] in
             
             func fetchAllTasks() -> Bool{
@@ -222,14 +222,14 @@ public class SOLocalDataBase: SODataBaseProtocol {
                 
                 if  let error = fetchError{
                     assert(false, "Failed to execute the fetch request \(error.localizedDescription)")
-                        
+                    
                     return false
                 } else {
                     if tasks.count > 0 {
                         dispatch_async(dispatch_get_main_queue(), {
                             
                             var _allTasks: [SOTask] = []
-
+                            
                             for task in tasks{
                                 var categorySelected: Bool = false
                                 if let category = SODataFetching.sharedInstance.categoryById(task.category){
@@ -262,7 +262,7 @@ public class SOLocalDataBase: SODataBaseProtocol {
                     }
                 }
             }
-
+            
             if !fetchAllTasks() {
                 self!.populateTasks()
                 
@@ -307,20 +307,21 @@ public class SOLocalDataBase: SODataBaseProtocol {
         return true
     }
     
-    // MARK: - Core Data stack
     lazy var applicationDocumentsDirectory: NSURL = {
         // The directory the application uses to store the Core Data store file. This code uses a directory named "com.domenicosolazzo.swift.Reading_data_from_CoreData" in the application's documents Application Support directory.
         let urls = NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask)
         return urls[urls.count-1] as! NSURL
         }()
     
+    // MARK: -
+    // MARK: - Core Data stack
     private lazy var managedObjectModel: NSManagedObjectModel = {
         // The managed object model for the application. This property is not optional. It is a fatal error for the application not to be able to find and load its model.
         let modelURL = NSBundle.mainBundle().URLForResource(DatabaseName, withExtension: "momd")!
         return NSManagedObjectModel(contentsOfURL: modelURL)!
         }()
     
-    private lazy var persistentStoreCoordinator: NSPersistentStoreCoordinator? = {
+    private lazy var persistentStoreCoordinator0: NSPersistentStoreCoordinator? = {
         // The persistent store coordinator for the application. This implementation creates and return a coordinator, having added the store for the application to it. This property is optional since there are legitimate error conditions that could cause the creation of the store to fail.
         // Create the coordinator and store
         var coordinator: NSPersistentStoreCoordinator? = NSPersistentStoreCoordinator(managedObjectModel: self.managedObjectModel)
@@ -328,6 +329,35 @@ public class SOLocalDataBase: SODataBaseProtocol {
         var error: NSError? = nil
         var failureReason = "There was an error creating or loading the application's saved data."
         if coordinator!.addPersistentStoreWithType(NSSQLiteStoreType, configuration: nil, URL: url, options: nil, error: &error) == nil {
+            coordinator = nil
+            // Report any error we got.
+            var dict = [String: AnyObject]()
+            dict[NSLocalizedDescriptionKey] = "Failed to initialize the application's saved data"
+            dict[NSLocalizedFailureReasonErrorKey] = failureReason
+            dict[NSUnderlyingErrorKey] = error
+            error = NSError(domain: DataBaseErrorDomain, code: 9999, userInfo: dict)
+            // Replace this with code to handle the error appropriately.
+            // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+            NSLog("Unresolved error \(error), \(error!.userInfo)")
+            abort()
+        }
+        
+        return coordinator
+        }()
+
+    private lazy var persistentStoreCoordinator: NSPersistentStoreCoordinator? = {
+        var coordinator: NSPersistentStoreCoordinator? = NSPersistentStoreCoordinator(managedObjectModel: self.managedObjectModel)
+        let url = self.applicationDocumentsDirectory.URLByAppendingPathComponent("\(DatabaseName).sqlite")
+        var error: NSError? = nil
+        var failureReason = "There was an error creating or loading the application's saved data."
+        
+        var options: Dictionary<String, String>? = nil
+
+        if self.isiCloudEnabled(){
+            options = [NSPersistentStoreUbiquitousContentNameKey: "Store"]
+        }
+
+        if coordinator!.addPersistentStoreWithType(NSSQLiteStoreType, configuration: nil, URL: url, options: options, error: &error) == nil {
             coordinator = nil
             // Report any error we got.
             var dict = [String: AnyObject]()
@@ -352,19 +382,35 @@ public class SOLocalDataBase: SODataBaseProtocol {
         }
         var managedObjectContext = NSManagedObjectContext()
         managedObjectContext.persistentStoreCoordinator = coordinator
+
+        if self.isiCloudEnabled(){
+            NSNotificationCenter.defaultCenter().addObserver(self, selector: "iCloudStoreUbiquitousContentChanges:", name: NSPersistentStoreDidImportUbiquitousContentChangesNotification,
+                object: coordinator)
+            
+            NSNotificationCenter.defaultCenter().addObserver(self, selector: "iCloudStoreWillChange:", name: NSPersistentStoreCoordinatorStoresWillChangeNotification,
+                object: coordinator)
+            
+            NSNotificationCenter.defaultCenter().addObserver(self, selector: "iCloudStoresDidChange:", name: NSPersistentStoreCoordinatorStoresDidChangeNotification,
+                object: coordinator)
+        }
+        
         return managedObjectContext
         }()
-    
+
+    // MARK: -
     // MARK: - Core Data Saving support
-    
     func saveContext() {
         if let moc = self.managedObjectContext {
             var error: NSError? = nil
-            if moc.hasChanges && !moc.save(&error) {
-                // Replace this implementation with code to handle the error appropriately.
-                // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-                NSLog("Unresolved error \(error), \(error!.userInfo)")
-                abort()
+            if moc.hasChanges{
+                if !moc.save(&error) {
+                    // Replace this implementation with code to handle the error appropriately.
+                    // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+                    NSLog("Unresolved error \(error), \(error!.userInfo)")
+                    abort()
+                } else {
+                    moc.reset()
+                }
             }
         }
     }
@@ -377,6 +423,37 @@ public class SOLocalDataBase: SODataBaseProtocol {
                 self.saveContext()
             }
         }
+    }
+
+   // MARK: - Core Data iCloud Store Changes Notifications' Handlers
+    @objc func iCloudStoreUbiquitousContentChanges(notification: NSNotification){
+        if let moc = self.managedObjectContext {
+            moc.mergeChangesFromContextDidSaveNotification(notification)
+            let notification: SOObserverNotification = SOObserverNotification(type: .SODataBaseDidChanged, data: nil)
+            SOObserversManager.sharedInstance.sendNotification(notification)
+        }
+    }
+
+    @objc func iCloudStoresDidChange(notification: NSNotification){
+        let notification: SOObserverNotification = SOObserverNotification(type: .SODataBaseDidChanged, data: nil)
+        SOObserversManager.sharedInstance.sendNotification(notification)
+    }
+
+    @objc func iCloudStoreWillChange(notification: NSNotification){
+        self.saveContext()
+    }
+    
+   // MARK: -
+    
+    func isiCloudEnabled() -> Bool{
+        let defaults = NSUserDefaults.standardUserDefaults()
+        let useiCloudOpt: Bool? = defaults.boolForKey(SOEnableiCloudForCoreDataKey)
+
+        if let useiCloud = useiCloudOpt{
+            return useiCloud
+        }
+        
+        return false
     }
     
 }

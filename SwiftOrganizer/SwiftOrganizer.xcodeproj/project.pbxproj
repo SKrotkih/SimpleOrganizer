@@ -328,8 +328,8 @@
 		7F57258A1B0F6114003DBDEB /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				7F6E98141B1DD9730048ED7A /* EditTaskViewController */,
 				7F5A6D1D1B14A115009665C7 /* MainViewController */,
+				7F6E98141B1DD9730048ED7A /* EditTaskViewController */,
 				7F0D37831B0F67B1008B785B /* SlideMenuController.swift */,
 				7F57258D1B0F6114003DBDEB /* LeftViewController.swift */,
 				7F5725911B0F6114003DBDEB /* SOSettingsViewController.swift */,

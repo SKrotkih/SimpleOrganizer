@@ -48,6 +48,7 @@ class SOMainViewController: UIViewController, SOEditTaskController, SOObserverPr
         self.title = "Organizer".localized
         
         SOObserversManager.sharedInstance.addObserver(self, type: .SODataBaseTypeChanged)
+        SOObserversManager.sharedInstance.addObserver(self, type: .SODataBaseDidChanged)
         
         /* Create the refresh control */
         refreshControl = UIRefreshControl()
@@ -58,6 +59,7 @@ class SOMainViewController: UIViewController, SOEditTaskController, SOObserverPr
     
     deinit {
         SOObserversManager.sharedInstance.removeObserver(self, type: .SODataBaseTypeChanged)
+        SOObserversManager.sharedInstance.removeObserver(self, type: .SODataBaseDidChanged)
     }
     
     override func didReceiveMemoryWarning() {
@@ -137,7 +139,7 @@ class SOMainViewController: UIViewController, SOEditTaskController, SOObserverPr
     //- MARK: SOObserverProtocol implementation
     func notify(notification: SOObserverNotification){
         switch notification.type{
-        case .SODataBaseTypeChanged:
+        case .SODataBaseTypeChanged, .SODataBaseDidChanged:
             self.reloadData({(error: NSError?) in
             
             })
