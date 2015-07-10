@@ -12,7 +12,9 @@ Features, which were realised:
 - used iCloud key-value storage for switching database types (if you change database type on your iPad, on your iPhone is changing database type  after some seconds)
 - Core Data iCloud (fallback store) works
 - push notifications via Parse.com server are working
-- events can be saved to the Calendar (then you can see your events in the Calendar app on your device).
+- events can be saved to the Calendar (then you can see your events in the Calendar app on your device) by EventKit.
+- localization 
+- local notifications implemented
 
 Used design patterns:
 - abstract method;

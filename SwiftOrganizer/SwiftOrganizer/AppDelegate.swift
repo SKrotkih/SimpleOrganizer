@@ -38,9 +38,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         SOiCloudManager.sharedInstance.prepareKeyValueStoreObserver()
         
+        application.registerUserNotificationSettings(UIUserNotificationSettings(forTypes: .Alert | .Badge | .Sound, categories: nil))  // types are UIUserNotificationType properties
+        
+        if let localNotification: UILocalNotification = launchOptions?[UIApplicationLaunchOptionsLocalNotificationKey] as? UILocalNotification {
+            println("Received notification \(localNotification.alertBody)!")
+            application.applicationIconBadgeNumber = 0;
+        }
+        
         return SOParseComManager.application(application, didFinishLaunchingWithOptions: launchOptions)
     }
-
+    
     //--------------------------------------
     // MARK: Push Notifications
     //--------------------------------------
@@ -55,6 +62,28 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject]) {
         SOParseComManager.application(application, didReceiveRemoteNotification: userInfo)
+    }
+    
+    //--------------------------------------
+    // MARK: Local Notifications
+    //--------------------------------------
+    
+    func application(application: UIApplication, didReceiveLocalNotification notification: UILocalNotification) {
+        // Called when the user taps on a local notification (without selecting 
+        // an action), or if a local notification arrives while using the app 
+        // (in which case the notification isn't shown to the user)
+        println("Received notification \(notification.alertBody)!")
+        application.applicationIconBadgeNumber = 0;
+    }
+
+    // This function may be called when the app is in the background, if the 
+    // action's activation mode was Background
+    func application(application: UIApplication, handleActionWithIdentifier identifier: String?, forLocalNotification notification: UILocalNotification, completionHandler: (() -> Void)) {
+            // Called when the user selects an action from a local notification
+            println("Received \(notification.category)! Action: \(identifier)")
+            // You must call this block when done dealing with the
+            // action, or you'll be terminated
+            completionHandler()
     }
     
     //-------------------------------------

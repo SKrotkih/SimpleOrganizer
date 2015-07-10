@@ -384,14 +384,31 @@ public class SOLocalDataBase: SODataBaseProtocol {
         managedObjectContext.persistentStoreCoordinator = coordinator
 
         if self.isiCloudEnabled(){
-            NSNotificationCenter.defaultCenter().addObserver(self, selector: "iCloudStoreUbiquitousContentChanges:", name: NSPersistentStoreDidImportUbiquitousContentChangesNotification,
-                object: coordinator)
+            NSNotificationCenter.defaultCenter().addObserverForName(NSPersistentStoreDidImportUbiquitousContentChangesNotification,
+                object: coordinator,
+                queue: NSOperationQueue.mainQueue(),
+                usingBlock: { (notification) in
+                    if let moc = self.managedObjectContext {
+                    moc.mergeChangesFromContextDidSaveNotification(notification)
+                    let notification: SOObserverNotification = SOObserverNotification(type: .SODataBaseDidChanged, data: nil)
+                    SOObserversManager.sharedInstance.sendNotification(notification)
+                    }
+                })
             
-            NSNotificationCenter.defaultCenter().addObserver(self, selector: "iCloudStoreWillChange:", name: NSPersistentStoreCoordinatorStoresWillChangeNotification,
-                object: coordinator)
+            NSNotificationCenter.defaultCenter().addObserverForName(NSPersistentStoreCoordinatorStoresWillChangeNotification,
+                object: coordinator,
+                queue: NSOperationQueue.mainQueue(),
+                usingBlock: { (notification) in
+                    let notification: SOObserverNotification = SOObserverNotification(type: .SODataBaseDidChanged, data: nil)
+                    SOObserversManager.sharedInstance.sendNotification(notification)
+                })
             
-            NSNotificationCenter.defaultCenter().addObserver(self, selector: "iCloudStoresDidChange:", name: NSPersistentStoreCoordinatorStoresDidChangeNotification,
-                object: coordinator)
+            NSNotificationCenter.defaultCenter().addObserverForName(NSPersistentStoreCoordinatorStoresDidChangeNotification,
+                    object: coordinator,
+                    queue: NSOperationQueue.mainQueue(),
+                    usingBlock: { (notification) in
+                self.saveContext()
+                    })
         }
         
         return managedObjectContext
@@ -425,24 +442,6 @@ public class SOLocalDataBase: SODataBaseProtocol {
         }
     }
 
-   // MARK: - Core Data iCloud Store Changes Notifications' Handlers
-    @objc func iCloudStoreUbiquitousContentChanges(notification: NSNotification){
-        if let moc = self.managedObjectContext {
-            moc.mergeChangesFromContextDidSaveNotification(notification)
-            let notification: SOObserverNotification = SOObserverNotification(type: .SODataBaseDidChanged, data: nil)
-            SOObserversManager.sharedInstance.sendNotification(notification)
-        }
-    }
-
-    @objc func iCloudStoresDidChange(notification: NSNotification){
-        let notification: SOObserverNotification = SOObserverNotification(type: .SODataBaseDidChanged, data: nil)
-        SOObserversManager.sharedInstance.sendNotification(notification)
-    }
-
-    @objc func iCloudStoreWillChange(notification: NSNotification){
-        self.saveContext()
-    }
-    
    // MARK: -
     
     func isiCloudEnabled() -> Bool{

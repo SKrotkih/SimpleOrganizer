@@ -83,6 +83,7 @@ public final class SOiCloudManager: SOObserverProtocol {
                                 if  userDefaults.synchronize(){
                                     let notification: SOObserverNotification = SOObserverNotification(type: .SODataBaseTypeChanged, data: nil)
                                     SOObserversManager.sharedInstance.sendNotification(notification)
+                                    sendLocalNotification("Type of DataBase was changed to \(value)!".localized, timeIntervalSinceNow: 1)
                                 }
                             }
                         }

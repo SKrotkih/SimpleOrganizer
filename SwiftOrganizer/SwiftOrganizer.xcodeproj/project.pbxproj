@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		7F0D37841B0F67B1008B785B /* SlideMenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F0D37831B0F67B1008B785B /* SlideMenuController.swift */; };
+		7F177AB61B4FDF960071773B /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7F177AB81B4FDF960071773B /* Localizable.strings */; };
 		7F441A591B2EB3EA004DAA5D /* SOParseComManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F441A581B2EB3EA004DAA5D /* SOParseComManager.swift */; };
 		7F497D4D1B18A6AF00F95BA9 /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F497D4C1B18A6AF00F95BA9 /* Category.swift */; };
 		7F497D521B1AA25500F95BA9 /* SOTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F497D511B1AA25500F95BA9 /* SOTabBarController.swift */; };
@@ -105,6 +106,10 @@
 
 /* Begin PBXFileReference section */
 		7F0D37831B0F67B1008B785B /* SlideMenuController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlideMenuController.swift; sourceTree = "<group>"; };
+		7F177AB21B4FDC820071773B /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Main.strings; sourceTree = "<group>"; };
+		7F177AB31B4FDC820071773B /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
+		7F177AB71B4FDF960071773B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		7F177AB91B4FDFA10071773B /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
 		7F441A581B2EB3EA004DAA5D /* SOParseComManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SOParseComManager.swift; sourceTree = "<group>"; };
 		7F441A5B1B2EBEBD004DAA5D /* SwiftOrganizer-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SwiftOrganizer-Bridging-Header.h"; sourceTree = "<group>"; };
 		7F497D4C1B18A6AF00F95BA9 /* Category.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Category.swift; path = LocalDataBase/Category.swift; sourceTree = "<group>"; };
@@ -286,6 +291,7 @@
 				7F5C2C381B400AC300506320 /* ObserverManager */,
 				7F57258A1B0F6114003DBDEB /* ViewControllers */,
 				7F57255B1B0F5DDA003DBDEB /* AppDelegate.swift */,
+				7F177AB81B4FDF960071773B /* Localizable.strings */,
 				7F5725621B0F5DDA003DBDEB /* Main.storyboard */,
 				7F5725651B0F5DDA003DBDEB /* Images.xcassets */,
 				7F5725671B0F5DDA003DBDEB /* LaunchScreen.xib */,
@@ -610,6 +616,7 @@
 		7F57254E1B0F5DDA003DBDEB /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				CLASSPREFIX = SO;
 				LastUpgradeCheck = 0630;
 				ORGANIZATIONNAME = "Sergey Krotkih";
 				TargetAttributes = {
@@ -635,6 +642,7 @@
 			knownRegions = (
 				en,
 				Base,
+				ru,
 			);
 			mainGroup = 7F57254D1B0F5DDA003DBDEB;
 			productRefGroup = 7F5725571B0F5DDA003DBDEB /* Products */;
@@ -654,6 +662,7 @@
 			files = (
 				7F497D5E1B1AF0D800F95BA9 /* SOCategoryTabView.xib in Resources */,
 				7F5A6D351B14C42C009665C7 /* ico5@2x.png in Resources */,
+				7F177AB61B4FDF960071773B /* Localizable.strings in Resources */,
 				7F5A6D331B14C42C009665C7 /* ico3@2x.png in Resources */,
 				7F6474A01B2730D700B3D75C /* ico14@2x.png in Resources */,
 				7F6474A31B2730D700B3D75C /* ico17@2x.png in Resources */,
@@ -762,10 +771,21 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		7F177AB81B4FDF960071773B /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				7F177AB71B4FDF960071773B /* en */,
+				7F177AB91B4FDFA10071773B /* ru */,
+			);
+			name = Localizable.strings;
+			path = Resources;
+			sourceTree = "<group>";
+		};
 		7F5725621B0F5DDA003DBDEB /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
 				7F5725631B0F5DDA003DBDEB /* Base */,
+				7F177AB21B4FDC820071773B /* ru */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -774,6 +794,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				7F5725681B0F5DDA003DBDEB /* Base */,
+				7F177AB31B4FDC820071773B /* ru */,
 			);
 			name = LaunchScreen.xib;
 			sourceTree = "<group>";

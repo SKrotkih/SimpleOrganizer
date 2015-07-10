@@ -1,0 +1,27 @@
+/* 
+  Localizable.strings
+  SwiftOrganizer
+
+  Created by Sergey Krotkih on 7/10/15.
+  Copyright (c) 2015 Sergey Krotkih. All rights reserved.
+*/
+
+"Organizer"="Органайзер";
+"Settings"="Настройки";
+"About"="О программе";
+"About Autors"="Об Авторе";
+"Category"="Категория";
+"Description"="Описание";
+"Data was chenged!"="Дата изменена!";
+"Close"="Закрыть";
+"Save"="Сохранить";
+"Update task error"="Ошибка во время обновления";
+"ToDo"="Сделать";
+"Events"="Событие";
+"Life"="Жизнь";
+"Work"="Работа";
+"Error of reading task data!"="Ошибка чтения данных!";
+"Error of saving data"="Ошибка сохранения данных!";
+"Add"="Добавить";
+"Done"="Готово";
+"Settings"="Настройки";

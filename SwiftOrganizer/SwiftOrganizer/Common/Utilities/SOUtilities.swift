@@ -21,3 +21,23 @@ func showAlertWithTitle(title:String, message:String){
     let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
     appDelegate.showAlertWithTitle(title, message: message)
 }
+
+func sendLocalNotification(message: String, timeIntervalSinceNow: NSTimeInterval = 0){
+    var localNotification = UILocalNotification()
+    localNotification.category = "com.skappledev.SwiftOrganizer.message"
+    localNotification.alertBody = message
+    localNotification.timeZone = NSTimeZone.defaultTimeZone()
+    localNotification.applicationIconBadgeNumber = UIApplication.sharedApplication().applicationIconBadgeNumber + 1;
+    
+    if timeIntervalSinceNow == 0{
+        UIApplication.sharedApplication().presentLocalNotificationNow(localNotification)
+    } else {
+        localNotification.fireDate = NSDate(timeIntervalSinceNow: timeIntervalSinceNow);
+        UIApplication.sharedApplication().scheduleLocalNotification(localNotification)
+    }
+//    You can use this func:
+//    UIApplication.sharedApplication().cancelLocalNotification(aNotification)
+//    UIApplication.sharedApplication().cancelAllLocalNotifications()
+    
+}
+
