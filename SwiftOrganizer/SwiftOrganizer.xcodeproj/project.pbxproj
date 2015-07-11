@@ -51,6 +51,7 @@
 		7F5A6D3A1B14C42C009665C7 /* ico10@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7F5A6D2E1B14C42C009665C7 /* ico10@2x.png */; };
 		7F5A6D3B1B14C42C009665C7 /* ico11@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7F5A6D2F1B14C42C009665C7 /* ico11@2x.png */; };
 		7F5A6D3C1B14C42C009665C7 /* ico12@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7F5A6D301B14C42C009665C7 /* ico12@2x.png */; };
+		7F5AA37A1B50B63400DA6E0B /* SOEditTaskCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F5AA3791B50B63400DA6E0B /* SOEditTaskCell.swift */; };
 		7F5C2C3A1B400B2400506320 /* SOObserversManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F5C2C391B400B2400506320 /* SOObserversManager.swift */; };
 		7F5C2C3C1B40143600506320 /* ArrayExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F5C2C3B1B40143600506320 /* ArrayExtension.swift */; };
 		7F5C2C3E1B42D88700506320 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = 7F5C2C3D1B42D88700506320 /* README.md */; };
@@ -160,6 +161,7 @@
 		7F5A6D2E1B14C42C009665C7 /* ico10@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ico10@2x.png"; path = "Resources/Images/Icons/ico10@2x.png"; sourceTree = "<group>"; };
 		7F5A6D2F1B14C42C009665C7 /* ico11@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ico11@2x.png"; path = "Resources/Images/Icons/ico11@2x.png"; sourceTree = "<group>"; };
 		7F5A6D301B14C42C009665C7 /* ico12@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ico12@2x.png"; path = "Resources/Images/Icons/ico12@2x.png"; sourceTree = "<group>"; };
+		7F5AA3791B50B63400DA6E0B /* SOEditTaskCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SOEditTaskCell.swift; path = EditTaskViewController/SOEditTaskCell.swift; sourceTree = "<group>"; };
 		7F5C2C391B400B2400506320 /* SOObserversManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SOObserversManager.swift; path = SwiftOrganizer/ObserverManager/SOObserversManager.swift; sourceTree = SOURCE_ROOT; };
 		7F5C2C3B1B40143600506320 /* ArrayExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArrayExtension.swift; sourceTree = "<group>"; };
 		7F5C2C3D1B42D88700506320 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../../README.md; sourceTree = "<group>"; };
@@ -526,6 +528,7 @@
 			children = (
 				7F57258C1B0F6114003DBDEB /* SOEditTaskViewController.swift */,
 				7F6E98271B1E27840048ED7A /* SOEnterBaseViewController.swift */,
+				7F5AA3791B50B63400DA6E0B /* SOEditTaskCell.swift */,
 				7F6E985B1B1EF2A50048ED7A /* Category */,
 				7F6E985C1B1EF2B60048ED7A /* Icons */,
 				7F6E985D1B1EF2C20048ED7A /* Date */,
@@ -732,6 +735,7 @@
 				7F5725961B0F6114003DBDEB /* SOAboutViewController.swift in Sources */,
 				7F5725A21B0F61F7003DBDEB /* StringExtension.swift in Sources */,
 				7F6E98261B1E24590048ED7A /* SOEnterDescriptionViewController.swift in Sources */,
+				7F5AA37A1B50B63400DA6E0B /* SOEditTaskCell.swift in Sources */,
 				7F6E98601B1EF3180048ED7A /* SOSelectCategoryCell.swift in Sources */,
 				7F5725981B0F6114003DBDEB /* SOSettingsViewController.swift in Sources */,
 				7F5725A41B0F61F7003DBDEB /* UIViewControllerExtension.swift in Sources */,

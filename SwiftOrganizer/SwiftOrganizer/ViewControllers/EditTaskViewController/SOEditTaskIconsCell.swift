@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SOEditTaskIconsCell: UITableViewCell {
+class SOEditTaskIconsCell: SOEditTaskCell {
 
     @IBOutlet weak var iconsBackgroundView: UIView!
     @IBOutlet weak var textBackgroundLabel: UILabel!
@@ -20,11 +20,13 @@ class SOEditTaskIconsCell: UITableViewCell {
     @IBOutlet weak var ico5ImageView: UIImageView!
     @IBOutlet weak var ico6ImageView: UIImageView!
     
-    var task: SOTask{
+    override var task: SOTask{
         get{
-            return SOTask()
+            return super.task
         }
         set{
+            super.task = newValue
+            
             let imagesView = [self.ico1ImageView, self.ico2ImageView, self.ico3ImageView, self.ico4ImageView, self.ico5ImageView, self.ico6ImageView]
             var count: Int = 0;
             
@@ -53,15 +55,8 @@ class SOEditTaskIconsCell: UITableViewCell {
         }
     }
 
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
-    }
-    
-    override func setSelected(selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-        
-        // Configure the view for the selected state
+    override func currentValueToString() -> String{
+        return ""
     }
     
 }

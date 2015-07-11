@@ -38,12 +38,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         SOiCloudManager.sharedInstance.prepareKeyValueStoreObserver()
         
+        // By Local Notifications this used
         application.registerUserNotificationSettings(UIUserNotificationSettings(forTypes: .Alert | .Badge | .Sound, categories: nil))  // types are UIUserNotificationType properties
-        
         if let localNotification: UILocalNotification = launchOptions?[UIApplicationLaunchOptionsLocalNotificationKey] as? UILocalNotification {
             println("Received notification \(localNotification.alertBody)!")
-            application.applicationIconBadgeNumber = 0;
         }
+        application.applicationIconBadgeNumber = 0;
+        // 
         
         return SOParseComManager.application(application, didFinishLaunchingWithOptions: launchOptions)
     }

@@ -1,20 +1,21 @@
 # SwiftOrganizer
 This is a simple organizer application for iPhone and iPad. 
-Was implemented as example of using Swift.
+Was implemented for getting some practice of using Swift.
 
-Were realised two type of database:
+Were realised two types of database:
 - Core Data (local database on device)
 - Remote database (on Parse.com server)
 
-Features, which were realised:
-- autolayout (on Interfase Builder Level only) have done
+Features, which were also realised:
+- autolayout (on Interfase Builder Level only)
 - switching of the database types from Core Data to remote database and vice versa works
 - used iCloud key-value storage for switching database types (if you change database type on your iPad, on your iPhone is changing database type  after some seconds)
-- Core Data iCloud (fallback store) works
-- push notifications via Parse.com server are working
+- Core Data iCloud (fallback store)
+- push notifications via Parse.com server
 - events can be saved to the Calendar (then you can see your events in the Calendar app on your device) by EventKit.
 - localization 
-- local notifications implemented
+- local notifications
+- sharing
 
 Used design patterns:
 - abstract method;

@@ -8,15 +8,17 @@
 
 import UIKit
 
-class SOEditTaskCategoryCell: UITableViewCell {
+class SOEditTaskCategoryCell: SOEditTaskCell {
 
     @IBOutlet weak var categoryNameLabel: UILabel!
 
-    var task: SOTask{
+    override var task: SOTask{
         get{
-            return SOTask()            
+            return super.task
         }
         set{
+            super.task = newValue
+            
             if newValue.categoryName == "" {
                 self.categoryNameLabel.text = "Category".localized
             }
@@ -25,4 +27,9 @@ class SOEditTaskCategoryCell: UITableViewCell {
             }
         }
     }
+    
+    override func currentValueToString() -> String{
+        return self.categoryNameLabel.text!
+    }
+    
 }

@@ -8,15 +8,17 @@
 
 import UIKit
 
-class SOEditTaskDateCell: UITableViewCell {
+class SOEditTaskDateCell: SOEditTaskCell {
 
     @IBOutlet weak var dateTextLabel: UILabel!
     
-    var task: SOTask{
+    override var task: SOTask{
         get{
-            return SOTask()            
+            return super.task
         }
         set{
+            super.task = newValue
+            
             if let dateEvent = newValue.date{
                 let dateFormatter = NSDateFormatter()
                 dateFormatter.dateFormat = "dd-MM-yyyy HH:mm:ss"
@@ -27,15 +29,8 @@ class SOEditTaskDateCell: UITableViewCell {
         }
     }
 
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
-    }
-    
-    override func setSelected(selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-        
-        // Configure the view for the selected state
+    override func currentValueToString() -> String{
+        return self.dateTextLabel.text!
     }
     
 }

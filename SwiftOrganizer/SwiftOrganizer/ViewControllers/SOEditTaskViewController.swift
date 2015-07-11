@@ -39,6 +39,7 @@ class SOEditTaskViewController: UIViewController, UITableViewDataSource, UITable
     private var _task: SOTask
     private var _orgTask: SOTask?
     private var isItNewTask: Bool
+    private var _cells = [SOEditTaskCell](count: SOEditTaskCellId.Undefined.rawValue, repeatedValue: SOEditTaskCell())
     
     @IBOutlet weak var tableView: UITableView!
 
@@ -149,28 +150,28 @@ class SOEditTaskViewController: UIViewController, UITableViewDataSource, UITable
 
         switch row{
         case .CategoryCell:
-            var cell = self.tableView.dequeueReusableCellWithIdentifier(cellId) as! SOEditTaskCategoryCell
-            cell.task = task!
+            _cells[0] = self.tableView.dequeueReusableCellWithIdentifier(cellId) as! SOEditTaskCategoryCell
+            _cells[0].task = task!
             
-            return cell
+            return _cells[0]
 
         case .IconsCell:
-            var cell = self.tableView.dequeueReusableCellWithIdentifier(cellId) as! SOEditTaskIconsCell
-            cell.task = task!
+            _cells[1] = self.tableView.dequeueReusableCellWithIdentifier(cellId) as! SOEditTaskIconsCell
+            _cells[1].task = task!
             
-            return cell
+            return _cells[1]
 
         case .DateCell:
-            var cell = self.tableView.dequeueReusableCellWithIdentifier(cellId) as! SOEditTaskDateCell
-            cell.task = task!
+            _cells[2] = self.tableView.dequeueReusableCellWithIdentifier(cellId) as! SOEditTaskDateCell
+            _cells[2].task = task!
             
-            return cell
+            return _cells[2]
 
         case .DescriptionCell:
-            var cell = self.tableView.dequeueReusableCellWithIdentifier(cellId) as! SOEditTaskDescriptionCell
-            cell.task = task!
+            _cells[3] = self.tableView.dequeueReusableCellWithIdentifier(cellId) as! SOEditTaskDescriptionCell
+            _cells[3].task = task!
 
-            return cell
+            return _cells[3]
             
         default:
             assert(false, "Rows is too much!")
@@ -210,6 +211,18 @@ class SOEditTaskViewController: UIViewController, UITableViewDataSource, UITable
     }
     
     // - MARK:
-    
-    
+    @IBAction func shareButtonPressed(sender: AnyObject) {
+        var text: String = "SwiftOrganizer: "
+        
+        for cell in _cells{
+            let str = cell.currentValueToString()
+            
+            if count(str) > 0{
+                text += str + "; "
+            }
+        }
+        
+        let activity = UIActivityViewController(activityItems: [text], applicationActivities: nil)
+        self.presentViewController(activity, animated: true, completion: nil)
+    }
 }

@@ -8,15 +8,17 @@
 
 import UIKit
 
-class SOEditTaskDescriptionCell: UITableViewCell {
+class SOEditTaskDescriptionCell: SOEditTaskCell {
     
     @IBOutlet weak var descriptionTasklabel: UILabel!
 
-    var task: SOTask{
+    override var task: SOTask{
         get{
-            return SOTask()
+            return super.task
         }
         set{
+            super.task = newValue
+            
             if newValue.title == "" {
                 self.descriptionTasklabel.text = "Description".localized
             }
@@ -26,15 +28,8 @@ class SOEditTaskDescriptionCell: UITableViewCell {
         }
     }
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
+    override func currentValueToString() -> String{
+        return self.descriptionTasklabel.text!
     }
-
-    override func setSelected(selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
-    }
-
+    
 }
