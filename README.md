@@ -16,6 +16,7 @@ Features, which were also realised:
 - localization 
 - local notifications
 - sharing
+- Documents. Ypu can add and edit txt documents.
 
 Used design patterns:
 - abstract method;

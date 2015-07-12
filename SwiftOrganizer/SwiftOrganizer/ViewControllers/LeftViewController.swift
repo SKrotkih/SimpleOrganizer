@@ -9,6 +9,7 @@ import UIKit
 
 enum LeftMenu: Int {
     case Main = 0
+    case Documents
     case Settings
     case About
 }
@@ -20,9 +21,10 @@ protocol LeftMenuProtocol : class {
 class LeftViewController : UIViewController, LeftMenuProtocol {
     
     @IBOutlet weak var tableView: UITableView!
-    var menus = ["Organizer".localized, "Settings".localized, "About".localized]
+    var menus = ["Organizer".localized, "Documents".localized, "Settings".localized, "About".localized]
     var mainViewController: UIViewController!
     var settingsViewController: UIViewController!
+    var documentsViewController: UIViewController!
     var goViewController: UIViewController!
     var aboutViewController: UIViewController!
     
@@ -35,6 +37,10 @@ class LeftViewController : UIViewController, LeftMenuProtocol {
         self.tableView.separatorColor = UIColor(red: 224/255, green: 224/255, blue: 224/255, alpha: 1.0)
         
         var storyboard = UIStoryboard(name: "Main", bundle: nil)
+
+        let documentsViewController = storyboard.instantiateViewControllerWithIdentifier("DocumentsViewController") as! SODocumentsViewController
+        self.documentsViewController = UINavigationController(rootViewController: documentsViewController)
+        
         let settingsViewController = storyboard.instantiateViewControllerWithIdentifier("SOSettingsViewController") as! SOSettingsViewController
         self.settingsViewController = UINavigationController(rootViewController: settingsViewController)
         
@@ -71,6 +77,9 @@ class LeftViewController : UIViewController, LeftMenuProtocol {
         switch menu {
         case .Main:
             self.slideMenuController()?.changeMainViewController(self.mainViewController, close: true)
+        case .Documents:
+            self.slideMenuController()?.changeMainViewController(self.documentsViewController, close: true)
+            break
         case .Settings:
             self.slideMenuController()?.changeMainViewController(self.settingsViewController, close: true)
             break

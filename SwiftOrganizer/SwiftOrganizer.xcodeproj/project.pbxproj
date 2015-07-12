@@ -55,6 +55,7 @@
 		7F5C2C3A1B400B2400506320 /* SOObserversManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F5C2C391B400B2400506320 /* SOObserversManager.swift */; };
 		7F5C2C3C1B40143600506320 /* ArrayExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F5C2C3B1B40143600506320 /* ArrayExtension.swift */; };
 		7F5C2C3E1B42D88700506320 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = 7F5C2C3D1B42D88700506320 /* README.md */; };
+		7F5E6E151B51730900A1B278 /* SODocumentsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F5E6E141B51730900A1B278 /* SODocumentsViewController.swift */; };
 		7F625EE81B2ED3DC004B7C16 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F625EE21B2ED3DC004B7C16 /* Bolts.framework */; };
 		7F625EE91B2ED3DC004B7C16 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F625EE31B2ED3DC004B7C16 /* Parse.framework */; };
 		7F625EEA1B2ED3DC004B7C16 /* ParseCrashReporting.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F625EE41B2ED3DC004B7C16 /* ParseCrashReporting.framework */; };
@@ -93,6 +94,8 @@
 		7F9B77261B189C54006D3434 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7F5725621B0F5DDA003DBDEB /* Main.storyboard */; };
 		7F9B77271B189C58006D3434 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7F5725671B0F5DDA003DBDEB /* LaunchScreen.xib */; };
 		7F9B772A1B189E67006D3434 /* SwiftOrganizer.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 7F9B77281B189E67006D3434 /* SwiftOrganizer.xcdatamodeld */; };
+		7FC8E88B1B521E630013906F /* SOSampleDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FC8E88A1B521E630013906F /* SOSampleDocument.swift */; };
+		7FC8E88D1B52207D0013906F /* SOEditDocumentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FC8E88C1B52207D0013906F /* SOEditDocumentViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -166,6 +169,7 @@
 		7F5C2C3B1B40143600506320 /* ArrayExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArrayExtension.swift; sourceTree = "<group>"; };
 		7F5C2C3D1B42D88700506320 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../../README.md; sourceTree = "<group>"; };
 		7F5D20EA1B3942B500926392 /* SwiftOrganizer.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = SwiftOrganizer.playground; sourceTree = "<group>"; };
+		7F5E6E141B51730900A1B278 /* SODocumentsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SODocumentsViewController.swift; sourceTree = "<group>"; };
 		7F625EE21B2ED3DC004B7C16 /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Bolts.framework; path = Frameworks/Bolts.framework; sourceTree = "<group>"; };
 		7F625EE31B2ED3DC004B7C16 /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Parse.framework; path = Frameworks/Parse.framework; sourceTree = "<group>"; };
 		7F625EE41B2ED3DC004B7C16 /* ParseCrashReporting.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ParseCrashReporting.framework; path = Frameworks/ParseCrashReporting.framework; sourceTree = "<group>"; };
@@ -202,6 +206,8 @@
 		7F6E98611B1F28650048ED7A /* SOSelectIconsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SOSelectIconsCell.swift; path = EditTaskViewController/SOSelectIconsCell.swift; sourceTree = "<group>"; };
 		7F6E98631B206CF80048ED7A /* Task.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Task.swift; path = LocalDataBase/Task.swift; sourceTree = "<group>"; };
 		7F9B77291B189E67006D3434 /* SwiftOrganizer.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = SwiftOrganizer.xcdatamodel; sourceTree = "<group>"; };
+		7FC8E88A1B521E630013906F /* SOSampleDocument.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SOSampleDocument.swift; sourceTree = "<group>"; };
+		7FC8E88C1B52207D0013906F /* SOEditDocumentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SOEditDocumentViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -335,6 +341,7 @@
 		7F57258A1B0F6114003DBDEB /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				7F5E6E131B5172EE00A1B278 /* Documents */,
 				7F5A6D1D1B14A115009665C7 /* MainViewController */,
 				7F6E98141B1DD9730048ED7A /* EditTaskViewController */,
 				7F0D37831B0F67B1008B785B /* SlideMenuController.swift */,
@@ -464,6 +471,16 @@
 			);
 			name = ObserverManager;
 			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		7F5E6E131B5172EE00A1B278 /* Documents */ = {
+			isa = PBXGroup;
+			children = (
+				7F5E6E141B51730900A1B278 /* SODocumentsViewController.swift */,
+				7FC8E88A1B521E630013906F /* SOSampleDocument.swift */,
+				7FC8E88C1B52207D0013906F /* SOEditDocumentViewController.swift */,
+			);
+			name = Documents;
 			sourceTree = "<group>";
 		};
 		7F625EEE1B2ED3EE004B7C16 /* Frameworks */ = {
@@ -710,6 +727,7 @@
 				7F9B772A1B189E67006D3434 /* SwiftOrganizer.xcdatamodeld in Sources */,
 				7F497D5A1B1AAF7700F95BA9 /* SOCategoryTabView.swift in Sources */,
 				7F5C2C3E1B42D88700506320 /* README.md in Sources */,
+				7FC8E88D1B52207D0013906F /* SOEditDocumentViewController.swift in Sources */,
 				7F0D37841B0F67B1008B785B /* SlideMenuController.swift in Sources */,
 				7F5725931B0F6114003DBDEB /* SOEditTaskViewController.swift in Sources */,
 				7F57255C1B0F5DDA003DBDEB /* AppDelegate.swift in Sources */,
@@ -739,6 +757,7 @@
 				7F6E98601B1EF3180048ED7A /* SOSelectCategoryCell.swift in Sources */,
 				7F5725981B0F6114003DBDEB /* SOSettingsViewController.swift in Sources */,
 				7F5725A41B0F61F7003DBDEB /* UIViewControllerExtension.swift in Sources */,
+				7F5E6E151B51730900A1B278 /* SODocumentsViewController.swift in Sources */,
 				7F497D541B1AA2C300F95BA9 /* SOTabBarContainerView.swift in Sources */,
 				7F6E981C1B1DE04C0048ED7A /* SOEditTaskDescriptionCell.swift in Sources */,
 				7F441A591B2EB3EA004DAA5D /* SOParseComManager.swift in Sources */,
@@ -750,6 +769,7 @@
 				7F625F091B2FDF5F004B7C16 /* SOCategory.swift in Sources */,
 				7F625F0A1B2FDF5F004B7C16 /* SOIco.swift in Sources */,
 				7F6E98161B1DD9F70048ED7A /* SOEditTaskCategoryCell.swift in Sources */,
+				7FC8E88B1B521E630013906F /* SOSampleDocument.swift in Sources */,
 				7F6E98281B1E27840048ED7A /* SOEnterBaseViewController.swift in Sources */,
 				7F497D651B1B330300F95BA9 /* SOUtilities.swift in Sources */,
 				7F497D521B1AA25500F95BA9 /* SOTabBarController.swift in Sources */,

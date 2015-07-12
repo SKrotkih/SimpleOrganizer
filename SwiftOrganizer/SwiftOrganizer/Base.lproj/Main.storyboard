@@ -613,6 +613,45 @@
             </objects>
             <point key="canvasLocation" x="1402" y="568"/>
         </scene>
+        <!--Edit Document View Controller-->
+        <scene sceneID="mbS-cN-DPO">
+            <objects>
+                <viewController id="DsR-OV-Bby" customClass="SOEditDocumentViewController" customModule="SwiftOrganizer" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="n8O-Pz-R9U"/>
+                        <viewControllerLayoutGuide type="bottom" id="0A1-ZF-9f3"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="6rg-I2-HNS">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Mog-td-9iy">
+                                <rect key="frame" x="16" y="0.0" width="568" height="600"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                <connections>
+                                    <outlet property="delegate" destination="DsR-OV-Bby" id="xYX-Wc-yPh"/>
+                                </connections>
+                            </textView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Mog-td-9iy" firstAttribute="top" secondItem="6rg-I2-HNS" secondAttribute="topMargin" id="Gb7-1A-O0f"/>
+                            <constraint firstItem="Mog-td-9iy" firstAttribute="leading" secondItem="6rg-I2-HNS" secondAttribute="leadingMargin" id="ZZD-kA-MXp"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="Mog-td-9iy" secondAttribute="trailing" id="mJ2-rJ-Gr7"/>
+                            <constraint firstItem="0A1-ZF-9f3" firstAttribute="top" secondItem="Mog-td-9iy" secondAttribute="bottom" id="xkZ-b8-Hsz"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="iOb-81-maN"/>
+                    <connections>
+                        <outlet property="textView" destination="Mog-td-9iy" id="cMs-gt-N90"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="RO8-0m-3iI" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2638" y="567"/>
+        </scene>
         <!--Edit Task View Controller-->
         <scene sceneID="4cK-mI-MCG">
             <objects>
@@ -1089,6 +1128,35 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QQq-GA-qZ8" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1402" y="-83"/>
+        </scene>
+        <!--Documents View Controller-->
+        <scene sceneID="5qW-JW-5Eq">
+            <objects>
+                <tableViewController storyboardIdentifier="DocumentsViewController" id="t3r-pF-eiz" customClass="SODocumentsViewController" customModule="SwiftOrganizer" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="kCz-7X-VQu">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="FileCell" id="qhG-ki-05H">
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="qhG-ki-05H" id="ZC6-TF-cil">
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="t3r-pF-eiz" id="zfE-Tm-ICF"/>
+                            <outlet property="delegate" destination="t3r-pF-eiz" id="QzK-z9-hUX"/>
+                        </connections>
+                    </tableView>
+                    <connections>
+                        <segue destination="DsR-OV-Bby" kind="show" identifier="showDetail" id="PgJ-fu-crK"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="UL9-nq-tj4" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2023" y="567"/>
         </scene>
         <!--About View Controller-->
         <scene sceneID="adq-KJ-u5Z">
