@@ -23,6 +23,24 @@
             </objects>
             <point key="canvasLocation" x="173" y="1222"/>
         </scene>
+        <!--Document Picker View Controller-->
+        <scene sceneID="T6i-Ow-1ej">
+            <objects>
+                <viewController storyboardIdentifier="DocumentPickerViewController" id="HA3-Vx-Bln" customClass="SODocumentPickerViewController" customModule="SwiftOrganizer" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="nsk-4W-gRK"/>
+                        <viewControllerLayoutGuide type="bottom" id="cLv-lF-pwp"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="OaQ-FF-IjF">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="fUu-mR-Eop" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="791" y="1219"/>
+        </scene>
         <!--Left View Controller-->
         <scene sceneID="Nq8-8X-A5v">
             <objects>

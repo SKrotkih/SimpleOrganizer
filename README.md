@@ -17,6 +17,7 @@ Features, which were also realised:
 - local notifications
 - sharing
 - Documents. Ypu can add and edit txt documents.
+- UIDocumentPickerViewController - download files from remote storage on iCloud, DropBox, GoogleDrive and so on to local folder.
 
 Used design patterns:
 - abstract method;

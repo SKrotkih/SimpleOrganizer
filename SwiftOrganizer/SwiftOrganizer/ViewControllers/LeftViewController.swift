@@ -10,6 +10,7 @@ import UIKit
 enum LeftMenu: Int {
     case Main = 0
     case Documents
+    case DocumentPicker
     case Settings
     case About
 }
@@ -21,10 +22,11 @@ protocol LeftMenuProtocol : class {
 class LeftViewController : UIViewController, LeftMenuProtocol {
     
     @IBOutlet weak var tableView: UITableView!
-    var menus = ["Organizer".localized, "Documents".localized, "Settings".localized, "About".localized]
+    var menus = ["Organizer".localized, "My Documents".localized, "External Documents".localized, "Settings".localized, "About".localized]
     var mainViewController: UIViewController!
     var settingsViewController: UIViewController!
     var documentsViewController: UIViewController!
+    var documentPickerViewController: UIViewController!
     var goViewController: UIViewController!
     var aboutViewController: UIViewController!
     
@@ -40,6 +42,9 @@ class LeftViewController : UIViewController, LeftMenuProtocol {
 
         let documentsViewController = storyboard.instantiateViewControllerWithIdentifier("DocumentsViewController") as! SODocumentsViewController
         self.documentsViewController = UINavigationController(rootViewController: documentsViewController)
+        
+        let documentPickerViewController = storyboard.instantiateViewControllerWithIdentifier("DocumentPickerViewController") as! SODocumentPickerViewController
+        self.documentPickerViewController = UINavigationController(rootViewController: documentPickerViewController)
         
         let settingsViewController = storyboard.instantiateViewControllerWithIdentifier("SOSettingsViewController") as! SOSettingsViewController
         self.settingsViewController = UINavigationController(rootViewController: settingsViewController)
@@ -79,6 +84,9 @@ class LeftViewController : UIViewController, LeftMenuProtocol {
             self.slideMenuController()?.changeMainViewController(self.mainViewController, close: true)
         case .Documents:
             self.slideMenuController()?.changeMainViewController(self.documentsViewController, close: true)
+            break
+        case .DocumentPicker:
+            self.slideMenuController()?.changeMainViewController(self.documentPickerViewController, close: true)
             break
         case .Settings:
             self.slideMenuController()?.changeMainViewController(self.settingsViewController, close: true)

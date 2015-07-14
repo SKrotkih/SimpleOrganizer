@@ -10,6 +10,7 @@
 		7F0D37841B0F67B1008B785B /* SlideMenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F0D37831B0F67B1008B785B /* SlideMenuController.swift */; };
 		7F177AB61B4FDF960071773B /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7F177AB81B4FDF960071773B /* Localizable.strings */; };
 		7F441A591B2EB3EA004DAA5D /* SOParseComManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F441A581B2EB3EA004DAA5D /* SOParseComManager.swift */; };
+		7F483B021B53CB3800C10180 /* SODocumentPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F483B011B53CB3800C10180 /* SODocumentPickerViewController.swift */; };
 		7F497D4D1B18A6AF00F95BA9 /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F497D4C1B18A6AF00F95BA9 /* Category.swift */; };
 		7F497D521B1AA25500F95BA9 /* SOTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F497D511B1AA25500F95BA9 /* SOTabBarController.swift */; };
 		7F497D541B1AA2C300F95BA9 /* SOTabBarContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F497D531B1AA2C300F95BA9 /* SOTabBarContainerView.swift */; };
@@ -116,6 +117,7 @@
 		7F177AB91B4FDFA10071773B /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
 		7F441A581B2EB3EA004DAA5D /* SOParseComManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SOParseComManager.swift; sourceTree = "<group>"; };
 		7F441A5B1B2EBEBD004DAA5D /* SwiftOrganizer-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SwiftOrganizer-Bridging-Header.h"; sourceTree = "<group>"; };
+		7F483B011B53CB3800C10180 /* SODocumentPickerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SODocumentPickerViewController.swift; sourceTree = "<group>"; };
 		7F497D4C1B18A6AF00F95BA9 /* Category.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Category.swift; path = LocalDataBase/Category.swift; sourceTree = "<group>"; };
 		7F497D511B1AA25500F95BA9 /* SOTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SOTabBarController.swift; path = TabBar/SOTabBarController.swift; sourceTree = "<group>"; };
 		7F497D531B1AA2C300F95BA9 /* SOTabBarContainerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SOTabBarContainerView.swift; path = TabBar/SOTabBarContainerView.swift; sourceTree = "<group>"; };
@@ -477,6 +479,7 @@
 			isa = PBXGroup;
 			children = (
 				7F5E6E141B51730900A1B278 /* SODocumentsViewController.swift */,
+				7F483B011B53CB3800C10180 /* SODocumentPickerViewController.swift */,
 				7FC8E88A1B521E630013906F /* SOSampleDocument.swift */,
 				7FC8E88C1B52207D0013906F /* SOEditDocumentViewController.swift */,
 			);
@@ -721,6 +724,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7F5725951B0F6114003DBDEB /* SOMainViewController.swift in Sources */,
+				7F483B021B53CB3800C10180 /* SODocumentPickerViewController.swift in Sources */,
 				7F5C2C3A1B400B2400506320 /* SOObserversManager.swift in Sources */,
 				7F6E98181B1DDD930048ED7A /* SOEditTaskIconsCell.swift in Sources */,
 				7F6E98221B1E24210048ED7A /* SOEnterIconsViewController.swift in Sources */,

@@ -15,7 +15,7 @@ class SODocumentsViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.title = "Documents".localized
+        self.title = "My Documents".localized
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -37,7 +37,7 @@ class SODocumentsViewController: UITableViewController {
     
     func updateFileList() {
         if let directoryUrls =  NSFileManager.defaultManager().contentsOfDirectoryAtURL(self.URLForDocuments(), includingPropertiesForKeys: nil, options: NSDirectoryEnumerationOptions.SkipsSubdirectoryDescendants, error: nil) {
-            self.txtFiles = directoryUrls.map(){ $0.path }.filter(){ $0.pathExtension == "txt" }
+            self.txtFiles = directoryUrls.map(){ $0.path }.filter(){$0.pathExtension == "txt" || $0.pathExtension == "pdf"}
             self.tableView.reloadData()
         }
     }
