@@ -72,9 +72,9 @@ class SOMainViewController: UIViewController, SOEditTaskController, SOObserverPr
         self.slideMenuController()?.removeLeftGestures()
         self.slideMenuController()?.removeRightGestures()
 
-        let buttonImage : UIImage! = UIImage(named: "add_task")
+        //let buttonImage : UIImage! = UIImage(named: "add_task")
         //var rightButton: UIBarButtonItem = UIBarButtonItem(image: buttonImage, style: UIBarButtonItemStyle.Plain, target: self, action: "addNewTask")
-        rightButton = UIBarButtonItem(title: "Add".localized, style: UIBarButtonItemStyle.Plain, target: self, action: "addNewTask")
+        rightButton = UIBarButtonItem(title: "Activity".localized, style: UIBarButtonItemStyle.Plain, target: self, action: "startActivityViewController")
         navigationItem.rightBarButtonItem = rightButton;
         
         self.reloadData({(error: NSError?) in })
@@ -103,13 +103,42 @@ class SOMainViewController: UIViewController, SOEditTaskController, SOObserverPr
         }
     }
 
-    func addNewTask(){
-        if self.mainTableView.editing == true{
-           self.mainTableView.editing = false
-            self.rightButton.title = "Add".localized
+    func startActivityViewController(){
+        if self.mainTableView.editing{
+            self.mainTableView.editing = false
+            self.rightButton.title = "Activity".localized
         } else {
-            self.startEditingTask(nil)
+            let editTaskListActivity = SOTaskMenuItemActivity()
+            editTaskListActivity.name = "EditTaskListActivity"
+            editTaskListActivity.title = "Erase Task".localized
+            editTaskListActivity.imageName = "ico12@2x"
+            editTaskListActivity.performBlock = {
+                self.editTaskList()
+            }
+            
+            let newTaskActivity = SOTaskMenuItemActivity()
+            newTaskActivity.name = "NewTaskActivity"
+            newTaskActivity.title = "New Task".localized
+            newTaskActivity.imageName = "ico11@2x"
+            newTaskActivity.performBlock = {
+                self.addNewTask()
+            }
+            
+            let switchDBtypeActivity = SOTaskMenuItemActivity()
+            switchDBtypeActivity.name = "SwitchDBtypeActivity"
+            switchDBtypeActivity.title = "Switch DB".localized
+            switchDBtypeActivity.imageName = "ico10@2x"
+            switchDBtypeActivity.performBlock = {
+                SOTypeDataBaseSwitcher.switchToAnotherDB()
+            }
+            
+            let activityController = UIActivityViewController(activityItems: [], applicationActivities: [editTaskListActivity, newTaskActivity, switchDBtypeActivity])
+            presentViewController(activityController, animated: true, completion: nil)
         }
+    }
+    
+    func addNewTask(){
+        self.startEditingTask(nil)
     }
 
     func editTask(task: SOTask?){
@@ -144,7 +173,7 @@ class SOMainViewController: UIViewController, SOEditTaskController, SOObserverPr
             
             })
         default:
-            assert(false, "The observer code notification is wrong!")
+            assert(false, "Something is wrong with observer code notification!")
         }
     }
     

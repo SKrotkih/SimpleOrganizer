@@ -73,7 +73,7 @@ public final class SODataBaseFactory: SOObserverProtocol {
         case .SODataBaseTypeChanged:
             self._dataBase = nil
         default:
-            assert(false, "The observer code notification is wrong!")
+            assert(false, "Something is wrong with observer code notification!")
         }
     }
 }

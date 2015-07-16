@@ -82,7 +82,7 @@ class SOObserversManager {
                     return priority0 > priority1
                 })
             default:
-                assert(false, "The observer code notification is wrong!")
+                assert(false, "Something is wrong with observer code notification!")
             }
         });
     }
@@ -101,7 +101,7 @@ class SOObserversManager {
                     return weakref.observer != nil && weakref.observer !== observer;
                 })
             default:
-                assert(false, "The observer code notification is wrong!")
+                assert(false, "Something is wrong with observer code notification!")
             }
         })
     }
@@ -118,7 +118,7 @@ class SOObserversManager {
                     self.notifyObserver(dict, notification: notification)
                 }
             default:
-                assert(false, "The observer code notification is wrong!")
+                assert(false, "Something is wrong with observer code notification!")
             }
         });
     }

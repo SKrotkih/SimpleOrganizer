@@ -103,7 +103,7 @@ public final class SOiCloudManager: SOObserverProtocol {
             }
 
         default:
-            assert(false, "The observer code notification is wrong!")
+            assert(false, "Something is wrong with observer code notification!")
         }
     }
 }

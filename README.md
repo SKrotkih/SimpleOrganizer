@@ -8,16 +8,16 @@ Were realised two types of database:
 
 Features, which were also realised:
 - autolayout (on Interfase Builder Level only)
-- switching of the database types from Core Data to remote database and vice versa works
-- used iCloud key-value storage for switching database types (if you change database type on your iPad, on your iPhone is changing database type  after some seconds)
-- Core Data iCloud (fallback store)
+- switching of the database types from Core Data to remote database and vice versa
+- used iCloud key-value storage for switching database types (if you change database type on your iPad, then on your iPhone is changing after some seconds too)
+- Core Data on iCloud (fallback store)
 - push notifications via Parse.com server
-- events can be saved to the Calendar (then you can see your events in the Calendar app on your device) by EventKit.
-- localization 
-- local notifications
-- sharing
-- Documents. Ypu can add and edit txt documents.
-- UIDocumentPickerViewController - download files from remote storage on iCloud, DropBox, GoogleDrive and so on to local folder.
+- events can be saved to the Calendar (then you can see your events in the Calendar app on your device) by using EventKit.
+- localization app 
+- local notifications 
+- sharing via UIActivityViewController
+- UIDocument. Enter and Edit files in the Documents folder.
+- Document Picker - access to files on remote storage like iCloud, DropBox and etc with download to local Documents folder.
 
 Used design patterns:
 - abstract method;
@@ -25,20 +25,22 @@ Used design patterns:
 - singleton;
 - builder;
 
+Notes for using.
 On first start are created some tasks by default. 
 You can add a new task by pressing on button '+' on the navigator bar. 
-You can select row in tableview for start editing task. 
-You can also delete any task by left swipe gesture on the table view row. 
-You can make fetch tasks. For that are used two tab bar view. Upper tab bar is used 
-for filtering by category. Bottom tab bar is used for filetering by icons.
+You can select line in tableview to start editing current task. 
+Any task may be deleted by left swipe gesture on the table view line. 
+For fetching tasks are used two tab bar. Upper tab bar is used for filtering by category. Bottom tab bar is used for filetering by icons.
 
-Category - is the entity which you can use for logical separating tasks. 
+Category - entity which used for featching. 
 There are some predefined category: 'ToDo', 'Work', 'Life', 'Events'.
-Some icons are predefined too.
+Icons are used for featching too. They are predefined too.
 
 The Project is in progress.
 In future:
 - add or remove icons and categories
 - make login (now is used login with default user and password on the parse.com).
 - add events to the Reminder app
-- Core Data iCloud (backend)
+- Core Data on iCloud (backend).
+
+16.07.2015: Added task list menu 'Activity'. Have used UIActivityViewController for that. Have made three menu items:  Erase Task, New Task and Switch DB type.

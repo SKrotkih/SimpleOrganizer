@@ -1123,7 +1123,7 @@
                         <subviews>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="123" translatesAutoresizingMaskIntoConstraints="NO" id="dAr-QD-wFY">
                                 <rect key="frame" x="16" y="28" width="568" height="305"/>
-                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.95686274509803926" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="305" id="sJQ-iF-aid"/>
                                 </constraints>

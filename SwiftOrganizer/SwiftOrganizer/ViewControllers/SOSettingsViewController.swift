@@ -28,31 +28,15 @@ class SOSettingsViewController: UIViewController, SOObserverProtocol {
     
     private func setUpCurrentDataBaseType()
     {
-        var selectedIndex: Int!
-        let defaults = NSUserDefaults.standardUserDefaults()
-        
-        if let name = defaults.stringForKey(SODataBaseTypeKey){
-            switch name{
-            case SODataBaseType.CoreData.rawValue:
-                selectedIndex = 0
-                let useiCloudOpt: Bool? = defaults.boolForKey(SOEnableiCloudForCoreDataKey)
+        let selectedIndex = SOTypeDataBaseSwitcher.indexOfCurrectDBType()
+        let usingICloud = SOTypeDataBaseSwitcher.usingICloudCurrentState()
 
-                if let useiCloud = useiCloudOpt{
-                    self.useiCloudSwitch.on = useiCloud
-                } else {
-                    self.useiCloudSwitch.on = false
-                }
-                self.useiCloudSwitch.enabled = true
-            case SODataBaseType.ParseCom.rawValue:
-                selectedIndex = 1
-                self.useiCloudSwitch.enabled = false
-            default:
-                selectedIndex = 0
-            }
-        } else {
-            selectedIndex = 0
+        if selectedIndex == 0{
+            self.useiCloudSwitch.on = usingICloud
+            self.useiCloudSwitch.enabled = true
+        } else if selectedIndex == 1{
+            self.useiCloudSwitch.enabled = false
         }
-
         self.segmentedControl.selectedSegmentIndex = selectedIndex
     }
     
@@ -63,29 +47,12 @@ class SOSettingsViewController: UIViewController, SOObserverProtocol {
     
     @IBAction func changeOfDataBase(sender: AnyObject) {
         let index = self.segmentedControl.selectedSegmentIndex
-        
-        let defaults = NSUserDefaults.standardUserDefaults()
-        var dbType: String
-
-        if index == 0{
-            dbType = SODataBaseType.CoreData.rawValue
-        } else if index == 1{
-            dbType = SODataBaseType.ParseCom.rawValue
-        } else {
-            return
-        }
-        
-        defaults.setObject(dbType, forKey: SODataBaseTypeKey)
-        defaults.synchronize()
-        let notification: SOObserverNotification = SOObserverNotification(type: .SODataBaseTypeChanged, data: dbType)
-        SOObserversManager.sharedInstance.sendNotification(notification)
+        SOTypeDataBaseSwitcher.switchToIndex(index)
     }
     
     @IBAction func changeOfUsingiCloud(sender: AnyObject) {
         let useiCloudValue = self.useiCloudSwitch.on
-        let defaults = NSUserDefaults.standardUserDefaults()
-        defaults.setBool(useiCloudValue, forKey: SOEnableiCloudForCoreDataKey)
-        defaults.synchronize()
+        SOTypeDataBaseSwitcher.setUpOfUsingICloud(useiCloudValue)
     }
     
     //- MARK: SOObserverProtocol implementation
@@ -94,8 +61,7 @@ class SOSettingsViewController: UIViewController, SOObserverProtocol {
         case .SODataBaseTypeChanged:
             setUpCurrentDataBaseType()            
         default:
-            assert(false, "The observer code notification is wrong!")
+            assert(false, "Something is wrong with observer code notification!")
         }
     }
-    
 }
