@@ -4,10 +4,20 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
-		<key>SOWidjet.xcscheme</key>
+		<key>DataBaseKit.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>4</integer>
+		</dict>
+		<key>OrganizerDataBaseKit.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
 			<integer>3</integer>
+		</dict>
+		<key>SOWidjet.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>2</integer>
 		</dict>
 		<key>SwiftExtension.xcscheme</key>
 		<dict>
@@ -43,6 +53,26 @@
 			<true/>
 		</dict>
 		<key>7FD44B061B5A562A000A4FB3</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>7FD44B1B1B5A9883000A4FB3</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>7FD44B251B5A9884000A4FB3</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>7FD44B401B5A98D6000A4FB3</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>7FD44B4A1B5A98D6000A4FB3</key>
 		<dict>
 			<key>primary</key>
 			<true/>

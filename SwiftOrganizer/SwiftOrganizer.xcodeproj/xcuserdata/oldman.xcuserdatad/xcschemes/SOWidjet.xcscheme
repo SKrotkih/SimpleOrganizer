@@ -35,6 +35,34 @@
                ReferencedContainer = "container:SwiftOrganizer.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "NO"
+            buildForArchiving = "NO"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "7FD44B251B5A9884000A4FB3"
+               BuildableName = "OrganizerDataBaseKitTests.xctest"
+               BlueprintName = "OrganizerDataBaseKitTests"
+               ReferencedContainer = "container:SwiftOrganizer.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "NO"
+            buildForArchiving = "NO"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "7FD44B4A1B5A98D6000A4FB3"
+               BuildableName = "DataBaseKitTests.xctest"
+               BlueprintName = "DataBaseKitTests"
+               ReferencedContainer = "container:SwiftOrganizer.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
       </BuildActionEntries>
    </BuildAction>
    <TestAction
@@ -43,13 +71,33 @@
       shouldUseLaunchSchemeArgsEnv = "YES"
       buildConfiguration = "Debug">
       <Testables>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "7FD44B251B5A9884000A4FB3"
+               BuildableName = "OrganizerDataBaseKitTests.xctest"
+               BlueprintName = "OrganizerDataBaseKitTests"
+               ReferencedContainer = "container:SwiftOrganizer.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "7FD44B4A1B5A98D6000A4FB3"
+               BuildableName = "DataBaseKitTests.xctest"
+               BlueprintName = "DataBaseKitTests"
+               ReferencedContainer = "container:SwiftOrganizer.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "7FD44B061B5A562A000A4FB3"
-            BuildableName = "SOWidjet.appex"
-            BlueprintName = "SOWidjet"
+            BlueprintIdentifier = "7F5725551B0F5DDA003DBDEB"
+            BuildableName = "SwiftOrganizer.app"
+            BlueprintName = "SwiftOrganizer"
             ReferencedContainer = "container:SwiftOrganizer.xcodeproj">
          </BuildableReference>
       </MacroExpansion>

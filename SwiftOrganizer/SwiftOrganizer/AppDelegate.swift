@@ -113,6 +113,26 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     //-------------------------------------
 
     func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject], fetchCompletionHandler completionHandler: (UIBackgroundFetchResult) -> Void) {
+
+        if application.applicationState == UIApplicationState.Active {
+            if let aps = userInfo["aps"] as? NSDictionary {
+                if let alert = aps["alert"] as? NSDictionary {
+                    if let message = alert["message"] as? NSString {
+                        self.showAlertWithTitle("Remote message was received:", message: message as String)
+                    }
+                } else if let alert = aps["alert"] as? NSString {
+                    self.showAlertWithTitle("Remote alert was received:", message: alert as String)
+                }
+            }
+            completionHandler(UIBackgroundFetchResult.NewData)
+        } else if application.applicationState == UIApplicationState.Inactive {
+            println("Inactive");
+            completionHandler(UIBackgroundFetchResult.NewData)
+        } else if application.applicationState == UIApplicationState.Background {
+            println("Background");
+            completionHandler(UIBackgroundFetchResult.NewData)
+        }
+        
         SOParseComManager.application(application, didReceiveRemoteNotification: userInfo, fetchCompletionHandler: completionHandler)
     }
     
