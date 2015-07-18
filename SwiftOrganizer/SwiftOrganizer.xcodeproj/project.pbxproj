@@ -99,6 +99,14 @@
 		7FC8E88D1B52207D0013906F /* SOEditDocumentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FC8E88C1B52207D0013906F /* SOEditDocumentViewController.swift */; };
 		7FD44AD11B57F2CE000A4FB3 /* SOTaskMenuItemActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FD44ACF1B57F2CE000A4FB3 /* SOTaskMenuItemActivity.swift */; };
 		7FD44AD61B5804BF000A4FB3 /* SOTypeDataBaseSwitcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FD44AD51B5804BF000A4FB3 /* SOTypeDataBaseSwitcher.swift */; };
+		7FD44AE01B59469E000A4FB3 /* ShareViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FD44ADF1B59469E000A4FB3 /* ShareViewController.swift */; };
+		7FD44AE21B59469E000A4FB3 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7FD44AE11B59469E000A4FB3 /* MainInterface.storyboard */; };
+		7FD44AE51B59469E000A4FB3 /* SwiftExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 7FD44ADB1B59469E000A4FB3 /* SwiftExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		7FD44AEB1B5950DC000A4FB3 /* AudienceSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FD44AEA1B5950DC000A4FB3 /* AudienceSelectionViewController.swift */; };
+		7FD44B081B5A562A000A4FB3 /* NotificationCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7FD44AF21B5A04A8000A4FB3 /* NotificationCenter.framework */; };
+		7FD44B0D1B5A562A000A4FB3 /* TodayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FD44B0C1B5A562A000A4FB3 /* TodayViewController.swift */; };
+		7FD44B0F1B5A562A000A4FB3 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7FD44B0E1B5A562A000A4FB3 /* MainInterface.storyboard */; };
+		7FD44B121B5A562A000A4FB3 /* SOWidjet.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 7FD44B071B5A562A000A4FB3 /* SOWidjet.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -109,7 +117,36 @@
 			remoteGlobalIDString = 7F5725551B0F5DDA003DBDEB;
 			remoteInfo = SwiftOrganizer;
 		};
+		7FD44AE31B59469E000A4FB3 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7F57254E1B0F5DDA003DBDEB /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 7FD44ADA1B59469E000A4FB3;
+			remoteInfo = SwiftExtension;
+		};
+		7FD44B101B5A562A000A4FB3 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7F57254E1B0F5DDA003DBDEB /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 7FD44B061B5A562A000A4FB3;
+			remoteInfo = SOWidjet;
+		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		7FD44AE91B59469E000A4FB3 /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				7FD44AE51B59469E000A4FB3 /* SwiftExtension.appex in Embed App Extensions */,
+				7FD44B121B5A562A000A4FB3 /* SOWidjet.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		7F0D37831B0F67B1008B785B /* SlideMenuController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlideMenuController.swift; sourceTree = "<group>"; };
@@ -214,6 +251,16 @@
 		7FC8E88C1B52207D0013906F /* SOEditDocumentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SOEditDocumentViewController.swift; sourceTree = "<group>"; };
 		7FD44ACF1B57F2CE000A4FB3 /* SOTaskMenuItemActivity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SOTaskMenuItemActivity.swift; sourceTree = "<group>"; };
 		7FD44AD51B5804BF000A4FB3 /* SOTypeDataBaseSwitcher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SOTypeDataBaseSwitcher.swift; path = BaseDataBase/SOTypeDataBaseSwitcher.swift; sourceTree = "<group>"; };
+		7FD44ADB1B59469E000A4FB3 /* SwiftExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = SwiftExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		7FD44ADE1B59469E000A4FB3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7FD44ADF1B59469E000A4FB3 /* ShareViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareViewController.swift; sourceTree = "<group>"; };
+		7FD44AE11B59469E000A4FB3 /* MainInterface.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = MainInterface.storyboard; sourceTree = "<group>"; };
+		7FD44AEA1B5950DC000A4FB3 /* AudienceSelectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudienceSelectionViewController.swift; sourceTree = "<group>"; };
+		7FD44AF21B5A04A8000A4FB3 /* NotificationCenter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NotificationCenter.framework; path = System/Library/Frameworks/NotificationCenter.framework; sourceTree = SDKROOT; };
+		7FD44B071B5A562A000A4FB3 /* SOWidjet.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = SOWidjet.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		7FD44B0B1B5A562A000A4FB3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7FD44B0C1B5A562A000A4FB3 /* TodayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayViewController.swift; sourceTree = "<group>"; };
+		7FD44B0E1B5A562A000A4FB3 /* MainInterface.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = MainInterface.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -240,6 +287,21 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7FD44AD81B59469E000A4FB3 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7FD44B041B5A562A000A4FB3 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7FD44B081B5A562A000A4FB3 /* NotificationCenter.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -281,8 +343,11 @@
 		7F57254D1B0F5DDA003DBDEB = {
 			isa = PBXGroup;
 			children = (
+				7FD44B091B5A562A000A4FB3 /* SOWidjet */,
+				7FD44ADC1B59469E000A4FB3 /* Sharing Extension */,
 				7F5725581B0F5DDA003DBDEB /* SwiftOrganizer */,
 				7F5725711B0F5DDB003DBDEB /* SwiftOrganizerTests */,
+				7FD44AF11B5A04A8000A4FB3 /* Frameworks */,
 				7F5725571B0F5DDA003DBDEB /* Products */,
 			);
 			sourceTree = "<group>";
@@ -292,6 +357,8 @@
 			children = (
 				7F5725561B0F5DDA003DBDEB /* SwiftOrganizer.app */,
 				7F57256E1B0F5DDB003DBDEB /* SwiftOrganizerTests.xctest */,
+				7FD44ADB1B59469E000A4FB3 /* SwiftExtension.appex */,
+				7FD44B071B5A562A000A4FB3 /* SOWidjet.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -566,9 +633,9 @@
 		7F6E985B1B1EF2A50048ED7A /* Category */ = {
 			isa = PBXGroup;
 			children = (
+				7F6E981F1B1E23F20048ED7A /* SOEnterCategoryViewController.swift */,
 				7F6E98151B1DD9F70048ED7A /* SOEditTaskCategoryCell.swift */,
 				7F6E985F1B1EF3180048ED7A /* SOSelectCategoryCell.swift */,
-				7F6E981F1B1E23F20048ED7A /* SOEnterCategoryViewController.swift */,
 			);
 			name = Category;
 			sourceTree = "<group>";
@@ -576,9 +643,9 @@
 		7F6E985C1B1EF2B60048ED7A /* Icons */ = {
 			isa = PBXGroup;
 			children = (
+				7F6E98211B1E24210048ED7A /* SOEnterIconsViewController.swift */,
 				7F6E98171B1DDD930048ED7A /* SOEditTaskIconsCell.swift */,
 				7F6E98611B1F28650048ED7A /* SOSelectIconsCell.swift */,
-				7F6E98211B1E24210048ED7A /* SOEnterIconsViewController.swift */,
 			);
 			name = Icons;
 			sourceTree = "<group>";
@@ -586,8 +653,8 @@
 		7F6E985D1B1EF2C20048ED7A /* Date */ = {
 			isa = PBXGroup;
 			children = (
-				7F6E98191B1DDED30048ED7A /* SOEditTaskDateCell.swift */,
 				7F6E98231B1E243C0048ED7A /* SOEnterDateViewController.swift */,
+				7F6E98191B1DDED30048ED7A /* SOEditTaskDateCell.swift */,
 			);
 			name = Date;
 			sourceTree = "<group>";
@@ -595,8 +662,8 @@
 		7F6E985E1B1EF2CD0048ED7A /* Description */ = {
 			isa = PBXGroup;
 			children = (
-				7F6E981B1B1DE04C0048ED7A /* SOEditTaskDescriptionCell.swift */,
 				7F6E98251B1E24590048ED7A /* SOEnterDescriptionViewController.swift */,
+				7F6E981B1B1DE04C0048ED7A /* SOEditTaskDescriptionCell.swift */,
 			);
 			name = Description;
 			sourceTree = "<group>";
@@ -609,6 +676,52 @@
 			name = Activities;
 			sourceTree = "<group>";
 		};
+		7FD44ADC1B59469E000A4FB3 /* Sharing Extension */ = {
+			isa = PBXGroup;
+			children = (
+				7FD44ADF1B59469E000A4FB3 /* ShareViewController.swift */,
+				7FD44AEA1B5950DC000A4FB3 /* AudienceSelectionViewController.swift */,
+				7FD44AE11B59469E000A4FB3 /* MainInterface.storyboard */,
+				7FD44ADD1B59469E000A4FB3 /* Supporting Files */,
+			);
+			name = "Sharing Extension";
+			path = SwiftExtension;
+			sourceTree = "<group>";
+		};
+		7FD44ADD1B59469E000A4FB3 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				7FD44ADE1B59469E000A4FB3 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		7FD44AF11B5A04A8000A4FB3 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				7FD44AF21B5A04A8000A4FB3 /* NotificationCenter.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		7FD44B091B5A562A000A4FB3 /* SOWidjet */ = {
+			isa = PBXGroup;
+			children = (
+				7FD44B0C1B5A562A000A4FB3 /* TodayViewController.swift */,
+				7FD44B0E1B5A562A000A4FB3 /* MainInterface.storyboard */,
+				7FD44B0A1B5A562A000A4FB3 /* Supporting Files */,
+			);
+			path = SOWidjet;
+			sourceTree = "<group>";
+		};
+		7FD44B0A1B5A562A000A4FB3 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				7FD44B0B1B5A562A000A4FB3 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -619,10 +732,13 @@
 				7F5725521B0F5DDA003DBDEB /* Sources */,
 				7F5725531B0F5DDA003DBDEB /* Frameworks */,
 				7F5725541B0F5DDA003DBDEB /* Resources */,
+				7FD44AE91B59469E000A4FB3 /* Embed App Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				7FD44AE41B59469E000A4FB3 /* PBXTargetDependency */,
+				7FD44B111B5A562A000A4FB3 /* PBXTargetDependency */,
 			);
 			name = SwiftOrganizer;
 			productName = SwiftOrganizer;
@@ -647,6 +763,40 @@
 			productReference = 7F57256E1B0F5DDB003DBDEB /* SwiftOrganizerTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
+		7FD44ADA1B59469E000A4FB3 /* SwiftExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 7FD44AE61B59469E000A4FB3 /* Build configuration list for PBXNativeTarget "SwiftExtension" */;
+			buildPhases = (
+				7FD44AD71B59469E000A4FB3 /* Sources */,
+				7FD44AD81B59469E000A4FB3 /* Frameworks */,
+				7FD44AD91B59469E000A4FB3 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = SwiftExtension;
+			productName = SwiftExtension;
+			productReference = 7FD44ADB1B59469E000A4FB3 /* SwiftExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
+		7FD44B061B5A562A000A4FB3 /* SOWidjet */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 7FD44B131B5A562A000A4FB3 /* Build configuration list for PBXNativeTarget "SOWidjet" */;
+			buildPhases = (
+				7FD44B031B5A562A000A4FB3 /* Sources */,
+				7FD44B041B5A562A000A4FB3 /* Frameworks */,
+				7FD44B051B5A562A000A4FB3 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = SOWidjet;
+			productName = SOWidjet;
+			productReference = 7FD44B071B5A562A000A4FB3 /* SOWidjet.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -670,6 +820,14 @@
 						CreatedOnToolsVersion = 6.3.2;
 						TestTargetID = 7F5725551B0F5DDA003DBDEB;
 					};
+					7FD44ADA1B59469E000A4FB3 = {
+						CreatedOnToolsVersion = 6.4;
+						DevelopmentTeam = N5B5T39W8Y;
+					};
+					7FD44B061B5A562A000A4FB3 = {
+						CreatedOnToolsVersion = 6.4;
+						DevelopmentTeam = N5B5T39W8Y;
+					};
 				};
 			};
 			buildConfigurationList = 7F5725511B0F5DDA003DBDEB /* Build configuration list for PBXProject "SwiftOrganizer" */;
@@ -688,6 +846,8 @@
 			targets = (
 				7F5725551B0F5DDA003DBDEB /* SwiftOrganizer */,
 				7F57256D1B0F5DDB003DBDEB /* SwiftOrganizerTests */,
+				7FD44ADA1B59469E000A4FB3 /* SwiftExtension */,
+				7FD44B061B5A562A000A4FB3 /* SOWidjet */,
 			);
 		};
 /* End PBXProject section */
@@ -727,6 +887,22 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7FD44AD91B59469E000A4FB3 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7FD44AE21B59469E000A4FB3 /* MainInterface.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7FD44B051B5A562A000A4FB3 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7FD44B0F1B5A562A000A4FB3 /* MainInterface.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -804,6 +980,23 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		7FD44AD71B59469E000A4FB3 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7FD44AE01B59469E000A4FB3 /* ShareViewController.swift in Sources */,
+				7FD44AEB1B5950DC000A4FB3 /* AudienceSelectionViewController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7FD44B031B5A562A000A4FB3 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7FD44B0D1B5A562A000A4FB3 /* TodayViewController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -811,6 +1004,16 @@
 			isa = PBXTargetDependency;
 			target = 7F5725551B0F5DDA003DBDEB /* SwiftOrganizer */;
 			targetProxy = 7F57256F1B0F5DDB003DBDEB /* PBXContainerItemProxy */;
+		};
+		7FD44AE41B59469E000A4FB3 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 7FD44ADA1B59469E000A4FB3 /* SwiftExtension */;
+			targetProxy = 7FD44AE31B59469E000A4FB3 /* PBXContainerItemProxy */;
+		};
+		7FD44B111B5A562A000A4FB3 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 7FD44B061B5A562A000A4FB3 /* SOWidjet */;
+			targetProxy = 7FD44B101B5A562A000A4FB3 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -1004,6 +1207,66 @@
 			};
 			name = Release;
 		};
+		7FD44AE71B59469E000A4FB3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = SwiftExtension/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		7FD44AE81B59469E000A4FB3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				INFOPLIST_FILE = SwiftExtension/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		7FD44B141B5A562A000A4FB3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = SOWidjet/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		7FD44B151B5A562A000A4FB3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				INFOPLIST_FILE = SOWidjet/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -1033,6 +1296,22 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
+		};
+		7FD44AE61B59469E000A4FB3 /* Build configuration list for PBXNativeTarget "SwiftExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7FD44AE71B59469E000A4FB3 /* Debug */,
+				7FD44AE81B59469E000A4FB3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		7FD44B131B5A562A000A4FB3 /* Build configuration list for PBXNativeTarget "SOWidjet" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7FD44B141B5A562A000A4FB3 /* Debug */,
+				7FD44B151B5A562A000A4FB3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
 		};
 /* End XCConfigurationList section */
 

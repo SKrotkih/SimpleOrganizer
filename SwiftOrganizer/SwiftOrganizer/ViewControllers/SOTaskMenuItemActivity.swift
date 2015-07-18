@@ -8,7 +8,7 @@
 
 import UIKit
 
-typealias SOClosureForActivityType = () -> ()
+typealias SOClosureForActivityType = () -> Void
 
 class SOTaskMenuItemActivity: UIActivity {
     

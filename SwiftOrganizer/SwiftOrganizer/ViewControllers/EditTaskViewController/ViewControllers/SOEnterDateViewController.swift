@@ -32,6 +32,8 @@ class SOEnterDateViewController: SOEnterBaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.title = "Date".localized                
 
     }
     

@@ -12,7 +12,7 @@
 "About Autors"="Об Авторе";
 "Category"="Категория";
 "Description"="Описание";
-"Data was chenged!"="Дата изменена!";
+"Data was chenged!"="Данные изменились!";
 "Close"="Закрыть";
 "Save"="Сохранить";
 "Update task error"="Ошибка во время обновления";
@@ -30,3 +30,5 @@
 "Activity"="Действия";
 "Erase Task"="Удалить задачу";
 "New Task"="Новая задача";
+"Date"="Дата";
+"Icons"="Иконки";

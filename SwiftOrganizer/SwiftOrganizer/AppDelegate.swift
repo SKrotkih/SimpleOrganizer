@@ -8,9 +8,32 @@
 
 import UIKit
 
+/* This is an extenstion on the String class that can convert a given
+string with the format of %d-%d into an NSIndexPath */
+extension String{
+    func toIndexPath () -> NSIndexPath{
+        let components = self.componentsSeparatedByString("-")
+        
+        if components.count == 2{
+            let section = components[0]
+            let row = components[1]
+            
+            if let sectionValue = section.toInt(){
+                
+                if let rowValue = row.toInt(){
+                    return NSIndexPath(forRow: rowValue, inSection: sectionValue)
+                }
+            }
+        }
+        return NSIndexPath()
+    }
+}
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
+    let widgetUrlScheme = "widget"
+    
     var window: UIWindow?
     var mainViewController: SOMainViewController!
 
@@ -99,6 +122,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(application: UIApplication, openURL url: NSURL, sourceApplication srcApp: String?, annotation annot: AnyObject?) -> Bool {
         return SOParseComManager.application(application, openURL: url, sourceApplication: srcApp, annotation: annot)
+    }
+    
+    func application(application: UIApplication, handleOpenURL url: NSURL) -> Bool {
+        
+        if url.scheme == widgetUrlScheme {
+            
+            /* Goes through our extension to convert
+            String to NSIndexPath */
+            let indexPath: NSIndexPath = url.host!.toIndexPath()
+            
+            /* Now do your work with the index path */
+            print(indexPath)
+            
+        }
+        
+        return true
     }
     
     

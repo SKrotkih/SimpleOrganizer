@@ -15,6 +15,8 @@ class SOEnterDescriptionViewController: SOEnterBaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.title = "Description".localized                        
 
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardDidShow:", name: UIKeyboardDidShowNotification,
             object: nil)

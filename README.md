@@ -1,6 +1,10 @@
 # SwiftOrganizer
-This is a simple organizer application for iPhone and iPad. 
-Was implemented for getting some practice of using Swift.
+============
+
+This is a simple organizer application for an iPhone and for an iPad. 
+Was implemented for getting some practice of using the Swift.
+
+## Implements
 
 Were realised two types of database:
 - Core Data (local database on device)
@@ -43,4 +47,21 @@ In future:
 - add events to the Reminder app
 - Core Data on iCloud (backend).
 
+## Requirements
+
+- Xcode 6
+- iOS 8
+
+## Author
+
+Sergey Krotkih
+
+## License
+
+SwiftOrganizer is available under the MIT license. See the LICENSE file for more info.
+
+## Update
+
 16.07.2015: Added task list menu 'Activity'. Have used UIActivityViewController for that. Have made three menu items:  Erase Task, New Task and Switch DB type.
+17.07.2015: Added Sharing Extension
+18.07.2015: Added Today Extension. Widjet

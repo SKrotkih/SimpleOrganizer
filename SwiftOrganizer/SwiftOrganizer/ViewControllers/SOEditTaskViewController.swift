@@ -68,6 +68,8 @@ class SOEditTaskViewController: UIViewController, UITableViewDataSource, UITable
     
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        self.title = "Edit Task".localized
     }
     
     override func viewWillAppear(animated: Bool) {

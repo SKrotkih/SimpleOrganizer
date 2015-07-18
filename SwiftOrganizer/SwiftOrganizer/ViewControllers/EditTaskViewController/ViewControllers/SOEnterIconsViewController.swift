@@ -17,6 +17,8 @@ class SOEnterIconsViewController: SOEnterBaseViewController, UITableViewDataSour
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.title = "Icons".localized        
 
         SODataFetching.sharedInstance.allIcons{(icons: [SOIco], fetchError: NSError?) in
             if let error = fetchError{

@@ -16,6 +16,8 @@ class SOEnterCategoryViewController: SOEnterBaseViewController, UITableViewDataS
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.title = "Category".localized
 
         SODataFetching.sharedInstance.allCategories{(categories: [SOCategory], fetchError: NSError?) in
             if let error = fetchError{
