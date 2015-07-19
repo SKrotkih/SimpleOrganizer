@@ -16,8 +16,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "7FD44B061B5A562A000A4FB3"
-               BuildableName = "SOWidjet.appex"
-               BlueprintName = "SOWidjet"
+               BuildableName = "SOWidget.appex"
+               BlueprintName = "SOWidget"
                ReferencedContainer = "container:SwiftOrganizer.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>

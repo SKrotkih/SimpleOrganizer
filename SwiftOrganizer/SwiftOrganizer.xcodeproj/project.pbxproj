@@ -87,7 +87,7 @@
 		7FD44B081B5A562A000A4FB3 /* NotificationCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7FD44AF21B5A04A8000A4FB3 /* NotificationCenter.framework */; };
 		7FD44B0D1B5A562A000A4FB3 /* TodayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FD44B0C1B5A562A000A4FB3 /* TodayViewController.swift */; };
 		7FD44B0F1B5A562A000A4FB3 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7FD44B0E1B5A562A000A4FB3 /* MainInterface.storyboard */; };
-		7FD44B121B5A562A000A4FB3 /* SOWidjet.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 7FD44B071B5A562A000A4FB3 /* SOWidjet.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		7FD44B121B5A562A000A4FB3 /* SOWidget.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 7FD44B071B5A562A000A4FB3 /* SOWidget.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		7FD44B461B5A98D6000A4FB3 /* DataBaseKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 7FD44B451B5A98D6000A4FB3 /* DataBaseKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		7FD44B551B5A98D6000A4FB3 /* DataBaseKitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FD44B541B5A98D6000A4FB3 /* DataBaseKitTests.swift */; };
 		7FD44B581B5A98D6000A4FB3 /* DataBaseKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7FD44B411B5A98D6000A4FB3 /* DataBaseKit.framework */; };
@@ -176,7 +176,7 @@
 			dstSubfolderSpec = 13;
 			files = (
 				7FD44AE51B59469E000A4FB3 /* SwiftExtension.appex in Embed App Extensions */,
-				7FD44B121B5A562A000A4FB3 /* SOWidjet.appex in Embed App Extensions */,
+				7FD44B121B5A562A000A4FB3 /* SOWidget.appex in Embed App Extensions */,
 			);
 			name = "Embed App Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -289,7 +289,7 @@
 		7FD44AE11B59469E000A4FB3 /* MainInterface.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = MainInterface.storyboard; sourceTree = "<group>"; };
 		7FD44AEA1B5950DC000A4FB3 /* AudienceSelectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudienceSelectionViewController.swift; sourceTree = "<group>"; };
 		7FD44AF21B5A04A8000A4FB3 /* NotificationCenter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NotificationCenter.framework; path = System/Library/Frameworks/NotificationCenter.framework; sourceTree = SDKROOT; };
-		7FD44B071B5A562A000A4FB3 /* SOWidjet.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = SOWidjet.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		7FD44B071B5A562A000A4FB3 /* SOWidget.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = SOWidget.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		7FD44B0B1B5A562A000A4FB3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7FD44B0C1B5A562A000A4FB3 /* TodayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayViewController.swift; sourceTree = "<group>"; };
 		7FD44B0E1B5A562A000A4FB3 /* MainInterface.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = MainInterface.storyboard; sourceTree = "<group>"; };
@@ -412,7 +412,7 @@
 			isa = PBXGroup;
 			children = (
 				7FD44B421B5A98D6000A4FB3 /* DataBaseKit */,
-				7FD44B091B5A562A000A4FB3 /* SOWidjet */,
+				7FD44B091B5A562A000A4FB3 /* SOWidget */,
 				7FD44ADC1B59469E000A4FB3 /* Sharing Extension */,
 				7F5725581B0F5DDA003DBDEB /* SwiftOrganizer */,
 				7F5725711B0F5DDB003DBDEB /* SwiftOrganizerTests */,
@@ -428,7 +428,7 @@
 				7F5725561B0F5DDA003DBDEB /* SwiftOrganizer.app */,
 				7F57256E1B0F5DDB003DBDEB /* SwiftOrganizerTests.xctest */,
 				7FD44ADB1B59469E000A4FB3 /* SwiftExtension.appex */,
-				7FD44B071B5A562A000A4FB3 /* SOWidjet.appex */,
+				7FD44B071B5A562A000A4FB3 /* SOWidget.appex */,
 				7FD44B411B5A98D6000A4FB3 /* DataBaseKit.framework */,
 				7FD44B4B1B5A98D6000A4FB3 /* DataBaseKitTests.xctest */,
 			);
@@ -737,7 +737,7 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		7FD44B091B5A562A000A4FB3 /* SOWidjet */ = {
+		7FD44B091B5A562A000A4FB3 /* SOWidget */ = {
 			isa = PBXGroup;
 			children = (
 				7FD44B161B5A911B000A4FB3 /* SOWidjet.entitlements */,
@@ -746,6 +746,7 @@
 				7FD44B0A1B5A562A000A4FB3 /* Supporting Files */,
 				7F5779D81B5B98CF006EB1E5 /* SOWidjet-Bridging-Header.h */,
 			);
+			name = SOWidget;
 			path = SOWidjet;
 			sourceTree = "<group>";
 		};
@@ -912,9 +913,9 @@
 			productReference = 7FD44ADB1B59469E000A4FB3 /* SwiftExtension.appex */;
 			productType = "com.apple.product-type.app-extension";
 		};
-		7FD44B061B5A562A000A4FB3 /* SOWidjet */ = {
+		7FD44B061B5A562A000A4FB3 /* SOWidget */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 7FD44B131B5A562A000A4FB3 /* Build configuration list for PBXNativeTarget "SOWidjet" */;
+			buildConfigurationList = 7FD44B131B5A562A000A4FB3 /* Build configuration list for PBXNativeTarget "SOWidget" */;
 			buildPhases = (
 				7FD44B031B5A562A000A4FB3 /* Sources */,
 				7FD44B041B5A562A000A4FB3 /* Frameworks */,
@@ -924,9 +925,9 @@
 			);
 			dependencies = (
 			);
-			name = SOWidjet;
+			name = SOWidget;
 			productName = SOWidjet;
-			productReference = 7FD44B071B5A562A000A4FB3 /* SOWidjet.appex */;
+			productReference = 7FD44B071B5A562A000A4FB3 /* SOWidget.appex */;
 			productType = "com.apple.product-type.app-extension";
 		};
 		7FD44B401B5A98D6000A4FB3 /* DataBaseKit */ = {
@@ -1035,7 +1036,7 @@
 				7F5725551B0F5DDA003DBDEB /* SwiftOrganizer */,
 				7F57256D1B0F5DDB003DBDEB /* SwiftOrganizerTests */,
 				7FD44ADA1B59469E000A4FB3 /* SwiftExtension */,
-				7FD44B061B5A562A000A4FB3 /* SOWidjet */,
+				7FD44B061B5A562A000A4FB3 /* SOWidget */,
 				7FD44B401B5A98D6000A4FB3 /* DataBaseKit */,
 				7FD44B4A1B5A98D6000A4FB3 /* DataBaseKitTests */,
 			);
@@ -1233,7 +1234,7 @@
 		};
 		7FD44B111B5A562A000A4FB3 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 7FD44B061B5A562A000A4FB3 /* SOWidjet */;
+			target = 7FD44B061B5A562A000A4FB3 /* SOWidget */;
 			targetProxy = 7FD44B101B5A562A000A4FB3 /* PBXContainerItemProxy */;
 		};
 		7FD44B4E1B5A98D6000A4FB3 /* PBXTargetDependency */ = {
@@ -1661,7 +1662,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		7FD44B131B5A562A000A4FB3 /* Build configuration list for PBXNativeTarget "SOWidjet" */ = {
+		7FD44B131B5A562A000A4FB3 /* Build configuration list for PBXNativeTarget "SOWidget" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				7FD44B141B5A562A000A4FB3 /* Debug */,

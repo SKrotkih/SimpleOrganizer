@@ -32,9 +32,7 @@ class TodayViewController: UIViewController, UITableViewDataSource, UITableViewD
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(
-            TableViewConstants.cellIdentifier,
-            forIndexPath: indexPath) as! UITableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("taskcellid", forIndexPath: indexPath) as! UITableViewCell
         
         cell.textLabel!.text = items[indexPath.row]
         
@@ -70,7 +68,6 @@ class TodayViewController: UIViewController, UITableViewDataSource, UITableViewD
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        resetContentSize()
     }
     
     override func viewDidAppear(animated: Bool) {

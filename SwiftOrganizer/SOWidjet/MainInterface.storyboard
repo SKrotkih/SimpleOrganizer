@@ -8,7 +8,7 @@
         <!--Today View Controller-->
         <scene sceneID="Zyj-JL-OXX">
             <objects>
-                <viewController id="cgJ-LG-RMR" customClass="TodayViewController" customModule="SOWidjet" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="cgJ-LG-RMR" customClass="TodayViewController" customModule="SOWidget" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="w4Y-QC-hFz"/>
                         <viewControllerLayoutGuide type="bottom" id="63i-vF-ecW"/>
@@ -18,35 +18,48 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="XMY-Uw-6h9">
-                                <rect key="frame" x="13" y="28" width="295" height="29"/>
+                                <rect key="frame" x="16" y="8" width="288" height="29"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="28" id="BgO-PQ-0nV"/>
+                                </constraints>
                                 <segments>
                                     <segment title="Local DataBase"/>
                                     <segment title="Parse.com DataBase"/>
                                 </segments>
-                                <color key="tintColor" red="0.29803922770000002" green="0.29803922770000002" blue="0.29803922770000002" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <connections>
                                     <action selector="switchToAnotherDataBase:" destination="cgJ-LG-RMR" eventType="valueChanged" id="oYP-jp-eEn"/>
                                 </connections>
                             </segmentedControl>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="fIF-Lw-Pun">
-                                <rect key="frame" x="16" y="74" width="288" height="486"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <rect key="frame" x="16" y="46" width="288" height="514"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <color key="tintColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="taskcellid" id="bE1-rK-Sml">
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="bE1-rK-Sml" id="fpG-ad-UOm">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
                                 <connections>
                                     <outlet property="dataSource" destination="cgJ-LG-RMR" id="Rkf-c4-FOH"/>
                                     <outlet property="delegate" destination="cgJ-LG-RMR" id="q0U-XV-oDS"/>
                                 </connections>
                             </tableView>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="centerX" secondItem="XMY-Uw-6h9" secondAttribute="centerX" constant="-0.5" id="1O2-YL-C5n"/>
-                            <constraint firstItem="XMY-Uw-6h9" firstAttribute="leading" secondItem="vrO-mL-T0h" secondAttribute="leadingMargin" constant="-3" id="cOd-lI-ZXV"/>
-                            <constraint firstItem="XMY-Uw-6h9" firstAttribute="top" secondItem="w4Y-QC-hFz" secondAttribute="bottom" constant="8" id="d3v-86-NIt"/>
-                            <constraint firstItem="fIF-Lw-Pun" firstAttribute="top" secondItem="XMY-Uw-6h9" secondAttribute="bottom" constant="18" id="dQ5-5h-9eW"/>
-                            <constraint firstItem="fIF-Lw-Pun" firstAttribute="leading" secondItem="vrO-mL-T0h" secondAttribute="leadingMargin" id="e4t-4V-fcC"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="XMY-Uw-6h9" secondAttribute="trailing" constant="-4" id="eAs-fF-gFg"/>
-                            <constraint firstItem="63i-vF-ecW" firstAttribute="top" secondItem="fIF-Lw-Pun" secondAttribute="bottom" constant="8" id="uTw-pg-EbC"/>
-                            <constraint firstItem="fIF-Lw-Pun" firstAttribute="trailing" secondItem="vrO-mL-T0h" secondAttribute="trailingMargin" id="yZd-RY-7wB"/>
+                            <constraint firstItem="fIF-Lw-Pun" firstAttribute="trailing" secondItem="vrO-mL-T0h" secondAttribute="trailingMargin" id="1MB-eb-T83"/>
+                            <constraint firstItem="XMY-Uw-6h9" firstAttribute="leading" secondItem="vrO-mL-T0h" secondAttribute="leadingMargin" id="Iru-nt-7v1"/>
+                            <constraint firstItem="63i-vF-ecW" firstAttribute="top" secondItem="fIF-Lw-Pun" secondAttribute="bottom" constant="8" id="KSd-DU-hBc"/>
+                            <constraint firstItem="XMY-Uw-6h9" firstAttribute="trailing" secondItem="vrO-mL-T0h" secondAttribute="trailingMargin" id="UzK-Y2-zt7"/>
+                            <constraint firstItem="fIF-Lw-Pun" firstAttribute="top" secondItem="XMY-Uw-6h9" secondAttribute="bottom" constant="10" id="tq6-5H-iAf"/>
+                            <constraint firstItem="fIF-Lw-Pun" firstAttribute="leading" secondItem="vrO-mL-T0h" secondAttribute="leadingMargin" id="wpQ-nv-EVM"/>
+                            <constraint firstItem="XMY-Uw-6h9" firstAttribute="top" secondItem="w4Y-QC-hFz" secondAttribute="bottom" constant="8" id="yHZ-A9-qVf"/>
                         </constraints>
                     </view>
                     <extendedEdge key="edgesForExtendedLayout"/>
