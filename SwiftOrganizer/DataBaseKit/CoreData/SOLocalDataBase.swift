@@ -11,13 +11,13 @@ import CoreData
 
 let DatabaseName = "SwiftOrganizer"
 let DataBaseErrorDomain = "SwiftOrganizerErrorDomain"
-let CategoryEntityName = "Category"
-let IcoEntityName = "Ico"
+let CategoryEntityName = "TaskCategory"
+let IcoEntityName = "TaskIco"
 let TaskEntityName = "Task"
 
 public class SOLocalDataBase: SODataBaseProtocol {
     
-    class func sharedInstance() -> SODataBaseProtocol{
+    public class func sharedInstance() -> SODataBaseProtocol{
         struct SingletonWrapper {
             static let sharedInstance = SOLocalDataBase()
         }
@@ -98,10 +98,10 @@ public class SOLocalDataBase: SODataBaseProtocol {
             ["id":"15","name":"ico15","img":"ico15"],
             ["id":"16","name":"ico16","img":"ico16"],
             ["id":"17","name":"ico17","img":"ico17"]]
-        let entityName = NSStringFromClass(Ico.classForCoder())
+        let entityName = NSStringFromClass(TaskIco.classForCoder())
         
         for dict in icons{
-            let ico = NSEntityDescription.insertNewObjectForEntityForName(entityName, inManagedObjectContext: managedObjectContext!) as! Ico
+            let ico = NSEntityDescription.insertNewObjectForEntityForName(entityName, inManagedObjectContext: managedObjectContext!) as! TaskIco
             ico.id = dict["id"]!
             ico.name = dict["name"]!
             ico.imagename = dict["img"]!
@@ -114,10 +114,10 @@ public class SOLocalDataBase: SODataBaseProtocol {
     private func populateCategories(){
         let categories = ["ToDo".localized, "Events".localized, "Life".localized, "Work".localized]
         var categoryId = 1
-        let entityName = NSStringFromClass(Category.classForCoder())
+        let entityName = NSStringFromClass(TaskCategory.classForCoder())
         
         for catagoryName in categories{
-            let category = NSEntityDescription.insertNewObjectForEntityForName(entityName, inManagedObjectContext: managedObjectContext!) as! Category
+            let category = NSEntityDescription.insertNewObjectForEntityForName(entityName, inManagedObjectContext: managedObjectContext!) as! TaskCategory
             let newCategoryId = "\(categoryId++)"
             category.id = newCategoryId
             category.name = catagoryName as String
@@ -128,19 +128,19 @@ public class SOLocalDataBase: SODataBaseProtocol {
     }
     
     // - MARK: Categories
-    func allCategories(block: (resultBuffer: [SOCategory], error: NSError?) -> Void){
+    public func allCategories(block: (resultBuffer: [SOCategory], error: NSError?) -> Void){
         var _allCategories: [SOCategory] = []
         
         let fetchRequest = NSFetchRequest(entityName: CategoryEntityName)
         
         var requestError: NSError?
-        let categories = managedObjectContext!.executeFetchRequest(fetchRequest, error: &requestError) as! [Category]
+        let categories = managedObjectContext!.executeFetchRequest(fetchRequest, error: &requestError) as! [TaskCategory]
         
         if let error = requestError{
             block(resultBuffer: _allCategories, error: error)
         } else {
             if categories.count > 0{
-                for category: Category in categories{
+                for category: TaskCategory in categories{
                     let categoryItem = self.newCategory(category)
                     _allCategories.append(categoryItem)
                 }
@@ -153,7 +153,7 @@ public class SOLocalDataBase: SODataBaseProtocol {
         }
     }
     
-    private func newCategory(category: Category) -> SOCategory{
+    private func newCategory(category: TaskCategory) -> SOCategory{
         var newCategory = SOCategory()
         newCategory.initFromCoreDataObject(category)
         
@@ -161,19 +161,19 @@ public class SOLocalDataBase: SODataBaseProtocol {
     }
     
     // - MARK: Icons
-    func allIcons(block: (resultBuffer: [SOIco], error: NSError?) -> Void){
+    public func allIcons(block: (resultBuffer: [SOIco], error: NSError?) -> Void){
         var _allIcon: [SOIco] = []
         
         let fetchRequest = NSFetchRequest(entityName: IcoEntityName)
         
         var requestError: NSError?
-        let icons = managedObjectContext!.executeFetchRequest(fetchRequest, error: &requestError) as! [Ico]
+        let icons = managedObjectContext!.executeFetchRequest(fetchRequest, error: &requestError) as! [TaskIco]
         
         if let error = requestError{
             block(resultBuffer: _allIcon, error: error)
         } else {
             if icons.count > 0{
-                for ico: Ico in icons{
+                for ico: TaskIco in icons{
                     let icoItem = self.newIco(ico)
                     _allIcon.append(icoItem)
                 }
@@ -187,14 +187,14 @@ public class SOLocalDataBase: SODataBaseProtocol {
     }
     
     // MARK: Ico
-    private func newIco(ico: Ico) -> SOIco{
+    private func newIco(ico: TaskIco) -> SOIco{
         var newIco = SOIco()
         newIco.initFromCoreDataObject(ico)
         
         return newIco
     }
     
-    func saveFieldToObject(object: AnyObject?, fieldName: String, value: AnyObject, block: (error: NSError?) -> Void){
+    public func saveFieldToObject(object: AnyObject?, fieldName: String, value: AnyObject, block: (error: NSError?) -> Void){
         let managedObject = object as? NSManagedObject
         
         if let object = managedObject{
@@ -209,7 +209,7 @@ public class SOLocalDataBase: SODataBaseProtocol {
     }
     
     // - MARK: Tasks
-    func allTasks(block: (resultBuffer: [SOTask], error: NSError?) -> Void) {
+    public func allTasks(block: (resultBuffer: [SOTask], error: NSError?) -> Void) {
         let backgroundContext = NSManagedObjectContext(concurrencyType: NSManagedObjectContextConcurrencyType.PrivateQueueConcurrencyType)
         backgroundContext.persistentStoreCoordinator = persistentStoreCoordinator
         
@@ -279,7 +279,7 @@ public class SOLocalDataBase: SODataBaseProtocol {
         return newTask
     }
     
-    func saveTask(task: SOTask, block: (error: NSError?) -> Void){
+    public func saveTask(task: SOTask, block: (error: NSError?) -> Void){
         let taskObject: Task? = task.databaseObject as? Task
         
         if let object = taskObject{
@@ -294,12 +294,12 @@ public class SOLocalDataBase: SODataBaseProtocol {
         block(error: nil)
     }
     
-    func removeTask(task: SOTask){
+    public func removeTask(task: SOTask){
         let taskObject: Task? = task.databaseObject as? Task
         self.deleteObject(taskObject)
     }
     
-    func areObjectsEqual(object1: AnyObject?, object2: AnyObject?) -> Bool{
+    public func areObjectsEqual(object1: AnyObject?, object2: AnyObject?) -> Bool{
         if let obj1: Task = object1 as? Task, let obj2: Task = object2 as? Task{
             return obj1 == obj2
         }
@@ -416,7 +416,7 @@ public class SOLocalDataBase: SODataBaseProtocol {
 
     // MARK: -
     // MARK: - Core Data Saving support
-    func saveContext() {
+    public func saveContext() {
         if let moc = self.managedObjectContext {
             var error: NSError? = nil
             if moc.hasChanges{

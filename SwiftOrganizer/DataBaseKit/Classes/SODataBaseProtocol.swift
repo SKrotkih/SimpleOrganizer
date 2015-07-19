@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol SODataBaseProtocol{
+public protocol SODataBaseProtocol{
 
     static func sharedInstance() -> SODataBaseProtocol
     

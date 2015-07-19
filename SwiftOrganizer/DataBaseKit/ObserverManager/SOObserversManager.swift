@@ -9,20 +9,20 @@
 
 import Foundation;
 
-protocol SOObserverProtocol: class{
+public protocol SOObserverProtocol: class{
     func notify(notification: SOObserverNotification)
 }
 
-enum SOObserverNotificationTypes: String{
+public enum SOObserverNotificationTypes: String{
     case SODataBaseTypeChanged = "DataBaseTypeChanged"
     case SODataBaseDidChanged = "DataBaseCloudDidChanged"
 }
 
-class SOObserverNotification {
-    let type: SOObserverNotificationTypes
-    let data: Any?
+public class SOObserverNotification {
+    public let type: SOObserverNotificationTypes
+    public let data: Any?
     
-    init(type: SOObserverNotificationTypes, data:Any?) {
+    public init(type: SOObserverNotificationTypes, data:Any?) {
         self.type = type;
         self.data = data;
     }
@@ -36,12 +36,12 @@ private class WeakObserverReference {
     }
 }
 
-class SOObserversManager {
+public class SOObserversManager {
     private var _dataBaseTypeChangeObservers = [Dictionary<String, AnyObject>]();
     private var _dataBaseDidChangeObservers = [Dictionary<String, AnyObject>]();
     private var collectionQueue = dispatch_queue_create("colQ", DISPATCH_QUEUE_CONCURRENT);
     
-    class var sharedInstance: SOObserversManager {
+    public class var sharedInstance: SOObserversManager {
         struct SingletonWrapper {
             static let sharedInstance = SOObserversManager()
         }
@@ -52,7 +52,7 @@ class SOObserversManager {
     private init() {
     }
     
-    func addObserver(observer: SOObserverProtocol, type: SOObserverNotificationTypes, priority: Int = 0){
+    public func addObserver(observer: SOObserverProtocol, type: SOObserverNotificationTypes, priority: Int = 0){
         dispatch_barrier_sync(self.collectionQueue, { () in
             let dict: Dictionary<String, AnyObject> = ["priority": priority, "object": WeakObserverReference(observer: observer)]
             
@@ -87,7 +87,7 @@ class SOObserversManager {
         });
     }
 
-    func removeObserver(observer: SOObserverProtocol, type: SOObserverNotificationTypes){
+    public func removeObserver(observer: SOObserverProtocol, type: SOObserverNotificationTypes){
         dispatch_barrier_sync(self.collectionQueue, { () in
             switch type{
             case .SODataBaseTypeChanged:
@@ -106,7 +106,7 @@ class SOObserversManager {
         })
     }
     
-    func sendNotification(notification: SOObserverNotification) {
+    public func sendNotification(notification: SOObserverNotification) {
         dispatch_sync(self.collectionQueue, { () in
             switch notification.type{
             case .SODataBaseTypeChanged:

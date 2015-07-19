@@ -9,8 +9,8 @@
 import Foundation
 import CoreData
 
-@objc(Ico)
-class Ico: NSManagedObject {
+@objc(TaskIco)
+class TaskIco: NSManagedObject {
 
     @NSManaged var id: String
     @NSManaged var name: String

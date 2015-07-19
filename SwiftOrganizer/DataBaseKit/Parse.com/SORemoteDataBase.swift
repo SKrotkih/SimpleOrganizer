@@ -17,7 +17,7 @@ public class SORemoteDataBase: SODataBaseProtocol {
     private var currentIcoIndex = 0
     private var currentTaskIndex = 0
 
-    class func sharedInstance() -> SODataBaseProtocol{
+    public class func sharedInstance() -> SODataBaseProtocol{
         struct SingletonWrapper {
             static let sharedInstance = SORemoteDataBase()
         }
@@ -175,7 +175,7 @@ public class SORemoteDataBase: SODataBaseProtocol {
     }
 
     
-    func allCategories(block: (resultBuffer: [SOCategory], error: NSError?) -> Void){
+    public func allCategories(block: (resultBuffer: [SOCategory], error: NSError?) -> Void){
         self.fetchAllDataOfClassName(CategoryClassName, block: {(resultBuffer: [AnyObject], error: NSError?) in
             let buffer = resultBuffer as! [SOCategory]
             block(resultBuffer: buffer, error: error)
@@ -190,7 +190,7 @@ public class SORemoteDataBase: SODataBaseProtocol {
         }
     }
 
-    func allIcons(block: (resultBuffer: [SOIco], error: NSError?) -> Void){
+    public func allIcons(block: (resultBuffer: [SOIco], error: NSError?) -> Void){
         self.fetchAllDataOfClassName(IcoClassName, block: {(resultBuffer: [AnyObject], error: NSError?) in
             let buffer: [SOIco] = resultBuffer as! [SOIco]
             block(resultBuffer: buffer, error: error)
@@ -219,7 +219,7 @@ public class SORemoteDataBase: SODataBaseProtocol {
         }
     }
     
-    func allTasks(block: (resultBuffer: [SOTask], error: NSError?) -> Void) {
+    public func allTasks(block: (resultBuffer: [SOTask], error: NSError?) -> Void) {
         self.fetchAllDataOfClassName(TaskClassName, block: {(resultBuffer: [AnyObject], fetchError: NSError?) in
             if let error = fetchError{
                 block(resultBuffer: [], error: error)
@@ -263,7 +263,7 @@ public class SORemoteDataBase: SODataBaseProtocol {
         })
     }
     
-    func saveTask(task: SOTask, block: (error: NSError?) -> Void){
+    public func saveTask(task: SOTask, block: (error: NSError?) -> Void){
         var object: PFObject? = task.databaseObject as? PFObject
         
         if let taskObject = object{
@@ -278,13 +278,13 @@ public class SORemoteDataBase: SODataBaseProtocol {
         })
     }
 
-    func removeTask(task: SOTask){
+    public func removeTask(task: SOTask){
         if let taskObject: PFObject = task.databaseObject as? PFObject{
             self.deleteObject(taskObject)
         }
     }
 
-    func areObjectsEqual(object1: AnyObject?, object2: AnyObject?) -> Bool{
+    public func areObjectsEqual(object1: AnyObject?, object2: AnyObject?) -> Bool{
         if let obj1: PFObject = object1 as? PFObject, let obj2: PFObject = object2 as? PFObject{
             return obj1 == obj2
         }
@@ -386,7 +386,7 @@ public class SORemoteDataBase: SODataBaseProtocol {
         }
     }
 
-    func saveFieldToObject(object: AnyObject?, fieldName: String, value: AnyObject, block: (error: NSError?) -> Void){
+    public func saveFieldToObject(object: AnyObject?, fieldName: String, value: AnyObject, block: (error: NSError?) -> Void){
         if let pfObject = object as? PFObject{
             pfObject[fieldName] = value
             self.saveObject(pfObject, block: {(error: NSError?) in
@@ -395,7 +395,7 @@ public class SORemoteDataBase: SODataBaseProtocol {
         }
     }
     
-    func saveContext() {
+    public func saveContext() {
     
     }
 

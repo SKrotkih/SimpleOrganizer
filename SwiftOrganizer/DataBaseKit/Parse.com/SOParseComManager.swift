@@ -22,13 +22,13 @@ let DefaultUserPassword = "1234"
 let SOUsernameKey = "UsernameKey"
 let SOPasswordKey = "PasswordKey"
 
-class SOParseComManager: NSObject {
+public class SOParseComManager: NSObject {
     
     //--------------------------------------
     // MARK: - UIApplicationDelegate
     //--------------------------------------
     
-     class func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+     public class func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Enable storing and querying data from Local Datastore.
         // Remove this line if you don't want to use Local Datastore features or want to use cachePolicy.
         Parse.enableLocalDatastore()
@@ -87,7 +87,7 @@ class SOParseComManager: NSObject {
     // MARK: Push Notifications
     //--------------------------------------
     
-    class func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData) {
+    public class func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData) {
         let installation = PFInstallation.currentInstallation()
         installation.setDeviceTokenFromData(deviceToken)
         installation.saveInBackground()
@@ -101,7 +101,7 @@ class SOParseComManager: NSObject {
         })
     }
     
-    class func application(application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: NSError) {
+    public class func application(application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: NSError) {
         if error.code == 3010 {
             println("Push notifications are not supported in the iOS Simulator.")
         } else {
@@ -109,14 +109,14 @@ class SOParseComManager: NSObject {
         }
     }
     
-    class func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject]) {
+    public class func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject]) {
         PFPush.handlePush(userInfo)
         if application.applicationState == UIApplicationState.Inactive {
             PFAnalytics.trackAppOpenedWithRemoteNotificationPayload(userInfo)
         }
     }
     
-    class func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject],
+    public class func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject],
         fetchCompletionHandler completionHandler: (UIBackgroundFetchResult) -> Void) {
             if application.applicationState == UIApplicationState.Active {
             } else if application.applicationState == UIApplicationState.Inactive {
@@ -129,7 +129,7 @@ class SOParseComManager: NSObject {
     // MARK: Facebook SDK Integration
     //--------------------------------------
     
-    class func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject?) -> Bool {
+    public class func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject?) -> Bool {
         ///////////////////////////////////////////////////////////
         // Uncomment this method if you are using Facebook
         ///////////////////////////////////////////////////////////

@@ -9,8 +9,8 @@
 
 import UIKit
 
-let SODataBaseTypeKey = "DataBaseType"
-let SOEnableiCloudForCoreDataKey = "EnableiCloudForCoreData"
+public let SODataBaseTypeKey = "DataBaseType"
+public let SOEnableiCloudForCoreDataKey = "EnableiCloudForCoreData"
 
 enum SODataBaseType: String{
     case Undefined = "Undefined"
@@ -21,7 +21,7 @@ enum SODataBaseType: String{
 public final class SODataBaseFactory: SOObserverProtocol {
     private var _dataBase: SODataBaseProtocol?
 
-    class var sharedInstance: SODataBaseFactory {
+    public class var sharedInstance: SODataBaseFactory {
         struct SingletonWrapper {
         static let sharedInstance = SODataBaseFactory()
         }
@@ -36,7 +36,7 @@ public final class SODataBaseFactory: SOObserverProtocol {
         SOObserversManager.sharedInstance.removeObserver(self, type: .SODataBaseTypeChanged)
     }
     
-    var dataBase: SODataBaseProtocol!{
+    public var dataBase: SODataBaseProtocol!{
         if _dataBase != nil{
             return _dataBase
         }
@@ -68,7 +68,7 @@ public final class SODataBaseFactory: SOObserverProtocol {
     }
     
     //- MARK: SOObserverProtocol implementation
-    func notify(notification: SOObserverNotification){
+    public func notify(notification: SOObserverNotification){
         switch notification.type{
         case .SODataBaseTypeChanged:
             self._dataBase = nil

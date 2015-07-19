@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SOCategory: NSObject {
+public class SOCategory: NSObject {
     
     private var _databaseObject: AnyObject?
     private var _id: String = ""
@@ -27,7 +27,7 @@ class SOCategory: NSObject {
         self.selected = selected
     }
     
-    var id: String{
+    public var id: String{
         get{
             return _id
         }
@@ -36,7 +36,7 @@ class SOCategory: NSObject {
         }
     }
     
-    var name: String{
+    public var name: String{
         get{
             return _name
         }
@@ -45,7 +45,7 @@ class SOCategory: NSObject {
         }
     }
     
-    var selected: Bool{
+    public var selected: Bool{
         get{
             return _selected
         }
@@ -63,7 +63,7 @@ class SOCategory: NSObject {
         }
     }
     
-    func didSelect(select: Bool, block: (error: NSError?) -> Void){
+    public func didSelect(select: Bool, block: (error: NSError?) -> Void){
         SODataBaseFactory.sharedInstance.dataBase.saveFieldToObject(self.databaseObject, fieldName: "selected", value: select, block: {(error: NSError?) in
             block(error: error)
         })
@@ -82,7 +82,7 @@ extension SOCategory{
     func copyToParseObject(object: PFObject){
     }
 
-    func initFromCoreDataObject(object: Category)
+    func initFromCoreDataObject(object: TaskCategory)
     {
         self.databaseObject = object
         self.id = object.id

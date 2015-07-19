@@ -8,9 +8,9 @@
 
 import Foundation
 
-class SOTypeDataBaseSwitcher{
+public class SOTypeDataBaseSwitcher{
 
-    class func switchToIndex(index: Int){
+    public class func switchToIndex(index: Int){
         let defaults = NSUserDefaults.standardUserDefaults()
         var dbType: String
         
@@ -28,13 +28,13 @@ class SOTypeDataBaseSwitcher{
         SOObserversManager.sharedInstance.sendNotification(notification)
     }
     
-    class func setUpOfUsingICloud(usingICloud: Bool){
+    public class func setUpOfUsingICloud(usingICloud: Bool){
         let defaults = NSUserDefaults.standardUserDefaults()
         defaults.setBool(usingICloud, forKey: SOEnableiCloudForCoreDataKey)
         defaults.synchronize()
     }
     
-    class func usingICloudCurrentState() -> Bool{
+    public class func usingICloudCurrentState() -> Bool{
         var retValue: Bool!
         let defaults = NSUserDefaults.standardUserDefaults()
         let useiCloudOpt: Bool? = defaults.boolForKey(SOEnableiCloudForCoreDataKey)
@@ -48,7 +48,7 @@ class SOTypeDataBaseSwitcher{
         return retValue
     }
     
-    class func indexOfCurrectDBType() -> Int{
+    public class func indexOfCurrectDBType() -> Int{
         var selectedIndex: Int!
         let defaults = NSUserDefaults.standardUserDefaults()
         
@@ -69,7 +69,7 @@ class SOTypeDataBaseSwitcher{
         return selectedIndex
     }
     
-    class func switchToAnotherDB(){
+    public class func switchToAnotherDB(){
         var currentIndex = self.indexOfCurrectDBType()
 
         if currentIndex == 0{

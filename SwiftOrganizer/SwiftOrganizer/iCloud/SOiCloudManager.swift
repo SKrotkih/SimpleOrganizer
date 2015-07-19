@@ -94,7 +94,7 @@ public final class SOiCloudManager: SOObserverProtocol {
     }
     
     //- MARK: SOObserverProtocol implementation
-    func notify(notification: SOObserverNotification){
+    public func notify(notification: SOObserverNotification){
         switch notification.type{
         case .SODataBaseTypeChanged:
             if let value: String = notification.data as? String{

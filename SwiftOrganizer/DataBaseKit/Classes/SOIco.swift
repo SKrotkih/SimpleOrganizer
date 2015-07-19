@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SOIco: NSObject {
+public class SOIco: NSObject {
 
     private var _databaseObject: AnyObject?
     private var _id: String = ""
@@ -34,7 +34,7 @@ class SOIco: NSObject {
         }
     }
     
-    var id: String{
+    public var id: String{
         get{
             return _id
         }
@@ -52,7 +52,7 @@ class SOIco: NSObject {
         }
     }
     
-    var imageName: String{
+    public var imageName: String{
         get{
             return _imageName
         }
@@ -61,7 +61,7 @@ class SOIco: NSObject {
         }
     }
     
-    var selected: Bool{
+    public var selected: Bool{
         get{
             return _selected
         }
@@ -70,7 +70,7 @@ class SOIco: NSObject {
         }
     }
     
-    func didSelect(select: Bool, block: (error: NSError?) -> Void){
+    public func didSelect(select: Bool, block: (error: NSError?) -> Void){
         SODataBaseFactory.sharedInstance.dataBase.saveFieldToObject(self.databaseObject, fieldName: "selected", value: select, block: {(error: NSError?) in
             block(error: error)
         })
@@ -90,7 +90,7 @@ extension SOIco{
     func copyToParseObject(object: PFObject){
     }
 
-    func initFromCoreDataObject(object: Ico)
+    func initFromCoreDataObject(object: TaskIco)
     {
         self.databaseObject = object
         self.id = object.id

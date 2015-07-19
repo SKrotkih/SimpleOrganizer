@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import DataBaseKit
 
 protocol SOEditTaskController{
     func startEditingTask(task: SOTask?)

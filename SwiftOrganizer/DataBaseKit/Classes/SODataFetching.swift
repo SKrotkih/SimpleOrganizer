@@ -15,7 +15,7 @@ public final class SODataFetching: SOObserverProtocol{
     
     private var collectionQueue = dispatch_queue_create("fetchDataQ", DISPATCH_QUEUE_CONCURRENT);
 
-    class var sharedInstance: SODataFetching {
+    public class var sharedInstance: SODataFetching {
         struct SingletonWrapper {
         static let sharedInstance = SODataFetching()
         }
@@ -32,7 +32,7 @@ public final class SODataFetching: SOObserverProtocol{
     
     
     // - MARK: Categories
-    func allCategories(block: (resultBuffer: [SOCategory], error: NSError?) -> Void){
+    public func allCategories(block: (resultBuffer: [SOCategory], error: NSError?) -> Void){
         if self._allCategories.count > 0{
             block(resultBuffer: self._allCategories, error: nil)
         } else {
@@ -44,7 +44,7 @@ public final class SODataFetching: SOObserverProtocol{
     }
     
     // - MARK: Icons
-    func allIcons(block: (resultBuffer: [SOIco], error: NSError?) -> Void){
+    public func allIcons(block: (resultBuffer: [SOIco], error: NSError?) -> Void){
         if self._allIcons.count > 0{
             block(resultBuffer: self._allIcons, error: nil)
         } else {
@@ -56,7 +56,7 @@ public final class SODataFetching: SOObserverProtocol{
     }
     
     // - MARK: Tasks
-    func allTasks(block: (resultBuffer: [SOTask], error: NSError?) -> Void) {
+    public func allTasks(block: (resultBuffer: [SOTask], error: NSError?) -> Void) {
         SODataBaseFactory.sharedInstance.dataBase.allTasks{(allCurrentTasks: [SOTask], error: NSError?) in
             self._allTasks = allCurrentTasks
             block(resultBuffer: self._allTasks, error: error)
@@ -106,7 +106,7 @@ public final class SODataFetching: SOObserverProtocol{
         return nil
     }
     
-    func iconImageName(id : String) -> String?{
+    public func iconImageName(id : String) -> String?{
         let icoOpt: SOIco? = self.iconById(id)
         if let ico = icoOpt{
             return ico.imageName
@@ -126,7 +126,7 @@ public final class SODataFetching: SOObserverProtocol{
     }
     
     //- MARK: SOObserverProtocol implementation
-    func notify(notification: SOObserverNotification){
+    public func notify(notification: SOObserverNotification){
         switch notification.type{
         case .SODataBaseTypeChanged:
             dispatch_barrier_sync(self.collectionQueue, { () in

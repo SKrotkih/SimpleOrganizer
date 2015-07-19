@@ -10,7 +10,7 @@ import UIKit
 
 let MaxIconsCount = 6
 
-class SOTask: NSObject{
+public class SOTask: NSObject{
 
     private var _databaseObject: AnyObject?
     private var _title: String = ""
@@ -18,7 +18,7 @@ class SOTask: NSObject{
     private var _icons = [String](count: MaxIconsCount, repeatedValue: "")
     private var _date: NSDate?
 
-    func clearTask(){
+    public func clearTask(){
         self.databaseObject = nil
         self.title = ""
         self.category = ""
@@ -26,7 +26,7 @@ class SOTask: NSObject{
         self.date = nil
     }
 
-    func cloneTask(task: SOTask){
+    public func cloneTask(task: SOTask){
         self.databaseObject = task.databaseObject
         self.title = task.title
         self.category = task.category
@@ -34,7 +34,7 @@ class SOTask: NSObject{
         self.date = task.date
     }
     
-    override func isEqual(object: AnyObject?) -> Bool {
+    override public func isEqual(object: AnyObject?) -> Bool {
         if let anotherTask: SOTask = object as? SOTask{
             var isEqual: Bool = true
             isEqual = isEqual && SODataBaseFactory.sharedInstance.dataBase.areObjectsEqual(self.databaseObject, object2: anotherTask.databaseObject)
@@ -63,13 +63,13 @@ class SOTask: NSObject{
         }
     }
     
-    var maxIconsCount: Int{
+    public var maxIconsCount: Int{
         get{
             return MaxIconsCount;
         }
     }
    
-    var title: String{
+    public var title: String{
         get{
             return _title
         }
@@ -78,7 +78,7 @@ class SOTask: NSObject{
         }
     }
     
-    var category: String{
+    public var category: String{
         get{
             return self._category
         }
@@ -87,7 +87,7 @@ class SOTask: NSObject{
         }
     }
 
-    var icons: [String]{
+    public var icons: [String]{
         get{
             return _icons
         }
@@ -96,7 +96,7 @@ class SOTask: NSObject{
         }
     }
     
-    var date: NSDate?{
+    public var date: NSDate?{
         get{
             return _date
         }
@@ -105,7 +105,7 @@ class SOTask: NSObject{
         }
     }
 
-    var categoryName: String{
+    public var categoryName: String{
         get{
             let categoryId = self._category
             
@@ -117,7 +117,7 @@ class SOTask: NSObject{
         }
     }
     
-    func iconImage(index: Int) -> UIImage?{
+    public func iconImage(index: Int) -> UIImage?{
         if index < _icons.count{
             let icoId = _icons[index]
             if let imageName : String = SODataFetching.sharedInstance.iconImageName(icoId){
@@ -130,7 +130,7 @@ class SOTask: NSObject{
         return nil
     }
 
-    func setIcon(index: Int, newValue: String){
+    public func setIcon(index: Int, newValue: String){
         if index < _icons.count{
             _icons[index] = newValue
         }
@@ -145,18 +145,18 @@ class SOTask: NSObject{
         }
     }
 
-    func save(block: (error: NSError?) -> Void){
+    public func save(block: (error: NSError?) -> Void){
         SODataBaseFactory.sharedInstance.dataBase.saveTask(self, block: {(error: NSError?) in
             block(error: error)
         })
     }
     
-    func remove(){
+    public func remove(){
         SODataBaseFactory.sharedInstance.dataBase.removeTask(self)
     }
     
     func update(){
-        //       let batch = NSBatchUpdateRequest(entityName: "Category")
+        //       let batch = NSBatchUpdateRequest(entityName: "TaskCategory")
         //        batch.propertiesToUpdate = [fieldName: value]
         //        // Predicate
         //        batch.predicate = NSPredicate(format: "id = %@", category.id)

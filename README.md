@@ -65,3 +65,4 @@ SwiftOrganizer is available under the MIT license. See the LICENSE file for more
 16.07.2015: Added task list menu 'Activity'. Have used UIActivityViewController for that. Have made three menu items:  Erase Task, New Task and Switch DB type.
 17.07.2015: Added Sharing Extension
 18.07.2015: Added Today Extension. Widjet
+19.07.2015: Created DataBase.framework. All database methods was removed to the framework. All ready to make Today widget with current actual tasks.
