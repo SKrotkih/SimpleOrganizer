@@ -9,6 +9,7 @@
 
 import UIKit
 
+public let AppGroupsId = "group.skappleid.SOWidget"
 public let SODataBaseTypeKey = "DataBaseType"
 public let SOEnableiCloudForCoreDataKey = "EnableiCloudForCoreData"
 

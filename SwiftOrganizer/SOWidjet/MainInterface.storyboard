@@ -1,42 +1,68 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="H3R-53-sqT">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="cgJ-LG-RMR">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--Today View Controller-->
-        <scene sceneID="N2P-a9-ua7">
+        <scene sceneID="Zyj-JL-OXX">
             <objects>
-                <tableViewController id="H3R-53-sqT" customClass="TodayViewController" customModule="SOTodayExtension" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="VxJ-4N-O6K">
+                <viewController id="cgJ-LG-RMR" customClass="TodayViewController" customModule="SOWidjet" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="w4Y-QC-hFz"/>
+                        <viewControllerLayoutGuide type="bottom" id="63i-vF-ecW"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="vrO-mL-T0h">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="XMY-Uw-6h9">
+                                <rect key="frame" x="13" y="28" width="295" height="29"/>
+                                <segments>
+                                    <segment title="Local DataBase"/>
+                                    <segment title="Parse.com DataBase"/>
+                                </segments>
+                                <color key="tintColor" red="0.29803922770000002" green="0.29803922770000002" blue="0.29803922770000002" alpha="1" colorSpace="calibratedRGB"/>
+                                <connections>
+                                    <action selector="switchToAnotherDataBase:" destination="cgJ-LG-RMR" eventType="valueChanged" id="oYP-jp-eEn"/>
+                                </connections>
+                            </segmentedControl>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="fIF-Lw-Pun">
+                                <rect key="frame" x="16" y="74" width="288" height="486"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="cgJ-LG-RMR" id="Rkf-c4-FOH"/>
+                                    <outlet property="delegate" destination="cgJ-LG-RMR" id="q0U-XV-oDS"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" textLabel="C5T-0d-xhc" style="IBUITableViewCellStyleDefault" id="9iw-Le-M5a">
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="9iw-Le-M5a" id="zYG-sv-MkW">
-                                    <autoresizingMask key="autoresizingMask"/>
-                                    <subviews>
-                                        <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="C5T-0d-xhc">
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                    </subviews>
-                                </tableViewCellContentView>
-                            </tableViewCell>
-                        </prototypes>
-                        <connections>
-                            <outlet property="dataSource" destination="H3R-53-sqT" id="qIk-Op-Mdy"/>
-                            <outlet property="delegate" destination="H3R-53-sqT" id="eXy-R6-4w0"/>
-                        </connections>
-                    </tableView>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="YVX-c6-WiN" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                        <constraints>
+                            <constraint firstAttribute="centerX" secondItem="XMY-Uw-6h9" secondAttribute="centerX" constant="-0.5" id="1O2-YL-C5n"/>
+                            <constraint firstItem="XMY-Uw-6h9" firstAttribute="leading" secondItem="vrO-mL-T0h" secondAttribute="leadingMargin" constant="-3" id="cOd-lI-ZXV"/>
+                            <constraint firstItem="XMY-Uw-6h9" firstAttribute="top" secondItem="w4Y-QC-hFz" secondAttribute="bottom" constant="8" id="d3v-86-NIt"/>
+                            <constraint firstItem="fIF-Lw-Pun" firstAttribute="top" secondItem="XMY-Uw-6h9" secondAttribute="bottom" constant="18" id="dQ5-5h-9eW"/>
+                            <constraint firstItem="fIF-Lw-Pun" firstAttribute="leading" secondItem="vrO-mL-T0h" secondAttribute="leadingMargin" id="e4t-4V-fcC"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="XMY-Uw-6h9" secondAttribute="trailing" constant="-4" id="eAs-fF-gFg"/>
+                            <constraint firstItem="63i-vF-ecW" firstAttribute="top" secondItem="fIF-Lw-Pun" secondAttribute="bottom" constant="8" id="uTw-pg-EbC"/>
+                            <constraint firstItem="fIF-Lw-Pun" firstAttribute="trailing" secondItem="vrO-mL-T0h" secondAttribute="trailingMargin" id="yZd-RY-7wB"/>
+                        </constraints>
+                    </view>
+                    <extendedEdge key="edgesForExtendedLayout"/>
+                    <nil key="simulatedStatusBarMetrics"/>
+                    <nil key="simulatedTopBarMetrics"/>
+                    <nil key="simulatedBottomBarMetrics"/>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="320" height="568"/>
+                    <connections>
+                        <outlet property="tableView" destination="fIF-Lw-Pun" id="u4F-D6-XBF"/>
+                        <outlet property="typeOfDataBaseSwitcher" destination="XMY-Uw-6h9" id="oDI-Aa-pHB"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="JHL-Qr-P35" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="366" y="328.5"/>
+            <point key="canvasLocation" x="-30" y="342"/>
         </scene>
     </scenes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">

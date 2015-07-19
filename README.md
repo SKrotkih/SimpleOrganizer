@@ -10,7 +10,7 @@ Were realised two types of database:
 - Core Data (local database on device)
 - Remote database (on Parse.com server)
 
-Features, which were also realised:
+Features, which were realised:
 - autolayout (on Interfase Builder Level only)
 - switching of the database types from Core Data to remote database and vice versa
 - used iCloud key-value storage for switching database types (if you change database type on your iPad, then on your iPhone is changing after some seconds too)
@@ -22,6 +22,8 @@ Features, which were also realised:
 - sharing via UIActivityViewController
 - UIDocument. Enter and Edit files in the Documents folder.
 - Document Picker - access to files on remote storage like iCloud, DropBox and etc with download to local Documents folder.
+- extension and widjet
+- all database function are in DataBaseKit.framework.
 
 Used design patterns:
 - abstract method;
@@ -43,9 +45,9 @@ Icons are used for featching too. They are predefined too.
 The Project is in progress.
 In future:
 - add or remove icons and categories
-- make login (now is used login with default user and password on the parse.com).
-- add events to the Reminder app
-- Core Data on iCloud (backend).
+- make login (at present default user and password are used for login to the backend (parse.com server)).
+- will be able to add events to the Reminder app
+- local database will be on the iCloud.
 
 ## Requirements
 
@@ -65,4 +67,4 @@ SwiftOrganizer is available under the MIT license. See the LICENSE file for more
 16.07.2015: Added task list menu 'Activity'. Have used UIActivityViewController for that. Have made three menu items:  Erase Task, New Task and Switch DB type.
 17.07.2015: Added Sharing Extension
 18.07.2015: Added Today Extension. Widjet
-19.07.2015: Created DataBase.framework. All database methods was removed to the framework. All ready to make Today widget with current actual tasks.
+19.07.2015: Created DataBaseKit.framework. All database methods was moved to the framework. All ready to make Today widget with current actual tasks.

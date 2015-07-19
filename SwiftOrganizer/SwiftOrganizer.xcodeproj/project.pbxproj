@@ -33,6 +33,7 @@
 		7F5725A31B0F61F7003DBDEB /* UITableViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F5725A01B0F61F7003DBDEB /* UITableViewExtension.swift */; };
 		7F5725A41B0F61F7003DBDEB /* UIViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F5725A11B0F61F7003DBDEB /* UIViewControllerExtension.swift */; };
 		7F5779D41B5B5E68006EB1E5 /* SwiftOrganizer.xcdatamodeld in Resources */ = {isa = PBXBuildFile; fileRef = 7FD44B791B5A9B1A000A4FB3 /* SwiftOrganizer.xcdatamodeld */; };
+		7F5779D71B5B97D2006EB1E5 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F57E00E1B4ACEF700789FBD /* CloudKit.framework */; };
 		7F57E00F1B4ACEF700789FBD /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F57E00E1B4ACEF700789FBD /* CloudKit.framework */; };
 		7F5826BD1B482D6C00C0B179 /* SOiCloudManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F5826BC1B482D6C00C0B179 /* SOiCloudManager.swift */; };
 		7F5A6D1F1B14A75A009665C7 /* SOMainTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F5A6D1E1B14A75A009665C7 /* SOMainTableViewController.swift */; };
@@ -229,6 +230,7 @@
 		7F57259F1B0F61F7003DBDEB /* StringExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
 		7F5725A01B0F61F7003DBDEB /* UITableViewExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UITableViewExtension.swift; sourceTree = "<group>"; };
 		7F5725A11B0F61F7003DBDEB /* UIViewControllerExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewControllerExtension.swift; sourceTree = "<group>"; };
+		7F5779D81B5B98CF006EB1E5 /* SOWidjet-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SOWidjet-Bridging-Header.h"; sourceTree = "<group>"; };
 		7F57E00E1B4ACEF700789FBD /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		7F5826BA1B481E2C00C0B179 /* SwiftOrganizer.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = SwiftOrganizer.entitlements; path = ../SwiftOrganizer.entitlements; sourceTree = "<group>"; };
 		7F5826BC1B482D6C00C0B179 /* SOiCloudManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SOiCloudManager.swift; path = SwiftOrganizer/iCloud/SOiCloudManager.swift; sourceTree = SOURCE_ROOT; };
@@ -304,7 +306,7 @@
 		7FD44B641B5A9A67000A4FB3 /* SODataFetching.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SODataFetching.swift; path = DataBaseKit/Classes/SODataFetching.swift; sourceTree = "<group>"; };
 		7FD44B651B5A9A67000A4FB3 /* SOIco.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SOIco.swift; path = DataBaseKit/Classes/SOIco.swift; sourceTree = "<group>"; };
 		7FD44B661B5A9A67000A4FB3 /* SOTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SOTask.swift; path = DataBaseKit/Classes/SOTask.swift; sourceTree = "<group>"; };
-		7FD44B671B5A9A67000A4FB3 /* SOTypeDataBaseSwitcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SOTypeDataBaseSwitcher.swift; path = DataBaseKit/Classes/SOTypeDataBaseSwitcher.swift; sourceTree = "<group>"; };
+		7FD44B671B5A9A67000A4FB3 /* SOTypeDataBaseSwitcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SOTypeDataBaseSwitcher.swift; path = Classes/SOTypeDataBaseSwitcher.swift; sourceTree = "<group>"; };
 		7FD44B711B5A9AC8000A4FB3 /* SOParseComManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SOParseComManager.swift; path = DataBaseKit/Parse.com/SOParseComManager.swift; sourceTree = "<group>"; };
 		7FD44B721B5A9AC8000A4FB3 /* SORemoteDataBase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SORemoteDataBase.swift; path = DataBaseKit/Parse.com/SORemoteDataBase.swift; sourceTree = "<group>"; };
 		7FD44B761B5A9B1A000A4FB3 /* TaskCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TaskCategory.swift; path = DataBaseKit/CoreData/TaskCategory.swift; sourceTree = "<group>"; };
@@ -348,6 +350,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7F5779D71B5B97D2006EB1E5 /* CloudKit.framework in Frameworks */,
 				7FD44B081B5A562A000A4FB3 /* NotificationCenter.framework in Frameworks */,
 				7FD44B601B5A98F1000A4FB3 /* DataBaseKit.framework in Frameworks */,
 			);
@@ -529,6 +532,14 @@
 				7F5C2C3B1B40143600506320 /* ArrayExtension.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		7F5779DC1B5BA28F006EB1E5 /* Type of DataBase Switcher */ = {
+			isa = PBXGroup;
+			children = (
+				7FD44B671B5A9A67000A4FB3 /* SOTypeDataBaseSwitcher.swift */,
+			);
+			name = "Type of DataBase Switcher";
 			sourceTree = "<group>";
 		};
 		7F5826BB1B482D1A00C0B179 /* iCloud */ = {
@@ -733,6 +744,7 @@
 				7FD44B0C1B5A562A000A4FB3 /* TodayViewController.swift */,
 				7FD44B0E1B5A562A000A4FB3 /* MainInterface.storyboard */,
 				7FD44B0A1B5A562A000A4FB3 /* Supporting Files */,
+				7F5779D81B5B98CF006EB1E5 /* SOWidjet-Bridging-Header.h */,
 			);
 			path = SOWidjet;
 			sourceTree = "<group>";
@@ -753,6 +765,7 @@
 				7FD44B811B5A9B23000A4FB3 /* CoreData */,
 				7FD44B751B5A9ADD000A4FB3 /* Parse.com */,
 				7FD44B6F1B5A9A79000A4FB3 /* Classes */,
+				7F5779DC1B5BA28F006EB1E5 /* Type of DataBase Switcher */,
 				7FD44B431B5A98D6000A4FB3 /* Supporting Files */,
 			);
 			path = DataBaseKit;
@@ -792,7 +805,6 @@
 				7FD44B661B5A9A67000A4FB3 /* SOTask.swift */,
 				7FD44B611B5A9A67000A4FB3 /* SOCategory.swift */,
 				7FD44B651B5A9A67000A4FB3 /* SOIco.swift */,
-				7FD44B671B5A9A67000A4FB3 /* SOTypeDataBaseSwitcher.swift */,
 			);
 			name = Classes;
 			path = ..;
@@ -989,6 +1001,9 @@
 						DevelopmentTeam = N5B5T39W8Y;
 						SystemCapabilities = {
 							com.apple.ApplicationGroups.iOS = {
+								enabled = 1;
+							};
+							com.apple.iCloud = {
 								enabled = 1;
 							};
 						};
@@ -1440,10 +1455,11 @@
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = SwiftExtension/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -1453,44 +1469,55 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = SwiftExtension/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};
 		7FD44B141B5A562A000A4FB3 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = SOWidjet/SOWidjet.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/SwiftOrganizer/Frameworks";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = SOWidjet/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SKIP_INSTALL = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "SOWidjet/SOWidjet-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
 		7FD44B151B5A562A000A4FB3 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = SOWidjet/SOWidjet.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/SwiftOrganizer/Frameworks";
 				INFOPLIST_FILE = SOWidjet/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SKIP_INSTALL = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "SOWidjet/SOWidjet-Bridging-Header.h";
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};
