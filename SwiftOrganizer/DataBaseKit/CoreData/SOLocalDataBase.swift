@@ -439,7 +439,7 @@ public class SOLocalDataBase: SODataBaseProtocol {
    // MARK: -
     
     func isiCloudEnabled() -> Bool{
-        let defaults = NSUserDefaults.standardUserDefaults()
+        let defaults = SOUserDefault.sharedDefaults()
         let useiCloudOpt: Bool? = defaults.boolForKey(SOEnableiCloudForCoreDataKey)
 
         if let useiCloud = useiCloudOpt{

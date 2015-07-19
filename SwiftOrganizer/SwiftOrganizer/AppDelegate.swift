@@ -141,6 +141,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     //--------------------------------------
     
     func application(application: UIApplication, openURL url: NSURL, sourceApplication srcApp: String?, annotation annot: AnyObject?) -> Bool {
+        
+        self.application(application, handleOpenURL: url)
+        
         return SOParseComManager.application(application, openURL: url, sourceApplication: srcApp, annotation: annot)
     }
     
@@ -148,13 +151,25 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         if url.scheme == widgetUrlScheme {
             
-            /* Goes through our extension to convert
-            String to NSIndexPath */
-            let indexPath: NSIndexPath = url.host!.toIndexPath()
+            let host = url.host!
             
-            /* Now do your work with the index path */
-            print(indexPath)
-            
+            let index: String.Index = advance(KeyInURLAsSwitchDataBase.startIndex, count(KeyInURLAsSwitchDataBase))
+            let key: String? = host.substringToIndex(index)
+
+            if key == KeyInURLAsSwitchDataBase{
+                var arr = split(host) {$0 == "."}
+
+                if let index = arr[1].toInt(){
+                    SOTypeDataBaseSwitcher.switchToIndex(index)
+                }
+            } else {
+                /* Goes through our extension to convert
+                String to NSIndexPath */
+                let indexPath: NSIndexPath = host.toIndexPath()
+                
+                /* Now do your work with the index path */
+                print(indexPath)
+            }
         }
         
         return true

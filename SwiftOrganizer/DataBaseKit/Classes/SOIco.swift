@@ -43,7 +43,7 @@ public class SOIco: NSObject {
         }
     }
     
-    var name: String{
+    public var name: String{
         get{
             return _name
         }

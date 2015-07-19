@@ -34,6 +34,9 @@
 		7F5725A41B0F61F7003DBDEB /* UIViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F5725A11B0F61F7003DBDEB /* UIViewControllerExtension.swift */; };
 		7F5779D41B5B5E68006EB1E5 /* SwiftOrganizer.xcdatamodeld in Resources */ = {isa = PBXBuildFile; fileRef = 7FD44B791B5A9B1A000A4FB3 /* SwiftOrganizer.xcdatamodeld */; };
 		7F5779D71B5B97D2006EB1E5 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F57E00E1B4ACEF700789FBD /* CloudKit.framework */; };
+		7F5779DD1B5BD82E006EB1E5 /* SwiftOrganizer.xcdatamodeld in Resources */ = {isa = PBXBuildFile; fileRef = 7FD44B791B5A9B1A000A4FB3 /* SwiftOrganizer.xcdatamodeld */; };
+		7F5779DF1B5BDAB6006EB1E5 /* SOWidgetTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F5779DE1B5BDAB6006EB1E5 /* SOWidgetTableViewCell.swift */; };
+		7F5779E11B5BE8E0006EB1E5 /* SOUserDefault.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F5779E01B5BE8E0006EB1E5 /* SOUserDefault.swift */; };
 		7F57E00F1B4ACEF700789FBD /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F57E00E1B4ACEF700789FBD /* CloudKit.framework */; };
 		7F5826BD1B482D6C00C0B179 /* SOiCloudManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F5826BC1B482D6C00C0B179 /* SOiCloudManager.swift */; };
 		7F5A6D1F1B14A75A009665C7 /* SOMainTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F5A6D1E1B14A75A009665C7 /* SOMainTableViewController.swift */; };
@@ -231,6 +234,8 @@
 		7F5725A01B0F61F7003DBDEB /* UITableViewExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UITableViewExtension.swift; sourceTree = "<group>"; };
 		7F5725A11B0F61F7003DBDEB /* UIViewControllerExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewControllerExtension.swift; sourceTree = "<group>"; };
 		7F5779D81B5B98CF006EB1E5 /* SOWidjet-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SOWidjet-Bridging-Header.h"; sourceTree = "<group>"; };
+		7F5779DE1B5BDAB6006EB1E5 /* SOWidgetTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SOWidgetTableViewCell.swift; sourceTree = "<group>"; };
+		7F5779E01B5BE8E0006EB1E5 /* SOUserDefault.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SOUserDefault.swift; path = Classes/SOUserDefault.swift; sourceTree = "<group>"; };
 		7F57E00E1B4ACEF700789FBD /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		7F5826BA1B481E2C00C0B179 /* SwiftOrganizer.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = SwiftOrganizer.entitlements; path = ../SwiftOrganizer.entitlements; sourceTree = "<group>"; };
 		7F5826BC1B482D6C00C0B179 /* SOiCloudManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SOiCloudManager.swift; path = SwiftOrganizer/iCloud/SOiCloudManager.swift; sourceTree = SOURCE_ROOT; };
@@ -538,6 +543,7 @@
 			isa = PBXGroup;
 			children = (
 				7FD44B671B5A9A67000A4FB3 /* SOTypeDataBaseSwitcher.swift */,
+				7F5779E01B5BE8E0006EB1E5 /* SOUserDefault.swift */,
 			);
 			name = "Type of DataBase Switcher";
 			sourceTree = "<group>";
@@ -742,6 +748,7 @@
 			children = (
 				7FD44B161B5A911B000A4FB3 /* SOWidjet.entitlements */,
 				7FD44B0C1B5A562A000A4FB3 /* TodayViewController.swift */,
+				7F5779DE1B5BDAB6006EB1E5 /* SOWidgetTableViewCell.swift */,
 				7FD44B0E1B5A562A000A4FB3 /* MainInterface.storyboard */,
 				7FD44B0A1B5A562A000A4FB3 /* Supporting Files */,
 				7F5779D81B5B98CF006EB1E5 /* SOWidjet-Bridging-Header.h */,
@@ -1095,6 +1102,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7FD44B0F1B5A562A000A4FB3 /* MainInterface.storyboard in Resources */,
+				7F5779DD1B5BD82E006EB1E5 /* SwiftOrganizer.xcdatamodeld in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1185,6 +1193,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7FD44B0D1B5A562A000A4FB3 /* TodayViewController.swift in Sources */,
+				7F5779DF1B5BDAB6006EB1E5 /* SOWidgetTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1198,6 +1207,7 @@
 				7FD44B851B5A9C27000A4FB3 /* SwiftOrganizer.xcdatamodeld in Sources */,
 				7FD44B861B5A9C27000A4FB3 /* Task.swift in Sources */,
 				7FD44B871B5A9C27000A4FB3 /* SOParseComManager.swift in Sources */,
+				7F5779E11B5BE8E0006EB1E5 /* SOUserDefault.swift in Sources */,
 				7FD44B881B5A9C27000A4FB3 /* SORemoteDataBase.swift in Sources */,
 				7FD44B891B5A9C27000A4FB3 /* SOCategory.swift in Sources */,
 				7FD44B8A1B5A9C27000A4FB3 /* SODataBaseFactory.swift in Sources */,

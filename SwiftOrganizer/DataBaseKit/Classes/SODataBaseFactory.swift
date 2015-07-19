@@ -12,6 +12,7 @@ import UIKit
 public let AppGroupsId = "group.skappleid.SOWidget"
 public let SODataBaseTypeKey = "DataBaseType"
 public let SOEnableiCloudForCoreDataKey = "EnableiCloudForCoreData"
+public let KeyInURLAsSwitchDataBase = "switchdbto."
 
 enum SODataBaseType: String{
     case Undefined = "Undefined"
@@ -42,7 +43,7 @@ public final class SODataBaseFactory: SOObserverProtocol {
             return _dataBase
         }
         
-        let defaults = NSUserDefaults.standardUserDefaults()
+        let defaults = SOUserDefault.sharedDefaults()
         
         if let name = defaults.stringForKey(SODataBaseTypeKey)
         {
@@ -62,7 +63,7 @@ public final class SODataBaseFactory: SOObserverProtocol {
     }
 
     private func defaultDataBase() -> SODataBaseProtocol{
-        let defaults = NSUserDefaults.standardUserDefaults()
+        let defaults = SOUserDefault.sharedDefaults()
         defaults.setObject(SODataBaseType.CoreData.rawValue, forKey: SODataBaseTypeKey)
         
         return SOLocalDataBase.sharedInstance()

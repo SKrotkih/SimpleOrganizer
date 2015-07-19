@@ -11,7 +11,7 @@ import Foundation
 public class SOTypeDataBaseSwitcher{
 
     public class func switchToIndex(index: Int){
-        let defaults = self.sharedDefaults()
+        let defaults = SOUserDefault.sharedDefaults()
         var dbType: String
         
         if index == 0{
@@ -29,14 +29,14 @@ public class SOTypeDataBaseSwitcher{
     }
     
     public class func setUpOfUsingICloud(usingICloud: Bool){
-        let defaults = self.sharedDefaults()
+        let defaults = SOUserDefault.sharedDefaults()
         defaults.setBool(usingICloud, forKey: SOEnableiCloudForCoreDataKey)
         defaults.synchronize()
     }
     
     public class func usingICloudCurrentState() -> Bool{
         var retValue: Bool!
-        let defaults = self.sharedDefaults()
+        let defaults = SOUserDefault.sharedDefaults()
         let useiCloudOpt: Bool? = defaults.boolForKey(SOEnableiCloudForCoreDataKey)
         
         if let useiCloud = useiCloudOpt{
@@ -50,7 +50,7 @@ public class SOTypeDataBaseSwitcher{
     
     public class func indexOfCurrectDBType() -> Int{
         var selectedIndex: Int!
-        let defaults = self.sharedDefaults()
+        let defaults = SOUserDefault.sharedDefaults()
         
         if let name = defaults.stringForKey(SODataBaseTypeKey){
 
@@ -79,17 +79,5 @@ public class SOTypeDataBaseSwitcher{
         }
 
         self.switchToIndex(currentIndex)
-    }
-    
-    class func sharedDefaults() -> NSUserDefaults{
-        var sharedDefaults: NSUserDefaults!
-        
-        if let defaults = NSUserDefaults(suiteName: AppGroupsId){
-            sharedDefaults = defaults
-        } else {
-            sharedDefaults = NSUserDefaults.standardUserDefaults()
-        }
-        
-        return sharedDefaults
     }
 }

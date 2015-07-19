@@ -150,7 +150,7 @@ public class SOParseComManager: NSObject {
 
     class func login(block: (error: NSError?) -> Void){
         
-        let defaults = NSUserDefaults.standardUserDefaults()
+        let defaults = SOUserDefault.sharedDefaults()
         var username: String = DefaultUsername
         var password: String = DefaultUserPassword
         
@@ -163,7 +163,7 @@ public class SOParseComManager: NSObject {
         PFUser.logInWithUsernameInBackground(username, password: password){(user: PFUser?, error: NSError?) -> Void in
             if let currentUser = user {
                 println("Hi, \(currentUser.username!)!")
-                let defaults = NSUserDefaults.standardUserDefaults()
+                let defaults = SOUserDefault.sharedDefaults()
                 defaults.setObject(username, forKey: SOUsernameKey)
                 defaults.setObject(password, forKey: SOPasswordKey)
                 block(error: nil)
