@@ -284,6 +284,11 @@ public class SORemoteDataBase: SODataBaseProtocol {
         }
     }
 
+    public func recordIdForTask(task: SOTask?) -> String?{
+        
+        return nil
+    }
+    
     public func areObjectsEqual(object1: AnyObject?, object2: AnyObject?) -> Bool{
         if let obj1: PFObject = object1 as? PFObject, let obj2: PFObject = object2 as? PFObject{
             return obj1 == obj2

@@ -303,6 +303,22 @@ public class SOLocalDataBase: SODataBaseProtocol {
         self.deleteObject(taskObject)
     }
     
+    // MARK: -
+    
+    public func recordIdForTask(task: SOTask?) -> String?{
+        if let _task = task{
+            if let object = _task.databaseObject as? Task{
+                let instanceURL: NSURL = object.objectID.URIRepresentation()
+                let classURL = instanceURL.URLByDeletingLastPathComponent
+                let recordId = instanceURL.lastPathComponent
+                
+                return recordId
+            }
+        }
+        
+        return nil
+    }
+    
     public func areObjectsEqual(object1: AnyObject?, object2: AnyObject?) -> Bool{
         if let obj1: Task = object1 as? Task, let obj2: Task = object2 as? Task{
             return obj1 == obj2

@@ -6,11 +6,11 @@ Was implemented for getting some practice of using the Swift.
 
 ## Implements
 
-Were realised two types of database:
-- Core Data (local database on device)
-- Remote database (on Parse.com server)
+Were implemented two types of database:
+- Local database on Core Data
+- Remote database on the Parse.com server
 
-Features, which were realised:
+Also were implemented the following features:
 - autolayout (on Interfase Builder Level only)
 - switching of the database types from Core Data to remote database and vice versa
 - used iCloud key-value storage for switching database types (if you change database type on your iPad, then on your iPhone is changing after some seconds too)
@@ -22,16 +22,17 @@ Features, which were realised:
 - sharing via UIActivityViewController
 - UIDocument. Enter and Edit files in the Documents folder.
 - Document Picker - access to files on remote storage like iCloud, DropBox and etc with download to local Documents folder.
-- extension and widget
-- all database function are in DataBaseKit.framework.
+- extension
+- todaye widget
+- all database function are in the DataBaseKit.framework.
 
-Used design patterns:
+Were applied the following design patterns:
 - abstract method;
 - observer;
 - singleton;
 - builder;
 
-Notes for using.
+Please pay attention to the following details:
 On first start are created some tasks by default. 
 You can add a new task by pressing on button '+' on the navigator bar. 
 You can select line in tableview to start editing current task. 
@@ -68,4 +69,4 @@ SwiftOrganizer is available under the MIT license. See the LICENSE file for more
 17.07.2015: Added Sharing Extension
 18.07.2015: Added Today Widget
 19.07.2015: Created DataBaseKit.framework. All database methods was moved to the framework. All ready to make Today widget with current actual tasks.
-20.07.2015: Updated Today Widget (works only with local DataBase)
+20.07.2015: Updated Today Widget (works only with local DataBase). Implemented task list and type of the database switcher

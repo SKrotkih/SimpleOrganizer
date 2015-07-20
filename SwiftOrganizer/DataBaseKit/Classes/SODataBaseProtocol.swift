@@ -23,4 +23,6 @@ public protocol SODataBaseProtocol{
     func saveContext()
     
     func areObjectsEqual(object1: AnyObject?, object2: AnyObject?) -> Bool
+    
+    func recordIdForTask(task: SOTask?) -> String?
 }

@@ -56,10 +56,14 @@ class TodayViewController: UIViewController, UITableViewDataSource, UITableViewD
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-
-        let urlAsString = "\(WidgetUrlScheme)://" + "\(indexPath.section)-\(indexPath.row)"
-        let url = NSURL(string: urlAsString)
-        self.extensionContext!.openURL(url!, completionHandler: nil)
+        let row = indexPath.row
+        let task: SOTask = self.tasks[row]
+        
+        if let recordId = SODataBaseFactory.sharedInstance.dataBase.recordIdForTask(task){
+            let urlAsString = "\(WidgetUrlScheme)://\(KeyInURLAsTaskId)\(recordId)"
+            let url = NSURL(string: urlAsString)
+            self.extensionContext!.openURL(url!, completionHandler: nil)
+        }
         tableView.deselectRowAtIndexPath(indexPath, animated: false)
     }
     

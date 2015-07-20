@@ -148,24 +148,28 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         if url.scheme == WidgetUrlScheme {
             
-            let host = url.host!
-            
-            let index: String.Index = advance(KeyInURLAsSwitchDataBase.startIndex, count(KeyInURLAsSwitchDataBase))
-            let key: String? = host.substringToIndex(index)
-
-            if key == KeyInURLAsSwitchDataBase{
-                var arr = split(host) {$0 == "."}
-
-                if let index = arr[1].toInt(){
-                    SOTypeDataBaseSwitcher.switchToIndex(index)
-                }
-            } else {
-                /* Goes through our extension to convert
-                String to NSIndexPath */
-                let indexPath: NSIndexPath = host.toIndexPath()
+            if let host = url.host{
                 
-                /* Now do your work with the index path */
-                print(indexPath)
+                if NSString(string: host).containsString(KeyInURLAsSwitchDataBase) {
+                    var arr = split(host) {$0 == "."}
+
+                    if arr.count == 2{
+                        if let index = arr[1].toInt(){
+                            SOTypeDataBaseSwitcher.switchToIndex(index)
+                        }
+                    }
+                } else if NSString(string: host).containsString(KeyInURLAsTaskId) {
+                    var arr = split(host) {$0 == "."}
+                    
+                    if arr.count == 2{
+                        if let taskId = arr[1] as? String{
+                            println("Task Id = \(taskId)")
+                        }
+                    }
+                    
+                } else {
+                    
+                }
             }
         }
         
