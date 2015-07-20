@@ -226,34 +226,38 @@ public class SOLocalDataBase: SODataBaseProtocol {
                     return false
                 } else {
                     if tasks.count > 0 {
-                        dispatch_async(dispatch_get_main_queue(), {
-                            
-                            var _allTasks: [SOTask] = []
-                            
-                            for task in tasks{
-                                var categorySelected: Bool = false
-                                if let category = SODataFetching.sharedInstance.categoryById(task.category){
-                                    categorySelected = category.selected
-                                }
-                                
-                                let icons = [task.ico1, task.ico2, task.ico3, task.ico4, task.ico5, task.ico6]
-                                var iconsSelected: Bool = true
-                                
-                                for iconId in icons{
-                                    let iconOpt: SOIco? = SODataFetching.sharedInstance.iconById(iconId)
-                                    if let ico = iconOpt{
-                                        iconsSelected = iconsSelected && ico.selected
+                        SODataFetching.sharedInstance.prepareAllSubTables{(fetchError: NSError?) in
+                            if let error = fetchError{
+                                block(resultBuffer: [], error: error)
+                            } else {
+                                dispatch_async(dispatch_get_main_queue(), {
+                                    var _allTasks: [SOTask] = []
+                                    
+                                    for task in tasks{
+                                        var categorySelected: Bool = false
+                                        if let category = SODataFetching.sharedInstance.categoryById(task.category){
+                                            categorySelected = category.selected
+                                        }
+                                        
+                                        let icons = [task.ico1, task.ico2, task.ico3, task.ico4, task.ico5, task.ico6]
+                                        var iconsSelected: Bool = true
+                                        
+                                        for iconId in icons{
+                                            let iconOpt: SOIco? = SODataFetching.sharedInstance.iconById(iconId)
+                                            if let ico = iconOpt{
+                                                iconsSelected = iconsSelected && ico.selected
+                                            }
+                                        }
+                                        
+                                        if categorySelected && iconsSelected{
+                                            let sotask = self!.newTask(task)
+                                            _allTasks.append(sotask)
+                                        }
                                     }
-                                }
-                                
-                                if categorySelected && iconsSelected{
-                                    let sotask = self!.newTask(task)
-                                    _allTasks.append(sotask)
-                                }
-                                
+                                    block(resultBuffer: _allTasks, error: nil)
+                                })
                             }
-                            block(resultBuffer: _allTasks, error: nil)
-                        })
+                        }
                         
                         return true
                     }

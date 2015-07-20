@@ -68,3 +68,4 @@ SwiftOrganizer is available under the MIT license. See the LICENSE file for more
 17.07.2015: Added Sharing Extension
 18.07.2015: Added Today Widget
 19.07.2015: Created DataBaseKit.framework. All database methods was moved to the framework. All ready to make Today widget with current actual tasks.
+20.07.2015: Updated Today Widget (works only with local DataBase)

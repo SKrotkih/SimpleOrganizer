@@ -10,8 +10,8 @@ import Foundation
 
 class SOWidgetTableViewCell: UITableViewCell {
 
+    @IBOutlet weak var categoryLabel: UILabel!
     @IBOutlet weak var descriptionLabel: UILabel!
-
-
+    @IBOutlet weak var dateLabel: UILabel!
 
 }

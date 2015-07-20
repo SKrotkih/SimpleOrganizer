@@ -31,9 +31,6 @@ extension String{
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
-
-    let widgetUrlScheme = "widget"
-    
     var window: UIWindow?
     var mainViewController: SOMainViewController!
 
@@ -149,7 +146,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(application: UIApplication, handleOpenURL url: NSURL) -> Bool {
         
-        if url.scheme == widgetUrlScheme {
+        if url.scheme == WidgetUrlScheme {
             
             let host = url.host!
             

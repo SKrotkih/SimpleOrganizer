@@ -55,6 +55,22 @@ public final class SODataFetching: SOObserverProtocol{
         }
     }
     
+    public func prepareAllSubTables(block: (error: NSError?) -> Void) {
+        self.allCategories{(categories: [SOCategory], fetchError: NSError?) in
+            if let error = fetchError{
+                block(error: error)
+            } else {
+                self.allIcons{(resultBuffer: [SOIco], fetchError: NSError?) in
+                    if let error = fetchError{
+                        block(error: error)
+                    } else {
+                        block(error: nil)
+                    }
+                }
+            }
+        }
+    }
+    
     // - MARK: Tasks
     public func allTasks(block: (resultBuffer: [SOTask], error: NSError?) -> Void) {
         SODataBaseFactory.sharedInstance.dataBase.allTasks{(allCurrentTasks: [SOTask], error: NSError?) in

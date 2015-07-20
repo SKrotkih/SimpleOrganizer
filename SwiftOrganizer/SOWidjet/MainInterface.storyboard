@@ -42,17 +42,48 @@
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="bE1-rK-Sml" id="fpG-ad-UOm">
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NRo-NL-zm2">
-                                                    <rect key="frame" x="18" y="5" width="262" height="21"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Category" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NRo-NL-zm2">
+                                                    <rect key="frame" x="8" y="8" width="58" height="18"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="18" id="3KL-Rx-cXT"/>
+                                                        <constraint firstAttribute="width" constant="58" id="xoA-me-jBJ"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" name="HelveticaNeue-CondensedBold" family="Helvetica Neue" pointSize="15"/>
+                                                    <color key="textColor" red="0.9923528439" green="0.42968168979999999" blue="0.35824965860000002" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Description" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0tF-fA-sh4">
+                                                    <rect key="frame" x="77" y="2" width="203" height="18"/>
                                                     <fontDescription key="fontDescription" name="HelveticaNeue-CondensedBold" family="Helvetica Neue" pointSize="15"/>
                                                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Date" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yPt-9G-6it">
+                                                    <rect key="frame" x="132" y="21" width="148" height="12"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="148" id="qcb-ma-5Sc"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" name="HelveticaNeue-CondensedBold" family="Helvetica Neue" pointSize="10"/>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                             <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                            <constraints>
+                                                <constraint firstItem="yPt-9G-6it" firstAttribute="trailing" secondItem="fpG-ad-UOm" secondAttribute="trailingMargin" id="44w-t0-xRF"/>
+                                                <constraint firstItem="NRo-NL-zm2" firstAttribute="top" secondItem="fpG-ad-UOm" secondAttribute="topMargin" id="Ipq-sa-KWi"/>
+                                                <constraint firstItem="0tF-fA-sh4" firstAttribute="trailing" secondItem="fpG-ad-UOm" secondAttribute="trailingMargin" id="J4x-8E-OTc"/>
+                                                <constraint firstItem="0tF-fA-sh4" firstAttribute="top" secondItem="fpG-ad-UOm" secondAttribute="topMargin" constant="-6" id="QUf-Nb-qB6"/>
+                                                <constraint firstItem="yPt-9G-6it" firstAttribute="top" secondItem="0tF-fA-sh4" secondAttribute="bottom" constant="1" id="Yc6-Lf-7kl"/>
+                                                <constraint firstItem="yPt-9G-6it" firstAttribute="top" secondItem="0tF-fA-sh4" secondAttribute="bottom" constant="1" id="b5m-xL-pDZ"/>
+                                                <constraint firstItem="NRo-NL-zm2" firstAttribute="leading" secondItem="fpG-ad-UOm" secondAttribute="leadingMargin" id="pha-if-BQI"/>
+                                                <constraint firstItem="0tF-fA-sh4" firstAttribute="leading" secondItem="NRo-NL-zm2" secondAttribute="trailing" constant="11" id="xAe-EH-jrx"/>
+                                            </constraints>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <outlet property="descriptionLabel" destination="NRo-NL-zm2" id="c7g-nV-Fx8"/>
+                                            <outlet property="categoryLabel" destination="NRo-NL-zm2" id="XfP-tB-Kec"/>
+                                            <outlet property="dateLabel" destination="yPt-9G-6it" id="cw9-0J-GGw"/>
+                                            <outlet property="descriptionLabel" destination="0tF-fA-sh4" id="jTM-Ge-x2a"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>

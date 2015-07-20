@@ -13,6 +13,7 @@ public let AppGroupsId = "group.skappleid.SOWidget"
 public let SODataBaseTypeKey = "DataBaseType"
 public let SOEnableiCloudForCoreDataKey = "EnableiCloudForCoreData"
 public let KeyInURLAsSwitchDataBase = "switchdbto."
+public let WidgetUrlScheme = "widget"
 
 enum SODataBaseType: String{
     case Undefined = "Undefined"

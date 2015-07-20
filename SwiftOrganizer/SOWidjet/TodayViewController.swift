@@ -23,12 +23,12 @@ class TodayViewController: UIViewController, UITableViewDataSource, UITableViewD
     }
     
     /* List of items that we want to display in our table view */
-    private var icons = [SOIco]()
+    private var tasks = [SOTask]()
 
     // MARK: UITableViewDelegate, UITableViewDataSource delegate protocol
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.icons.count
+        return self.tasks.count
     }
     
     func tableView(tableView: UITableView,  heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat{
@@ -38,16 +38,26 @@ class TodayViewController: UIViewController, UITableViewDataSource, UITableViewD
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(TableViewConstants.cellIdentifier, forIndexPath: indexPath) as! SOWidgetTableViewCell
         let row = indexPath.row
-        let ico: SOIco = self.icons[row]
-        let icoName = ico.name
-        cell.descriptionLabel!.text = icoName
+        let task: SOTask = self.tasks[row]
+        let categoryName = task.categoryName
+        let taskDescription = task.title
+        cell.categoryLabel!.text = categoryName
+        cell.descriptionLabel!.text = taskDescription
+
+        if let dateEvent = task.date{
+            let dateFormatter = NSDateFormatter()
+            dateFormatter.dateFormat = "dd-MM-yyyy HH:mm:ss"
+            cell.dateLabel.text = dateFormatter.stringFromDate(dateEvent)
+        } else{
+            cell.dateLabel.text = ""
+        }
         
         return cell
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
 
-        let urlAsString = "widget://" + "\(indexPath.section)-\(indexPath.row)"
+        let urlAsString = "\(WidgetUrlScheme)://" + "\(indexPath.section)-\(indexPath.row)"
         let url = NSURL(string: urlAsString)
         self.extensionContext!.openURL(url!, completionHandler: nil)
         tableView.deselectRowAtIndexPath(indexPath, animated: false)
@@ -59,7 +69,7 @@ class TodayViewController: UIViewController, UITableViewDataSource, UITableViewD
         let index = typeOfDataBaseSwitcher.selectedSegmentIndex
         SOTypeDataBaseSwitcher.switchToIndex(index)
 
-        let urlAsString = "widget://\(KeyInURLAsSwitchDataBase)\(index)"
+        let urlAsString = "\(WidgetUrlScheme)://\(KeyInURLAsSwitchDataBase)\(index)"
         let url = NSURL(string: urlAsString)
         self.extensionContext!.openURL(url!, completionHandler: nil)
     }
@@ -68,7 +78,7 @@ class TodayViewController: UIViewController, UITableViewDataSource, UITableViewD
         var prefferedSize: CGSize = tableView.contentSize
         prefferedSize.height = CGRectGetMaxY(self.typeOfDataBaseSwitcher.frame)
         prefferedSize.height += 15.0
-        prefferedSize.height += CGFloat(self.icons.count) * TableViewConstants.cellHeight
+        prefferedSize.height += CGFloat(self.tasks.count) * TableViewConstants.cellHeight
         
         self.preferredContentSize = prefferedSize
     }
@@ -83,12 +93,12 @@ class TodayViewController: UIViewController, UITableViewDataSource, UITableViewD
     }
     
     func performFetch() -> NCUpdateResult {
-        SODataFetching.sharedInstance.allIcons{(icons: [SOIco], fetchError: NSError?) in
+        SODataFetching.sharedInstance.allTasks{(allCurrentTasks: [SOTask], fetchError: NSError?) in
             if let error = fetchError{
-                println("Error reading icons data \(error.description)")
-                self.icons.removeAll(keepCapacity: true)
+                println("Error reading tasks data \(error.description)")
+                self.tasks.removeAll(keepCapacity: true)
             } else {
-                self.icons = icons
+                self.tasks = allCurrentTasks
                 self.tableView.reloadData()
                 self.resetContentSize()
             }
