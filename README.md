@@ -11,7 +11,7 @@ Were implemented two types of database:
 - Remote database on the Parse.com server
 
 Also were implemented the following features:
-- autolayout (on Interfase Builder Level only)
+- auto layout (on Interface Builder Level only)
 - switching of the database types from Core Data to remote database and vice versa
 - used iCloud key-value storage for switching database types (if you change database type on your iPad, then on your iPhone is changing after some seconds too)
 - Core Data on iCloud (fallback store)
@@ -21,9 +21,9 @@ Also were implemented the following features:
 - local notifications 
 - sharing via UIActivityViewController
 - UIDocument. Enter and Edit files in the Documents folder.
-- Document Picker - access to files on remote storage like iCloud, DropBox and etc with download to local Documents folder.
+- Document Picker - access to files on remote storage like iCloud, DropBox and etc with a download to the local Documents folder.
 - extension
-- todaye widget
+- today widget
 - all database function are in the DataBaseKit.framework.
 
 Were applied the following design patterns:
@@ -35,20 +35,20 @@ Were applied the following design patterns:
 Please pay attention to the following details:
 On first start are created some tasks by default. 
 You can add a new task by pressing on button '+' on the navigator bar. 
-You can select line in tableview to start editing current task. 
+You can select line in table view to start editing current task. 
 Any task may be deleted by left swipe gesture on the table view line. 
-For fetching tasks are used two tab bar. Upper tab bar is used for filtering by category. Bottom tab bar is used for filetering by icons.
+For fetching tasks are used two tab bar. The upper tab bar is used for filtering by category. The bottom tab bar is used for filtering by icons.
 
-Category - entity which used for featching. 
+Category - the entity which used for fetching. 
 There are some predefined category: 'ToDo', 'Work', 'Life', 'Events'.
-Icons are used for featching too. They are predefined too.
+Icons are used for fetching too. They are predefined too.
 
 The Project is in progress.
 In future:
 - add or remove icons and categories
 - make login (at present default user and password are used for login to the backend (parse.com server)).
 - will be able to add events to the Reminder app
-- local database will be on the iCloud.
+- the local database will be on the iCloud.
 
 ## Requirements
 
@@ -57,7 +57,7 @@ In future:
 
 ## Author
 
-Sergey Krotkih
+Sergey Krotkih http://sergey-krotkih.blogspot.com
 
 ## License
 
@@ -65,8 +65,8 @@ SwiftOrganizer is available under the MIT license. See the LICENSE file for more
 
 ## Update
 
-16.07.2015: Added task list menu 'Activity'. Have used UIActivityViewController for that. Have made three menu items:  Erase Task, New Task and Switch DB type.
+16.07.2015: Added task list menu 'Activity'. Have used UIActivityViewController for that. Have made three menu items:  Erase Task, New Task, and Switch DB type.
 17.07.2015: Added Sharing Extension
 18.07.2015: Added Today Widget
-19.07.2015: Created DataBaseKit.framework. All database methods was moved to the framework. All ready to make Today widget with current actual tasks.
+19.07.2015: Created DataBaseKit.framework. All database methods were moved to the framework. All ready to make Today widget with current actual tasks.
 20.07.2015: Updated Today Widget (works only with local DataBase). Implemented task list and type of the database switcher
