@@ -104,6 +104,8 @@ class SOMainViewController: UIViewController, SOEditTaskController, SOObserverPr
         }
     }
 
+    // MARK: Edit Task List
+    
     func startActivityViewController(){
         if self.mainTableView.editing{
             self.mainTableView.editing = false

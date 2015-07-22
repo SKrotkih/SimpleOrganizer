@@ -88,51 +88,6 @@ class SOEditTaskViewController: UIViewController, UITableViewDataSource, UITable
         
         self.tableView.reloadData()        
     }
-    
-    func doneButtonWasPressed() {
-        self.buildObject()
-    }
-    
-    func closeButtonWasPressed() {
-        if dataWasChanged() {
-
-            let controller = UIAlertController(title: "Data was chenged!".localized, message: nil, preferredStyle: .ActionSheet)
-            let skeepDateAction = UIAlertAction(title: "Close".localized, style: .Cancel, handler: { action in
-                self.closeWindow()
-            })
-            let saveDateAction = UIAlertAction(title: "Save".localized, style: .Default, handler: { action in
-                self.buildObject()
-                self.closeWindow()
-            })
-            controller.addAction(skeepDateAction)
-            controller.addAction(saveDateAction)
-            
-            self.presentViewController(controller, animated: true, completion: nil)
-        } else {
-            self.closeWindow()
-        }
-    }
-    
-    func dataWasChanged() -> Bool{
-        return self._orgTask != self.task
-    }
-
-    // This method builds an object, which properties were changed before in separated views
-    // Builder is presented by just one class
-    private func buildObject(){
-        self.task!.save{(error: NSError?) in
-            if let saveError = error{
-                showAlertWithTitle("Update task error".localized, saveError.description)
-            } else if let orgTask = self._orgTask{
-                orgTask.cloneTask(self.task!)
-            }
-        }
-    }
-
-    func closeWindow() {
-        self.navigationController?.popViewControllerAnimated(true)
-    }
-    
 
     //- MARK: UITableViewDataSource
     /// Number of rows in a section
@@ -227,4 +182,63 @@ class SOEditTaskViewController: UIViewController, UITableViewDataSource, UITable
         let activity = UIActivityViewController(activityItems: [text], applicationActivities: nil)
         self.presentViewController(activity, animated: true, completion: nil)
     }
+    
+    // - MARK: Exit with close window
+    
+    func doneButtonWasPressed() {
+        self.buildObject()
+    }
+    
+    func closeButtonWasPressed() {
+        if dataWasChanged() {
+            
+            let controller = UIAlertController(title: "Data was chenged!".localized, message: nil, preferredStyle: .ActionSheet)
+            let skeepDateAction = UIAlertAction(title: "Close".localized, style: .Cancel, handler: { action in
+                self.closeWindow()
+            })
+            let saveDateAction = UIAlertAction(title: "Save".localized, style: .Default, handler: { action in
+                self.buildObject()
+                self.closeWindow()
+            })
+            controller.addAction(skeepDateAction)
+            controller.addAction(saveDateAction)
+            
+            self.presentViewController(controller, animated: true, completion: nil)
+        } else {
+            self.closeWindow()
+        }
+    }
+    
+    func dataWasChanged() -> Bool{
+        if let orgTask = self._orgTask{
+            return !orgTask.isEqual(self.task)
+        } else if isItNewTask {
+            let puretask = SOTask()
+            puretask.clearTask()
+            return !puretask.isEqual(self.task)
+        }
+        
+        return false
+    }
+    
+    // This method builds an object, which properties were changed before in separated views
+    // Builder is presented by just one class
+    private func buildObject(){
+        self.task!.save{(error: NSError?) in
+            if let saveError = error{
+                showAlertWithTitle("Update task error".localized, saveError.description)
+            } else if let orgTask = self._orgTask{
+                orgTask.cloneTask(self.task!)
+            } else if self.isItNewTask{
+                self.isItNewTask = false
+                self._orgTask = SOTask()
+                self._orgTask!.cloneTask(self.task!)
+            }
+        }
+    }
+    
+    func closeWindow() {
+        self.navigationController?.popViewControllerAnimated(true)
+    }
+    
 }

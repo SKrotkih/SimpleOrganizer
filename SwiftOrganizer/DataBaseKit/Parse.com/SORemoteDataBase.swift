@@ -270,6 +270,7 @@ public class SORemoteDataBase: SODataBaseProtocol {
             task.copyToParseObject(taskObject)
         } else {
             object = PFObject(className: TaskClassName)
+            task.databaseObject = object
             task.copyToParseObject(object!)
         }
         

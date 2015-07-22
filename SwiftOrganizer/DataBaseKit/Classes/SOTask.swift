@@ -55,8 +55,6 @@ public class SOTask: NSObject{
                 isEqual = isEqual && false
             }
             
-            isEqual = isEqual || self.title == anotherTask.title
-            
             return isEqual
         } else {
             return false

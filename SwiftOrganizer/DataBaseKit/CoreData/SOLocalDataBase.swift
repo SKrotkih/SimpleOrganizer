@@ -291,6 +291,7 @@ public class SOLocalDataBase: SODataBaseProtocol {
         }
         else{
             let object = self.newTaskManagedObject()
+            task.databaseObject = object
             task.copyToCoreDataObject(object)
         }
         self.saveContext()
