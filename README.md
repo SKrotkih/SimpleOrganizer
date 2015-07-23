@@ -57,7 +57,10 @@ In future:
 
 ## Author
 
-Sergey Krotkih http://sergey-krotkih.blogspot.com
+Sergey Krotkih 
+http://stackoverflow.com/users/1709337/stosha
+https://www.linkedin.com/pub/sergey-krotkih/20/6a4/274
+http://sergey-krotkih.blogspot.com
 
 ## License
 

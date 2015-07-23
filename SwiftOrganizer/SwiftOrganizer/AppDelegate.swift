@@ -18,10 +18,10 @@ extension String{
             let section = components[0]
             let row = components[1]
             
-            if let sectionValue = section.toInt(){
+            if let theSection = section.toInt(){
                 
-                if let rowValue = row.toInt(){
-                    return NSIndexPath(forRow: rowValue, inSection: sectionValue)
+                if let theRow = row.toInt(){
+                    return NSIndexPath(forRow: theRow, inSection: theSection)
                 }
             }
         }
@@ -60,8 +60,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // By Local Notifications this used
         application.registerUserNotificationSettings(UIUserNotificationSettings(forTypes: .Alert | .Badge | .Sound, categories: nil))  // types are UIUserNotificationType properties
-        if let localNotification: UILocalNotification = launchOptions?[UIApplicationLaunchOptionsLocalNotificationKey] as? UILocalNotification {
-            println("Received notification \(localNotification.alertBody)!")
+        if let theNotification: UILocalNotification = launchOptions?[UIApplicationLaunchOptionsLocalNotificationKey] as? UILocalNotification {
+            println("Received notification \(theNotification.alertBody)!")
         }
         application.applicationIconBadgeNumber = 0;
         // 
@@ -112,13 +112,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject], fetchCompletionHandler completionHandler: (UIBackgroundFetchResult) -> Void) {
 
         if application.applicationState == UIApplicationState.Active {
-            if let aps = userInfo["aps"] as? NSDictionary {
-                if let alert = aps["alert"] as? NSDictionary {
-                    if let message = alert["message"] as? NSString {
-                        self.showAlertWithTitle("Remote message was received:", message: message as String)
+            if let theAps = userInfo["aps"] as? NSDictionary {
+                if let theAlert = theAps["alert"] as? NSDictionary {
+                    if let theMessage = theAlert["message"] as? NSString {
+                        self.showAlertWithTitle("Remote message was received:", message: theMessage as String)
                     }
-                } else if let alert = aps["alert"] as? NSString {
-                    self.showAlertWithTitle("Remote alert was received:", message: alert as String)
+                } else if let theMessage = theAps["alert"] as? NSString {
+                    self.showAlertWithTitle("Remote alert was received:", message: theMessage as String)
                 }
             }
             completionHandler(UIBackgroundFetchResult.NewData)
