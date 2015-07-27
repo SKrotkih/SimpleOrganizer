@@ -14,7 +14,7 @@ protocol SOEditTaskController{
     func editTaskList()
 }
 
-class SOMainViewController: UIViewController, SOEditTaskController, SOObserverProtocol{
+class SOMainViewController: UIViewController{
 
     @IBOutlet weak var mainTableView: UITableView!
     var mainTableViewController: SOMainTableViewController!
@@ -147,8 +147,9 @@ class SOMainViewController: UIViewController, SOEditTaskController, SOObserverPr
     func editTask(task: SOTask?){
         self.startEditingTask(task)
     }
-    
-    //- MARK: SOEditTaskController protocol implementation
+}
+
+extension SOMainViewController: SOEditTaskController{
     func startEditingTask(task: SOTask?){
         var storyboard = UIStoryboard(name: "Main", bundle: nil)
         let newTaskRecordViewController = storyboard.instantiateViewControllerWithIdentifier("SOEditTaskViewController") as! SOEditTaskViewController
@@ -160,24 +161,26 @@ class SOMainViewController: UIViewController, SOEditTaskController, SOObserverPr
         self.rightButton.title = "Done".localized
         self.mainTableView.editing = true
     }
-    
-    //- MARK: Helper Methods
-    func showAlertWithTitle(title:String, message:String){
-        var controller = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.Alert)
-        controller.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
-        presentViewController(controller, animated: true, completion: nil)
-    }
+}
 
-    //- MARK: SOObserverProtocol implementation
+
+extension SOMainViewController: SOObserverProtocol{
     func notify(notification: SOObserverNotification){
         switch notification.type{
         case .SODataBaseTypeChanged, .SODataBaseDidChanged:
             self.reloadData({(error: NSError?) in
-            
+                
             })
         default:
             assert(false, "Something is wrong with observer code notification!")
         }
     }
-    
+}
+
+extension SOMainViewController{
+    func showAlertWithTitle(title:String, message:String){
+        var controller = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.Alert)
+        controller.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
+        presentViewController(controller, animated: true, completion: nil)
+    }
 }

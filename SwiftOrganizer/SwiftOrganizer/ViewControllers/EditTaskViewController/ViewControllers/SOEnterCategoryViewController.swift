@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SOEnterCategoryViewController: SOEnterBaseViewController, UITableViewDataSource, UITableViewDelegate {
+class SOEnterCategoryViewController: SOEnterBaseViewController {
 
     var categories: [SOCategory]!
     
@@ -33,15 +33,14 @@ class SOEnterCategoryViewController: SOEnterBaseViewController, UITableViewDataS
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
+}
 
-    //- MARK: UITableViewDataSource
-    /// Number of rows in a section
+extension SOEnterCategoryViewController: UITableViewDataSource {
+
     @objc func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return categories.count
     }
     
-    // Customizing the row height
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) ->
         CGFloat {
             return 44
@@ -57,15 +56,13 @@ class SOEnterCategoryViewController: SOEnterBaseViewController, UITableViewDataS
         
         return cell
     }
-    
-    //- MARK: UITableViewDelegate
+}
 
+extension SOEnterCategoryViewController: UITableViewDelegate {
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let row = indexPath.row
         self.task?.category = categories[row].id
         
         super.closeButtonWasPressed()
     }
-    // - MARK:
-
 }

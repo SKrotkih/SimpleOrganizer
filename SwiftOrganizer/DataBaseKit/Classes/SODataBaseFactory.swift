@@ -22,7 +22,7 @@ enum SODataBaseType: String{
     case ParseCom = "ParseDataBase"
 }
 
-public final class SODataBaseFactory: SOObserverProtocol {
+public final class SODataBaseFactory {
     private var _dataBase: SODataBaseProtocol?
 
     public class var sharedInstance: SODataBaseFactory {
@@ -70,8 +70,9 @@ public final class SODataBaseFactory: SOObserverProtocol {
         
         return SOLocalDataBase.sharedInstance()
     }
-    
-    //- MARK: SOObserverProtocol implementation
+}
+
+extension SODataBaseFactory: SOObserverProtocol {
     public func notify(notification: SOObserverNotification){
         switch notification.type{
         case .SODataBaseTypeChanged:

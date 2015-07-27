@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SOEnterIconsViewController: SOEnterBaseViewController, UITableViewDataSource, UITableViewDelegate {
+class SOEnterIconsViewController: SOEnterBaseViewController {
     
     @IBOutlet weak var tableView: UITableView!
 
@@ -70,10 +70,10 @@ class SOEnterIconsViewController: SOEnterBaseViewController, UITableViewDataSour
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
+}
 
-    //- MARK: UITableViewDataSource
-    /// Number of rows in a section
+extension SOEnterIconsViewController: UITableViewDataSource{
+    
     @objc func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return icons.count
     }
@@ -83,7 +83,7 @@ class SOEnterIconsViewController: SOEnterBaseViewController, UITableViewDataSour
         let selectIconsCell = "selectIconsCell"
         let row = indexPath.row
         var cell = self.tableView.dequeueReusableCellWithIdentifier(selectIconsCell) as! SOSelectIconsCell
-
+        
         let ico: SOIco = icons[row]
         let icoId: String = ico.id
         
@@ -96,7 +96,7 @@ class SOEnterIconsViewController: SOEnterBaseViewController, UITableViewDataSour
         for i in 0..<taskIcons.count{
             if icoId == taskIcons[i]{
                 checkBoxImageName =  "check_box"
-
+                
                 break
             }
         }
@@ -105,14 +105,16 @@ class SOEnterIconsViewController: SOEnterBaseViewController, UITableViewDataSour
         return cell
     }
     
-    //- MARK: UITableViewDelegate
-    
+}
+
+extension SOEnterIconsViewController: UITableViewDelegate {
+
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let row = indexPath.row
         let ico: SOIco = icons[row]
         let icoId: String = ico.id
         var needAdd: Bool = true
-
+        
         for i in 0..<taskIcons.count{
             if icoId == taskIcons[i]{
                 taskIcons.removeAtIndex(i)
@@ -128,6 +130,4 @@ class SOEnterIconsViewController: SOEnterBaseViewController, UITableViewDataSour
         
         self.tableView.reloadData()
     }
-    // - MARK:
-
 }

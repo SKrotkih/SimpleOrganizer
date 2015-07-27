@@ -58,9 +58,9 @@ In future:
 ## Author
 
 Sergey Krotkih 
-http://stackoverflow.com/users/1709337/stosha
-https://www.linkedin.com/pub/sergey-krotkih/20/6a4/274
-http://sergey-krotkih.blogspot.com
+- http://stackoverflow.com/users/1709337/stosha
+- https://www.linkedin.com/pub/sergey-krotkih/20/6a4/274
+- http://sergey-krotkih.blogspot.com
 
 ## License
 
@@ -68,8 +68,8 @@ SwiftOrganizer is available under the MIT license. See the LICENSE file for more
 
 ## Update
 
-16.07.2015: Added task list menu 'Activity'. Have used UIActivityViewController for that. Have made three menu items:  Erase Task, New Task, and Switch DB type.
-17.07.2015: Added Sharing Extension
-18.07.2015: Added Today Widget
-19.07.2015: Created DataBaseKit.framework. All database methods were moved to the framework. All ready to make Today widget with current actual tasks.
-20.07.2015: Updated Today Widget (works only with local DataBase). Implemented task list and type of the database switcher
+- 16.07.2015: Added task list menu 'Activity'. Have used UIActivityViewController for that. Have made three menu items:  Erase Task, New Task, and Switch DB type.
+- 17.07.2015: Added Sharing Extension
+- 18.07.2015: Added Today Widget
+- 19.07.2015: Created DataBaseKit.framework. All database methods were moved to the framework. All ready to make Today widget with current actual tasks.
+- 20.07.2015: Updated Today Widget (works only with local DataBase). Implemented task list and type of the database switcher

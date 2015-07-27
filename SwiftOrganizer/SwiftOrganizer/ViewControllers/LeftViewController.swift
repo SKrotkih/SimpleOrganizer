@@ -19,7 +19,7 @@ protocol LeftMenuProtocol : class {
     func changeViewController(menu: LeftMenu)
 }
 
-class LeftViewController : UIViewController, LeftMenuProtocol {
+class LeftViewController : UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
 
@@ -78,7 +78,9 @@ class LeftViewController : UIViewController, LeftMenuProtocol {
             self.changeViewController(menu)
         }
     }
-    
+}
+
+extension LeftViewController: LeftMenuProtocol {
     func changeViewController(menu: LeftMenu) {
         switch menu {
         case .Main:
@@ -99,5 +101,4 @@ class LeftViewController : UIViewController, LeftMenuProtocol {
             break
         }
     }
-    
 }

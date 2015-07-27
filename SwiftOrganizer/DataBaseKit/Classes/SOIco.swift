@@ -69,12 +69,6 @@ public class SOIco: NSObject {
             self._selected = newValue
         }
     }
-    
-    public func didSelect(select: Bool, block: (error: NSError?) -> Void){
-        SODataBaseFactory.sharedInstance.dataBase.saveFieldToObject(self.databaseObject, fieldName: "selected", value: select, block: {(error: NSError?) in
-            block(error: error)
-        })
-    }
 }
 
 extension SOIco{
@@ -98,8 +92,12 @@ extension SOIco{
         self.imageName = object.imagename
         self.selected = object.selected
     }
-    
-    
-    
 }
 
+extension SOIco{
+    public func didSelect(select: Bool, block: (error: NSError?) -> Void){
+        SODataBaseFactory.sharedInstance.dataBase.saveFieldToObject(self.databaseObject, fieldName: "selected", value: select, block: {(error: NSError?) in
+            block(error: error)
+        })
+    }
+}

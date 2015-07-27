@@ -8,14 +8,10 @@
 
 import UIKit
 
-class SOSettingsViewController: UIViewController, SOObserverProtocol {
+class SOSettingsViewController: UIViewController {
     
     @IBOutlet weak var segmentedControl: UISegmentedControl!
     @IBOutlet weak var useiCloudSwitch: UISwitch!
-    
-    deinit{
-        SOObserversManager.sharedInstance.removeObserver(self, type: .SODataBaseTypeChanged)
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,6 +20,10 @@ class SOSettingsViewController: UIViewController, SOObserverProtocol {
         self.setUpCurrentDataBaseType()
         
         SOObserversManager.sharedInstance.addObserver(self, type: .SODataBaseTypeChanged)
+    }
+
+    deinit{
+        SOObserversManager.sharedInstance.removeObserver(self, type: .SODataBaseTypeChanged)
     }
     
     private func setUpCurrentDataBaseType()
@@ -54,14 +54,16 @@ class SOSettingsViewController: UIViewController, SOObserverProtocol {
         let useiCloudValue = self.useiCloudSwitch.on
         SOTypeDataBaseSwitcher.setUpOfUsingICloud(useiCloudValue)
     }
-    
-    //- MARK: SOObserverProtocol implementation
+}
+
+extension SOSettingsViewController: SOObserverProtocol{
     func notify(notification: SOObserverNotification){
         switch notification.type{
         case .SODataBaseTypeChanged:
-            setUpCurrentDataBaseType()            
+            setUpCurrentDataBaseType()
         default:
             assert(false, "Something is wrong with observer code notification!")
         }
     }
 }
+

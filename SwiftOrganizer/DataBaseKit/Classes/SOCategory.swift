@@ -62,12 +62,6 @@ public class SOCategory: NSObject {
             _databaseObject = newValue
         }
     }
-    
-    public func didSelect(select: Bool, block: (error: NSError?) -> Void){
-        SODataBaseFactory.sharedInstance.dataBase.saveFieldToObject(self.databaseObject, fieldName: "selected", value: select, block: {(error: NSError?) in
-            block(error: error)
-        })
-    }
 }
 
 extension SOCategory{
@@ -88,5 +82,13 @@ extension SOCategory{
         self.id = object.id
         self.name = object.name
         self.selected = object.selected
+    }
+}
+
+extension SOCategory{
+    public func didSelect(select: Bool, block: (error: NSError?) -> Void){
+        SODataBaseFactory.sharedInstance.dataBase.saveFieldToObject(self.databaseObject, fieldName: "selected", value: select, block: {(error: NSError?) in
+            block(error: error)
+        })
     }
 }

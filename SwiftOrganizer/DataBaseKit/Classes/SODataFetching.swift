@@ -8,7 +8,7 @@
 
 import UIKit
 
-public final class SODataFetching: SOObserverProtocol{
+public final class SODataFetching{
     private lazy var _allTasks = [SOTask]()
     private lazy var _allCategories = [SOCategory]()
     private lazy var _allIcons = [SOIco]()
@@ -140,8 +140,9 @@ public final class SODataFetching: SOObserverProtocol{
         
         return nil
     }
-    
-    //- MARK: SOObserverProtocol implementation
+}
+
+extension SODataFetching: SOObserverProtocol {
     public func notify(notification: SOObserverNotification){
         switch notification.type{
         case .SODataBaseTypeChanged:
@@ -154,5 +155,5 @@ public final class SODataFetching: SOObserverProtocol{
             assert(false, "Something is wrong with observer code notification!")
         }
     }
-    
 }
+

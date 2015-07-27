@@ -8,7 +8,7 @@
 
 import Foundation
 
-public final class SOiCloudManager: SOObserverProtocol {
+public final class SOiCloudManager {
     
     class var sharedInstance: SOiCloudManager {
         struct SingletonWrapper {
@@ -92,8 +92,9 @@ public final class SOiCloudManager: SOObserverProtocol {
             }
         }
     }
-    
-    //- MARK: SOObserverProtocol implementation
+}
+
+extension SOiCloudManager: SOObserverProtocol {
     public func notify(notification: SOObserverNotification){
         switch notification.type{
         case .SODataBaseTypeChanged:
@@ -101,7 +102,7 @@ public final class SOiCloudManager: SOObserverProtocol {
                 let key: String = SOObserverNotificationTypes.SODataBaseTypeChanged.rawValue
                 self.updateKeyValueStoreKey(key, object: value)
             }
-
+            
         default:
             assert(false, "Something is wrong with observer code notification!")
         }
