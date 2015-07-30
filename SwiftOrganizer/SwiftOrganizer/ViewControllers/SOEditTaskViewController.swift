@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Social
 
 enum SOEditTaskViewControllerId: String {
     case Category = "EnterCategoryVC"
@@ -103,6 +104,64 @@ class SOEditTaskViewController: UIViewController {
         
         let activity = UIActivityViewController(activityItems: [text], applicationActivities: nil)
         self.presentViewController(activity, animated: true, completion: nil)
+    }
+
+    @IBAction func shareComposeFacebookButtonPressed(sender: AnyObject) {
+        var text: String = "SwiftOrganizer: "
+        
+        for cell in _cells{
+            let str = cell.currentValueToString()
+            
+            if count(str) > 0{
+                text += str + "; "
+            }
+        }
+        
+        let serviceType = SLServiceTypeFacebook
+        
+        if SLComposeViewController.isAvailableForServiceType(serviceType){
+            let controller = SLComposeViewController(forServiceType: serviceType)
+            controller.setInitialText(text)
+            controller.addImage(UIImage(named: "ico1@2x"))
+            controller.addURL(NSURL(string: "http://www.apple.com/safari/"))
+            controller.completionHandler = {(result: SLComposeViewControllerResult) in
+                println("Completed")
+            }
+            presentViewController(controller, animated: true, completion: nil)
+
+        } else {
+            println("The Facebook service is not available".localized)
+        }
+    }
+    
+    @IBAction func shareComposeTwitterButtonPressed(sender: AnyObject) {
+        var text: String = "SwiftOrganizer: "
+        
+        for cell in _cells{
+            let str = cell.currentValueToString()
+            
+            if count(str) > 0{
+                text += str + "; "
+            }
+        }
+        
+        let serviceType = SLServiceTypeTwitter
+        
+        if SLComposeViewController.isAvailableForServiceType(serviceType){
+            let controller = SLComposeViewController(forServiceType: serviceType)
+            controller.setInitialText(text)
+            controller.addImage(UIImage(named: "ico1@2x"))
+            controller.addURL(NSURL(string: "http://www.apple.com/safari/"))
+            controller.completionHandler = {(result: SLComposeViewControllerResult) in
+                println("Completed")
+            }
+            presentViewController(controller, animated: true, completion: nil)
+            
+        } else {
+            println("The Facebook service is not available".localized)
+        }
+        
+        
     }
     
     // - MARK: Exit with close window

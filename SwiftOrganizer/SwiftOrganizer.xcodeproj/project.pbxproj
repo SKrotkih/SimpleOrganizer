@@ -56,6 +56,7 @@
 		7F5AA37A1B50B63400DA6E0B /* SOEditTaskCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F5AA3791B50B63400DA6E0B /* SOEditTaskCell.swift */; };
 		7F5C2C3C1B40143600506320 /* ArrayExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F5C2C3B1B40143600506320 /* ArrayExtension.swift */; };
 		7F5C2C3E1B42D88700506320 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = 7F5C2C3D1B42D88700506320 /* README.md */; };
+		7F5C81741B69E36C00284D9D /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F5C81731B69E36C00284D9D /* Social.framework */; };
 		7F5E6E151B51730900A1B278 /* SODocumentsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F5E6E141B51730900A1B278 /* SODocumentsViewController.swift */; };
 		7F625EF01B2ED492004B7C16 /* libstdc++.6.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F625EEF1B2ED492004B7C16 /* libstdc++.6.dylib */; };
 		7F625EF21B2ED49C004B7C16 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F625EF11B2ED49C004B7C16 /* MobileCoreServices.framework */; };
@@ -256,6 +257,7 @@
 		7F5AA3791B50B63400DA6E0B /* SOEditTaskCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SOEditTaskCell.swift; path = EditTaskViewController/SOEditTaskCell.swift; sourceTree = "<group>"; };
 		7F5C2C3B1B40143600506320 /* ArrayExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArrayExtension.swift; sourceTree = "<group>"; };
 		7F5C2C3D1B42D88700506320 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../../README.md; sourceTree = "<group>"; };
+		7F5C81731B69E36C00284D9D /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		7F5D20EA1B3942B500926392 /* SwiftOrganizer.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = SwiftOrganizer.playground; sourceTree = "<group>"; };
 		7F5E6E141B51730900A1B278 /* SODocumentsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SODocumentsViewController.swift; sourceTree = "<group>"; };
 		7F625EE21B2ED3DC004B7C16 /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Bolts.framework; path = Frameworks/Bolts.framework; sourceTree = "<group>"; };
@@ -327,6 +329,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7F5C81741B69E36C00284D9D /* Social.framework in Frameworks */,
 				7F625EF81B2ED4C2004B7C16 /* libsqlite3.dylib in Frameworks */,
 				7F625EF61B2ED4B7004B7C16 /* AudioToolbox.framework in Frameworks */,
 				7F625EF41B2ED4A9004B7C16 /* SystemConfiguration.framework in Frameworks */,
@@ -738,6 +741,7 @@
 		7FD44AF11B5A04A8000A4FB3 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				7F5C81731B69E36C00284D9D /* Social.framework */,
 				7FD44AF21B5A04A8000A4FB3 /* NotificationCenter.framework */,
 			);
 			name = Frameworks;

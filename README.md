@@ -20,6 +20,7 @@ Also were implemented the following features:
 - localization app 
 - local notifications 
 - sharing via UIActivityViewController
+- sharing on Facebook and Twitter via SLComposeViewController
 - UIDocument. Enter and Edit files in the Documents folder.
 - Document Picker - access to files on remote storage like iCloud, DropBox and etc with a download to the local Documents folder.
 - extension
