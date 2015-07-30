@@ -56,13 +56,13 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wgF-aq-AAF">
                                 <rect key="frame" x="131" y="150" width="340" height="204"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please enter a phone number:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eeI-uX-1V4">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please enter a phone number or e-mail:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eeI-uX-1V4">
                                         <rect key="frame" x="37" y="8" width="265" height="21"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="265" id="9PK-IO-x3G"/>
                                             <constraint firstAttribute="height" constant="21" id="WBE-Qa-TZg"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" name="HelveticaNeue-CondensedBold" family="Helvetica Neue" pointSize="18"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue-CondensedBold" family="Helvetica Neue" pointSize="15"/>
                                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
@@ -76,7 +76,7 @@
                                         <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="phonePad"/>
                                     </textField>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="43x-8e-ofz">
-                                        <rect key="frame" x="149" y="126" width="40" height="40"/>
+                                        <rect key="frame" x="149" y="151" width="40" height="40"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="0ME-He-EGy"/>
                                             <constraint firstAttribute="width" constant="40" id="FX4-Xe-GDA"/>
@@ -95,21 +95,45 @@
                                     <constraint firstAttribute="centerX" secondItem="eeI-uX-1V4" secondAttribute="centerX" constant="0.5" id="5sH-oA-LsW"/>
                                     <constraint firstAttribute="centerX" secondItem="WrI-UZ-3Yo" secondAttribute="centerX" constant="1" id="ArZ-Jf-XkP"/>
                                     <constraint firstAttribute="width" constant="340" id="Jgr-eH-skL"/>
-                                    <constraint firstAttribute="bottom" secondItem="43x-8e-ofz" secondAttribute="bottom" constant="38" id="LRR-RB-eiP"/>
+                                    <constraint firstAttribute="bottom" secondItem="43x-8e-ofz" secondAttribute="bottom" constant="13" id="LRR-RB-eiP"/>
                                     <constraint firstItem="WrI-UZ-3Yo" firstAttribute="top" secondItem="eeI-uX-1V4" secondAttribute="bottom" constant="14" id="R3B-9Y-D2v"/>
                                     <constraint firstItem="eeI-uX-1V4" firstAttribute="top" secondItem="wgF-aq-AAF" secondAttribute="top" constant="8" id="Snr-r3-ND7"/>
                                     <constraint firstAttribute="centerX" secondItem="43x-8e-ofz" secondAttribute="centerX" constant="1" id="abf-Ks-Rh9"/>
                                     <constraint firstAttribute="height" constant="204" id="t8U-91-fxH"/>
                                 </constraints>
                             </view>
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="GRN-Sc-TLV">
+                                <rect key="frame" x="229" y="233" width="51" height="31"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <color key="tintColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="onTintColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <action selector="emailSwitchChanged:" destination="ekg-BH-0Tz" eventType="valueChanged" id="f6X-Mk-F9O"/>
+                                </connections>
+                            </switch>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="e-mail" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NPM-el-elw">
+                                <rect key="frame" x="286" y="238" width="122" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="122" id="x8f-3f-l9T"/>
+                                    <constraint firstAttribute="height" constant="21" id="zc4-0w-wr7"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-CondensedBold" family="Helvetica Neue" pointSize="17"/>
+                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="centerY" secondItem="wgF-aq-AAF" secondAttribute="centerY" constant="48" id="AcO-W7-n8Q"/>
                             <constraint firstAttribute="centerX" secondItem="wgF-aq-AAF" secondAttribute="centerX" constant="-1" id="Awy-Cz-bZq"/>
+                            <constraint firstItem="wgF-aq-AAF" firstAttribute="leading" secondItem="GRN-Sc-TLV" secondAttribute="trailing" constant="-147" id="BiH-vG-20h"/>
+                            <constraint firstItem="wgF-aq-AAF" firstAttribute="top" secondItem="NPM-el-elw" secondAttribute="bottom" constant="-109" id="eoW-oj-PBK"/>
+                            <constraint firstItem="wgF-aq-AAF" firstAttribute="top" secondItem="GRN-Sc-TLV" secondAttribute="bottom" constant="-114" id="g1i-JL-VH0"/>
+                            <constraint firstItem="NPM-el-elw" firstAttribute="leading" secondItem="wgF-aq-AAF" secondAttribute="trailing" constant="-185" id="oqF-kn-fAx"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="emailSwitch" destination="GRN-Sc-TLV" id="v0U-1O-Xhy"/>
                         <outlet property="phoneNumber" destination="WrI-UZ-3Yo" id="FCm-1m-kHM"/>
                     </connections>
                 </viewController>
