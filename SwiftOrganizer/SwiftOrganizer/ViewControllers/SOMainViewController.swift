@@ -134,7 +134,7 @@ class SOMainViewController: UIViewController{
             switchDBtypeActivity.performBlock = {
                 SOTypeDataBaseSwitcher.switchToAnotherDB()
             }
-
+            
             let activityController = UIActivityViewController(activityItems: [], applicationActivities: [editTaskListActivity, newTaskActivity, switchDBtypeActivity])
             presentViewController(activityController, animated: true, completion: nil)
         }

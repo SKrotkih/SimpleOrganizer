@@ -41,6 +41,82 @@
             </objects>
             <point key="canvasLocation" x="791" y="1219"/>
         </scene>
+        <!--Face Time Call Phone View Controller-->
+        <scene sceneID="KF3-Ha-4Pt">
+            <objects>
+                <viewController storyboardIdentifier="FaceTimeCallPhoneViewController" id="ekg-BH-0Tz" customClass="SOFaceTimeCallPhoneViewController" customModule="SwiftOrganizer" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="63m-x5-vV6"/>
+                        <viewControllerLayoutGuide type="bottom" id="tra-jZ-PZW"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Kxb-8g-3Hn">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wgF-aq-AAF">
+                                <rect key="frame" x="131" y="150" width="340" height="204"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please enter a phone number:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eeI-uX-1V4">
+                                        <rect key="frame" x="37" y="8" width="265" height="21"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="265" id="9PK-IO-x3G"/>
+                                            <constraint firstAttribute="height" constant="21" id="WBE-Qa-TZg"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue-CondensedBold" family="Helvetica Neue" pointSize="18"/>
+                                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Phone Number" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="WrI-UZ-3Yo">
+                                        <rect key="frame" x="46" y="43" width="246" height="30"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="246" id="B3O-el-lww"/>
+                                            <constraint firstAttribute="height" constant="30" id="qsh-mb-Bfh"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue-CondensedBold" family="Helvetica Neue" pointSize="17"/>
+                                        <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="phonePad"/>
+                                    </textField>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="43x-8e-ofz">
+                                        <rect key="frame" x="149" y="126" width="40" height="40"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="40" id="0ME-He-EGy"/>
+                                            <constraint firstAttribute="width" constant="40" id="FX4-Xe-GDA"/>
+                                        </constraints>
+                                        <state key="normal" image="phone.png" backgroundImage="phone.png">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <state key="highlighted" image="phone.png" backgroundImage="phone.png"/>
+                                        <connections>
+                                            <action selector="callPhoneButtonPressed:" destination="ekg-BH-0Tz" eventType="touchUpInside" id="eZi-TP-1EK"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="centerX" secondItem="eeI-uX-1V4" secondAttribute="centerX" constant="0.5" id="5sH-oA-LsW"/>
+                                    <constraint firstAttribute="centerX" secondItem="WrI-UZ-3Yo" secondAttribute="centerX" constant="1" id="ArZ-Jf-XkP"/>
+                                    <constraint firstAttribute="width" constant="340" id="Jgr-eH-skL"/>
+                                    <constraint firstAttribute="bottom" secondItem="43x-8e-ofz" secondAttribute="bottom" constant="38" id="LRR-RB-eiP"/>
+                                    <constraint firstItem="WrI-UZ-3Yo" firstAttribute="top" secondItem="eeI-uX-1V4" secondAttribute="bottom" constant="14" id="R3B-9Y-D2v"/>
+                                    <constraint firstItem="eeI-uX-1V4" firstAttribute="top" secondItem="wgF-aq-AAF" secondAttribute="top" constant="8" id="Snr-r3-ND7"/>
+                                    <constraint firstAttribute="centerX" secondItem="43x-8e-ofz" secondAttribute="centerX" constant="1" id="abf-Ks-Rh9"/>
+                                    <constraint firstAttribute="height" constant="204" id="t8U-91-fxH"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="centerY" secondItem="wgF-aq-AAF" secondAttribute="centerY" constant="48" id="AcO-W7-n8Q"/>
+                            <constraint firstAttribute="centerX" secondItem="wgF-aq-AAF" secondAttribute="centerX" constant="-1" id="Awy-Cz-bZq"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="phoneNumber" destination="WrI-UZ-3Yo" id="FCm-1m-kHM"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="pFk-om-tMn" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1402" y="1222"/>
+        </scene>
         <!--Left View Controller-->
         <scene sceneID="Nq8-8X-A5v">
             <objects>
@@ -1278,5 +1354,6 @@
         <image name="ico4.png" width="51" height="51"/>
         <image name="ico5.png" width="50" height="50"/>
         <image name="ico6.png" width="52" height="51"/>
+        <image name="phone.png" width="40" height="40"/>
     </resources>
 </document>

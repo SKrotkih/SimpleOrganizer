@@ -12,6 +12,7 @@ enum LeftMenu: Int {
     case Documents
     case DocumentPicker
     case Settings
+    case FaceTimeCall
     case About
 }
 
@@ -23,13 +24,14 @@ class LeftViewController : UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
 
-    var menus = ["Organizer".localized, "My Documents".localized, "External Documents".localized, "Settings".localized, "About".localized]
+    var menus = ["Organizer".localized, "My Documents".localized, "External Documents".localized, "Settings".localized, "Make phone call via FaceTime".localized, "About".localized]
     var mainViewController: UIViewController!
     var settingsViewController: UIViewController!
     var documentsViewController: UIViewController!
     var documentPickerViewController: UIViewController!
     var goViewController: UIViewController!
     var aboutViewController: UIViewController!
+    var phoneCallViaFaceTimeViewController: UIViewController!
     
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -49,6 +51,9 @@ class LeftViewController : UIViewController {
         
         let settingsViewController = storyboard.instantiateViewControllerWithIdentifier("SOSettingsViewController") as! SOSettingsViewController
         self.settingsViewController = UINavigationController(rootViewController: settingsViewController)
+
+        let thePhoneCallViaFaceTimeViewController = storyboard.instantiateViewControllerWithIdentifier("FaceTimeCallPhoneViewController") as! SOFaceTimeCallPhoneViewController
+        self.phoneCallViaFaceTimeViewController = UINavigationController(rootViewController: thePhoneCallViaFaceTimeViewController)
         
         let aboutViewController = storyboard.instantiateViewControllerWithIdentifier("SOAboutViewController") as! SOAboutViewController
         self.aboutViewController = UINavigationController(rootViewController: aboutViewController)
@@ -94,6 +99,9 @@ extension LeftViewController: LeftMenuProtocol {
         case .Settings:
             self.slideMenuController()?.changeMainViewController(self.settingsViewController, close: true)
             break
+        case .FaceTimeCall:
+            self.slideMenuController()?.changeMainViewController(self.phoneCallViaFaceTimeViewController, close: true)
+            break
         case .About:
             self.slideMenuController()?.changeMainViewController(self.aboutViewController, close: true)
             break
@@ -102,3 +110,4 @@ extension LeftViewController: LeftMenuProtocol {
         }
     }
 }
+
