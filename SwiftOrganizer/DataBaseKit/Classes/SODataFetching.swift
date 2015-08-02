@@ -81,11 +81,7 @@ public final class SODataFetching{
     
     // - MARK: Fetch Of The Data Instance Fields
     subscript(index: Int) -> SOCategory? {
-        if self._allCategories.count > 0 && index < self._allCategories.count{
-            return self._allCategories[index]
-        }
-        
-        return nil
+        return self.categoryForIndex(index)
     }
     
     func categoryForIndex(index: Int) -> SOCategory?{

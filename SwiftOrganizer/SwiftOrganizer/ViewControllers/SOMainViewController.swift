@@ -46,8 +46,6 @@ class SOMainViewController: UIViewController{
         categoryTabBarController.filterStateDelegate = mainTableViewController
         iconsTabBarController.filterStateDelegate = mainTableViewController
         
-        self.title = "Organizer".localized
-        
         SOObserversManager.sharedInstance.addObserver(self, type: .SODataBaseTypeChanged)
         SOObserversManager.sharedInstance.addObserver(self, type: .SODataBaseDidChanged)
         
@@ -56,6 +54,7 @@ class SOMainViewController: UIViewController{
         refreshControl!.addTarget(self, action: "handleRefresh:", forControlEvents: .ValueChanged)
         mainTableView.addSubview(refreshControl!)
         
+        self.titleActualize()
     }
     
     deinit {
@@ -100,10 +99,17 @@ class SOMainViewController: UIViewController{
             self.iconsTabBarController.reloadTabs{(error: NSError?) in
                 self.mainTableViewController.reloadData()
                 block(error: error)
+                self.titleActualize()
             }
         }
     }
 
+    private func titleActualize(){
+        let defaultTitle = "Organizer".localized
+        let currentDB = SOTypeDataBaseSwitcher.currectDataBaseDescription()
+        self.title = "\(defaultTitle) (\(currentDB))"
+    }
+    
     // MARK: Edit Task List
     
     func startActivityViewController(){
@@ -149,6 +155,8 @@ class SOMainViewController: UIViewController{
     }
 }
 
+    // MARK: Start editing task
+
 extension SOMainViewController: SOEditTaskController{
     func startEditingTask(task: SOTask?){
         var storyboard = UIStoryboard(name: "Main", bundle: nil)
@@ -163,6 +171,7 @@ extension SOMainViewController: SOEditTaskController{
     }
 }
 
+    // MARK: Observer notifications handler
 
 extension SOMainViewController: SOObserverProtocol{
     func notify(notification: SOObserverNotification){
@@ -176,6 +185,8 @@ extension SOMainViewController: SOObserverProtocol{
         }
     }
 }
+
+    // MARK: Alert View Controller
 
 extension SOMainViewController{
     func showAlertWithTitle(title:String, message:String){

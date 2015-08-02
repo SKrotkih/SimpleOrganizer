@@ -1,9 +1,9 @@
 //
 //  SOCategory.swift
-//  
+//  SwiftOrganizer
 //
 //  Created by Sergey Krotkih on 5/29/15.
-//
+//  Copyright (c) 2015 Sergey Krotkih. All rights reserved.
 //
 
 import UIKit
@@ -64,30 +64,32 @@ public class SOCategory: NSObject {
     }
 }
 
-extension SOCategory{
-    func initFromParseObject(object: PFObject)
+extension SOCategory: SOConcreteObjectsProtocol{
+    public func initFromParseObject(object: AnyObject)
     {
-        self.databaseObject = object
-        self.id = object["recordid"] as! String
-        self.name = object["name"] as! String
-        self.selected = object["selected"] as! Bool
+        let theObject = object as! PFObject
+        self.databaseObject = theObject
+        self.id = theObject[kCategoryFldId] as! String
+        self.name = theObject[kCategoryFldName] as! String
+        self.selected = theObject[kCategoryFldSelected] as! Bool
     }
     
-    func copyToParseObject(object: PFObject){
+    public func copyToParseObject(object: AnyObject){
     }
 
-    func initFromCoreDataObject(object: TaskCategory)
+    public func initFromCoreDataObject(object: AnyObject)
     {
-        self.databaseObject = object
-        self.id = object.id
-        self.name = object.name
-        self.selected = object.selected
+        let theObject = object as! TaskCategory
+        self.databaseObject = theObject
+        self.id = theObject.id
+        self.name = theObject.name
+        self.selected = theObject.selected
     }
 }
 
 extension SOCategory{
     public func didSelect(select: Bool, block: (error: NSError?) -> Void){
-        SODataBaseFactory.sharedInstance.dataBase.saveFieldToObject(self.databaseObject, fieldName: "selected", value: select, block: {(error: NSError?) in
+        SODataBaseFactory.sharedInstance.dataBase.saveFieldToObject(self.databaseObject, fieldName: kCategoryFldSelected, value: select, block: {(error: NSError?) in
             block(error: error)
         })
     }

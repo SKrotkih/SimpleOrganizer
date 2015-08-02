@@ -21,6 +21,7 @@
 		7F497D651B1B330300F95BA9 /* SOUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F497D641B1B330300F95BA9 /* SOUtilities.swift */; };
 		7F56ACC71B6A5C9E00B0C1EF /* SOFaceTimeCallPhoneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F56ACC61B6A5C9E00B0C1EF /* SOFaceTimeCallPhoneViewController.swift */; };
 		7F56ACC91B6A5EE600B0C1EF /* phone.png in Resources */ = {isa = PBXBuildFile; fileRef = 7F56ACC81B6A5EE600B0C1EF /* phone.png */; };
+		7F56ACCB1B6D1A2200B0C1EF /* SOSemaforeExample.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F56ACCA1B6D1A2200B0C1EF /* SOSemaforeExample.swift */; };
 		7F57255C1B0F5DDA003DBDEB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F57255B1B0F5DDA003DBDEB /* AppDelegate.swift */; };
 		7F5725661B0F5DDA003DBDEB /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7F5725651B0F5DDA003DBDEB /* Images.xcassets */; };
 		7F5725751B0F5DDB003DBDEB /* SwiftOrganizerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F5725741B0F5DDB003DBDEB /* SwiftOrganizerTests.swift */; };
@@ -219,6 +220,7 @@
 		7F497D641B1B330300F95BA9 /* SOUtilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SOUtilities.swift; path = Utilities/SOUtilities.swift; sourceTree = "<group>"; };
 		7F56ACC61B6A5C9E00B0C1EF /* SOFaceTimeCallPhoneViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SOFaceTimeCallPhoneViewController.swift; sourceTree = "<group>"; };
 		7F56ACC81B6A5EE600B0C1EF /* phone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = phone.png; path = Resources/Images/phone.png; sourceTree = "<group>"; };
+		7F56ACCA1B6D1A2200B0C1EF /* SOSemaforeExample.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SOSemaforeExample.swift; path = Utilities/SOSemaforeExample.swift; sourceTree = "<group>"; };
 		7F5725561B0F5DDA003DBDEB /* SwiftOrganizer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwiftOrganizer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7F57255A1B0F5DDA003DBDEB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7F57255B1B0F5DDA003DBDEB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -416,6 +418,7 @@
 			isa = PBXGroup;
 			children = (
 				7F497D641B1B330300F95BA9 /* SOUtilities.swift */,
+				7F56ACCA1B6D1A2200B0C1EF /* SOSemaforeExample.swift */,
 			);
 			name = Utilities;
 			sourceTree = "<group>";
@@ -1159,6 +1162,7 @@
 				7F6E981A1B1DDED30048ED7A /* SOEditTaskDateCell.swift in Sources */,
 				7F6E98621B1F28650048ED7A /* SOSelectIconsCell.swift in Sources */,
 				7F6E98201B1E23F20048ED7A /* SOEnterCategoryViewController.swift in Sources */,
+				7F56ACCB1B6D1A2200B0C1EF /* SOSemaforeExample.swift in Sources */,
 				7F56ACC71B6A5C9E00B0C1EF /* SOFaceTimeCallPhoneViewController.swift in Sources */,
 				7F5725961B0F6114003DBDEB /* SOAboutViewController.swift in Sources */,
 				7F5725A21B0F61F7003DBDEB /* StringExtension.swift in Sources */,

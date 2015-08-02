@@ -80,4 +80,15 @@ public class SOTypeDataBaseSwitcher{
 
         self.switchToIndex(currentIndex)
     }
+    
+    public class func currectDataBaseDescription() -> String{
+        var currentIndex = self.indexOfCurrectDBType()
+        
+        if currentIndex == 0{
+            return "Local".localized
+        } else{
+            return "Remote".localized
+        }
+    }
+    
 }

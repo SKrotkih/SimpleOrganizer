@@ -1,9 +1,9 @@
 //
 //  Ico.swift
-//  
+//  SwiftOrganizer
 //
 //  Created by Sergey Krotkih on 5/29/15.
-//
+//  Copyright (c) 2015 Sergey Krotkih. All rights reserved.
 //
 
 import UIKit
@@ -71,32 +71,34 @@ public class SOIco: NSObject {
     }
 }
 
-extension SOIco{
-    func initFromParseObject(object: PFObject)
+extension SOIco: SOConcreteObjectsProtocol{
+    public func initFromParseObject(object: AnyObject)
     {
-        self.databaseObject = object
-        self.id = object["recordid"] as! String
-        self.name = object["name"] as! String
-        self.imageName = object["imageName"] as! String
-        self.selected = object["selected"] as! Bool
+        let theObject = object as! PFObject
+        self.databaseObject = theObject
+        self.id = theObject[kIcoFldId] as! String
+        self.name = theObject[kIcoFldName] as! String
+        self.imageName = theObject[kIcoFldImageName] as! String
+        self.selected = theObject[kIcoFldSelected] as! Bool
     }
     
-    func copyToParseObject(object: PFObject){
+    public func copyToParseObject(object: AnyObject){
     }
 
-    func initFromCoreDataObject(object: TaskIco)
+    public func initFromCoreDataObject(object: AnyObject)
     {
-        self.databaseObject = object
-        self.id = object.id
-        self.name = object.name
-        self.imageName = object.imagename
-        self.selected = object.selected
+        let theObject = object as! TaskIco
+        self.databaseObject = theObject
+        self.id = theObject.id
+        self.name = theObject.name
+        self.imageName = theObject.imagename
+        self.selected = theObject.selected
     }
 }
 
 extension SOIco{
     public func didSelect(select: Bool, block: (error: NSError?) -> Void){
-        SODataBaseFactory.sharedInstance.dataBase.saveFieldToObject(self.databaseObject, fieldName: "selected", value: select, block: {(error: NSError?) in
+        SODataBaseFactory.sharedInstance.dataBase.saveFieldToObject(self.databaseObject, fieldName: kIcoFldSelected, value: select, block: {(error: NSError?) in
             block(error: error)
         })
     }
