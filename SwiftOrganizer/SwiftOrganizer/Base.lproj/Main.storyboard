@@ -1340,7 +1340,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fRT-No-Hep">
-                                <rect key="frame" x="157" y="260" width="286" height="81"/>
+                                <rect key="frame" x="157" y="71" width="286" height="81"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Swift Organizer" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="plm-bl-iMo">
                                         <rect key="frame" x="20" y="13" width="246" height="32"/>
@@ -1361,14 +1361,29 @@
                                     <constraint firstAttribute="width" constant="286" id="Tlx-TW-dTJ"/>
                                 </constraints>
                             </view>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iih-ER-gJy">
+                                <rect key="frame" x="16" y="160" width="568" height="420"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-CondensedBold" family="Helvetica Neue" pointSize="15"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
                         </subviews>
                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="centerY" secondItem="fRT-No-Hep" secondAttribute="centerY" id="RAE-kK-Aoa"/>
+                            <constraint firstItem="4w6-Ph-vE3" firstAttribute="top" secondItem="iih-ER-gJy" secondAttribute="bottom" constant="20" id="1mS-zt-zP1"/>
+                            <constraint firstItem="iih-ER-gJy" firstAttribute="top" secondItem="fRT-No-Hep" secondAttribute="bottom" constant="8" id="1oe-cC-SLt"/>
+                            <constraint firstItem="iih-ER-gJy" firstAttribute="leading" secondItem="IWZ-ke-U66" secondAttribute="leadingMargin" id="4F8-hh-Wuv"/>
+                            <constraint firstItem="fRT-No-Hep" firstAttribute="top" secondItem="QEC-CO-vAa" secondAttribute="bottom" constant="51" id="LZ2-B6-Kge"/>
                             <constraint firstAttribute="centerX" secondItem="fRT-No-Hep" secondAttribute="centerX" id="TRb-Kp-O4a"/>
+                            <constraint firstItem="iih-ER-gJy" firstAttribute="trailing" secondItem="IWZ-ke-U66" secondAttribute="trailingMargin" id="U1u-AR-bC7"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="Wve-YG-p0e"/>
+                    <connections>
+                        <outlet property="readmeTextView" destination="iih-ER-gJy" id="j5k-3w-6dH"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="R0Q-i3-kfU" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

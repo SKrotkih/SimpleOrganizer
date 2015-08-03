@@ -57,6 +57,7 @@
 		7F5A6D3B1B14C42C009665C7 /* ico11@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7F5A6D2F1B14C42C009665C7 /* ico11@2x.png */; };
 		7F5A6D3C1B14C42C009665C7 /* ico12@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7F5A6D301B14C42C009665C7 /* ico12@2x.png */; };
 		7F5AA37A1B50B63400DA6E0B /* SOEditTaskCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F5AA3791B50B63400DA6E0B /* SOEditTaskCell.swift */; };
+		7F5B37281B6F2B1D00112760 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 7F5C2C3D1B42D88700506320 /* README.md */; };
 		7F5C2C3C1B40143600506320 /* ArrayExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F5C2C3B1B40143600506320 /* ArrayExtension.swift */; };
 		7F5C2C3E1B42D88700506320 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = 7F5C2C3D1B42D88700506320 /* README.md */; };
 		7F5C81741B69E36C00284D9D /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F5C81731B69E36C00284D9D /* Social.framework */; };
@@ -1088,6 +1089,7 @@
 				7F5A6D391B14C42C009665C7 /* ico9@2x.png in Resources */,
 				7F6474A11B2730D700B3D75C /* ico15@2x.png in Resources */,
 				7F5779D41B5B5E68006EB1E5 /* SwiftOrganizer.xcdatamodeld in Resources */,
+				7F5B37281B6F2B1D00112760 /* README.md in Resources */,
 				7F9B77261B189C54006D3434 /* Main.storyboard in Resources */,
 				7F9B77271B189C58006D3434 /* LaunchScreen.xib in Resources */,
 				7F5A6D3B1B14C42C009665C7 /* ico11@2x.png in Resources */,

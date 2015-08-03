@@ -13,11 +13,20 @@ import UIKit
 class SOAboutViewController: UIViewController {
     
     weak var delegate: LeftMenuProtocol?
+    @IBOutlet weak var readmeTextView: UITextView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.title = "About Autors".localized                
+        self.title = "About SwiftOrganizer".localized
+        
+        let readmeFilePath = NSBundle.mainBundle().pathForResource("README", ofType: "md")
+
+        if let readme = NSString(contentsOfFile: readmeFilePath!, encoding: NSUTF8StringEncoding, error: nil){
+            self.readmeTextView.text = readme as String
+        } else {
+            self.readmeTextView.text = ""
+        }
     }
     
     override func viewWillAppear(animated: Bool) {
