@@ -11,6 +11,7 @@ import UIKit
 class SOEnterBaseViewController: UIViewController {
 
     var task: SOTask?
+    var undoDelegate: SOEditTaskUndoDelegateProtocol?
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)

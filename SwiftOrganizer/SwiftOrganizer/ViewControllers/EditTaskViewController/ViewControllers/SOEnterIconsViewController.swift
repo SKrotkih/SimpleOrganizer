@@ -66,6 +66,23 @@ class SOEnterIconsViewController: SOEnterBaseViewController {
         super.closeButtonWasPressed()
     }
     
+    func fillIconsBuffer() -> [String]{
+        if let editTask = self.task{
+            let iconsCount = editTask.icons.count
+            var buffer = [String](count: iconsCount, repeatedValue: "")
+            
+            for i in 0..<iconsCount{
+                if i < taskIcons.count{
+                    buffer[i] = taskIcons[i]
+                }
+            }
+        
+            return buffer
+        }
+
+        return []
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -114,6 +131,9 @@ extension SOEnterIconsViewController: UITableViewDelegate {
         let ico: SOIco = icons[row]
         let icoId: String = ico.id
         var needAdd: Bool = true
+
+        let dict = NSDictionary(objects: [fillIconsBuffer()], forKeys: ["icons"])
+        self.undoDelegate?.addToUndoBuffer(dict)
         
         for i in 0..<taskIcons.count{
             if icoId == taskIcons[i]{

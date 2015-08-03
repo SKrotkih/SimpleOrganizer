@@ -58,6 +58,7 @@
 		7F5A6D3C1B14C42C009665C7 /* ico12@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7F5A6D301B14C42C009665C7 /* ico12@2x.png */; };
 		7F5AA37A1B50B63400DA6E0B /* SOEditTaskCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F5AA3791B50B63400DA6E0B /* SOEditTaskCell.swift */; };
 		7F5B37281B6F2B1D00112760 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 7F5C2C3D1B42D88700506320 /* README.md */; };
+		7F5B372A1B6F988500112760 /* undo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7F5B37291B6F988500112760 /* undo@2x.png */; };
 		7F5C2C3C1B40143600506320 /* ArrayExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F5C2C3B1B40143600506320 /* ArrayExtension.swift */; };
 		7F5C2C3E1B42D88700506320 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = 7F5C2C3D1B42D88700506320 /* README.md */; };
 		7F5C81741B69E36C00284D9D /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F5C81731B69E36C00284D9D /* Social.framework */; };
@@ -262,6 +263,7 @@
 		7F5A6D2F1B14C42C009665C7 /* ico11@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ico11@2x.png"; path = "Resources/Images/Icons/ico11@2x.png"; sourceTree = "<group>"; };
 		7F5A6D301B14C42C009665C7 /* ico12@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ico12@2x.png"; path = "Resources/Images/Icons/ico12@2x.png"; sourceTree = "<group>"; };
 		7F5AA3791B50B63400DA6E0B /* SOEditTaskCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SOEditTaskCell.swift; path = EditTaskViewController/SOEditTaskCell.swift; sourceTree = "<group>"; };
+		7F5B37291B6F988500112760 /* undo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "undo@2x.png"; path = "Resources/Images/undo@2x.png"; sourceTree = "<group>"; };
 		7F5C2C3B1B40143600506320 /* ArrayExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArrayExtension.swift; sourceTree = "<group>"; };
 		7F5C2C3D1B42D88700506320 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../../README.md; sourceTree = "<group>"; };
 		7F5C81731B69E36C00284D9D /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
@@ -663,6 +665,7 @@
 		7F6E98131B1C87E50048ED7A /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				7F5B37291B6F988500112760 /* undo@2x.png */,
 				7F56ACC81B6A5EE600B0C1EF /* phone.png */,
 			);
 			name = Images;
@@ -1077,6 +1080,7 @@
 				7F6474A31B2730D700B3D75C /* ico17@2x.png in Resources */,
 				7F5A6D381B14C42C009665C7 /* ico8@2x.png in Resources */,
 				7F5A6D341B14C42C009665C7 /* ico4@2x.png in Resources */,
+				7F5B372A1B6F988500112760 /* undo@2x.png in Resources */,
 				7F497D621B1AF9B600F95BA9 /* SOIconTabView.xib in Resources */,
 				7F6474A21B2730D700B3D75C /* ico16@2x.png in Resources */,
 				7F5A6D361B14C42C009665C7 /* ico6@2x.png in Resources */,

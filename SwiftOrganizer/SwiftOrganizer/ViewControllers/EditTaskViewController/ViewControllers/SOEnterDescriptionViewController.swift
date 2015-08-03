@@ -37,6 +37,9 @@ class SOEnterDescriptionViewController: SOEnterBaseViewController {
     
     func doneButtonWasPressed() {
         if let editTask = self.task{
+            let dict = NSDictionary(objects: [editTask.title], forKeys: ["title"])
+            self.undoDelegate?.addToUndoBuffer(dict)
+            
             editTask.title = textView.text
         }
         

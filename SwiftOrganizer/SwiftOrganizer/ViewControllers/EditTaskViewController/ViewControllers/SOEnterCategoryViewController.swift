@@ -60,8 +60,14 @@ extension SOEnterCategoryViewController: UITableViewDataSource {
 
 extension SOEnterCategoryViewController: UITableViewDelegate {
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        let row = indexPath.row
-        self.task?.category = categories[row].id
+
+        if let theTask = self.task{
+            let dict = NSDictionary(objects: [theTask.category], forKeys: ["category"])
+            self.undoDelegate?.addToUndoBuffer(dict)
+            
+            let row = indexPath.row
+            theTask.category = categories[row].id
+        }
         
         super.closeButtonWasPressed()
     }

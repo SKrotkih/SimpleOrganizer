@@ -9,6 +9,9 @@
 
 import Foundation;
 
+let kPriorityKey = "priority"
+let kObjectKey = "object"
+
 public protocol SOObserverProtocol: class{
     func notify(notification: SOObserverNotification)
 }
@@ -54,7 +57,7 @@ public class SOObserversManager {
     
     public func addObserver(observer: SOObserverProtocol, type: SOObserverNotificationTypes, priority: Int = 0){
         dispatch_barrier_sync(self.collectionQueue, { () in
-            let dict: Dictionary<String, AnyObject> = ["priority": priority, "object": WeakObserverReference(observer: observer)]
+            let dict: Dictionary<String, AnyObject> = [kPriorityKey: priority, kObjectKey: WeakObserverReference(observer: observer)]
             
             switch type{
             case .SODataBaseTypeChanged:
@@ -64,8 +67,8 @@ public class SOObserversManager {
                 self._dataBaseTypeChangeObservers.sort({
                     let dict0: Dictionary<String, AnyObject> = $0
                     let dict1: Dictionary<String, AnyObject> = $1
-                    let priority0 = dict0["priority"] as! Int
-                    let priority1 = dict1["priority"] as! Int
+                    let priority0 = dict0[kPriorityKey] as! Int
+                    let priority1 = dict1[kPriorityKey] as! Int
                     
                     return priority0 > priority1
                 })
@@ -76,8 +79,8 @@ public class SOObserversManager {
                 self._dataBaseDidChangeObservers.sort({
                     let dict0: Dictionary<String, AnyObject> = $0
                     let dict1: Dictionary<String, AnyObject> = $1
-                    let priority0 = dict0["priority"] as! Int
-                    let priority1 = dict1["priority"] as! Int
+                    let priority0 = dict0[kPriorityKey] as! Int
+                    let priority1 = dict1[kPriorityKey] as! Int
                     
                     return priority0 > priority1
                 })
@@ -92,12 +95,12 @@ public class SOObserversManager {
             switch type{
             case .SODataBaseTypeChanged:
                 self._dataBaseTypeChangeObservers = filter(self._dataBaseTypeChangeObservers, { dict in
-                    let weakref: WeakObserverReference = dict["object"] as! WeakObserverReference
+                    let weakref: WeakObserverReference = dict[kObjectKey] as! WeakObserverReference
                     return weakref.observer != nil && weakref.observer !== observer;
                 })
             case .SODataBaseDidChanged:
                 self._dataBaseDidChangeObservers = filter(self._dataBaseDidChangeObservers, { dict in
-                    let weakref: WeakObserverReference = dict["object"] as! WeakObserverReference
+                    let weakref: WeakObserverReference = dict[kObjectKey] as! WeakObserverReference
                     return weakref.observer != nil && weakref.observer !== observer;
                 })
             default:
@@ -124,8 +127,8 @@ public class SOObserversManager {
     }
     
     private func notifyObserver(dict: Dictionary<String, AnyObject>, notification: SOObserverNotification){
-        let weakref: WeakObserverReference = dict["object"] as! WeakObserverReference
-        let priority: Int = dict["priority"] as! Int
+        let weakref: WeakObserverReference = dict[kObjectKey] as! WeakObserverReference
+        let priority: Int = dict[kPriorityKey] as! Int
         
         dispatch_async(dispatch_get_main_queue(), {
             weakref.observer?.notify(notification);

@@ -35,12 +35,18 @@ enum SOEditTaskCellId: Int {
     }
 }
 
+public protocol SOEditTaskUndoDelegateProtocol{
+    func addToUndoBuffer(dict: NSDictionary)
+}
+
 class SOEditTaskViewController: UIViewController {
 
     private var _task: SOTask
     private var _orgTask: SOTask?
     private var isItNewTask: Bool
     private var _cells = [SOEditTaskCell](count: SOEditTaskCellId.Undefined.rawValue, repeatedValue: SOEditTaskCell())
+    
+    private let _undoManager = NSUndoManager()
     
     @IBOutlet weak var tableView: UITableView!
 
@@ -71,6 +77,8 @@ class SOEditTaskViewController: UIViewController {
         super.viewDidLoad()
 
         self.title = "Edit Task".localized
+        
+        _undoManager.prepareWithInvocationTarget(self)
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -82,12 +90,53 @@ class SOEditTaskViewController: UIViewController {
         
         let rightButtonImage : UIImage! = UIImage(named: "save_task")
         var rightButton: UIBarButtonItem = UIBarButtonItem(image: rightButtonImage, style: UIBarButtonItemStyle.Plain, target: self, action: "doneButtonWasPressed")
-        navigationItem.rightBarButtonItem = rightButton;
+
+        let undoButtonImage : UIImage! = UIImage(named: "undo")
+        var undoButton: UIBarButtonItem = UIBarButtonItem(image: undoButtonImage, style: UIBarButtonItemStyle.Plain, target: self, action: "undoButtonWasPressed")
+        
+        navigationItem.rightBarButtonItems = [undoButton, rightButton];
         
         self.slideMenuController()?.removeLeftGestures()
         self.slideMenuController()?.removeRightGestures()
         
-        self.tableView.reloadData()        
+        self.tableView.reloadData()
+    }
+    
+    // MARK: UNDO
+    
+    func undoButtonWasPressed() {
+        _undoManager.undo()
+        self.tableView.reloadData()
+    }
+    
+    // MARK: Edit data
+    
+    func dataWasChanged() -> Bool{
+        if let orgTask = self._orgTask{
+            return !orgTask.isEqual(self.task)
+        } else if isItNewTask {
+            let puretask = SOTask()
+            puretask.clearTask()
+            return !puretask.isEqual(self.task)
+        }
+        
+        return false
+    }
+    
+    // This method builds an object, which properties were changed before in separated views
+    // Builder is presented by just one class
+    private func buildObject(){
+        self.task!.save{(error: NSError?) in
+            if let saveError = error{
+                showAlertWithTitle("Update task error".localized, saveError.description)
+            } else if let orgTask = self._orgTask{
+                orgTask.cloneTask(self.task!)
+            } else if self.isItNewTask{
+                self.isItNewTask = false
+                self._orgTask = SOTask()
+                self._orgTask!.cloneTask(self.task!)
+            }
+        }
     }
     
     // - MARK:
@@ -190,36 +239,10 @@ class SOEditTaskViewController: UIViewController {
         }
     }
     
-    func dataWasChanged() -> Bool{
-        if let orgTask = self._orgTask{
-            return !orgTask.isEqual(self.task)
-        } else if isItNewTask {
-            let puretask = SOTask()
-            puretask.clearTask()
-            return !puretask.isEqual(self.task)
-        }
-        
-        return false
-    }
-    
-    // This method builds an object, which properties were changed before in separated views
-    // Builder is presented by just one class
-    private func buildObject(){
-        self.task!.save{(error: NSError?) in
-            if let saveError = error{
-                showAlertWithTitle("Update task error".localized, saveError.description)
-            } else if let orgTask = self._orgTask{
-                orgTask.cloneTask(self.task!)
-            } else if self.isItNewTask{
-                self.isItNewTask = false
-                self._orgTask = SOTask()
-                self._orgTask!.cloneTask(self.task!)
-            }
-        }
-    }
-    
     func closeWindow() {
         self.navigationController?.popViewControllerAnimated(true)
+
+        _undoManager.removeAllActions()
     }
     
 }
@@ -284,22 +307,62 @@ extension SOEditTaskViewController: UITableViewDelegate{
         case .CategoryCell:
             let enterCategoryVC = storyboard.instantiateViewControllerWithIdentifier(SOEditTaskViewControllerId.Category.rawValue) as! SOEnterCategoryViewController
             enterCategoryVC.task = task
+            enterCategoryVC.undoDelegate = self
             self.navigationController!.pushViewController(enterCategoryVC, animated: true)
         case .IconsCell:
             let enterIconsVC = storyboard.instantiateViewControllerWithIdentifier(SOEditTaskViewControllerId.Icons.rawValue) as! SOEnterIconsViewController
             enterIconsVC.task = task
+            enterIconsVC.undoDelegate = self
             self.navigationController!.pushViewController(enterIconsVC, animated: true)
         case .DateCell:
             let enterDateVC = storyboard.instantiateViewControllerWithIdentifier(SOEditTaskViewControllerId.Date.rawValue) as! SOEnterDateViewController
             enterDateVC.task = task
+            enterDateVC.undoDelegate = self
             enterDateVC.date = task?.date
             self.navigationController!.pushViewController(enterDateVC, animated: true)
         case .DescriptionCell:
             let enterDescrVC = storyboard.instantiateViewControllerWithIdentifier(SOEditTaskViewControllerId.Description.rawValue) as! SOEnterDescriptionViewController
             enterDescrVC.task = task
+            enterDescrVC.undoDelegate = self
             self.navigationController!.pushViewController(enterDescrVC, animated: true)
         default:
             assert(false, "Rows is too much!")
         }
     }
 }
+
+    // MARK: Undo task data implementation
+
+extension SOEditTaskViewController: SOEditTaskUndoDelegateProtocol{
+
+    func addToUndoBuffer(dict: NSDictionary){
+        _undoManager.registerUndoWithTarget(self, selector: "undoData:", object: dict);
+    }
+
+    @objc func undoData(data: [String: AnyObject]) {
+        if let fldName = data.keys.first{
+            switch fldName{
+            case "category":
+                let prevCategory = data[fldName] as! String
+                self.task?.category = prevCategory
+            case "icons":
+                let prevIcons = data[fldName] as! NSArray
+                self.task?.icons = prevIcons as! [String]
+            case "date":
+                let prevDate = data[fldName] as! String
+                var dateFormatter = NSDateFormatter()
+                dateFormatter.dateFormat = "dd-MM-yyyy HH:mm:ss"
+                var date = dateFormatter.dateFromString(prevDate)
+                self.task?.date = date
+            case "title":
+                let prevDescription = data[fldName] as! String
+                self.task?.title = prevDescription
+            default:
+                println("Error: Something wrong with undo buffer keys!")
+            }
+        }
+    }
+    
+}
+
+
