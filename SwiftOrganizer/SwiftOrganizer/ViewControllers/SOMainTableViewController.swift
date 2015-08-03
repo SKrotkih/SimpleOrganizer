@@ -20,9 +20,8 @@ class SOMainTableViewController: NSObject{
     
     var tasks : [SOTask] = []
     
-    let mainTableViewCellIdentifier = "MainTableViewCell"
-    let mainHeaderTableViewCellIdentifier = "HeaderTableViewCell"
-    let newRecordTableViewCellIdentifier = "NewRecordTableViewCell"
+    let kMainTableViewCellIdentifier = "MainTableViewCell"
+    let kMainHeaderTableViewCellIdentifier = "HeaderTableViewCell"
     
     init(tableView aTavleView: UITableView, delegate: SOEditTaskController){
         self.tableView = aTavleView
@@ -94,7 +93,7 @@ extension SOMainTableViewController: UITableViewDataSource {
     }
     
     @objc func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        var cell = self.tableView.dequeueReusableCellWithIdentifier(mainTableViewCellIdentifier) as! SOMainTableViewCell
+        var cell = self.tableView.dequeueReusableCellWithIdentifier(kMainTableViewCellIdentifier) as! SOMainTableViewCell
         let row = indexPath.row
         let currentTask : SOTask = self.tasks[row]
         cell.fillTaskData(currentTask)
@@ -163,7 +162,7 @@ extension SOMainTableViewController: UITableViewDelegate {
     }
     
     func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView?{
-        let headerCell = self.tableView.dequeueReusableCellWithIdentifier(mainHeaderTableViewCellIdentifier) as! UITableViewCell
+        let headerCell = self.tableView.dequeueReusableCellWithIdentifier(kMainHeaderTableViewCellIdentifier) as! UITableViewCell
         
         return headerCell
     }

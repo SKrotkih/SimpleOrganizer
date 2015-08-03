@@ -31,13 +31,13 @@ class SOSettingsViewController: UIViewController {
         let selectedIndex = SOTypeDataBaseSwitcher.indexOfCurrectDBType()
         let usingICloud = SOTypeDataBaseSwitcher.usingICloudCurrentState()
 
-        if selectedIndex == 0{
+        if selectedIndex == .CoreDataIndex{
             self.useiCloudSwitch.on = usingICloud
             self.useiCloudSwitch.enabled = true
-        } else if selectedIndex == 1{
+        } else if selectedIndex == .ParseComIndex{
             self.useiCloudSwitch.enabled = false
         }
-        self.segmentedControl.selectedSegmentIndex = selectedIndex
+        self.segmentedControl.selectedSegmentIndex = selectedIndex.rawValue
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -47,7 +47,7 @@ class SOSettingsViewController: UIViewController {
     
     @IBAction func changeOfDataBase(sender: AnyObject) {
         let index = self.segmentedControl.selectedSegmentIndex
-        SOTypeDataBaseSwitcher.switchToIndex(index)
+        SOTypeDataBaseSwitcher.switchToIndex(DataBaseIndex(rawValue: index)!)
     }
     
     @IBAction func changeOfUsingiCloud(sender: AnyObject) {

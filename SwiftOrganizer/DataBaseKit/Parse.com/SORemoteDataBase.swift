@@ -81,12 +81,12 @@ public class SORemoteDataBase: SODataBaseProtocol {
                         }
                         
                         let icons = task.icons
-                        var iconsSelected: Bool = true
+                        var iconsSelected: Bool = false
                         
                         for iconId in icons{
                             let iconOpt: SOIco? = SODataFetching.sharedInstance.iconById(iconId)
                             if let ico = iconOpt{
-                                iconsSelected = iconsSelected && ico.selected
+                                iconsSelected = iconsSelected || ico.selected
                             }
                         }
                         

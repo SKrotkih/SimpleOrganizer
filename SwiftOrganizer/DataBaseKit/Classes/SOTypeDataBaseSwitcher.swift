@@ -8,15 +8,20 @@
 
 import Foundation
 
+public enum DataBaseIndex: Int{
+    case CoreDataIndex = 0
+    case ParseComIndex
+}
+
 public class SOTypeDataBaseSwitcher{
 
-    public class func switchToIndex(index: Int){
+    public class func switchToIndex(index: DataBaseIndex){
         let defaults = SOUserDefault.sharedDefaults()
         var dbType: String
         
-        if index == 0{
+        if index == .CoreDataIndex{
             dbType = SODataBaseType.CoreData.rawValue
-        } else if index == 1{
+        } else if index == .ParseComIndex{
             dbType = SODataBaseType.ParseCom.rawValue
         } else {
             return
@@ -24,7 +29,7 @@ public class SOTypeDataBaseSwitcher{
         
         defaults.setObject(dbType, forKey: SODataBaseTypeKey)
         defaults.synchronize()
-        let notification: SOObserverNotification = SOObserverNotification(type: .SODataBaseTypeChanged, data: dbType)
+        let notification = SOObserverNotification(type: .SODataBaseTypeChanged, data: dbType)
         SOObserversManager.sharedInstance.sendNotification(notification)
     }
     
@@ -48,22 +53,22 @@ public class SOTypeDataBaseSwitcher{
         return retValue
     }
     
-    public class func indexOfCurrectDBType() -> Int{
-        var selectedIndex: Int!
+    public class func indexOfCurrectDBType() -> DataBaseIndex{
+        var selectedIndex: DataBaseIndex!
         let defaults = SOUserDefault.sharedDefaults()
         
         if let name = defaults.stringForKey(SODataBaseTypeKey){
 
             switch name{
             case SODataBaseType.CoreData.rawValue:
-                selectedIndex = 0
+                selectedIndex = .CoreDataIndex
             case SODataBaseType.ParseCom.rawValue:
-                selectedIndex = 1
+                selectedIndex = .ParseComIndex
             default:
-                selectedIndex = 0
+                selectedIndex = .CoreDataIndex
             }
         } else {
-            selectedIndex = 0
+            selectedIndex = .CoreDataIndex
         }
         
         return selectedIndex
@@ -72,10 +77,13 @@ public class SOTypeDataBaseSwitcher{
     public class func switchToAnotherDB(){
         var currentIndex = self.indexOfCurrectDBType()
 
-        if currentIndex == 0{
-           currentIndex = 1
-        } else{
-           currentIndex = 0
+        switch currentIndex{
+        case .CoreDataIndex:
+            currentIndex = .ParseComIndex
+        case .ParseComIndex:
+            currentIndex = .CoreDataIndex
+        default:
+           currentIndex = .CoreDataIndex
         }
 
         self.switchToIndex(currentIndex)
@@ -84,10 +92,13 @@ public class SOTypeDataBaseSwitcher{
     public class func currectDataBaseDescription() -> String{
         var currentIndex = self.indexOfCurrectDBType()
         
-        if currentIndex == 0{
+        switch currentIndex{
+        case .CoreDataIndex:
             return "Local".localized
-        } else{
+        case .ParseComIndex:
             return "Remote".localized
+        default:
+            return "Local".localized
         }
     }
     

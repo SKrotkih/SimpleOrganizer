@@ -155,7 +155,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
                     if arr.count == 2{
                         if let index = arr[1].toInt(){
-                            SOTypeDataBaseSwitcher.switchToIndex(index)
+                            SOTypeDataBaseSwitcher.switchToIndex(DataBaseIndex(rawValue: index)!)
                         }
                     }
                 } else if NSString(string: host).containsString(KeyInURLAsTaskId) {

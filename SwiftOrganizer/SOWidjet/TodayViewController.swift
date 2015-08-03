@@ -71,7 +71,7 @@ class TodayViewController: UIViewController, UITableViewDataSource, UITableViewD
 
     @IBAction func switchToAnotherDataBase(sender: AnyObject) {
         let index = typeOfDataBaseSwitcher.selectedSegmentIndex
-        SOTypeDataBaseSwitcher.switchToIndex(index)
+        SOTypeDataBaseSwitcher.switchToIndex(DataBaseIndex(rawValue: index)!)
 
         let urlAsString = "\(WidgetUrlScheme)://\(KeyInURLAsSwitchDataBase)\(index)"
         let url = NSURL(string: urlAsString)
@@ -91,7 +91,7 @@ class TodayViewController: UIViewController, UITableViewDataSource, UITableViewD
         super.viewDidAppear(animated)
         
         let index = SOTypeDataBaseSwitcher.indexOfCurrectDBType()
-        self.typeOfDataBaseSwitcher.selectedSegmentIndex = index
+        self.typeOfDataBaseSwitcher.selectedSegmentIndex = index.rawValue
         
         self.performFetch()
     }

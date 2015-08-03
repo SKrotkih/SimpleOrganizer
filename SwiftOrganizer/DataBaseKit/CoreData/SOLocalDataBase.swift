@@ -33,6 +33,7 @@ public class SOLocalDataBase: SODataBaseProtocol {
         return newObject
     }
     
+    // I tried to make generic for allCategories and the allIcons function but faced some principal problems
     // - MARK: Categories
     public func allCategories(block: (resultBuffer: [SOCategory], error: NSError?) -> Void){
         var _allCategories: [SOCategory] = []
@@ -110,19 +111,20 @@ public class SOLocalDataBase: SODataBaseProtocol {
                                 dispatch_async(dispatch_get_main_queue(), {
                                     var _allTasks: [SOTask] = []
                                     
-                                    for task in tasks{
+                                    for task: Task in tasks{
                                         var categorySelected: Bool = false
+                                        
                                         if let category = SODataFetching.sharedInstance.categoryById(task.category){
                                             categorySelected = category.selected
                                         }
                                         
                                         let icons = [task.ico1, task.ico2, task.ico3, task.ico4, task.ico5, task.ico6]
-                                        var iconsSelected: Bool = true
+                                        var iconsSelected: Bool = false
                                         
                                         for iconId in icons{
                                             let iconOpt: SOIco? = SODataFetching.sharedInstance.iconById(iconId)
                                             if let ico = iconOpt{
-                                                iconsSelected = iconsSelected && ico.selected
+                                                iconsSelected = iconsSelected || ico.selected
                                             }
                                         }
                                         
@@ -291,13 +293,14 @@ public class SOLocalDataBase: SODataBaseProtocol {
         
         if let object = managedObject{
             object.setValue(value, forKey: fieldName);
+            self.saveContext()
+            block(error: nil)
         }
         else{
-            
+            var dict = [String: AnyObject]()
+            let error: NSError? = NSError(domain: DataBaseErrorDomain, code: 9998, userInfo: dict)
+            self.reportAnyErrorWeGot(error)
         }
-        
-        self.saveContext()
-        block(error: nil)
     }
     
     public func saveContext() {
