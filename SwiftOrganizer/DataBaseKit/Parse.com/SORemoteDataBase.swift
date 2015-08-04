@@ -32,6 +32,7 @@ let kIcoFldImageName = "imageName"
 let kIcoFldSelected = "selected"
 
 public class SORemoteDataBase: SODataBaseProtocol {
+    private let queue = dispatch_queue_create("remoteDataBaseRequestsQ", DISPATCH_QUEUE_CONCURRENT);
     private var currentCategoryIndex = 0
     private var currentIcoIndex = 0
     private var currentTaskIndex = 0
@@ -105,25 +106,29 @@ public class SORemoteDataBase: SODataBaseProtocol {
     }
     
     public func saveTask(task: SOTask, block: (error: NSError?) -> Void){
-        var object: PFObject? = task.databaseObject as? PFObject
-        
-        if let taskObject = object{
-            task.copyToParseObject(taskObject)
-        } else {
-            object = PFObject(className: TaskClassName)
-            task.databaseObject = object
-            task.copyToParseObject(object!)
-        }
-        
-        self.saveObject(object!, block: {(error: NSError?) in
-            block(error: error)
+        dispatch_sync(self.queue, { () in
+            var object: PFObject? = task.databaseObject as? PFObject
+            
+            if let taskObject = object{
+                task.copyToParseObject(taskObject)
+            } else {
+                object = PFObject(className: TaskClassName)
+                task.databaseObject = object
+                task.copyToParseObject(object!)
+            }
+            
+            self.saveObject(object!, block: {(error: NSError?) in
+                block(error: error)
+            })
         })
     }
 
     public func removeTask(task: SOTask){
-        if let taskObject: PFObject = task.databaseObject as? PFObject{
-            self.deleteObject(taskObject)
-        }
+        dispatch_barrier_sync(self.queue, { () in
+            if let taskObject: PFObject = task.databaseObject as? PFObject{
+                self.deleteObject(taskObject)
+            }
+        })
     }
 
     public func recordIdForTask(task: SOTask?) -> String?{

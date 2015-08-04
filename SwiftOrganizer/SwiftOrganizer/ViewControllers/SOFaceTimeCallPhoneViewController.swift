@@ -9,15 +9,22 @@
 import UIKit
 
 class SOFaceTimeCallPhoneViewController: UIViewController {
+
+    var rightButton: UIBarButtonItem!
     
     @IBOutlet weak var phoneNumber: UITextField!
     @IBOutlet weak var emailSwitch: UISwitch!
+    @IBOutlet weak var faceTimeSwitch: UISwitch!
+    @IBOutlet weak var titleOfTextFieldLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.title = "Call phone via FaceTime".localized
+        self.title = "Make Call".localized
         self.emailSwitch.on = false
+        self.faceTimeSwitch.on = false
+        self.phoneNumber.delegate = self
+        self.setUpControllsState()
     }
 
     deinit{
@@ -25,9 +32,47 @@ class SOFaceTimeCallPhoneViewController: UIViewController {
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        self.setNavigationBarItem()
+        
+        self.addLeftBarButtonWithImage(UIImage(named: "ic_menu_black_24dp")!)
+        self.slideMenuController()?.removeLeftGestures()
+        self.slideMenuController()?.removeRightGestures()
+        
+        rightButton = UIBarButtonItem(title: "Done".localized, style: UIBarButtonItemStyle.Plain, target: self, action: "doneButtonPressed:")
+        navigationItem.rightBarButtonItem = rightButton;
+        self.phoneNumber.resignFirstResponder()
+        self.rightButton.enabled = false
+        
     }
 
+    func doneButtonPressed(sender: AnyObject) {
+        self.phoneNumber.resignFirstResponder()
+        self.rightButton.enabled = false
+    }
+
+    func setUpControllsState() {
+        if self.faceTimeSwitch.on {
+            self.titleOfTextFieldLabel.text = "Please enter a phone number or e-mail:".localized
+            self.emailSwitch.enabled = true
+            self.emailSwitch.on = false
+            self.setUpEmailModeState()
+        } else {
+            self.titleOfTextFieldLabel.text = "Plwease enter a phone number".localized
+            self.emailSwitch.enabled = false
+            self.phoneNumber.placeholder = "Phone Number".localized
+        }
+    }
+    
+    func setUpEmailModeState() {
+        if self.emailSwitch.on {
+            self.phoneNumber.placeholder = "e-mail"
+            self.phoneNumber.keyboardType = .EmailAddress
+        } else {
+            self.phoneNumber.placeholder = "Phone Number".localized
+            self.phoneNumber.keyboardType = .PhonePad
+        }
+    }
+    
+    
     @IBAction func callPhoneButtonPressed(sender: AnyObject) {
         
         let phoneNumber = self.phoneNumber.text
@@ -50,18 +95,20 @@ class SOFaceTimeCallPhoneViewController: UIViewController {
         }
     }
     
-    @IBAction func emailSwitchChanged(sender: AnyObject) {
-        if self.emailSwitch.on {
-            self.phoneNumber.placeholder = "e-mail"
-            self.phoneNumber.keyboardType = .EmailAddress
-        } else {
-            self.phoneNumber.placeholder = "Phone Number".localized
-            self.phoneNumber.keyboardType = .PhonePad
+    @IBAction func faceTimeSwichChanged(sender: AnyObject) {
+        if let switchFaceTime = sender as? UISwitch{
+            self.setUpControllsState()
         }
     }
     
+    @IBAction func emailSwitchChanged(sender: AnyObject) {
+        self.setUpEmailModeState()
+    }
+    
     private func facetime(phoneNumber: String) {
-        if let facetimeURL: NSURL = NSURL(string: "facetime://\(phoneNumber)") {
+        let shcheme: String = self.faceTimeSwitch.on ? "facetime" : "telprompt"
+        
+        if let facetimeURL: NSURL = NSURL(string: "\(shcheme)://\(phoneNumber)") {
             let application: UIApplication = UIApplication.sharedApplication()
             if (application.canOpenURL(facetimeURL)) {
                 application.openURL(facetimeURL);
@@ -85,7 +132,16 @@ extension SOFaceTimeCallPhoneViewController{
         // println("validate calendar: \(testStr)")
         let phoneNumberRegEx = "^((\\+)|(00))[0-9]{6,14}$"
         
-        let phoneNumberTest = NSPredicate(format:"SELF MATCHES %@", phoneNumberRegEx)
+        let phoneNumberTest = NSPredicate(format: "SELF MATCHES %@", phoneNumberRegEx)
         return phoneNumberTest.evaluateWithObject(testStr)
     }
 }
+
+extension SOFaceTimeCallPhoneViewController: UITextFieldDelegate{
+
+    func textFieldDidBeginEditing(textField: UITextField){
+        self.rightButton.enabled = true
+    }
+    
+}
+

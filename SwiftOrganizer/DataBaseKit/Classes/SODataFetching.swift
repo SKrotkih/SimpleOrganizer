@@ -12,7 +12,6 @@ public final class SODataFetching{
     private lazy var _allTasks = [SOTask]()
     private lazy var _allCategories = [SOCategory]()
     private lazy var _allIcons = [SOIco]()
-    
     private var collectionQueue = dispatch_queue_create("fetchDataQ", DISPATCH_QUEUE_CONCURRENT);
 
     public class var sharedInstance: SODataFetching {

@@ -26,7 +26,7 @@ Also were implemented the following features:
 - extension
 - today widget
 - all database function are in the DataBaseKit.framework.
-- make phone call via FaceTime.
+- make phone call via FaceTime and by Phone.
 - undo for task edit data
 
 Were applied the following design patterns:
@@ -78,4 +78,6 @@ SwiftOrganizer is available under the MIT license. See the LICENSE file for more
 - 20.07.2015: Updated Today Widget (works only with local DataBase). Implemented task list and type of the database switcher
 - 30.07.2015: Added sharing via SLComposeViewController; added feature to call phone via FaceTime
 - 03.08.2015: Implemented undo for task editor view controller
+- 04.08.2015: Added feature to make call by Phone
+
 

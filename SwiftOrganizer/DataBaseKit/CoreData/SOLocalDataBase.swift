@@ -17,6 +17,8 @@ let TaskEntityName = "Task"
 
 public class SOLocalDataBase: SODataBaseProtocol {
     
+    private let queue = dispatch_queue_create("localDataBaseRequestsQ", DISPATCH_QUEUE_CONCURRENT);
+    
     public class func sharedInstance() -> SODataBaseProtocol{
         struct SingletonWrapper {
             static let sharedInstance = SOLocalDataBase()
@@ -33,56 +35,82 @@ public class SOLocalDataBase: SODataBaseProtocol {
         return newObject
     }
     
-    // I tried to make generic for allCategories and the allIcons function but faced some principal problems
+    // - TODO: I tried to make generic for allCategories and the allIcons function but faced some principal problems
     // - MARK: Categories
     public func allCategories(block: (resultBuffer: [SOCategory], error: NSError?) -> Void){
         var _allCategories: [SOCategory] = []
+        var _error: NSError?
+        var _needRecursiveCall: Bool = false
         
-        let fetchRequest = NSFetchRequest(entityName: CategoryEntityName)
-        
-        var requestError: NSError?
-        let categories = self.managedObjectContext!.executeFetchRequest(fetchRequest, error: &requestError) as! [TaskCategory]
-        
-        if let error = requestError{
-            block(resultBuffer: _allCategories, error: error)
-        } else {
-            if categories.count > 0{
-                for category: TaskCategory in categories{
-                    let categoryItem = self.fillNewObjectWithData(SOCategory(), managedObject: category)
-                    _allCategories.append(categoryItem)
-                }
-                block(resultBuffer: _allCategories, error: nil)
+        dispatch_sync(self.queue, {() in
+            let fetchRequest = NSFetchRequest(entityName: CategoryEntityName)
+            
+            var requestError: NSError?
+            let categories = self.managedObjectContext!.executeFetchRequest(fetchRequest, error: &requestError) as! [TaskCategory]
+            
+            if let error = requestError{
+                _error = error
             } else {
-                populateCategories()
-                
-                return self.allCategories(block)
+                if categories.count > 0{
+                    for category: TaskCategory in categories{
+                        let categoryItem = self.fillNewObjectWithData(SOCategory(), managedObject: category)
+                        _allCategories.append(categoryItem)
+                    }
+                } else {
+                    self.populateCategories()
+
+                    _needRecursiveCall = true
+                }
             }
+        })
+        
+        if _needRecursiveCall{
+            return self.allCategories(block)
+        }
+        
+        if _error == nil{
+            block(resultBuffer: _allCategories, error: nil)
+        } else {
+            block(resultBuffer: [], error: _error)
         }
     }
     
     // - MARK: Icons
     public func allIcons(block: (resultBuffer: [SOIco], error: NSError?) -> Void){
         var _allIcon: [SOIco] = []
+        var _error: NSError?
+        var _needRecursiveCall: Bool = false
         
-        let fetchRequest = NSFetchRequest(entityName: IcoEntityName)
-        
-        var requestError: NSError?
-        let icons = self.managedObjectContext!.executeFetchRequest(fetchRequest, error: &requestError) as! [TaskIco]
-        
-        if let error = requestError{
-            block(resultBuffer: _allIcon, error: error)
-        } else {
-            if icons.count > 0{
-                for ico: TaskIco in icons{
-                    let icoItem = self.fillNewObjectWithData(SOIco(), managedObject: ico)
-                    _allIcon.append(icoItem)
-                }
-                block(resultBuffer: _allIcon, error: nil)
+        dispatch_sync(self.queue, {() in
+            let fetchRequest = NSFetchRequest(entityName: IcoEntityName)
+            
+            var requestError: NSError?
+            let icons = self.managedObjectContext!.executeFetchRequest(fetchRequest, error: &requestError) as! [TaskIco]
+            
+            if let error = requestError{
+                _error = error
             } else {
-                populateIcons()
-                
-                return self.allIcons(block)
+                if icons.count > 0{
+                    for ico: TaskIco in icons{
+                        let icoItem = self.fillNewObjectWithData(SOIco(), managedObject: ico)
+                        _allIcon.append(icoItem)
+                    }
+                } else {
+                    self.populateIcons()
+                    
+                    _needRecursiveCall = true
+                }
             }
+        })
+        
+        if _needRecursiveCall{
+            return self.allIcons(block)
+        }
+        
+        if _error == nil{
+            block(resultBuffer: _allIcon, error: nil)
+        } else {
+            block(resultBuffer: [], error: _error)
         }
     }
     
@@ -162,24 +190,28 @@ public class SOLocalDataBase: SODataBaseProtocol {
     }
     
     public func saveTask(task: SOTask, block: (error: NSError?) -> Void){
-        let taskObject: Task? = task.databaseObject as? Task
-        
-        if let object = taskObject{
-            task.copyToCoreDataObject(object)
-        }
-        else{
-            let object = self.newTaskManagedObject()
-            task.databaseObject = object
-            task.copyToCoreDataObject(object)
-        }
-        self.saveContext()
+        dispatch_sync(self.queue, {() in
+            let taskObject: Task? = task.databaseObject as? Task
+            
+            if let object = taskObject{
+                task.copyToCoreDataObject(object)
+            }
+            else{
+                let object = self.newTaskManagedObject()
+                task.databaseObject = object
+                task.copyToCoreDataObject(object)
+            }
+            self.saveContext()
+        })
         
         block(error: nil)
     }
     
     public func removeTask(task: SOTask){
-        let taskObject: Task? = task.databaseObject as? Task
-        self.deleteObject(taskObject)
+        dispatch_barrier_sync(self.queue, { () in
+            let taskObject: Task? = task.databaseObject as? Task
+            self.deleteObject(taskObject)
+        })
     }
     
     public func recordIdForTask(task: SOTask?) -> String?{

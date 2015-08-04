@@ -11,8 +11,8 @@ enum LeftMenu: Int {
     case Main = 0
     case Documents
     case DocumentPicker
-    case Settings
     case FaceTimeCall
+    case Settings
     case About
 }
 
@@ -24,7 +24,7 @@ class LeftViewController : UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
 
-    var menus = ["Organizer".localized, "My Documents".localized, "External Documents".localized, "Settings".localized, "Make phone call via FaceTime".localized, "About".localized]
+    var menus = ["Organizer".localized, "My Documents".localized, "External Documents".localized, "Make Call".localized, "Settings".localized, "About".localized]
     var mainViewController: UIViewController!
     var settingsViewController: UIViewController!
     var documentsViewController: UIViewController!
@@ -48,12 +48,12 @@ class LeftViewController : UIViewController {
         
         let documentPickerViewController = storyboard.instantiateViewControllerWithIdentifier("DocumentPickerViewController") as! SODocumentPickerViewController
         self.documentPickerViewController = UINavigationController(rootViewController: documentPickerViewController)
-        
-        let settingsViewController = storyboard.instantiateViewControllerWithIdentifier("SOSettingsViewController") as! SOSettingsViewController
-        self.settingsViewController = UINavigationController(rootViewController: settingsViewController)
 
         let thePhoneCallViaFaceTimeViewController = storyboard.instantiateViewControllerWithIdentifier("FaceTimeCallPhoneViewController") as! SOFaceTimeCallPhoneViewController
         self.phoneCallViaFaceTimeViewController = UINavigationController(rootViewController: thePhoneCallViaFaceTimeViewController)
+        
+        let settingsViewController = storyboard.instantiateViewControllerWithIdentifier("SOSettingsViewController") as! SOSettingsViewController
+        self.settingsViewController = UINavigationController(rootViewController: settingsViewController)
         
         let aboutViewController = storyboard.instantiateViewControllerWithIdentifier("SOAboutViewController") as! SOAboutViewController
         self.aboutViewController = UINavigationController(rootViewController: aboutViewController)
@@ -96,11 +96,11 @@ extension LeftViewController: LeftMenuProtocol {
         case .DocumentPicker:
             self.slideMenuController()?.changeMainViewController(self.documentPickerViewController, close: true)
             break
-        case .Settings:
-            self.slideMenuController()?.changeMainViewController(self.settingsViewController, close: true)
-            break
         case .FaceTimeCall:
             self.slideMenuController()?.changeMainViewController(self.phoneCallViaFaceTimeViewController, close: true)
+            break
+        case .Settings:
+            self.slideMenuController()?.changeMainViewController(self.settingsViewController, close: true)
             break
         case .About:
             self.slideMenuController()?.changeMainViewController(self.aboutViewController, close: true)
