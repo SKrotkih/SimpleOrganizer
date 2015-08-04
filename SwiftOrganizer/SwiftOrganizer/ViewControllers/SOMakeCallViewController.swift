@@ -1,5 +1,5 @@
 //
-//  SOSettingsViewController.swift
+//  SOMakeCallViewController.swift
 //  SwiftOrganizer
 //
 //  Created by Sergey Krotkih on 7/29/15.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SOFaceTimeCallPhoneViewController: UIViewController {
+class SOMakeCallViewController: UIViewController {
 
     var rightButton: UIBarButtonItem!
     
@@ -56,7 +56,7 @@ class SOFaceTimeCallPhoneViewController: UIViewController {
             self.emailSwitch.on = false
             self.setUpEmailModeState()
         } else {
-            self.titleOfTextFieldLabel.text = "Plwease enter a phone number".localized
+            self.titleOfTextFieldLabel.text = "Please enter a phone number".localized
             self.emailSwitch.enabled = false
             self.phoneNumber.placeholder = "Phone Number".localized
         }
@@ -119,7 +119,7 @@ class SOFaceTimeCallPhoneViewController: UIViewController {
 
     // MARK: Validation e-mail and phonen number
 
-extension SOFaceTimeCallPhoneViewController{
+extension SOMakeCallViewController{
     func isValidEmail(testStr:String) -> Bool {
         // println("validate calendar: \(testStr)")
         let emailRegEx = "^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$"
@@ -137,7 +137,7 @@ extension SOFaceTimeCallPhoneViewController{
     }
 }
 
-extension SOFaceTimeCallPhoneViewController: UITextFieldDelegate{
+extension SOMakeCallViewController: UITextFieldDelegate{
 
     func textFieldDidBeginEditing(textField: UITextField){
         self.rightButton.enabled = true

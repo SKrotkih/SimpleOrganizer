@@ -41,10 +41,10 @@
             </objects>
             <point key="canvasLocation" x="791" y="1219"/>
         </scene>
-        <!--Face Time Call Phone View Controller-->
+        <!--Make Call View Controller-->
         <scene sceneID="KF3-Ha-4Pt">
             <objects>
-                <viewController storyboardIdentifier="FaceTimeCallPhoneViewController" id="ekg-BH-0Tz" customClass="SOFaceTimeCallPhoneViewController" customModule="SwiftOrganizer" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="FaceTimeCallPhoneViewController" id="ekg-BH-0Tz" customClass="SOMakeCallViewController" customModule="SwiftOrganizer" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="63m-x5-vV6"/>
                         <viewControllerLayoutGuide type="bottom" id="tra-jZ-PZW"/>
