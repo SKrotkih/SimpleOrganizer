@@ -8,8 +8,6 @@
 
 import UIKit
 
-
-
 class SOAboutViewController: UIViewController {
     
     weak var delegate: LeftMenuProtocol?
@@ -31,7 +29,10 @@ class SOAboutViewController: UIViewController {
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        self.setNavigationBarItem()
+
+        self.addLeftBarButtonWithImage(UIImage(named: "ic_menu_black_24dp")!)
+        self.slideMenuController()?.removeLeftGestures()
+        self.slideMenuController()?.removeRightGestures()
     }
     
     override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {

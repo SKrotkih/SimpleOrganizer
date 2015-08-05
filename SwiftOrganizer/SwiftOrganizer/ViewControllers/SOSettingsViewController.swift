@@ -42,7 +42,10 @@ class SOSettingsViewController: UIViewController {
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        self.setNavigationBarItem()
+        
+        self.addLeftBarButtonWithImage(UIImage(named: "ic_menu_black_24dp")!)
+        self.slideMenuController()?.removeLeftGestures()
+        self.slideMenuController()?.removeRightGestures()
     }
     
     @IBAction func changeOfDataBase(sender: AnyObject) {

@@ -18,8 +18,7 @@ class SOEnterDescriptionViewController: SOEnterBaseViewController {
         
         self.title = "Description".localized                        
 
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardDidShow:", name: UIKeyboardDidShowNotification,
-            object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardDidShow:", name: UIKeyboardDidShowNotification,  object: nil)
     }
 
     override func viewWillAppear(animated: Bool) {
@@ -29,9 +28,9 @@ class SOEnterDescriptionViewController: SOEnterBaseViewController {
         var rightButton: UIBarButtonItem = UIBarButtonItem(image: rightButtonImage, style: UIBarButtonItemStyle.Plain, target: self, action: "doneButtonWasPressed")
         navigationItem.rightBarButtonItem = rightButton;
 
-        if let editTask = self.task{
-            textView.text = editTask.title
-        }
+        self.automaticallyAdjustsScrollViewInsets = false
+        textView.text = self.task?.title
+
         textView.becomeFirstResponder()
     }
     

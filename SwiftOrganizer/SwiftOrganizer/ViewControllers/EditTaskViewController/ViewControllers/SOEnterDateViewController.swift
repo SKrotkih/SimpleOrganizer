@@ -125,12 +125,18 @@ class SOEnterDateViewController: SOEnterBaseViewController {
 
     private func saveData(){
         if let editTask = self.task{
-
-            var dateFormatter = NSDateFormatter()
-            dateFormatter.dateFormat = "dd-MM-yyyy HH:mm:ss"
-            var dateString = dateFormatter.stringFromDate(editTask.date!)
+            var dateString: String!
+            
+            if let oldDate = editTask.date{
+                var dateFormatter = NSDateFormatter()
+                dateFormatter.dateFormat = "dd-MM-yyyy HH:mm:ss"
+                dateString = dateFormatter.stringFromDate(oldDate)
+            } else {
+                dateString = ""
+            }
             let dict = NSDictionary(objects: [dateString], forKeys: ["date"])
             self.undoDelegate?.addToUndoBuffer(dict)
+
             
             editTask.date = self.date
         } else {
