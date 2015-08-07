@@ -57,18 +57,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.createMenuView()
         
         SOiCloudManager.sharedInstance.prepareKeyValueStoreObserver()
+
+        SOLocalNotificationsCenter.prepareLocalNotifications(application, launchOptions: launchOptions)
         
-        // By Local Notifications this used
-        application.registerUserNotificationSettings(UIUserNotificationSettings(forTypes: .Alert | .Badge | .Sound, categories: nil))  // types are UIUserNotificationType properties
-        if let theNotification: UILocalNotification = launchOptions?[UIApplicationLaunchOptionsLocalNotificationKey] as? UILocalNotification {
-            println("Received notification \(theNotification.alertBody)!")
-        }
         application.applicationIconBadgeNumber = 0;
-        // 
         
         return SOParseComManager.application(application, didFinishLaunchingWithOptions: launchOptions)
     }
-    
+
     //--------------------------------------
     // MARK: Push Notifications
     //--------------------------------------
@@ -89,11 +85,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     // MARK: Local Notifications
     //--------------------------------------
     
+    func application(application: UIApplication, didRegisterUserNotificationSettings notificationSettings: UIUserNotificationSettings){
+        SOLocalNotificationsCenter.didRegisterUserNotificationSettings(notificationSettings)
+    }
+    
     func application(application: UIApplication, didReceiveLocalNotification notification: UILocalNotification) {
         // Called when the user taps on a local notification (without selecting 
         // an action), or if a local notification arrives while using the app 
         // (in which case the notification isn't shown to the user)
-        println("Received notification \(notification.alertBody)!")
+        
+        SOLocalNotificationsCenter.didReceiveLocalNotification(notification)
+        
         application.applicationIconBadgeNumber = 0;
     }
 

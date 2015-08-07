@@ -130,6 +130,7 @@
 		7FD44BAE1B5AAB1F000A4FB3 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F625EF51B2ED4B7004B7C16 /* AudioToolbox.framework */; };
 		7FD44BAF1B5AAB6B000A4FB3 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F625EF11B2ED49C004B7C16 /* MobileCoreServices.framework */; };
 		7FD44BB01B5AAB7A000A4FB3 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F625EF31B2ED4A9004B7C16 /* SystemConfiguration.framework */; };
+		7FE4AE421B731F0600FE12D3 /* SOLocalNotificationsCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FE4AE411B731F0600FE12D3 /* SOLocalNotificationsCenter.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -331,6 +332,7 @@
 		7FD44B7A1B5A9B1A000A4FB3 /* SwiftOrganizer.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = SwiftOrganizer.xcdatamodel; sourceTree = "<group>"; };
 		7FD44B7B1B5A9B1A000A4FB3 /* Task.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Task.swift; path = DataBaseKit/CoreData/Task.swift; sourceTree = "<group>"; };
 		7FD44BAA1B5AA924000A4FB3 /* SOObserversManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SOObserversManager.swift; sourceTree = "<group>"; };
+		7FE4AE411B731F0600FE12D3 /* SOLocalNotificationsCenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SOLocalNotificationsCenter.swift; path = Common/LocalNotifications/SOLocalNotificationsCenter.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -456,6 +458,7 @@
 		7F5725581B0F5DDA003DBDEB /* SwiftOrganizer */ = {
 			isa = PBXGroup;
 			children = (
+				7FE4AE401B731E9C00FE12D3 /* Local Notifications */,
 				7F5826BB1B482D1A00C0B179 /* iCloud */,
 				7F5725991B0F61AC003DBDEB /* Common */,
 				7F57258A1B0F6114003DBDEB /* ViewControllers */,
@@ -866,6 +869,14 @@
 			path = ObserverManager;
 			sourceTree = "<group>";
 		};
+		7FE4AE401B731E9C00FE12D3 /* Local Notifications */ = {
+			isa = PBXGroup;
+			children = (
+				7FE4AE411B731F0600FE12D3 /* SOLocalNotificationsCenter.swift */,
+			);
+			name = "Local Notifications";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -1177,6 +1188,7 @@
 				7F6E98601B1EF3180048ED7A /* SOSelectCategoryCell.swift in Sources */,
 				7F5725981B0F6114003DBDEB /* SOSettingsViewController.swift in Sources */,
 				7F5725A41B0F61F7003DBDEB /* UIViewControllerExtension.swift in Sources */,
+				7FE4AE421B731F0600FE12D3 /* SOLocalNotificationsCenter.swift in Sources */,
 				7FD44AD11B57F2CE000A4FB3 /* SOTaskMenuItemActivity.swift in Sources */,
 				7F5E6E151B51730900A1B278 /* SODocumentsViewController.swift in Sources */,
 				7F497D541B1AA2C300F95BA9 /* SOTabBarContainerView.swift in Sources */,

@@ -137,6 +137,8 @@ public final class SODataFetching{
     }
 }
 
+    // MARK: SOObserverProtocol
+
 extension SODataFetching: SOObserverProtocol {
     public func notify(notification: SOObserverNotification){
         switch notification.type{

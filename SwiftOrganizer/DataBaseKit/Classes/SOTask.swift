@@ -24,7 +24,7 @@ public class SOTask: NSObject{
         }
     }
     
-    var databaseObject: AnyObject?{
+    public var databaseObject: AnyObject?{
         get{
             return _databaseObject
         }
@@ -230,6 +230,8 @@ extension SOTask{
         }
     }
 }
+
+    // MARK: Icons
 
 extension SOTask{
     public func iconImage(index: Int) -> UIImage?{

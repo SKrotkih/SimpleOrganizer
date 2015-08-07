@@ -39,10 +39,40 @@ class SOMainTableViewController: NSObject{
                 showAlertWithTitle("Error of reading task data!".localized, error.description)
             } else {
                 self.tasks = allCurrentTasks
+                self.addToSchedule(self.tasks)
                 self.tableView.reloadData()
             }
         }
     }
+    
+    func addToSchedule(tasks: [SOTask]){
+
+        SOLocalNotificationsCenter.cancelAllNotifications()
+
+        for task: SOTask in tasks{
+            if let date = task.date{
+                if date.compare(NSDate()) == NSComparisonResult.OrderedDescending{
+                    let userInfo: [NSObject : AnyObject] = [
+                        SOLocalNotificationsCenter.kTaskIdKeyName(): self.taskMessageToSchedule(task)
+                    ]
+                    SOLocalNotificationsCenter.sendScheduleNotification(task.title, date: date, userInfo: userInfo)
+                }
+            }
+        }
+    }
+    
+    private func taskMessageToSchedule(task: SOTask) -> String{
+        var message: String = ""
+        
+        if let date = task.date{
+            let dateFormatter = NSDateFormatter()
+            dateFormatter.dateFormat = "dd-MM-yyyy HH:mm:ss"
+            message = "\(task.categoryName):\n\(task.title)\n\(dateFormatter.stringFromDate(date))"
+        }
+        
+        return message
+    }
+    
 }
 
     // MARK: SOChangeFilterStateDelegate
