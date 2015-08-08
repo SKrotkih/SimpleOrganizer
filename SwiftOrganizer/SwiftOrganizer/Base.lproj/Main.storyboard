@@ -1234,10 +1234,14 @@
                                 </date>
                             </datePicker>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Hqg-2q-nBP">
-                                <rect key="frame" x="124" y="20" width="353" height="50"/>
+                                <rect key="frame" x="124" y="20" width="353" height="65"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iWm-wM-yf0">
-                                        <rect key="frame" x="2" y="10" width="122" height="30"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iWm-wM-yf0">
+                                        <rect key="frame" x="2" y="1" width="122" height="30"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="30" id="My3-1S-SIm"/>
+                                            <constraint firstAttribute="width" constant="122" id="tH1-I4-1Wa"/>
+                                        </constraints>
                                         <fontDescription key="fontDescription" name="HelveticaNeue-CondensedBold" family="Helvetica Neue" pointSize="17"/>
                                         <state key="normal" title="Today">
                                             <color key="titleColor" red="0.29803922770000002" green="0.29803922770000002" blue="0.29803922770000002" alpha="1" colorSpace="calibratedRGB"/>
@@ -1247,8 +1251,12 @@
                                             <action selector="todayEnterOnButtonPressed:" destination="ZPv-0M-s6H" eventType="touchUpInside" id="T9u-uq-C51"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UXo-Or-4Pz">
-                                        <rect key="frame" x="114" y="10" width="240" height="30"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UXo-Or-4Pz">
+                                        <rect key="frame" x="114" y="1" width="240" height="30"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="240" id="iHj-ce-Lgt"/>
+                                            <constraint firstAttribute="height" constant="30" id="qBe-tC-MNa"/>
+                                        </constraints>
                                         <fontDescription key="fontDescription" name="HelveticaNeue-CondensedBold" family="Helvetica Neue" pointSize="17"/>
                                         <state key="normal" title="Save event to the Calendar">
                                             <color key="titleColor" red="0.29803922770000002" green="0.29803922770000002" blue="0.29803922770000002" alpha="1" colorSpace="calibratedRGB"/>
@@ -1258,11 +1266,41 @@
                                             <action selector="saveToCalendarOnButtonPressed:" destination="ZPv-0M-s6H" eventType="touchUpInside" id="Rlx-r7-Qf3"/>
                                         </connections>
                                     </button>
+                                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dJz-cZ-KsE">
+                                        <rect key="frame" x="114" y="33" width="51" height="31"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="31" id="OI6-6I-fgy"/>
+                                            <constraint firstAttribute="width" constant="49" id="aF9-8a-ekX"/>
+                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="49" id="gJQ-hk-FjH"/>
+                                        </constraints>
+                                        <color key="onTintColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                        <connections>
+                                            <action selector="needToRememberChangeState:" destination="ZPv-0M-s6H" eventType="valueChanged" id="Cee-s5-4U8"/>
+                                        </connections>
+                                    </switch>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Need to remember" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gXq-eX-Yrq">
+                                        <rect key="frame" x="176" y="36" width="132" height="21"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="21" id="Rhg-0L-075"/>
+                                            <constraint firstAttribute="width" constant="132" id="xb5-UK-R1M"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue-CondensedBold" family="Helvetica Neue" pointSize="17"/>
+                                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="FCE-E6-1T4"/>
+                                    <constraint firstItem="gXq-eX-Yrq" firstAttribute="leading" secondItem="dJz-cZ-KsE" secondAttribute="trailing" constant="13" id="1YV-Kr-wDI"/>
+                                    <constraint firstItem="UXo-Or-4Pz" firstAttribute="top" secondItem="Hqg-2q-nBP" secondAttribute="top" constant="1" id="4Vv-iP-7fZ"/>
+                                    <constraint firstAttribute="height" constant="65" id="FCE-E6-1T4"/>
                                     <constraint firstAttribute="width" constant="353" id="Pc6-TM-2Zj"/>
+                                    <constraint firstAttribute="bottom" secondItem="dJz-cZ-KsE" secondAttribute="bottom" constant="1" id="bII-wN-Cwo"/>
+                                    <constraint firstItem="dJz-cZ-KsE" firstAttribute="leading" secondItem="Hqg-2q-nBP" secondAttribute="leading" constant="114" id="ckm-CR-LHB"/>
+                                    <constraint firstAttribute="bottom" secondItem="gXq-eX-Yrq" secondAttribute="bottom" constant="8" id="gf0-u5-zhq"/>
+                                    <constraint firstAttribute="trailing" secondItem="UXo-Or-4Pz" secondAttribute="trailing" constant="-1" id="oQa-bS-SKw"/>
+                                    <constraint firstItem="iWm-wM-yf0" firstAttribute="leading" secondItem="Hqg-2q-nBP" secondAttribute="leading" constant="2" id="rgg-EM-O5p"/>
+                                    <constraint firstItem="iWm-wM-yf0" firstAttribute="top" secondItem="Hqg-2q-nBP" secondAttribute="top" constant="1" id="whU-NX-xWO"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -1276,7 +1314,10 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="caveEventToCalendarButton" destination="UXo-Or-4Pz" id="BNU-fz-ZDu"/>
                         <outlet property="datePicker" destination="Rvd-Nc-2wN" id="7cR-1o-S2j"/>
+                        <outlet property="needRememberLabel" destination="gXq-eX-Yrq" id="iHO-CC-IfH"/>
+                        <outlet property="needRememberSwitch" destination="dJz-cZ-KsE" id="Pz1-pG-xxS"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Iyk-FN-BqE" userLabel="First Responder" sceneMemberID="firstResponder"/>

@@ -20,9 +20,6 @@ class SOMainTableViewController: NSObject{
     
     var tasks : [SOTask] = []
     
-    let kMainTableViewCellIdentifier = "MainTableViewCell"
-    let kMainHeaderTableViewCellIdentifier = "HeaderTableViewCell"
-    
     init(tableView aTavleView: UITableView, delegate: SOEditTaskController){
         self.tableView = aTavleView
         self.taskEditingDelegate = delegate
@@ -39,13 +36,13 @@ class SOMainTableViewController: NSObject{
                 showAlertWithTitle("Error of reading task data!".localized, error.description)
             } else {
                 self.tasks = allCurrentTasks
-                self.addToSchedule(self.tasks)
+                self.addTasksToReminder(self.tasks)
                 self.tableView.reloadData()
             }
         }
     }
     
-    func addToSchedule(tasks: [SOTask]){
+    func addTasksToReminder(tasks: [SOTask]){
 
         SOLocalNotificationsCenter.cancelAllNotifications()
 
@@ -53,7 +50,7 @@ class SOMainTableViewController: NSObject{
             if let date = task.date{
                 if date.compare(NSDate()) == NSComparisonResult.OrderedDescending{
                     let userInfo: [NSObject : AnyObject] = [
-                        SOLocalNotificationsCenter.kTaskIdKeyName(): self.taskMessageToSchedule(task)
+                        SOLocalNotificationsCenter.kTaskIdKeyName(): self.forReminderMessageTask(task, date: date)
                     ]
                     SOLocalNotificationsCenter.sendScheduleNotification(task.title, date: date, userInfo: userInfo)
                 }
@@ -61,14 +58,10 @@ class SOMainTableViewController: NSObject{
         }
     }
     
-    private func taskMessageToSchedule(task: SOTask) -> String{
-        var message: String = ""
-        
-        if let date = task.date{
-            let dateFormatter = NSDateFormatter()
-            dateFormatter.dateFormat = "dd-MM-yyyy HH:mm:ss"
-            message = "\(task.categoryName):\n\(task.title)\n\(dateFormatter.stringFromDate(date))"
-        }
+    private func forReminderMessageTask(task: SOTask, date: NSDate) -> String{
+        let dateFormatter = NSDateFormatter()
+        dateFormatter.dateFormat = "dd-MM-yyyy HH:mm:ss"
+        let  message = "\(task.categoryName):\n\(task.title)\nat \(dateFormatter.stringFromDate(date))"
         
         return message
     }
@@ -123,7 +116,7 @@ extension SOMainTableViewController: UITableViewDataSource {
     }
     
     @objc func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        var cell = self.tableView.dequeueReusableCellWithIdentifier(kMainTableViewCellIdentifier) as! SOMainTableViewCell
+        var cell = self.tableView.dequeueReusableCellWithIdentifier(self.mainTableViewCellIdentifier()) as! SOMainTableViewCell
         let row = indexPath.row
         let currentTask : SOTask = self.tasks[row]
         cell.fillTaskData(currentTask)
@@ -179,23 +172,44 @@ extension SOMainTableViewController: UITableViewDelegate {
     
     // Customizing the row height
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return 47
+        return self.heightOfTableRow()
     }
     
     func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat{
         switch section {
         case 0:
-            return 28.0
+            return self.heightOfTableHeader()
         default:
             return 0.0
         }
     }
     
     func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView?{
-        let headerCell = self.tableView.dequeueReusableCellWithIdentifier(kMainHeaderTableViewCellIdentifier) as! UITableViewCell
+        let headerCell = self.tableView.dequeueReusableCellWithIdentifier(mainHeaderTableViewCellIdentifier()) as! UITableViewCell
         
         return headerCell
+    }
+}
+
+    // MARK: Constants
+
+extension SOMainTableViewController{
+    private func mainTableViewCellIdentifier() -> String{
+        return "MainTableViewCell"
+    }
+
+    private func mainHeaderTableViewCellIdentifier() -> String{
+        return "HeaderTableViewCell"
+    }
+    
+    private func heightOfTableRow() -> CGFloat{
+        return 47.0
+    }
+    
+    private func heightOfTableHeader() -> CGFloat{
+        return 28.0
     }
     
     
 }
+

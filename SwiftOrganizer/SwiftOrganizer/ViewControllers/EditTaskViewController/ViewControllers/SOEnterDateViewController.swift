@@ -14,6 +14,10 @@ class SOEnterDateViewController: SOEnterBaseViewController {
     private var _date: NSDate?
     
     @IBOutlet weak var datePicker: UIDatePicker!
+    @IBOutlet weak var needRememberSwitch: UISwitch!
+    @IBOutlet weak var needRememberLabel: UILabel!
+    @IBOutlet weak var caveEventToCalendarButton: UIButton!
+    
     
     convenience init(date: NSDate){
         self.init()
@@ -33,7 +37,10 @@ class SOEnterDateViewController: SOEnterBaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.title = "Date".localized                
+        self.title = "Date".localized
+        self.needRememberLabel.text = "Need to remember".localized
+        self.caveEventToCalendarButton.setTitle("Save event to the Calendar".localized, forState: .Normal)
+        self.needRememberSwitch.on = true
 
     }
     
@@ -58,6 +65,11 @@ class SOEnterDateViewController: SOEnterBaseViewController {
     func doneButtonWasPressed() {
         self.date = self.datePicker.date
         self.closeButtonWasPressed()
+    }
+    
+    
+    @IBAction func needToRememberChangeState(sender: AnyObject) {
+        
     }
     
     @IBAction func todayEnterOnButtonPressed(sender: AnyObject) {

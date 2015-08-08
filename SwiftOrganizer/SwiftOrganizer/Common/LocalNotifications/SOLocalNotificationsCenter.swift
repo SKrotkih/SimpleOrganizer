@@ -22,7 +22,7 @@ class SOLocalNotificationsCenter: NSObject {
         self.checkLocalNotifications(launchOptions)
     }
     
-    // MARK: Register Local Notifications
+    // MARK: Register the Local Notifications
     
     private class func registerLocalNotificationsSettings(application: UIApplication, launchOptions: [NSObject: AnyObject]?) {
         application.registerUserNotificationSettings(UIUserNotificationSettings(forTypes: .Alert | .Badge | .Sound, categories: nil))  // types are UIUserNotificationType properties
@@ -34,7 +34,7 @@ class SOLocalNotificationsCenter: NSObject {
         self.setAreAllowedTheLocalNotifications(areAllowedTheLocalNotifications)
     }
     
-    // MARK: Received Local Notification
+    // MARK: The Local Notifications Handler
     
     class func didReceiveLocalNotification(notification: UILocalNotification) {
 
@@ -55,7 +55,7 @@ class SOLocalNotificationsCenter: NSObject {
         
     }
     
-    // MARK:
+    // MARK: Send the Local Notifications
     
     class func sendLocalNotification(message: String, timeIntervalSinceNow: NSTimeInterval = 0, needToIncrementBadgeNumber: Bool = true, category: String? = nil) {
         if self.areAllowedTheLocalNotifications(){
@@ -91,14 +91,15 @@ class SOLocalNotificationsCenter: NSObject {
             localNotification.fireDate = date
             localNotification.timeZone = NSCalendar.currentCalendar().timeZone
 
-            localNotification.alertBody = message
-            
             if let theUserInfo = userInfo{
                 localNotification.hasAction = true
-                localNotification.alertAction = theUserInfo[self.kTaskIdKeyName()] as? String
+                let alert = theUserInfo[self.kTaskIdKeyName()] as? String
+                localNotification.alertAction = alert
+                localNotification.alertBody = alert
                 localNotification.userInfo = theUserInfo
             } else {
                 localNotification.hasAction = false
+                localNotification.alertBody = message
             }
             
             if needToIncrementBadgeNumber{
@@ -109,25 +110,18 @@ class SOLocalNotificationsCenter: NSObject {
         }
     }
     
-}
-
-    // MARK: Constants
-
-extension SOLocalNotificationsCenter{
-    private class func defaultCategory() -> String{
-        return "com.skappledev.SwiftOrganizer.message"
+    // This function may be called when the app is in the background, if the
+    // action's activation mode was Background
+    class func handleActionForNotification(notification: UILocalNotification, identifier: String?){
+        // Called when the user selects an action from a local notification
+        println("Received \(notification.category)! Action: \(identifier)")
+        // You must call this block when done dealing with the
+        // action, or you'll be terminated
     }
     
-    private class func kAreAllowedTheLocalNotivicationsKey() -> String{
-        return "AreAllowedTheLocalNotivicationsKey"
-    }
-    
-    class func kTaskIdKeyName() -> String{
-        return "message"
-    }
 }
 
-    // MARK: Cancel Notifications
+    // MARK: Cancel the Local Notifications
 
 extension SOLocalNotificationsCenter{
     class func cancelAllNotifications(){
@@ -139,7 +133,7 @@ extension SOLocalNotificationsCenter{
     }
 }
 
-    // MARK: AreAllowedTheLocalNotifications property
+    // MARK: Are Allowed The LocalNotifications? property
 
 extension SOLocalNotificationsCenter{
     
@@ -166,5 +160,21 @@ extension SOLocalNotificationsCenter{
 extension SOLocalNotificationsCenter{
     private class func application() -> UIApplication{
         return UIApplication.sharedApplication()
+    }
+}
+
+// MARK: Constants
+
+extension SOLocalNotificationsCenter{
+    private class func defaultCategory() -> String{
+        return "com.skappledev.SwiftOrganizer.message"
+    }
+    
+    private class func kAreAllowedTheLocalNotivicationsKey() -> String{
+        return "AreAllowedTheLocalNotivicationsKey"
+    }
+    
+    class func kTaskIdKeyName() -> String{
+        return "message"
     }
 }
