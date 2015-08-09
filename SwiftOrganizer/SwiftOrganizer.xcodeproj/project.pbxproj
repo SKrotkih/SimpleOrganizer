@@ -41,6 +41,8 @@
 		7F5779DF1B5BDAB6006EB1E5 /* SOWidgetTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F5779DE1B5BDAB6006EB1E5 /* SOWidgetTableViewCell.swift */; };
 		7F5779E11B5BE8E0006EB1E5 /* SOUserDefault.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F5779E01B5BE8E0006EB1E5 /* SOUserDefault.swift */; };
 		7F57E00F1B4ACEF700789FBD /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F57E00E1B4ACEF700789FBD /* CloudKit.framework */; };
+		7F57EB341B77394B000AEF92 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 7F57EB331B77394B000AEF92 /* Settings.bundle */; };
+		7F57EB371B773B78000AEF92 /* SOExternalSettingsObserever.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F57EB361B773B78000AEF92 /* SOExternalSettingsObserever.swift */; };
 		7F5826BD1B482D6C00C0B179 /* SOiCloudManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F5826BC1B482D6C00C0B179 /* SOiCloudManager.swift */; };
 		7F5A6D1F1B14A75A009665C7 /* SOMainTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F5A6D1E1B14A75A009665C7 /* SOMainTableViewController.swift */; };
 		7F5A6D211B14B61B009665C7 /* SOMainTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F5A6D201B14B61B009665C7 /* SOMainTableViewCell.swift */; };
@@ -249,6 +251,8 @@
 		7F5779DE1B5BDAB6006EB1E5 /* SOWidgetTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SOWidgetTableViewCell.swift; sourceTree = "<group>"; };
 		7F5779E01B5BE8E0006EB1E5 /* SOUserDefault.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SOUserDefault.swift; path = Classes/SOUserDefault.swift; sourceTree = "<group>"; };
 		7F57E00E1B4ACEF700789FBD /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
+		7F57EB331B77394B000AEF92 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = Settings.bundle; path = Resources/Settings.bundle; sourceTree = "<group>"; };
+		7F57EB361B773B78000AEF92 /* SOExternalSettingsObserever.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SOExternalSettingsObserever.swift; path = "Common/External Settings/SOExternalSettingsObserever.swift"; sourceTree = "<group>"; };
 		7F5826BA1B481E2C00C0B179 /* SwiftOrganizer.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = SwiftOrganizer.entitlements; path = ../SwiftOrganizer.entitlements; sourceTree = "<group>"; };
 		7F5826BC1B482D6C00C0B179 /* SOiCloudManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SOiCloudManager.swift; path = SwiftOrganizer/iCloud/SOiCloudManager.swift; sourceTree = SOURCE_ROOT; };
 		7F5A6D1E1B14A75A009665C7 /* SOMainTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SOMainTableViewController.swift; sourceTree = "<group>"; };
@@ -462,6 +466,7 @@
 		7F5725581B0F5DDA003DBDEB /* SwiftOrganizer */ = {
 			isa = PBXGroup;
 			children = (
+				7F57EB351B773B32000AEF92 /* External Settings */,
 				7F5D195E1B761F0A0095C51F /* Reachability */,
 				7FE4AE401B731E9C00FE12D3 /* Local Notifications */,
 				7F5826BB1B482D1A00C0B179 /* iCloud */,
@@ -473,6 +478,7 @@
 				7F5725651B0F5DDA003DBDEB /* Images.xcassets */,
 				7F5725671B0F5DDA003DBDEB /* LaunchScreen.xib */,
 				7F5C2C3D1B42D88700506320 /* README.md */,
+				7F57EB331B77394B000AEF92 /* Settings.bundle */,
 				7F5D20EA1B3942B500926392 /* SwiftOrganizer.playground */,
 				7F5A6D221B14C37C009665C7 /* Resources */,
 				7F625EEE1B2ED3EE004B7C16 /* Frameworks */,
@@ -568,6 +574,14 @@
 				7F5779E01B5BE8E0006EB1E5 /* SOUserDefault.swift */,
 			);
 			name = "Type of DataBase Switcher";
+			sourceTree = "<group>";
+		};
+		7F57EB351B773B32000AEF92 /* External Settings */ = {
+			isa = PBXGroup;
+			children = (
+				7F57EB361B773B78000AEF92 /* SOExternalSettingsObserever.swift */,
+			);
+			name = "External Settings";
 			sourceTree = "<group>";
 		};
 		7F5826BB1B482D1A00C0B179 /* iCloud */ = {
@@ -1118,6 +1132,7 @@
 				7F5A6D371B14C42C009665C7 /* ico7@2x.png in Resources */,
 				7F5A6D391B14C42C009665C7 /* ico9@2x.png in Resources */,
 				7F6474A11B2730D700B3D75C /* ico15@2x.png in Resources */,
+				7F57EB341B77394B000AEF92 /* Settings.bundle in Resources */,
 				7F5779D41B5B5E68006EB1E5 /* SwiftOrganizer.xcdatamodeld in Resources */,
 				7F5B37281B6F2B1D00112760 /* README.md in Resources */,
 				7F9B77261B189C54006D3434 /* Main.storyboard in Resources */,
@@ -1195,6 +1210,7 @@
 				7F6E98621B1F28650048ED7A /* SOSelectIconsCell.swift in Sources */,
 				7F6E98201B1E23F20048ED7A /* SOEditCategoryViewController.swift in Sources */,
 				7F56ACCB1B6D1A2200B0C1EF /* SOSemaforeExample.swift in Sources */,
+				7F57EB371B773B78000AEF92 /* SOExternalSettingsObserever.swift in Sources */,
 				7F56ACC71B6A5C9E00B0C1EF /* SOMakeCallViewController.swift in Sources */,
 				7F5725961B0F6114003DBDEB /* SOAboutViewController.swift in Sources */,
 				7F5725A21B0F61F7003DBDEB /* StringExtension.swift in Sources */,

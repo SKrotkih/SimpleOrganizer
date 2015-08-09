@@ -30,6 +30,7 @@ Also were implemented the following features:
 - undo for task edit data
 - local notifications
 - Reachability the Internet observer: auto switch to local data base when the Internet is disconnected
+- Observing of changes in Settings app for application's preferences.
 
 Were applied the following design patterns:
 - abstract method;
@@ -83,6 +84,7 @@ SwiftOrganizer is available under the MIT license. See the LICENSE file for more
 - 04.08.2015: Added feature to make call by Phone
 - 07.08.2015: Local notifications for task reminder implemented
 - 08.08.2015: Reachability the Internet observer implemented: auto switch to local data base when the Internet is disconnected
-- 09.08.2015: If the current database is remote and the Internet is disconnected, then app switches to the local database and goes to the main table.  
+- 09.08.2015: If the current database is remote and the Internet is disconnected, then app switches to the local database and goes to the main table. 
+- 09.08.2015: Settings app is used for enter some data. Settings changes added observing. 
 
 
