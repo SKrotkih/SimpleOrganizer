@@ -1,5 +1,5 @@
 //
-//  SOEnterBaseViewController.swift
+//  SOEditTaskFieldBaseViewController.swift
 //  SwiftOrganizer
 //
 //  Created by Sergey Krotkih on 6/2/15.
@@ -7,9 +7,10 @@
 //
 
 import UIKit
+import DataBaseKit
 
-class SOEnterBaseViewController: UIViewController {
-
+class SOEditTaskFieldBaseViewController: UIViewController {
+    
     var task: SOTask?
     var undoDelegate: SOEditTaskUndoDelegateProtocol?
     
@@ -23,7 +24,7 @@ class SOEnterBaseViewController: UIViewController {
         self.slideMenuController()?.removeLeftGestures()
         self.slideMenuController()?.removeRightGestures()
     }
-
+    
     func closeButtonWasPressed() {
         self.navigationController?.popViewControllerAnimated(true)
     }

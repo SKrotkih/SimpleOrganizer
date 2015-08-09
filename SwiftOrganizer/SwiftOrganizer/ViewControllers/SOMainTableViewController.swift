@@ -37,6 +37,9 @@ class SOMainTableViewController: NSObject{
             } else {
                 self.tasks = allCurrentTasks
                 self.addTasksToReminder(self.tasks)
+
+                
+                
                 self.tableView.reloadData()
             }
         }

@@ -41,6 +41,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         self.createMenuView()
         
+        SOTypeDataBaseSwitcher.startInternetObserver()
+        
         SOiCloudManager.sharedInstance.prepareKeyValueStoreObserver()
 
         SOLocalNotificationsCenter.prepareLocalNotifications(application, launchOptions: launchOptions)

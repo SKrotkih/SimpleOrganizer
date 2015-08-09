@@ -1,5 +1,5 @@
 //
-//  SOEnterCategoryViewController.swift
+//  SOEditCategoryViewController.swift
 //  SwiftOrganizer
 //
 //  Created by Sergey Krotkih on 6/2/15.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SOEnterCategoryViewController: SOEnterBaseViewController {
+class SOEditCategoryViewController: SOEditTaskFieldBaseViewController {
 
     var categories: [SOCategory]!
     
@@ -35,7 +35,7 @@ class SOEnterCategoryViewController: SOEnterBaseViewController {
     }
 }
 
-extension SOEnterCategoryViewController: UITableViewDataSource {
+extension SOEditCategoryViewController: UITableViewDataSource {
 
     @objc func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return categories.count
@@ -58,7 +58,7 @@ extension SOEnterCategoryViewController: UITableViewDataSource {
     }
 }
 
-extension SOEnterCategoryViewController: UITableViewDelegate {
+extension SOEditCategoryViewController: UITableViewDelegate {
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
 
         if let theTask = self.task{

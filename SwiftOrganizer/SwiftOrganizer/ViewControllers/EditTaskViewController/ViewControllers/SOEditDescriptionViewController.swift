@@ -1,5 +1,5 @@
 //
-//  SOEnterDescriptionViewController.swift
+//  SOEditDescriptionViewController.swift
 //  SwiftOrganizer
 //
 //  Created by Sergey Krotkih on 6/2/15.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SOEnterDescriptionViewController: SOEnterBaseViewController {
+class SOEditDescriptionViewController: SOEditTaskFieldBaseViewController {
     
     @IBOutlet weak var textView: UITextView!
     @IBOutlet weak var heightTextViewConstraint: NSLayoutConstraint!
@@ -21,6 +21,10 @@ class SOEnterDescriptionViewController: SOEnterBaseViewController {
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardDidShow:", name: UIKeyboardDidShowNotification,  object: nil)
     }
 
+    deinit {
+        NSNotificationCenter.defaultCenter().removeObserver(self)
+    }
+    
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         

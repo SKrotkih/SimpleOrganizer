@@ -1,5 +1,5 @@
 //
-//  SOEnterDateViewController.swift
+//  SOEditDateViewController.swift
 //  SwiftOrganizer
 //
 //  Created by Sergey Krotkih on 6/2/15.
@@ -9,7 +9,7 @@
 import UIKit
 import EventKit
 
-class SOEnterDateViewController: SOEnterBaseViewController {
+class SOEditDateViewController: SOEditTaskFieldBaseViewController {
 
     private var _date: NSDate?
     

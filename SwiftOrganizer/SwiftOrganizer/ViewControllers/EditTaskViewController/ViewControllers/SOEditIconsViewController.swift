@@ -1,5 +1,5 @@
 //
-//  SOEnterIconsViewController.swift
+//  SOEditIconsViewController.swift
 //  SwiftOrganizer
 //
 //  Created by Sergey Krotkih on 6/2/15.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SOEnterIconsViewController: SOEnterBaseViewController {
+class SOEditIconsViewController: SOEditTaskFieldBaseViewController {
     
     @IBOutlet weak var tableView: UITableView!
 
@@ -89,7 +89,7 @@ class SOEnterIconsViewController: SOEnterBaseViewController {
     }
 }
 
-extension SOEnterIconsViewController: UITableViewDataSource{
+extension SOEditIconsViewController: UITableViewDataSource{
     
     @objc func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return icons.count
@@ -124,7 +124,7 @@ extension SOEnterIconsViewController: UITableViewDataSource{
     
 }
 
-extension SOEnterIconsViewController: UITableViewDelegate {
+extension SOEditIconsViewController: UITableViewDelegate {
 
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let row = indexPath.row

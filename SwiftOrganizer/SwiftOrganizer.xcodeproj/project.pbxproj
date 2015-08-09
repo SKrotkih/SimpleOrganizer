@@ -62,6 +62,8 @@
 		7F5C2C3C1B40143600506320 /* ArrayExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F5C2C3B1B40143600506320 /* ArrayExtension.swift */; };
 		7F5C2C3E1B42D88700506320 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = 7F5C2C3D1B42D88700506320 /* README.md */; };
 		7F5C81741B69E36C00284D9D /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F5C81731B69E36C00284D9D /* Social.framework */; };
+		7F5D19611B7635200095C51F /* SOReachabilityCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F5D195B1B761C460095C51F /* SOReachabilityCenter.swift */; };
+		7F5D19621B7635200095C51F /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F5D195F1B761F0A0095C51F /* Reachability.swift */; };
 		7F5E6E151B51730900A1B278 /* SODocumentsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F5E6E141B51730900A1B278 /* SODocumentsViewController.swift */; };
 		7F625EF01B2ED492004B7C16 /* libstdc++.6.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F625EEF1B2ED492004B7C16 /* libstdc++.6.dylib */; };
 		7F625EF21B2ED49C004B7C16 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F625EF11B2ED49C004B7C16 /* MobileCoreServices.framework */; };
@@ -77,11 +79,11 @@
 		7F6E98181B1DDD930048ED7A /* SOEditTaskIconsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6E98171B1DDD930048ED7A /* SOEditTaskIconsCell.swift */; };
 		7F6E981A1B1DDED30048ED7A /* SOEditTaskDateCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6E98191B1DDED30048ED7A /* SOEditTaskDateCell.swift */; };
 		7F6E981C1B1DE04C0048ED7A /* SOEditTaskDescriptionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6E981B1B1DE04C0048ED7A /* SOEditTaskDescriptionCell.swift */; };
-		7F6E98201B1E23F20048ED7A /* SOEnterCategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6E981F1B1E23F20048ED7A /* SOEnterCategoryViewController.swift */; };
-		7F6E98221B1E24210048ED7A /* SOEnterIconsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6E98211B1E24210048ED7A /* SOEnterIconsViewController.swift */; };
-		7F6E98241B1E243C0048ED7A /* SOEnterDateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6E98231B1E243C0048ED7A /* SOEnterDateViewController.swift */; };
-		7F6E98261B1E24590048ED7A /* SOEnterDescriptionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6E98251B1E24590048ED7A /* SOEnterDescriptionViewController.swift */; };
-		7F6E98281B1E27840048ED7A /* SOEnterBaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6E98271B1E27840048ED7A /* SOEnterBaseViewController.swift */; };
+		7F6E98201B1E23F20048ED7A /* SOEditCategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6E981F1B1E23F20048ED7A /* SOEditCategoryViewController.swift */; };
+		7F6E98221B1E24210048ED7A /* SOEditIconsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6E98211B1E24210048ED7A /* SOEditIconsViewController.swift */; };
+		7F6E98241B1E243C0048ED7A /* SOEditDateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6E98231B1E243C0048ED7A /* SOEditDateViewController.swift */; };
+		7F6E98261B1E24590048ED7A /* SOEditDescriptionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6E98251B1E24590048ED7A /* SOEditDescriptionViewController.swift */; };
+		7F6E98281B1E27840048ED7A /* SOEditTaskFieldBaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6E98271B1E27840048ED7A /* SOEditTaskFieldBaseViewController.swift */; };
 		7F6E98601B1EF3180048ED7A /* SOSelectCategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6E985F1B1EF3180048ED7A /* SOSelectCategoryCell.swift */; };
 		7F6E98621B1F28650048ED7A /* SOSelectIconsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6E98611B1F28650048ED7A /* SOSelectIconsCell.swift */; };
 		7F9B77261B189C54006D3434 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7F5725621B0F5DDA003DBDEB /* Main.storyboard */; };
@@ -268,6 +270,8 @@
 		7F5C2C3B1B40143600506320 /* ArrayExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArrayExtension.swift; sourceTree = "<group>"; };
 		7F5C2C3D1B42D88700506320 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../../README.md; sourceTree = "<group>"; };
 		7F5C81731B69E36C00284D9D /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
+		7F5D195B1B761C460095C51F /* SOReachabilityCenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SOReachabilityCenter.swift; path = ../Utilities/SOReachabilityCenter.swift; sourceTree = "<group>"; };
+		7F5D195F1B761F0A0095C51F /* Reachability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
 		7F5D20EA1B3942B500926392 /* SwiftOrganizer.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = SwiftOrganizer.playground; sourceTree = "<group>"; };
 		7F5E6E141B51730900A1B278 /* SODocumentsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SODocumentsViewController.swift; sourceTree = "<group>"; };
 		7F625EE21B2ED3DC004B7C16 /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Bolts.framework; path = Frameworks/Bolts.framework; sourceTree = "<group>"; };
@@ -290,11 +294,11 @@
 		7F6E98171B1DDD930048ED7A /* SOEditTaskIconsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SOEditTaskIconsCell.swift; path = EditTaskViewController/SOEditTaskIconsCell.swift; sourceTree = "<group>"; };
 		7F6E98191B1DDED30048ED7A /* SOEditTaskDateCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SOEditTaskDateCell.swift; path = EditTaskViewController/SOEditTaskDateCell.swift; sourceTree = "<group>"; };
 		7F6E981B1B1DE04C0048ED7A /* SOEditTaskDescriptionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SOEditTaskDescriptionCell.swift; path = EditTaskViewController/SOEditTaskDescriptionCell.swift; sourceTree = "<group>"; };
-		7F6E981F1B1E23F20048ED7A /* SOEnterCategoryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SOEnterCategoryViewController.swift; path = EditTaskViewController/ViewControllers/SOEnterCategoryViewController.swift; sourceTree = "<group>"; };
-		7F6E98211B1E24210048ED7A /* SOEnterIconsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SOEnterIconsViewController.swift; path = EditTaskViewController/ViewControllers/SOEnterIconsViewController.swift; sourceTree = "<group>"; };
-		7F6E98231B1E243C0048ED7A /* SOEnterDateViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SOEnterDateViewController.swift; path = EditTaskViewController/ViewControllers/SOEnterDateViewController.swift; sourceTree = "<group>"; };
-		7F6E98251B1E24590048ED7A /* SOEnterDescriptionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SOEnterDescriptionViewController.swift; path = EditTaskViewController/ViewControllers/SOEnterDescriptionViewController.swift; sourceTree = "<group>"; };
-		7F6E98271B1E27840048ED7A /* SOEnterBaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SOEnterBaseViewController.swift; path = EditTaskViewController/ViewControllers/SOEnterBaseViewController.swift; sourceTree = "<group>"; };
+		7F6E981F1B1E23F20048ED7A /* SOEditCategoryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SOEditCategoryViewController.swift; path = EditTaskViewController/ViewControllers/SOEditCategoryViewController.swift; sourceTree = "<group>"; };
+		7F6E98211B1E24210048ED7A /* SOEditIconsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SOEditIconsViewController.swift; path = EditTaskViewController/ViewControllers/SOEditIconsViewController.swift; sourceTree = "<group>"; };
+		7F6E98231B1E243C0048ED7A /* SOEditDateViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SOEditDateViewController.swift; path = EditTaskViewController/ViewControllers/SOEditDateViewController.swift; sourceTree = "<group>"; };
+		7F6E98251B1E24590048ED7A /* SOEditDescriptionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SOEditDescriptionViewController.swift; path = EditTaskViewController/ViewControllers/SOEditDescriptionViewController.swift; sourceTree = "<group>"; };
+		7F6E98271B1E27840048ED7A /* SOEditTaskFieldBaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SOEditTaskFieldBaseViewController.swift; path = EditTaskViewController/ViewControllers/SOEditTaskFieldBaseViewController.swift; sourceTree = "<group>"; };
 		7F6E985F1B1EF3180048ED7A /* SOSelectCategoryCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SOSelectCategoryCell.swift; path = EditTaskViewController/SOSelectCategoryCell.swift; sourceTree = "<group>"; };
 		7F6E98611B1F28650048ED7A /* SOSelectIconsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SOSelectIconsCell.swift; path = EditTaskViewController/SOSelectIconsCell.swift; sourceTree = "<group>"; };
 		7FC8E88A1B521E630013906F /* SOSampleDocument.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SOSampleDocument.swift; sourceTree = "<group>"; };
@@ -458,6 +462,7 @@
 		7F5725581B0F5DDA003DBDEB /* SwiftOrganizer */ = {
 			isa = PBXGroup;
 			children = (
+				7F5D195E1B761F0A0095C51F /* Reachability */,
 				7FE4AE401B731E9C00FE12D3 /* Local Notifications */,
 				7F5826BB1B482D1A00C0B179 /* iCloud */,
 				7F5725991B0F61AC003DBDEB /* Common */,
@@ -627,6 +632,16 @@
 			name = TasksIcons;
 			sourceTree = "<group>";
 		};
+		7F5D195E1B761F0A0095C51F /* Reachability */ = {
+			isa = PBXGroup;
+			children = (
+				7F5D195B1B761C460095C51F /* SOReachabilityCenter.swift */,
+				7F5D195F1B761F0A0095C51F /* Reachability.swift */,
+			);
+			name = Reachability;
+			path = Common/Reachability;
+			sourceTree = "<group>";
+		};
 		7F5E6E131B5172EE00A1B278 /* Documents */ = {
 			isa = PBXGroup;
 			children = (
@@ -678,7 +693,7 @@
 			isa = PBXGroup;
 			children = (
 				7F57258C1B0F6114003DBDEB /* SOEditTaskViewController.swift */,
-				7F6E98271B1E27840048ED7A /* SOEnterBaseViewController.swift */,
+				7F6E98271B1E27840048ED7A /* SOEditTaskFieldBaseViewController.swift */,
 				7F5AA3791B50B63400DA6E0B /* SOEditTaskCell.swift */,
 				7F6E985B1B1EF2A50048ED7A /* Category */,
 				7F6E985C1B1EF2B60048ED7A /* Icons */,
@@ -691,7 +706,7 @@
 		7F6E985B1B1EF2A50048ED7A /* Category */ = {
 			isa = PBXGroup;
 			children = (
-				7F6E981F1B1E23F20048ED7A /* SOEnterCategoryViewController.swift */,
+				7F6E981F1B1E23F20048ED7A /* SOEditCategoryViewController.swift */,
 				7F6E98151B1DD9F70048ED7A /* SOEditTaskCategoryCell.swift */,
 				7F6E985F1B1EF3180048ED7A /* SOSelectCategoryCell.swift */,
 			);
@@ -701,7 +716,7 @@
 		7F6E985C1B1EF2B60048ED7A /* Icons */ = {
 			isa = PBXGroup;
 			children = (
-				7F6E98211B1E24210048ED7A /* SOEnterIconsViewController.swift */,
+				7F6E98211B1E24210048ED7A /* SOEditIconsViewController.swift */,
 				7F6E98171B1DDD930048ED7A /* SOEditTaskIconsCell.swift */,
 				7F6E98611B1F28650048ED7A /* SOSelectIconsCell.swift */,
 			);
@@ -711,7 +726,7 @@
 		7F6E985D1B1EF2C20048ED7A /* Date */ = {
 			isa = PBXGroup;
 			children = (
-				7F6E98231B1E243C0048ED7A /* SOEnterDateViewController.swift */,
+				7F6E98231B1E243C0048ED7A /* SOEditDateViewController.swift */,
 				7F6E98191B1DDED30048ED7A /* SOEditTaskDateCell.swift */,
 			);
 			name = Date;
@@ -720,7 +735,7 @@
 		7F6E985E1B1EF2CD0048ED7A /* Description */ = {
 			isa = PBXGroup;
 			children = (
-				7F6E98251B1E24590048ED7A /* SOEnterDescriptionViewController.swift */,
+				7F6E98251B1E24590048ED7A /* SOEditDescriptionViewController.swift */,
 				7F6E981B1B1DE04C0048ED7A /* SOEditTaskDescriptionCell.swift */,
 			);
 			name = Description;
@@ -1161,7 +1176,7 @@
 				7F5725951B0F6114003DBDEB /* SOMainViewController.swift in Sources */,
 				7F483B021B53CB3800C10180 /* SODocumentPickerViewController.swift in Sources */,
 				7F6E98181B1DDD930048ED7A /* SOEditTaskIconsCell.swift in Sources */,
-				7F6E98221B1E24210048ED7A /* SOEnterIconsViewController.swift in Sources */,
+				7F6E98221B1E24210048ED7A /* SOEditIconsViewController.swift in Sources */,
 				7F497D5A1B1AAF7700F95BA9 /* SOCategoryTabView.swift in Sources */,
 				7F5C2C3E1B42D88700506320 /* README.md in Sources */,
 				7FC8E88D1B52207D0013906F /* SOEditDocumentViewController.swift in Sources */,
@@ -1172,18 +1187,18 @@
 				7F497D5C1B1AAF9700F95BA9 /* SOIconTabView.swift in Sources */,
 				7F5725941B0F6114003DBDEB /* LeftViewController.swift in Sources */,
 				7F57259D1B0F61AC003DBDEB /* BaseTableViewCell.swift in Sources */,
-				7F6E98241B1E243C0048ED7A /* SOEnterDateViewController.swift in Sources */,
+				7F6E98241B1E243C0048ED7A /* SOEditDateViewController.swift in Sources */,
 				7F5A6D211B14B61B009665C7 /* SOMainTableViewCell.swift in Sources */,
 				7F5725A31B0F61F7003DBDEB /* UITableViewExtension.swift in Sources */,
 				7F5C2C3C1B40143600506320 /* ArrayExtension.swift in Sources */,
 				7F6E981A1B1DDED30048ED7A /* SOEditTaskDateCell.swift in Sources */,
 				7F6E98621B1F28650048ED7A /* SOSelectIconsCell.swift in Sources */,
-				7F6E98201B1E23F20048ED7A /* SOEnterCategoryViewController.swift in Sources */,
+				7F6E98201B1E23F20048ED7A /* SOEditCategoryViewController.swift in Sources */,
 				7F56ACCB1B6D1A2200B0C1EF /* SOSemaforeExample.swift in Sources */,
 				7F56ACC71B6A5C9E00B0C1EF /* SOMakeCallViewController.swift in Sources */,
 				7F5725961B0F6114003DBDEB /* SOAboutViewController.swift in Sources */,
 				7F5725A21B0F61F7003DBDEB /* StringExtension.swift in Sources */,
-				7F6E98261B1E24590048ED7A /* SOEnterDescriptionViewController.swift in Sources */,
+				7F6E98261B1E24590048ED7A /* SOEditDescriptionViewController.swift in Sources */,
 				7F5AA37A1B50B63400DA6E0B /* SOEditTaskCell.swift in Sources */,
 				7F6E98601B1EF3180048ED7A /* SOSelectCategoryCell.swift in Sources */,
 				7F5725981B0F6114003DBDEB /* SOSettingsViewController.swift in Sources */,
@@ -1199,7 +1214,7 @@
 				7F497D581B1AAAB400F95BA9 /* SOIconsTabBarController.swift in Sources */,
 				7F6E98161B1DD9F70048ED7A /* SOEditTaskCategoryCell.swift in Sources */,
 				7FC8E88B1B521E630013906F /* SOSampleDocument.swift in Sources */,
-				7F6E98281B1E27840048ED7A /* SOEnterBaseViewController.swift in Sources */,
+				7F6E98281B1E27840048ED7A /* SOEditTaskFieldBaseViewController.swift in Sources */,
 				7F497D651B1B330300F95BA9 /* SOUtilities.swift in Sources */,
 				7F497D521B1AA25500F95BA9 /* SOTabBarController.swift in Sources */,
 			);
@@ -1235,6 +1250,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7F5D19611B7635200095C51F /* SOReachabilityCenter.swift in Sources */,
+				7F5D19621B7635200095C51F /* Reachability.swift in Sources */,
 				7FD44B821B5A9C27000A4FB3 /* TaskCategory.swift in Sources */,
 				7FD44B831B5A9C27000A4FB3 /* TaskIco.swift in Sources */,
 				7FD44B841B5A9C27000A4FB3 /* SOLocalDataBase.swift in Sources */,

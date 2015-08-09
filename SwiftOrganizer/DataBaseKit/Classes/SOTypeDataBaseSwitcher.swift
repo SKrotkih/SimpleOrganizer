@@ -103,3 +103,23 @@ public class SOTypeDataBaseSwitcher{
     }
     
 }
+
+    // MARK: Internet Reachability Observer
+
+extension SOTypeDataBaseSwitcher{
+    
+    public class func startInternetObserver(){
+        SOReachabilityCenter.sharedInstance.startInternetObserver{ void in
+            self.switchToLocalBaseIfNeeded()
+        }
+        
+        self.switchToLocalBaseIfNeeded()        
+    }
+    
+    private class func switchToLocalBaseIfNeeded(){
+        if !SOReachabilityCenter.sharedInstance.isInternetConnected() && self.indexOfCurrectDBType() == .ParseComIndex{
+            self.switchToIndex(.CoreDataIndex)
+        }
+    }
+    
+}

@@ -245,6 +245,22 @@ class SOEditTaskViewController: UIViewController {
         _undoManager.removeAllActions()
     }
     
+    func cancelEdit(){
+        if let navController = self.navigationController{
+            let currentTopViewController = topViewController(base: navController)
+            
+            if currentTopViewController == self{
+                closeButtonWasPressed()
+            } else if currentTopViewController!.isKindOfClass(SOEditTaskFieldBaseViewController){
+                let editTaskFieldViewController = currentTopViewController as! SOEditTaskFieldBaseViewController
+                editTaskFieldViewController.closeButtonWasPressed()
+                dispatch_async(dispatch_get_main_queue(), {
+                    self.closeButtonWasPressed()
+                })
+            }
+        }
+    }
+    
 }
 
 extension SOEditTaskViewController: UITableViewDataSource {
@@ -305,23 +321,23 @@ extension SOEditTaskViewController: UITableViewDelegate{
         let row: SOEditTaskCellId = SOEditTaskCellId(rawValue: indexPath.row)!
         switch row{
         case .CategoryCell:
-            let enterCategoryVC = storyboard.instantiateViewControllerWithIdentifier(SOEditTaskViewControllerId.Category.rawValue) as! SOEnterCategoryViewController
+            let enterCategoryVC = storyboard.instantiateViewControllerWithIdentifier(SOEditTaskViewControllerId.Category.rawValue) as! SOEditCategoryViewController
             enterCategoryVC.task = task
             enterCategoryVC.undoDelegate = self
             self.navigationController!.pushViewController(enterCategoryVC, animated: true)
         case .IconsCell:
-            let enterIconsVC = storyboard.instantiateViewControllerWithIdentifier(SOEditTaskViewControllerId.Icons.rawValue) as! SOEnterIconsViewController
+            let enterIconsVC = storyboard.instantiateViewControllerWithIdentifier(SOEditTaskViewControllerId.Icons.rawValue) as! SOEditIconsViewController
             enterIconsVC.task = task
             enterIconsVC.undoDelegate = self
             self.navigationController!.pushViewController(enterIconsVC, animated: true)
         case .DateCell:
-            let enterDateVC = storyboard.instantiateViewControllerWithIdentifier(SOEditTaskViewControllerId.Date.rawValue) as! SOEnterDateViewController
+            let enterDateVC = storyboard.instantiateViewControllerWithIdentifier(SOEditTaskViewControllerId.Date.rawValue) as! SOEditDateViewController
             enterDateVC.task = task
             enterDateVC.undoDelegate = self
             enterDateVC.date = task?.date
             self.navigationController!.pushViewController(enterDateVC, animated: true)
         case .DescriptionCell:
-            let enterDescrVC = storyboard.instantiateViewControllerWithIdentifier(SOEditTaskViewControllerId.Description.rawValue) as! SOEnterDescriptionViewController
+            let enterDescrVC = storyboard.instantiateViewControllerWithIdentifier(SOEditTaskViewControllerId.Description.rawValue) as! SOEditDescriptionViewController
             enterDescrVC.task = task
             enterDescrVC.undoDelegate = self
             self.navigationController!.pushViewController(enterDescrVC, animated: true)

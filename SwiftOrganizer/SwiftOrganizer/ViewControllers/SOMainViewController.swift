@@ -29,6 +29,8 @@ class SOMainViewController: UIViewController{
     var iconsTabBarController: SOIconsTabBarController!
 
     var rightButton: UIBarButtonItem!
+
+    private var _editTaskViewController: SOEditTaskViewController?
     
     var allTimes = [NSDate]()
     private var refreshControl: UIRefreshControl?
@@ -97,6 +99,7 @@ class SOMainViewController: UIViewController{
     private func reloadData(block: (error: NSError?) -> Void){
         self.categoryTabBarController.reloadTabs{(error: NSError?) in
             self.iconsTabBarController.reloadTabs{(error: NSError?) in
+                self.cancelEditTask()
                 self.mainTableViewController.reloadData()
                 block(error: error)
                 self.titleActualize()
@@ -146,6 +149,22 @@ class SOMainViewController: UIViewController{
         }
     }
     
+    private var editTaskViewController: SOEditTaskViewController{
+        get{
+            if _editTaskViewController != nil {
+                return _editTaskViewController!
+            }
+            var storyboard = UIStoryboard(name: "Main", bundle: nil)
+            _editTaskViewController = storyboard.instantiateViewControllerWithIdentifier("SOEditTaskViewController") as? SOEditTaskViewController
+
+            return _editTaskViewController!
+        }
+    }
+    
+    func cancelEditTask(){
+        self.editTaskViewController.cancelEdit()
+    }
+    
     func addNewTask(){
         self.startEditingTask(nil)
     }
@@ -159,10 +178,8 @@ class SOMainViewController: UIViewController{
 
 extension SOMainViewController: SOEditTaskController{
     func startEditingTask(task: SOTask?){
-        var storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let newTaskRecordViewController = storyboard.instantiateViewControllerWithIdentifier("SOEditTaskViewController") as! SOEditTaskViewController
-        newTaskRecordViewController.task = task
-        self.navigationController!.pushViewController(newTaskRecordViewController, animated: true)
+        self.editTaskViewController.task = task
+        self.navigationController!.pushViewController(self.editTaskViewController, animated: true)
     }
     
     func editTaskList(){
@@ -171,7 +188,7 @@ extension SOMainViewController: SOEditTaskController{
     }
 }
 
-    // MARK: Observer notifications handler
+    // MARK: SOObserverNotificationTypes Observer notifications handler
 
 extension SOMainViewController: SOObserverProtocol{
     func notify(notification: SOObserverNotification){

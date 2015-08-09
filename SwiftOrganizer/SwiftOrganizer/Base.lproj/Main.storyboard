@@ -594,10 +594,10 @@
             </objects>
             <point key="canvasLocation" x="182" y="-723"/>
         </scene>
-        <!--Enter Icons View Controller-->
+        <!--Edit Icons View Controller-->
         <scene sceneID="wPZ-kX-jUY">
             <objects>
-                <viewController storyboardIdentifier="EnterIconsVC" id="ZZB-EF-G2O" customClass="SOEnterIconsViewController" customModule="SwiftOrganizer" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="EnterIconsVC" id="ZZB-EF-G2O" customClass="SOEditIconsViewController" customModule="SwiftOrganizer" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="nS4-u9-MfF"/>
                         <viewControllerLayoutGuide type="bottom" id="HMS-AB-SwM"/>
@@ -1140,10 +1140,10 @@
             </objects>
             <point key="canvasLocation" x="790" y="-723"/>
         </scene>
-        <!--Enter Category View Controller-->
+        <!--Edit Category View Controller-->
         <scene sceneID="BPc-HJ-Q57">
             <objects>
-                <viewController storyboardIdentifier="EnterCategoryVC" id="d5z-aT-xtB" customClass="SOEnterCategoryViewController" customModule="SwiftOrganizer" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="EnterCategoryVC" id="d5z-aT-xtB" customClass="SOEditCategoryViewController" customModule="SwiftOrganizer" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="VuJ-hv-lhg"/>
                         <viewControllerLayoutGuide type="bottom" id="7MS-GQ-0DM"/>
@@ -1209,10 +1209,10 @@
             </objects>
             <point key="canvasLocation" x="1402" y="-725"/>
         </scene>
-        <!--Enter Date View Controller-->
+        <!--Edit Date View Controller-->
         <scene sceneID="Y8A-Tu-odx">
             <objects>
-                <viewController storyboardIdentifier="EnterDateVC" id="ZPv-0M-s6H" customClass="SOEnterDateViewController" customModule="SwiftOrganizer" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="EnterDateVC" id="ZPv-0M-s6H" customClass="SOEditDateViewController" customModule="SwiftOrganizer" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="a5y-AI-L7M"/>
                         <viewControllerLayoutGuide type="bottom" id="NXl-hd-Tq2"/>
@@ -1324,10 +1324,10 @@
             </objects>
             <point key="canvasLocation" x="790" y="-82"/>
         </scene>
-        <!--Enter Description View Controller-->
+        <!--Edit Description View Controller-->
         <scene sceneID="fgm-A3-TZn">
             <objects>
-                <viewController storyboardIdentifier="EnterDescriptionVC" id="n5j-fl-08P" customClass="SOEnterDescriptionViewController" customModule="SwiftOrganizer" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="EnterDescriptionVC" id="n5j-fl-08P" customClass="SOEditDescriptionViewController" customModule="SwiftOrganizer" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="oEP-rl-Ize"/>
                         <viewControllerLayoutGuide type="bottom" id="zAu-fn-Df6"/>
