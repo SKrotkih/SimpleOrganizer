@@ -30,11 +30,18 @@ class SOExternalSettingsObserever{
         let userDefaults = NSUserDefaults.standardUserDefaults()
 
         if let name = userDefaults.stringForKey("name_preference"){
-            println(name)
+            //println(name)
         }
 
-        if let needUseRemoteDataBase = userDefaults.stringForKey("enabled_preference"){
-            println(needUseRemoteDataBase)
+        // See enabled_preference id in Settings.bundle
+        if let useRemoteDataBase = userDefaults.stringForKey("enabled_preference"){
+            if let newIndexOfDBType = useRemoteDataBase.toInt(){
+                let indexOfCurrectDBType = SOTypeDataBaseSwitcher.indexOfCurrectDBType().rawValue
+
+                if newIndexOfDBType != indexOfCurrectDBType{
+                    SOTypeDataBaseSwitcher.switchToAnotherDB()
+                }
+            }
         }
         
     }

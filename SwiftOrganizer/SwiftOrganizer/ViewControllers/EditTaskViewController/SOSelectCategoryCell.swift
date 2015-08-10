@@ -13,6 +13,7 @@ class SOSelectCategoryCell: UITableViewCell {
     @IBInspectable var customColor: UIColor!
     @IBInspectable var customText: String!
     
+    
     @IBOutlet weak var categoryNameLabel: UILabel!
     
     override func awakeFromNib() {

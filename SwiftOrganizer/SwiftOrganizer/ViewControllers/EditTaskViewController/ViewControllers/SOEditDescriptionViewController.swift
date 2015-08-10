@@ -38,6 +38,28 @@ class SOEditDescriptionViewController: SOEditTaskFieldBaseViewController {
         textView.becomeFirstResponder()
     }
     
+    override func willFinishOfEditing() -> Bool{
+        if let editTask = self.task{
+            if editTask.title != textView.text{
+                let controller = UIAlertController(title: "Data were chenged!".localized, message: nil, preferredStyle: .ActionSheet)
+                let skeepDateAction = UIAlertAction(title: "Close".localized, style: .Cancel, handler: { action in
+                    self.textView.text = self.task?.title
+                    super.closeButtonWasPressed()
+                })
+                let saveDateAction = UIAlertAction(title: "Save".localized, style: .Default, handler: { action in
+                    self.doneButtonWasPressed()
+                })
+                controller.addAction(skeepDateAction)
+                controller.addAction(saveDateAction)
+                self.presentViewController(controller, animated: true, completion: nil)
+                
+                return false
+            }
+        }
+        
+        return super.willFinishOfEditing()
+    }
+    
     func doneButtonWasPressed() {
         if let editTask = self.task{
             let dict = NSDictionary(objects: [editTask.title], forKeys: ["title"])

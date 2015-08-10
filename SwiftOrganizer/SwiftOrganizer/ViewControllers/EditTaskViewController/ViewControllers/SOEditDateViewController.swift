@@ -38,10 +38,14 @@ class SOEditDateViewController: SOEditTaskFieldBaseViewController {
         super.viewDidLoad()
         
         self.title = "Date".localized
-        self.needRememberLabel.text = "Need to remember".localized
+        self.needRememberLabel.text = "Does need reminder?".localized
         self.caveEventToCalendarButton.setTitle("Save event to the Calendar".localized, forState: .Normal)
         self.needRememberSwitch.on = true
 
+    }
+    
+    override func willFinishOfEditing() -> Bool{
+        return true && super.willFinishOfEditing()
     }
     
     override func didReceiveMemoryWarning() {

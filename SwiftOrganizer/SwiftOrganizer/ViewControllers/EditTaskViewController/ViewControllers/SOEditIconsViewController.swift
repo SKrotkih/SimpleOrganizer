@@ -36,18 +36,67 @@ class SOEditIconsViewController: SOEditTaskFieldBaseViewController {
         let rightButtonImage : UIImage! = UIImage(named: "save_task")
         var rightButton: UIBarButtonItem = UIBarButtonItem(image: rightButtonImage, style: UIBarButtonItemStyle.Plain, target: self, action: "doneButtonWasPressed")
         navigationItem.rightBarButtonItem = rightButton;
-        
+        self.reloadData()
+    }
+    
+    private func reloadData(){
         if let editTask = self.task{
             taskIcons.removeAll(keepCapacity: false)
             let icons = editTask.icons
-
+            
             for i in 0..<icons.count{
                 let icoId = icons[i]
-
+                
                 if icoId != ""{
                     taskIcons.append(icoId)
                 }
             }
+        }
+    }
+    
+    override func willFinishOfEditing() -> Bool{
+        var needAsk: Bool = false
+
+        if let editTask = self.task{
+            let icons = editTask.icons
+            var countIcons: Int = 0
+            
+            for i in 0..<icons.count{
+                let icoId: String = icons[i]
+                
+                if count(icoId) > 0{
+                    if filter(self.taskIcons, {
+                        return $0 == icoId
+                    }).count == 0{
+                        needAsk = true
+                        break
+                    }
+                    countIcons++
+                }
+            }
+            
+            if !needAsk && countIcons != self.taskIcons.count{
+                needAsk = true
+            }
+            
+        }
+
+        if needAsk{
+            let controller = UIAlertController(title: "Data were chenged!".localized, message: nil, preferredStyle: .ActionSheet)
+            let skeepDateAction = UIAlertAction(title: "Close".localized, style: .Cancel, handler: { action in
+                self.reloadData()
+                super.closeButtonWasPressed()
+            })
+            let saveDateAction = UIAlertAction(title: "Save".localized, style: .Default, handler: { action in
+                self.doneButtonWasPressed()
+            })
+            controller.addAction(skeepDateAction)
+            controller.addAction(saveDateAction)
+            self.presentViewController(controller, animated: true, completion: nil)
+            
+            return false
+        } else {
+            return super.willFinishOfEditing()
         }
     }
     

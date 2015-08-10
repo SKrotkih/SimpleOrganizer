@@ -1157,26 +1157,42 @@
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="tintColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="gray" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="selectCategoryCell" rowHeight="44" id="3BN-Rq-hqO" customClass="SOSelectCategoryCell" customModule="SwiftOrganizer" customModuleProvider="target">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="gray" accessoryType="checkmark" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="selectCategoryCell" rowHeight="44" id="3BN-Rq-hqO" customClass="SOSelectCategoryCell" customModule="SwiftOrganizer" customModuleProvider="target">
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="3BN-Rq-hqO" id="epW-ZW-U2W">
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Category" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IpT-Pi-s9Y">
-                                                    <rect key="frame" x="15" y="11" width="505" height="21"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Category" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IpT-Pi-s9Y">
+                                                    <rect key="frame" x="15" y="11" width="425" height="21"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="21" id="eNp-8M-Pcn"/>
+                                                    </constraints>
                                                     <fontDescription key="fontDescription" name="HelveticaNeue-CondensedBold" family="Helvetica Neue" pointSize="14"/>
                                                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6VZ-Ol-MBf">
-                                                    <rect key="frame" x="15" y="43" width="553" height="1"/>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6VZ-Ol-MBf">
+                                                    <rect key="frame" x="15" y="43" width="465" height="1"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="1" id="JY3-oQ-dj8"/>
+                                                    </constraints>
                                                 </view>
                                             </subviews>
                                             <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                            <constraints>
+                                                <constraint firstItem="IpT-Pi-s9Y" firstAttribute="top" secondItem="epW-ZW-U2W" secondAttribute="topMargin" constant="3" id="KLK-xK-JaC"/>
+                                                <constraint firstItem="6VZ-Ol-MBf" firstAttribute="leading" secondItem="epW-ZW-U2W" secondAttribute="leadingMargin" constant="7" id="Lf7-Dr-CoQ"/>
+                                                <constraint firstItem="IpT-Pi-s9Y" firstAttribute="leading" secondItem="epW-ZW-U2W" secondAttribute="leadingMargin" constant="7" id="aeD-Vz-yoI"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="6VZ-Ol-MBf" secondAttribute="bottom" constant="-8" id="be6-Ah-72l"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="6VZ-Ol-MBf" secondAttribute="trailing" constant="41" id="qh8-Am-VCT"/>
+                                                <constraint firstItem="IpT-Pi-s9Y" firstAttribute="trailing" secondItem="epW-ZW-U2W" secondAttribute="trailingMargin" constant="-81" id="t1f-s7-4KY"/>
+                                                <constraint firstItem="6VZ-Ol-MBf" firstAttribute="top" secondItem="IpT-Pi-s9Y" secondAttribute="bottom" constant="11" id="v7Z-l0-Adh"/>
+                                            </constraints>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                        <color key="tintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="color" keyPath="customColor">
                                                 <color key="value" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -1278,11 +1294,11 @@
                                             <action selector="needToRememberChangeState:" destination="ZPv-0M-s6H" eventType="valueChanged" id="Cee-s5-4U8"/>
                                         </connections>
                                     </switch>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Need to remember" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gXq-eX-Yrq">
-                                        <rect key="frame" x="176" y="36" width="132" height="21"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Does need reminder?" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gXq-eX-Yrq">
+                                        <rect key="frame" x="176" y="36" width="177" height="21"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="21" id="Rhg-0L-075"/>
-                                            <constraint firstAttribute="width" constant="132" id="xb5-UK-R1M"/>
+                                            <constraint firstAttribute="width" constant="177" id="xb5-UK-R1M"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" name="HelveticaNeue-CondensedBold" family="Helvetica Neue" pointSize="17"/>
                                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>

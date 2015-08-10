@@ -29,6 +29,14 @@ class SOEditCategoryViewController: SOEditTaskFieldBaseViewController {
         }
     }
 
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+    }
+    
+    override func willFinishOfEditing() -> Bool{
+        return true && super.willFinishOfEditing()
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -51,8 +59,16 @@ extension SOEditCategoryViewController: UITableViewDataSource {
         let selectCategoryCell = "selectCategoryCell"
         let row = indexPath.row
         var cell = self.tableView.dequeueReusableCellWithIdentifier(selectCategoryCell) as! SOSelectCategoryCell
+        let categoryId = categories[row].id
         let categoryName = categories[row].name
         cell.categoryNameLabel.text = categoryName
+        cell.accessoryType = .None
+        
+        if let editTask = self.task{
+            if editTask.category == categoryId{
+                cell.accessoryType = .Checkmark
+            }
+        }
         
         return cell
     }

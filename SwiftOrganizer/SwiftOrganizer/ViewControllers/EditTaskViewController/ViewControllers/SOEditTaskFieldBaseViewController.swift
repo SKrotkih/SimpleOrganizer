@@ -25,7 +25,13 @@ class SOEditTaskFieldBaseViewController: UIViewController {
         self.slideMenuController()?.removeRightGestures()
     }
     
+    func willFinishOfEditing() -> Bool{
+        return true
+    }
+    
     func closeButtonWasPressed() {
-        self.navigationController?.popViewControllerAnimated(true)
+        if self.willFinishOfEditing(){
+            self.navigationController?.popViewControllerAnimated(true)
+        }
     }
 }
