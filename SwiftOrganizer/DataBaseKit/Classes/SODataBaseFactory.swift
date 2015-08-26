@@ -16,12 +16,6 @@ public let KeyInURLAsSwitchDataBase = "switchdbto."
 public let KeyInURLAsTaskId = "taskid."
 public let WidgetUrlScheme = "widget"
 
-enum SODataBaseType: String{
-    case Undefined = "Undefined"
-    case CoreData = "LocalDataBase"
-    case ParseCom = "ParseDataBase"
-}
-
 public final class SODataBaseFactory {
     private var _dataBase: SODataBaseProtocol?
 
@@ -45,30 +39,16 @@ public final class SODataBaseFactory {
             return _dataBase
         }
         
-        let defaults = SOUserDefault.sharedDefaults()
+        let dataBaseIndex: DataBaseIndex =  SOTypeDataBaseSwitcher.indexOfCurrectDBType()
         
-        if let name = defaults.stringForKey(SODataBaseTypeKey)
-        {
-            switch name{
-            case SODataBaseType.CoreData.rawValue:
-                _dataBase = SOLocalDataBase.sharedInstance()
-            case SODataBaseType.ParseCom.rawValue:
-                _dataBase = SORemoteDataBase.sharedInstance()
-            default:
-                _dataBase = defaultDataBase()
-            }
-        } else {
-            _dataBase = defaultDataBase()
+        switch dataBaseIndex{
+        case .CoreDataIndex:
+            _dataBase = SOLocalDataBase.sharedInstance()
+        case .ParseComIndex:
+            _dataBase = SORemoteDataBase.sharedInstance()
         }
         
         return _dataBase
-    }
-
-    private func defaultDataBase() -> SODataBaseProtocol{
-        let defaults = SOUserDefault.sharedDefaults()
-        defaults.setObject(SODataBaseType.CoreData.rawValue, forKey: SODataBaseTypeKey)
-        
-        return SOLocalDataBase.sharedInstance()
     }
 }
 

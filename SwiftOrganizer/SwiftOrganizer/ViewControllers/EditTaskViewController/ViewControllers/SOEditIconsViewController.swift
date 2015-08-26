@@ -40,9 +40,9 @@ class SOEditIconsViewController: SOEditTaskFieldBaseViewController {
     }
     
     private func reloadData(){
-        if let editTask = self.task{
+        if let theTask = self.task{
             taskIcons.removeAll(keepCapacity: false)
-            let icons = editTask.icons
+            let icons = theTask.icons
             
             for i in 0..<icons.count{
                 let icoId = icons[i]
@@ -57,8 +57,8 @@ class SOEditIconsViewController: SOEditTaskFieldBaseViewController {
     override func willFinishOfEditing() -> Bool{
         var needAsk: Bool = false
 
-        if let editTask = self.task{
-            let icons = editTask.icons
+        if let theTask = self.task{
+            let icons = theTask.icons
             var countIcons: Int = 0
             
             for i in 0..<icons.count{
@@ -101,14 +101,14 @@ class SOEditIconsViewController: SOEditTaskFieldBaseViewController {
     }
     
     func doneButtonWasPressed() {
-        if let editTask = self.task{
-            let icons = editTask.icons
+        if let theTask = self.task{
+            let icons = theTask.icons
             for i in 0..<icons.count{
                 var newIconValue = ""
                 if i < taskIcons.count{
                     newIconValue = taskIcons[i]
                 }
-                editTask.setIcon(i, newValue: newIconValue)
+                theTask.setIcon(i, newValue: newIconValue)
             }
         }
         
@@ -116,8 +116,8 @@ class SOEditIconsViewController: SOEditTaskFieldBaseViewController {
     }
     
     func fillIconsBuffer() -> [String]{
-        if let editTask = self.task{
-            let iconsCount = editTask.icons.count
+        if let theTask = self.task{
+            let iconsCount = theTask.icons.count
             var buffer = [String](count: iconsCount, repeatedValue: "")
             
             for i in 0..<iconsCount{
@@ -137,6 +137,8 @@ class SOEditIconsViewController: SOEditTaskFieldBaseViewController {
         // Dispose of any resources that can be recreated.
     }
 }
+
+    // MARK: UITableViewDataSource
 
 extension SOEditIconsViewController: UITableViewDataSource{
     
@@ -172,6 +174,8 @@ extension SOEditIconsViewController: UITableViewDataSource{
     }
     
 }
+
+    // MARK: UITableViewDelegate
 
 extension SOEditIconsViewController: UITableViewDelegate {
 

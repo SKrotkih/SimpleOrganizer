@@ -28,11 +28,7 @@ public protocol SODataBaseProtocol{
 }
 
 public protocol SOConcreteObjectsProtocol: AnyObject{
-
-func initFromParseObject(object: AnyObject)
-
-func copyToParseObject(object: AnyObject)
-
-func initFromCoreDataObject(object: AnyObject)
-
+    func initFromParseObject(object: AnyObject)
+    func copyToParseObject(object: AnyObject)
+    func initFromCoreDataObject(object: AnyObject)
 }

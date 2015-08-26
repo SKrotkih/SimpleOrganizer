@@ -13,6 +13,12 @@ public enum DataBaseIndex: Int{
     case ParseComIndex
 }
 
+enum SODataBaseType: String{
+    case Undefined = "Undefined"
+    case CoreData = "LocalDataBase"
+    case ParseCom = "ParseDataBase"
+}
+
 public class SOTypeDataBaseSwitcher{
 
     public class func switchToIndex(index: DataBaseIndex){

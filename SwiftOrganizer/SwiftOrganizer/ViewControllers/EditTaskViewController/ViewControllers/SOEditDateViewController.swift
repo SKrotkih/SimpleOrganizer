@@ -140,10 +140,10 @@ class SOEditDateViewController: SOEditTaskFieldBaseViewController {
     }
 
     private func saveData(){
-        if let editTask = self.task{
+        if let theTask = self.task{
             var dateString: String!
             
-            if let oldDate = editTask.date{
+            if let oldDate = theTask.date{
                 var dateFormatter = NSDateFormatter()
                 dateFormatter.dateFormat = "dd-MM-yyyy HH:mm:ss"
                 dateString = dateFormatter.stringFromDate(oldDate)
@@ -154,7 +154,7 @@ class SOEditDateViewController: SOEditTaskFieldBaseViewController {
             self.undoDelegate?.addToUndoBuffer(dict)
 
             
-            editTask.date = self.date
+            theTask.date = self.date
         } else {
             let msg = "Warning"
             let controller = UIAlertController(title: "Something is going wrong!", message: msg, preferredStyle: .Alert)

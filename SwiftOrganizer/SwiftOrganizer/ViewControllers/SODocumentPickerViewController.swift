@@ -62,7 +62,7 @@ class SODocumentPickerViewController: UIViewController, UIDocumentPickerDelegate
 
     func saveFileToDocuments(srcFileNameURL: NSURL, dstFileName: String)
     {
-        var destinationURL = NSFileManager.defaultManager().URLsForDirectory(NSSearchPathDirectory.DocumentDirectory, inDomains: NSSearchPathDomainMask.UserDomainMask).last as! NSURL
+        var destinationURL = URLForDocuments()
         destinationURL = destinationURL.URLByAppendingPathComponent(dstFileName)
         var copyError : NSError? = nil
         NSFileManager.defaultManager().copyItemAtURL(srcFileNameURL, toURL: destinationURL, error: &copyError)

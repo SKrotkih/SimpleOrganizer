@@ -10,7 +10,7 @@ import UIKit
 
 class SOEditCategoryViewController: SOEditTaskFieldBaseViewController {
 
-    var categories: [SOCategory]!
+    private var categories: [SOCategory]!
     
     @IBOutlet weak var tableView: UITableView!
     
@@ -43,29 +43,30 @@ class SOEditCategoryViewController: SOEditTaskFieldBaseViewController {
     }
 }
 
+    // MARK: UITableViewDataSource
+
 extension SOEditCategoryViewController: UITableViewDataSource {
 
     @objc func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return categories.count
     }
     
-    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) ->
-        CGFloat {
+    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
             return 44
     }
     
     @objc func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         let selectCategoryCell = "selectCategoryCell"
-        let row = indexPath.row
         var cell = self.tableView.dequeueReusableCellWithIdentifier(selectCategoryCell) as! SOSelectCategoryCell
+        let row = indexPath.row
         let categoryId = categories[row].id
         let categoryName = categories[row].name
         cell.categoryNameLabel.text = categoryName
         cell.accessoryType = .None
         
-        if let editTask = self.task{
-            if editTask.category == categoryId{
+        if let theTask = self.task{
+            if theTask.category == categoryId{
                 cell.accessoryType = .Checkmark
             }
         }
@@ -73,6 +74,8 @@ extension SOEditCategoryViewController: UITableViewDataSource {
         return cell
     }
 }
+
+    // MARK: UITableViewDelegate
 
 extension SOEditCategoryViewController: UITableViewDelegate {
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {

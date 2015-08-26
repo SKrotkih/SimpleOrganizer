@@ -10,7 +10,7 @@ import UIKit
 
 class SOEditTaskCell: UITableViewCell {
     
-    var _task: SOTask!
+    private var _task: SOTask!
     
     var task: SOTask{
         get{
@@ -23,6 +23,7 @@ class SOEditTaskCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        
         // Initialization code
     }
     
@@ -33,6 +34,9 @@ class SOEditTaskCell: UITableViewCell {
     }
     
     func currentValueToString() -> String{
+
+        assert(false, "You need override this method in the child class!")
+        
         return ""
     }
     
