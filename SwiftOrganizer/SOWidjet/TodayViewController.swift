@@ -59,7 +59,7 @@ class TodayViewController: UIViewController, UITableViewDataSource, UITableViewD
         let row = indexPath.row
         let task: SOTask = self.tasks[row]
         
-        if let recordId = SODataBaseFactory.sharedInstance.dataBase.recordIdForTask(task){
+        if let recordId = SODataBaseFactory.sharedInstance.dataBase.getRecordIdForTask(task){
             let urlAsString = "\(WidgetUrlScheme)://\(KeyInURLAsTaskId)\(recordId)"
             let url = NSURL(string: urlAsString)
             self.extensionContext!.openURL(url!, completionHandler: nil)

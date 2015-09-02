@@ -153,7 +153,7 @@ extension SOEditIconsViewController: UITableViewDataSource{
         var cell = self.tableView.dequeueReusableCellWithIdentifier(selectIconsCell) as! SOSelectIconsCell
         
         let ico: SOIco = icons[row]
-        let icoId: String = ico.id
+        let icoId: String = ico.recordid
         
         if let icoImageName = SODataFetching.sharedInstance.iconImageName(icoId){
             cell.icoImageView.image = UIImage(named: icoImageName)
@@ -182,7 +182,7 @@ extension SOEditIconsViewController: UITableViewDelegate {
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let row = indexPath.row
         let ico: SOIco = icons[row]
-        let icoId: String = ico.id
+        let icoId: String = ico.recordid
         var needAdd: Bool = true
 
         let dict = NSDictionary(objects: [fillIconsBuffer()], forKeys: ["icons"])

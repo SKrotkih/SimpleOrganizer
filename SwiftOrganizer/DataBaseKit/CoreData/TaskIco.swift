@@ -12,7 +12,7 @@ import CoreData
 @objc(TaskIco)
 class TaskIco: NSManagedObject {
 
-    @NSManaged var id: String
+    @NSManaged var recordid: String
     @NSManaged var name: String
     @NSManaged var imagename: String
     @NSManaged var selected: Bool    

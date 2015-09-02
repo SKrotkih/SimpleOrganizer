@@ -101,7 +101,7 @@ public final class SODataFetching{
     
     func categoryById(id : String) -> SOCategory?{
         for category in self._allCategories{
-            if category.id == id{
+            if category.recordid == id{
                 return category
             }
         }
@@ -128,7 +128,7 @@ public final class SODataFetching{
     
     func iconById(id : String) -> SOIco?{
         for ico in self._allIcons{
-            if ico.id == id{
+            if ico.recordid == id{
                 return ico
             }
         }

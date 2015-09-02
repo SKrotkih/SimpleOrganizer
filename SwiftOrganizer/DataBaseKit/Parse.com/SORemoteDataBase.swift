@@ -46,7 +46,20 @@ public class SORemoteDataBase: SODataBaseProtocol {
     
     private init() {
     }
+
+    public func getObjectForRecordId(recordid: String, entityName: String) -> AnyObject?{
+        return nil
+    }
     
+    public func getRecordIdForTask(task: SOTask?) -> String?{
+        return nil
+    }
+}
+
+    // - MARK: -
+    // - MARK: Fetch Data
+
+extension SORemoteDataBase{
     public func allCategories(block: (resultBuffer: [SOCategory], error: NSError?) -> Void){
         self.fetchAllDataOfClassName(CategoryClassName, block: {(resultBuffer: [AnyObject], error: NSError?) in
             let buffer = resultBuffer as! [SOCategory]
@@ -76,7 +89,7 @@ public class SORemoteDataBase: SODataBaseProtocol {
                     
                     for task in tasks{
                         var categorySelected: Bool = false
-
+                        
                         if let category = SODataFetching.sharedInstance.categoryById(task.category){
                             categorySelected = category.selected
                         }
@@ -104,47 +117,6 @@ public class SORemoteDataBase: SODataBaseProtocol {
             }
         })
     }
-    
-    public func saveTask(task: SOTask, block: (error: NSError?) -> Void){
-        dispatch_sync(self.queue, { () in
-            var object: PFObject? = task.databaseObject as? PFObject
-            
-            if let taskObject = object{
-                task.copyToParseObject(taskObject)
-            } else {
-                object = PFObject(className: TaskClassName)
-                task.databaseObject = object
-                task.copyToParseObject(object!)
-            }
-            
-            self.saveObject(object!, block: {(error: NSError?) in
-                block(error: error)
-            })
-        })
-    }
-
-    public func removeTask(task: SOTask){
-        dispatch_barrier_sync(self.queue, { () in
-            if let taskObject: PFObject = task.databaseObject as? PFObject{
-                self.deleteObject(taskObject)
-            }
-        })
-    }
-
-    public func recordIdForTask(task: SOTask?) -> String?{
-        
-        return nil
-    }
-    
-    public func areObjectsEqual(object1: AnyObject?, object2: AnyObject?) -> Bool{
-        if let obj1: PFObject = object1 as? PFObject, let obj2: PFObject = object2 as? PFObject{
-            return obj1 == obj2
-        }
-
-        return true
-    }
-    
-    // - MARK: Private methods
     
     private func fetchAllDataOfClassName(className: String, block: (resultBuffer: [AnyObject], error: NSError?) -> Void){
         SOParseComManager.checkUser { (checkError) -> Void in
@@ -196,11 +168,34 @@ public class SORemoteDataBase: SODataBaseProtocol {
         }
         
         newInstance.initFromParseObject(object)
-
+        
         return newInstance
     }
+}
 
-    // MARK: - Saving support
+    // MARK: -
+    // MARK: - Save Data
+
+extension SORemoteDataBase{
+    
+    public func saveTask(task: SOTask, block: (error: NSError?) -> Void){
+        dispatch_sync(self.queue, {[weak self] in
+            var object: PFObject? = task.databaseObject as? PFObject
+            
+            if let taskObject = object{
+                task.copyToParseObject(taskObject)
+            } else {
+                object = PFObject(className: TaskClassName)
+                task.databaseObject = object
+                task.copyToParseObject(object!)
+            }
+            
+            self!.saveObject(object!, block: {(error: NSError?) in
+                block(error: error)
+            })
+            })
+    }
+
     private func saveObject(object: PFObject, block: (error: NSError?) -> Void){
         SOParseComManager.checkUser { (checkError) -> Void in
             if let error = checkError{
@@ -216,7 +211,7 @@ public class SORemoteDataBase: SODataBaseProtocol {
             }
         }
     }
-
+    
     public func saveFieldToObject(object: AnyObject?, fieldName: String, value: AnyObject, block: (error: NSError?) -> Void){
         if let pfObject = object as? PFObject{
             pfObject[fieldName] = value
@@ -227,15 +222,31 @@ public class SORemoteDataBase: SODataBaseProtocol {
     }
     
     public func saveContext() {
-    
+        
     }
+}
 
+    // - MARK: -
+    // - MARK: Remove Data
+
+extension SORemoteDataBase{
+    
+    public func removeTask(task: SOTask){
+        dispatch_barrier_sync(self.queue, {[weak self] in
+            if let taskObject: PFObject = task.databaseObject as? PFObject{
+                self!.deleteObject(taskObject)
+            }
+            })
+    }
+    
     private func deleteObject(object: PFObject)
     {
         object.deleteInBackground()
     }
+    
 }
 
+    // - MARK: -
     // - MARK: Fill a default data to the local database
 
 extension SORemoteDataBase{
@@ -289,7 +300,7 @@ extension SORemoteDataBase{
         if self.currentCategoryIndex < defaultCategories.count{
             let category: SOCategory = defaultCategories[self.currentCategoryIndex++]
             var object = PFObject(className: CategoryClassName)
-            object[kCategoryFldId] = category.id
+            object[kCategoryFldId] = category.recordid
             object[kCategoryFldName] = category.name
             object[kCategoryFldSelected] = category.selected
             object.saveInBackgroundWithBlock {(success: Bool, error: NSError?) -> Void in
@@ -349,7 +360,7 @@ extension SORemoteDataBase{
         if self.currentIcoIndex < defaultIcons.count{
             let ico: SOIco = defaultIcons[self.currentIcoIndex++]
             var object = PFObject(className: IcoClassName)
-            object[kIcoFldId] = ico.id
+            object[kIcoFldId] = ico.recordid
             object[kIcoFldName] = ico.name
             object[kIcoFldImageName] = ico.imageName
             object[kIcoFldSelected] = ico.selected
@@ -441,3 +452,14 @@ extension SORemoteDataBase{
     }
 }
 
+extension SORemoteDataBase{
+    
+    public func areObjectsEqual(object1: AnyObject?, object2: AnyObject?) -> Bool{
+        if let obj1: PFObject = object1 as? PFObject, let obj2: PFObject = object2 as? PFObject{
+            return obj1 == obj2
+        }
+        
+        return true
+    }
+    
+}

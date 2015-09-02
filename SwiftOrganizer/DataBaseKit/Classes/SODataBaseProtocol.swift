@@ -24,7 +24,9 @@ public protocol SODataBaseProtocol{
     
     func areObjectsEqual(object1: AnyObject?, object2: AnyObject?) -> Bool
     
-    func recordIdForTask(task: SOTask?) -> String?
+    func getRecordIdForTask(task: SOTask?) -> String?
+    
+    func getObjectForRecordId(recordid: String, entityName: String) -> AnyObject?
 }
 
 public protocol SOConcreteObjectsProtocol: AnyObject{

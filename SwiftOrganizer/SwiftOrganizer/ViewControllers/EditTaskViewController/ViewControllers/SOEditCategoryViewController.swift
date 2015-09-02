@@ -60,7 +60,7 @@ extension SOEditCategoryViewController: UITableViewDataSource {
         let selectCategoryCell = "selectCategoryCell"
         var cell = self.tableView.dequeueReusableCellWithIdentifier(selectCategoryCell) as! SOSelectCategoryCell
         let row = indexPath.row
-        let categoryId = categories[row].id
+        let categoryId = categories[row].recordid
         let categoryName = categories[row].name
         cell.categoryNameLabel.text = categoryName
         cell.accessoryType = .None
@@ -85,7 +85,7 @@ extension SOEditCategoryViewController: UITableViewDelegate {
             self.undoDelegate?.addToUndoBuffer(dict)
             
             let row = indexPath.row
-            theTask.category = categories[row].id
+            theTask.category = categories[row].recordid
         }
         
         super.closeButtonWasPressed()

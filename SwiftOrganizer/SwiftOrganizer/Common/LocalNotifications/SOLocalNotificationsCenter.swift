@@ -38,9 +38,11 @@ class SOLocalNotificationsCenter: NSObject {
     
     class func didReceiveLocalNotification(notification: UILocalNotification) {
 
-        let bundlesCount = UIApplication.sharedApplication().applicationIconBadgeNumber - 1
+        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        
+        let bundlesCount = appDelegate.applicationIconBadgeNumber - 1
         if bundlesCount >= 0{
-            UIApplication.sharedApplication().applicationIconBadgeNumber = bundlesCount
+            appDelegate.applicationIconBadgeNumber = bundlesCount
         }
         
         if let alertBody = notification.alertBody{
@@ -71,7 +73,8 @@ class SOLocalNotificationsCenter: NSObject {
             localNotification.timeZone = NSTimeZone.defaultTimeZone()
             
             if needToIncrementBadgeNumber{
-                localNotification.applicationIconBadgeNumber = UIApplication.sharedApplication().applicationIconBadgeNumber + 1;
+                let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+                localNotification.applicationIconBadgeNumber = appDelegate.applicationIconBadgeNumber + 1;
             }
             
             if timeIntervalSinceNow == 0{
@@ -103,7 +106,8 @@ class SOLocalNotificationsCenter: NSObject {
             }
             
             if needToIncrementBadgeNumber{
-                localNotification.applicationIconBadgeNumber = UIApplication.sharedApplication().applicationIconBadgeNumber + 1;
+                let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+                localNotification.applicationIconBadgeNumber = appDelegate.applicationIconBadgeNumber + 1;
             }
 
             application().scheduleLocalNotification(localNotification)

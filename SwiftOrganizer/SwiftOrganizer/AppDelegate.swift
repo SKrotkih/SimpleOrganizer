@@ -47,11 +47,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         SOLocalNotificationsCenter.prepareLocalNotifications(application, launchOptions: launchOptions)
         
-        application.applicationIconBadgeNumber = 0;
-        
         SOExternalSettingsObserever.startObserver()
         
-        return SOParseComManager.application(application, didFinishLaunchingWithOptions: launchOptions)
+        let retBoolValue: Bool = SOParseComManager.application(application, didFinishLaunchingWithOptions: launchOptions)
+        
+        self.applicationIconBadgeNumber = 0
+        
+        return retBoolValue
     }
 
     //--------------------------------------
@@ -90,7 +92,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func applicationWillEnterForeground(application: UIApplication) {
         // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
-        application.applicationIconBadgeNumber = 0;        
+        self.applicationIconBadgeNumber = 0
     }
     
     func applicationWillTerminate(application: UIApplication) {
@@ -202,6 +204,50 @@ extension AppDelegate{
     
 }
 
+extension AppDelegate{
+    var applicationIconBadgeNumber: Int{
+        get{
+            return  UIApplication.sharedApplication().applicationIconBadgeNumber
+        }
+        set{
+            if AppDelegate.SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO("8.0") {
+                if UIApplication.sharedApplication().currentUserNotificationSettings().types & UIUserNotificationType.Badge != nil {
+                    UIApplication.sharedApplication().applicationIconBadgeNumber = newValue
+                }
+            } else {
+                UIApplication.sharedApplication().applicationIconBadgeNumber = newValue
+            }
+        }
+    }
+}
+
+extension AppDelegate{
+    /// System check
+    class func SYSTEM_VERSION_EQUAL_TO(version: String) -> Bool {
+        return UIDevice.currentDevice().systemVersion.compare(version,
+            options: NSStringCompareOptions.NumericSearch) == NSComparisonResult.OrderedSame
+    }
+    
+    class func SYSTEM_VERSION_GREATER_THAN(version: String) -> Bool {
+        return UIDevice.currentDevice().systemVersion.compare(version,
+            options: NSStringCompareOptions.NumericSearch) == NSComparisonResult.OrderedDescending
+    }
+    
+    class func SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(version: String) -> Bool {
+        return UIDevice.currentDevice().systemVersion.compare(version,
+            options: NSStringCompareOptions.NumericSearch) != NSComparisonResult.OrderedAscending
+    }
+    
+    class func SYSTEM_VERSION_LESS_THAN(version: String) -> Bool {
+        return UIDevice.currentDevice().systemVersion.compare(version,
+            options: NSStringCompareOptions.NumericSearch) == NSComparisonResult.OrderedAscending
+    }
+    
+    class func SYSTEM_VERSION_LESS_THAN_OR_EQUAL_TO(version: String) -> Bool {
+        return UIDevice.currentDevice().systemVersion.compare(version,
+            options: NSStringCompareOptions.NumericSearch) != NSComparisonResult.OrderedDescending
+    }
+}
 
 //--------------------------------------
 // MARK: Utility

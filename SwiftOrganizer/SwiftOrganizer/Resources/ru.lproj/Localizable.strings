@@ -20,7 +20,7 @@
 "Events"="Событие";
 "Life"="Жизнь";
 "Work"="Работа";
-"Error of reading task data!"="Ошибка чтения данных!";
+"Failed fetch data!"="Ошибка чтения данных!";
 "Error of saving data"="Ошибка сохранения данных!";
 "Add"="Добавить";
 "Done"="Готово";

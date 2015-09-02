@@ -32,12 +32,12 @@ class SOTabBarController: NSObject {
     func reloadTabs(block: (error: NSError?) -> Void){
         if let containerView = self.containerView, scrollView = self.scrollView{
             if self.tabsCount > 0{
-                dispatch_async(dispatch_get_main_queue(), {
+                dispatch_async(dispatch_get_main_queue(), {[weak self] in
                     let subViews = containerView.subviews
                     var x : CGFloat = 0
                     
-                    for i in 0..<self.tabsCount{
-                        let view: UIView = self.tabs[i]
+                    for i in 0..<self!.tabsCount{
+                        let view: UIView = self!.tabs[i]
                         var frame = view.frame
                         let w: CGFloat = CGRectGetWidth(frame)
                         if subViews.filter({ el in el as! UIView == view }).count == 0 {

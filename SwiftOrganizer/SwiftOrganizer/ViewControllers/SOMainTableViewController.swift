@@ -33,14 +33,13 @@ class SOMainTableViewController: NSObject{
     func reloadData(){
         SODataFetching.sharedInstance.allTasks{(allCurrentTasks: [SOTask], fetchError: NSError?) in
             if let error = fetchError{
-                showAlertWithTitle("Error of reading task data!".localized, error.description)
+                showAlertWithTitle("Failed fetch data!".localized, error.description)
             } else {
-                self.tasks = allCurrentTasks
-                self.addTasksToReminder(self.tasks)
-
-                
-                
-                self.tableView.reloadData()
+                dispatch_async(dispatch_get_main_queue(), {
+                    self.tasks = allCurrentTasks
+                    self.addTasksToReminder(self.tasks)
+                    self.tableView.reloadData()
+                })
             }
         }
     }
@@ -91,8 +90,8 @@ extension SOMainTableViewController: SOChangeFilterStateDelegate{
     func didSelectIcon(icon: SOIco, select: Bool, block: (error: NSError?) -> Void){
         icon.didSelect(select, block: { (error) -> Void in
             if error == nil {
-                dispatch_async(dispatch_get_main_queue(), {
-                    self.reloadData()
+                dispatch_async(dispatch_get_main_queue(), {[weak self] in
+                    self?.reloadData()
                 })
             } else {
                 showAlertWithTitle("Error of saving data".localized, error!.description)

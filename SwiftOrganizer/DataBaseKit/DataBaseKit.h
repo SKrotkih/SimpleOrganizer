@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import <Parse/Parse.h>
+#import "KVOTryCatchException.h"
 
 //! Project version number for DataBaseKit.
 FOUNDATION_EXPORT double DataBaseKitVersionNumber;

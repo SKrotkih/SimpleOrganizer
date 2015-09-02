@@ -11,7 +11,7 @@ import UIKit
 public class SOIco: NSObject {
 
     private var _databaseObject: AnyObject?
-    private var _id: String = ""
+    private var _recordid: String = ""
     private var _name: String = ""
     private var _imageName: String = ""
     private var _selected = false
@@ -19,7 +19,7 @@ public class SOIco: NSObject {
     convenience init(id: String, name: String, imageName: String, selected: Bool) {
         self.init()
         
-        self.id = id
+        self.recordid = id
         self.name = name
         self.imageName = imageName
         self.selected = selected
@@ -34,12 +34,12 @@ public class SOIco: NSObject {
         }
     }
     
-    public var id: String{
+    public var recordid: String{
         get{
-            return _id
+            return _recordid
         }
         set{
-            self._id = newValue
+            self._recordid = newValue
         }
     }
     
@@ -76,7 +76,7 @@ extension SOIco: SOConcreteObjectsProtocol{
     {
         let theObject = object as! PFObject
         self.databaseObject = theObject
-        self.id = theObject[kIcoFldId] as! String
+        self.recordid = theObject[kIcoFldId] as! String
         self.name = theObject[kIcoFldName] as! String
         self.imageName = theObject[kIcoFldImageName] as! String
         self.selected = theObject[kIcoFldSelected] as! Bool
@@ -89,7 +89,7 @@ extension SOIco: SOConcreteObjectsProtocol{
     {
         let theObject = object as! TaskIco
         self.databaseObject = theObject
-        self.id = theObject.id
+        self.recordid = theObject.recordid
         self.name = theObject.name
         self.imageName = theObject.imagename
         self.selected = theObject.selected
@@ -98,7 +98,13 @@ extension SOIco: SOConcreteObjectsProtocol{
 
 extension SOIco{
     public func didSelect(select: Bool, block: (error: NSError?) -> Void){
-        SODataBaseFactory.sharedInstance.dataBase.saveFieldToObject(self.databaseObject, fieldName: kIcoFldSelected, value: select, block: {(error: NSError?) in
+        let dataBase: SODataBaseProtocol = SODataBaseFactory.sharedInstance.dataBase
+        var dataBaseObject: AnyObject? = self.databaseObject
+        let dBaseObject: AnyObject? = dataBase.getObjectForRecordId(self.recordid, entityName: "TaskIco")
+        if dBaseObject != nil{
+            dataBaseObject = dBaseObject
+        }
+        dataBase.saveFieldToObject(dataBaseObject, fieldName: kIcoFldSelected, value: select, block: {(error: NSError?) in
             block(error: error)
         })
     }

@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		7F0D37841B0F67B1008B785B /* SlideMenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F0D37831B0F67B1008B785B /* SlideMenuController.swift */; };
 		7F177AB61B4FDF960071773B /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7F177AB81B4FDF960071773B /* Localizable.strings */; };
+		7F2042E81B95E10A00EF5AAE /* KVOTryCatchException.h in Headers */ = {isa = PBXBuildFile; fileRef = 7F5F543D1B95B1930095FE4C /* KVOTryCatchException.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		7F483B021B53CB3800C10180 /* SODocumentPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F483B011B53CB3800C10180 /* SODocumentPickerViewController.swift */; };
 		7F497D521B1AA25500F95BA9 /* SOTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F497D511B1AA25500F95BA9 /* SOTabBarController.swift */; };
 		7F497D541B1AA2C300F95BA9 /* SOTabBarContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F497D531B1AA2C300F95BA9 /* SOTabBarContainerView.swift */; };
@@ -89,6 +90,7 @@
 		7F6E98281B1E27840048ED7A /* SOEditTaskFieldBaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6E98271B1E27840048ED7A /* SOEditTaskFieldBaseViewController.swift */; };
 		7F6E98601B1EF3180048ED7A /* SOSelectCategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6E985F1B1EF3180048ED7A /* SOSelectCategoryCell.swift */; };
 		7F6E98621B1F28650048ED7A /* SOSelectIconsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6E98611B1F28650048ED7A /* SOSelectIconsCell.swift */; };
+		7F6F09F71B95DDD6002B5B1A /* KVOTryCatchException.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F5F543E1B95B1930095FE4C /* KVOTryCatchException.m */; };
 		7F9B77261B189C54006D3434 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7F5725621B0F5DDA003DBDEB /* Main.storyboard */; };
 		7F9B77271B189C58006D3434 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7F5725671B0F5DDA003DBDEB /* LaunchScreen.xib */; };
 		7FC8E88B1B521E630013906F /* SOSampleDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FC8E88A1B521E630013906F /* SOSampleDocument.swift */; };
@@ -280,6 +282,8 @@
 		7F5D195F1B761F0A0095C51F /* Reachability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
 		7F5D20EA1B3942B500926392 /* SwiftOrganizer.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = SwiftOrganizer.playground; sourceTree = "<group>"; };
 		7F5E6E141B51730900A1B278 /* SODocumentsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SODocumentsViewController.swift; sourceTree = "<group>"; };
+		7F5F543D1B95B1930095FE4C /* KVOTryCatchException.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KVOTryCatchException.h; path = "SwiftOrganizer/Objective-C/KVOTryCatchException.h"; sourceTree = SOURCE_ROOT; };
+		7F5F543E1B95B1930095FE4C /* KVOTryCatchException.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = KVOTryCatchException.m; path = "SwiftOrganizer/Objective-C/KVOTryCatchException.m"; sourceTree = SOURCE_ROOT; };
 		7F625EE21B2ED3DC004B7C16 /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Bolts.framework; path = Frameworks/Bolts.framework; sourceTree = "<group>"; };
 		7F625EE31B2ED3DC004B7C16 /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Parse.framework; path = Frameworks/Parse.framework; sourceTree = "<group>"; };
 		7F625EE41B2ED3DC004B7C16 /* ParseCrashReporting.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ParseCrashReporting.framework; path = Frameworks/ParseCrashReporting.framework; sourceTree = "<group>"; };
@@ -481,12 +485,12 @@
 				7F5725651B0F5DDA003DBDEB /* Images.xcassets */,
 				7F5725671B0F5DDA003DBDEB /* LaunchScreen.xib */,
 				7F5C2C3D1B42D88700506320 /* README.md */,
+				7F441A5B1B2EBEBD004DAA5D /* SwiftOrganizer-Bridging-Header.h */,
 				7F57EB331B77394B000AEF92 /* Settings.bundle */,
 				7F5D20EA1B3942B500926392 /* SwiftOrganizer.playground */,
+				7F5725591B0F5DDA003DBDEB /* Supporting Files */,
 				7F5A6D221B14C37C009665C7 /* Resources */,
 				7F625EEE1B2ED3EE004B7C16 /* Frameworks */,
-				7F5725591B0F5DDA003DBDEB /* Supporting Files */,
-				7F441A5B1B2EBEBD004DAA5D /* SwiftOrganizer-Bridging-Header.h */,
 			);
 			path = SwiftOrganizer;
 			sourceTree = "<group>";
@@ -523,6 +527,7 @@
 				7F5E6E131B5172EE00A1B278 /* Documents */,
 				7F5A6D1D1B14A115009665C7 /* MainViewController */,
 				7F6E98141B1DD9730048ED7A /* Edit Task */,
+				7F5F543C1B95B1530095FE4C /* Objective-C */,
 				7F0D37831B0F67B1008B785B /* SlideMenuController.swift */,
 				7F57258D1B0F6114003DBDEB /* LeftViewController.swift */,
 				7F5725911B0F6114003DBDEB /* SOSettingsViewController.swift */,
@@ -688,6 +693,15 @@
 				7FC8E88C1B52207D0013906F /* SOEditDocumentViewController.swift */,
 			);
 			name = Documents;
+			sourceTree = "<group>";
+		};
+		7F5F543C1B95B1530095FE4C /* Objective-C */ = {
+			isa = PBXGroup;
+			children = (
+				7F5F543D1B95B1930095FE4C /* KVOTryCatchException.h */,
+				7F5F543E1B95B1930095FE4C /* KVOTryCatchException.m */,
+			);
+			name = "Objective-C";
 			sourceTree = "<group>";
 		};
 		7F625EEE1B2ED3EE004B7C16 /* Frameworks */ = {
@@ -933,6 +947,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7FD44B461B5A98D6000A4FB3 /* DataBaseKit.h in Headers */,
+				7F2042E81B95E10A00EF5AAE /* KVOTryCatchException.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1304,6 +1319,7 @@
 				7FD44B8D1B5A9C27000A4FB3 /* SOIco.swift in Sources */,
 				7FD44B971B5A9DE5000A4FB3 /* StringExtension.swift in Sources */,
 				7FD44B8E1B5A9C27000A4FB3 /* SOTask.swift in Sources */,
+				7F6F09F71B95DDD6002B5B1A /* KVOTryCatchException.m in Sources */,
 				7FD44B8F1B5A9C27000A4FB3 /* SOTypeDataBaseSwitcher.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1481,7 +1497,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
-				SWIFT_OBJC_BRIDGING_HEADER = "SwiftOrganizer/SwiftOrganizer-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/SwiftOrganizer/SwiftOrganizer-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -1504,7 +1520,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
-				SWIFT_OBJC_BRIDGING_HEADER = "SwiftOrganizer/SwiftOrganizer-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/SwiftOrganizer/SwiftOrganizer-Bridging-Header.h";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;

@@ -88,10 +88,10 @@ class SOMainViewController: UIViewController{
         smoother than just doing the update without the animation */
         let popTime = dispatch_time(DISPATCH_TIME_NOW, Int64(NSEC_PER_SEC))
         
-        dispatch_after(popTime, dispatch_get_main_queue(), {
-            self.reloadData({(error: NSError?) in
-                self.allTimes.append(NSDate())
-                self.refreshControl!.endRefreshing()
+        dispatch_after(popTime, dispatch_get_main_queue(), {[weak self] in
+            self!.reloadData({(error: NSError?) in
+                self!.allTimes.append(NSDate())
+                self!.refreshControl!.endRefreshing()
             })
         })
     }

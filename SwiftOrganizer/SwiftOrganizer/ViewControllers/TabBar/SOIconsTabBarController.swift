@@ -18,7 +18,7 @@ class SOIconsTabBarController: SOTabBarController {
             self.tabsCount = 0
 
             if let error = fetchError{
-                showAlertWithTitle("Error reading icons data", error.description)
+                showAlertWithTitle("Error fetching icons data", error.description)
             } else if icons.count > 0{
                 self.tabsCount = icons.count
                 

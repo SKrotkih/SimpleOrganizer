@@ -12,7 +12,7 @@ import CoreData
 @objc(TaskCategory)
 class TaskCategory: NSManagedObject {
 
-    @NSManaged var id: String
+    @NSManaged var recordid: String
     @NSManaged var name: String
     @NSManaged var selected: Bool
 

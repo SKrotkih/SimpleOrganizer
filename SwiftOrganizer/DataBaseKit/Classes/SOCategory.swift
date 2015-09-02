@@ -11,7 +11,7 @@ import UIKit
 public class SOCategory: NSObject {
     
     private var _databaseObject: AnyObject?
-    private var _id: String = ""
+    private var _recordid: String = ""
     private var _name: String = ""
     private var _selected = false
 
@@ -22,17 +22,17 @@ public class SOCategory: NSObject {
     convenience init(id: String, name: String, selected: Bool) {
         self.init()
         
-        self.id = id
+        self.recordid = id
         self.name = name
         self.selected = selected
     }
     
-    public var id: String{
+    public var recordid: String{
         get{
-            return _id
+            return _recordid
         }
         set{
-            _id = newValue
+            _recordid = newValue
         }
     }
     
@@ -69,7 +69,7 @@ extension SOCategory: SOConcreteObjectsProtocol{
     {
         let theObject = object as! PFObject
         self.databaseObject = theObject
-        self.id = theObject[kCategoryFldId] as! String
+        self.recordid = theObject[kCategoryFldId] as! String
         self.name = theObject[kCategoryFldName] as! String
         self.selected = theObject[kCategoryFldSelected] as! Bool
     }
@@ -81,15 +81,25 @@ extension SOCategory: SOConcreteObjectsProtocol{
     {
         let theObject = object as! TaskCategory
         self.databaseObject = theObject
-        self.id = theObject.id
+        self.recordid = theObject.recordid
         self.name = theObject.name
         self.selected = theObject.selected
     }
 }
 
+    // MARK: -
+    // MARK: - Select Category Handler
+
 extension SOCategory{
     public func didSelect(select: Bool, block: (error: NSError?) -> Void){
-        SODataBaseFactory.sharedInstance.dataBase.saveFieldToObject(self.databaseObject, fieldName: kCategoryFldSelected, value: select, block: {(error: NSError?) in
+        let dataBase: SODataBaseProtocol = SODataBaseFactory.sharedInstance.dataBase
+        var dataBaseObject: AnyObject? = self.databaseObject
+        let dBaseObject: AnyObject? = dataBase.getObjectForRecordId(self.recordid, entityName: "TaskCategory")
+        
+        if dBaseObject != nil{
+            dataBaseObject = dBaseObject
+        }
+        dataBase.saveFieldToObject(dataBaseObject, fieldName: kCategoryFldSelected, value: select, block: {(error: NSError?) in
             block(error: error)
         })
     }
