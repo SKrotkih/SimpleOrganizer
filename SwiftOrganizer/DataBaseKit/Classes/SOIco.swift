@@ -100,7 +100,7 @@ extension SOIco{
     public func didSelect(select: Bool, block: (error: NSError?) -> Void){
         let dataBase: SODataBaseProtocol = SODataBaseFactory.sharedInstance.dataBase
         var dataBaseObject: AnyObject? = self.databaseObject
-        let dBaseObject: AnyObject? = dataBase.getObjectForRecordId(self.recordid, entityName: "TaskIco")
+        let dBaseObject: AnyObject? = dataBase.getObjectForRecordId(self.recordid, entityName: IcoEntityName)
         if dBaseObject != nil{
             dataBaseObject = dBaseObject
         }

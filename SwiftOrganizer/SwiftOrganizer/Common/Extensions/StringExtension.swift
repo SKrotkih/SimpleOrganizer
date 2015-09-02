@@ -16,4 +16,21 @@ extension String {
     var localized: String {
         return NSLocalizedString(self, tableName: nil, bundle: NSBundle.mainBundle(), value: "", comment: "")
     }
+    
+    func toIndexPath () -> NSIndexPath{
+        let components = self.componentsSeparatedByString("-")
+        
+        if components.count == 2{
+            let section = components[0]
+            let row = components[1]
+            
+            if let theSection = section.toInt(){
+                
+                if let theRow = row.toInt(){
+                    return NSIndexPath(forRow: theRow, inSection: theSection)
+                }
+            }
+        }
+        return NSIndexPath()
+    }
 }

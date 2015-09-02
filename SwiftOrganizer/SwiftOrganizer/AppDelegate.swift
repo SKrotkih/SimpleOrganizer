@@ -8,38 +8,17 @@
 
 import UIKit
 
-/* This is an extenstion on the String class that can convert a given
-string with the format of %d-%d into an NSIndexPath */
-extension String{
-    func toIndexPath () -> NSIndexPath{
-        let components = self.componentsSeparatedByString("-")
-        
-        if components.count == 2{
-            let section = components[0]
-            let row = components[1]
-            
-            if let theSection = section.toInt(){
-                
-                if let theRow = row.toInt(){
-                    return NSIndexPath(forRow: theRow, inSection: theSection)
-                }
-            }
-        }
-        return NSIndexPath()
-    }
-}
-
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
+
     var window: UIWindow?
     var mainViewController: SOMainViewController!
 
-    //--------------------------------------
+    // MARK: -
     // MARK: didFinishLaunching
-    //--------------------------------------
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-        self.createMenuView()
+        self.createOfSlidingViewControllers()
         
         SOTypeDataBaseSwitcher.startInternetObserver()
         
@@ -56,9 +35,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return retBoolValue
     }
 
-    //--------------------------------------
+    // MARK: -
     // MARK: open URL
-    //--------------------------------------
     
     func application(application: UIApplication, openURL url: NSURL, sourceApplication srcApp: String?, annotation annot: AnyObject?) -> Bool {
         
@@ -75,7 +53,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         return true
     }
+}
 
+// MARK: -
+// MARK: Application's life cycle
+
+extension AppDelegate{
     func applicationDidBecomeActive(application: UIApplication) {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
     }
@@ -102,12 +85,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 }
 
-//--------------------------------------
-// MARK: Create Menu
-//--------------------------------------
+// MARK: -
+// MARK: Create of Sliding View Controllers
 
 extension AppDelegate{
-    private func createMenuView() {
+    private func createOfSlidingViewControllers() {
         
         var storyboard = UIStoryboard(name: "Main", bundle: nil)
         
@@ -115,11 +97,13 @@ extension AppDelegate{
         let leftViewController = storyboard.instantiateViewControllerWithIdentifier("LeftViewController") as! LeftViewController
         let rightViewController = storyboard.instantiateViewControllerWithIdentifier("RightViewController") as! RightViewController
         
-        let nvc: UINavigationController = UINavigationController(rootViewController: mainViewController)
+        let navigationController: UINavigationController = UINavigationController(rootViewController: mainViewController)
         
-        leftViewController.mainViewController = nvc
+        leftViewController.mainViewController = navigationController
         
-        let slideMenuController = SlideMenuController(mainViewController:nvc, leftMenuViewController: leftViewController, rightMenuViewController: rightViewController)
+        let slideMenuController = SlideMenuController(  mainViewController: navigationController,
+                                                        leftMenuViewController: leftViewController,
+                                                        rightMenuViewController: rightViewController)
         
         self.window?.backgroundColor = UIColor(red: 236.0, green: 238.0, blue: 241.0, alpha: 1.0)
         self.window?.rootViewController = slideMenuController
@@ -128,9 +112,8 @@ extension AppDelegate{
     
 }
 
-//--------------------------------------
+// MARK: -
 // MARK: Local Notifications
-//--------------------------------------
 
 extension AppDelegate{
     
@@ -152,9 +135,8 @@ extension AppDelegate{
     }
 }
 
-//--------------------------------------
+// MARK: -
 // MARK: Push Notifications
-//--------------------------------------
 
 extension AppDelegate{
     func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData){
@@ -173,6 +155,9 @@ extension AppDelegate{
         SOPushNotificationsCenter.didReceiveRemoteNotification(application, userInfo: userInfo, completionHandler: completionHandler)
     }
 }
+
+// MARK: -
+// MARK: Today Widget
 
 extension AppDelegate{
 
@@ -221,8 +206,10 @@ extension AppDelegate{
     }
 }
 
+    // MARK: -
+    // MARK: System check
+
 extension AppDelegate{
-    /// System check
     class func SYSTEM_VERSION_EQUAL_TO(version: String) -> Bool {
         return UIDevice.currentDevice().systemVersion.compare(version,
             options: NSStringCompareOptions.NumericSearch) == NSComparisonResult.OrderedSame
@@ -249,9 +236,8 @@ extension AppDelegate{
     }
 }
 
-//--------------------------------------
-// MARK: Utility
-//--------------------------------------
+    // MARK: -
+    // MARK: Utility
 
 extension AppDelegate{
     

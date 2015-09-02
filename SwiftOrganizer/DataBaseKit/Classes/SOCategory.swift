@@ -94,7 +94,7 @@ extension SOCategory{
     public func didSelect(select: Bool, block: (error: NSError?) -> Void){
         let dataBase: SODataBaseProtocol = SODataBaseFactory.sharedInstance.dataBase
         var dataBaseObject: AnyObject? = self.databaseObject
-        let dBaseObject: AnyObject? = dataBase.getObjectForRecordId(self.recordid, entityName: "TaskCategory")
+        let dBaseObject: AnyObject? = dataBase.getObjectForRecordId(self.recordid, entityName: CategoryEntityName)
         
         if dBaseObject != nil{
             dataBaseObject = dBaseObject
