@@ -18,39 +18,20 @@ class SOEditIconsViewController: SOEditTaskFieldBaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.title = "Icons".localized        
-
-        SODataFetching.sharedInstance.allIcons{(icons: [SOIco], fetchError: NSError?) in
-            if let error = fetchError{
-                showAlertWithTitle("Error reading icons data", error.description)
-            } else {
-                self.icons = icons
-                self.tableView.reloadData()
-            }
-        }
+        self.title = "Icons".localized
+        let rightButtonImage : UIImage! = UIImage(named: "save_task")
+        var rightButton: UIBarButtonItem = UIBarButtonItem(image: rightButtonImage, style: UIBarButtonItemStyle.Plain, target: self, action: "doneButtonWasPressed")
+        navigationItem.rightBarButtonItem = rightButton;
     }
 
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        
-        let rightButtonImage : UIImage! = UIImage(named: "save_task")
-        var rightButton: UIBarButtonItem = UIBarButtonItem(image: rightButtonImage, style: UIBarButtonItemStyle.Plain, target: self, action: "doneButtonWasPressed")
-        navigationItem.rightBarButtonItem = rightButton;
-        self.reloadData()
-    }
-    
-    private func reloadData(){
-        if let theTask = self.task{
-            taskIcons.removeAll(keepCapacity: false)
-            let icons = theTask.icons
-            
-            for i in 0..<icons.count{
-                let icoId = icons[i]
-                
-                if icoId != ""{
-                    taskIcons.append(icoId)
-                }
-            }
+
+        self.fetchData { () -> Void in
+            self.reloadData()
+            dispatch_async(dispatch_get_main_queue(), {
+                self.tableView.reloadData()
+            })
         }
     }
     
@@ -83,7 +64,7 @@ class SOEditIconsViewController: SOEditTaskFieldBaseViewController {
 
         if needAsk{
             let controller = UIAlertController(title: "Data were chenged!".localized, message: nil, preferredStyle: .ActionSheet)
-            let skeepDateAction = UIAlertAction(title: "Close".localized, style: .Cancel, handler: { action in
+            let skeepDateAction = UIAlertAction(title: "Discard".localized, style: .Cancel, handler: { action in
                 self.reloadData()
                 super.closeButtonWasPressed()
             })
@@ -115,6 +96,41 @@ class SOEditIconsViewController: SOEditTaskFieldBaseViewController {
         super.closeButtonWasPressed()
     }
     
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
+}
+
+extension SOEditIconsViewController{
+
+    private func fetchData(completeBlock: ()-> Void ){
+        SODataFetching.sharedInstance.allIcons{(icons: [SOIco], fetchError: NSError?) in
+            if let error = fetchError{
+                self.icons.removeAll(keepCapacity: false)
+                showAlertWithTitle("Failed to fetch data".localized, error.description)
+            } else {
+                self.icons = icons.filter {(ico: SOIco) in ico.visible }
+            }
+            completeBlock()
+        }
+    }
+    
+    private func reloadData(){
+        if let theTask = self.task{
+            taskIcons.removeAll(keepCapacity: false)
+            let icons = theTask.icons
+            
+            for i in 0..<icons.count{
+                let icoId = icons[i]
+                
+                if icoId != ""{
+                    taskIcons.append(icoId)
+                }
+            }
+        }
+    }
+    
     func fillIconsBuffer() -> [String]{
         if let theTask = self.task{
             let iconsCount = theTask.icons.count
@@ -125,16 +141,11 @@ class SOEditIconsViewController: SOEditTaskFieldBaseViewController {
                     buffer[i] = taskIcons[i]
                 }
             }
-        
+            
             return buffer
         }
-
+        
         return []
-    }
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
 }
 
@@ -182,6 +193,7 @@ extension SOEditIconsViewController: UITableViewDelegate {
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let row = indexPath.row
         let ico: SOIco = icons[row]
+        
         let icoId: String = ico.recordid
         var needAdd: Bool = true
 
@@ -200,7 +212,9 @@ extension SOEditIconsViewController: UITableViewDelegate {
         if needAdd && taskIcons.count <= task?.maxIconsCount{
             taskIcons.append(icoId)
         }
-        
-        self.tableView.reloadData()
+
+        dispatch_async(dispatch_get_main_queue(), {
+            self.tableView.reloadData()
+        })
     }
 }

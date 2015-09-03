@@ -22,10 +22,8 @@ class SOTabBarController: NSObject {
     }
 
     func clearTabs(){
-        if self.tabsCount > 0{
-            if let containerView = self.containerView{
-                containerView.subviews.map({$0.removeFromSuperview()})
-            }
+        if let containerView = self.containerView{
+            containerView.subviews.map({$0.removeFromSuperview()})
         }
     }
     
@@ -33,19 +31,16 @@ class SOTabBarController: NSObject {
         if self.containerView != nil && self.scrollView != nil{
             if self.tabsCount > 0{
                 dispatch_async(dispatch_get_main_queue(), {
-                    let subViews = self.containerView!.subviews
+                    self.clearTabs()
                     var x : CGFloat = 0
                     
                     for i in 0..<self.tabsCount{
                         let view: UIView = self.tabs[i]
                         var frame = view.frame
                         let w: CGFloat = CGRectGetWidth(frame)
-                        if subViews.filter({ el in el as! UIView == view }).count == 0 {
-                            frame.origin.x = x
-                            view.frame = frame
-                            self.containerView!.addSubview(view)
-                        }
-
+                        frame.origin.x = x
+                        view.frame = frame
+                        self.containerView!.addSubview(view)
                         x += w
                     }
                     let h: CGFloat = CGRectGetHeight(self.scrollView!.frame)

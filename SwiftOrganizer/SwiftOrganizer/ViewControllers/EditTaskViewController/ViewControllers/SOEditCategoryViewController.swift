@@ -10,7 +10,7 @@ import UIKit
 
 class SOEditCategoryViewController: SOEditTaskFieldBaseViewController {
 
-    private var categories: [SOCategory]!
+    private var categories: [SOCategory] = [SOCategory]()
     
     @IBOutlet weak var tableView: UITableView!
     
@@ -18,19 +18,21 @@ class SOEditCategoryViewController: SOEditTaskFieldBaseViewController {
         super.viewDidLoad()
         
         self.title = "Category".localized
-
-        SODataFetching.sharedInstance.allCategories{(categories: [SOCategory], fetchError: NSError?) in
-            if let error = fetchError{
-                showAlertWithTitle("Error reading categories data", error.description)
-            } else {
-                self.categories = categories
-                self.tableView.reloadData()
-            }
-        }
     }
 
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
+        
+        SODataFetching.sharedInstance.allCategories{(categories: [SOCategory], fetchError: NSError?) in
+            if let error = fetchError{
+                showAlertWithTitle("Error reading categories data", error.description)
+            } else {
+                dispatch_async(dispatch_get_main_queue(), {
+                    self.categories = categories.filter {(category: SOCategory) in category.visible }
+                    self.tableView.reloadData()
+                })
+            }
+        }
     }
     
     override func willFinishOfEditing() -> Bool{

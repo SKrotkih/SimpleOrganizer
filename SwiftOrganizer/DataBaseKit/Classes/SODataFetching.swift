@@ -32,25 +32,17 @@ public final class SODataFetching{
     
     // - MARK: Categories
     public func allCategories(block: (resultBuffer: [SOCategory], error: NSError?) -> Void){
-        if self._allCategories.count > 0{
-            block(resultBuffer: self._allCategories, error: nil)
-        } else {
-            SODataBaseFactory.sharedInstance.dataBase.allCategories{(categories: [SOCategory], error: NSError?) in
-                self._allCategories = categories
-                block(resultBuffer: self._allCategories, error: error)
-            }
+        SODataBaseFactory.sharedInstance.dataBase.allCategories{(categories: [SOCategory], error: NSError?) in
+            self._allCategories = categories
+            block(resultBuffer: self._allCategories, error: error)
         }
     }
     
     // - MARK: Icons
     public func allIcons(block: (resultBuffer: [SOIco], error: NSError?) -> Void){
-        if self._allIcons.count > 0{
-            block(resultBuffer: self._allIcons, error: nil)
-        } else {
-            SODataBaseFactory.sharedInstance.dataBase.allIcons{(icons: [SOIco], error: NSError?) in
-                self._allIcons = icons
-                block(resultBuffer: self._allIcons, error: error)
-            }
+        SODataBaseFactory.sharedInstance.dataBase.allIcons{(icons: [SOIco], error: NSError?) in
+            self._allIcons = icons
+            block(resultBuffer: self._allIcons, error: error)
         }
     }
     

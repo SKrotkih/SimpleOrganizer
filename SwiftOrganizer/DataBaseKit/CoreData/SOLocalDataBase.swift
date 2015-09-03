@@ -147,16 +147,16 @@ extension SOLocalDataBase{
         dispatch_sync(self.queue, {() in
             let fetchRequest = NSFetchRequest(entityName: CategoryEntityName)
             
-            var requestError: NSError?
-            let categories = self.managedObjectContext!.executeFetchRequest(fetchRequest, error: &requestError) as! [TaskCategory]
+            var fetchError: NSError?
+            let objects = self.managedObjectContext!.executeFetchRequest(fetchRequest, error: &fetchError) as! [TaskCategory]
             
-            if let error = requestError{
+            if let error = fetchError{
                 _error = error
             } else {
-                if categories.count > 0{
-                    for category: TaskCategory in categories{
-                        let categoryItem = self.fillNewObjectWithData(SOCategory(), managedObject: category)
-                        _allCategories.append(categoryItem)
+                if objects.count > 0{
+                    for object: TaskCategory in objects{
+                        let theObject = self.fillNewObjectWithData(SOCategory(), managedObject: object)
+                        _allCategories.append(theObject)
                     }
                 } else {
                     self.populateCategories()
@@ -186,16 +186,16 @@ extension SOLocalDataBase{
         dispatch_sync(self.queue, {() in
             let fetchRequest = NSFetchRequest(entityName: IcoEntityName)
             
-            var requestError: NSError?
-            let icons = self.managedObjectContext!.executeFetchRequest(fetchRequest, error: &requestError) as! [TaskIco]
+            var fetchError: NSError?
+            let objects = self.managedObjectContext!.executeFetchRequest(fetchRequest, error: &fetchError) as! [TaskIco]
             
-            if let error = requestError{
+            if let error = fetchError{
                 _error = error
             } else {
-                if icons.count > 0{
-                    for ico: TaskIco in icons{
-                        let icoItem: SOIco = self.fillNewObjectWithData(SOIco(), managedObject: ico)
-                        _allIcon.append(icoItem)
+                if objects.count > 0{
+                    for object: TaskIco in objects{
+                        let theObject: SOIco = self.fillNewObjectWithData(SOIco(), managedObject: object)
+                        _allIcon.append(theObject)
                     }
                 } else {
                     self.populateIcons()
@@ -352,6 +352,22 @@ extension SOLocalDataBase{
         block(error: nil)
     }
     
+    public func saveFieldValueToObject(dataBaseObject: AnyObject?, entityName: String, fldName: String, recordId: String?, value: AnyObject, block: (error: NSError?) -> Void){
+        var object: AnyObject? = dataBaseObject
+        
+        if let theRecordId = recordId{
+            let dBaseObject: AnyObject? = self.getObjectForRecordId(theRecordId, entityName: entityName)
+            
+            if dBaseObject != nil{
+                object = dBaseObject
+            }
+        }
+        
+        self.saveFieldToObject(object, fieldName: fldName, value: value, block: {(error: NSError?) in
+            block(error: error)
+        })
+    }
+    
     public func saveFieldToObject(object: AnyObject?, fieldName: String, value: AnyObject, block: (error: NSError?) -> Void){
         let managedObject = object as? NSManagedObject
         
@@ -500,6 +516,7 @@ extension SOLocalDataBase{
             ico.name = dict["name"]!
             ico.imagename = dict["img"]!
             ico.selected = true
+            ico.visible = true
         }
         
         saveContext()
@@ -516,6 +533,7 @@ extension SOLocalDataBase{
             category.recordid = newCategoryId
             category.name = catagoryName as String
             category.selected = true
+            category.visible = true
         }
         
         saveContext()

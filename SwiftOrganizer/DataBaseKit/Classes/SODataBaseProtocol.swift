@@ -19,6 +19,8 @@ public protocol SODataBaseProtocol{
     func saveTask(task: SOTask, block: (error: NSError?) -> Void)
     func removeTask(task: SOTask)
 
+    func saveFieldValueToObject(dataBaseObject: AnyObject?, entityName: String, fldName: String, recordId: String?, value: AnyObject, block: (error: NSError?) -> Void)
+    
     func saveFieldToObject(object: AnyObject?, fieldName: String, value: AnyObject, block: (error: NSError?) -> Void)
     func saveContext()
     

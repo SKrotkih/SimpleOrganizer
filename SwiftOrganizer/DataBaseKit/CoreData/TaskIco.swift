@@ -16,5 +16,5 @@ class TaskIco: NSManagedObject {
     @NSManaged var name: String
     @NSManaged var imagename: String
     @NSManaged var selected: Bool    
-
+    @NSManaged var visible: Bool
 }

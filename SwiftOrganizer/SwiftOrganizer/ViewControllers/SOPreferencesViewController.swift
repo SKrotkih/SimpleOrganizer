@@ -43,7 +43,7 @@ class SOPreferencesViewController: UIViewController {
             let iconsVC = storyboard.instantiateViewControllerWithIdentifier("PreferenceIconsViewController") as! SOPreferenceIconsViewController
             viewController = iconsVC
         default:
-            assert(false, "Table row number is wrong!")
+            assert(false, "Too many rows in the Table!")
         }
 
         self.navigationController?.pushViewController(viewController, animated: true)
@@ -70,13 +70,14 @@ extension SOPreferencesViewController: UITableViewDataSource, UITableViewDelegat
         case .IconsPreferencesEditor:
             cell.textLabel?.text = "Icons".localized
         default:
-            cell.textLabel?.text = "Undefined"
+            assert(false, "Too many rows in the Table!")
         }
         
         return cell
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        tableView.deselectRowAtIndexPath(indexPath, animated: false)
         let itemIndex: SOPreferencesRowItem = SOPreferencesRowItem(rawValue: indexPath.row)!
         self.didSelectController(itemIndex)
     }

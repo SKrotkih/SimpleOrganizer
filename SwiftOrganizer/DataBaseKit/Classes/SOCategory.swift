@@ -14,6 +14,7 @@ public class SOCategory: NSObject {
     private var _recordid: String = ""
     private var _name: String = ""
     private var _selected = false
+    public var visible = false
 
     override init() {
         super.init()
@@ -72,6 +73,7 @@ extension SOCategory: SOConcreteObjectsProtocol{
         self.recordid = theObject[kCategoryFldId] as! String
         self.name = theObject[kCategoryFldName] as! String
         self.selected = theObject[kCategoryFldSelected] as! Bool
+        self.visible = theObject[kFldVisible] as! Bool
     }
     
     public func copyToParseObject(object: AnyObject){
@@ -84,6 +86,7 @@ extension SOCategory: SOConcreteObjectsProtocol{
         self.recordid = theObject.recordid
         self.name = theObject.name
         self.selected = theObject.selected
+        self.visible = theObject.visible
     }
 }
 
@@ -91,15 +94,17 @@ extension SOCategory: SOConcreteObjectsProtocol{
     // MARK: - Select Category Handler
 
 extension SOCategory{
-    public func didSelect(select: Bool, block: (error: NSError?) -> Void){
+    public func setSelect(select: Bool, block: (error: NSError?) -> Void){
+        self.saveFldName(kCategoryFldSelected, value: select, block: block)
+    }
+    
+    public func setVisible(visible: Bool, block: (error: NSError?) -> Void){
+        self.saveFldName(kFldVisible, value: visible, block: block)
+    }
+    
+    public func saveFldName(fldName: String, value: AnyObject, block: (error: NSError?) -> Void){
         let dataBase: SODataBaseProtocol = SODataBaseFactory.sharedInstance.dataBase
-        var dataBaseObject: AnyObject? = self.databaseObject
-        let dBaseObject: AnyObject? = dataBase.getObjectForRecordId(self.recordid, entityName: CategoryEntityName)
-        
-        if dBaseObject != nil{
-            dataBaseObject = dBaseObject
-        }
-        dataBase.saveFieldToObject(dataBaseObject, fieldName: kCategoryFldSelected, value: select, block: {(error: NSError?) in
+        dataBase.saveFieldValueToObject(self.databaseObject, entityName: CategoryEntityName, fldName: fldName, recordId: self.recordid, value: value, block: {(error: NSError?) in
             block(error: error)
         })
     }

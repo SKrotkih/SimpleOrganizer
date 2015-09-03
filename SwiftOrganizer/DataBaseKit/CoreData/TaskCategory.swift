@@ -15,5 +15,5 @@ class TaskCategory: NSManagedObject {
     @NSManaged var recordid: String
     @NSManaged var name: String
     @NSManaged var selected: Bool
-
+    @NSManaged var visible: Bool
 }

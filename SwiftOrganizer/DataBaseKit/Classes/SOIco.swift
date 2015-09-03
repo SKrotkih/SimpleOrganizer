@@ -15,6 +15,7 @@ public class SOIco: NSObject {
     private var _name: String = ""
     private var _imageName: String = ""
     private var _selected = false
+    public var visible = false
 
     convenience init(id: String, name: String, imageName: String, selected: Bool) {
         self.init()
@@ -80,6 +81,7 @@ extension SOIco: SOConcreteObjectsProtocol{
         self.name = theObject[kIcoFldName] as! String
         self.imageName = theObject[kIcoFldImageName] as! String
         self.selected = theObject[kIcoFldSelected] as! Bool
+        self.visible = theObject[kFldVisible] as! Bool
     }
     
     public func copyToParseObject(object: AnyObject){
@@ -93,18 +95,22 @@ extension SOIco: SOConcreteObjectsProtocol{
         self.name = theObject.name
         self.imageName = theObject.imagename
         self.selected = theObject.selected
+        self.visible = theObject.visible
     }
 }
 
 extension SOIco{
-    public func didSelect(select: Bool, block: (error: NSError?) -> Void){
+    public func setSelect(select: Bool, block: (error: NSError?) -> Void){
+        self.saveFldName(kIcoFldSelected, value: select, block: block)
+    }
+    
+    public func setVisible(visible: Bool, block: (error: NSError?) -> Void){
+        self.saveFldName(kFldVisible, value: visible, block: block)
+    }
+    
+    public func saveFldName(fldName: String, value: AnyObject, block: (error: NSError?) -> Void){
         let dataBase: SODataBaseProtocol = SODataBaseFactory.sharedInstance.dataBase
-        var dataBaseObject: AnyObject? = self.databaseObject
-        let dBaseObject: AnyObject? = dataBase.getObjectForRecordId(self.recordid, entityName: IcoEntityName)
-        if dBaseObject != nil{
-            dataBaseObject = dBaseObject
-        }
-        dataBase.saveFieldToObject(dataBaseObject, fieldName: kIcoFldSelected, value: select, block: {(error: NSError?) in
+        dataBase.saveFieldValueToObject(self.databaseObject, entityName: IcoEntityName, fldName: fldName, recordId: self.recordid, value: value, block: {(error: NSError?) in
             block(error: error)
         })
     }

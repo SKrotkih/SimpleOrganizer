@@ -15,16 +15,18 @@
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="recordid" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="selected" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="visible" optional="YES" attributeType="Boolean" syncable="YES"/>
     </entity>
     <entity name="TaskIco" representedClassName="TaskIco" syncable="YES">
         <attribute name="imagename" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="recordid" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="selected" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="visible" optional="YES" attributeType="Boolean" syncable="YES"/>
     </entity>
     <elements>
         <element name="Task" positionX="-63" positionY="-18" width="128" height="180"/>
-        <element name="TaskCategory" positionX="-36" positionY="63" width="128" height="90"/>
-        <element name="TaskIco" positionX="-54" positionY="54" width="128" height="105"/>
+        <element name="TaskCategory" positionX="-36" positionY="63" width="128" height="105"/>
+        <element name="TaskIco" positionX="-54" positionY="54" width="128" height="120"/>
     </elements>
 </model>

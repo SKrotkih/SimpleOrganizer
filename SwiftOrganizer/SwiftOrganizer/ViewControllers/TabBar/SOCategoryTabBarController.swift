@@ -19,26 +19,25 @@ class SOCategoryTabBarController: SOTabBarController {
             if let error = fetchError{
                 showAlertWithTitle("Error reading categories data", error.description)
             } else if categories.count > 0{
-                super.clearTabs()
-
-                self.tabsCount = categories.count
-
-                for i in 0..<self.tabsCount {
-                    var tabView: SOCategoryTabView!
-                    
-                    if i < self.tabs.count{
-                        tabView = self.tabs[i] as! SOCategoryTabView
-                    } else {
-                        var xibItems: NSArray = NSBundle.mainBundle().loadNibNamed(self.tabViewXibName, owner: nil, options: nil)
-                        tabView = xibItems[0] as! SOCategoryTabView
-                        tabView.autoresizingMask = UIViewAutoresizing.FlexibleHeight;                        
-                        tabView.filterStateDelegate = self.filterStateDelegate
-                        self.tabs.append(tabView)
-                    }
-                    
+                for i in 0..<categories.count {
                     let category: SOCategory = categories[i]
-                    tabView.category = category
-                    tabView.selected = category.selected
+                    
+                    if category.visible{
+                        var tabView: SOCategoryTabView!
+                        
+                        if i < self.tabs.count{
+                            tabView = self.tabs[i] as! SOCategoryTabView
+                        } else {
+                            var xibItems: NSArray = NSBundle.mainBundle().loadNibNamed(self.tabViewXibName, owner: nil, options: nil)
+                            tabView = xibItems[0] as! SOCategoryTabView
+                            tabView.autoresizingMask = UIViewAutoresizing.FlexibleHeight;
+                            tabView.filterStateDelegate = self.filterStateDelegate
+                            self.tabs.append(tabView)
+                        }
+                        tabView.category = category
+                        tabView.selected = category.selected
+                        self.tabsCount++
+                    }
                 }
                 super.reloadTabs{(error: NSError?) in
                     block(error: error)

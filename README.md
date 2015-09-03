@@ -87,5 +87,5 @@ SwiftOrganizer is available under the MIT license. See the LICENSE file for more
 - 09.08.2015: If the current database is remote and the Internet is disconnected, then app switches to the local database and goes to the main table. 
 - 09.08.2015: Settings app is used for enter some data. Settings changes added observing. 
 - 01.09.2015: Fixed "Attempting to badge the application icon but haven't received permission from the user to badge the application" run-time error message
-- 03.09.2015: Added Preferences menu
+- 03.09.2015: Added Preferences menu. There are a possibility select favorite categories and icons for tab bar.
 

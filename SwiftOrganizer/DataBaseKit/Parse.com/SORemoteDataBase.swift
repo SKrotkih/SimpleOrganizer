@@ -22,6 +22,8 @@ let kTaskFldIco5 = "ico5"
 let kTaskFldIco6 = "ico6"
 let kTaskFldDate = "date"
 
+let kFldVisible = "visible"
+
 let kCategoryFldId = "recordid"
 let kCategoryFldName = "name"
 let kCategoryFldSelected = "selected"
@@ -61,21 +63,21 @@ public class SORemoteDataBase: SODataBaseProtocol {
 
 extension SORemoteDataBase{
     public func allCategories(block: (resultBuffer: [SOCategory], error: NSError?) -> Void){
-        self.fetchAllDataOfClassName(CategoryClassName, block: {(resultBuffer: [AnyObject], error: NSError?) in
+        self.fetchAllDataWithClassName(CategoryClassName, block: {(resultBuffer: [AnyObject], error: NSError?) in
             let buffer = resultBuffer as! [SOCategory]
             block(resultBuffer: buffer, error: error)
         })
     }
     
     public func allIcons(block: (resultBuffer: [SOIco], error: NSError?) -> Void){
-        self.fetchAllDataOfClassName(IcoClassName, block: {(resultBuffer: [AnyObject], error: NSError?) in
+        self.fetchAllDataWithClassName(IcoClassName, block: {(resultBuffer: [AnyObject], error: NSError?) in
             let buffer: [SOIco] = resultBuffer as! [SOIco]
             block(resultBuffer: buffer, error: error)
         })
     }
     
     public func allTasks(block: (resultBuffer: [SOTask], error: NSError?) -> Void) {
-        self.fetchAllDataOfClassName(TaskClassName, block: {(resultBuffer: [AnyObject], fetchError: NSError?) in
+        self.fetchAllDataWithClassName(TaskClassName, block: {(resultBuffer: [AnyObject], fetchError: NSError?) in
             if let error = fetchError{
                 block(resultBuffer: [], error: error)
             }
@@ -118,7 +120,7 @@ extension SORemoteDataBase{
         })
     }
     
-    private func fetchAllDataOfClassName(className: String, block: (resultBuffer: [AnyObject], error: NSError?) -> Void){
+    private func fetchAllDataWithClassName(className: String, block: (resultBuffer: [AnyObject], error: NSError?) -> Void){
         SOParseComManager.checkUser { (checkError) -> Void in
             if let error = checkError{
                 block(resultBuffer: [], error: error)
@@ -139,10 +141,11 @@ extension SORemoteDataBase{
                                 block(resultBuffer: resultBuffer, error: nil)
                             } else {
                                 self.populateDefaultData(className, block: {(populateError: NSError?) -> Void in
+
                                     if let anError = populateError{
                                         block(resultBuffer: resultBuffer, error: anError)
                                     } else {
-                                        self.fetchAllDataOfClassName(className, block: block)
+                                        self.fetchAllDataWithClassName(className, block: block)
                                     }
                                 })
                             }
@@ -210,6 +213,12 @@ extension SORemoteDataBase{
                 }
             }
         }
+    }
+
+    public func saveFieldValueToObject(dataBaseObject: AnyObject?, entityName: String, fldName: String, recordId: String?, value: AnyObject, block: (error: NSError?) -> Void){
+        self.saveFieldToObject(dataBaseObject, fieldName: fldName, value: value, block: {(error: NSError?) in
+            block(error: error)
+        })
     }
     
     public func saveFieldToObject(object: AnyObject?, fieldName: String, value: AnyObject, block: (error: NSError?) -> Void){
@@ -303,6 +312,7 @@ extension SORemoteDataBase{
             object[kCategoryFldId] = category.recordid
             object[kCategoryFldName] = category.name
             object[kCategoryFldSelected] = category.selected
+            object[kFldVisible] = true
             object.saveInBackgroundWithBlock {(success: Bool, error: NSError?) -> Void in
                 if (success) {
                     block(error: nil)
@@ -364,6 +374,7 @@ extension SORemoteDataBase{
             object[kIcoFldName] = ico.name
             object[kIcoFldImageName] = ico.imageName
             object[kIcoFldSelected] = ico.selected
+            object[kFldVisible] = true
             object.saveInBackgroundWithBlock {(success: Bool, error: NSError?) -> Void in
                 if (success) {
                     block(error: nil)

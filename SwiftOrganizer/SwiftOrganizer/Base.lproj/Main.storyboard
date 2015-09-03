@@ -53,15 +53,17 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="xZa-mH-50h">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="xZa-mH-50h">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" red="0.80000001190000003" green="0.80000001190000003" blue="0.80000001190000003" alpha="1" colorSpace="calibratedRGB"/>
                                 <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="PreferrencesCell" id="nee-Ht-GlL">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="gray" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="PreferrencesCell" id="nee-Ht-GlL">
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="nee-Ht-GlL" id="nsX-dJ-3D8">
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     </tableViewCell>
                                 </prototypes>
                                 <sections/>
@@ -73,10 +75,10 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="xZa-mH-50h" secondAttribute="trailing" id="KgT-1R-v6k"/>
-                            <constraint firstItem="xZa-mH-50h" firstAttribute="leading" secondItem="ltC-JM-nRg" secondAttribute="leading" id="XaP-7v-ZYM"/>
-                            <constraint firstItem="xZa-mH-50h" firstAttribute="top" secondItem="ltC-JM-nRg" secondAttribute="top" id="c2g-Lf-mJn"/>
-                            <constraint firstItem="48d-Pb-3QF" firstAttribute="top" secondItem="xZa-mH-50h" secondAttribute="bottom" id="lsD-b0-BNF"/>
+                            <constraint firstItem="xZa-mH-50h" firstAttribute="top" secondItem="ltC-JM-nRg" secondAttribute="top" id="3Ke-v1-NbV"/>
+                            <constraint firstItem="48d-Pb-3QF" firstAttribute="top" secondItem="xZa-mH-50h" secondAttribute="bottom" id="R3d-7m-cBy"/>
+                            <constraint firstItem="xZa-mH-50h" firstAttribute="leading" secondItem="ltC-JM-nRg" secondAttribute="leading" id="oe4-Ol-uib"/>
+                            <constraint firstAttribute="trailing" secondItem="xZa-mH-50h" secondAttribute="trailing" id="sYl-Hs-vJg"/>
                         </constraints>
                     </view>
                     <connections>
