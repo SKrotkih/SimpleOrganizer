@@ -12,7 +12,8 @@
 "About Autors"="Об Авторе";
 "Category"="Категория";
 "Description"="Описание";
-"Data was chenged!"="Данные изменились!";
+"Data was changed!"="Данные изменились!";
+"Discard"="Отменить";
 "Close"="Закрыть";
 "Save"="Сохранить";
 "Update task error"="Ошибка во время обновления";
@@ -36,4 +37,6 @@
 "Notification"="Уведомление";
 "Does need reminder?"="Напомнить";
 "Save event to the Calendar"="Добавить в календарь";
-
+"Please enter a valid"="Введите действительный ";
+"phone number"="номер телефона";
+"Preferences"="Предпочтения";

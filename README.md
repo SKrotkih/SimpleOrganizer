@@ -52,9 +52,8 @@ Icons are used for fetching too. They are predefined too.
 
 The Project is in progress.
 In future:
-- add or remove icons and categories
+- edit the preferences set for the icons and categories
 - make login (at present default user and password are used for login to the backend (parse.com server)).
-- will be able to add events to the Reminder app
 - the local database will be on the iCloud.
 
 ## Requirements
@@ -88,4 +87,5 @@ SwiftOrganizer is available under the MIT license. See the LICENSE file for more
 - 09.08.2015: If the current database is remote and the Internet is disconnected, then app switches to the local database and goes to the main table. 
 - 09.08.2015: Settings app is used for enter some data. Settings changes added observing. 
 - 01.09.2015: Fixed "Attempting to badge the application icon but haven't received permission from the user to badge the application" run-time error message
+- 03.09.2015: Added Preferences menu
 

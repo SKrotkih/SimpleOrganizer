@@ -1,14 +1,16 @@
 //
 //  LeftViewController.swift
-//  SlideMenuControllerSwift
+//  SwiftOrganizer
 //
-//  Created by Yuji Hato on 12/3/14.
+//  Created by Sergey Krotkih on 7/29/15.
+//  Copyright (c) 2015 Sergey Krotkih. All rights reserved.
 //
 
 import UIKit
 
 enum LeftMenu: Int {
     case Main = 0
+    case Preferences
     case Documents
     case DocumentPicker
     case FaceTimeCall
@@ -24,8 +26,9 @@ class LeftViewController : UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
 
-    var menus = ["Organizer".localized, "My Documents".localized, "External Documents".localized, "Make Call".localized, "Settings".localized, "About".localized]
+    var menus = ["Organizer".localized, "Preferences".localized, "My Documents".localized, "External Documents".localized, "Make Call".localized, "Settings".localized, "About".localized]
     var mainViewController: UIViewController!
+    var preferencesViewController: UIViewController!
     var settingsViewController: UIViewController!
     var documentsViewController: UIViewController!
     var documentPickerViewController: UIViewController!
@@ -45,6 +48,9 @@ class LeftViewController : UIViewController {
 
         let documentsViewController = storyboard.instantiateViewControllerWithIdentifier("DocumentsViewController") as! SODocumentsViewController
         self.documentsViewController = UINavigationController(rootViewController: documentsViewController)
+        
+        let preferencesViewController = storyboard.instantiateViewControllerWithIdentifier("PreferencesViewController") as! SOPreferencesViewController
+        self.preferencesViewController = UINavigationController(rootViewController: preferencesViewController)
         
         let documentPickerViewController = storyboard.instantiateViewControllerWithIdentifier("DocumentPickerViewController") as! SODocumentPickerViewController
         self.documentPickerViewController = UINavigationController(rootViewController: documentPickerViewController)
@@ -90,6 +96,8 @@ extension LeftViewController: LeftMenuProtocol {
         switch menu {
         case .Main:
             self.slideMenuController()?.changeMainViewController(self.mainViewController, close: true)
+        case .Preferences:
+            self.slideMenuController()?.changeMainViewController(self.preferencesViewController, close: true)
         case .Documents:
             self.slideMenuController()?.changeMainViewController(self.documentsViewController, close: true)
             break

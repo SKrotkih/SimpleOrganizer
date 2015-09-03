@@ -70,14 +70,19 @@ class SOMainViewController: UIViewController{
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
+        
         self.addLeftBarButtonWithImage(UIImage(named: "ic_menu_black_24dp")!)
         self.slideMenuController()?.removeLeftGestures()
         self.slideMenuController()?.removeRightGestures()
 
-        //let buttonImage : UIImage! = UIImage(named: "add_task")
-        //var rightButton: UIBarButtonItem = UIBarButtonItem(image: buttonImage, style: UIBarButtonItemStyle.Plain, target: self, action: "addNewTask")
-        rightButton = UIBarButtonItem(title: "Activity".localized, style: UIBarButtonItemStyle.Plain, target: self, action: "startActivityViewController")
-        navigationItem.rightBarButtonItem = rightButton;
+        let addTaskImage : UIImage! = UIImage(named: "add_task")
+        var addTaskButton: UIBarButtonItem = UIBarButtonItem(image: addTaskImage, style: UIBarButtonItemStyle.Plain, target: self, action: "addNewTask")
+        let activityImage : UIImage! = UIImage(named: "activity")
+        var activityButton: UIBarButtonItem = UIBarButtonItem(image: activityImage, style: UIBarButtonItemStyle.Plain, target: self, action: "startActivityViewController")
+        navigationItem.rightBarButtonItems = [addTaskButton, activityButton]
+        
+        //rightButton = UIBarButtonItem(title: "Activity".localized, style: UIBarButtonItemStyle.Plain, target: self, action: "startActivityViewController")
+        //navigationItem.rightBarButtonItem = addTaskButton;
         
         self.reloadData({(error: NSError?) in })
     }
@@ -131,7 +136,7 @@ class SOMainViewController: UIViewController{
             let newTaskActivity = SOTaskMenuItemActivity()
             newTaskActivity.name = "NewTaskActivity"
             newTaskActivity.title = "New Task".localized
-            newTaskActivity.imageName = "ico11@2x"
+            newTaskActivity.imageName = "add_task"
             newTaskActivity.performBlock = {
                 self.addNewTask()
             }

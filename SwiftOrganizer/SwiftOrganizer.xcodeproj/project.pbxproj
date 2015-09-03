@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7F0CB6B81B97F29B0058CDD5 /* SOPreferencesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F0CB6B71B97F29B0058CDD5 /* SOPreferencesViewController.swift */; };
+		7F0CB6BB1B97FFA40058CDD5 /* Preferences.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7F0CB6B91B97FFA40058CDD5 /* Preferences.storyboard */; };
+		7F0CB6BE1B9802210058CDD5 /* SOPreferenceCategoriesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F0CB6BC1B9802210058CDD5 /* SOPreferenceCategoriesViewController.swift */; };
+		7F0CB6BF1B9802210058CDD5 /* SOPreferenceIconsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F0CB6BD1B9802210058CDD5 /* SOPreferenceIconsViewController.swift */; };
 		7F0D37841B0F67B1008B785B /* SlideMenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F0D37831B0F67B1008B785B /* SlideMenuController.swift */; };
 		7F177AB61B4FDF960071773B /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7F177AB81B4FDF960071773B /* Localizable.strings */; };
 		7F2042E81B95E10A00EF5AAE /* KVOTryCatchException.h in Headers */ = {isa = PBXBuildFile; fileRef = 7F5F543D1B95B1930095FE4C /* KVOTryCatchException.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -212,6 +216,10 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		7F0CB6B71B97F29B0058CDD5 /* SOPreferencesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SOPreferencesViewController.swift; sourceTree = "<group>"; };
+		7F0CB6BA1B97FFA40058CDD5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Preferences.storyboard; sourceTree = "<group>"; };
+		7F0CB6BC1B9802210058CDD5 /* SOPreferenceCategoriesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SOPreferenceCategoriesViewController.swift; sourceTree = "<group>"; };
+		7F0CB6BD1B9802210058CDD5 /* SOPreferenceIconsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SOPreferenceIconsViewController.swift; sourceTree = "<group>"; };
 		7F0D37831B0F67B1008B785B /* SlideMenuController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlideMenuController.swift; sourceTree = "<group>"; };
 		7F177AB21B4FDC820071773B /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Main.strings; sourceTree = "<group>"; };
 		7F177AB31B4FDC820071773B /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
@@ -418,6 +426,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		7F0CB6B61B97F2650058CDD5 /* Preferences */ = {
+			isa = PBXGroup;
+			children = (
+				7F0CB6B91B97FFA40058CDD5 /* Preferences.storyboard */,
+				7F0CB6B71B97F29B0058CDD5 /* SOPreferencesViewController.swift */,
+				7F0CB6BC1B9802210058CDD5 /* SOPreferenceCategoriesViewController.swift */,
+				7F0CB6BD1B9802210058CDD5 /* SOPreferenceIconsViewController.swift */,
+			);
+			name = Preferences;
+			sourceTree = "<group>";
+		};
 		7F497D501B1AA20D00F95BA9 /* TabBar */ = {
 			isa = PBXGroup;
 			children = (
@@ -523,6 +542,7 @@
 		7F57258A1B0F6114003DBDEB /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				7F0CB6B61B97F2650058CDD5 /* Preferences */,
 				7FD44ACE1B57F2B8000A4FB3 /* Activities */,
 				7F5E6E131B5172EE00A1B278 /* Documents */,
 				7F5A6D1D1B14A115009665C7 /* MainViewController */,
@@ -1153,6 +1173,7 @@
 				7F6474A01B2730D700B3D75C /* ico14@2x.png in Resources */,
 				7F6474A31B2730D700B3D75C /* ico17@2x.png in Resources */,
 				7F5A6D381B14C42C009665C7 /* ico8@2x.png in Resources */,
+				7F0CB6BB1B97FFA40058CDD5 /* Preferences.storyboard in Resources */,
 				7F5A6D341B14C42C009665C7 /* ico4@2x.png in Resources */,
 				7F5B372A1B6F988500112760 /* undo@2x.png in Resources */,
 				7F497D621B1AF9B600F95BA9 /* SOIconTabView.xib in Resources */,
@@ -1231,8 +1252,10 @@
 				7FC8E88D1B52207D0013906F /* SOEditDocumentViewController.swift in Sources */,
 				7F0D37841B0F67B1008B785B /* SlideMenuController.swift in Sources */,
 				7F5725931B0F6114003DBDEB /* SOEditTaskViewController.swift in Sources */,
+				7F0CB6BF1B9802210058CDD5 /* SOPreferenceIconsViewController.swift in Sources */,
 				7F57255C1B0F5DDA003DBDEB /* AppDelegate.swift in Sources */,
 				7F497D561B1AAA9900F95BA9 /* SOCategoryTabBarController.swift in Sources */,
+				7F0CB6BE1B9802210058CDD5 /* SOPreferenceCategoriesViewController.swift in Sources */,
 				7F497D5C1B1AAF9700F95BA9 /* SOIconTabView.swift in Sources */,
 				7F5725941B0F6114003DBDEB /* LeftViewController.swift in Sources */,
 				7F57259D1B0F61AC003DBDEB /* BaseTableViewCell.swift in Sources */,
@@ -1254,6 +1277,7 @@
 				7F5725981B0F6114003DBDEB /* SOSettingsViewController.swift in Sources */,
 				7F5725A41B0F61F7003DBDEB /* UIViewControllerExtension.swift in Sources */,
 				7FE4AE421B731F0600FE12D3 /* SOLocalNotificationsCenter.swift in Sources */,
+				7F0CB6B81B97F29B0058CDD5 /* SOPreferencesViewController.swift in Sources */,
 				7FD44AD11B57F2CE000A4FB3 /* SOTaskMenuItemActivity.swift in Sources */,
 				7F5E6E151B51730900A1B278 /* SODocumentsViewController.swift in Sources */,
 				7F497D541B1AA2C300F95BA9 /* SOTabBarContainerView.swift in Sources */,
@@ -1368,6 +1392,15 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		7F0CB6B91B97FFA40058CDD5 /* Preferences.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				7F0CB6BA1B97FFA40058CDD5 /* Base */,
+			);
+			name = Preferences.storyboard;
+			path = ..;
+			sourceTree = "<group>";
+		};
 		7F177AB81B4FDF960071773B /* Localizable.strings */ = {
 			isa = PBXVariantGroup;
 			children = (

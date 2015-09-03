@@ -89,7 +89,7 @@ class SOMakeCallViewController: UIViewController {
         if isValidOk {
             self.facetime(phoneNumber)
         } else {
-            let message = "Please enter valid".localized
+            let message = "Please enter a valid".localized
             let messageOpt = self.emailSwitch.on ? "e-mail" : "phone number".localized
             showAlertWithTitle("Error".localized, "\(message) \(messageOpt)!")
         }

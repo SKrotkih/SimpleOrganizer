@@ -76,13 +76,19 @@ class SOEditTaskViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.title = "Edit Task".localized
+        self.title = ""
         
         _undoManager.prepareWithInvocationTarget(self)
     }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
+
+        if isItNewTask{
+            self.title = "New Task".localized
+        } else {
+            self.title = "Edit Task".localized
+        }
         
         let leftButtonImage: UIImage! = UIImage(named: "back_button")
         var leftButton: UIBarButtonItem = UIBarButtonItem(image: leftButtonImage, style: UIBarButtonItemStyle.Plain, target: self, action: "closeButtonWasPressed")
@@ -222,8 +228,8 @@ class SOEditTaskViewController: UIViewController {
     func closeButtonWasPressed() {
         if dataWasChanged() {
             
-            let controller = UIAlertController(title: "Data was chenged!".localized, message: nil, preferredStyle: .ActionSheet)
-            let skeepDateAction = UIAlertAction(title: "Close".localized, style: .Cancel, handler: { action in
+            let controller = UIAlertController(title: "Data was changed!".localized, message: nil, preferredStyle: .ActionSheet)
+            let skeepDateAction = UIAlertAction(title: "Discard".localized, style: .Cancel, handler: { action in
                 self.closeWindow()
             })
             let saveDateAction = UIAlertAction(title: "Save".localized, style: .Default, handler: { action in
@@ -317,6 +323,7 @@ extension SOEditTaskViewController: UITableViewDelegate{
 
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         var storyboard = UIStoryboard(name: "Main", bundle: nil)
+        var viewController: UIViewController!
         
         let row: SOEditTaskCellId = SOEditTaskCellId(rawValue: indexPath.row)!
         switch row{
@@ -324,26 +331,28 @@ extension SOEditTaskViewController: UITableViewDelegate{
             let enterCategoryVC = storyboard.instantiateViewControllerWithIdentifier(SOEditTaskViewControllerId.Category.rawValue) as! SOEditCategoryViewController
             enterCategoryVC.task = task
             enterCategoryVC.undoDelegate = self
-            self.navigationController!.pushViewController(enterCategoryVC, animated: true)
+            viewController = enterCategoryVC
         case .IconsCell:
             let enterIconsVC = storyboard.instantiateViewControllerWithIdentifier(SOEditTaskViewControllerId.Icons.rawValue) as! SOEditIconsViewController
             enterIconsVC.task = task
             enterIconsVC.undoDelegate = self
-            self.navigationController!.pushViewController(enterIconsVC, animated: true)
+            viewController = enterIconsVC
         case .DateCell:
             let enterDateVC = storyboard.instantiateViewControllerWithIdentifier(SOEditTaskViewControllerId.Date.rawValue) as! SOEditDateViewController
             enterDateVC.task = task
             enterDateVC.undoDelegate = self
             enterDateVC.date = task?.date
-            self.navigationController!.pushViewController(enterDateVC, animated: true)
+            viewController = enterDateVC
         case .DescriptionCell:
             let enterDescrVC = storyboard.instantiateViewControllerWithIdentifier(SOEditTaskViewControllerId.Description.rawValue) as! SOEditDescriptionViewController
             enterDescrVC.task = task
             enterDescrVC.undoDelegate = self
-            self.navigationController!.pushViewController(enterDescrVC, animated: true)
+            viewController = enterDescrVC
         default:
             assert(false, "Rows is too much!")
         }
+        
+        self.navigationController!.pushViewController(viewController, animated: true)
     }
 }
 

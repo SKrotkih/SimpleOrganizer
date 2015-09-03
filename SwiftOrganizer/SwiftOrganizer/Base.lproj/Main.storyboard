@@ -41,6 +41,52 @@
             </objects>
             <point key="canvasLocation" x="791" y="1219"/>
         </scene>
+        <!--Preferences View Controller-->
+        <scene sceneID="VQM-xL-I4H">
+            <objects>
+                <viewController storyboardIdentifier="PreferencesViewController" id="CzF-FO-vmC" customClass="SOPreferencesViewController" customModule="SwiftOrganizer" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Mbk-vn-Beg"/>
+                        <viewControllerLayoutGuide type="bottom" id="48d-Pb-3QF"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="ltC-JM-nRg">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="xZa-mH-50h">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="PreferrencesCell" id="nee-Ht-GlL">
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="nee-Ht-GlL" id="nsX-dJ-3D8">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                                <sections/>
+                                <connections>
+                                    <outlet property="dataSource" destination="CzF-FO-vmC" id="Ex1-KV-5GL"/>
+                                    <outlet property="delegate" destination="CzF-FO-vmC" id="aDV-7M-6jv"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="xZa-mH-50h" secondAttribute="trailing" id="KgT-1R-v6k"/>
+                            <constraint firstItem="xZa-mH-50h" firstAttribute="leading" secondItem="ltC-JM-nRg" secondAttribute="leading" id="XaP-7v-ZYM"/>
+                            <constraint firstItem="xZa-mH-50h" firstAttribute="top" secondItem="ltC-JM-nRg" secondAttribute="top" id="c2g-Lf-mJn"/>
+                            <constraint firstItem="48d-Pb-3QF" firstAttribute="top" secondItem="xZa-mH-50h" secondAttribute="bottom" id="lsD-b0-BNF"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="tableView" destination="xZa-mH-50h" id="rjX-qo-fox"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Iuc-A7-KTF" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="789" y="1870"/>
+        </scene>
         <!--Make Call View Controller-->
         <scene sceneID="KF3-Ha-4Pt">
             <objects>
