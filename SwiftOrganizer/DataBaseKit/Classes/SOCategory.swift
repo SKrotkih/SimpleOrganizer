@@ -8,61 +8,25 @@
 
 import UIKit
 
-public class SOCategory: NSObject {
+public class SOCategory: SOCatalog {
     
-    private var _databaseObject: AnyObject?
-    private var _recordid: String = ""
-    private var _name: String = ""
-    private var _selected = false
-    public var visible = false
-
-    override init() {
-        super.init()
-    }
+    public var name: String = ""
     
     convenience init(id: String, name: String, selected: Bool) {
         self.init()
         
         self.recordid = id
-        self.name = name
         self.selected = selected
-    }
-    
-    public var recordid: String{
-        get{
-            return _recordid
-        }
-        set{
-            _recordid = newValue
-        }
-    }
-    
-    public var name: String{
-        get{
-            return _name
-        }
-        set{
-            _name = newValue
-        }
-    }
-    
-    public var selected: Bool{
-        get{
-            return _selected
-        }
-        set{
-            _selected = newValue
-        }
-    }
 
-    var databaseObject: AnyObject?{
+        self.name = name
+    }
+    
+    public override var entityName: String{
         get{
-            return _databaseObject
-        }
-        set{
-            _databaseObject = newValue
+            return CategoryEntityName
         }
     }
+    
 }
 
 extension SOCategory: SOConcreteObjectsProtocol{
@@ -70,9 +34,9 @@ extension SOCategory: SOConcreteObjectsProtocol{
     {
         let theObject = object as! PFObject
         self.databaseObject = theObject
-        self.recordid = theObject[kCategoryFldId] as! String
+        self.recordid = theObject[kFldRecordId] as! String
         self.name = theObject[kCategoryFldName] as! String
-        self.selected = theObject[kCategoryFldSelected] as! Bool
+        self.selected = theObject[kFldSelected] as! Bool
         self.visible = theObject[kFldVisible] as! Bool
     }
     
@@ -87,25 +51,5 @@ extension SOCategory: SOConcreteObjectsProtocol{
         self.name = theObject.name
         self.selected = theObject.selected
         self.visible = theObject.visible
-    }
-}
-
-    // MARK: -
-    // MARK: - Select Category Handler
-
-extension SOCategory{
-    public func setSelect(select: Bool, block: (error: NSError?) -> Void){
-        self.saveFldName(kCategoryFldSelected, value: select, block: block)
-    }
-    
-    public func setVisible(visible: Bool, block: (error: NSError?) -> Void){
-        self.saveFldName(kFldVisible, value: visible, block: block)
-    }
-    
-    public func saveFldName(fldName: String, value: AnyObject, block: (error: NSError?) -> Void){
-        let dataBase: SODataBaseProtocol = SODataBaseFactory.sharedInstance.dataBase
-        dataBase.saveFieldValueToObject(self.databaseObject, entityName: CategoryEntityName, fldName: fldName, recordId: self.recordid, value: value, block: {(error: NSError?) in
-            block(error: error)
-        })
     }
 }

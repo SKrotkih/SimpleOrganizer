@@ -25,7 +25,7 @@ class SOEditCategoryViewController: SOEditTaskFieldBaseViewController {
         
         SODataFetching.sharedInstance.allCategories{(categories: [SOCategory], fetchError: NSError?) in
             if let error = fetchError{
-                showAlertWithTitle("Error reading categories data", error.description)
+                showAlertWithTitle("Failed to fetch data".localized, error.description)
             } else {
                 dispatch_async(dispatch_get_main_queue(), {
                     self.categories = categories.filter {(category: SOCategory) in category.visible }

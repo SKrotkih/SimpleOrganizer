@@ -154,13 +154,11 @@ extension SOLocalDataBase{
                 _error = error
             } else {
                 if objects.count > 0{
-                    for object: TaskCategory in objects{
-                        let theObject = self.fillNewObjectWithData(SOCategory(), managedObject: object)
-                        _allCategories.append(theObject)
-                    }
+                    objects.map({object in
+                        _allCategories.append(self.fillNewObjectWithData(SOCategory(), managedObject: object))
+                    })
                 } else {
                     self.populateCategories()
-                    
                     _needRecursiveCall = true
                 }
             }
@@ -193,10 +191,9 @@ extension SOLocalDataBase{
                 _error = error
             } else {
                 if objects.count > 0{
-                    for object: TaskIco in objects{
-                        let theObject: SOIco = self.fillNewObjectWithData(SOIco(), managedObject: object)
-                        _allIcon.append(theObject)
-                    }
+                    objects.map({object in
+                        _allIcon.append(self.fillNewObjectWithData(SOIco(), managedObject: object))
+                    })
                 } else {
                     self.populateIcons()
                     

@@ -8,66 +8,24 @@
 
 import UIKit
 
-public class SOIco: NSObject {
+public class SOIco: SOCatalog {
 
-    private var _databaseObject: AnyObject?
-    private var _recordid: String = ""
-    private var _name: String = ""
-    private var _imageName: String = ""
-    private var _selected = false
-    public var visible = false
+    public var name: String = ""
+    public var imageName: String = ""
 
     convenience init(id: String, name: String, imageName: String, selected: Bool) {
         self.init()
         
         self.recordid = id
+        self.selected = selected
+        
         self.name = name
         self.imageName = imageName
-        self.selected = selected
     }
     
-    var databaseObject: AnyObject?{
+    public override var entityName: String{
         get{
-            return _databaseObject
-        }
-        set{
-            _databaseObject = newValue
-        }
-    }
-    
-    public var recordid: String{
-        get{
-            return _recordid
-        }
-        set{
-            self._recordid = newValue
-        }
-    }
-    
-    public var name: String{
-        get{
-            return _name
-        }
-        set{
-            self._name = newValue
-        }
-    }
-    
-    public var imageName: String{
-        get{
-            return _imageName
-        }
-        set{
-            self._imageName = newValue
-        }
-    }
-    
-    public var selected: Bool{
-        get{
-            return _selected
-        }
-        set{
-            self._selected = newValue
+            return IcoEntityName
         }
     }
 }
@@ -77,10 +35,10 @@ extension SOIco: SOConcreteObjectsProtocol{
     {
         let theObject = object as! PFObject
         self.databaseObject = theObject
-        self.recordid = theObject[kIcoFldId] as! String
+        self.recordid = theObject[kFldRecordId] as! String
         self.name = theObject[kIcoFldName] as! String
         self.imageName = theObject[kIcoFldImageName] as! String
-        self.selected = theObject[kIcoFldSelected] as! Bool
+        self.selected = theObject[kFldSelected] as! Bool
         self.visible = theObject[kFldVisible] as! Bool
     }
     
@@ -96,22 +54,5 @@ extension SOIco: SOConcreteObjectsProtocol{
         self.imageName = theObject.imagename
         self.selected = theObject.selected
         self.visible = theObject.visible
-    }
-}
-
-extension SOIco{
-    public func setSelect(select: Bool, block: (error: NSError?) -> Void){
-        self.saveFldName(kIcoFldSelected, value: select, block: block)
-    }
-    
-    public func setVisible(visible: Bool, block: (error: NSError?) -> Void){
-        self.saveFldName(kFldVisible, value: visible, block: block)
-    }
-    
-    public func saveFldName(fldName: String, value: AnyObject, block: (error: NSError?) -> Void){
-        let dataBase: SODataBaseProtocol = SODataBaseFactory.sharedInstance.dataBase
-        dataBase.saveFieldValueToObject(self.databaseObject, entityName: IcoEntityName, fldName: fldName, recordId: self.recordid, value: value, block: {(error: NSError?) in
-            block(error: error)
-        })
     }
 }

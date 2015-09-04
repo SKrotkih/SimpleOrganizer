@@ -23,15 +23,12 @@ let kTaskFldIco6 = "ico6"
 let kTaskFldDate = "date"
 
 let kFldVisible = "visible"
+let kFldSelected = "selected"
+let kFldRecordId = "recordid"
 
-let kCategoryFldId = "recordid"
 let kCategoryFldName = "name"
-let kCategoryFldSelected = "selected"
-
-let kIcoFldId = "recordid"
 let kIcoFldName = "name"
 let kIcoFldImageName = "imageName"
-let kIcoFldSelected = "selected"
 
 public class SORemoteDataBase: SODataBaseProtocol {
     private let queue = dispatch_queue_create("remoteDataBaseRequestsQ", DISPATCH_QUEUE_CONCURRENT);
@@ -133,11 +130,9 @@ extension SORemoteDataBase{
                     } else {
                         if let pfObjects: [PFObject] = objects as? [PFObject]{
                             if pfObjects.count > 0{
-                                for object: PFObject in pfObjects{
-                                    if let instance: AnyObject = self.newInstanceFactory(object, className: className){
-                                        resultBuffer.append(instance)
-                                    }
-                                }
+                                pfObjects.map({object in
+                                    resultBuffer.append(self.newInstanceFactory(object, className: className)!)
+                                })
                                 block(resultBuffer: resultBuffer, error: nil)
                             } else {
                                 self.populateDefaultData(className, block: {(populateError: NSError?) -> Void in
@@ -309,9 +304,9 @@ extension SORemoteDataBase{
         if self.currentCategoryIndex < defaultCategories.count{
             let category: SOCategory = defaultCategories[self.currentCategoryIndex++]
             var object = PFObject(className: CategoryClassName)
-            object[kCategoryFldId] = category.recordid
+            object[kFldRecordId] = category.recordid
             object[kCategoryFldName] = category.name
-            object[kCategoryFldSelected] = category.selected
+            object[kFldSelected] = category.selected
             object[kFldVisible] = true
             object.saveInBackgroundWithBlock {(success: Bool, error: NSError?) -> Void in
                 if (success) {
@@ -370,10 +365,10 @@ extension SORemoteDataBase{
         if self.currentIcoIndex < defaultIcons.count{
             let ico: SOIco = defaultIcons[self.currentIcoIndex++]
             var object = PFObject(className: IcoClassName)
-            object[kIcoFldId] = ico.recordid
+            object[kFldRecordId] = ico.recordid
             object[kIcoFldName] = ico.name
             object[kIcoFldImageName] = ico.imageName
-            object[kIcoFldSelected] = ico.selected
+            object[kFldSelected] = ico.selected
             object[kFldVisible] = true
             object.saveInBackgroundWithBlock {(success: Bool, error: NSError?) -> Void in
                 if (success) {

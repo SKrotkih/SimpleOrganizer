@@ -23,4 +23,21 @@ extension Array {
             self.removeAtIndex(index!)
         }
     }
+    
+    func each(f: (T) -> ()) {
+        for object in self {
+            f(object)
+        }
+    }
+    
+    func remove(functor: (T) -> Bool) -> [T] {
+        var tmpArray = [T]()
+        for object in self {
+            let theObject = object as T
+            if functor(theObject) == false {
+                tmpArray.append(theObject)
+            }
+        }
+        return tmpArray
+    }
 }

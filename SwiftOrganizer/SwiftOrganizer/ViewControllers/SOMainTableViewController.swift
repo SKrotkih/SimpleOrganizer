@@ -75,7 +75,7 @@ class SOMainTableViewController: NSObject{
 extension SOMainTableViewController: SOChangeFilterStateDelegate{
 
     func didSelectCategory(category: SOCategory, select: Bool, block: (error: NSError?) -> Void){
-        category.setSelect(select, block: { (error) -> Void in
+        category.setSelected(select, block: { (error) -> Void in
             if error == nil {
                 dispatch_async(dispatch_get_main_queue(), {
                     self.reloadData()
@@ -88,7 +88,7 @@ extension SOMainTableViewController: SOChangeFilterStateDelegate{
     }
     
     func didSelectIcon(icon: SOIco, select: Bool, block: (error: NSError?) -> Void){
-        icon.setSelect(select, block: { (error) -> Void in
+        icon.setSelected(select, block: { (error) -> Void in
             if error == nil {
                 dispatch_async(dispatch_get_main_queue(), {[weak self] in
                     self?.reloadData()

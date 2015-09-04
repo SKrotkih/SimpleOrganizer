@@ -74,6 +74,8 @@
 		7F5C81741B69E36C00284D9D /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F5C81731B69E36C00284D9D /* Social.framework */; };
 		7F5D19611B7635200095C51F /* SOReachabilityCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F5D195B1B761C460095C51F /* SOReachabilityCenter.swift */; };
 		7F5D19621B7635200095C51F /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F5D195F1B761F0A0095C51F /* Reachability.swift */; };
+		7F5D48D21B997E20002ACFB1 /* NSDateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F5D48D11B997E20002ACFB1 /* NSDateExtension.swift */; };
+		7F5D48D41B998BD5002ACFB1 /* SOCatalog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F5D48D31B998BD5002ACFB1 /* SOCatalog.swift */; };
 		7F5E6E151B51730900A1B278 /* SODocumentsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F5E6E141B51730900A1B278 /* SODocumentsViewController.swift */; };
 		7F625EF01B2ED492004B7C16 /* libstdc++.6.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F625EEF1B2ED492004B7C16 /* libstdc++.6.dylib */; };
 		7F625EF21B2ED49C004B7C16 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F625EF11B2ED49C004B7C16 /* MobileCoreServices.framework */; };
@@ -293,6 +295,8 @@
 		7F5D195B1B761C460095C51F /* SOReachabilityCenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SOReachabilityCenter.swift; path = ../Utilities/SOReachabilityCenter.swift; sourceTree = "<group>"; };
 		7F5D195F1B761F0A0095C51F /* Reachability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
 		7F5D20EA1B3942B500926392 /* SwiftOrganizer.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = SwiftOrganizer.playground; sourceTree = "<group>"; };
+		7F5D48D11B997E20002ACFB1 /* NSDateExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSDateExtension.swift; sourceTree = "<group>"; };
+		7F5D48D31B998BD5002ACFB1 /* SOCatalog.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SOCatalog.swift; path = DataBaseKit/Classes/SOCatalog.swift; sourceTree = "<group>"; };
 		7F5E6E141B51730900A1B278 /* SODocumentsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SODocumentsViewController.swift; sourceTree = "<group>"; };
 		7F5F543D1B95B1930095FE4C /* KVOTryCatchException.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KVOTryCatchException.h; path = "SwiftOrganizer/Objective-C/KVOTryCatchException.h"; sourceTree = SOURCE_ROOT; };
 		7F5F543E1B95B1930095FE4C /* KVOTryCatchException.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = KVOTryCatchException.m; path = "SwiftOrganizer/Objective-C/KVOTryCatchException.m"; sourceTree = SOURCE_ROOT; };
@@ -597,6 +601,7 @@
 				7F5725A01B0F61F7003DBDEB /* UITableViewExtension.swift */,
 				7F5725A11B0F61F7003DBDEB /* UIViewControllerExtension.swift */,
 				7F5C2C3B1B40143600506320 /* ArrayExtension.swift */,
+				7F5D48D11B997E20002ACFB1 /* NSDateExtension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -921,6 +926,7 @@
 				7FD44B661B5A9A67000A4FB3 /* SOTask.swift */,
 				7FD44B611B5A9A67000A4FB3 /* SOCategory.swift */,
 				7FD44B651B5A9A67000A4FB3 /* SOIco.swift */,
+				7F5D48D31B998BD5002ACFB1 /* SOCatalog.swift */,
 			);
 			name = Classes;
 			path = ..;
@@ -1285,6 +1291,7 @@
 				7F5725A41B0F61F7003DBDEB /* UIViewControllerExtension.swift in Sources */,
 				7FE4AE421B731F0600FE12D3 /* SOLocalNotificationsCenter.swift in Sources */,
 				7F0CB6B81B97F29B0058CDD5 /* SOPreferencesViewController.swift in Sources */,
+				7F5D48D21B997E20002ACFB1 /* NSDateExtension.swift in Sources */,
 				7FD44AD11B57F2CE000A4FB3 /* SOTaskMenuItemActivity.swift in Sources */,
 				7F5E6E151B51730900A1B278 /* SODocumentsViewController.swift in Sources */,
 				7F497D541B1AA2C300F95BA9 /* SOTabBarContainerView.swift in Sources */,
@@ -1348,6 +1355,7 @@
 				7FD44B8B1B5A9C27000A4FB3 /* SODataBaseProtocol.swift in Sources */,
 				7FD44B8C1B5A9C27000A4FB3 /* SODataFetching.swift in Sources */,
 				7FD44BAB1B5AA924000A4FB3 /* SOObserversManager.swift in Sources */,
+				7F5D48D41B998BD5002ACFB1 /* SOCatalog.swift in Sources */,
 				7FD44B8D1B5A9C27000A4FB3 /* SOIco.swift in Sources */,
 				7FD44B971B5A9DE5000A4FB3 /* StringExtension.swift in Sources */,
 				7FD44B8E1B5A9C27000A4FB3 /* SOTask.swift in Sources */,
