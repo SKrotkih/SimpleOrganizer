@@ -8,7 +8,7 @@
 
 import UIKit
 
-public class SOCatalog: NSObject {
+public class SOCatalog: NSObject, SOConcreteObjectsProtocol {
 
     public var databaseObject: AnyObject?
     public var recordid: String = ""
@@ -25,7 +25,30 @@ public class SOCatalog: NSObject {
             return ""
         }
     }
+
+    //- MARK: -
+    //- MARK: SOConcreteObjectsProtocol
     
+    public func initFromParseObject(object: AnyObject)
+    {
+        let theObject = object as! PFObject
+        self.databaseObject = theObject
+        self.recordid = theObject[kFldRecordId] as! String
+        self.selected = theObject[kFldSelected] as! Bool
+        self.visible = theObject[kFldVisible] as! Bool
+    }
+    
+    public func copyToParseObject(object: AnyObject){
+    }
+    
+    public func initFromCoreDataObject(object: AnyObject)
+    {
+        let theObject = object as! NSManagedObject
+        self.databaseObject = theObject
+        self.recordid = theObject.valueForKey(kFldRecordId) as! String
+        self.selected = theObject.valueForKey(kFldSelected) as! Bool
+        self.visible = theObject.valueForKey(kFldVisible) as! Bool
+    }
 }
 
 extension SOCatalog{

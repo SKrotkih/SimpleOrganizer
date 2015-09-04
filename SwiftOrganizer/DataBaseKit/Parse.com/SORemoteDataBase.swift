@@ -28,7 +28,7 @@ let kFldRecordId = "recordid"
 
 let kCategoryFldName = "name"
 let kIcoFldName = "name"
-let kIcoFldImageName = "imageName"
+let kIcoFldImageName = "imagename"
 
 public class SORemoteDataBase: SODataBaseProtocol {
     private let queue = dispatch_queue_create("remoteDataBaseRequestsQ", DISPATCH_QUEUE_CONCURRENT);

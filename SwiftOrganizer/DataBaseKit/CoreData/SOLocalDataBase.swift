@@ -11,8 +11,6 @@ import CoreData
 
 let DatabaseName = "SwiftOrganizer"
 let DataBaseErrorDomain = "SwiftOrganizerErrorDomain"
-let CategoryEntityName = "TaskCategory"
-let IcoEntityName = "TaskIco"
 let TaskEntityName = "Task"
 
 public class SOLocalDataBase: SODataBaseProtocol {

@@ -8,6 +8,8 @@
 
 import UIKit
 
+let IcoEntityName = "TaskIco"
+
 public class SOIco: SOCatalog {
 
     public var name: String = ""
@@ -28,31 +30,28 @@ public class SOIco: SOCatalog {
             return IcoEntityName
         }
     }
-}
 
-extension SOIco: SOConcreteObjectsProtocol{
-    public func initFromParseObject(object: AnyObject)
+    //- MARK: -
+    //- MARK: SOConcreteObjectsProtocol
+    
+    public override func initFromParseObject(object: AnyObject)
     {
         let theObject = object as! PFObject
-        self.databaseObject = theObject
-        self.recordid = theObject[kFldRecordId] as! String
+        super.initFromParseObject(theObject)
         self.name = theObject[kIcoFldName] as! String
         self.imageName = theObject[kIcoFldImageName] as! String
-        self.selected = theObject[kFldSelected] as! Bool
-        self.visible = theObject[kFldVisible] as! Bool
     }
     
-    public func copyToParseObject(object: AnyObject){
+    public override func copyToParseObject(object: AnyObject){
+        super.copyToParseObject(object)
     }
-
-    public func initFromCoreDataObject(object: AnyObject)
+    
+    public override func initFromCoreDataObject(object: AnyObject)
     {
-        let theObject = object as! TaskIco
-        self.databaseObject = theObject
-        self.recordid = theObject.recordid
-        self.name = theObject.name
-        self.imageName = theObject.imagename
-        self.selected = theObject.selected
-        self.visible = theObject.visible
+        super.initFromCoreDataObject(object)
+        let theObject = object as! NSManagedObject
+        self.name = theObject.valueForKey(kIcoFldName) as! String
+        self.imageName = theObject.valueForKey(kIcoFldImageName) as! String
     }
 }
+
