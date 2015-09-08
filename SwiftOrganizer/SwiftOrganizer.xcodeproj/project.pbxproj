@@ -27,6 +27,9 @@
 		7F497D621B1AF9B600F95BA9 /* SOIconTabView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7F497D611B1AF9B600F95BA9 /* SOIconTabView.xib */; };
 		7F497D651B1B330300F95BA9 /* SOUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F497D641B1B330300F95BA9 /* SOUtilities.swift */; };
 		7F55D3EA1B9ED1F000C02645 /* SOConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F55D3E81B9ED1C200C02645 /* SOConstants.swift */; };
+		7F55D3EC1B9EFAAA00C02645 /* SOCoreDataBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F55D3EB1B9EFAAA00C02645 /* SOCoreDataBase.swift */; };
+		7F55D3EE1B9F073700C02645 /* SOPopulateRemoteDataBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F55D3ED1B9F073700C02645 /* SOPopulateRemoteDataBase.swift */; };
+		7F55D3F01B9F090900C02645 /* SOPopulateLocalDataBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F55D3EF1B9F090900C02645 /* SOPopulateLocalDataBase.swift */; };
 		7F56ACC71B6A5C9E00B0C1EF /* SOMakeCallViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F56ACC61B6A5C9E00B0C1EF /* SOMakeCallViewController.swift */; };
 		7F56ACC91B6A5EE600B0C1EF /* phone.png in Resources */ = {isa = PBXBuildFile; fileRef = 7F56ACC81B6A5EE600B0C1EF /* phone.png */; };
 		7F56ACCB1B6D1A2200B0C1EF /* SOSemaforeExample.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F56ACCA1B6D1A2200B0C1EF /* SOSemaforeExample.swift */; };
@@ -244,6 +247,9 @@
 		7F497D611B1AF9B600F95BA9 /* SOIconTabView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SOIconTabView.xib; path = TabBar/SOIconTabView.xib; sourceTree = "<group>"; };
 		7F497D641B1B330300F95BA9 /* SOUtilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SOUtilities.swift; path = Utilities/SOUtilities.swift; sourceTree = "<group>"; };
 		7F55D3E81B9ED1C200C02645 /* SOConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SOConstants.swift; path = ../SwiftOrganizer/SOConstants.swift; sourceTree = "<group>"; };
+		7F55D3EB1B9EFAAA00C02645 /* SOCoreDataBase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SOCoreDataBase.swift; path = DataBaseKit/CoreData/SOCoreDataBase.swift; sourceTree = "<group>"; };
+		7F55D3ED1B9F073700C02645 /* SOPopulateRemoteDataBase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SOPopulateRemoteDataBase.swift; path = DataBaseKit/Parse.com/SOPopulateRemoteDataBase.swift; sourceTree = "<group>"; };
+		7F55D3EF1B9F090900C02645 /* SOPopulateLocalDataBase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SOPopulateLocalDataBase.swift; path = DataBaseKit/CoreData/SOPopulateLocalDataBase.swift; sourceTree = "<group>"; };
 		7F56ACC61B6A5C9E00B0C1EF /* SOMakeCallViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SOMakeCallViewController.swift; sourceTree = "<group>"; };
 		7F56ACC81B6A5EE600B0C1EF /* phone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = phone.png; path = Resources/Images/phone.png; sourceTree = "<group>"; };
 		7F56ACCA1B6D1A2200B0C1EF /* SOSemaforeExample.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SOSemaforeExample.swift; path = Utilities/SOSemaforeExample.swift; sourceTree = "<group>"; };
@@ -940,6 +946,7 @@
 			children = (
 				7FD44B711B5A9AC8000A4FB3 /* SOParseComManager.swift */,
 				7FD44B721B5A9AC8000A4FB3 /* SORemoteDataBase.swift */,
+				7F55D3ED1B9F073700C02645 /* SOPopulateRemoteDataBase.swift */,
 			);
 			name = Parse.com;
 			path = ..;
@@ -951,7 +958,9 @@
 				7FD44B761B5A9B1A000A4FB3 /* TaskCategory.swift */,
 				7FD44B771B5A9B1A000A4FB3 /* TaskIco.swift */,
 				7FD44B7B1B5A9B1A000A4FB3 /* Task.swift */,
+				7F55D3EB1B9EFAAA00C02645 /* SOCoreDataBase.swift */,
 				7FD44B781B5A9B1A000A4FB3 /* SOLocalDataBase.swift */,
+				7F55D3EF1B9F090900C02645 /* SOPopulateLocalDataBase.swift */,
 				7FD44B791B5A9B1A000A4FB3 /* SwiftOrganizer.xcdatamodeld */,
 			);
 			name = CoreData;
@@ -1345,10 +1354,12 @@
 			files = (
 				7F5D19611B7635200095C51F /* SOReachabilityCenter.swift in Sources */,
 				7F55D3EA1B9ED1F000C02645 /* SOConstants.swift in Sources */,
+				7F55D3F01B9F090900C02645 /* SOPopulateLocalDataBase.swift in Sources */,
 				7F5D19621B7635200095C51F /* Reachability.swift in Sources */,
 				7FD44B821B5A9C27000A4FB3 /* TaskCategory.swift in Sources */,
 				7FD44B831B5A9C27000A4FB3 /* TaskIco.swift in Sources */,
 				7FD44B841B5A9C27000A4FB3 /* SOLocalDataBase.swift in Sources */,
+				7F55D3EC1B9EFAAA00C02645 /* SOCoreDataBase.swift in Sources */,
 				7FD44B851B5A9C27000A4FB3 /* SwiftOrganizer.xcdatamodeld in Sources */,
 				7FD44B861B5A9C27000A4FB3 /* Task.swift in Sources */,
 				7FD44B871B5A9C27000A4FB3 /* SOParseComManager.swift in Sources */,
@@ -1356,6 +1367,7 @@
 				7FD44B881B5A9C27000A4FB3 /* SORemoteDataBase.swift in Sources */,
 				7FD44B891B5A9C27000A4FB3 /* SOCategory.swift in Sources */,
 				7FD44B8A1B5A9C27000A4FB3 /* SODataBaseFactory.swift in Sources */,
+				7F55D3EE1B9F073700C02645 /* SOPopulateRemoteDataBase.swift in Sources */,
 				7FD44B8B1B5A9C27000A4FB3 /* SODataBaseProtocol.swift in Sources */,
 				7FD44B8C1B5A9C27000A4FB3 /* SODataFetching.swift in Sources */,
 				7FD44BAB1B5AA924000A4FB3 /* SOObserversManager.swift in Sources */,

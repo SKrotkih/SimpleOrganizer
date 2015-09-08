@@ -24,7 +24,7 @@ public final class SODataFetching{
     private init() {
     }
 
-    // - MARK: Categories
+    // MARK: - Categories
     public func allCategories(block: (resultBuffer: [SOCategory], error: NSError?) -> Void){
         SODataBaseFactory.sharedInstance.dataBase.allCategories{(categories: [SOCategory], error: NSError?) in
             self._allCategories = categories
@@ -32,7 +32,7 @@ public final class SODataFetching{
         }
     }
     
-    // - MARK: Icons
+    // MARK: -  Icons
     public func allIcons(block: (resultBuffer: [SOIco], error: NSError?) -> Void){
         SODataBaseFactory.sharedInstance.dataBase.allIcons{(icons: [SOIco], error: NSError?) in
             self._allIcons = icons
@@ -56,7 +56,7 @@ public final class SODataFetching{
         }
     }
     
-    // - MARK: Tasks
+    // MARK: - Tasks
     public func allTasks(block: (resultBuffer: [SOTask], error: NSError?) -> Void) {
         SODataBaseFactory.sharedInstance.dataBase.allTasks{(allCurrentTasks: [SOTask], error: NSError?) in
             self._allTasks = allCurrentTasks

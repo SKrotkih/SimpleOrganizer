@@ -22,7 +22,6 @@ public protocol SODataBaseProtocol{
     func saveFieldValueToObject(dataBaseObject: AnyObject?, entityName: String, fldName: String, recordId: String?, value: AnyObject, block: (error: NSError?) -> Void)
     
     func saveFieldToObject(object: AnyObject?, fieldName: String, value: AnyObject, block: (error: NSError?) -> Void)
-    func saveContext()
     
     func areObjectsEqual(object1: AnyObject?, object2: AnyObject?) -> Bool
     
