@@ -5,19 +5,13 @@
 //  Created by Sergey Krotkih on 5/28/15.
 //  Copyright (c) 2015 Sergey Krotkih. All rights reserved.
 //
-//  Factory Method Pattern implemented on this singleton
+//  There is the Factory Method Pattern on the Chain Responsibility and on the Singleton
 
 import UIKit
 
-public let AppGroupsId = "group.skappleid.SOWidget"
-public let SODataBaseTypeKey = "DataBaseType"
-public let SOEnableiCloudForCoreDataKey = "EnableiCloudForCoreData"
-public let KeyInURLAsSwitchDataBase = "switchdbto."
-public let KeyInURLAsTaskId = "taskid."
-public let WidgetUrlScheme = "widget"
-
 public final class SODataBaseFactory {
-    private var _dataBase: SODataBaseProtocol?
+    private let localDataBase: SOLocalDataBase
+    private let remoteDataBase: SORemoteDataBase
 
     public class var sharedInstance: SODataBaseFactory {
         struct SingletonWrapper {
@@ -27,38 +21,13 @@ public final class SODataBaseFactory {
     }
     
     private init() {
-        SOObserversManager.sharedInstance.addObserver(self, type: .SODataBaseTypeChanged, priority: 999)
+        localDataBase = SOLocalDataBase()
+        remoteDataBase = SORemoteDataBase()
+        localDataBase.nextDataBase = remoteDataBase
+        remoteDataBase.nextDataBase = localDataBase
     }
 
-    deinit{
-        SOObserversManager.sharedInstance.removeObserver(self, type: .SODataBaseTypeChanged)
-    }
-    
     public var dataBase: SODataBaseProtocol!{
-        if _dataBase != nil{
-            return _dataBase
-        }
-        
-        let dataBaseIndex: DataBaseIndex =  SOTypeDataBaseSwitcher.indexOfCurrectDBType()
-        
-        switch dataBaseIndex{
-        case .CoreDataIndex:
-            _dataBase = SOLocalDataBase.sharedInstance()
-        case .ParseComIndex:
-            _dataBase = SORemoteDataBase.sharedInstance()
-        }
-        
-        return _dataBase
-    }
-}
-
-extension SODataBaseFactory: SOObserverProtocol {
-    public func notify(notification: SOObserverNotification){
-        switch notification.type{
-        case .SODataBaseTypeChanged:
-            self._dataBase = nil
-        default:
-            assert(false, "Something is wrong with observer code notification!")
-        }
+        return localDataBase.chainResponsibility(SOTypeDataBaseSwitcher.currentDataBaseIndex())
     }
 }

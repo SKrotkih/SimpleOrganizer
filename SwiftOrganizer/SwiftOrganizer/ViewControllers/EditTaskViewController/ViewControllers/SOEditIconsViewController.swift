@@ -164,11 +164,9 @@ extension SOEditIconsViewController: UITableViewDataSource{
         var cell = self.tableView.dequeueReusableCellWithIdentifier(selectIconsCell) as! SOSelectIconsCell
         
         let ico: SOIco = icons[row]
-        let icoId: String = ico.recordid
-        
-        if let icoImageName = SODataFetching.sharedInstance.iconImageName(icoId){
-            cell.icoImageView.image = UIImage(named: icoImageName)
-        }
+        let icoId: String = ico.recordid;
+        let icoImageName: String = ico.imageName
+        cell.icoImageView.image = UIImage(named: icoImageName)
         
         var checkBoxImageName: String = "uncheck_box"
         

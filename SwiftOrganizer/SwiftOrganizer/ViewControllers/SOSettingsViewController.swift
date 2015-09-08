@@ -28,7 +28,7 @@ class SOSettingsViewController: UIViewController {
     
     private func setUpCurrentDataBaseType()
     {
-        let selectedIndex = SOTypeDataBaseSwitcher.indexOfCurrectDBType()
+        let selectedIndex = SOTypeDataBaseSwitcher.currentDataBaseIndex()
         let usingICloud = SOTypeDataBaseSwitcher.usingICloudCurrentState()
 
         if selectedIndex == .CoreDataIndex{

@@ -84,11 +84,8 @@ extension SOPreferenceIconsViewController: UITableViewDelegate, UITableViewDataS
         let ico: SOIco = self.buffer[indexPath.row] as! SOIco
 
         let icoId: String = ico.recordid
-        
-        if let icoImageName = SODataFetching.sharedInstance.iconImageName(icoId){
-            cell.icoImageView.image = UIImage(named: icoImageName)
-        }
-        
+        let icoImageName = ico.imageName;
+        cell.icoImageView.image = UIImage(named: icoImageName)
         var checkBoxImageName: String = ico.visible ? "check_box": "uncheck_box"
         cell.checkImageView.image = UIImage(named: checkBoxImageName)
         

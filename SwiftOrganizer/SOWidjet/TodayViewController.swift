@@ -90,7 +90,7 @@ class TodayViewController: UIViewController, UITableViewDataSource, UITableViewD
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         
-        let index = SOTypeDataBaseSwitcher.indexOfCurrectDBType()
+        let index = SOTypeDataBaseSwitcher.currentDataBaseIndex()
         self.typeOfDataBaseSwitcher.selectedSegmentIndex = index.rawValue
         
         self.performFetch()

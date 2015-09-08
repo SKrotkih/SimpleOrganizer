@@ -35,17 +35,15 @@ public class SORemoteDataBase: SODataBaseProtocol {
     private var currentCategoryIndex = 0
     private var currentIcoIndex = 0
     private var currentTaskIndex = 0
-
-    public class func sharedInstance() -> SODataBaseProtocol{
-        struct SingletonWrapper {
-            static let sharedInstance = SORemoteDataBase()
+    var nextDataBase: SODataBaseProtocol?
+    
+    public func chainResponsibility(dataBaseIndex: DataBaseIndex) -> SODataBaseProtocol{
+        if dataBaseIndex == .ParseComIndex{
+            return self
         }
-        return SingletonWrapper.sharedInstance;
+        return self.nextDataBase!.chainResponsibility(dataBaseIndex)
     }
     
-    private init() {
-    }
-
     public func getObjectForRecordId(recordid: String, entityName: String) -> AnyObject?{
         return nil
     }

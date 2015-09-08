@@ -10,7 +10,7 @@ import UIKit
 
 public protocol SODataBaseProtocol{
 
-    static func sharedInstance() -> SODataBaseProtocol
+    func chainResponsibility(dataBaseIndex: DataBaseIndex) -> SODataBaseProtocol
     
     func allCategories(block: (resultBuffer: [SOCategory], error: NSError?) -> Void)
     func allIcons(block: (resultBuffer: [SOIco], error: NSError?) -> Void)

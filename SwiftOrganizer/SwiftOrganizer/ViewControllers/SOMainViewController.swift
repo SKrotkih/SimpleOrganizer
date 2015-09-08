@@ -146,7 +146,7 @@ class SOMainViewController: UIViewController{
             switchDBtypeActivity.title = "Switch DB".localized
             switchDBtypeActivity.imageName = "ico10@2x"
             switchDBtypeActivity.performBlock = {
-                SOTypeDataBaseSwitcher.switchToAnotherDB()
+                SOTypeDataBaseSwitcher.switchToNextDataBase()
             }
             
             let activityController = UIActivityViewController(activityItems: [], applicationActivities: [editTaskListActivity, newTaskActivity, switchDBtypeActivity])

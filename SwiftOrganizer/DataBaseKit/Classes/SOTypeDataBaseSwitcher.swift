@@ -11,33 +11,97 @@ import Foundation
 public enum DataBaseIndex: Int{
     case CoreDataIndex = 0
     case ParseComIndex
+    
+    func localizedDescription() -> String{
+        switch self{
+        case CoreDataIndex:
+            return "Local".localized
+        case ParseComIndex:
+            return "Remote".localized
+        }
+    }
+    
+    func nextDataBaseIndex() -> DataBaseIndex{
+        switch self{
+        case CoreDataIndex:
+            return ParseComIndex
+        case ParseComIndex:
+            return CoreDataIndex
+        }
+    }
+    
+    static func localDataBaseIndex() -> DataBaseIndex{
+        return CoreDataIndex
+    }
+    
 }
 
 enum SODataBaseType: String{
     case Undefined = "Undefined"
     case CoreData = "LocalDataBase"
     case ParseCom = "ParseDataBase"
+    
+    static func nameByIndex(dataBaseIndex: DataBaseIndex) -> String{
+        var dataBaseName = SODataBaseType.CoreData.rawValue
+        
+        switch dataBaseIndex{
+        case .CoreDataIndex:
+            dataBaseName = SODataBaseType.CoreData.rawValue
+        case .ParseComIndex:
+            dataBaseName = SODataBaseType.ParseCom.rawValue
+        }
+
+        return dataBaseName
+    }
+    
+    static func indexByName(name: String?) -> DataBaseIndex{
+        var index: DataBaseIndex = .CoreDataIndex
+        
+        if name == nil || name == SODataBaseType.CoreData.rawValue{
+            index = .CoreDataIndex
+        } else if name == SODataBaseType.ParseCom.rawValue{
+            index = .ParseComIndex
+        }
+        
+        return index
+    }
 }
 
 public class SOTypeDataBaseSwitcher{
 
-    public class func switchToIndex(index: DataBaseIndex){
+    public class func currentDataBaseIndex() -> DataBaseIndex{
         let defaults = SOUserDefault.sharedDefaults()
-        var dbType: String
+        return SODataBaseType.indexByName(defaults.stringForKey(SODataBaseTypeKey))
+    }
+    
+    public class func switchToIndex(newDataBaseIndex: DataBaseIndex){
+        let newDataBaseName: String = SODataBaseType.nameByIndex(newDataBaseIndex)
         
-        if index == .CoreDataIndex{
-            dbType = SODataBaseType.CoreData.rawValue
-        } else if index == .ParseComIndex{
-            dbType = SODataBaseType.ParseCom.rawValue
-        } else {
-            return
+        if newDataBaseIndex != self.currentDataBaseIndex(){
+            let defaults = SOUserDefault.sharedDefaults()
+            defaults.setObject(newDataBaseName, forKey: SODataBaseTypeKey)
+            defaults.synchronize()
         }
         
-        defaults.setObject(dbType, forKey: SODataBaseTypeKey)
-        defaults.synchronize()
-        let notification = SOObserverNotification(type: .SODataBaseTypeChanged, data: dbType)
+        let notification = SOObserverNotification(type: .SODataBaseTypeChanged, data: newDataBaseName)
         SOObserversManager.sharedInstance.sendNotification(notification)
     }
+    
+    public class func switchToNextDataBase(){
+        var currentDataBaseIndex = self.currentDataBaseIndex()
+        let newDataBaseIndex = currentDataBaseIndex.nextDataBaseIndex()
+        self.switchToIndex(newDataBaseIndex)
+    }
+    
+    public class func currectDataBaseDescription() -> String{
+        var currentDataBaseIndex = self.currentDataBaseIndex()
+        return currentDataBaseIndex.localizedDescription()
+    }
+}
+
+    // MARK: - iCloud
+
+extension SOTypeDataBaseSwitcher{
     
     public class func setUpOfUsingICloud(usingICloud: Bool){
         let defaults = SOUserDefault.sharedDefaults()
@@ -58,59 +122,9 @@ public class SOTypeDataBaseSwitcher{
         
         return retValue
     }
-    
-    public class func indexOfCurrectDBType() -> DataBaseIndex{
-        var selectedIndex: DataBaseIndex!
-        let defaults = SOUserDefault.sharedDefaults()
-        
-        if let name = defaults.stringForKey(SODataBaseTypeKey){
-
-            switch name{
-            case SODataBaseType.CoreData.rawValue:
-                selectedIndex = .CoreDataIndex
-            case SODataBaseType.ParseCom.rawValue:
-                selectedIndex = .ParseComIndex
-            default:
-                selectedIndex = .CoreDataIndex
-            }
-        } else {
-            selectedIndex = .CoreDataIndex
-        }
-        
-        return selectedIndex
-    }
-    
-    public class func switchToAnotherDB(){
-        var currentIndex = self.indexOfCurrectDBType()
-
-        switch currentIndex{
-        case .CoreDataIndex:
-            currentIndex = .ParseComIndex
-        case .ParseComIndex:
-            currentIndex = .CoreDataIndex
-        default:
-           currentIndex = .CoreDataIndex
-        }
-
-        self.switchToIndex(currentIndex)
-    }
-    
-    public class func currectDataBaseDescription() -> String{
-        var currentIndex = self.indexOfCurrectDBType()
-        
-        switch currentIndex{
-        case .CoreDataIndex:
-            return "Local".localized
-        case .ParseComIndex:
-            return "Remote".localized
-        default:
-            return "Local".localized
-        }
-    }
-    
 }
 
-    // MARK: Internet Reachability Observer
+    // MARK: - Internet Reachability Observer
 
 extension SOTypeDataBaseSwitcher{
     
@@ -123,8 +137,8 @@ extension SOTypeDataBaseSwitcher{
     }
     
     private class func switchToLocalBaseIfNeeded(){
-        if !SOReachabilityCenter.sharedInstance.isInternetConnected() && self.indexOfCurrectDBType() == .ParseComIndex{
-            self.switchToIndex(.CoreDataIndex)
+        if !SOReachabilityCenter.sharedInstance.isInternetConnected() && self.currentDataBaseIndex() != DataBaseIndex.localDataBaseIndex(){
+            self.switchToIndex(DataBaseIndex.localDataBaseIndex())
         }
     }
     

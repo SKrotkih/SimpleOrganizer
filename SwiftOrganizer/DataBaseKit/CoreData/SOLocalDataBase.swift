@@ -16,15 +16,13 @@ let TaskEntityName = "Task"
 public class SOLocalDataBase: SODataBaseProtocol {
     
     private let queue = dispatch_queue_create("localDataBaseRequestsQ", DISPATCH_QUEUE_CONCURRENT);
+    var nextDataBase: SODataBaseProtocol?
     
-    public class func sharedInstance() -> SODataBaseProtocol{
-        struct SingletonWrapper {
-            static let sharedInstance = SOLocalDataBase()
+    public func chainResponsibility(dataBaseIndex: DataBaseIndex) -> SODataBaseProtocol{
+        if dataBaseIndex == .CoreDataIndex{
+            return self
         }
-        return SingletonWrapper.sharedInstance;
-    }
-    
-    private init() {
+        return self.nextDataBase!.chainResponsibility(dataBaseIndex)
     }
     
     // MARK: -
@@ -123,6 +121,63 @@ public class SOLocalDataBase: SODataBaseProtocol {
         }()
     
 }
+
+    // MARK: -
+    // MARK: - Update Data
+
+extension SOLocalDataBase{
+    func deleteObject(objectForDeleting: NSManagedObject?)
+    {
+        if let moc = self.managedObjectContext {
+            if let object = objectForDeleting{
+                moc.deleteObject(object)
+                self.saveContext()
+            }
+        }
+    }
+
+    public func saveFieldToObject(object: AnyObject?, fieldName: String, value: AnyObject, block: (error: NSError?) -> Void){
+        let managedObject = object as? NSManagedObject
+        
+        if let object = managedObject{
+            dispatch_async(dispatch_get_main_queue(), {[weak self] in
+                let tryCatchException = KVOTryCatchException()
+                //object.setValue(value, forKey: fieldName);
+                if  let error: NSError = tryCatchException.trySetKeyValueForObject(object, forKeyPath: fieldName, value: value){
+                    block(error: error)
+                }
+                else{
+                    self!.saveContext()
+                    block(error: nil)
+                }
+                })
+        }
+        else{
+            var dict = [String: AnyObject]()
+            let error: NSError? = NSError(domain: DataBaseErrorDomain, code: 9998, userInfo: dict)
+            self.reportAnyErrorWeGot(error)
+        }
+    }
+    
+    public func saveContext() {
+        if let moc = self.managedObjectContext {
+            var error: NSError? = nil
+            
+            if moc.hasChanges{
+                
+                if !moc.save(&error) {
+                    // Replace this implementation with code to handle the error appropriately.
+                    // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+                    NSLog("Unresolved error \(error), \(error!.userInfo)")
+                    abort()
+                } else {
+                    moc.reset()
+                }
+            }
+        }
+    }
+}
+
 
     // MARK: -
     // MARK: - Fetch Data
@@ -362,47 +417,6 @@ extension SOLocalDataBase{
             block(error: error)
         })
     }
-    
-    public func saveFieldToObject(object: AnyObject?, fieldName: String, value: AnyObject, block: (error: NSError?) -> Void){
-        let managedObject = object as? NSManagedObject
-        
-        if let object = managedObject{
-            dispatch_async(dispatch_get_main_queue(), {[weak self] in
-                let tryCatchException = KVOTryCatchException()
-                //object.setValue(value, forKey: fieldName);
-                if  let error: NSError = tryCatchException.trySetKeyValueForObject(object, forKeyPath: fieldName, value: value){
-                    block(error: error)
-                }
-                else{
-                    self!.saveContext()
-                    block(error: nil)
-                }
-                })
-        }
-        else{
-            var dict = [String: AnyObject]()
-            let error: NSError? = NSError(domain: DataBaseErrorDomain, code: 9998, userInfo: dict)
-            self.reportAnyErrorWeGot(error)
-        }
-    }
-    
-    public func saveContext() {
-        if let moc = self.managedObjectContext {
-            var error: NSError? = nil
-            
-            if moc.hasChanges{
-                
-                if !moc.save(&error) {
-                    // Replace this implementation with code to handle the error appropriately.
-                    // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-                    NSLog("Unresolved error \(error), \(error!.userInfo)")
-                    abort()
-                } else {
-                    moc.reset()
-                }
-            }
-        }
-    }
 }
 
     // MARK: -
@@ -417,15 +431,6 @@ extension SOLocalDataBase{
         })
     }
     
-    func deleteObject(objectForDeleting: NSManagedObject?)
-    {
-        if let moc = self.managedObjectContext {
-            if let object = objectForDeleting{
-                moc.deleteObject(object)
-                self.saveContext()
-            }
-        }
-    }
 }
 
     //- MARK: Helper methods

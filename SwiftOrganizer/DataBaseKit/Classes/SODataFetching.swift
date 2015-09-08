@@ -22,14 +22,8 @@ public final class SODataFetching{
     }
     
     private init() {
-        SOObserversManager.sharedInstance.addObserver(self, type: .SODataBaseTypeChanged, priority: 998)
     }
 
-    deinit{
-        SOObserversManager.sharedInstance.removeObserver(self, type: .SODataBaseTypeChanged)
-    }
-    
-    
     // - MARK: Categories
     public func allCategories(block: (resultBuffer: [SOCategory], error: NSError?) -> Void){
         SODataBaseFactory.sharedInstance.dataBase.allCategories{(categories: [SOCategory], error: NSError?) in
@@ -69,31 +63,21 @@ public final class SODataFetching{
             block(resultBuffer: self._allTasks, error: error)
         }
     }
+}
+
+extension SODataFetching{
     
-    // - MARK: Fetch Of The Data Instance Fields
-    subscript(index: Int) -> SOCategory? {
-        return self.categoryForIndex(index)
-    }
-    
-    func categoryForIndex(index: Int) -> SOCategory?{
-        if self._allCategories.count > 0 && index < self._allCategories.count{
-            return self._allCategories[index]
-        }
-        
-        return nil
-    }
-    
-    func categoryName(id : String) -> String?{
-        if let category = self.categoryById(id){
+    public func categoryName(categoryId: String) -> String?{
+        if let category = self.categoryById(categoryId){
             return category.name
         }
         
         return nil
     }
     
-    func categoryById(id : String) -> SOCategory?{
+    public func categoryById(categoryId: String) -> SOCategory?{
         for category in self._allCategories{
-            if category.recordid == id{
+            if category.recordid == categoryId{
                 return category
             }
         }
@@ -101,16 +85,8 @@ public final class SODataFetching{
         return nil
     }
     
-    func iconForIndex(index: Int) -> SOIco?{
-        if self._allIcons.count > 0 && index < self._allIcons.count{
-            return self._allIcons[index]
-        }
-        
-        return nil
-    }
-    
-    public func iconImageName(id : String) -> String?{
-        let icoOpt: SOIco? = self.iconById(id)
+    public func iconImageName(iconId : String) -> String?{
+        let icoOpt: SOIco? = self.iconById(iconId)
         if let ico = icoOpt{
             return ico.imageName
         }
@@ -118,9 +94,9 @@ public final class SODataFetching{
         return nil
     }
     
-    func iconById(id : String) -> SOIco?{
+    public func iconById(iconId : String) -> SOIco?{
         for ico in self._allIcons{
-            if ico.recordid == id{
+            if ico.recordid == iconId{
                 return ico
             }
         }
@@ -128,21 +104,3 @@ public final class SODataFetching{
         return nil
     }
 }
-
-    // MARK: SOObserverProtocol
-
-extension SODataFetching: SOObserverProtocol {
-    public func notify(notification: SOObserverNotification){
-        switch notification.type{
-        case .SODataBaseTypeChanged:
-            dispatch_barrier_sync(self.collectionQueue, { () in
-                self._allCategories.removeAll(keepCapacity: false)
-                self._allTasks.removeAll(keepCapacity: false)
-                self._allIcons.removeAll(keepCapacity: false)
-            });
-        default:
-            assert(false, "Something is wrong with observer code notification!")
-        }
-    }
-}
-

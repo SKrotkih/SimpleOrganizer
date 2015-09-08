@@ -26,6 +26,7 @@
 		7F497D5E1B1AF0D800F95BA9 /* SOCategoryTabView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7F497D5D1B1AF0D800F95BA9 /* SOCategoryTabView.xib */; };
 		7F497D621B1AF9B600F95BA9 /* SOIconTabView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7F497D611B1AF9B600F95BA9 /* SOIconTabView.xib */; };
 		7F497D651B1B330300F95BA9 /* SOUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F497D641B1B330300F95BA9 /* SOUtilities.swift */; };
+		7F55D3EA1B9ED1F000C02645 /* SOConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F55D3E81B9ED1C200C02645 /* SOConstants.swift */; };
 		7F56ACC71B6A5C9E00B0C1EF /* SOMakeCallViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F56ACC61B6A5C9E00B0C1EF /* SOMakeCallViewController.swift */; };
 		7F56ACC91B6A5EE600B0C1EF /* phone.png in Resources */ = {isa = PBXBuildFile; fileRef = 7F56ACC81B6A5EE600B0C1EF /* phone.png */; };
 		7F56ACCB1B6D1A2200B0C1EF /* SOSemaforeExample.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F56ACCA1B6D1A2200B0C1EF /* SOSemaforeExample.swift */; };
@@ -242,6 +243,7 @@
 		7F497D5D1B1AF0D800F95BA9 /* SOCategoryTabView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SOCategoryTabView.xib; path = TabBar/SOCategoryTabView.xib; sourceTree = "<group>"; };
 		7F497D611B1AF9B600F95BA9 /* SOIconTabView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SOIconTabView.xib; path = TabBar/SOIconTabView.xib; sourceTree = "<group>"; };
 		7F497D641B1B330300F95BA9 /* SOUtilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SOUtilities.swift; path = Utilities/SOUtilities.swift; sourceTree = "<group>"; };
+		7F55D3E81B9ED1C200C02645 /* SOConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SOConstants.swift; path = ../SwiftOrganizer/SOConstants.swift; sourceTree = "<group>"; };
 		7F56ACC61B6A5C9E00B0C1EF /* SOMakeCallViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SOMakeCallViewController.swift; sourceTree = "<group>"; };
 		7F56ACC81B6A5EE600B0C1EF /* phone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = phone.png; path = Resources/Images/phone.png; sourceTree = "<group>"; };
 		7F56ACCA1B6D1A2200B0C1EF /* SOSemaforeExample.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SOSemaforeExample.swift; path = Utilities/SOSemaforeExample.swift; sourceTree = "<group>"; };
@@ -882,6 +884,7 @@
 			isa = PBXGroup;
 			children = (
 				7FD44B451B5A98D6000A4FB3 /* DataBaseKit.h */,
+				7F55D3E81B9ED1C200C02645 /* SOConstants.swift */,
 				7FD44BA91B5AA924000A4FB3 /* ObserverManager */,
 				7FD44B811B5A9B23000A4FB3 /* CoreData */,
 				7FD44B751B5A9ADD000A4FB3 /* Parse.com */,
@@ -1341,6 +1344,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7F5D19611B7635200095C51F /* SOReachabilityCenter.swift in Sources */,
+				7F55D3EA1B9ED1F000C02645 /* SOConstants.swift in Sources */,
 				7F5D19621B7635200095C51F /* Reachability.swift in Sources */,
 				7FD44B821B5A9C27000A4FB3 /* TaskCategory.swift in Sources */,
 				7FD44B831B5A9C27000A4FB3 /* TaskIco.swift in Sources */,

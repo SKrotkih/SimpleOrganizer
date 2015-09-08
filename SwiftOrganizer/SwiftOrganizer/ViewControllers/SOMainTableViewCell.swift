@@ -45,14 +45,14 @@ class SOMainTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
 
-        let horizontal = UISwipeGestureRecognizer(target: self, action: "leftHorizontalSwipe:")
+        let horizontal = UISwipeGestureRecognizer(target: self, action: "leftSwipeGesture:")
         horizontal.direction = .Left
         horizontal.numberOfTouchesRequired = 1
         
         swipeGestureView.addGestureRecognizer(horizontal)
     }
 
-    func leftHorizontalSwipe(recognizer:UIGestureRecognizer) {
+    func leftSwipeGesture(recognizer:UIGestureRecognizer) {
         removeTask()
     }
     
