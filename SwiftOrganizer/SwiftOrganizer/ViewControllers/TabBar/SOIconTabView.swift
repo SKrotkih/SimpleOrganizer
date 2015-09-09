@@ -9,11 +9,10 @@
 import UIKit
 
 class SOIconTabView: UIView {
+    @IBOutlet weak var button: UIButton!
 
     var filterStateDelegate: SOChangeFilterStateDelegate?
-    
     var _selected: Bool = false
-    
     var _ico: SOIco?
     
     var ico: SOIco? {
@@ -45,12 +44,10 @@ class SOIconTabView: UIView {
         }
     }
     
-    @IBOutlet weak var button: UIButton!
-    
     @IBAction func buttonPressedHandler(sender: AnyObject) {
         if let delegate = self.filterStateDelegate, ico = _ico{
             let newValue: Bool = !self.selected
-            delegate.didSelectIcon(ico, select: newValue, block: {(error: NSError?) in
+            delegate.didSelectIcon(ico, select: newValue, completionBlock: {(error: NSError?) in
                 if error == nil{
                     ico.selected = newValue
                     self.selected = newValue

@@ -9,8 +9,8 @@
 import UIKit
 
 protocol SOChangeFilterStateDelegate{
-    func didSelectCategory(category: SOCategory, select: Bool, block: (error: NSError?) -> Void)
-    func didSelectIcon(icon: SOIco, select: Bool, block: (error: NSError?) -> Void)
+    func didSelectCategory(category: SOCategory, select: Bool, completionBlock: (error: NSError?) -> Void)
+    func didSelectIcon(icon: SOIco, select: Bool, completionBlock: (error: NSError?) -> Void)
 }
 
 class SOMainTableViewController: NSObject{
@@ -33,7 +33,7 @@ class SOMainTableViewController: NSObject{
     func reloadData(){
         SODataFetching.sharedInstance.allTasks{(allCurrentTasks: [SOTask], fetchError: NSError?) in
             if let error = fetchError{
-                showAlertWithTitle("Failed fetch data!".localized, error.description)
+                showAlertWithTitle("Failed to fetch data!".localized, error.description)
             } else {
                 dispatch_async(dispatch_get_main_queue(), {
                     self.tasks = allCurrentTasks
@@ -74,8 +74,8 @@ class SOMainTableViewController: NSObject{
 
 extension SOMainTableViewController: SOChangeFilterStateDelegate{
 
-    func didSelectCategory(category: SOCategory, select: Bool, block: (error: NSError?) -> Void){
-        category.setSelected(select, block: { (error) -> Void in
+    func didSelectCategory(category: SOCategory, select: Bool, completionBlock: (error: NSError?) -> Void){
+        category.setSelected(select, completionBlock: { (error) -> Void in
             if error == nil {
                 dispatch_async(dispatch_get_main_queue(), {
                     self.reloadData()
@@ -83,12 +83,12 @@ extension SOMainTableViewController: SOChangeFilterStateDelegate{
             } else {
                 showAlertWithTitle("Error of saving data".localized, error!.description)
             }
-            block(error: error)
+            completionBlock(error: error)
         })
     }
     
-    func didSelectIcon(icon: SOIco, select: Bool, block: (error: NSError?) -> Void){
-        icon.setSelected(select, block: { (error) -> Void in
+    func didSelectIcon(icon: SOIco, select: Bool, completionBlock: (error: NSError?) -> Void){
+        icon.setSelected(select, completionBlock: { (error) -> Void in
             if error == nil {
                 dispatch_async(dispatch_get_main_queue(), {[weak self] in
                     self?.reloadData()
@@ -96,7 +96,7 @@ extension SOMainTableViewController: SOChangeFilterStateDelegate{
             } else {
                 showAlertWithTitle("Error of saving data".localized, error!.description)
             }
-            block(error: error)
+            completionBlock(error: error)
         })
     }
 }

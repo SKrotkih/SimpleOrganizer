@@ -12,12 +12,12 @@ class SOCategoryTabBarController: SOTabBarController {
 
     private let tabViewXibName = "SOCategoryTabView"
     
-    override func reloadTabs(block: (error: NSError?) -> Void){
+    override func reloadTabs(completionBlock: (error: NSError?) -> Void){
         SODataFetching.sharedInstance.allCategories{(categories: [SOCategory], fetchError: NSError?) in
             self.tabsCount = 0
             
             if let error = fetchError{
-                showAlertWithTitle("Error reading categories data", error.description)
+                showAlertWithTitle("Failed to read of categories data".localized, error.description)
             } else if categories.count > 0{
                 for i in 0..<categories.count {
                     let category: SOCategory = categories[i]
@@ -40,11 +40,11 @@ class SOCategoryTabBarController: SOTabBarController {
                     }
                 }
                 super.reloadTabs{(error: NSError?) in
-                    block(error: error)
+                    completionBlock(error: error)
                 }
             } else {
-                showAlertWithTitle("Warning:", "Categories data are not presented on the Parse.com Server.")
-                block(error: nil)
+                showAlertWithTitle("Warning".localized, "Categories data are not presented on the Parse.com Server.".localized)
+                completionBlock(error: nil)
             }
         }
     }

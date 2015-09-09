@@ -10,6 +10,8 @@ import UIKit
 
 class SOCategoryTabView: UIView {
     @IBOutlet weak var tabBackgroundView: UIView!
+    @IBOutlet weak var button: UIButton!
+    
     var filterStateDelegate: SOChangeFilterStateDelegate?
     var _selected: Bool = false
     var _category: SOCategory?
@@ -23,8 +25,6 @@ class SOCategoryTabView: UIView {
             self.button.setTitle( newValue?.name, forState: .Normal)
         }
     }
-    
-    @IBOutlet weak var button: UIButton!
     
     var selected: Bool {
         get{
@@ -46,7 +46,7 @@ class SOCategoryTabView: UIView {
     @IBAction func buttonPressedHandler(sender: AnyObject) {
         if let delegate = self.filterStateDelegate, category = _category{
             let newValue: Bool = !self.selected
-            delegate.didSelectCategory(category, select: newValue, block: {(error: NSError?) in
+            delegate.didSelectCategory(category, select: newValue, completionBlock: {(error: NSError?) in
                 if error == nil{
                     category.selected = newValue
                     self.selected = newValue

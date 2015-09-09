@@ -69,6 +69,7 @@ class SOMainTableViewCell: UITableViewCell {
     }
     
     //- MARK: Fill DATA
+    
     func fillTaskData(task: SOTask){
         self.task = task
         self.titleTextLabel!.text = task.title

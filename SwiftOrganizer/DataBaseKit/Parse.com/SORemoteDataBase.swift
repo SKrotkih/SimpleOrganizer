@@ -32,10 +32,11 @@ let kIcoFldImageName = "imagename"
 
 public class SORemoteDataBase: SODataBaseProtocol {
     private let queue = dispatch_queue_create("remoteDataBaseRequestsQ", DISPATCH_QUEUE_CONCURRENT);
-    var nextDataBase: SODataBaseProtocol?
+    private var nextDataBase: SODataBaseProtocol?
     let populateDataBase: SOPopulateRemoteDataBase
     
-    init(){
+    required public init(nextDataBase: SODataBaseProtocol?){
+        self.nextDataBase = nextDataBase
         populateDataBase = SOPopulateRemoteDataBase()
     }
     
@@ -59,24 +60,24 @@ public class SORemoteDataBase: SODataBaseProtocol {
     // - MARK: Fetch Data
 
 extension SORemoteDataBase{
-    public func allCategories(block: (resultBuffer: [SOCategory], error: NSError?) -> Void){
-        self.fetchAllDataWithClassName(CategoryClassName, block: {(resultBuffer: [AnyObject], error: NSError?) in
+    public func allCategories(completionBlock: (resultBuffer: [SOCategory], error: NSError?) -> Void){
+        self.fetchAllDataWithClassName(CategoryClassName, completionBlock: {(resultBuffer: [AnyObject], error: NSError?) in
             let buffer = resultBuffer as! [SOCategory]
-            block(resultBuffer: buffer, error: error)
+            completionBlock(resultBuffer: buffer, error: error)
         })
     }
     
-    public func allIcons(block: (resultBuffer: [SOIco], error: NSError?) -> Void){
-        self.fetchAllDataWithClassName(IcoClassName, block: {(resultBuffer: [AnyObject], error: NSError?) in
+    public func allIcons(completionBlock: (resultBuffer: [SOIco], error: NSError?) -> Void){
+        self.fetchAllDataWithClassName(IcoClassName, completionBlock: {(resultBuffer: [AnyObject], error: NSError?) in
             let buffer: [SOIco] = resultBuffer as! [SOIco]
-            block(resultBuffer: buffer, error: error)
+            completionBlock(resultBuffer: buffer, error: error)
         })
     }
     
-    public func allTasks(block: (resultBuffer: [SOTask], error: NSError?) -> Void) {
-        self.fetchAllDataWithClassName(TaskClassName, block: {(resultBuffer: [AnyObject], fetchError: NSError?) in
+    public func allTasks(completionBlock: (resultBuffer: [SOTask], error: NSError?) -> Void) {
+        self.fetchAllDataWithClassName(TaskClassName, completionBlock: {(resultBuffer: [AnyObject], fetchError: NSError?) in
             if let error = fetchError{
-                block(resultBuffer: [], error: error)
+                completionBlock(resultBuffer: [], error: error)
             }
             
             let tasks = resultBuffer as! [SOTask]
@@ -108,39 +109,39 @@ extension SORemoteDataBase{
                         }
                         
                     }
-                    block(resultBuffer: _allTasks, error: nil)
+                    completionBlock(resultBuffer: _allTasks, error: nil)
                 })
             }
             else {
-                block(resultBuffer: [], error: nil)
+                completionBlock(resultBuffer: [], error: nil)
             }
         })
     }
     
-    private func fetchAllDataWithClassName(className: String, block: (resultBuffer: [AnyObject], error: NSError?) -> Void){
+    private func fetchAllDataWithClassName(className: String, completionBlock: (resultBuffer: [AnyObject], error: NSError?) -> Void){
         SOParseComManager.checkUser { (checkError) -> Void in
             if let error = checkError{
-                block(resultBuffer: [], error: error)
+                completionBlock(resultBuffer: [], error: error)
             } else {
                 let query = PFQuery(className: className)
                 query.findObjectsInBackgroundWithBlock {(objects, fetchError) in
                     var resultBuffer: [AnyObject] = []
                     if let anError = fetchError {
-                        block(resultBuffer: resultBuffer, error: anError)
+                        completionBlock(resultBuffer: resultBuffer, error: anError)
                     } else {
                         if let pfObjects: [PFObject] = objects as? [PFObject]{
                             if pfObjects.count > 0{
                                 pfObjects.map({object in
                                     resultBuffer.append(self.newInstanceFactory(object, className: className)!)
                                 })
-                                block(resultBuffer: resultBuffer, error: nil)
+                                completionBlock(resultBuffer: resultBuffer, error: nil)
                             } else {
-                                self.populateDataBase.populateDefaultData(className, block: {(populateError: NSError?) -> Void in
+                                self.populateDataBase.populateDefaultData(className, completionBlock: {(populateError: NSError?) -> Void in
 
                                     if let anError = populateError{
-                                        block(resultBuffer: resultBuffer, error: anError)
+                                        completionBlock(resultBuffer: resultBuffer, error: anError)
                                     } else {
-                                        self.fetchAllDataWithClassName(className, block: block)
+                                        self.fetchAllDataWithClassName(className, completionBlock: completionBlock)
                                     }
                                 })
                             }
@@ -165,7 +166,7 @@ extension SORemoteDataBase{
             return nil
         }
         
-        newInstance.initFromParseObject(object)
+        newInstance.initWithParseObject(object)
         
         return newInstance
     }
@@ -176,7 +177,7 @@ extension SORemoteDataBase{
 
 extension SORemoteDataBase{
     
-    public func saveTask(task: SOTask, block: (error: NSError?) -> Void){
+    public func saveTask(task: SOTask, completionBlock: (error: NSError?) -> Void){
         dispatch_sync(self.queue, {[weak self] in
             var object: PFObject? = task.databaseObject as? PFObject
             
@@ -188,39 +189,39 @@ extension SORemoteDataBase{
                 task.copyToParseObject(object!)
             }
             
-            self!.saveObject(object!, block: {(error: NSError?) in
-                block(error: error)
+            self!.saveObject(object!, completionBlock: {(error: NSError?) in
+                completionBlock(error: error)
             })
             })
     }
 
-    private func saveObject(object: PFObject, block: (error: NSError?) -> Void){
+    private func saveObject(object: PFObject, completionBlock: (error: NSError?) -> Void){
         SOParseComManager.checkUser { (checkError) -> Void in
             if let error = checkError{
-                block(error: error)
+                completionBlock(error: error)
             } else {
                 object.saveInBackgroundWithBlock {(success: Bool, error: NSError?) -> Void in
                     if (success) {
-                        block(error: nil)
+                        completionBlock(error: nil)
                     } else {
-                        block(error: error)
+                        completionBlock(error: error)
                     }
                 }
             }
         }
     }
 
-    public func saveFieldValueToObject(dataBaseObject: AnyObject?, entityName: String, fldName: String, recordId: String?, value: AnyObject, block: (error: NSError?) -> Void){
-        self.saveFieldToObject(dataBaseObject, fieldName: fldName, value: value, block: {(error: NSError?) in
-            block(error: error)
+    public func saveFieldValueToObject(dataBaseObject: AnyObject?, entityName: String, fldName: String, recordId: String?, value: AnyObject, completionBlock: (error: NSError?) -> Void){
+        self.saveFieldToObject(dataBaseObject, fieldName: fldName, value: value, completionBlock: {(error: NSError?) in
+            completionBlock(error: error)
         })
     }
     
-    public func saveFieldToObject(object: AnyObject?, fieldName: String, value: AnyObject, block: (error: NSError?) -> Void){
+    public func saveFieldToObject(object: AnyObject?, fieldName: String, value: AnyObject, completionBlock: (error: NSError?) -> Void){
         if let pfObject = object as? PFObject{
             pfObject[fieldName] = value
-            self.saveObject(pfObject, block: {(error: NSError?) in
-                block(error: error)
+            self.saveObject(pfObject, completionBlock: {(error: NSError?) in
+                completionBlock(error: error)
             })
         }
     }

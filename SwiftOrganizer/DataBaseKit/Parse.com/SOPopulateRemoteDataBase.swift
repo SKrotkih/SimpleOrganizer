@@ -14,19 +14,19 @@ public class SOPopulateRemoteDataBase {
     private var currentIcoIndex = 0
     private var currentTaskIndex = 0
 
-    public func populateDefaultData(className: String, block: (error: NSError?) -> Void){
+    public func populateDefaultData(className: String, completionBlock: (error: NSError?) -> Void){
         switch className{
         case IcoClassName:
             self.populateIcons{(populateError: NSError?) -> Void in
-                block(error: populateError)
+                completionBlock(error: populateError)
             }
         case CategoryClassName:
             self.populateCategories{(populateError: NSError?) -> Void in
-                block(error: populateError)
+                completionBlock(error: populateError)
             }
         case TaskClassName:
             self.populateTasks{(populateError: NSError?) -> Void in
-                block(error: populateError)
+                completionBlock(error: populateError)
             }
         default:
             return
@@ -34,26 +34,26 @@ public class SOPopulateRemoteDataBase {
     }
     
     // - MARK: Categories
-    private func populateCategories(block: (error: NSError?) -> Void){
+    private func populateCategories(completionBlock: (error: NSError?) -> Void){
         self.currentCategoryIndex = 0
         self.populateNextCategory{(error: NSError?) -> Void in
-            block(error: error)
+            completionBlock(error: error)
         }
     }
     
-    private func populateNextCategory(block: (error: NSError?) -> Void){
+    private func populateNextCategory(completionBlock: (error: NSError?) -> Void){
         if !(self.populateNextCategoryInBackground{(error: NSError?) -> Void in
             if error == nil{
-                self.populateNextCategory(block)
+                self.populateNextCategory(completionBlock)
             } else {
-                block(error: error)
+                completionBlock(error: error)
             }
             }){
-                block(error: nil)
+                completionBlock(error: nil)
         }
     }
     
-    private func populateNextCategoryInBackground(block: (error: NSError?) -> Void) -> Bool{
+    private func populateNextCategoryInBackground(completionBlock: (error: NSError?) -> Void) -> Bool{
         let defaultCategories = [
             SOCategory(id:"1", name:"ToDo".localized, selected: true),
             SOCategory(id:"2", name:"Events".localized, selected: true),
@@ -69,9 +69,9 @@ public class SOPopulateRemoteDataBase {
             object[kFldVisible] = true
             object.saveInBackgroundWithBlock {(success: Bool, error: NSError?) -> Void in
                 if (success) {
-                    block(error: nil)
+                    completionBlock(error: nil)
                 } else {
-                    block(error: error)
+                    completionBlock(error: error)
                 }
             }
         } else {
@@ -82,26 +82,26 @@ public class SOPopulateRemoteDataBase {
     }
     
     // - MARK: Icons
-    private func populateIcons(block: (error: NSError?) -> Void){
+    private func populateIcons(completionBlock: (error: NSError?) -> Void){
         self.currentIcoIndex = 0
         self.populateNextIco{(error: NSError?) -> Void in
-            block(error: error)
+            completionBlock(error: error)
         }
     }
     
-    private func populateNextIco(block: (error: NSError?) -> Void){
+    private func populateNextIco(completionBlock: (error: NSError?) -> Void){
         if !(self.populateNextIcoInBackground{(error: NSError?) -> Void in
             if error == nil{
-                self.populateNextIco(block)
+                self.populateNextIco(completionBlock)
             } else {
-                block(error: error)
+                completionBlock(error: error)
             }
             }){
-                block(error: nil)
+                completionBlock(error: nil)
         }
     }
     
-    private func populateNextIcoInBackground(block: (error: NSError?) -> Void) -> Bool{
+    private func populateNextIcoInBackground(completionBlock: (error: NSError?) -> Void) -> Bool{
         let defaultIcons = [
             SOIco(id:"1", name:"ico1".localized, imageName: "ico1", selected: true),
             SOIco(id:"2", name:"ico2".localized, imageName: "ico2", selected: true),
@@ -131,9 +131,9 @@ public class SOPopulateRemoteDataBase {
             object[kFldVisible] = true
             object.saveInBackgroundWithBlock {(success: Bool, error: NSError?) -> Void in
                 if (success) {
-                    block(error: nil)
+                    completionBlock(error: nil)
                 } else {
-                    block(error: error)
+                    completionBlock(error: error)
                 }
             }
         } else {
@@ -144,26 +144,26 @@ public class SOPopulateRemoteDataBase {
     }
     
     // - MARK: Tasks
-    private func populateTasks(block: (error: NSError?) -> Void){
+    private func populateTasks(completionBlock: (error: NSError?) -> Void){
         self.currentTaskIndex = 0
         self.populateNextTask{(error: NSError?) -> Void in
-            block(error: error)
+            completionBlock(error: error)
         }
     }
     
-    private func populateNextTask(block: (error: NSError?) -> Void){
+    private func populateNextTask(completionBlock: (error: NSError?) -> Void){
         if !(self.populateNextTaskInBackground{(error: NSError?) -> Void in
             if error == nil{
-                self.populateNextTask(block)
+                self.populateNextTask(completionBlock)
             } else {
-                block(error: error)
+                completionBlock(error: error)
             }
             }){
-                block(error: nil)
+                completionBlock(error: nil)
         }
     }
     
-    private func populateNextTaskInBackground(block: (error: NSError?) -> Void) -> Bool{
+    private func populateNextTaskInBackground(completionBlock: (error: NSError?) -> Void) -> Bool{
         let defaultTasks : [Dictionary<String, String>] = [
             [kTaskFldCategory: "1",
                 kTaskFldIco1: "1",
@@ -204,9 +204,9 @@ public class SOPopulateRemoteDataBase {
             object[kTaskFldDate] = NSDate()
             object.saveInBackgroundWithBlock {(success: Bool, error: NSError?) -> Void in
                 if (success) {
-                    block(error: nil)
+                    completionBlock(error: nil)
                 } else {
-                    block(error: error)
+                    completionBlock(error: error)
                 }
             }
         } else {

@@ -12,16 +12,16 @@ public protocol SODataBaseProtocol{
 
     func chainResponsibility(dataBaseIndex: DataBaseIndex) -> SODataBaseProtocol
     
-    func allCategories(block: (resultBuffer: [SOCategory], error: NSError?) -> Void)
-    func allIcons(block: (resultBuffer: [SOIco], error: NSError?) -> Void)
-    func allTasks(block: (resultBuffer: [SOTask], error: NSError?) -> Void)
+    func allCategories(completionBlock: (resultBuffer: [SOCategory], error: NSError?) -> Void)
+    func allIcons(completionBlock: (resultBuffer: [SOIco], error: NSError?) -> Void)
+    func allTasks(completionBlock: (resultBuffer: [SOTask], error: NSError?) -> Void)
 
-    func saveTask(task: SOTask, block: (error: NSError?) -> Void)
+    func saveTask(task: SOTask, completionBlock: (error: NSError?) -> Void)
     func removeTask(task: SOTask)
 
-    func saveFieldValueToObject(dataBaseObject: AnyObject?, entityName: String, fldName: String, recordId: String?, value: AnyObject, block: (error: NSError?) -> Void)
+    func saveFieldValueToObject(dataBaseObject: AnyObject?, entityName: String, fldName: String, recordId: String?, value: AnyObject, completionBlock: (error: NSError?) -> Void)
     
-    func saveFieldToObject(object: AnyObject?, fieldName: String, value: AnyObject, block: (error: NSError?) -> Void)
+    func saveFieldToObject(object: AnyObject?, fieldName: String, value: AnyObject, completionBlock: (error: NSError?) -> Void)
     
     func areObjectsEqual(object1: AnyObject?, object2: AnyObject?) -> Bool
     
@@ -31,7 +31,7 @@ public protocol SODataBaseProtocol{
 }
 
 public protocol SOConcreteObjectsProtocol: AnyObject{
-    func initFromParseObject(object: AnyObject)
+    func initWithParseObject(object: AnyObject)
     func copyToParseObject(object: AnyObject)
-    func initFromCoreDataObject(object: AnyObject)
+    func initWithCoreDataObject(object: AnyObject)
 }

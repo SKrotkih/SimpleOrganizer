@@ -35,31 +35,29 @@ enum SOEditTaskCellId: Int {
     }
 }
 
+enum SOEditTaskFiledName: String {
+    case CategoryFldName = "category"
+    case IconsFldName = "icons"
+    case DateFldName = "date"
+    case DescriptionFldName = "title"
+}
+
 public protocol SOEditTaskUndoDelegateProtocol{
     func addToUndoBuffer(dict: NSDictionary)
 }
 
 class SOEditTaskViewController: UIViewController {
+    @IBOutlet weak var tableView: UITableView!
 
     private var _task: SOTask
     private var _orgTask: SOTask?
     private var isItNewTask: Bool
     private var _cells = [SOEditTaskCell](count: SOEditTaskCellId.Undefined.rawValue, repeatedValue: SOEditTaskCell())
-    
     private let _undoManager = NSUndoManager()
-    
-    @IBOutlet weak var tableView: UITableView!
 
-    required init(coder aDecoder: NSCoder) {
-        _task = SOTask()
-        isItNewTask = true
-        
-        super.init(coder: aDecoder)
-    }
-    
     var task: SOTask?{
         get{
-          return _task
+            return _task
         }
         set{
             isItNewTask = (newValue == nil)
@@ -71,6 +69,13 @@ class SOEditTaskViewController: UIViewController {
                 _task.cloneTask(newValue!)
             }
         }
+    }
+    
+    required init(coder aDecoder: NSCoder) {
+        _task = SOTask()
+        isItNewTask = true
+        
+        super.init(coder: aDecoder)
     }
     
     override func viewDidLoad() {
@@ -269,6 +274,8 @@ class SOEditTaskViewController: UIViewController {
     
 }
 
+    // MARK: - UITableViewDataSource
+
 extension SOEditTaskViewController: UITableViewDataSource {
 
     @objc func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -367,19 +374,19 @@ extension SOEditTaskViewController: SOEditTaskUndoDelegateProtocol{
     @objc func undoData(data: [String: AnyObject]) {
         if let fldName = data.keys.first{
             switch fldName{
-            case "category":
+            case SOEditTaskFiledName.CategoryFldName.rawValue:
                 let prevCategory = data[fldName] as! String
                 self.task?.category = prevCategory
-            case "icons":
+            case SOEditTaskFiledName.IconsFldName.rawValue:
                 let prevIcons = data[fldName] as! NSArray
                 self.task?.icons = prevIcons as! [String]
-            case "date":
+            case SOEditTaskFiledName.DateFldName.rawValue:
                 let prevDate = data[fldName] as! String
                 var dateFormatter = NSDateFormatter()
                 dateFormatter.dateFormat = "dd-MM-yyyy HH:mm:ss"
                 var date = dateFormatter.dateFromString(prevDate)
                 self.task?.date = date
-            case "title":
+            case SOEditTaskFiledName.DescriptionFldName.rawValue:
                 let prevDescription = data[fldName] as! String
                 self.task?.title = prevDescription
             default:

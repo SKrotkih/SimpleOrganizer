@@ -12,11 +12,11 @@ let MaxIconsCount = 6
 
 public class SOTask: NSObject{
 
-    private var _databaseObject: AnyObject?
-    private var _title: String = ""
-    private var _category: String = ""
-    private var _icons = [String](count: MaxIconsCount, repeatedValue: "")
-    private var _date: NSDate?
+    public var databaseObject: AnyObject?
+    public var title: String = ""
+    public var category: String = ""
+    public var icons: [String] = [String](count: MaxIconsCount, repeatedValue: "")
+    public var date: NSDate?
     
     public var maxIconsCount: Int{
         get{
@@ -24,54 +24,9 @@ public class SOTask: NSObject{
         }
     }
     
-    public var databaseObject: AnyObject?{
-        get{
-            return _databaseObject
-        }
-        set{
-            _databaseObject = newValue
-        }
-    }
-    
-    public var title: String{
-        get{
-            return _title
-        }
-        set{
-            self._title = newValue
-        }
-    }
-    
-    public var category: String{
-        get{
-            return self._category
-        }
-        set{
-            self._category = newValue
-        }
-    }
-    
-    public var icons: [String]{
-        get{
-            return _icons
-        }
-        set{
-            _icons = newValue
-        }
-    }
-    
-    public var date: NSDate?{
-        get{
-            return _date
-        }
-        set{
-            _date = newValue
-        }
-    }
-    
     public var categoryName: String{
         get{
-            let categoryId = self._category
+            let categoryId = self.category
             
             if let returnValue = SODataFetching.sharedInstance.categoryName(categoryId){
                 return returnValue
@@ -84,7 +39,7 @@ public class SOTask: NSObject{
 
 extension SOTask: SOConcreteObjectsProtocol{
 
-    public func initFromParseObject(object: AnyObject)
+    public func initWithParseObject(object: AnyObject)
     {
         let theObject = object as! PFObject
         self.databaseObject = theObject
@@ -129,7 +84,7 @@ extension SOTask: SOConcreteObjectsProtocol{
         }
     }
     
-    public func initFromCoreDataObject(object: AnyObject)
+    public func initWithCoreDataObject(object: AnyObject)
     {
         let theObject = object as! Task
 
@@ -149,9 +104,9 @@ extension SOTask: SOConcreteObjectsProtocol{
 
 extension SOTask{
 
-    public func save(block: (error: NSError?) -> Void){
-        SODataBaseFactory.sharedInstance.dataBase.saveTask(self, block: {(error: NSError?) in
-            block(error: error)
+    public func save(completionBlock: (error: NSError?) -> Void){
+        SODataBaseFactory.sharedInstance.dataBase.saveTask(self, completionBlock: {(error: NSError?) in
+            completionBlock(error: error)
         })
     }
     
@@ -219,6 +174,7 @@ extension SOTask{
                     let s1: String = self.icons[index]
                     let s2: String = self.icons[index]
                     isEqual = isEqual && (s1 == s2)
+                    
                 }
             } else {
                 isEqual = isEqual && false
@@ -235,8 +191,8 @@ extension SOTask{
 
 extension SOTask{
     public func iconImage(index: Int) -> UIImage?{
-        if index < _icons.count{
-            let icoId = _icons[index]
+        if index < icons.count{
+            let icoId = icons[index]
             if let imageName : String = SODataFetching.sharedInstance.iconImageName(icoId){
                 if let image : UIImage = UIImage(named: imageName){
                     return image
@@ -248,8 +204,8 @@ extension SOTask{
     }
     
     public func setIcon(index: Int, newValue: String){
-        if index < _icons.count{
-            _icons[index] = newValue
+        if index < icons.count{
+            icons[index] = newValue
         }
     }
 }

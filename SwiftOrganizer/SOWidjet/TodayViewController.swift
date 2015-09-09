@@ -4,17 +4,18 @@
 //
 //  Created by vandad on 167//14.
 //  Copyright (c) 2014 Pixolity Ltd. All rights reserved.
+//  Adapted Sergey Krotkih
+//  Copyright (c) 2015 Sergey Krotkih. All rights reserved.
 //
 
 import UIKit
 import NotificationCenter
 import DataBaseKit
 
-class TodayViewController: UIViewController, UITableViewDataSource, UITableViewDelegate,  NCWidgetProviding {
+class TodayViewController: UIViewController, NCWidgetProviding {
+    /* List of items that we want to display in our table view */
+    private var tasks = [SOTask]()
 
-    @IBOutlet weak var typeOfDataBaseSwitcher: UISegmentedControl!
-    @IBOutlet weak var tableView: UITableView!
-    
     /* The same identifier is saved in our storyboard for the prototype
     cells for this table view controller */
     struct TableViewConstants{
@@ -22,53 +23,10 @@ class TodayViewController: UIViewController, UITableViewDataSource, UITableViewD
         static let cellHeight: CGFloat = 32.0
     }
     
-    /* List of items that we want to display in our table view */
-    private var tasks = [SOTask]()
+    @IBOutlet weak var typeOfDataBaseSwitcher: UISegmentedControl!
 
-    // MARK: UITableViewDelegate, UITableViewDataSource delegate protocol
+    @IBOutlet weak var tableView: UITableView!
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.tasks.count
-    }
-    
-    func tableView(tableView: UITableView,  heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat{
-        return TableViewConstants.cellHeight
-    }
-    
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(TableViewConstants.cellIdentifier, forIndexPath: indexPath) as! SOWidgetTableViewCell
-        let row = indexPath.row
-        let task: SOTask = self.tasks[row]
-        let categoryName = task.categoryName
-        let taskDescription = task.title
-        cell.categoryLabel!.text = categoryName
-        cell.descriptionLabel!.text = taskDescription
-
-        if let dateEvent = task.date{
-            let dateFormatter = NSDateFormatter()
-            dateFormatter.dateFormat = "dd-MM-yyyy HH:mm:ss"
-            cell.dateLabel.text = dateFormatter.stringFromDate(dateEvent)
-        } else{
-            cell.dateLabel.text = ""
-        }
-        
-        return cell
-    }
-    
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        let row = indexPath.row
-        let task: SOTask = self.tasks[row]
-        
-        if let recordId = SODataBaseFactory.sharedInstance.dataBase.getRecordIdForTask(task){
-            let urlAsString = "\(WidgetUrlScheme)://\(KeyInURLAsTaskId)\(recordId)"
-            let url = NSURL(string: urlAsString)
-            self.extensionContext!.openURL(url!, completionHandler: nil)
-        }
-        tableView.deselectRowAtIndexPath(indexPath, animated: false)
-    }
-    
-    // MARK: -
-
     @IBAction func switchToAnotherDataBase(sender: AnyObject) {
         let index = typeOfDataBaseSwitcher.selectedSegmentIndex
         SOTypeDataBaseSwitcher.switchToIndex(DataBaseIndex(rawValue: index)!)
@@ -116,4 +74,49 @@ class TodayViewController: UIViewController, UITableViewDataSource, UITableViewD
         completionHandler(result)
     }
     
+}
+
+    // MARK: - UITableViewDelegate, UITableViewDataSource delegate protocol
+
+extension TodayViewController: UITableViewDataSource, UITableViewDelegate {
+    
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return self.tasks.count
+    }
+    
+    func tableView(tableView: UITableView,  heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat{
+        return TableViewConstants.cellHeight
+    }
+    
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCellWithIdentifier(TableViewConstants.cellIdentifier, forIndexPath: indexPath) as! SOWidgetTableViewCell
+        let row = indexPath.row
+        let task: SOTask = self.tasks[row]
+        let categoryName = task.categoryName
+        let taskDescription = task.title
+        cell.categoryLabel!.text = categoryName
+        cell.descriptionLabel!.text = taskDescription
+        
+        if let dateEvent = task.date{
+            let dateFormatter = NSDateFormatter()
+            dateFormatter.dateFormat = "dd-MM-yyyy HH:mm:ss"
+            cell.dateLabel.text = dateFormatter.stringFromDate(dateEvent)
+        } else{
+            cell.dateLabel.text = ""
+        }
+        
+        return cell
+    }
+    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        let row = indexPath.row
+        let task: SOTask = self.tasks[row]
+        
+        if let recordId = SODataBaseFactory.sharedInstance.dataBase.getRecordIdForTask(task){
+            let urlAsString = "\(WidgetUrlScheme)://\(KeyInURLAsTaskId)\(recordId)"
+            let url = NSURL(string: urlAsString)
+            self.extensionContext!.openURL(url!, completionHandler: nil)
+        }
+        tableView.deselectRowAtIndexPath(indexPath, animated: false)
+    }
 }

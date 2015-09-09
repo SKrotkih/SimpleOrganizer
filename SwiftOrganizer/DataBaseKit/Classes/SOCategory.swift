@@ -32,10 +32,10 @@ public class SOCategory: SOCatalog {
     //- MARK: -
     //- MARK: SOConcreteObjectsProtocol
     
-    public override func initFromParseObject(object: AnyObject)
+    public override func initWithParseObject(object: AnyObject)
     {
         let theObject = object as! PFObject
-        super.initFromParseObject(theObject)
+        super.initWithParseObject(theObject)
         self.name = theObject[kCategoryFldName] as! String
     }
     
@@ -43,9 +43,9 @@ public class SOCategory: SOCatalog {
         super.copyToParseObject(object)
     }
     
-    public override func initFromCoreDataObject(object: AnyObject)
+    public override func initWithCoreDataObject(object: AnyObject)
     {
-        super.initFromCoreDataObject(object)
+        super.initWithCoreDataObject(object)
         let theObject = object as! NSManagedObject
         self.name = theObject.valueForKey(kCategoryFldName) as! String
     }

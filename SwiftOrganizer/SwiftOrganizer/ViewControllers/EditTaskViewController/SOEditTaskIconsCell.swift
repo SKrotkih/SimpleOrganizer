@@ -9,10 +9,8 @@
 import UIKit
 
 class SOEditTaskIconsCell: SOEditTaskCell {
-
     @IBOutlet weak var iconsBackgroundView: UIView!
     @IBOutlet weak var textBackgroundLabel: UILabel!
-    
     @IBOutlet weak var ico1ImageView: UIImageView!
     @IBOutlet weak var ico2ImageView: UIImageView!
     @IBOutlet weak var ico3ImageView: UIImageView!

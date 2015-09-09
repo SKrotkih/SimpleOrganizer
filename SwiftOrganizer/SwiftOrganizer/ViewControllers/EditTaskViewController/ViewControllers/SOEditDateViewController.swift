@@ -10,14 +10,11 @@ import UIKit
 import EventKit
 
 class SOEditDateViewController: SOEditTaskFieldBaseViewController {
-
     private var _date: NSDate?
-    
     @IBOutlet weak var datePicker: UIDatePicker!
     @IBOutlet weak var needRememberSwitch: UISwitch!
     @IBOutlet weak var needRememberLabel: UILabel!
     @IBOutlet weak var caveEventToCalendarButton: UIButton!
-    
     
     convenience init(date: NSDate){
         self.init()
@@ -41,17 +38,6 @@ class SOEditDateViewController: SOEditTaskFieldBaseViewController {
         self.needRememberLabel.text = "Does need reminder?".localized
         self.caveEventToCalendarButton.setTitle("Save event to the Calendar".localized, forState: .Normal)
         self.needRememberSwitch.on = true
-
-    }
-    
-    override func willFinishOfEditing() -> Bool{
-        return true && super.willFinishOfEditing()
-    }
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-
-        // Dispose of any resources that can be recreated.
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -66,6 +52,16 @@ class SOEditDateViewController: SOEditTaskFieldBaseViewController {
         }
     }
 
+    override func willFinishOfEditing() -> Bool{
+        return true && super.willFinishOfEditing()
+    }
+    
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+
+        // Dispose of any resources that can be recreated.
+    }
+
     func doneButtonWasPressed() {
         self.date = self.datePicker.date
         self.closeButtonWasPressed()
@@ -73,7 +69,6 @@ class SOEditDateViewController: SOEditTaskFieldBaseViewController {
     
     
     @IBAction func needToRememberChangeState(sender: AnyObject) {
-        
     }
     
     @IBAction func todayEnterOnButtonPressed(sender: AnyObject) {

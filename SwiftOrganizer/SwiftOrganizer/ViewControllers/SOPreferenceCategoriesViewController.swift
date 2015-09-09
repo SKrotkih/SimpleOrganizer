@@ -37,7 +37,7 @@ class SOPreferenceCategoriesViewController: UIViewController {
     private func didSelectRow(aRow: Int){
         let category: SOCategory = self.buffer[aRow] as! SOCategory
         let currState: Bool = !category.visible
-        category.setVisible(currState, block: {(error: NSError?) in
+        category.setVisible(currState, completionBlock: {(error: NSError?) in
             if let theError = error{
                 showAlertWithTitle("Failed to save data".localized, theError.description)
             } else {
@@ -66,6 +66,8 @@ extension SOPreferenceCategoriesViewController{
         }
     }
 }
+
+    // MARK: - UITableViewDelegate, UITableViewDataSource
 
 extension SOPreferenceCategoriesViewController: UITableViewDelegate, UITableViewDataSource{
     

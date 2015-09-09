@@ -171,7 +171,8 @@ extension SOLocalNotificationsCenter{
 
 extension SOLocalNotificationsCenter{
     private class func defaultCategory() -> String{
-        return "com.skappledev.SwiftOrganizer.message"
+        let bundleID = NSBundle.mainBundle().bundleIdentifier
+        return "\(bundleID).message"
     }
     
     private class func kAreAllowedTheLocalNotivicationsKey() -> String{

@@ -22,6 +22,14 @@ class SOSettingsViewController: UIViewController {
         SOObserversManager.sharedInstance.addObserver(self, type: .SODataBaseTypeChanged)
     }
 
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        self.addLeftBarButtonWithImage(UIImage(named: "ic_menu_black_24dp")!)
+        self.slideMenuController()?.removeLeftGestures()
+        self.slideMenuController()?.removeRightGestures()
+    }
+    
     deinit{
         SOObserversManager.sharedInstance.removeObserver(self, type: .SODataBaseTypeChanged)
     }
@@ -38,14 +46,6 @@ class SOSettingsViewController: UIViewController {
             self.useiCloudSwitch.enabled = false
         }
         self.segmentedControl.selectedSegmentIndex = selectedIndex.rawValue
-    }
-    
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        self.addLeftBarButtonWithImage(UIImage(named: "ic_menu_black_24dp")!)
-        self.slideMenuController()?.removeLeftGestures()
-        self.slideMenuController()?.removeRightGestures()
     }
     
     @IBAction func changeOfDataBase(sender: AnyObject) {

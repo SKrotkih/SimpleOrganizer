@@ -59,15 +59,6 @@ class SOMainViewController: UIViewController{
         self.titleActualize()
     }
     
-    deinit {
-        SOObserversManager.sharedInstance.removeObserver(self, type: .SODataBaseTypeChanged)
-        SOObserversManager.sharedInstance.removeObserver(self, type: .SODataBaseDidChanged)
-    }
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-    }
-    
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
@@ -86,6 +77,15 @@ class SOMainViewController: UIViewController{
         
         self.reloadData({(error: NSError?) in })
     }
+
+    deinit {
+        SOObserversManager.sharedInstance.removeObserver(self, type: .SODataBaseTypeChanged)
+        SOObserversManager.sharedInstance.removeObserver(self, type: .SODataBaseDidChanged)
+    }
+    
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+    }
     
     func handleRefresh(paramSender: AnyObject){
         /* Put a bit of delay between when the refresh control is released
@@ -101,12 +101,12 @@ class SOMainViewController: UIViewController{
         })
     }
     
-    private func reloadData(block: (error: NSError?) -> Void){
+    private func reloadData(completionBlock: (error: NSError?) -> Void){
         self.categoryTabBarController.reloadTabs{(error: NSError?) in
             self.iconsTabBarController.reloadTabs{(error: NSError?) in
                 self.cancelEditTask()
                 self.mainTableViewController.reloadData()
-                block(error: error)
+                completionBlock(error: error)
                 self.titleActualize()
             }
         }

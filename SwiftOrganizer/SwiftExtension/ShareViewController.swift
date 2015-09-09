@@ -10,15 +10,9 @@ import UIKit
 import Social
 import MobileCoreServices
 
-class ShareViewController: SLComposeServiceViewController, AudienceSelectionViewControllerDelegate {
+class ShareViewController: SLComposeServiceViewController {
 
     var imageData: NSData?
-    
-    func audienceSelectionViewController(sender: AudienceSelectionViewController,
-        selectedValue: String) {
-            audienceConfigurationItem.value = selectedValue
-            popConfigurationViewController()
-    }
     
     func showAudienceSelection(){
         let controller = AudienceSelectionViewController(style: .Plain)
@@ -39,7 +33,7 @@ class ShareViewController: SLComposeServiceViewController, AudienceSelectionView
 
     override func presentationAnimationDidFinish(){
         super.presentationAnimationDidFinish()
-        placeholder = "Your comments"
+        placeholder = "Your comments".localized
         let content = extensionContext!.inputItems[0] as! NSExtensionItem
         let contentType = kUTTypeImage as NSString
         
@@ -73,7 +67,7 @@ class ShareViewController: SLComposeServiceViewController, AudienceSelectionView
     
     lazy var audienceConfigurationItem: SLComposeSheetConfigurationItem = {
         let item = SLComposeSheetConfigurationItem()
-        item.title = "Audience"
+        item.title = "Audience".localized
         item.value = AudienceSelectionViewController.defaultAudience()
         item.tapHandler = self.showAudienceSelection
         return item
@@ -84,4 +78,14 @@ class ShareViewController: SLComposeServiceViewController, AudienceSelectionView
     }
     
 
+}
+
+    // MARK: - AudienceSelectionViewControllerDelegate protocol implementation
+
+extension ShareViewController: AudienceSelectionViewControllerDelegate{
+    func audienceSelectionViewController(sender: AudienceSelectionViewController,
+        selectedValue: String) {
+            audienceConfigurationItem.value = selectedValue
+            popConfigurationViewController()
+    }
 }

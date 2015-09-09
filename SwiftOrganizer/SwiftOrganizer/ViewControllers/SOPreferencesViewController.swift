@@ -10,8 +10,7 @@ import UIKit
 
 enum SOPreferencesRowItem: Int {
     case CategoryPreferencesEditor = 0
-    case IconsPreferencesEditor,
-    Undefined
+    case IconsPreferencesEditor
 }
 
 class SOPreferencesViewController: UIViewController {
@@ -37,13 +36,9 @@ class SOPreferencesViewController: UIViewController {
         
         switch aChoice {
         case .CategoryPreferencesEditor:
-            let categoriesVC = storyboard.instantiateViewControllerWithIdentifier("PreferenceCategoriesViewController") as! SOPreferenceCategoriesViewController
-            viewController = categoriesVC
+            viewController = storyboard.instantiateViewControllerWithIdentifier("PreferenceCategoriesViewController") as! SOPreferenceCategoriesViewController
         case .IconsPreferencesEditor:
-            let iconsVC = storyboard.instantiateViewControllerWithIdentifier("PreferenceIconsViewController") as! SOPreferenceIconsViewController
-            viewController = iconsVC
-        default:
-            assert(false, "Too many rows in the Table!")
+            viewController = storyboard.instantiateViewControllerWithIdentifier("PreferenceIconsViewController") as! SOPreferenceIconsViewController
         }
 
         self.navigationController?.pushViewController(viewController, animated: true)
@@ -69,8 +64,6 @@ extension SOPreferencesViewController: UITableViewDataSource, UITableViewDelegat
             cell.textLabel?.text = "Categories".localized
         case .IconsPreferencesEditor:
             cell.textLabel?.text = "Icons".localized
-        default:
-            assert(false, "Too many rows in the Table!")
         }
         
         return cell

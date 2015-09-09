@@ -71,6 +71,11 @@ class LeftViewController : UIViewController {
         super.viewDidAppear(animated)
     }
     
+}
+
+    // MARK: - UITableViewDelegate, UITableViewDataSource
+
+extension LeftViewController: UITableViewDelegate, UITableViewDataSource{
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return menus.count
     }
@@ -90,6 +95,8 @@ class LeftViewController : UIViewController {
         }
     }
 }
+
+    // MARK: - Change View Controller
 
 extension LeftViewController: LeftMenuProtocol {
     func changeViewController(menu: LeftMenu) {

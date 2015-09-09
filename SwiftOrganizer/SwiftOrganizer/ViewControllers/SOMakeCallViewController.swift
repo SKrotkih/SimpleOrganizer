@@ -26,9 +26,6 @@ class SOMakeCallViewController: UIViewController {
         self.phoneNumber.delegate = self
         self.setUpControllsState()
     }
-
-    deinit{
-    }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
@@ -44,6 +41,9 @@ class SOMakeCallViewController: UIViewController {
         
     }
 
+    deinit{
+    }
+    
     func doneButtonPressed(sender: AnyObject) {
         self.phoneNumber.resignFirstResponder()
         self.rightButton.enabled = false
@@ -80,9 +80,9 @@ class SOMakeCallViewController: UIViewController {
         
         if count(phoneNumber) > 0{
             if self.emailSwitch.on {
-                isValidOk = self.isValidEmail(phoneNumber)
+                isValidOk = phoneNumber.isValidEmail()
             } else {
-                isValidOk = self.isValidPhoneNumber(phoneNumber)
+                isValidOk = phoneNumber.isValidPhoneNumber()
             }
         }
         
@@ -114,26 +114,6 @@ class SOMakeCallViewController: UIViewController {
                 application.openURL(facetimeURL);
             }
         }
-    }
-}
-
-    // MARK: Validation e-mail and phonen number
-
-extension SOMakeCallViewController{
-    func isValidEmail(testStr:String) -> Bool {
-        // println("validate calendar: \(testStr)")
-        let emailRegEx = "^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$"
-        
-        let emailTest = NSPredicate(format:"SELF MATCHES %@", emailRegEx)
-        return emailTest.evaluateWithObject(testStr)
-    }
-    
-    func isValidPhoneNumber(testStr:String) -> Bool {
-        // println("validate calendar: \(testStr)")
-        let phoneNumberRegEx = "^((\\+)|(00))[0-9]{6,14}$"
-        
-        let phoneNumberTest = NSPredicate(format: "SELF MATCHES %@", phoneNumberRegEx)
-        return phoneNumberTest.evaluateWithObject(testStr)
     }
 }
 

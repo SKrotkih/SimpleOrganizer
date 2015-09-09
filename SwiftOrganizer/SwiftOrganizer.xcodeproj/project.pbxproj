@@ -30,6 +30,7 @@
 		7F55D3EC1B9EFAAA00C02645 /* SOCoreDataBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F55D3EB1B9EFAAA00C02645 /* SOCoreDataBase.swift */; };
 		7F55D3EE1B9F073700C02645 /* SOPopulateRemoteDataBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F55D3ED1B9F073700C02645 /* SOPopulateRemoteDataBase.swift */; };
 		7F55D3F01B9F090900C02645 /* SOPopulateLocalDataBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F55D3EF1B9F090900C02645 /* SOPopulateLocalDataBase.swift */; };
+		7F55D3F11BA01A4C00C02645 /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F57259F1B0F61F7003DBDEB /* StringExtension.swift */; };
 		7F56ACC71B6A5C9E00B0C1EF /* SOMakeCallViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F56ACC61B6A5C9E00B0C1EF /* SOMakeCallViewController.swift */; };
 		7F56ACC91B6A5EE600B0C1EF /* phone.png in Resources */ = {isa = PBXBuildFile; fileRef = 7F56ACC81B6A5EE600B0C1EF /* phone.png */; };
 		7F56ACCB1B6D1A2200B0C1EF /* SOSemaforeExample.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F56ACCA1B6D1A2200B0C1EF /* SOSemaforeExample.swift */; };
@@ -1336,6 +1337,7 @@
 			files = (
 				7FD44AE01B59469E000A4FB3 /* ShareViewController.swift in Sources */,
 				7FD44AEB1B5950DC000A4FB3 /* AudienceSelectionViewController.swift in Sources */,
+				7F55D3F11BA01A4C00C02645 /* StringExtension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

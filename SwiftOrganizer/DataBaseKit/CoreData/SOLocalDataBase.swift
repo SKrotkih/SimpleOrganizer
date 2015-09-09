@@ -12,11 +12,12 @@ let TaskEntityName = "Task"
 
 public class SOLocalDataBase: SODataBaseProtocol {
     private let queue = dispatch_queue_create("localDataBaseRequestsQ", DISPATCH_QUEUE_CONCURRENT);
-    var nextDataBase: SODataBaseProtocol?
+    private var nextDataBase: SODataBaseProtocol?
     private var coreData: SOCoreDataBase
     private var populateDataBase: SOPopulateLocalDataBase
 
-    init(){
+    required public init(nextDataBase: SODataBaseProtocol?){
+        self.nextDataBase = nextDataBase
         self.coreData = SOCoreDataBase()
         self.populateDataBase = SOPopulateLocalDataBase()
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "applicationWillTerminate:", name: UIApplicationWillTerminateNotification,  object: nil)
@@ -41,14 +42,14 @@ public class SOLocalDataBase: SODataBaseProtocol {
 extension SOLocalDataBase{
 
     private func fillNewObjectWithData<T: SOConcreteObjectsProtocol, T2: AnyObject>(newObject: T, managedObject: T2) -> T{
-        newObject.initFromCoreDataObject(managedObject)
+        newObject.initWithCoreDataObject(managedObject)
         
         return newObject
     }
     
     // TODO: - I tried to make generic for allCategories and the allIcons function but faced some principal problems
     // MARK: Categories
-    public func allCategories(block: (resultBuffer: [SOCategory], error: NSError?) -> Void){
+    public func allCategories(completionBlock: (resultBuffer: [SOCategory], error: NSError?) -> Void){
         var _allCategories: [SOCategory] = []
         var _error: NSError?
         var _needRecursiveCall: Bool = false
@@ -74,19 +75,19 @@ extension SOLocalDataBase{
         })
         
         if _needRecursiveCall{
-            return self.allCategories(block)
+            return self.allCategories(completionBlock)
         }
         
         if _error == nil{
-            block(resultBuffer: _allCategories, error: nil)
+            completionBlock(resultBuffer: _allCategories, error: nil)
         } else {
-            block(resultBuffer: [], error: _error)
+            completionBlock(resultBuffer: [], error: _error)
         }
     }
     
     // MARK: - Icons
     
-    public func allIcons(block: (resultBuffer: [SOIco], error: NSError?) -> Void){
+    public func allIcons(completionBlock: (resultBuffer: [SOIco], error: NSError?) -> Void){
         var _allIcon: [SOIco] = []
         var _error: NSError?
         var _needRecursiveCall: Bool = false
@@ -113,18 +114,18 @@ extension SOLocalDataBase{
         })
         
         if _needRecursiveCall{
-            return self.allIcons(block)
+            return self.allIcons(completionBlock)
         }
         
         if _error == nil{
-            block(resultBuffer: _allIcon, error: nil)
+            completionBlock(resultBuffer: _allIcon, error: nil)
         } else {
-            block(resultBuffer: [], error: _error)
+            completionBlock(resultBuffer: [], error: _error)
         }
     }
     
     // MARK: - Tasks
-    public func allTasks(block: (resultBuffer: [SOTask], error: NSError?) -> Void) {
+    public func allTasks(completionBlock: (resultBuffer: [SOTask], error: NSError?) -> Void) {
         let backgroundContext = NSManagedObjectContext(concurrencyType: NSManagedObjectContextConcurrencyType.PrivateQueueConcurrencyType)
         backgroundContext.persistentStoreCoordinator = self.coreData.persistentStoreCoordinator
         
@@ -143,7 +144,7 @@ extension SOLocalDataBase{
                     if tasks.count > 0 {
                         SODataFetching.sharedInstance.prepareAllSubTables{(fetchError: NSError?) in
                             if let error = fetchError{
-                                block(resultBuffer: [], error: error)
+                                completionBlock(resultBuffer: [], error: error)
                             } else {
                                 dispatch_async(dispatch_get_main_queue(), {
                                     var _allTasks: [SOTask] = []
@@ -170,7 +171,7 @@ extension SOLocalDataBase{
                                             _allTasks.append(sotask)
                                         }
                                     }
-                                    block(resultBuffer: _allTasks, error: nil)
+                                    completionBlock(resultBuffer: _allTasks, error: nil)
                                 })
                             }
                         }
@@ -193,7 +194,7 @@ extension SOLocalDataBase{
     
     private func newTask(task: Task) -> SOTask{
         var newTask: SOTask = SOTask()
-        newTask.initFromCoreDataObject(task)
+        newTask.initWithCoreDataObject(task)
         
         return newTask
     }
@@ -240,7 +241,7 @@ extension SOLocalDataBase{
 
 extension SOLocalDataBase{
     
-    public func saveTask(task: SOTask, block: (error: NSError?) -> Void){
+    public func saveTask(task: SOTask, completionBlock: (error: NSError?) -> Void){
         dispatch_sync(self.queue, {() in
             let taskObject: Task? = task.databaseObject as? Task
             
@@ -255,10 +256,10 @@ extension SOLocalDataBase{
             self.coreData.saveContext()
         })
         
-        block(error: nil)
+        completionBlock(error: nil)
     }
     
-    public func saveFieldToObject(object: AnyObject?, fieldName: String, value: AnyObject, block: (error: NSError?) -> Void){
+    public func saveFieldToObject(object: AnyObject?, fieldName: String, value: AnyObject, completionBlock: (error: NSError?) -> Void){
         let managedObject = object as? NSManagedObject
         
         if let object = managedObject{
@@ -266,11 +267,11 @@ extension SOLocalDataBase{
                 let tryCatchException = KVOTryCatchException()
                 //object.setValue(value, forKey: fieldName);
                 if  let error: NSError = tryCatchException.trySetKeyValueForObject(object, forKeyPath: fieldName, value: value){
-                    block(error: error)
+                    completionBlock(error: error)
                 }
                 else{
                     self!.coreData.saveContext()
-                    block(error: nil)
+                    completionBlock(error: nil)
                 }
                 })
         }
@@ -281,7 +282,7 @@ extension SOLocalDataBase{
         }
     }
     
-    public func saveFieldValueToObject(dataBaseObject: AnyObject?, entityName: String, fldName: String, recordId: String?, value: AnyObject, block: (error: NSError?) -> Void){
+    public func saveFieldValueToObject(dataBaseObject: AnyObject?, entityName: String, fldName: String, recordId: String?, value: AnyObject, completionBlock: (error: NSError?) -> Void){
         var object: AnyObject? = dataBaseObject
         
         if let theRecordId = recordId{
@@ -292,8 +293,8 @@ extension SOLocalDataBase{
             }
         }
         
-        self.saveFieldToObject(object, fieldName: fldName, value: value, block: {(error: NSError?) in
-            block(error: error)
+        self.saveFieldToObject(object, fieldName: fldName, value: value, completionBlock: {(error: NSError?) in
+            completionBlock(error: error)
         })
     }
 }

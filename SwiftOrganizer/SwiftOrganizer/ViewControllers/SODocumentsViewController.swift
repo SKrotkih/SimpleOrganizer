@@ -42,34 +42,6 @@ class SODocumentsViewController: UITableViewController {
         }
     }
     
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 1
-    }
-    
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.txtFiles.count
-    }
-    
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("FileCell") as! UITableViewCell
-        let filePath = self.txtFiles[indexPath.row]
-        cell.textLabel?.text = filePath.lastPathComponent
-        
-        return cell
-    }
-    
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        let filePath = self.txtFiles[indexPath.row]
-        let URL: NSURL! = NSURL(fileURLWithPath: filePath)
-        let documentToOpen = SOSampleDocument(fileURL: URL)
-
-        documentToOpen.openWithCompletionHandler() { (success) in
-            if success == true {
-                self.performSegueWithIdentifier("showDetail", sender: documentToOpen)
-            }
-        }
-    }
-    
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
         if segue.identifier == "showDetail" {
             let detailViewController = segue.destinationViewController as! SOEditDocumentViewController
@@ -95,4 +67,36 @@ class SODocumentsViewController: UITableViewController {
         }
     }
     
+}
+
+    // MARK: - TableView Delegate and DataSource protocol implementation
+
+extension SODocumentsViewController{
+    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return self.txtFiles.count
+    }
+    
+    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCellWithIdentifier("FileCell") as! UITableViewCell
+        let filePath = self.txtFiles[indexPath.row]
+        cell.textLabel?.text = filePath.lastPathComponent
+        
+        return cell
+    }
+    
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        let filePath = self.txtFiles[indexPath.row]
+        let URL: NSURL! = NSURL(fileURLWithPath: filePath)
+        let documentToOpen = SOSampleDocument(fileURL: URL)
+        
+        documentToOpen.openWithCompletionHandler() { (success) in
+            if success == true {
+                self.performSegueWithIdentifier("showDetail", sender: documentToOpen)
+            }
+        }
+    }
 }

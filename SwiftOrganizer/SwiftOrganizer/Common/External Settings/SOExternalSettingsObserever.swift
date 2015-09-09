@@ -7,7 +7,7 @@
 //
 
 // Before using this feature, you need to create the Settings.bundle in the Xcode. 
-// For that add new file in Xcode, then select iOS - Resources - Settings.bundle
+// For that add a new file in Xcode, then select iOS - Resources - Settings.bundle
 
 import Foundation
 

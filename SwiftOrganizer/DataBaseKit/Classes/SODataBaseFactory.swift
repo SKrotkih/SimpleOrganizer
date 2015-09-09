@@ -5,7 +5,7 @@
 //  Created by Sergey Krotkih on 5/28/15.
 //  Copyright (c) 2015 Sergey Krotkih. All rights reserved.
 //
-//  There is the Factory Method Pattern on the Chain Responsibility and on the Singleton
+//  There is the Factory Method Pattern with using of the Chain Responsibility and of the Singleton patterns
 
 import UIKit
 
@@ -15,16 +15,14 @@ public final class SODataBaseFactory {
 
     public class var sharedInstance: SODataBaseFactory {
         struct SingletonWrapper {
-        static let sharedInstance = SODataBaseFactory()
+            static let sharedInstance = SODataBaseFactory()
         }
         return SingletonWrapper.sharedInstance;
     }
     
     private init() {
-        localDataBase = SOLocalDataBase()
-        remoteDataBase = SORemoteDataBase()
-        localDataBase.nextDataBase = remoteDataBase
-        remoteDataBase.nextDataBase = localDataBase
+        remoteDataBase = SORemoteDataBase(nextDataBase: nil)
+        localDataBase = SOLocalDataBase(nextDataBase: remoteDataBase)
     }
 
     public var dataBase: SODataBaseProtocol!{

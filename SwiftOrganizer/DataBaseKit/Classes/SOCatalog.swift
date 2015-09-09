@@ -29,7 +29,7 @@ public class SOCatalog: NSObject, SOConcreteObjectsProtocol {
     //- MARK: -
     //- MARK: SOConcreteObjectsProtocol
     
-    public func initFromParseObject(object: AnyObject)
+    public func initWithParseObject(object: AnyObject)
     {
         let theObject = object as! PFObject
         self.databaseObject = theObject
@@ -41,7 +41,7 @@ public class SOCatalog: NSObject, SOConcreteObjectsProtocol {
     public func copyToParseObject(object: AnyObject){
     }
     
-    public func initFromCoreDataObject(object: AnyObject)
+    public func initWithCoreDataObject(object: AnyObject)
     {
         let theObject = object as! NSManagedObject
         self.databaseObject = theObject
@@ -53,18 +53,18 @@ public class SOCatalog: NSObject, SOConcreteObjectsProtocol {
 
 extension SOCatalog{
 
-    public func setSelected(select: Bool, block: (error: NSError?) -> Void){
-        self.saveFldName(kFldSelected, value: select, block: block)
+    public func setSelected(select: Bool, completionBlock: (error: NSError?) -> Void){
+        self.saveFldName(kFldSelected, value: select, completionBlock: completionBlock)
     }
     
-    public func setVisible(visible: Bool, block: (error: NSError?) -> Void){
-        self.saveFldName(kFldVisible, value: visible, block: block)
+    public func setVisible(visible: Bool, completionBlock: (error: NSError?) -> Void){
+        self.saveFldName(kFldVisible, value: visible, completionBlock: completionBlock)
     }
 
-    public func saveFldName(fldName: String, value: AnyObject, block: (error: NSError?) -> Void){
+    public func saveFldName(fldName: String, value: AnyObject, completionBlock: (error: NSError?) -> Void){
         let dataBase: SODataBaseProtocol = SODataBaseFactory.sharedInstance.dataBase
-        dataBase.saveFieldValueToObject(self.databaseObject, entityName: self.entityName, fldName: fldName, recordId: self.recordid, value: value, block: {(error: NSError?) in
-            block(error: error)
+        dataBase.saveFieldValueToObject(self.databaseObject, entityName: self.entityName, fldName: fldName, recordId: self.recordid, value: value, completionBlock: {(error: NSError?) in
+            completionBlock(error: error)
         })
     }
 }

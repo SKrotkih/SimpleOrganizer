@@ -38,7 +38,7 @@ class SOPreferenceIconsViewController: UIViewController {
     private func didSelectRow(aRow: Int){
         let ico: SOIco = self.buffer[aRow] as! SOIco
         let visible: Bool = !ico.visible
-        ico.setVisible(visible, block: {(error: NSError?) in
+        ico.setVisible(visible, completionBlock: {(error: NSError?) in
             if let theError = error{
                 showAlertWithTitle("Failed to save data".localized, theError.description)
             } else {
@@ -68,6 +68,8 @@ extension SOPreferenceIconsViewController{
     }
 }
 
+    // MARK: - UITableViewDelegate, UITableViewDataSource
+
 extension SOPreferenceIconsViewController: UITableViewDelegate, UITableViewDataSource{
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -95,6 +97,5 @@ extension SOPreferenceIconsViewController: UITableViewDelegate, UITableViewDataS
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         self.didSelectRow(indexPath.row)
     }
-    
     
 }

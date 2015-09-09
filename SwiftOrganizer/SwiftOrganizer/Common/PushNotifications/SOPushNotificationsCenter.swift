@@ -10,7 +10,6 @@ import Foundation
 
 class SOPushNotificationsCenter: NSObject {
 
-
     class func didRegisterForRemoteNotificationsWithDeviceToken(application: UIApplication,  deviceToken: NSData){
         SOParseComManager.application(application, didRegisterForRemoteNotificationsWithDeviceToken: deviceToken)
     }
@@ -38,7 +37,11 @@ class SOPushNotificationsCenter: NSObject {
         
         SOParseComManager.application(application, didReceiveRemoteNotification: userInfo, fetchCompletionHandler: completionHandler)
     }
-    
+}
+
+    // MARK: - Parse notification
+
+extension SOPushNotificationsCenter{
     class func parseRemoteNotification(userInfo: [NSObject : AnyObject]){
         if let theAps = userInfo["aps"] as? NSDictionary {
             if let theAlert = theAps["alert"] as? NSDictionary {
@@ -50,6 +53,4 @@ class SOPushNotificationsCenter: NSObject {
             }
         }
     }
-    
-    
 }

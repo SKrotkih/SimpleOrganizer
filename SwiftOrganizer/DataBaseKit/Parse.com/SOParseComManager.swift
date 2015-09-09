@@ -136,18 +136,18 @@ public class SOParseComManager: NSObject {
         return true
     }
 
-    class func checkUser(block: (error: NSError?) -> Void){
+    class func checkUser(completionBlock: (error: NSError?) -> Void){
         var currentUser = PFUser.currentUser()
         if currentUser != nil {
-            block(error: nil)
+            completionBlock(error: nil)
         } else {
             self.login{(error: NSError?) in
-                block(error: error)
+                completionBlock(error: error)
             }
         }
     }
 
-    class func login(block: (error: NSError?) -> Void){
+    class func login(completionBlock: (error: NSError?) -> Void){
         
         let defaults = SOUserDefault.sharedDefaults()
         var username: String = DefaultUsername
@@ -165,9 +165,9 @@ public class SOParseComManager: NSObject {
                 let defaults = SOUserDefault.sharedDefaults()
                 defaults.setObject(username, forKey: SOUsernameKey)
                 defaults.setObject(password, forKey: SOPasswordKey)
-                block(error: nil)
+                completionBlock(error: nil)
             } else {
-                block(error: error)
+                completionBlock(error: error)
                 println("The login failed. \(error?.description)")
             }
         }

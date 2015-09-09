@@ -34,10 +34,10 @@ public class SOIco: SOCatalog {
     //- MARK: -
     //- MARK: SOConcreteObjectsProtocol
     
-    public override func initFromParseObject(object: AnyObject)
+    public override func initWithParseObject(object: AnyObject)
     {
         let theObject = object as! PFObject
-        super.initFromParseObject(theObject)
+        super.initWithParseObject(theObject)
         self.name = theObject[kIcoFldName] as! String
         self.imageName = theObject[kIcoFldImageName] as! String
     }
@@ -46,9 +46,9 @@ public class SOIco: SOCatalog {
         super.copyToParseObject(object)
     }
     
-    public override func initFromCoreDataObject(object: AnyObject)
+    public override func initWithCoreDataObject(object: AnyObject)
     {
-        super.initFromCoreDataObject(object)
+        super.initWithCoreDataObject(object)
         let theObject = object as! NSManagedObject
         self.name = theObject.valueForKey(kIcoFldName) as! String
         self.imageName = theObject.valueForKey(kIcoFldImageName) as! String

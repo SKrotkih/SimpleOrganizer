@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SODocumentPickerViewController: UIViewController, UIDocumentPickerDelegate {
+class SODocumentPickerViewController: UIViewController {
     var rightButton: UIBarButtonItem!
     
     override func viewDidLoad() {
@@ -33,27 +33,6 @@ class SODocumentPickerViewController: UIViewController, UIDocumentPickerDelegate
         documentPicker.delegate = self
         documentPicker.modalPresentationStyle = UIModalPresentationStyle.FullScreen
         self.presentViewController(documentPicker, animated: true, completion: nil)
-    }
-    
-    func documentPicker(controller: UIDocumentPickerViewController, didPickDocumentAtURL url: NSURL) {
-        
-        let fileName = url.lastPathComponent
-        let temporaryURL = NSURL.fileURLWithPath(NSTemporaryDirectory(), isDirectory:true)?.URLByAppendingPathComponent(fileName!)
-        var copyError : NSError? = nil
-        NSFileManager.defaultManager().copyItemAtURL(url, toURL: temporaryURL!, error: &copyError)
-
-        if let theError = copyError {
-            println("Error copying: \(theError)")
-        }
-        self.saveFileToDocuments(temporaryURL!, dstFileName: fileName!)
-        //self.saveFileToiCloud(temporaryURL!, dstFileName: fileName!)
-        self.dismissViewControllerAnimated(true, completion: nil)
-    }
-    
-    func documentPickerWasCancelled(controller: UIDocumentPickerViewController)
-    {
-        // Nothing got selected, so just dismiss it
-        self.dismissViewControllerAnimated(true, completion: nil)
     }
 
     func URLForDocuments() -> NSURL {
@@ -82,7 +61,30 @@ class SODocumentPickerViewController: UIViewController, UIDocumentPickerDelegate
             println("Error making ubiquitous: \(theError)")
         }
     }
+}
+
+    // MARK: - UIDocumentPickerDelegate
+
+extension SODocumentPickerViewController: UIDocumentPickerDelegate{
     
+    func documentPicker(controller: UIDocumentPickerViewController, didPickDocumentAtURL url: NSURL) {
+        
+        let fileName = url.lastPathComponent
+        let temporaryURL = NSURL.fileURLWithPath(NSTemporaryDirectory(), isDirectory:true)?.URLByAppendingPathComponent(fileName!)
+        var copyError : NSError? = nil
+        NSFileManager.defaultManager().copyItemAtURL(url, toURL: temporaryURL!, error: &copyError)
+        
+        if let theError = copyError {
+            println("Error copying: \(theError)")
+        }
+        self.saveFileToDocuments(temporaryURL!, dstFileName: fileName!)
+        //self.saveFileToiCloud(temporaryURL!, dstFileName: fileName!)
+        self.dismissViewControllerAnimated(true, completion: nil)
+    }
     
-    
+    func documentPickerWasCancelled(controller: UIDocumentPickerViewController)
+    {
+        // Nothing got selected, so just dismiss it
+        self.dismissViewControllerAnimated(true, completion: nil)
+    }
 }

@@ -20,22 +20,9 @@ class SOEditTaskCell: UITableViewCell {
             _task = newValue
         }
     }
-    
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        
-        // Initialization code
-    }
-    
-    override func setSelected(selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-        
-        // Configure the view for the selected state
-    }
-    
-    func currentValueToString() -> String{
 
-        assert(false, "You need override this method in the child class!")
+    func currentValueToString() -> String{
+        assert(false, "You should to override this method in a child class!")
         
         return ""
     }

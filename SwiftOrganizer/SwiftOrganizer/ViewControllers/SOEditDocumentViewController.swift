@@ -9,7 +9,7 @@
 
 import UIKit
 
-class SOEditDocumentViewController: UIViewController, UITextViewDelegate {
+class SOEditDocumentViewController: UIViewController {
     
     var rightButton: UIBarButtonItem!
     @IBOutlet weak var textView: UITextView!
@@ -41,13 +41,6 @@ class SOEditDocumentViewController: UIViewController, UITextViewDelegate {
         }
     }
     
-    func textViewDidChange(textView: UITextView) { //Handle the text changes here
-        if let document : SOSampleDocument = self.detailItem {
-            document.text = self.textView.text
-            document.updateChangeCount(UIDocumentChangeKind.Done)
-        }
-    }
-    
     @IBAction func doneButtonPressed(sender: AnyObject){
         if let document: SOSampleDocument = self.detailItem {
             document.saveToURL(document.fileURL, forSaveOperation: UIDocumentSaveOperation.ForOverwriting){(success) in
@@ -59,3 +52,14 @@ class SOEditDocumentViewController: UIViewController, UITextViewDelegate {
     }
 }
 
+extension SOEditDocumentViewController: UITextViewDelegate{
+    
+    func textViewDidChange(textView: UITextView) {
+        if let document : SOSampleDocument = self.detailItem {
+            //Handle the text changes here
+            document.text = self.textView.text
+            document.updateChangeCount(UIDocumentChangeKind.Done)
+        }
+    }
+    
+}

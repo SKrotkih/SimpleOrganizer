@@ -25,31 +25,31 @@ public final class SODataFetching{
     }
 
     // MARK: - Categories
-    public func allCategories(block: (resultBuffer: [SOCategory], error: NSError?) -> Void){
+    public func allCategories(completionBlock: (resultBuffer: [SOCategory], error: NSError?) -> Void){
         SODataBaseFactory.sharedInstance.dataBase.allCategories{(categories: [SOCategory], error: NSError?) in
             self._allCategories = categories
-            block(resultBuffer: self._allCategories, error: error)
+            completionBlock(resultBuffer: self._allCategories, error: error)
         }
     }
     
     // MARK: -  Icons
-    public func allIcons(block: (resultBuffer: [SOIco], error: NSError?) -> Void){
+    public func allIcons(completionBlock: (resultBuffer: [SOIco], error: NSError?) -> Void){
         SODataBaseFactory.sharedInstance.dataBase.allIcons{(icons: [SOIco], error: NSError?) in
             self._allIcons = icons
-            block(resultBuffer: self._allIcons, error: error)
+            completionBlock(resultBuffer: self._allIcons, error: error)
         }
     }
     
-    public func prepareAllSubTables(block: (error: NSError?) -> Void) {
+    public func prepareAllSubTables(completionBlock: (error: NSError?) -> Void) {
         self.allCategories{(categories: [SOCategory], fetchError: NSError?) in
             if let error = fetchError{
-                block(error: error)
+                completionBlock(error: error)
             } else {
                 self.allIcons{(resultBuffer: [SOIco], fetchError: NSError?) in
                     if let error = fetchError{
-                        block(error: error)
+                        completionBlock(error: error)
                     } else {
-                        block(error: nil)
+                        completionBlock(error: nil)
                     }
                 }
             }
@@ -57,10 +57,10 @@ public final class SODataFetching{
     }
     
     // MARK: - Tasks
-    public func allTasks(block: (resultBuffer: [SOTask], error: NSError?) -> Void) {
+    public func allTasks(completionBlock: (resultBuffer: [SOTask], error: NSError?) -> Void) {
         SODataBaseFactory.sharedInstance.dataBase.allTasks{(allCurrentTasks: [SOTask], error: NSError?) in
             self._allTasks = allCurrentTasks
-            block(resultBuffer: self._allTasks, error: error)
+            completionBlock(resultBuffer: self._allTasks, error: error)
         }
     }
 }

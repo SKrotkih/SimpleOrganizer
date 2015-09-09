@@ -31,8 +31,8 @@ public class SOReachabilityCenter{
         return self.reachability.isReachable()
     }
 
-    func startInternetObserver(block: () -> Void  ){
-        self.changeReachableBlock = block
+    func startInternetObserver(completionBlock: () -> Void  ){
+        self.changeReachableBlock = completionBlock
         
         self.reachability.whenReachable = { reachability in
             self.changeReachableBlock()
