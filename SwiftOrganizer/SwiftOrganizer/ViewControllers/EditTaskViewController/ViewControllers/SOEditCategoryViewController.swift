@@ -23,7 +23,7 @@ class SOEditCategoryViewController: SOEditTaskFieldBaseViewController {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
-        SODataFetching.sharedInstance.allCategories{(categories: [SOCategory], fetchError: NSError?) in
+        SODataSource.sharedInstance.allCategories{(categories: [SOCategory], fetchError: NSError?) in
             if let error = fetchError{
                 showAlertWithTitle("Failed to fetch data".localized, error.description)
             } else {

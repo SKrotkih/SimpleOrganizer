@@ -142,7 +142,7 @@ extension SOLocalDataBase{
                     return false
                 } else {
                     if tasks.count > 0 {
-                        SODataFetching.sharedInstance.prepareAllSubTables{(fetchError: NSError?) in
+                        self!.prepareAllSubTables{(fetchError: NSError?) in
                             if let error = fetchError{
                                 completionBlock(resultBuffer: [], error: error)
                             } else {
@@ -152,7 +152,7 @@ extension SOLocalDataBase{
                                     for task: Task in tasks{
                                         var categorySelected: Bool = false
                                         
-                                        if let category = SODataFetching.sharedInstance.categoryById(task.category){
+                                        if let category = SODataSource.sharedInstance.categoryById(task.category){
                                             categorySelected = category.selected
                                         }
                                         
@@ -160,7 +160,7 @@ extension SOLocalDataBase{
                                         var iconsSelected: Bool = false
                                         
                                         for iconId in icons{
-                                            let iconOpt: SOIco? = SODataFetching.sharedInstance.iconById(iconId)
+                                            let iconOpt: SOIco? = SODataSource.sharedInstance.iconById(iconId)
                                             if let ico = iconOpt{
                                                 iconsSelected = iconsSelected || ico.selected
                                             }
@@ -188,6 +188,24 @@ extension SOLocalDataBase{
                 self!.populateDataBase.populateTasks()
                 
                 fetchAllTasks()
+            }
+        }
+    }
+
+    private func prepareAllSubTables(completionBlock: (error: NSError?) -> Void) {
+        let dataSource = SODataSource.sharedInstance
+        
+        dataSource.allCategories{(categories: [SOCategory], fetchError: NSError?) in
+            if let error = fetchError{
+                completionBlock(error: error)
+            } else {
+                dataSource.allIcons{(resultBuffer: [SOIco], fetchError: NSError?) in
+                    if let error = fetchError{
+                        completionBlock(error: error)
+                    } else {
+                        completionBlock(error: nil)
+                    }
+                }
             }
         }
     }

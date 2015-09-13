@@ -90,7 +90,7 @@ extension SORemoteDataBase{
                     for task in tasks{
                         var categorySelected: Bool = false
                         
-                        if let category = SODataFetching.sharedInstance.categoryById(task.category){
+                        if let category = SODataSource.sharedInstance.categoryById(task.category){
                             categorySelected = category.selected
                         }
                         
@@ -98,7 +98,7 @@ extension SORemoteDataBase{
                         var iconsSelected: Bool = false
                         
                         for iconId in icons{
-                            let iconOpt: SOIco? = SODataFetching.sharedInstance.iconById(iconId)
+                            let iconOpt: SOIco? = SODataSource.sharedInstance.iconById(iconId)
                             if let ico = iconOpt{
                                 iconsSelected = iconsSelected || ico.selected
                             }

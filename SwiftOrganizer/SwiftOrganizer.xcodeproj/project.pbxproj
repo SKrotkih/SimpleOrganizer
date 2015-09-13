@@ -132,7 +132,7 @@
 		7FD44B891B5A9C27000A4FB3 /* SOCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FD44B611B5A9A67000A4FB3 /* SOCategory.swift */; };
 		7FD44B8A1B5A9C27000A4FB3 /* SODataBaseFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FD44B621B5A9A67000A4FB3 /* SODataBaseFactory.swift */; };
 		7FD44B8B1B5A9C27000A4FB3 /* SODataBaseProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FD44B631B5A9A67000A4FB3 /* SODataBaseProtocol.swift */; };
-		7FD44B8C1B5A9C27000A4FB3 /* SODataFetching.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FD44B641B5A9A67000A4FB3 /* SODataFetching.swift */; };
+		7FD44B8C1B5A9C27000A4FB3 /* SODataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FD44B641B5A9A67000A4FB3 /* SODataSource.swift */; };
 		7FD44B8D1B5A9C27000A4FB3 /* SOIco.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FD44B651B5A9A67000A4FB3 /* SOIco.swift */; };
 		7FD44B8E1B5A9C27000A4FB3 /* SOTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FD44B661B5A9A67000A4FB3 /* SOTask.swift */; };
 		7FD44B8F1B5A9C27000A4FB3 /* SOTypeDataBaseSwitcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FD44B671B5A9A67000A4FB3 /* SOTypeDataBaseSwitcher.swift */; };
@@ -359,7 +359,7 @@
 		7FD44B611B5A9A67000A4FB3 /* SOCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SOCategory.swift; path = DataBaseKit/Classes/SOCategory.swift; sourceTree = "<group>"; };
 		7FD44B621B5A9A67000A4FB3 /* SODataBaseFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SODataBaseFactory.swift; path = DataBaseKit/Classes/SODataBaseFactory.swift; sourceTree = "<group>"; };
 		7FD44B631B5A9A67000A4FB3 /* SODataBaseProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SODataBaseProtocol.swift; path = DataBaseKit/Classes/SODataBaseProtocol.swift; sourceTree = "<group>"; };
-		7FD44B641B5A9A67000A4FB3 /* SODataFetching.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SODataFetching.swift; path = DataBaseKit/Classes/SODataFetching.swift; sourceTree = "<group>"; };
+		7FD44B641B5A9A67000A4FB3 /* SODataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SODataSource.swift; path = DataBaseKit/Classes/SODataSource.swift; sourceTree = "<group>"; };
 		7FD44B651B5A9A67000A4FB3 /* SOIco.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SOIco.swift; path = DataBaseKit/Classes/SOIco.swift; sourceTree = "<group>"; };
 		7FD44B661B5A9A67000A4FB3 /* SOTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SOTask.swift; path = DataBaseKit/Classes/SOTask.swift; sourceTree = "<group>"; };
 		7FD44B671B5A9A67000A4FB3 /* SOTypeDataBaseSwitcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SOTypeDataBaseSwitcher.swift; path = Classes/SOTypeDataBaseSwitcher.swift; sourceTree = "<group>"; };
@@ -932,7 +932,7 @@
 			children = (
 				7FD44B621B5A9A67000A4FB3 /* SODataBaseFactory.swift */,
 				7FD44B631B5A9A67000A4FB3 /* SODataBaseProtocol.swift */,
-				7FD44B641B5A9A67000A4FB3 /* SODataFetching.swift */,
+				7FD44B641B5A9A67000A4FB3 /* SODataSource.swift */,
 				7FD44B661B5A9A67000A4FB3 /* SOTask.swift */,
 				7FD44B611B5A9A67000A4FB3 /* SOCategory.swift */,
 				7FD44B651B5A9A67000A4FB3 /* SOIco.swift */,
@@ -1371,7 +1371,7 @@
 				7FD44B8A1B5A9C27000A4FB3 /* SODataBaseFactory.swift in Sources */,
 				7F55D3EE1B9F073700C02645 /* SOPopulateRemoteDataBase.swift in Sources */,
 				7FD44B8B1B5A9C27000A4FB3 /* SODataBaseProtocol.swift in Sources */,
-				7FD44B8C1B5A9C27000A4FB3 /* SODataFetching.swift in Sources */,
+				7FD44B8C1B5A9C27000A4FB3 /* SODataSource.swift in Sources */,
 				7FD44BAB1B5AA924000A4FB3 /* SOObserversManager.swift in Sources */,
 				7F5D48D41B998BD5002ACFB1 /* SOCatalog.swift in Sources */,
 				7FD44B8D1B5A9C27000A4FB3 /* SOIco.swift in Sources */,

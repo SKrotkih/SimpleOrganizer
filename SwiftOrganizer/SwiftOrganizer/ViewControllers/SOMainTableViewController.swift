@@ -31,7 +31,7 @@ class SOMainTableViewController: NSObject{
     }
 
     func reloadData(){
-        SODataFetching.sharedInstance.allTasks{(allCurrentTasks: [SOTask], fetchError: NSError?) in
+        SODataSource.sharedInstance.allTasks{(allCurrentTasks: [SOTask], fetchError: NSError?) in
             if let error = fetchError{
                 showAlertWithTitle("Failed to fetch data!".localized, error.description)
             } else {

@@ -55,7 +55,7 @@ class SOPreferenceCategoriesViewController: UIViewController {
 
 extension SOPreferenceCategoriesViewController{
     private func fetchData(completeBlock: ()-> Void ){
-        SODataFetching.sharedInstance.allCategories{(categories: [SOCategory], fetchError: NSError?) in
+        SODataSource.sharedInstance.allCategories{(categories: [SOCategory], fetchError: NSError?) in
             if let error = fetchError{
                 self.buffer.removeAll(keepCapacity: false)
                 showAlertWithTitle("Failed to fetch data".localized, error.description)

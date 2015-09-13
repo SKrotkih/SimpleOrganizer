@@ -105,7 +105,7 @@ class SOEditIconsViewController: SOEditTaskFieldBaseViewController {
 extension SOEditIconsViewController{
 
     private func fetchData(completeBlock: ()-> Void ){
-        SODataFetching.sharedInstance.allIcons{(icons: [SOIco], fetchError: NSError?) in
+        SODataSource.sharedInstance.allIcons{(icons: [SOIco], fetchError: NSError?) in
             if let error = fetchError{
                 self.icons.removeAll(keepCapacity: false)
                 showAlertWithTitle("Failed to fetch data".localized, error.description)

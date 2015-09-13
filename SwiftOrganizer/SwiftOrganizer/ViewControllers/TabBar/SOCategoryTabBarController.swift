@@ -13,7 +13,7 @@ class SOCategoryTabBarController: SOTabBarController {
     private let tabViewXibName = "SOCategoryTabView"
     
     override func reloadTabs(completionBlock: (error: NSError?) -> Void){
-        SODataFetching.sharedInstance.allCategories{(categories: [SOCategory], fetchError: NSError?) in
+        SODataSource.sharedInstance.allCategories{(categories: [SOCategory], fetchError: NSError?) in
             self.tabsCount = 0
             
             if let error = fetchError{

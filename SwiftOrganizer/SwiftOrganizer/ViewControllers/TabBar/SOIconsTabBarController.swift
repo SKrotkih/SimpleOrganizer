@@ -14,7 +14,7 @@ class SOIconsTabBarController: SOTabBarController {
     
     override func reloadTabs(block: (error: NSError?) -> Void){
 
-        SODataFetching.sharedInstance.allIcons{(icons: [SOIco], fetchError: NSError?) in
+        SODataSource.sharedInstance.allIcons{(icons: [SOIco], fetchError: NSError?) in
             self.tabsCount = 0
 
             if let error = fetchError{

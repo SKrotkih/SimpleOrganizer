@@ -28,13 +28,20 @@ public class SOTask: NSObject{
         get{
             let categoryId = self.category
             
-            if let returnValue = SODataFetching.sharedInstance.categoryName(categoryId){
-                return returnValue
+            if let category = SODataSource.sharedInstance.categoryById(categoryId){
+                return category.name
             }
             
             return ""
         }
     }
+    
+    public var taskId: String?{
+        get{
+            return SODataBaseFactory.sharedInstance.dataBase.getRecordIdForTask(self)
+        }
+    }
+    
 }
 
 extension SOTask: SOConcreteObjectsProtocol{
@@ -193,7 +200,11 @@ extension SOTask{
     public func iconImage(index: Int) -> UIImage?{
         if index < icons.count{
             let icoId = icons[index]
-            if let imageName : String = SODataFetching.sharedInstance.iconImageName(icoId){
+            
+            let ico: SOIco? = SODataSource.sharedInstance.iconById(icoId)
+            if let theIco = ico{
+                let imageName : String = theIco.imageName
+
                 if let image : UIImage = UIImage(named: imageName){
                     return image
                 }

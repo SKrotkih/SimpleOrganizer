@@ -38,6 +38,7 @@ Were applied the following design patterns:
 - observer;
 - singleton;
 - builder;
+- chain responsibility;
 
 Please pay attention to the following details:
 On first start are created some tasks by default. 

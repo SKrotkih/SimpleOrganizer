@@ -55,7 +55,7 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     }
     
     func performFetch() -> NCUpdateResult {
-        SODataFetching.sharedInstance.allTasks{(allCurrentTasks: [SOTask], fetchError: NSError?) in
+        SODataSource.sharedInstance.allTasks{(allCurrentTasks: [SOTask], fetchError: NSError?) in
             if let error = fetchError{
                 println("Error reading tasks data \(error.description)")
                 self.tasks.removeAll(keepCapacity: true)
@@ -112,8 +112,8 @@ extension TodayViewController: UITableViewDataSource, UITableViewDelegate {
         let row = indexPath.row
         let task: SOTask = self.tasks[row]
         
-        if let recordId = SODataBaseFactory.sharedInstance.dataBase.getRecordIdForTask(task){
-            let urlAsString = "\(WidgetUrlScheme)://\(KeyInURLAsTaskId)\(recordId)"
+        if let taskId = task.taskId{
+            let urlAsString = "\(WidgetUrlScheme)://\(KeyInURLAsTaskId)\(taskId)"
             let url = NSURL(string: urlAsString)
             self.extensionContext!.openURL(url!, completionHandler: nil)
         }
