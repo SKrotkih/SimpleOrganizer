@@ -640,7 +640,7 @@
 			name = "Push Notifications";
 			sourceTree = "<group>";
 		};
-		7F57EB3B1B786A86000AEF92 /* Edit Filed Of Task */ = {
+		7F57EB3B1B786A86000AEF92 /* Edit Fileds */ = {
 			isa = PBXGroup;
 			children = (
 				7F6E98271B1E27840048ED7A /* SOEditTaskFieldBaseViewController.swift */,
@@ -649,7 +649,7 @@
 				7F6E985D1B1EF2C20048ED7A /* Date */,
 				7F6E985E1B1EF2CD0048ED7A /* Description */,
 			);
-			name = "Edit Filed Of Task";
+			name = "Edit Fileds";
 			sourceTree = "<group>";
 		};
 		7F5826BB1B482D1A00C0B179 /* iCloud */ = {
@@ -785,7 +785,7 @@
 			children = (
 				7F57258C1B0F6114003DBDEB /* SOEditTaskViewController.swift */,
 				7F5AA3791B50B63400DA6E0B /* SOEditTaskCell.swift */,
-				7F57EB3B1B786A86000AEF92 /* Edit Filed Of Task */,
+				7F57EB3B1B786A86000AEF92 /* Edit Fileds */,
 			);
 			name = "Edit Task";
 			sourceTree = "<group>";

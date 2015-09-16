@@ -155,7 +155,7 @@ class SOEditTaskViewController: UIViewController {
         var text: String = "SwiftOrganizer: "
         
         for cell in _cells{
-            let str = cell.currentValueToString()
+            let str = cell.stringData()
             
             if count(str) > 0{
                 text += str + "; "
@@ -170,7 +170,7 @@ class SOEditTaskViewController: UIViewController {
         var text: String = "SwiftOrganizer: "
         
         for cell in _cells{
-            let str = cell.currentValueToString()
+            let str = cell.stringData()
             
             if count(str) > 0{
                 text += str + "; "
@@ -198,7 +198,7 @@ class SOEditTaskViewController: UIViewController {
         var text: String = "SwiftOrganizer: "
         
         for cell in _cells{
-            let str = cell.currentValueToString()
+            let str = cell.stringData()
             
             if count(str) > 0{
                 text += str + "; "

@@ -21,7 +21,7 @@ class SOEditTaskCell: UITableViewCell {
         }
     }
 
-    func currentValueToString() -> String{
+    func stringData() -> String{
         assert(false, "You should to override this method in a child class!")
         
         return ""

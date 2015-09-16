@@ -13,7 +13,7 @@ let TaskEntityName = "Task"
 public class SOLocalDataBase: SODataBaseProtocol {
     private let queue = dispatch_queue_create("localDataBaseRequestsQ", DISPATCH_QUEUE_CONCURRENT);
     private var nextDataBase: SODataBaseProtocol?
-    private var coreData: SOCoreDataBase
+    private var coreData: SOCoreDataProtocol
     private var populateDataBase: SOPopulateLocalDataBase
 
     required public init(nextDataBase: SODataBaseProtocol?){

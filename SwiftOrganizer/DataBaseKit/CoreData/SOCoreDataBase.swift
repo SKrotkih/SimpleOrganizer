@@ -12,7 +12,18 @@ import CoreData
 let DatabaseName = "SwiftOrganizer"
 let DataBaseErrorDomain = "SwiftOrganizerErrorDomain"
 
-public class SOCoreDataBase {
+protocol SOCoreDataProtocol{
+    var persistentStoreCoordinator: NSPersistentStoreCoordinator?{get}
+    var managedObjectContext: NSManagedObjectContext?{get}
+    func newManagedObject(entityName: String) -> NSManagedObject!
+    func saveContext()
+    func deleteObject(objectForDeleting: NSManagedObject?)
+
+    func reportAnyErrorWeGot(error: NSError?)
+    var applicationDocumentsDirectory: NSURL{get}
+}
+
+public class SOCoreDataBase: SOCoreDataProtocol {
     
     private lazy var managedObjectModel: NSManagedObjectModel = {
         // The managed object model for the application. This property is not optional. It is a fatal error for the application not to be able to find and load its model.
@@ -120,7 +131,7 @@ public class SOCoreDataBase {
 // MARK: - Update Data
 
 extension SOCoreDataBase{
-    func deleteObject(objectForDeleting: NSManagedObject?)
+    public func deleteObject(objectForDeleting: NSManagedObject?)
     {
         if let moc = self.managedObjectContext {
             if let object = objectForDeleting{

@@ -28,7 +28,7 @@ class SOEditTaskDescriptionCell: SOEditTaskCell {
         }
     }
     
-    override func currentValueToString() -> String{
+    override func stringData() -> String{
         return self.descriptionTasklabel.text!
     }
     
