@@ -55,9 +55,9 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     }
     
     func performFetch() -> NCUpdateResult {
-        SODataSource.sharedInstance.allTasks{(allCurrentTasks: [SOTask], fetchError: NSError?) in
+        SOFetchingData.sharedInstance.allTasks{(allCurrentTasks: [SOTask], fetchError: NSError?) in
             if let error = fetchError{
-                println("Error reading tasks data \(error.description)")
+                print("Error reading tasks data \(error.description)")
                 self.tasks.removeAll(keepCapacity: true)
             } else {
                 self.tasks = allCurrentTasks

@@ -44,7 +44,7 @@ class SOTabBarController: NSObject {
                         x += w
                     }
                     let h: CGFloat = CGRectGetHeight(self.scrollView!.frame)
-                    var contentSize: CGSize = CGSizeMake(x, h)
+                    let contentSize: CGSize = CGSizeMake(x, h)
                     var containerFrame: CGRect = self.containerView!.frame
                     containerFrame.size = contentSize
                     self.containerView!.frame = containerFrame
@@ -52,11 +52,11 @@ class SOTabBarController: NSObject {
                     completionBlock(error: nil)
                 })
             } else {
-                println("TabBarController: No one bar is presented!")
+                print("TabBarController: No one bar is presented!")
                 completionBlock(error: nil)
             }
         } else {
-            println("TabBarController: ContainerView does not exist!")
+            print("TabBarController: ContainerView does not exist!")
             completionBlock(error: nil)
         }
     }

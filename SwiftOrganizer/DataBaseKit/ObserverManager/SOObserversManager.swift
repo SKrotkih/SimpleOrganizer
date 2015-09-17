@@ -64,7 +64,7 @@ public class SOObserversManager {
                 self._dataBaseTypeChangeObservers.append(dict);
                 
                 // Sort array
-                self._dataBaseTypeChangeObservers.sort({
+                self._dataBaseTypeChangeObservers.sortInPlace({
                     let dict0: Dictionary<String, AnyObject> = $0
                     let dict1: Dictionary<String, AnyObject> = $1
                     let priority0 = dict0[kPriorityKey] as! Int
@@ -76,7 +76,7 @@ public class SOObserversManager {
                 self._dataBaseDidChangeObservers.append(dict);
                 
                 // Sort array
-                self._dataBaseDidChangeObservers.sort({
+                self._dataBaseDidChangeObservers.sortInPlace({
                     let dict0: Dictionary<String, AnyObject> = $0
                     let dict1: Dictionary<String, AnyObject> = $1
                     let priority0 = dict0[kPriorityKey] as! Int
@@ -84,8 +84,6 @@ public class SOObserversManager {
                     
                     return priority0 > priority1
                 })
-            default:
-                assert(false, "Something is wrong with observer code notification!")
             }
         });
     }
@@ -94,17 +92,15 @@ public class SOObserversManager {
         dispatch_barrier_sync(self.collectionQueue, { () in
             switch type{
             case .SODataBaseTypeChanged:
-                self._dataBaseTypeChangeObservers = filter(self._dataBaseTypeChangeObservers, { dict in
+                self._dataBaseTypeChangeObservers = self._dataBaseTypeChangeObservers.filter({ dict in
                     let weakref: WeakObserverReference = dict[kObjectKey] as! WeakObserverReference
                     return weakref.observer != nil && weakref.observer !== observer;
                 })
             case .SODataBaseDidChanged:
-                self._dataBaseDidChangeObservers = filter(self._dataBaseDidChangeObservers, { dict in
+                self._dataBaseDidChangeObservers = self._dataBaseDidChangeObservers.filter({ dict in
                     let weakref: WeakObserverReference = dict[kObjectKey] as! WeakObserverReference
                     return weakref.observer != nil && weakref.observer !== observer;
                 })
-            default:
-                assert(false, "Something is wrong with observer code notification!")
             }
         })
     }
@@ -120,16 +116,12 @@ public class SOObserversManager {
                 for dict in self._dataBaseDidChangeObservers {
                     self.notifyObserver(dict, notification: notification)
                 }
-            default:
-                assert(false, "Something is wrong with observer code notification!")
             }
         });
     }
     
     private func notifyObserver(dict: Dictionary<String, AnyObject>, notification: SOObserverNotification){
         let weakref: WeakObserverReference = dict[kObjectKey] as! WeakObserverReference
-        let priority: Int = dict[kPriorityKey] as! Int
-        
         dispatch_async(dispatch_get_main_queue(), {
             weakref.observer?.notify(notification);
         })

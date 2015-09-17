@@ -20,7 +20,7 @@ class SOEditIconsViewController: SOEditTaskFieldBaseViewController {
         
         self.title = "Icons".localized
         let rightButtonImage : UIImage! = UIImage(named: "save_task")
-        var rightButton: UIBarButtonItem = UIBarButtonItem(image: rightButtonImage, style: UIBarButtonItemStyle.Plain, target: self, action: "doneButtonWasPressed")
+        let rightButton: UIBarButtonItem = UIBarButtonItem(image: rightButtonImage, style: UIBarButtonItemStyle.Plain, target: self, action: "doneButtonWasPressed")
         navigationItem.rightBarButtonItem = rightButton;
     }
 
@@ -35,7 +35,7 @@ class SOEditIconsViewController: SOEditTaskFieldBaseViewController {
         }
     }
     
-    override func willFinishOfEditing() -> Bool{
+    override func willFinishEditing() -> Bool{
         var needAsk: Bool = false
 
         if let theTask = self.task{
@@ -45,8 +45,8 @@ class SOEditIconsViewController: SOEditTaskFieldBaseViewController {
             for i in 0..<icons.count{
                 let icoId: String = icons[i]
                 
-                if count(icoId) > 0{
-                    if filter(self.taskIcons, {
+                if icoId.characters.count > 0{
+                    if self.taskIcons.filter({
                         return $0 == icoId
                     }).count == 0{
                         needAsk = true
@@ -77,7 +77,7 @@ class SOEditIconsViewController: SOEditTaskFieldBaseViewController {
             
             return false
         } else {
-            return super.willFinishOfEditing()
+            return super.willFinishEditing()
         }
     }
     
@@ -105,10 +105,10 @@ class SOEditIconsViewController: SOEditTaskFieldBaseViewController {
 extension SOEditIconsViewController{
 
     private func fetchData(completeBlock: ()-> Void ){
-        SODataSource.sharedInstance.allIcons{(icons: [SOIco], fetchError: NSError?) in
+        SOFetchingData.sharedInstance.allIcons{(icons: [SOIco], fetchError: NSError?) in
             if let error = fetchError{
                 self.icons.removeAll(keepCapacity: false)
-                showAlertWithTitle("Failed to fetch data".localized, error.description)
+                showAlertWithTitle("Failed to fetch data".localized, message: error.description)
             } else {
                 self.icons = icons.filter {(ico: SOIco) in ico.visible }
             }
@@ -161,7 +161,7 @@ extension SOEditIconsViewController: UITableViewDataSource{
         
         let selectIconsCell = "selectIconsCell"
         let row = indexPath.row
-        var cell = self.tableView.dequeueReusableCellWithIdentifier(selectIconsCell) as! SOSelectIconsCell
+        let cell = self.tableView.dequeueReusableCellWithIdentifier(selectIconsCell) as! SOSelectIconsCell
         
         let ico: SOIco = icons[row]
         let icoId: String = ico.recordid;

@@ -18,19 +18,19 @@ class SOEditTaskFieldBaseViewController: UIViewController {
         super.viewWillAppear(animated)
         
         let leftButtonImage: UIImage! = UIImage(named: "back_button")
-        var leftButton: UIBarButtonItem = UIBarButtonItem(image: leftButtonImage, style: UIBarButtonItemStyle.Plain, target: self, action: "closeButtonWasPressed")
+        let leftButton: UIBarButtonItem = UIBarButtonItem(image: leftButtonImage, style: UIBarButtonItemStyle.Plain, target: self, action: "closeButtonWasPressed")
         navigationItem.leftBarButtonItem = leftButton;
         
         self.slideMenuController()?.removeLeftGestures()
         self.slideMenuController()?.removeRightGestures()
     }
     
-    func willFinishOfEditing() -> Bool{
+    func willFinishEditing() -> Bool{
         return true
     }
     
     func closeButtonWasPressed() {
-        if self.willFinishOfEditing(){
+        if self.willFinishEditing(){
             self.navigationController?.popViewControllerAnimated(true)
         }
     }

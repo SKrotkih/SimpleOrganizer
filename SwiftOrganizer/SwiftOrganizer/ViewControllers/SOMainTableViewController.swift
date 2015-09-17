@@ -31,9 +31,9 @@ class SOMainTableViewController: NSObject{
     }
 
     func reloadData(){
-        SODataSource.sharedInstance.allTasks{(allCurrentTasks: [SOTask], fetchError: NSError?) in
+        SOFetchingData.sharedInstance.allTasks{(allCurrentTasks: [SOTask], fetchError: NSError?) in
             if let error = fetchError{
-                showAlertWithTitle("Failed to fetch data!".localized, error.description)
+                showAlertWithTitle("Failed to fetch data!".localized, message: error.description)
             } else {
                 dispatch_async(dispatch_get_main_queue(), {
                     self.tasks = allCurrentTasks
@@ -81,7 +81,7 @@ extension SOMainTableViewController: SOChangeFilterStateDelegate{
                     self.reloadData()
                 })
             } else {
-                showAlertWithTitle("Error of saving data".localized, error!.description)
+                showAlertWithTitle("Error of saving data".localized, message: error!.description)
             }
             completionBlock(error: error)
         })
@@ -94,7 +94,7 @@ extension SOMainTableViewController: SOChangeFilterStateDelegate{
                     self?.reloadData()
                 })
             } else {
-                showAlertWithTitle("Error of saving data".localized, error!.description)
+                showAlertWithTitle("Error of saving data".localized, message: error!.description)
             }
             completionBlock(error: error)
         })
@@ -118,7 +118,7 @@ extension SOMainTableViewController: UITableViewDataSource {
     }
     
     @objc func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        var cell = self.tableView.dequeueReusableCellWithIdentifier(self.mainTableViewCellIdentifier()) as! SOMainTableViewCell
+        let cell = self.tableView.dequeueReusableCellWithIdentifier(self.mainTableViewCellIdentifier()) as! SOMainTableViewCell
         let row = indexPath.row
         let currentTask : SOTask = self.tasks[row]
         cell.fillTaskData(currentTask)
@@ -187,7 +187,7 @@ extension SOMainTableViewController: UITableViewDelegate {
     }
     
     func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView?{
-        let headerCell = self.tableView.dequeueReusableCellWithIdentifier(mainHeaderTableViewCellIdentifier()) as! UITableViewCell
+        let headerCell = self.tableView.dequeueReusableCellWithIdentifier(mainHeaderTableViewCellIdentifier())
         
         return headerCell
     }

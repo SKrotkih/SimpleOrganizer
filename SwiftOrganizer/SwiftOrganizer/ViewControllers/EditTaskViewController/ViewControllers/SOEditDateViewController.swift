@@ -44,7 +44,7 @@ class SOEditDateViewController: SOEditTaskFieldBaseViewController {
         super.viewWillAppear(animated)
         
         let rightButtonImage : UIImage! = UIImage(named: "save_task")
-        var rightButton: UIBarButtonItem = UIBarButtonItem(image: rightButtonImage, style: UIBarButtonItemStyle.Plain, target: self, action: "doneButtonWasPressed")
+        let rightButton: UIBarButtonItem = UIBarButtonItem(image: rightButtonImage, style: UIBarButtonItemStyle.Plain, target: self, action: "doneButtonWasPressed")
         navigationItem.rightBarButtonItem = rightButton;
         
         if let currTaskDate = self.date{
@@ -52,8 +52,8 @@ class SOEditDateViewController: SOEditTaskFieldBaseViewController {
         }
     }
 
-    override func willFinishOfEditing() -> Bool{
-        return true && super.willFinishOfEditing()
+    override func willFinishEditing() -> Bool{
+        return true && super.willFinishEditing()
     }
     
     override func didReceiveMemoryWarning() {
@@ -76,41 +76,46 @@ class SOEditDateViewController: SOEditTaskFieldBaseViewController {
     }
     
     @IBAction func saveToCalendarOnButtonPressed(sender: AnyObject) {
-        var store = EKEventStore()
-        
-        store.requestAccessToEntityType(EKEntityTypeEvent) { (success: Bool, error: NSError!) in
+        let store = EKEventStore()
+        store.requestAccessToEntityType(EKEntityType.Event, completion: {success, error in
             if success{
-                println("Got permission = \(success)")
+                print("Got permission = \(success)")
                 //                    var reminderCalendars =
                 //                    store.calendarsForEntityType(EKEntityTypeReminder) as! [EKCalendar]
                 
-                var eventCalendars = store.calendarsForEntityType(EKEntityTypeEvent) as! [EKCalendar]
+                var eventCalendars = store.calendarsForEntityType(EKEntityType.Event)
                 
                 if eventCalendars.count > 0 {
-                    var theEvent = EKEvent(eventStore: store)
+                    let theEvent = EKEvent(eventStore: store)
                     
                     for i in 0..<eventCalendars.count{
                         let calendar: EKCalendar! = eventCalendars[i]
-                        println("Calendar \(i):"+calendar.title)
+                        print("Calendar \(i):"+calendar.title)
                     }
                     
                     theEvent.calendar = eventCalendars[0]
                     theEvent.startDate = self.datePicker.date
                     theEvent.endDate = self.datePicker.date
-                    theEvent.title = self.task?.title
+                    theEvent.title = self.task!.title
                     var error : NSError? = nil
-                    store.saveEvent(theEvent, span: EKSpanThisEvent, commit: true, error: &error)
+                    do {
+                        try store.saveEvent(theEvent, span: .ThisEvent, commit: true)
+                    } catch let error1 as NSError {
+                        error = error1
+                    } catch {
+                        fatalError()
+                    }
                     
-                    if error == nil{
-                        println("Event was saved to the Calendar successfully!")
+                    if let theError = error{
+                        print("Event was saved to the Calendar with Error = \(theError)")
                     } else {
-                        println("Event was saved to the Calendar with Error = \(error)")
+                        print("Event was saved to the Calendar successfully!")
                     }
                 }
             } else {
-                println("Got error = \(error)")
+                print("Got error = \(error)")
             }
-        }
+        })
     }
     
     override func closeButtonWasPressed() {
@@ -139,7 +144,7 @@ class SOEditDateViewController: SOEditTaskFieldBaseViewController {
             var dateString: String!
             
             if let oldDate = theTask.date{
-                var dateFormatter = NSDateFormatter()
+                let dateFormatter = NSDateFormatter()
                 dateFormatter.dateFormat = "dd-MM-yyyy HH:mm:ss"
                 dateString = dateFormatter.stringFromDate(oldDate)
             } else {

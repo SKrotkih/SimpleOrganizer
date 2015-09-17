@@ -38,7 +38,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     // MARK: -
     // MARK: open URL
     
-    func application(application: UIApplication, openURL url: NSURL, sourceApplication srcApp: String?, annotation annot: AnyObject?) -> Bool {
+    func application(application: UIApplication, openURL url: NSURL, sourceApplication srcApp: String?, annotation annot: AnyObject) -> Bool {
         
         self.application(application, handleOpenURL: url)
         
@@ -90,7 +90,7 @@ extension AppDelegate{
 extension AppDelegate{
     private func createOfSlidingViewControllers() {
         
-        var storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
         
         mainViewController = storyboard.instantiateViewControllerWithIdentifier("SOMainViewController") as! SOMainViewController
         let leftViewController = storyboard.instantiateViewControllerWithIdentifier("LeftViewController") as! LeftViewController
@@ -164,19 +164,19 @@ extension AppDelegate{
         if let host = url.host{
             
             if NSString(string: host).containsString(KeyInURLAsSwitchDataBase) {
-                var arr = split(host) {$0 == "."}
+                var arr = host.characters.split {$0 == "."}.map { String($0) }
                 
                 if arr.count == 2{
-                    if let index = arr[1].toInt(){
+                    if let index = Int(arr[1]){
                         SOTypeDataBaseSwitcher.switchToIndex(DataBaseIndex(rawValue: index)!)
                     }
                 }
             } else if NSString(string: host).containsString(KeyInURLAsTaskId) {
-                var arr = split(host) {$0 == "."}
+                var arr = host.characters.split {$0 == "."}.map { String($0) }
                 
                 if arr.count == 2{
-                    if let taskId = arr[1] as? String{
-                        println("Task Id = \(taskId)")
+                    if let taskId: String = arr[1] as? String{
+                        print("Task Id = \(taskId)")
                     }
                 }
                 
@@ -195,7 +195,7 @@ extension AppDelegate{
         }
         set{
             if AppDelegate.SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO("8.0") {
-                if UIApplication.sharedApplication().currentUserNotificationSettings().types & UIUserNotificationType.Badge != nil {
+                if UIApplication.sharedApplication().currentUserNotificationSettings()!.types.intersect(UIUserNotificationType.Badge) != [] {
                     UIApplication.sharedApplication().applicationIconBadgeNumber = newValue
                 }
             } else {

@@ -10,7 +10,7 @@ import UIKit
 
 class SODocumentsViewController: UITableViewController {
     var rightButton: UIBarButtonItem!
-    var txtFiles: [String!] = []
+    var txtFiles: [NSURL] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,8 +23,6 @@ class SODocumentsViewController: UITableViewController {
         self.addLeftBarButtonWithImage(UIImage(named: "ic_menu_black_24dp")!)
         self.slideMenuController()?.removeLeftGestures()
         self.slideMenuController()?.removeRightGestures()
-        
-        let buttonImage : UIImage! = UIImage(named: "add_task")
         rightButton = UIBarButtonItem(title: "Add".localized, style: UIBarButtonItemStyle.Plain, target: self, action: "createDocument:")
         navigationItem.rightBarButtonItem = rightButton;
         
@@ -32,12 +30,13 @@ class SODocumentsViewController: UITableViewController {
     }
     
     func URLForDocuments() -> NSURL {
-        return NSFileManager.defaultManager().URLsForDirectory(NSSearchPathDirectory.DocumentDirectory, inDomains: NSSearchPathDomainMask.UserDomainMask).last as! NSURL
+        let urls = NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask)
+        return urls[urls.count-1]
     }
     
     func updateFileList() {
-        if let directoryUrls =  NSFileManager.defaultManager().contentsOfDirectoryAtURL(self.URLForDocuments(), includingPropertiesForKeys: nil, options: NSDirectoryEnumerationOptions.SkipsSubdirectoryDescendants, error: nil) {
-            self.txtFiles = directoryUrls.map(){ $0.path }.filter(){$0.pathExtension == "txt" || $0.pathExtension == "pdf"}
+        if let directoryUrls: [NSURL] =  try? NSFileManager.defaultManager().contentsOfDirectoryAtURL(self.URLForDocuments(), includingPropertiesForKeys: nil, options: NSDirectoryEnumerationOptions.SkipsSubdirectoryDescendants) {
+            self.txtFiles = directoryUrls.filter(){$0.pathExtension == "txt" || $0.pathExtension == "pdf"}
             self.tableView.reloadData()
         }
     }
@@ -81,17 +80,18 @@ extension SODocumentsViewController{
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("FileCell") as! UITableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("FileCell")
         let filePath = self.txtFiles[indexPath.row]
-        cell.textLabel?.text = filePath.lastPathComponent
+        //let fileURL: NSURL! = NSURL(fileURLWithPath: filePath)
+        cell!.textLabel?.text = filePath.lastPathComponent
         
-        return cell
+        return cell!
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let filePath = self.txtFiles[indexPath.row]
-        let URL: NSURL! = NSURL(fileURLWithPath: filePath)
-        let documentToOpen = SOSampleDocument(fileURL: URL)
+        //let fileURL: NSURL! = NSURL(fileURLWithPath: filePath)
+        let documentToOpen = SOSampleDocument(fileURL: filePath)
         
         documentToOpen.openWithCompletionHandler() { (success) in
             if success == true {

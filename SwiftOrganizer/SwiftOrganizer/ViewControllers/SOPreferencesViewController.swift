@@ -32,7 +32,7 @@ class SOPreferencesViewController: UIViewController {
     
     private func didSelectController(aChoice: SOPreferencesRowItem){
         var viewController: UIViewController!
-        var storyboard = UIStoryboard(name: "Preferences", bundle: nil)
+        let storyboard = UIStoryboard(name: "Preferences", bundle: nil)
         
         switch aChoice {
         case .CategoryPreferencesEditor:
@@ -56,17 +56,17 @@ extension SOPreferencesViewController: UITableViewDataSource, UITableViewDelegat
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("PreferrencesCell") as! UITableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("PreferrencesCell")
         let itemIndex: SOPreferencesRowItem = SOPreferencesRowItem(rawValue: indexPath.row)!
 
         switch itemIndex {
         case .CategoryPreferencesEditor:
-            cell.textLabel?.text = "Categories".localized
+            cell!.textLabel?.text = "Categories".localized
         case .IconsPreferencesEditor:
-            cell.textLabel?.text = "Icons".localized
+            cell!.textLabel?.text = "Icons".localized
         }
         
-        return cell
+        return cell!
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {

@@ -17,13 +17,13 @@ logitem.data = dataArray;
 
 dataArray[1] = 10;
 
-println("Value: \(logitem.data![1])");
+print("Value: \(logitem.data![1])");
 
 var locarray = [1,2,3,4]
 logitem.logarray = locarray
 
 locarray[1] = 10
-println("Value: \(logitem.logarray![1])");
+print("Value: \(logitem.logarray![1])");
 
 
 

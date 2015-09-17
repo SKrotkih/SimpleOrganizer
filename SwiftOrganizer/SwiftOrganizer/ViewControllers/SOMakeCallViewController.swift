@@ -78,25 +78,25 @@ class SOMakeCallViewController: UIViewController {
         let phoneNumber = self.phoneNumber.text
         var isValidOk: Bool = false
         
-        if count(phoneNumber) > 0{
+        if phoneNumber!.characters.count > 0{
             if self.emailSwitch.on {
-                isValidOk = phoneNumber.isValidEmail()
+                isValidOk = phoneNumber!.isValidEmail()
             } else {
-                isValidOk = phoneNumber.isValidPhoneNumber()
+                isValidOk = phoneNumber!.isValidPhoneNumber()
             }
         }
         
         if isValidOk {
-            self.facetime(phoneNumber)
+            self.facetime(phoneNumber!)
         } else {
             let message = "Please enter a valid".localized
             let messageOpt = self.emailSwitch.on ? "e-mail" : "phone number".localized
-            showAlertWithTitle("Error".localized, "\(message) \(messageOpt)!")
+            showAlertWithTitle("Error".localized, message: "\(message) \(messageOpt)!")
         }
     }
     
     @IBAction func faceTimeSwichChanged(sender: AnyObject) {
-        if let switchFaceTime = sender as? UISwitch{
+        if self.faceTimeSwitch == sender as? UISwitch {
             self.setUpControllsState()
         }
     }

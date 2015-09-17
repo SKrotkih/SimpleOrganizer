@@ -13,11 +13,11 @@ class SOCategoryTabBarController: SOTabBarController {
     private let tabViewXibName = "SOCategoryTabView"
     
     override func reloadTabs(completionBlock: (error: NSError?) -> Void){
-        SODataSource.sharedInstance.allCategories{(categories: [SOCategory], fetchError: NSError?) in
+        SOFetchingData.sharedInstance.allCategories{(categories: [SOCategory], fetchError: NSError?) in
             self.tabsCount = 0
             
             if let error = fetchError{
-                showAlertWithTitle("Failed to read of categories data".localized, error.description)
+                showAlertWithTitle("Failed to read of categories data".localized, message: error.description)
             } else if categories.count > 0{
                 for i in 0..<categories.count {
                     let category: SOCategory = categories[i]
@@ -28,7 +28,7 @@ class SOCategoryTabBarController: SOTabBarController {
                         if i < self.tabs.count{
                             tabView = self.tabs[i] as! SOCategoryTabView
                         } else {
-                            var xibItems: NSArray = NSBundle.mainBundle().loadNibNamed(self.tabViewXibName, owner: nil, options: nil)
+                            let xibItems: NSArray = NSBundle.mainBundle().loadNibNamed(self.tabViewXibName, owner: nil, options: nil)
                             tabView = xibItems[0] as! SOCategoryTabView
                             tabView.autoresizingMask = UIViewAutoresizing.FlexibleHeight;
                             tabView.filterStateDelegate = self.filterStateDelegate
@@ -43,7 +43,7 @@ class SOCategoryTabBarController: SOTabBarController {
                     completionBlock(error: error)
                 }
             } else {
-                showAlertWithTitle("Warning".localized, "Categories data are not presented on the Parse.com Server.".localized)
+                showAlertWithTitle("Warning".localized, message: "Categories data are not presented on the Parse.com Server.".localized)
                 completionBlock(error: nil)
             }
         }

@@ -35,7 +35,7 @@ class SOExternalSettingsObserever{
 
         // See enabled_preference id in Settings.bundle
         if let useRemoteDataBase = userDefaults.stringForKey("enabled_preference"){
-            if let newIndexOfDBType = useRemoteDataBase.toInt(){
+            if let newIndexOfDBType = Int(useRemoteDataBase){
                 let indexOfCurrectDBType = SOTypeDataBaseSwitcher.currentDataBaseIndex().rawValue
 
                 if newIndexOfDBType != indexOfCurrectDBType{

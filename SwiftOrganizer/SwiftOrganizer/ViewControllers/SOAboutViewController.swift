@@ -20,7 +20,7 @@ class SOAboutViewController: UIViewController {
         
         let readmeFilePath = NSBundle.mainBundle().pathForResource("README", ofType: "md")
 
-        if let readme = NSString(contentsOfFile: readmeFilePath!, encoding: NSUTF8StringEncoding, error: nil){
+        if let readme = try? NSString(contentsOfFile: readmeFilePath!, encoding: NSUTF8StringEncoding){
             self.readmeTextView.text = readme as String
         } else {
             self.readmeTextView.text = ""
@@ -38,7 +38,7 @@ class SOAboutViewController: UIViewController {
     override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransitionToSize(size, withTransitionCoordinator: coordinator)
         if let viewController = self.slideMenuController()?.mainViewController as? UINavigationController {
-            if viewController.topViewController.isKindOfClass(SOAboutViewController) {
+            if viewController.topViewController!.isKindOfClass(SOAboutViewController) {
                 self.slideMenuController()?.removeLeftGestures()
                 self.slideMenuController()?.removeRightGestures()
             }

@@ -22,26 +22,36 @@ class SOEditCategoryViewController: SOEditTaskFieldBaseViewController {
 
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        
-        SODataSource.sharedInstance.allCategories{(categories: [SOCategory], fetchError: NSError?) in
-            if let error = fetchError{
-                showAlertWithTitle("Failed to fetch data".localized, error.description)
-            } else {
-                dispatch_async(dispatch_get_main_queue(), {
-                    self.categories = categories.filter {(category: SOCategory) in category.visible }
-                    self.tableView.reloadData()
-                })
-            }
+
+        self.fetchData{
+            dispatch_async(dispatch_get_main_queue(), {
+                self.tableView.reloadData()
+            })
         }
     }
     
-    override func willFinishOfEditing() -> Bool{
-        return true && super.willFinishOfEditing()
+    override func willFinishEditing() -> Bool{
+        return true && super.willFinishEditing()
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+}
+
+    // MARK: -
+
+extension SOEditCategoryViewController{
+    private func fetchData(completionBlock: ()-> Void){
+        SOFetchingData.sharedInstance.allCategories{(categories: [SOCategory], fetchError: NSError?) in
+            if let error = fetchError{
+                showAlertWithTitle("Failed to fetch data".localized, message: error.description)
+            } else {
+                self.categories = categories.filter {(category: SOCategory) in category.visible }
+                completionBlock()
+            }
+        }
     }
 }
 
@@ -60,7 +70,7 @@ extension SOEditCategoryViewController: UITableViewDataSource {
     @objc func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         let selectCategoryCell = "selectCategoryCell"
-        var cell = self.tableView.dequeueReusableCellWithIdentifier(selectCategoryCell) as! SOSelectCategoryCell
+        let cell = self.tableView.dequeueReusableCellWithIdentifier(selectCategoryCell) as! SOSelectCategoryCell
         let row = indexPath.row
         let categoryId = categories[row].recordid
         let categoryName = categories[row].name

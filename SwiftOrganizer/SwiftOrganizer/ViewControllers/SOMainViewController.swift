@@ -67,9 +67,9 @@ class SOMainViewController: UIViewController{
         self.slideMenuController()?.removeRightGestures()
 
         let addTaskImage : UIImage! = UIImage(named: "add_task")
-        var addTaskButton: UIBarButtonItem = UIBarButtonItem(image: addTaskImage, style: UIBarButtonItemStyle.Plain, target: self, action: "addNewTask")
+        let addTaskButton: UIBarButtonItem = UIBarButtonItem(image: addTaskImage, style: UIBarButtonItemStyle.Plain, target: self, action: "addNewTask")
         let activityImage : UIImage! = UIImage(named: "activity")
-        var activityButton: UIBarButtonItem = UIBarButtonItem(image: activityImage, style: UIBarButtonItemStyle.Plain, target: self, action: "startActivityViewController")
+        let activityButton: UIBarButtonItem = UIBarButtonItem(image: activityImage, style: UIBarButtonItemStyle.Plain, target: self, action: "startActivityViewController")
         navigationItem.rightBarButtonItems = [addTaskButton, activityButton]
         
         //rightButton = UIBarButtonItem(title: "Activity".localized, style: UIBarButtonItemStyle.Plain, target: self, action: "startActivityViewController")
@@ -159,7 +159,7 @@ class SOMainViewController: UIViewController{
             if _editTaskViewController != nil {
                 return _editTaskViewController!
             }
-            var storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
             _editTaskViewController = storyboard.instantiateViewControllerWithIdentifier("SOEditTaskViewController") as? SOEditTaskViewController
 
             return _editTaskViewController!
@@ -202,8 +202,6 @@ extension SOMainViewController: SOObserverProtocol{
             self.reloadData({(error: NSError?) in
                 
             })
-        default:
-            assert(false, "Something is wrong with observer code notification!")
         }
     }
 }
@@ -212,7 +210,7 @@ extension SOMainViewController: SOObserverProtocol{
 
 extension SOMainViewController{
     func showAlertWithTitle(title:String, message:String){
-        var controller = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.Alert)
+        let controller = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.Alert)
         controller.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
         presentViewController(controller, animated: true, completion: nil)
     }

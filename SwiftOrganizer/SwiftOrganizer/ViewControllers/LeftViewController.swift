@@ -36,7 +36,7 @@ class LeftViewController : UIViewController {
     var aboutViewController: UIViewController!
     var phoneCallViaFaceTimeViewController: UIViewController!
     
-    required init(coder aDecoder: NSCoder) {
+    required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
    
@@ -44,7 +44,7 @@ class LeftViewController : UIViewController {
         super.viewDidLoad()
         self.tableView.separatorColor = UIColor(red: 224/255, green: 224/255, blue: 224/255, alpha: 1.0)
         
-        var storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
 
         let documentsViewController = storyboard.instantiateViewControllerWithIdentifier("DocumentsViewController") as! SODocumentsViewController
         self.documentsViewController = UINavigationController(rootViewController: documentsViewController)
@@ -119,8 +119,6 @@ extension LeftViewController: LeftMenuProtocol {
             break
         case .About:
             self.slideMenuController()?.changeMainViewController(self.aboutViewController, close: true)
-            break
-        default:
             break
         }
     }

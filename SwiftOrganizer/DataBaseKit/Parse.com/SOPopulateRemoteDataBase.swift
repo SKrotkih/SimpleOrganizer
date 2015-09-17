@@ -62,7 +62,7 @@ public class SOPopulateRemoteDataBase {
         
         if self.currentCategoryIndex < defaultCategories.count{
             let category: SOCategory = defaultCategories[self.currentCategoryIndex++]
-            var object = PFObject(className: CategoryClassName)
+            let object = PFObject(className: CategoryClassName)
             object[kFldRecordId] = category.recordid
             object[kCategoryFldName] = category.name
             object[kFldSelected] = category.selected
@@ -123,7 +123,7 @@ public class SOPopulateRemoteDataBase {
         
         if self.currentIcoIndex < defaultIcons.count{
             let ico: SOIco = defaultIcons[self.currentIcoIndex++]
-            var object = PFObject(className: IcoClassName)
+            let object = PFObject(className: IcoClassName)
             object[kFldRecordId] = ico.recordid
             object[kIcoFldName] = ico.name
             object[kIcoFldImageName] = ico.imageName
@@ -191,7 +191,7 @@ public class SOPopulateRemoteDataBase {
                 kTaskFldTitle: "Life task"]]
         
         if self.currentTaskIndex < defaultTasks.count{
-            var object = PFObject(className: TaskClassName)
+            let object = PFObject(className: TaskClassName)
             let dict: Dictionary<String, String> = defaultTasks[self.currentTaskIndex++]
             object[kTaskFldCategory] = dict[kTaskFldCategory]
             object[kTaskFldIco1] = dict[kTaskFldIco1]

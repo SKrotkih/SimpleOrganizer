@@ -11,7 +11,7 @@ import Social
 import MobileCoreServices
 
 class ShareViewController: SLComposeServiceViewController {
-
+    
     var imageData: NSData?
     
     func showAudienceSelection(){
@@ -22,15 +22,13 @@ class ShareViewController: SLComposeServiceViewController {
     }
     
     override func isContentValid() -> Bool {
-        if let data = imageData{
-            if count(contentText) > 0{
-                return true
-            }
+        if contentText.characters.count > 0{
+            return true
         }
         
         return false
     }
-
+    
     override func presentationAnimationDidFinish(){
         super.presentationAnimationDidFinish()
         placeholder = "Your comments".localized
@@ -44,12 +42,12 @@ class ShareViewController: SLComposeServiceViewController {
                 
                 dispatch_async(dispatchQueue, {[weak self] in
                     let strongSelf = self!
-                    attachment.loadItemForTypeIdentifier(contentType as String, options: nil, completionHandler: {(content: NSSecureCoding!, error: NSError!) in
-                        
-                        if let data = content as? NSData{ dispatch_async(dispatch_get_main_queue(), {
-                            strongSelf.imageData = data
-                            strongSelf.validateContent()
-                        })
+                    attachment.loadItemForTypeIdentifier(contentType as String, options: nil, completionHandler: {(content: NSSecureCoding?, error: NSError!) in
+                        if let data = content as? NSData{
+                            dispatch_async(dispatch_get_main_queue(), {
+                                strongSelf.imageData = data
+                                strongSelf.validateContent()
+                            })
                         }
                     })
                     }) }
@@ -57,7 +55,7 @@ class ShareViewController: SLComposeServiceViewController {
             break
         }
     }
-
+    
     override func didSelectPost() {
         
         // Enter here what need to do after user taps the Post button
@@ -77,10 +75,10 @@ class ShareViewController: SLComposeServiceViewController {
         return [audienceConfigurationItem]
     }
     
-
+    
 }
 
-    // MARK: - AudienceSelectionViewControllerDelegate protocol implementation
+// MARK: - AudienceSelectionViewControllerDelegate protocol implementation
 
 extension ShareViewController: AudienceSelectionViewControllerDelegate{
     func audienceSelectionViewController(sender: AudienceSelectionViewController,

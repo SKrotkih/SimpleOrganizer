@@ -25,12 +25,12 @@ class SOLocalNotificationsCenter: NSObject {
     // MARK: Register the Local Notifications
     
     private class func registerLocalNotificationsSettings(application: UIApplication, launchOptions: [NSObject: AnyObject]?) {
-        application.registerUserNotificationSettings(UIUserNotificationSettings(forTypes: .Alert | .Badge | .Sound, categories: nil))  // types are UIUserNotificationType properties
+        application.registerUserNotificationSettings(UIUserNotificationSettings(forTypes: [.Alert, .Badge, .Sound], categories: nil))  // types are UIUserNotificationType properties
     }
     
     class func didRegisterUserNotificationSettings(notificationSettings: UIUserNotificationSettings){
         /* The user did not allow us to send notifications */
-        let areAllowedTheLocalNotifications = notificationSettings.types != nil
+        let areAllowedTheLocalNotifications = notificationSettings.types != []
         self.setAreAllowedTheLocalNotifications(areAllowedTheLocalNotifications)
     }
     
@@ -48,10 +48,10 @@ class SOLocalNotificationsCenter: NSObject {
         if let alertBody = notification.alertBody{
             if let userInfo = notification.userInfo{
                 if let message = userInfo[self.kTaskIdKeyName()] as? String {
-                    showAlertWithTitle("Reminder".localized, message)
+                    showAlertWithTitle("Reminder".localized, message: message)
                 }
             } else {
-                showAlertWithTitle("Notification".localized, alertBody)
+                showAlertWithTitle("Notification".localized, message: alertBody)
             }
         }
         
@@ -61,7 +61,7 @@ class SOLocalNotificationsCenter: NSObject {
     
     class func sendLocalNotification(message: String, timeIntervalSinceNow: NSTimeInterval = 0, needToIncrementBadgeNumber: Bool = true, category: String? = nil) {
         if self.areAllowedTheLocalNotifications(){
-            var localNotification = UILocalNotification()
+            let localNotification = UILocalNotification()
             
             if let theCategory = category {
                 localNotification.category = theCategory
@@ -89,7 +89,7 @@ class SOLocalNotificationsCenter: NSObject {
     class func sendScheduleNotification(message: String, date: NSDate, userInfo: [NSObject : AnyObject]? = nil, needToIncrementBadgeNumber: Bool = true, category: String? = nil) {
         if self.areAllowedTheLocalNotifications(){
 
-            var localNotification = UILocalNotification()
+            let localNotification = UILocalNotification()
             
             localNotification.fireDate = date
             localNotification.timeZone = NSCalendar.currentCalendar().timeZone
@@ -118,7 +118,7 @@ class SOLocalNotificationsCenter: NSObject {
     // action's activation mode was Background
     class func handleActionForNotification(notification: UILocalNotification, identifier: String?){
         // Called when the user selects an action from a local notification
-        println("Received \(notification.category)! Action: \(identifier)")
+        print("Received \(notification.category)! Action: \(identifier)")
         // You must call this block when done dealing with the
         // action, or you'll be terminated
     }

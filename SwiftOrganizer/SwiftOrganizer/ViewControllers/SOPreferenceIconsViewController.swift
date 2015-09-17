@@ -23,14 +23,16 @@ class SOPreferenceIconsViewController: UIViewController {
         super.viewWillAppear(animated)
 
         let rightButtonImage : UIImage! = UIImage(named: "save_task")
-        var rightButton: UIBarButtonItem = UIBarButtonItem(image: rightButtonImage, style: UIBarButtonItemStyle.Plain, target: self, action: "doneButtonWasPressed")
+        let rightButton: UIBarButtonItem = UIBarButtonItem(image: rightButtonImage, style: UIBarButtonItemStyle.Plain, target: self, action: "doneButtonWasPressed")
         navigationItem.rightBarButtonItem = rightButton;
         
         self.slideMenuController()?.removeLeftGestures()
         self.slideMenuController()?.removeRightGestures()
         
         self.fetchData { () -> Void in
-            self.tableView.reloadData()
+            dispatch_async(dispatch_get_main_queue(), {
+                self.tableView.reloadData()
+            })
         }
         
     }
@@ -40,10 +42,12 @@ class SOPreferenceIconsViewController: UIViewController {
         let visible: Bool = !ico.visible
         ico.setVisible(visible, completionBlock: {(error: NSError?) in
             if let theError = error{
-                showAlertWithTitle("Failed to save data".localized, theError.description)
+                showAlertWithTitle("Failed to save data".localized, message: theError.description)
             } else {
                 self.fetchData { () -> Void in
-                    self.tableView.reloadData()
+                    dispatch_async(dispatch_get_main_queue(), {
+                        self.tableView.reloadData()
+                    })
                 }
             }
         })
@@ -56,10 +60,10 @@ class SOPreferenceIconsViewController: UIViewController {
 
 extension SOPreferenceIconsViewController{
     private func fetchData(completeBlock: ()-> Void ){
-        SODataSource.sharedInstance.allIcons{(icons: [SOIco], fetchError: NSError?) in
+        SOFetchingData.sharedInstance.allIcons{(icons: [SOIco], fetchError: NSError?) in
             if let error = fetchError{
                 self.buffer.removeAll(keepCapacity: false)
-                showAlertWithTitle("Failed to fetch data".localized, error.description)
+                showAlertWithTitle("Failed to fetch data".localized, message: error.description)
             } else {
                 self.buffer = icons
                 completeBlock()
@@ -85,10 +89,9 @@ extension SOPreferenceIconsViewController: UITableViewDelegate, UITableViewDataS
         tableView.deselectRowAtIndexPath(indexPath, animated: false)
         let ico: SOIco = self.buffer[indexPath.row] as! SOIco
 
-        let icoId: String = ico.recordid
         let icoImageName = ico.imageName;
         cell.icoImageView.image = UIImage(named: icoImageName)
-        var checkBoxImageName: String = ico.visible ? "check_box": "uncheck_box"
+        let checkBoxImageName: String = ico.visible ? "check_box": "uncheck_box"
         cell.checkImageView.image = UIImage(named: checkBoxImageName)
         
         return cell

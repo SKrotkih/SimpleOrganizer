@@ -11,7 +11,7 @@ import Foundation
 extension Array {
     mutating func remove<U: Equatable>(object: U) {
         var index: Int?
-        for (idx, objectToCompare) in enumerate(self) {
+        for (idx, objectToCompare) in self.enumerate() {
             if let to = objectToCompare as? U {
                 if object == to {
                     index = idx
@@ -24,16 +24,16 @@ extension Array {
         }
     }
     
-    func each(f: (T) -> ()) {
+    func each(f: (Element) -> ()) {
         for object in self {
             f(object)
         }
     }
     
-    func remove(functor: (T) -> Bool) -> [T] {
-        var tmpArray = [T]()
+    func remove(functor: (Element) -> Bool) -> [Element] {
+        var tmpArray = [Element]()
         for object in self {
-            let theObject = object as T
+            let theObject = object as Element
             if functor(theObject) == false {
                 tmpArray.append(theObject)
             }

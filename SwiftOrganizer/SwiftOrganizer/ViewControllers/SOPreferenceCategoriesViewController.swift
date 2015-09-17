@@ -22,14 +22,16 @@ class SOPreferenceCategoriesViewController: UIViewController {
         super.viewWillAppear(animated)
         
         let rightButtonImage : UIImage! = UIImage(named: "save_task")
-        var rightButton: UIBarButtonItem = UIBarButtonItem(image: rightButtonImage, style: UIBarButtonItemStyle.Plain, target: self, action: "doneButtonWasPressed")
+        let rightButton: UIBarButtonItem = UIBarButtonItem(image: rightButtonImage, style: UIBarButtonItemStyle.Plain, target: self, action: "doneButtonWasPressed")
         navigationItem.rightBarButtonItem = rightButton;
         
         self.slideMenuController()?.removeLeftGestures()
         self.slideMenuController()?.removeRightGestures()
         
-        self.fetchData { () -> Void in
-            self.tableView.reloadData()
+        self.fetchData {
+            dispatch_async(dispatch_get_main_queue(), {
+                self.tableView.reloadData()
+            })
         }
 
     }
@@ -39,10 +41,12 @@ class SOPreferenceCategoriesViewController: UIViewController {
         let currState: Bool = !category.visible
         category.setVisible(currState, completionBlock: {(error: NSError?) in
             if let theError = error{
-                showAlertWithTitle("Failed to save data".localized, theError.description)
+                showAlertWithTitle("Failed to save data".localized, message: theError.description)
             } else {
-                self.fetchData { () -> Void in
-                    self.tableView.reloadData()
+                self.fetchData {
+                    dispatch_async(dispatch_get_main_queue(), {
+                        self.tableView.reloadData()
+                    })
                 }
             }
         })
@@ -54,11 +58,11 @@ class SOPreferenceCategoriesViewController: UIViewController {
 }
 
 extension SOPreferenceCategoriesViewController{
-    private func fetchData(completeBlock: ()-> Void ){
-        SODataSource.sharedInstance.allCategories{(categories: [SOCategory], fetchError: NSError?) in
+    private func fetchData(completeBlock: () -> Void ){
+        SOFetchingData.sharedInstance.allCategories{(categories: [SOCategory], fetchError: NSError?) in
             if let error = fetchError{
                 self.buffer.removeAll(keepCapacity: false)
-                showAlertWithTitle("Failed to fetch data".localized, error.description)
+                showAlertWithTitle("Failed to fetch data".localized, message: error.description)
             } else {
                 self.buffer = categories
                 completeBlock()
@@ -86,7 +90,7 @@ extension SOPreferenceCategoriesViewController: UITableViewDelegate, UITableView
         
         cell.categoryNameLabel.text = category.name
         
-        var checkBoxImageName: String = category.visible ? "check_box": "uncheck_box"
+        let checkBoxImageName: String = category.visible ? "check_box": "uncheck_box"
         cell.checkImageView.image = UIImage(named: checkBoxImageName)
         
         return cell

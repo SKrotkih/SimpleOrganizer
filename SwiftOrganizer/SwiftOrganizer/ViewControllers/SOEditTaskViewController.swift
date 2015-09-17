@@ -71,7 +71,7 @@ class SOEditTaskViewController: UIViewController {
         }
     }
     
-    required init(coder aDecoder: NSCoder) {
+    required init?(coder aDecoder: NSCoder) {
         _task = SOTask()
         isItNewTask = true
         
@@ -96,14 +96,14 @@ class SOEditTaskViewController: UIViewController {
         }
         
         let leftButtonImage: UIImage! = UIImage(named: "back_button")
-        var leftButton: UIBarButtonItem = UIBarButtonItem(image: leftButtonImage, style: UIBarButtonItemStyle.Plain, target: self, action: "closeButtonWasPressed")
+        let leftButton: UIBarButtonItem = UIBarButtonItem(image: leftButtonImage, style: UIBarButtonItemStyle.Plain, target: self, action: "closeButtonWasPressed")
         navigationItem.leftBarButtonItem = leftButton;
         
         let rightButtonImage : UIImage! = UIImage(named: "save_task")
-        var rightButton: UIBarButtonItem = UIBarButtonItem(image: rightButtonImage, style: UIBarButtonItemStyle.Plain, target: self, action: "doneButtonWasPressed")
+        let rightButton: UIBarButtonItem = UIBarButtonItem(image: rightButtonImage, style: UIBarButtonItemStyle.Plain, target: self, action: "doneButtonWasPressed")
 
         let undoButtonImage : UIImage! = UIImage(named: "undo")
-        var undoButton: UIBarButtonItem = UIBarButtonItem(image: undoButtonImage, style: UIBarButtonItemStyle.Plain, target: self, action: "undoButtonWasPressed")
+        let undoButton: UIBarButtonItem = UIBarButtonItem(image: undoButtonImage, style: UIBarButtonItemStyle.Plain, target: self, action: "undoButtonWasPressed")
         
         navigationItem.rightBarButtonItems = [undoButton, rightButton];
         
@@ -139,7 +139,7 @@ class SOEditTaskViewController: UIViewController {
     private func buildObject(){
         self.task!.save{(error: NSError?) in
             if let saveError = error{
-                showAlertWithTitle("Update task error".localized, saveError.description)
+                showAlertWithTitle("Update task error".localized, message: saveError.description)
             } else if let orgTask = self._orgTask{
                 orgTask.cloneTask(self.task!)
             } else if self.isItNewTask{
@@ -157,7 +157,7 @@ class SOEditTaskViewController: UIViewController {
         for cell in _cells{
             let str = cell.stringData()
             
-            if count(str) > 0{
+            if str.characters.count > 0{
                 text += str + "; "
             }
         }
@@ -172,7 +172,7 @@ class SOEditTaskViewController: UIViewController {
         for cell in _cells{
             let str = cell.stringData()
             
-            if count(str) > 0{
+            if str.characters.count > 0{
                 text += str + "; "
             }
         }
@@ -185,12 +185,12 @@ class SOEditTaskViewController: UIViewController {
             controller.addImage(UIImage(named: "ico1@2x"))
             controller.addURL(NSURL(string: "http://www.apple.com/safari/"))
             controller.completionHandler = {(result: SLComposeViewControllerResult) in
-                println("Completed")
+                print("Completed")
             }
             presentViewController(controller, animated: true, completion: nil)
 
         } else {
-            println("The Facebook service is not available".localized)
+            print("The Facebook service is not available".localized)
         }
     }
     
@@ -200,7 +200,7 @@ class SOEditTaskViewController: UIViewController {
         for cell in _cells{
             let str = cell.stringData()
             
-            if count(str) > 0{
+            if str.characters.count > 0{
                 text += str + "; "
             }
         }
@@ -213,12 +213,12 @@ class SOEditTaskViewController: UIViewController {
             controller.addImage(UIImage(named: "ico1@2x"))
             controller.addURL(NSURL(string: "http://www.apple.com/safari/"))
             controller.completionHandler = {(result: SLComposeViewControllerResult) in
-                println("Completed")
+                print("Completed")
             }
             presentViewController(controller, animated: true, completion: nil)
             
         } else {
-            println("The Facebook service is not available".localized)
+            print("The Facebook service is not available".localized)
         }
         
         
@@ -258,7 +258,7 @@ class SOEditTaskViewController: UIViewController {
     
     func cancelEdit(){
         if let navController = self.navigationController{
-            let currentTopViewController = topViewController(base: navController)
+            let currentTopViewController = topViewController(navController)
             
             if currentTopViewController == self{
                 closeButtonWasPressed()
@@ -319,7 +319,7 @@ extension SOEditTaskViewController: UITableViewDataSource {
             
         default:
             assert(false, "Rows is too much!")
-            var cell = self.tableView.dequeueReusableCellWithIdentifier(SOEditTaskCellId.Undefined.toString()) as? SOEditTaskCategoryCell
+            let cell = self.tableView.dequeueReusableCellWithIdentifier(SOEditTaskCellId.Undefined.toString()) as? SOEditTaskCategoryCell
             
             return cell!
         }
@@ -329,7 +329,7 @@ extension SOEditTaskViewController: UITableViewDataSource {
 extension SOEditTaskViewController: UITableViewDelegate{
 
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        var storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
         var viewController: UIViewController!
         
         let row: SOEditTaskCellId = SOEditTaskCellId(rawValue: indexPath.row)!
@@ -382,15 +382,15 @@ extension SOEditTaskViewController: SOEditTaskUndoDelegateProtocol{
                 self.task?.icons = prevIcons as! [String]
             case SOEditTaskFiledName.DateFldName.rawValue:
                 let prevDate = data[fldName] as! String
-                var dateFormatter = NSDateFormatter()
+                let dateFormatter = NSDateFormatter()
                 dateFormatter.dateFormat = "dd-MM-yyyy HH:mm:ss"
-                var date = dateFormatter.dateFromString(prevDate)
+                let date = dateFormatter.dateFromString(prevDate)
                 self.task?.date = date
             case SOEditTaskFiledName.DescriptionFldName.rawValue:
                 let prevDescription = data[fldName] as! String
                 self.task?.title = prevDescription
             default:
-                println("Error: Something wrong with undo buffer keys!")
+                print("Error: Something wrong with undo buffer keys!")
             }
         }
     }

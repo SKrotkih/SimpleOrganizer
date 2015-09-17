@@ -28,7 +28,7 @@ public class SOTask: NSObject{
         get{
             let categoryId = self.category
             
-            if let category = SODataSource.sharedInstance.categoryById(categoryId){
+            if let category = SOFetchingData.sharedInstance.categoryById(categoryId){
                 return category.name
             }
             
@@ -201,7 +201,7 @@ extension SOTask{
         if index < icons.count{
             let icoId = icons[index]
             
-            let ico: SOIco? = SODataSource.sharedInstance.iconById(icoId)
+            let ico: SOIco? = SOFetchingData.sharedInstance.iconById(icoId)
             if let theIco = ico{
                 let imageName : String = theIco.imageName
 

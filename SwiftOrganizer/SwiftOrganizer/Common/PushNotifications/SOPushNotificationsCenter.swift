@@ -28,10 +28,10 @@ class SOPushNotificationsCenter: NSObject {
             self.parseRemoteNotification(userInfo)
             completionHandler(UIBackgroundFetchResult.NewData)
         } else if application.applicationState == UIApplicationState.Inactive {
-            println("Remote Notification was received in the Inactive mode of!");
+            print("Remote Notification was received in the Inactive mode of!");
             completionHandler(UIBackgroundFetchResult.NewData)
         } else if application.applicationState == UIApplicationState.Background {
-            println("Remote Notification was received in the Background mode!");
+            print("Remote Notification was received in the Background mode!");
             completionHandler(UIBackgroundFetchResult.NewData)
         }
         
@@ -46,10 +46,10 @@ extension SOPushNotificationsCenter{
         if let theAps = userInfo["aps"] as? NSDictionary {
             if let theAlert = theAps["alert"] as? NSDictionary {
                 if let theMessage = theAlert["message"] as? NSString {
-                    showAlertWithTitle("Remote message".localized, theMessage as String)
+                    showAlertWithTitle("Remote message".localized, message: theMessage as String)
                 }
             } else if let theMessage = theAps["alert"] as? NSString {
-                showAlertWithTitle("Remote alert".localized, theMessage as String)
+                showAlertWithTitle("Remote alert".localized, message: theMessage as String)
             }
         }
     }

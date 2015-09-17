@@ -15,7 +15,7 @@ public class SOLocalDataBase: SODataBaseProtocol {
     private var nextDataBase: SODataBaseProtocol?
     private var coreData: SOCoreDataProtocol
     private var populateDataBase: SOPopulateLocalDataBase
-
+    
     required public init(nextDataBase: SODataBaseProtocol?){
         self.nextDataBase = nextDataBase
         self.coreData = SOCoreDataBase()
@@ -40,7 +40,7 @@ public class SOLocalDataBase: SODataBaseProtocol {
 }
 
 extension SOLocalDataBase{
-
+    
     private func fillNewObjectWithData<T: SOConcreteObjectsProtocol, T2: AnyObject>(newObject: T, managedObject: T2) -> T{
         newObject.initWithCoreDataObject(managedObject)
         
@@ -51,26 +51,20 @@ extension SOLocalDataBase{
     // MARK: Categories
     public func allCategories(completionBlock: (resultBuffer: [SOCategory], error: NSError?) -> Void){
         var _allCategories: [SOCategory] = []
-        var _error: NSError?
         var _needRecursiveCall: Bool = false
         
         dispatch_sync(self.queue, {() in
             let fetchRequest = NSFetchRequest(entityName: CategoryEntityName)
             
-            var fetchError: NSError?
-            let objects = self.coreData.managedObjectContext!.executeFetchRequest(fetchRequest, error: &fetchError) as! [TaskCategory]
+            let objects = (try! self.coreData.managedObjectContext!.executeFetchRequest(fetchRequest)) as! [TaskCategory]
             
-            if let error = fetchError{
-                _error = error
+            if objects.count > 0{
+                objects.map({object in
+                    _allCategories.append(self.fillNewObjectWithData(SOCategory(), managedObject: object))
+                })
             } else {
-                if objects.count > 0{
-                    objects.map({object in
-                        _allCategories.append(self.fillNewObjectWithData(SOCategory(), managedObject: object))
-                    })
-                } else {
-                    self.populateDataBase.populateCategories()
-                    _needRecursiveCall = true
-                }
+                self.populateDataBase.populateCategories()
+                _needRecursiveCall = true
             }
         })
         
@@ -78,38 +72,28 @@ extension SOLocalDataBase{
             return self.allCategories(completionBlock)
         }
         
-        if _error == nil{
-            completionBlock(resultBuffer: _allCategories, error: nil)
-        } else {
-            completionBlock(resultBuffer: [], error: _error)
-        }
+        completionBlock(resultBuffer: _allCategories, error: nil)
     }
     
     // MARK: - Icons
     
     public func allIcons(completionBlock: (resultBuffer: [SOIco], error: NSError?) -> Void){
         var _allIcon: [SOIco] = []
-        var _error: NSError?
         var _needRecursiveCall: Bool = false
         
         dispatch_sync(self.queue, {() in
             let fetchRequest = NSFetchRequest(entityName: IcoEntityName)
             
-            var fetchError: NSError?
-            let objects = self.coreData.managedObjectContext!.executeFetchRequest(fetchRequest, error: &fetchError) as! [TaskIco]
+            let objects = (try! self.coreData.managedObjectContext!.executeFetchRequest(fetchRequest)) as! [TaskIco]
             
-            if let error = fetchError{
-                _error = error
+            if objects.count > 0{
+                objects.map({object in
+                    _allIcon.append(self.fillNewObjectWithData(SOIco(), managedObject: object))
+                })
             } else {
-                if objects.count > 0{
-                    objects.map({object in
-                        _allIcon.append(self.fillNewObjectWithData(SOIco(), managedObject: object))
-                    })
-                } else {
-                    self.populateDataBase.populateIcons()
-                    
-                    _needRecursiveCall = true
-                }
+                self.populateDataBase.populateIcons()
+                
+                _needRecursiveCall = true
             }
         })
         
@@ -117,11 +101,7 @@ extension SOLocalDataBase{
             return self.allIcons(completionBlock)
         }
         
-        if _error == nil{
-            completionBlock(resultBuffer: _allIcon, error: nil)
-        } else {
-            completionBlock(resultBuffer: [], error: _error)
-        }
+        completionBlock(resultBuffer: _allIcon, error: nil)
     }
     
     // MARK: - Tasks
@@ -133,54 +113,47 @@ extension SOLocalDataBase{
             
             func fetchAllTasks() -> Bool{
                 let fetchRequest = NSFetchRequest(entityName: TaskEntityName)
-                var fetchError: NSError?
-                let tasks = self!.coreData.managedObjectContext!.executeFetchRequest(fetchRequest, error: &fetchError) as! [Task]
+                let tasks = (try! self!.coreData.managedObjectContext!.executeFetchRequest(fetchRequest)) as! [Task]
                 
-                if  let error = fetchError{
-                    assert(false, "Failed to execute the fetch request \(error.localizedDescription)")
-                    
-                    return false
-                } else {
-                    if tasks.count > 0 {
-                        self!.prepareAllSubTables{(fetchError: NSError?) in
-                            if let error = fetchError{
-                                completionBlock(resultBuffer: [], error: error)
-                            } else {
-                                dispatch_async(dispatch_get_main_queue(), {
-                                    var _allTasks: [SOTask] = []
+                if tasks.count > 0 {
+                    self!.prepareAllDependencies{(fetchError: NSError?) in
+                        if let error = fetchError{
+                            completionBlock(resultBuffer: [], error: error)
+                        } else {
+                            dispatch_async(dispatch_get_main_queue(), {
+                                var _allTasks: [SOTask] = []
+                                
+                                for task: Task in tasks{
+                                    var categorySelected: Bool = false
                                     
-                                    for task: Task in tasks{
-                                        var categorySelected: Bool = false
-                                        
-                                        if let category = SODataSource.sharedInstance.categoryById(task.category){
-                                            categorySelected = category.selected
-                                        }
-                                        
-                                        let icons = [task.ico1, task.ico2, task.ico3, task.ico4, task.ico5, task.ico6]
-                                        var iconsSelected: Bool = false
-                                        
-                                        for iconId in icons{
-                                            let iconOpt: SOIco? = SODataSource.sharedInstance.iconById(iconId)
-                                            if let ico = iconOpt{
-                                                iconsSelected = iconsSelected || ico.selected
-                                            }
-                                        }
-                                        
-                                        if categorySelected && iconsSelected{
-                                            let sotask = self!.newTask(task)
-                                            _allTasks.append(sotask)
+                                    if let category = SOFetchingData.sharedInstance.categoryById(task.category){
+                                        categorySelected = category.selected
+                                    }
+                                    
+                                    let icons = [task.ico1, task.ico2, task.ico3, task.ico4, task.ico5, task.ico6]
+                                    var iconsSelected: Bool = false
+                                    
+                                    for iconId in icons{
+                                        let iconOpt: SOIco? = SOFetchingData.sharedInstance.iconById(iconId)
+                                        if let ico = iconOpt{
+                                            iconsSelected = iconsSelected || ico.selected
                                         }
                                     }
-                                    completionBlock(resultBuffer: _allTasks, error: nil)
-                                })
-                            }
+                                    
+                                    if categorySelected && iconsSelected{
+                                        let sotask = self!.newTask(task)
+                                        _allTasks.append(sotask)
+                                    }
+                                }
+                                completionBlock(resultBuffer: _allTasks, error: nil)
+                            })
                         }
-                        
-                        return true
                     }
-                    else {
-                        return false
-                    }
+                    
+                    return true
+                }
+                else {
+                    return false
                 }
             }
             
@@ -191,37 +164,69 @@ extension SOLocalDataBase{
             }
         }
     }
-
-    private func prepareAllSubTables(completionBlock: (error: NSError?) -> Void) {
-        let dataSource = SODataSource.sharedInstance
+    
+    private func prepareAllDependencies(completionBlock: (error: NSError?) -> Void) {
+        let dataSource = SOFetchingData.sharedInstance
+        let serialQueue = dispatch_queue_create("serialQuieue", DISPATCH_QUEUE_SERIAL)
         
-        dataSource.allCategories{(categories: [SOCategory], fetchError: NSError?) in
-            if let error = fetchError{
-                completionBlock(error: error)
-            } else {
-                dataSource.allIcons{(resultBuffer: [SOIco], fetchError: NSError?) in
-                    if let error = fetchError{
-                        completionBlock(error: error)
-                    } else {
-                        completionBlock(error: nil)
-                    }
+        // MARK: Grouping Task Together
+        
+        let taskGroup = dispatch_group_create()
+        
+        dispatch_group_async(taskGroup, serialQueue, {
+            dataSource.allCategories{(categories: [SOCategory], fetchError: NSError?) in
+                if let error = fetchError{
+                    completionBlock(error: error)
                 }
             }
-        }
+            });
+        
+        dispatch_group_async(taskGroup, serialQueue, {
+            dataSource.allIcons{(resultBuffer: [SOIco], fetchError: NSError?) in
+                if let error = fetchError{
+                    completionBlock(error: error)
+                }
+            }
+            });
+        
+        dispatch_group_notify(taskGroup, serialQueue, {
+            // Here the sequebce is finishing
+            completionBlock(error: nil)
+            });
+        
+        // MARK: Serial sequence: after fetching Categories are starting Icons fetching
+        
+        //        dispatch_async(serialQueue, { () in
+        //            dataSource.allCategories{(categories: [SOCategory], fetchError: NSError?) in
+        //                if let error = fetchError{
+        //                    completionBlock(error: error)
+        //                }
+        //            }
+        //        })
+        //        dispatch_async(serialQueue, { () in
+        //            dataSource.allIcons{(resultBuffer: [SOIco], fetchError: NSError?) in
+        //                if let error = fetchError{
+        //                    completionBlock(error: error)
+        //                } else {
+        //                    // Here the sequebce is finishing
+        //                    completionBlock(error: nil)
+        //                }
+        //            }
+        //        })
+        
     }
     
     private func newTask(task: Task) -> SOTask{
-        var newTask: SOTask = SOTask()
+        let newTask: SOTask = SOTask()
         newTask.initWithCoreDataObject(task)
         
         return newTask
     }
     
     public func getRecordIdForTask(task: SOTask?) -> String?{
-        if let _task = task{
-            if let object = _task.databaseObject as? Task{
+        if let theTtask = task{
+            if let object = theTtask.databaseObject as? Task{
                 let instanceURL: NSURL = object.objectID.URIRepresentation()
-                let classURL = instanceURL.URLByDeletingLastPathComponent
                 let recordId = instanceURL.lastPathComponent
                 
                 return recordId
@@ -239,11 +244,18 @@ extension SOLocalDataBase{
             let predicate = NSPredicate(format: "recordid == %@", recordid)
             fetchRequest.predicate = predicate
             var requestError: NSError?
-            let _class: AnyClass = NSClassFromString(entityName)
-            let fetchedData = self.coreData.managedObjectContext!.executeFetchRequest(fetchRequest, error: &requestError)
+            let fetchedData: [AnyObject]?
+            do {
+                fetchedData = try self.coreData.managedObjectContext!.executeFetchRequest(fetchRequest)
+            } catch let error as NSError {
+                requestError = error
+                fetchedData = nil
+            } catch {
+                fatalError()
+            }
             
             if let error = requestError{
-                println("\(error.localizedDescription)")
+                print("\(error.localizedDescription)")
             } else if let theFetchedData = fetchedData as [AnyObject]?{
                 if theFetchedData.count > 0{
                     databaseObject = theFetchedData[0]
@@ -255,7 +267,7 @@ extension SOLocalDataBase{
     }
 }
 
-    // MARK: - Save Objects
+// MARK: - Save Objects
 
 extension SOLocalDataBase{
     
@@ -294,7 +306,7 @@ extension SOLocalDataBase{
                 })
         }
         else{
-            var dict = [String: AnyObject]()
+            let dict = [String: AnyObject]()
             let error: NSError? = NSError(domain: DataBaseErrorDomain, code: 9998, userInfo: dict)
             self.coreData.reportAnyErrorWeGot(error)
         }
@@ -317,10 +329,10 @@ extension SOLocalDataBase{
     }
 }
 
-    // MARK: - Delete Objects
+// MARK: - Delete Objects
 
 extension SOLocalDataBase{
-
+    
     public func removeTask(task: SOTask){
         dispatch_barrier_sync(self.queue, { () in
             let taskObject: Task? = task.databaseObject as? Task
@@ -330,7 +342,7 @@ extension SOLocalDataBase{
     
 }
 
-    // MARK: - Other functions
+// MARK: - Other functions
 
 extension SOLocalDataBase{
     public func areObjectsEqual(object1: AnyObject?, object2: AnyObject?) -> Bool{

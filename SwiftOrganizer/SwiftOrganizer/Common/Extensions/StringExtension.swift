@@ -24,9 +24,9 @@ extension String {
             let section = components[0]
             let row = components[1]
             
-            if let theSection = section.toInt(){
+            if let theSection = Int(section){
                 
-                if let theRow = row.toInt(){
+                if let theRow = Int(row){
                     return NSIndexPath(forRow: theRow, inSection: theSection)
                 }
             }

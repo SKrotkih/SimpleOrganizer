@@ -78,7 +78,6 @@
 		7F5C2C3E1B42D88700506320 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = 7F5C2C3D1B42D88700506320 /* README.md */; };
 		7F5C81741B69E36C00284D9D /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F5C81731B69E36C00284D9D /* Social.framework */; };
 		7F5D19611B7635200095C51F /* SOReachabilityCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F5D195B1B761C460095C51F /* SOReachabilityCenter.swift */; };
-		7F5D19621B7635200095C51F /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F5D195F1B761F0A0095C51F /* Reachability.swift */; };
 		7F5D48D21B997E20002ACFB1 /* NSDateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F5D48D11B997E20002ACFB1 /* NSDateExtension.swift */; };
 		7F5D48D41B998BD5002ACFB1 /* SOCatalog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F5D48D31B998BD5002ACFB1 /* SOCatalog.swift */; };
 		7F5E6E151B51730900A1B278 /* SODocumentsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F5E6E141B51730900A1B278 /* SODocumentsViewController.swift */; };
@@ -104,6 +103,7 @@
 		7F6E98601B1EF3180048ED7A /* SOSelectCategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6E985F1B1EF3180048ED7A /* SOSelectCategoryCell.swift */; };
 		7F6E98621B1F28650048ED7A /* SOSelectIconsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6E98611B1F28650048ED7A /* SOSelectIconsCell.swift */; };
 		7F6F09F71B95DDD6002B5B1A /* KVOTryCatchException.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F5F543E1B95B1930095FE4C /* KVOTryCatchException.m */; };
+		7F8FE93B1BAA8A7400AC31F1 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F8FE9391BAA8A3A00AC31F1 /* Reachability.swift */; settings = {ASSET_TAGS = (); }; };
 		7F9B77261B189C54006D3434 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7F5725621B0F5DDA003DBDEB /* Main.storyboard */; };
 		7F9B77271B189C58006D3434 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7F5725671B0F5DDA003DBDEB /* LaunchScreen.xib */; };
 		7FC8E88B1B521E630013906F /* SOSampleDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FC8E88A1B521E630013906F /* SOSampleDocument.swift */; };
@@ -132,7 +132,7 @@
 		7FD44B891B5A9C27000A4FB3 /* SOCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FD44B611B5A9A67000A4FB3 /* SOCategory.swift */; };
 		7FD44B8A1B5A9C27000A4FB3 /* SODataBaseFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FD44B621B5A9A67000A4FB3 /* SODataBaseFactory.swift */; };
 		7FD44B8B1B5A9C27000A4FB3 /* SODataBaseProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FD44B631B5A9A67000A4FB3 /* SODataBaseProtocol.swift */; };
-		7FD44B8C1B5A9C27000A4FB3 /* SODataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FD44B641B5A9A67000A4FB3 /* SODataSource.swift */; };
+		7FD44B8C1B5A9C27000A4FB3 /* SOFetchingData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FD44B641B5A9A67000A4FB3 /* SOFetchingData.swift */; };
 		7FD44B8D1B5A9C27000A4FB3 /* SOIco.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FD44B651B5A9A67000A4FB3 /* SOIco.swift */; };
 		7FD44B8E1B5A9C27000A4FB3 /* SOTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FD44B661B5A9A67000A4FB3 /* SOTask.swift */; };
 		7FD44B8F1B5A9C27000A4FB3 /* SOTypeDataBaseSwitcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FD44B671B5A9A67000A4FB3 /* SOTypeDataBaseSwitcher.swift */; };
@@ -151,6 +151,7 @@
 		7FD44BAF1B5AAB6B000A4FB3 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F625EF11B2ED49C004B7C16 /* MobileCoreServices.framework */; };
 		7FD44BB01B5AAB7A000A4FB3 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F625EF31B2ED4A9004B7C16 /* SystemConfiguration.framework */; };
 		7FE4AE421B731F0600FE12D3 /* SOLocalNotificationsCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FE4AE411B731F0600FE12D3 /* SOLocalNotificationsCenter.swift */; };
+		D3DD6F60D663023FA3D2E5A1 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4AEA86C943A6B1F2AA0F76C7 /* libPods.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -225,6 +226,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		420995C6E5DB73509D5787CC /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "../Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		4AEA86C943A6B1F2AA0F76C7 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		7F0CB6B71B97F29B0058CDD5 /* SOPreferencesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SOPreferencesViewController.swift; sourceTree = "<group>"; };
 		7F0CB6BA1B97FFA40058CDD5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Preferences.storyboard; sourceTree = "<group>"; };
 		7F0CB6BC1B9802210058CDD5 /* SOPreferenceCategoriesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SOPreferenceCategoriesViewController.swift; sourceTree = "<group>"; };
@@ -302,7 +305,6 @@
 		7F5C2C3D1B42D88700506320 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../../README.md; sourceTree = "<group>"; };
 		7F5C81731B69E36C00284D9D /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		7F5D195B1B761C460095C51F /* SOReachabilityCenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SOReachabilityCenter.swift; path = ../Utilities/SOReachabilityCenter.swift; sourceTree = "<group>"; };
-		7F5D195F1B761F0A0095C51F /* Reachability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
 		7F5D20EA1B3942B500926392 /* SwiftOrganizer.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = SwiftOrganizer.playground; sourceTree = "<group>"; };
 		7F5D48D11B997E20002ACFB1 /* NSDateExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSDateExtension.swift; sourceTree = "<group>"; };
 		7F5D48D31B998BD5002ACFB1 /* SOCatalog.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SOCatalog.swift; path = DataBaseKit/Classes/SOCatalog.swift; sourceTree = "<group>"; };
@@ -336,6 +338,7 @@
 		7F6E98271B1E27840048ED7A /* SOEditTaskFieldBaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SOEditTaskFieldBaseViewController.swift; path = EditTaskViewController/ViewControllers/SOEditTaskFieldBaseViewController.swift; sourceTree = "<group>"; };
 		7F6E985F1B1EF3180048ED7A /* SOSelectCategoryCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SOSelectCategoryCell.swift; path = EditTaskViewController/SOSelectCategoryCell.swift; sourceTree = "<group>"; };
 		7F6E98611B1F28650048ED7A /* SOSelectIconsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SOSelectIconsCell.swift; path = EditTaskViewController/SOSelectIconsCell.swift; sourceTree = "<group>"; };
+		7F8FE9391BAA8A3A00AC31F1 /* Reachability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
 		7FC8E88A1B521E630013906F /* SOSampleDocument.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SOSampleDocument.swift; sourceTree = "<group>"; };
 		7FC8E88C1B52207D0013906F /* SOEditDocumentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SOEditDocumentViewController.swift; sourceTree = "<group>"; };
 		7FD44ACF1B57F2CE000A4FB3 /* SOTaskMenuItemActivity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SOTaskMenuItemActivity.swift; sourceTree = "<group>"; };
@@ -359,7 +362,7 @@
 		7FD44B611B5A9A67000A4FB3 /* SOCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SOCategory.swift; path = DataBaseKit/Classes/SOCategory.swift; sourceTree = "<group>"; };
 		7FD44B621B5A9A67000A4FB3 /* SODataBaseFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SODataBaseFactory.swift; path = DataBaseKit/Classes/SODataBaseFactory.swift; sourceTree = "<group>"; };
 		7FD44B631B5A9A67000A4FB3 /* SODataBaseProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SODataBaseProtocol.swift; path = DataBaseKit/Classes/SODataBaseProtocol.swift; sourceTree = "<group>"; };
-		7FD44B641B5A9A67000A4FB3 /* SODataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SODataSource.swift; path = DataBaseKit/Classes/SODataSource.swift; sourceTree = "<group>"; };
+		7FD44B641B5A9A67000A4FB3 /* SOFetchingData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SOFetchingData.swift; path = DataBaseKit/Classes/SOFetchingData.swift; sourceTree = "<group>"; };
 		7FD44B651B5A9A67000A4FB3 /* SOIco.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SOIco.swift; path = DataBaseKit/Classes/SOIco.swift; sourceTree = "<group>"; };
 		7FD44B661B5A9A67000A4FB3 /* SOTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SOTask.swift; path = DataBaseKit/Classes/SOTask.swift; sourceTree = "<group>"; };
 		7FD44B671B5A9A67000A4FB3 /* SOTypeDataBaseSwitcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SOTypeDataBaseSwitcher.swift; path = Classes/SOTypeDataBaseSwitcher.swift; sourceTree = "<group>"; };
@@ -372,6 +375,7 @@
 		7FD44B7B1B5A9B1A000A4FB3 /* Task.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Task.swift; path = DataBaseKit/CoreData/Task.swift; sourceTree = "<group>"; };
 		7FD44BAA1B5AA924000A4FB3 /* SOObserversManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SOObserversManager.swift; sourceTree = "<group>"; };
 		7FE4AE411B731F0600FE12D3 /* SOLocalNotificationsCenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SOLocalNotificationsCenter.swift; path = Common/LocalNotifications/SOLocalNotificationsCenter.swift; sourceTree = "<group>"; };
+		C5F4973A75FBE8E108BF8674 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "../Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -387,6 +391,7 @@
 				7F625EF21B2ED49C004B7C16 /* MobileCoreServices.framework in Frameworks */,
 				7F625EF01B2ED492004B7C16 /* libstdc++.6.dylib in Frameworks */,
 				7F57E00F1B4ACEF700789FBD /* CloudKit.framework in Frameworks */,
+				D3DD6F60D663023FA3D2E5A1 /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -491,6 +496,7 @@
 				7FD44B511B5A98D6000A4FB3 /* DataBaseKitTests */,
 				7FD44AF11B5A04A8000A4FB3 /* Frameworks */,
 				7F5725571B0F5DDA003DBDEB /* Products */,
+				8F5055E152ECE604EDB21720 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -718,7 +724,7 @@
 			isa = PBXGroup;
 			children = (
 				7F5D195B1B761C460095C51F /* SOReachabilityCenter.swift */,
-				7F5D195F1B761F0A0095C51F /* Reachability.swift */,
+				7F8FE9391BAA8A3A00AC31F1 /* Reachability.swift */,
 			);
 			name = Reachability;
 			path = Common/Reachability;
@@ -861,6 +867,7 @@
 			children = (
 				7F5C81731B69E36C00284D9D /* Social.framework */,
 				7FD44AF21B5A04A8000A4FB3 /* NotificationCenter.framework */,
+				4AEA86C943A6B1F2AA0F76C7 /* libPods.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -932,7 +939,7 @@
 			children = (
 				7FD44B621B5A9A67000A4FB3 /* SODataBaseFactory.swift */,
 				7FD44B631B5A9A67000A4FB3 /* SODataBaseProtocol.swift */,
-				7FD44B641B5A9A67000A4FB3 /* SODataSource.swift */,
+				7FD44B641B5A9A67000A4FB3 /* SOFetchingData.swift */,
 				7FD44B661B5A9A67000A4FB3 /* SOTask.swift */,
 				7FD44B611B5A9A67000A4FB3 /* SOCategory.swift */,
 				7FD44B651B5A9A67000A4FB3 /* SOIco.swift */,
@@ -984,6 +991,15 @@
 			name = "Local Notifications";
 			sourceTree = "<group>";
 		};
+		8F5055E152ECE604EDB21720 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				C5F4973A75FBE8E108BF8674 /* Pods.debug.xcconfig */,
+				420995C6E5DB73509D5787CC /* Pods.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -1003,11 +1019,14 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 7F5725781B0F5DDB003DBDEB /* Build configuration list for PBXNativeTarget "SwiftOrganizer" */;
 			buildPhases = (
+				3E015CDDA50D5995401A143F /* Check Pods Manifest.lock */,
 				7F5725521B0F5DDA003DBDEB /* Sources */,
 				7F5725531B0F5DDA003DBDEB /* Frameworks */,
 				7F5725541B0F5DDA003DBDEB /* Resources */,
 				7FD44AE91B59469E000A4FB3 /* Embed App Extensions */,
 				7FD44B381B5A9884000A4FB3 /* Embed Frameworks */,
+				EC4DB5355301CBFFB912C6BE /* Embed Pods Frameworks */,
+				EB334D4ACF13A734F080FB93 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1117,7 +1136,9 @@
 			isa = PBXProject;
 			attributes = {
 				CLASSPREFIX = SO;
-				LastUpgradeCheck = 0630;
+				LastSwiftMigration = 0700;
+				LastSwiftUpdateCheck = 0700;
+				LastUpgradeCheck = 0700;
 				ORGANIZATIONNAME = "Sergey Krotkih";
 				TargetAttributes = {
 					7F5725551B0F5DDA003DBDEB = {
@@ -1263,6 +1284,54 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		3E015CDDA50D5995401A143F /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		EB334D4ACF13A734F080FB93 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/../Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		EC4DB5355301CBFFB912C6BE /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/../Pods/Target Support Files/Pods/Pods-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		7F5725521B0F5DDA003DBDEB /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -1357,7 +1426,6 @@
 				7F5D19611B7635200095C51F /* SOReachabilityCenter.swift in Sources */,
 				7F55D3EA1B9ED1F000C02645 /* SOConstants.swift in Sources */,
 				7F55D3F01B9F090900C02645 /* SOPopulateLocalDataBase.swift in Sources */,
-				7F5D19621B7635200095C51F /* Reachability.swift in Sources */,
 				7FD44B821B5A9C27000A4FB3 /* TaskCategory.swift in Sources */,
 				7FD44B831B5A9C27000A4FB3 /* TaskIco.swift in Sources */,
 				7FD44B841B5A9C27000A4FB3 /* SOLocalDataBase.swift in Sources */,
@@ -1371,13 +1439,14 @@
 				7FD44B8A1B5A9C27000A4FB3 /* SODataBaseFactory.swift in Sources */,
 				7F55D3EE1B9F073700C02645 /* SOPopulateRemoteDataBase.swift in Sources */,
 				7FD44B8B1B5A9C27000A4FB3 /* SODataBaseProtocol.swift in Sources */,
-				7FD44B8C1B5A9C27000A4FB3 /* SODataSource.swift in Sources */,
+				7FD44B8C1B5A9C27000A4FB3 /* SOFetchingData.swift in Sources */,
 				7FD44BAB1B5AA924000A4FB3 /* SOObserversManager.swift in Sources */,
 				7F5D48D41B998BD5002ACFB1 /* SOCatalog.swift in Sources */,
 				7FD44B8D1B5A9C27000A4FB3 /* SOIco.swift in Sources */,
 				7FD44B971B5A9DE5000A4FB3 /* StringExtension.swift in Sources */,
 				7FD44B8E1B5A9C27000A4FB3 /* SOTask.swift in Sources */,
 				7F6F09F71B95DDD6002B5B1A /* KVOTryCatchException.m in Sources */,
+				7F8FE93B1BAA8A7400AC31F1 /* Reachability.swift in Sources */,
 				7FD44B8F1B5A9C27000A4FB3 /* SOTypeDataBaseSwitcher.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1487,6 +1556,7 @@
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -1549,6 +1619,7 @@
 		};
 		7F5725791B0F5DDB003DBDEB /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = C5F4973A75FBE8E108BF8674 /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -1562,6 +1633,7 @@
 				INFOPLIST_FILE = SwiftOrganizer/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.skappledev.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "c368512e-04bd-489a-938c-7c70f7c5954b";
 				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/SwiftOrganizer/SwiftOrganizer-Bridging-Header.h";
@@ -1572,6 +1644,7 @@
 		};
 		7F57257A1B0F5DDB003DBDEB /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 420995C6E5DB73509D5787CC /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -1585,6 +1658,7 @@
 				INFOPLIST_FILE = SwiftOrganizer/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.skappledev.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "c368512e-04bd-489a-938c-7c70f7c5954b";
 				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/SwiftOrganizer/SwiftOrganizer-Bridging-Header.h";
@@ -1606,6 +1680,7 @@
 				);
 				INFOPLIST_FILE = SwiftOrganizerTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "de.codeit.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SwiftOrganizer.app/SwiftOrganizer";
 			};
@@ -1621,6 +1696,7 @@
 				);
 				INFOPLIST_FILE = SwiftOrganizerTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "de.codeit.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SwiftOrganizer.app/SwiftOrganizer";
 			};
@@ -1638,6 +1714,7 @@
 				INFOPLIST_FILE = SwiftExtension/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.skappledev.SwiftOrganizer.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "726fc764-1a26-4536-87fd-e829f743572e";
 				SKIP_INSTALL = YES;
@@ -1653,6 +1730,7 @@
 				INFOPLIST_FILE = SwiftExtension/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.skappledev.SwiftOrganizer.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "726fc764-1a26-4536-87fd-e829f743572e";
 				SKIP_INSTALL = YES;
@@ -1676,6 +1754,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.skappledev.SwiftOrganizer.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "9e32e2fd-e121-443b-95a3-338a2b7a7520";
 				SKIP_INSTALL = YES;
@@ -1696,6 +1775,7 @@
 				INFOPLIST_FILE = SOWidjet/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.skappledev.SwiftOrganizer.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "9e32e2fd-e121-443b-95a3-338a2b7a7520";
 				SKIP_INSTALL = YES;
@@ -1728,6 +1808,7 @@
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.skappledev.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SKIP_INSTALL = YES;
@@ -1760,6 +1841,7 @@
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.skappledev.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SKIP_INSTALL = YES;
@@ -1785,6 +1867,7 @@
 				INFOPLIST_FILE = DataBaseKitTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.skappledev.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SwiftOrganizer.app/SwiftOrganizer";
 			};
@@ -1800,6 +1883,7 @@
 				INFOPLIST_FILE = DataBaseKitTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.skappledev.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SwiftOrganizer.app/SwiftOrganizer";
 			};

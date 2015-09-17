@@ -22,21 +22,20 @@ class SODocumentPickerViewController: UIViewController {
         self.addLeftBarButtonWithImage(UIImage(named: "ic_menu_black_24dp")!)
         self.slideMenuController()?.removeLeftGestures()
         self.slideMenuController()?.removeRightGestures()
-        
-        let buttonImage : UIImage! = UIImage(named: "add_task")
         rightButton = UIBarButtonItem(title: "Open".localized, style: UIBarButtonItemStyle.Plain, target: self, action: "importAction:")
         navigationItem.rightBarButtonItem = rightButton;
     }
 
     func importAction(sender: AnyObject) {
-        var documentPicker: UIDocumentPickerViewController = UIDocumentPickerViewController(documentTypes: ["public.data"], inMode: UIDocumentPickerMode.Import)
+        let documentPicker: UIDocumentPickerViewController = UIDocumentPickerViewController(documentTypes: ["public.data"], inMode: UIDocumentPickerMode.Import)
         documentPicker.delegate = self
         documentPicker.modalPresentationStyle = UIModalPresentationStyle.FullScreen
         self.presentViewController(documentPicker, animated: true, completion: nil)
     }
 
     func URLForDocuments() -> NSURL {
-        return NSFileManager.defaultManager().URLsForDirectory(NSSearchPathDirectory.DocumentDirectory, inDomains: NSSearchPathDomainMask.UserDomainMask).last as! NSURL
+        let urls = NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask)
+        return urls[urls.count-1]
     }
 
     func saveFileToDocuments(srcFileNameURL: NSURL, dstFileName: String)
@@ -44,10 +43,14 @@ class SODocumentPickerViewController: UIViewController {
         var destinationURL = URLForDocuments()
         destinationURL = destinationURL.URLByAppendingPathComponent(dstFileName)
         var copyError : NSError? = nil
-        NSFileManager.defaultManager().copyItemAtURL(srcFileNameURL, toURL: destinationURL, error: &copyError)
+        do {
+            try NSFileManager.defaultManager().copyItemAtURL(srcFileNameURL, toURL: destinationURL)
+        } catch let error as NSError {
+            copyError = error
+        }
         
         if let theError = copyError {
-            println("Error making ubiquitous: \(theError)")
+            print("Error making ubiquitous: \(theError)")
         }
     }
     
@@ -55,10 +58,14 @@ class SODocumentPickerViewController: UIViewController {
     {
         let destinationURL = NSFileManager.defaultManager().URLForUbiquityContainerIdentifier(nil)?.URLByAppendingPathComponent("Documents").URLByAppendingPathComponent(dstFileName)
         var makeUbiquitousError : NSError? = nil
-        NSFileManager.defaultManager().setUbiquitous(true, itemAtURL: srcFileNameURL, destinationURL: destinationURL!, error: &makeUbiquitousError)
+        do {
+            try NSFileManager.defaultManager().setUbiquitous(true, itemAtURL: srcFileNameURL, destinationURL: destinationURL!)
+        } catch let error as NSError {
+            makeUbiquitousError = error
+        }
         
         if let theError = makeUbiquitousError {
-            println("Error making ubiquitous: \(theError)")
+            print("Error making ubiquitous: \(theError)")
         }
     }
 }
@@ -70,15 +77,19 @@ extension SODocumentPickerViewController: UIDocumentPickerDelegate{
     func documentPicker(controller: UIDocumentPickerViewController, didPickDocumentAtURL url: NSURL) {
         
         let fileName = url.lastPathComponent
-        let temporaryURL = NSURL.fileURLWithPath(NSTemporaryDirectory(), isDirectory:true)?.URLByAppendingPathComponent(fileName!)
-        var copyError : NSError? = nil
-        NSFileManager.defaultManager().copyItemAtURL(url, toURL: temporaryURL!, error: &copyError)
-        
-        if let theError = copyError {
-            println("Error copying: \(theError)")
+        let temporaryURL = NSURL.fileURLWithPath(NSTemporaryDirectory(), isDirectory:true).URLByAppendingPathComponent(fileName!)
+        var copyFileError : NSError? = nil
+
+        do {
+            try NSFileManager.defaultManager().copyItemAtURL(url, toURL: temporaryURL)
+        } catch let error as NSError {
+            copyFileError = error
         }
-        self.saveFileToDocuments(temporaryURL!, dstFileName: fileName!)
-        //self.saveFileToiCloud(temporaryURL!, dstFileName: fileName!)
+        
+        if let theError = copyFileError {
+            print("Error copying: \(theError)")
+        }
+        self.saveFileToDocuments(temporaryURL, dstFileName: fileName!)
         self.dismissViewControllerAnimated(true, completion: nil)
     }
     

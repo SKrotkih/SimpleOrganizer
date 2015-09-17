@@ -24,29 +24,29 @@ public class SOReachabilityCenter{
     }
     
     deinit{
-        self.reachability.stopNotifier()
+        self.reachability!.stopNotifier()
     }
     
     func isInternetConnected() -> Bool{
-        return self.reachability.isReachable()
+        return self.reachability!.isReachable()
     }
 
     func startInternetObserver(completionBlock: () -> Void  ){
         self.changeReachableBlock = completionBlock
         
-        self.reachability.whenReachable = { reachability in
+        self.reachability!.whenReachable = { reachability in
             self.changeReachableBlock()
         }
 
-        self.reachability.whenUnreachable = { reachability in
+        self.reachability!.whenUnreachable = { reachability in
             self.changeReachableBlock()
         }
         
-        self.reachability.startNotifier()
+        self.reachability!.startNotifier()
     }
     
     func stopInternetObserver(){
-        reachability.stopNotifier()
+        reachability!.stopNotifier()
     }
     
 }

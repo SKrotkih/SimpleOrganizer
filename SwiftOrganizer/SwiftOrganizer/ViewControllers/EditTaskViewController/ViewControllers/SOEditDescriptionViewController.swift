@@ -29,7 +29,7 @@ class SOEditDescriptionViewController: SOEditTaskFieldBaseViewController {
         super.viewWillAppear(animated)
         
         let rightButtonImage : UIImage! = UIImage(named: "save_task")
-        var rightButton: UIBarButtonItem = UIBarButtonItem(image: rightButtonImage, style: UIBarButtonItemStyle.Plain, target: self, action: "doneButtonWasPressed")
+        let rightButton: UIBarButtonItem = UIBarButtonItem(image: rightButtonImage, style: UIBarButtonItemStyle.Plain, target: self, action: "doneButtonWasPressed")
         navigationItem.rightBarButtonItem = rightButton;
 
         self.automaticallyAdjustsScrollViewInsets = false
@@ -38,7 +38,7 @@ class SOEditDescriptionViewController: SOEditTaskFieldBaseViewController {
         textView.becomeFirstResponder()
     }
     
-    override func willFinishOfEditing() -> Bool{
+    override func willFinishEditing() -> Bool{
         if let theTask = self.task{
             if theTask.title != textView.text{
                 let controller = UIAlertController(title: "Data were chenged!".localized, message: nil, preferredStyle: .ActionSheet)
@@ -57,7 +57,7 @@ class SOEditDescriptionViewController: SOEditTaskFieldBaseViewController {
             }
         }
         
-        return super.willFinishOfEditing()
+        return super.willFinishEditing()
     }
     
     func doneButtonWasPressed() {
@@ -74,7 +74,7 @@ class SOEditDescriptionViewController: SOEditTaskFieldBaseViewController {
     func keyboardDidShow(notification: NSNotification){
         dispatch_async(dispatch_get_main_queue(), {
             if let userInfo = notification.userInfo {
-                if let keyboardSize: CGSize = userInfo[UIKeyboardFrameEndUserInfoKey]?.CGRectValue().size {
+                if let keyboardSize: CGSize = userInfo[UIKeyboardFrameEndUserInfoKey]?.CGRectValue.size {
                     let keyboardHeight: CGFloat = keyboardSize.height
                     let textViewHeight = CGRectGetHeight(self.view.frame) - (CGRectGetMinY(self.textView.frame) + 16.0 + keyboardHeight)
                     self.heightTextViewConstraint.constant = textViewHeight

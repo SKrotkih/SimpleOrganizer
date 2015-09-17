@@ -1,5 +1,5 @@
 //
-//  SODataSource.swift
+//  SOFetchingData.swift
 //  SwiftOrganizer
 //
 //  Created by Sergey Krotkih on 6/16/15.
@@ -9,7 +9,7 @@
 
 import UIKit
 
-public protocol SODataSourceProtocol{
+public protocol SOFetchingDataProtocol{
     func allTasks(completionBlock: (resultBuffer: [SOTask], error: NSError?) -> Void)
     func allCategories(completionBlock: (resultBuffer: [SOCategory], error: NSError?) -> Void)
     func allIcons(completionBlock: (resultBuffer: [SOIco], error: NSError?) -> Void)
@@ -18,14 +18,14 @@ public protocol SODataSourceProtocol{
     func iconById(iconId : String) -> SOIco?
 }
 
-public final class SODataSource : SODataSourceProtocol{
+public final class SOFetchingData : SOFetchingDataProtocol{
     private lazy var _allCategories = [SOCategory]()
     private lazy var _allIcons = [SOIco]()
     private var collectionQueue = dispatch_queue_create("fetchDataQ", DISPATCH_QUEUE_CONCURRENT);
 
-    public class var sharedInstance: SODataSourceProtocol {
+    public class var sharedInstance: SOFetchingDataProtocol {
         struct SingletonWrapper {
-        static let sharedInstance = SODataSource()
+        static let sharedInstance = SOFetchingData()
         }
         return SingletonWrapper.sharedInstance;
     }
@@ -40,10 +40,14 @@ public final class SODataSource : SODataSourceProtocol{
     }
 
     public func allCategories(completionBlock: (resultBuffer: [SOCategory], error: NSError?) -> Void){
+        
+        
         SODataBaseFactory.sharedInstance.dataBase.allCategories{(categories: [SOCategory], error: NSError?) in
             self._allCategories = categories
             completionBlock(resultBuffer: categories, error: error)
         }
+        
+        
     }
     
     public func allIcons(completionBlock: (resultBuffer: [SOIco], error: NSError?) -> Void){
@@ -56,7 +60,7 @@ public final class SODataSource : SODataSourceProtocol{
 
     // MARK: -
 
-extension SODataSource{
+extension SOFetchingData{
     
     public func categoryById(categoryId: String) -> SOCategory?{
         for category in self._allCategories{

@@ -51,9 +51,14 @@ public class SOCoreDataBase: SOCoreDataProtocol {
         
         if let url = persistentStoreDirectory?.URLByAppendingPathComponent("\(DatabaseName).sqlite"){
             var error: NSError? = nil
-            if coordinator!.addPersistentStoreWithType(NSSQLiteStoreType, configuration: nil, URL: url, options: options, error: &error) == nil {
+            do {
+                try coordinator!.addPersistentStoreWithType(NSSQLiteStoreType, configuration: nil, URL: url, options: options)
+            } catch var error1 as NSError {
+                error = error1
                 coordinator = nil
                 self.reportAnyErrorWeGot(error)
+            } catch {
+                fatalError()
             }
         } else {
             coordinator = nil
@@ -84,7 +89,7 @@ public class SOCoreDataBase: SOCoreDataProtocol {
     public lazy var applicationDocumentsDirectory: NSURL = {
         // The directory the application uses to store the Core Data store file. This code uses a directory named "com.domenicosolazzo.swift.Reading_data_from_CoreData" in the application's documents Application Support directory.
         let urls = NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask)
-        return urls[urls.count-1] as! NSURL
+        return urls[urls.count-1] 
         }()
 
     
@@ -120,7 +125,7 @@ public class SOCoreDataBase: SOCoreDataProtocol {
     
     public func newManagedObject(entityName: String) -> NSManagedObject!{
         //let entityName = NSStringFromClass(Task.classForCoder())
-        let object  = NSEntityDescription.insertNewObjectForEntityForName(entityName, inManagedObjectContext: self.managedObjectContext!) as! NSManagedObject
+        let object  = NSEntityDescription.insertNewObjectForEntityForName(entityName, inManagedObjectContext: self.managedObjectContext!) 
         
         return object
     }
@@ -147,13 +152,15 @@ extension SOCoreDataBase{
             
             if moc.hasChanges{
                 
-                if !moc.save(&error) {
+                do {
+                    try moc.save()
+                    moc.reset()
+                } catch let error1 as NSError {
+                    error = error1
                     // Replace this implementation with code to handle the error appropriately.
                     // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
                     NSLog("Unresolved error \(error), \(error!.userInfo)")
                     abort()
-                } else {
-                    moc.reset()
                 }
             }
         }

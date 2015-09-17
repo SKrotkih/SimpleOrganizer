@@ -11,7 +11,7 @@ import UIKit
 class SOSampleDocument: UIDocument {
     var text: String = ""
     
-    override func loadFromContents(contents: AnyObject, ofType typeName: String, error outError: NSErrorPointer) -> Bool {
+    override func loadFromContents(contents: AnyObject, ofType typeName: String?) throws {
         self.text = ""
         if let data = contents as? NSData {
             if data.length > 0 {
@@ -21,12 +21,14 @@ class SOSampleDocument: UIDocument {
                 }
             }
         }
-        
-        return true
     }
     
     // Called when the system needs a snapshot of the current state of // the document, for autosaving.
-    override func contentsForType(typeName: String,  error outError: NSErrorPointer) -> AnyObject? {
-        return self.text.dataUsingEncoding(NSUTF8StringEncoding)
+    override func contentsForType(typeName: String) throws -> AnyObject {
+        let outError: NSError! = NSError(domain: "Migrator", code: 0, userInfo: nil)
+        if let value = self.text.dataUsingEncoding(NSUTF8StringEncoding) {
+            return value
+        }
+        throw outError
     }
 }

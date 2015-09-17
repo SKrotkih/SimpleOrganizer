@@ -88,13 +88,13 @@ public class SOTypeDataBaseSwitcher{
     }
     
     public class func switchToNextDataBase(){
-        var currentDataBaseIndex = self.currentDataBaseIndex()
+        let currentDataBaseIndex = self.currentDataBaseIndex()
         let newDataBaseIndex = currentDataBaseIndex.nextDataBaseIndex()
         self.switchToIndex(newDataBaseIndex)
     }
     
     public class func currectDataBaseDescription() -> String{
-        var currentDataBaseIndex = self.currentDataBaseIndex()
+        let currentDataBaseIndex = self.currentDataBaseIndex()
         return currentDataBaseIndex.localizedDescription()
     }
 }

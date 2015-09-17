@@ -73,7 +73,7 @@ public class SOParseComManager: NSObject {
         }
 
         if application.respondsToSelector("registerUserNotificationSettings:") {
-            let userNotificationTypes = UIUserNotificationType.Alert | UIUserNotificationType.Badge | UIUserNotificationType.Sound
+            let userNotificationTypes: UIUserNotificationType = [UIUserNotificationType.Alert, UIUserNotificationType.Badge, UIUserNotificationType.Sound]
             let settings = UIUserNotificationSettings(forTypes: userNotificationTypes, categories: nil)
             application.registerUserNotificationSettings(settings)
             application.registerForRemoteNotifications()
@@ -93,18 +93,18 @@ public class SOParseComManager: NSObject {
         
         PFPush.subscribeToChannelInBackground("", block: { (succeeded: Bool, error: NSError?) -> Void in
             if succeeded {
-                println("SwiftOrganizer successfully subscribed to push notifications on the broadcast channel.");
+                print("SwiftOrganizer successfully subscribed to push notifications on the broadcast channel.");
             } else {
-                println("SwiftOrganizer failed to subscribe to push notifications on the broadcast channel with error = \(error?.description).")
+                print("SwiftOrganizer failed to subscribe to push notifications on the broadcast channel with error = \(error?.description).")
             }
         })
     }
     
     public class func application(application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: NSError) {
         if error.code == 3010 {
-            println("Push notifications are not supported in the iOS Simulator.")
+            print("Push notifications are not supported in the iOS Simulator.")
         } else {
-            println("application:didFailToRegisterForRemoteNotificationsWithError: %@", error)
+            print("application:didFailToRegisterForRemoteNotificationsWithError: %@", error)
         }
     }
     
@@ -137,7 +137,7 @@ public class SOParseComManager: NSObject {
     }
 
     class func checkUser(completionBlock: (error: NSError?) -> Void){
-        var currentUser = PFUser.currentUser()
+        let currentUser = PFUser.currentUser()
         if currentUser != nil {
             completionBlock(error: nil)
         } else {
@@ -161,14 +161,14 @@ public class SOParseComManager: NSObject {
         
         PFUser.logInWithUsernameInBackground(username, password: password){(user: PFUser?, error: NSError?) -> Void in
             if let currentUser = user {
-                println("Hi, \(currentUser.username!)!")
+                print("Hi, \(currentUser.username!)!")
                 let defaults = SOUserDefault.sharedDefaults()
                 defaults.setObject(username, forKey: SOUsernameKey)
                 defaults.setObject(password, forKey: SOPasswordKey)
                 completionBlock(error: nil)
             } else {
                 completionBlock(error: error)
-                println("The login failed. \(error?.description)")
+                print("The login failed. \(error?.description)")
             }
         }
     }
