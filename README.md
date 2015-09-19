@@ -32,6 +32,7 @@ Also were implemented the following features:
 - Reachability the Internet observer: auto switch to local data base when the Internet is disconnected
 - Observing of changes in Settings app for application's preferences.
 - Work with Objective-C in the Swift project
+- Cocoapods was added for parse framework 
 
 Were applied the following design patterns:
 - abstract method;
@@ -89,4 +90,5 @@ SwiftOrganizer is available under the MIT license. See the LICENSE file for more
 - 09.08.2015: Settings app is used for enter some data. Settings changes added observing. 
 - 01.09.2015: Fixed "Attempting to badge the application icon but haven't received permission from the user to badge the application" run-time error message
 - 03.09.2015: Added Preferences menu. There are a possibility select favorite categories and icons for tab bar.
-
+- 17.09.2015: Fixed build for Xcode 7.0 according Swift 2.0 requirements.
+- 19.09.2015: Fixed parse.com framework double linking. Fixed lots of warnings on runtime.

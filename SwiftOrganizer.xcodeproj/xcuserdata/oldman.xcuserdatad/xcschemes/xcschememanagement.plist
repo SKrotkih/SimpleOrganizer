@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>SchemeUserState</key>
+	<dict>
+		<key>DataBaseKit.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>1</integer>
+		</dict>
+		<key>SOWidjet.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>7</integer>
+		</dict>
+		<key>SwiftExtension.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>6</integer>
+		</dict>
+		<key>SwiftOrganizer.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>0</integer>
+		</dict>
+	</dict>
+	<key>SuppressBuildableAutocreation</key>
+	<dict>
+		<key>7F5DF5431BAD288E00959432</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>7F5DF55A1BAD288E00959432</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>7F5DF5651BAD288E00959432</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>7F5DF57C1BAD2BBB00959432</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>7F5DF5851BAD2BBB00959432</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>7F5DF6E91BAD83B200959432</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>7F5DF6FF1BAD851200959432</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+	</dict>
+</dict>
+</plist>

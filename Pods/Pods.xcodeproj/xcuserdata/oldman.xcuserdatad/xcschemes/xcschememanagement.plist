@@ -8,31 +8,49 @@
 		<dict>
 			<key>isShown</key>
 			<false/>
+			<key>orderHint</key>
+			<integer>2</integer>
 		</dict>
 		<key>Parse.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
+			<key>orderHint</key>
+			<integer>3</integer>
 		</dict>
-		<key>Pods.xcscheme</key>
+		<key>Pods-DataBaseKit.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
+			<key>orderHint</key>
+			<integer>4</integer>
+		</dict>
+		<key>Pods-SwiftOrganizer.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+			<key>orderHint</key>
+			<integer>5</integer>
 		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>5D8129E3793C29AAEEF26CE316A9DDC0</key>
+		<key>1CAF2E64FA2112E656282E1950BF60EF</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>6A456211BBA2DEF977C7FA11183AFFF0</key>
+		<key>4B36EBDFBA5F29B54BB496829D850956</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>C40DD0E78C02BFF0A6A074B269763FA7</key>
+		<key>783A483C3AD6EF82557A6EF752682607</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>BD88A81F5B1E015036BF644C660FE5EB</key>
 		<dict>
 			<key>primary</key>
 			<true/>
