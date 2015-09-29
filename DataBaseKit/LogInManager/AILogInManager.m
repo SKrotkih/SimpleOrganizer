@@ -19,6 +19,7 @@
 @implementation AILogInManager
 {
     BOOL _facebookIsLoggedIn;
+    UIActionSheet* _logOutSheet;
 }
 
 + (AILogInManager*) sharedInstance
@@ -93,8 +94,16 @@
                  }
 
                  _facebookIsLoggedIn = YES;
-                 
-                 NSLog(@"%@", anUser);
+
+                 NSString* userName = anUser[@"name"];
+
+                 NSString* message = [NSString stringWithFormat: @"Welcome, %@", userName];
+                 UIActionSheet* sheet = [[UIActionSheet alloc] initWithTitle: message
+                                                                    delegate: self
+                                                           cancelButtonTitle: NSLocalizedString(@"OK", nil)
+                                                      destructiveButtonTitle: nil
+                                                           otherButtonTitles: nil, nil];
+                 [sheet showInView: aViewController.view];
 
                  aCompletionBlock(OperationIsRanSuccessfully);
              }];
@@ -167,12 +176,12 @@
     {
         self.completionBlock = aCompletionBlock;
         
-        UIActionSheet* sheet = [[UIActionSheet alloc] initWithTitle: nil
+        _logOutSheet = [[UIActionSheet alloc] initWithTitle: nil
                                                            delegate: self
                                                   cancelButtonTitle: NSLocalizedString(@"Cancel", nil)
                                              destructiveButtonTitle: nil
                                                   otherButtonTitles: NSLocalizedString(@"Log Out", nil), nil];
-        [sheet showInView: aViewController.view];
+        [_logOutSheet showInView: aViewController.view];
     }
 }
 
@@ -190,10 +199,12 @@
 
 - (void) actionSheet: (UIActionSheet*) actionSheet didDismissWithButtonIndex: (NSInteger) buttonIndex
 {
-    if (buttonIndex == 0)
+    if (actionSheet == _logOutSheet && buttonIndex == 0)
     {
+        __weak AILogInManager* weakSelf = self;
+        
         [self logOutWithSuccessBlock:^{
-            self.completionBlock();
+            weakSelf.completionBlock();
         }];
     }
 }

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import FBSDKCoreKit
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -28,7 +29,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         SOExternalSettingsObserever.startObserver()
         
-        let retBoolValue: Bool = SOParseComManager.application(application, didFinishLaunchingWithOptions: launchOptions)
+        var retBoolValue: Bool = SOParseComManager.application(application, didFinishLaunchingWithOptions: launchOptions)
+        
+        retBoolValue = retBoolValue || FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
         
         self.applicationIconBadgeNumber = 0
         
@@ -39,10 +42,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     // MARK: open URL
     
     func application(application: UIApplication, openURL url: NSURL, sourceApplication srcApp: String?, annotation annot: AnyObject) -> Bool {
-        
         self.application(application, handleOpenURL: url)
+        var isHandledOk: Bool = FBSDKApplicationDelegate.sharedInstance().application(application, openURL: url, sourceApplication: srcApp, annotation: annot)
+        isHandledOk = isHandledOk || SOParseComManager.application(application, openURL: url, sourceApplication: srcApp, annotation: annot)
         
-        return SOParseComManager.application(application, openURL: url, sourceApplication: srcApp, annotation: annot)
+        return isHandledOk
     }
     
     func application(application: UIApplication, handleOpenURL url: NSURL) -> Bool {
