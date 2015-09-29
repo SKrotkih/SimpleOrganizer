@@ -1,5 +1,5 @@
 //
-//  LeftViewController.swift
+//  MainMenuViewController.swift
 //  SwiftOrganizer
 //
 //  Created by Sergey Krotkih on 7/29/15.
@@ -9,7 +9,8 @@
 import UIKit
 
 enum LeftMenu: Int {
-    case Main = 0
+    case LogIn = 0
+    case Main = 1
     case Preferences
     case Documents
     case DocumentPicker
@@ -22,11 +23,11 @@ protocol LeftMenuProtocol : class {
     func changeViewController(menu: LeftMenu)
 }
 
-class LeftViewController : UIViewController {
+class MainMenuViewController : UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
 
-    var menus = ["Organizer".localized, "Preferences".localized, "My Documents".localized, "External Documents".localized, "Make Call".localized, "Settings".localized, "About".localized]
+    var menus = ["Log In".localized, "Organizer".localized, "Preferences".localized, "My Documents".localized, "External Documents".localized, "Make Call".localized, "Settings".localized, "About".localized]
     var mainViewController: UIViewController!
     var preferencesViewController: UIViewController!
     var settingsViewController: UIViewController!
@@ -75,7 +76,7 @@ class LeftViewController : UIViewController {
 
     // MARK: - UITableViewDelegate, UITableViewDataSource
 
-extension LeftViewController: UITableViewDelegate, UITableViewDataSource{
+extension MainMenuViewController: UITableViewDelegate, UITableViewDataSource{
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return menus.count
     }
@@ -98,9 +99,11 @@ extension LeftViewController: UITableViewDelegate, UITableViewDataSource{
 
     // MARK: - Change View Controller
 
-extension LeftViewController: LeftMenuProtocol {
+extension MainMenuViewController: LeftMenuProtocol {
     func changeViewController(menu: LeftMenu) {
         switch menu {
+        case .LogIn:
+            self.facebookLogIn()
         case .Main:
             self.slideMenuController()?.changeMainViewController(self.mainViewController, close: true)
         case .Preferences:
@@ -124,3 +127,15 @@ extension LeftViewController: LeftMenuProtocol {
     }
 }
 
+extension MainMenuViewController
+{
+    func facebookLogIn(){
+        AILogInManager.sharedInstance().logInWithFacebookWithViewControoler(self, completionBlock: {(loginState: AILoginState) in
+            if loginState == OperationIsRanSuccessfully{
+                NSLog("Logged In!")
+            } else {
+                NSLog("Failed log in!")
+            }
+        })
+    }
+}

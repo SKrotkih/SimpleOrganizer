@@ -12,7 +12,7 @@
 @interface KVOTryCatchException : NSObject
 
 - (NSError*) trySetKeyValueForObject: (NSManagedObject*) aManagedObject
-                                    forKeyPath: (NSString*) aKeyPath
-                                         value: (id) aValue;
+                          forKeyPath: (NSString*) aKeyPath
+                               value: (id) aValue;
 
 @end

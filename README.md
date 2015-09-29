@@ -33,6 +33,7 @@ Also were implemented the following features:
 - Observing of changes in Settings app for application's preferences.
 - Work with Objective-C in the Swift project
 - Cocoapods was added for parse framework 
+- Facebook SDK added
 
 Were applied the following design patterns:
 - abstract method;
@@ -92,3 +93,4 @@ SwiftOrganizer is available under the MIT license. See the LICENSE file for more
 - 03.09.2015: Added Preferences menu. There are a possibility select favorite categories and icons for tab bar.
 - 17.09.2015: Fixed build for Xcode 7.0 according Swift 2.0 requirements.
 - 19.09.2015: Fixed parse.com framework double linking. Fixed lots of warnings on runtime.
+- 29.09.2015: Facebook SDK added, registered AppID, login function in Objective-C was implemented. 

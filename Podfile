@@ -11,6 +11,7 @@ link_with 'SwiftOrganizer', 'DataBaseKit'
 
 def available_pods
     pod 'Parse'
+    #pod 'ReachabilitySwift', git: 'https://github.com/ashleymills/Reachability.swift'
 end
 
 target 'SwiftOrganizer' do
@@ -20,3 +21,8 @@ end
 target 'DataBaseKit' do
     available_pods
 end
+
+pod 'FBSDKCoreKit'
+pod 'FBSDKLoginKit'
+pod 'FBSDKShareKit'
+

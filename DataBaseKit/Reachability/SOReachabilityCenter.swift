@@ -10,7 +10,9 @@ import Foundation
 
 typealias SOReachabilityObserverType = () -> Void
 
-public class SOReachabilityCenter{
+@objc
+
+public class SOReachabilityCenter: NSObject{
 
     var changeReachableBlock: SOReachabilityObserverType!
     let reachability = Reachability.reachabilityForInternetConnection()
@@ -27,7 +29,7 @@ public class SOReachabilityCenter{
         self.reachability!.stopNotifier()
     }
     
-    func isInternetConnected() -> Bool{
+    public func isInternetConnected() -> Bool{
         return self.reachability!.isReachable()
     }
 

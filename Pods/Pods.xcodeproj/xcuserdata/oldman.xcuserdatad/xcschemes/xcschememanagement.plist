@@ -8,49 +8,81 @@
 		<dict>
 			<key>isShown</key>
 			<false/>
-			<key>orderHint</key>
-			<integer>2</integer>
+		</dict>
+		<key>FBSDKCoreKit.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>FBSDKLoginKit.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>FBSDKShareKit.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
 		</dict>
 		<key>Parse.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
-			<key>orderHint</key>
-			<integer>3</integer>
 		</dict>
 		<key>Pods-DataBaseKit.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
-			<key>orderHint</key>
-			<integer>4</integer>
 		</dict>
 		<key>Pods-SwiftOrganizer.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
-			<key>orderHint</key>
-			<integer>5</integer>
+		</dict>
+		<key>Pods.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
 		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>1CAF2E64FA2112E656282E1950BF60EF</key>
+		<key>192E923E60CC1DC3E1E41CCDB5B6AFB0</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>4B36EBDFBA5F29B54BB496829D850956</key>
+		<key>2300FCCB9BE65B3E60772593285208A4</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>783A483C3AD6EF82557A6EF752682607</key>
+		<key>34E6987270C482094C82CF4E8AC6CF8D</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>BD88A81F5B1E015036BF644C660FE5EB</key>
+		<key>4B357A6548951D82A0E80A6584AC0AD6</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>80C702A3DA842BA5D535D986FCFF3D2D</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>D9DAFC1C97C47EF356AF1A7AFCB3C00D</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>F00C43B6C97660CE48A3F72988B225B6</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>F3E36165AB67AB4F6179B13E5A0282BE</key>
 		<dict>
 			<key>primary</key>
 			<true/>

@@ -554,7 +554,7 @@ class SlideMenuController: UIViewController, UIGestureRecognizerDelegate {
         }
     }
     
-    func changeLeftViewController(leftViewController: UIViewController, closeLeft:Bool) {
+    func changeMainMenuViewController(leftViewController: UIViewController, closeLeft:Bool) {
         
         removeViewController(leftViewController)
         self.leftViewController = leftViewController

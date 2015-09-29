@@ -55,6 +55,19 @@ extension SOLocalDataBase{
         
         dispatch_sync(self.queue, {() in
             let fetchRequest = NSFetchRequest(entityName: CategoryEntityName)
+
+            
+            /*
+            // Example of filtering and sorting:
+            
+            let predicate = NSPredicate(format: "title='The first book'")
+            let lengthSort = NSSortDescriptor(key: "length", ascending: true)
+            let alphaSort = NSSortDescriptor(key: "text", ascending: false)
+            fetchRequest.predicate = predicate
+            fetchRequest.sortDescriptors = [lengthSort, alphaSort]
+            
+            */
+            
             
             let objects = (try! self.coreData.managedObjectContext!.executeFetchRequest(fetchRequest)) as! [TaskCategory]
             

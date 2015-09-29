@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "KVOTryCatchException.h"
+#import "AILogInManager.h"
 
 //! Project version number for DataBaseKit.
 FOUNDATION_EXPORT double DataBaseKitVersionNumber;

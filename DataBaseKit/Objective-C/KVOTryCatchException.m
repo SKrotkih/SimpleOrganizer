@@ -11,8 +11,8 @@
 @implementation KVOTryCatchException
 
 - (NSError*) trySetKeyValueForObject: (NSManagedObject*) aManagedObject
-                                    forKeyPath: (NSString*) aKeyPath
-                                         value: (id) aValue
+                          forKeyPath: (NSString*) aKeyPath
+                               value: (id) aValue
 {
     NSError* error;
     
@@ -26,7 +26,7 @@
                                     code: -1
                                 userInfo: userInfo];
     }
-
+    
     return error;
 }
 

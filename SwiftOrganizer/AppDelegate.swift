@@ -93,7 +93,7 @@ extension AppDelegate{
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         
         mainViewController = storyboard.instantiateViewControllerWithIdentifier("SOMainViewController") as! SOMainViewController
-        let leftViewController = storyboard.instantiateViewControllerWithIdentifier("LeftViewController") as! LeftViewController
+        let leftViewController = storyboard.instantiateViewControllerWithIdentifier("MainMenuViewController") as! MainMenuViewController
         let rightViewController = storyboard.instantiateViewControllerWithIdentifier("RightViewController") as! RightViewController
         
         let navigationController: UINavigationController = UINavigationController(rootViewController: mainViewController)

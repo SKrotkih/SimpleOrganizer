@@ -14,3 +14,8 @@ public let SOEnableiCloudForCoreDataKey = "EnableiCloudForCoreData"
 public let KeyInURLAsSwitchDataBase = "switchdbto."
 public let KeyInURLAsTaskId = "taskid."
 public let WidgetUrlScheme = "widget"
+
+// Facebook
+// https://developers.facebook.com/apps/538129673003368/settings/
+
+public let FacebookAppId = "538129673003368"
