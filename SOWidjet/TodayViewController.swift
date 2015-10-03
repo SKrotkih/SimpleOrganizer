@@ -31,7 +31,7 @@ class TodayViewController: UIViewController, NCWidgetProviding {
         let index = typeOfDataBaseSwitcher.selectedSegmentIndex
         SOTypeDataBaseSwitcher.switchToIndex(DataBaseIndex(rawValue: index)!)
 
-        let urlAsString = "\(WidgetUrlScheme)://\(KeyInURLAsSwitchDataBase)\(index)"
+        let urlAsString = "\(WidgetUrlScheme)://\(WidgetDataKeys.KeyInURLAsSwitchDataBase)\(index)"
         let url = NSURL(string: urlAsString)
         self.extensionContext!.openURL(url!, completionHandler: nil)
     }

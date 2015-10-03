@@ -167,7 +167,7 @@ extension AppDelegate{
     private func todayWidgetHandleOpenURL(url:  NSURL){
         if let host = url.host{
             
-            if NSString(string: host).containsString(KeyInURLAsSwitchDataBase) {
+            if NSString(string: host).containsString(WidgetDataKeys.KeyInURLAsSwitchDataBase) {
                 var arr = host.characters.split {$0 == "."}.map { String($0) }
                 
                 if arr.count == 2{

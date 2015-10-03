@@ -94,3 +94,5 @@ SwiftOrganizer is available under the MIT license. See the LICENSE file for more
 - 17.09.2015: Fixed build for Xcode 7.0 according Swift 2.0 requirements.
 - 19.09.2015: Fixed parse.com framework double linking. Fixed lots of warnings on runtime.
 - 29.09.2015: Facebook SDK added, registered AppID, login function in Objective-C was implemented. 
+- 02.10.2015: Added the DateTools framework
+

@@ -22,9 +22,7 @@ public class SOCatalog: NSObject, SOConcreteObjectsProtocol {
     }
     
     public var entityName: String{
-        get{
-            return ""
-        }
+        return ""
     }
 
     //- MARK: -

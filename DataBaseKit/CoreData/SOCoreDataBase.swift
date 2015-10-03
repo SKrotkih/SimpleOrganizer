@@ -186,7 +186,7 @@ extension SOCoreDataBase{
     
     func isiCloudEnabled() -> Bool{
         let defaults = SOUserDefault.sharedDefaults()
-        let useiCloudOpt: Bool? = defaults.boolForKey(SOEnableiCloudForCoreDataKey)
+        let useiCloudOpt: Bool? = defaults.boolForKey(DefaultsDataKeys.SOEnableiCloudForCoreDataKey)
         
         if let useiCloud = useiCloudOpt{
             return useiCloud

@@ -23,9 +23,7 @@ public class SOUser: NSObject {
     }
     
     public var entityName: String{
-        get{
-            return UserEntityName
-        }
+        return UserEntityName
     }
     
     public class func currentUser() -> SOUser{

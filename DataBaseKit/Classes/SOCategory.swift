@@ -25,9 +25,7 @@ public class SOCategory: SOCatalog {
     }
     
     public override var entityName: String{
-        get{
-            return CategoryEntityName
-        }
+        return CategoryEntityName
     }
 
     //- MARK: -

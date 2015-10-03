@@ -27,9 +27,7 @@ public class SOIco: SOCatalog {
     }
     
     public override var entityName: String{
-        get{
-            return IcoEntityName
-        }
+        return IcoEntityName
     }
 
     //- MARK: -

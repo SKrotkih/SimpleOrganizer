@@ -72,13 +72,13 @@ public final class SOiCloudManager {
 
                             if key == expectedKey{
 
-                                if let currDataBaseName = userDefaults.stringForKey(SODataBaseTypeKey){
+                                if let currDataBaseName = userDefaults.stringForKey(DefaultsDataKeys.SODataBaseTypeKey){
                                 
                                     if currDataBaseName == value as! String{
                                         continue
                                     }
                                 }
-                                userDefaults.setObject(value, forKey: SODataBaseTypeKey)
+                                userDefaults.setObject(value, forKey: DefaultsDataKeys.SODataBaseTypeKey)
 
                                 if  userDefaults.synchronize(){
                                     let notification: SOObserverNotification = SOObserverNotification(type: .SODataBaseTypeChanged, data: nil)

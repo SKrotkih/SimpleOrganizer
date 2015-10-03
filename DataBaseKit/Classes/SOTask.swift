@@ -20,27 +20,21 @@ public class SOTask: NSObject{
     public var date: NSDate?
     
     public var maxIconsCount: Int{
-        get{
-            return MaxIconsCount;
-        }
+        return MaxIconsCount;
     }
     
     public var categoryName: String{
-        get{
-            let categoryId = self.category
-            
-            if let category = SOFetchingData.sharedInstance.categoryById(categoryId){
-                return category.name
-            }
-            
-            return ""
+        let categoryId = self.category
+        
+        if let category = SOFetchingData.sharedInstance.categoryById(categoryId){
+            return category.name
         }
+        
+        return ""
     }
     
     public var taskId: String?{
-        get{
-            return SODataBaseFactory.sharedInstance.dataBase.getRecordIdForTask(self)
-        }
+        return SODataBaseFactory.sharedInstance.dataBase.getRecordIdForTask(self)
     }
     
 }

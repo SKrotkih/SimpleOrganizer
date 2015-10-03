@@ -155,15 +155,13 @@ class SOMainViewController: UIViewController{
     }
     
     private var editTaskViewController: SOEditTaskViewController{
-        get{
-            if _editTaskViewController != nil {
-                return _editTaskViewController!
-            }
-            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            _editTaskViewController = storyboard.instantiateViewControllerWithIdentifier("SOEditTaskViewController") as? SOEditTaskViewController
-
+        if _editTaskViewController != nil {
             return _editTaskViewController!
         }
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        _editTaskViewController = storyboard.instantiateViewControllerWithIdentifier("SOEditTaskViewController") as? SOEditTaskViewController
+        
+        return _editTaskViewController!
     }
     
     func cancelEditTask(){

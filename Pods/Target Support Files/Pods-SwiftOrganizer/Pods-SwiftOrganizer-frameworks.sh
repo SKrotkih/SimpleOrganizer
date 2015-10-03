@@ -83,6 +83,7 @@ strip_invalid_archs() {
 
 if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "Pods-SwiftOrganizer/Bolts.framework"
+  install_framework "Pods-SwiftOrganizer/DateTools.framework"
   install_framework "Pods-SwiftOrganizer/FBSDKCoreKit.framework"
   install_framework "Pods-SwiftOrganizer/FBSDKLoginKit.framework"
   install_framework "Pods-SwiftOrganizer/FBSDKShareKit.framework"
@@ -90,6 +91,7 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "Pods-SwiftOrganizer/Bolts.framework"
+  install_framework "Pods-SwiftOrganizer/DateTools.framework"
   install_framework "Pods-SwiftOrganizer/FBSDKCoreKit.framework"
   install_framework "Pods-SwiftOrganizer/FBSDKLoginKit.framework"
   install_framework "Pods-SwiftOrganizer/FBSDKShareKit.framework"
