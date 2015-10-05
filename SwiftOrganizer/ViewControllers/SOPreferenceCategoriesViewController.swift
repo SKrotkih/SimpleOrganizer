@@ -16,10 +16,6 @@ class SOPreferenceCategoriesViewController: UIViewController {
         super.viewDidLoad()
         
         self.title = "Categories".localized
-    }
-    
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
         
         let rightButtonImage : UIImage! = UIImage(named: "save_task")
         let rightButton: UIBarButtonItem = UIBarButtonItem(image: rightButtonImage, style: UIBarButtonItemStyle.Plain, target: self, action: "doneButtonWasPressed")
@@ -27,6 +23,10 @@ class SOPreferenceCategoriesViewController: UIViewController {
         
         self.slideMenuController()?.removeLeftGestures()
         self.slideMenuController()?.removeRightGestures()
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
         
         self.fetchData {
             dispatch_async(dispatch_get_main_queue(), {
@@ -36,7 +36,7 @@ class SOPreferenceCategoriesViewController: UIViewController {
 
     }
     
-    private func didSelectRow(aRow: Int){
+    func didSelectRow(aRow: Int){
         let category: SOCategory = self.buffer[aRow] as! SOCategory
         let currState: Bool = !category.visible
         category.setVisible(currState, completionBlock: {(error: NSError?) in
@@ -52,8 +52,11 @@ class SOPreferenceCategoriesViewController: UIViewController {
         })
     }
     
-    private func doneButtonWasPressed(){
+    func doneButtonWasPressed(){
         
+        // TODO: Need to implement Mememnto Design Pattern
+        
+        self.navigationController?.popViewControllerAnimated(true)
     }
 }
 

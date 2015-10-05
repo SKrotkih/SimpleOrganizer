@@ -26,7 +26,7 @@ protocol LeftMenuProtocol : class {
 class MainMenuViewController : UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
-
+    
     var menus = ["Log In".localized, "Organizer".localized, "Preferences".localized, "My Documents".localized, "External Documents".localized, "Make Call".localized, "Settings".localized, "About".localized]
     var mainViewController: UIViewController!
     var preferencesViewController: UIViewController!
@@ -40,13 +40,13 @@ class MainMenuViewController : UIViewController {
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
-   
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.tableView.separatorColor = UIColor(red: 224/255, green: 224/255, blue: 224/255, alpha: 1.0)
         
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-
+        
         let documentsViewController = storyboard.instantiateViewControllerWithIdentifier("DocumentsViewController") as! SODocumentsViewController
         self.documentsViewController = UINavigationController(rootViewController: documentsViewController)
         
@@ -55,7 +55,7 @@ class MainMenuViewController : UIViewController {
         
         let documentPickerViewController = storyboard.instantiateViewControllerWithIdentifier("DocumentPickerViewController") as! SODocumentPickerViewController
         self.documentPickerViewController = UINavigationController(rootViewController: documentPickerViewController)
-
+        
         let thePhoneCallViaFaceTimeViewController = storyboard.instantiateViewControllerWithIdentifier("FaceTimeCallPhoneViewController") as! SOMakeCallViewController
         self.phoneCallViaFaceTimeViewController = UINavigationController(rootViewController: thePhoneCallViaFaceTimeViewController)
         
@@ -74,7 +74,7 @@ class MainMenuViewController : UIViewController {
     
 }
 
-    // MARK: - UITableViewDelegate, UITableViewDataSource
+// MARK: - UITableViewDelegate, UITableViewDataSource
 
 extension MainMenuViewController: UITableViewDelegate, UITableViewDataSource{
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -86,56 +86,75 @@ extension MainMenuViewController: UITableViewDelegate, UITableViewDataSource{
         cell.backgroundColor = UIColor.lightGrayColor()
         cell.textLabel?.font = UIFont.italicSystemFontOfSize(18)
         cell.textLabel?.textColor = UIColor(red: 255/255, green: 255/255, blue: 255/255, alpha: 1.0)
-        cell.textLabel?.text = menus[indexPath.row]
+        
+        var title: String!
+        let row: Int = indexPath.row
+        let menuItem: LeftMenu = LeftMenu(rawValue: row)!
+        
+        if menuItem == .LogIn{
+            let userHasConnected: Bool = SODataBaseFactory.sharedInstance.dataBase.currentUserHasLoggedIn()
+            title = userHasConnected ? "Log Out" : "Log In"
+        } else {
+            title = menus[row]
+        }
+        cell.textLabel?.text = title
+        
         return cell
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        if let menu = LeftMenu(rawValue: indexPath.item) {
-            self.changeViewController(menu)
+        if let menuItem = LeftMenu(rawValue: indexPath.item) {
+            if menuItem == .LogIn{
+                self.logInOperation()
+            } else {
+                self.changeViewController(menuItem)
+            }
         }
     }
 }
 
-    // MARK: - Change View Controller
+// MARK: - Change View Controller
 
 extension MainMenuViewController: LeftMenuProtocol {
     func changeViewController(menu: LeftMenu) {
         switch menu {
         case .LogIn:
-            self.facebookLogIn()
+            break
         case .Main:
             self.slideMenuController()?.changeMainViewController(self.mainViewController, close: true)
         case .Preferences:
             self.slideMenuController()?.changeMainViewController(self.preferencesViewController, close: true)
         case .Documents:
             self.slideMenuController()?.changeMainViewController(self.documentsViewController, close: true)
-            break
         case .DocumentPicker:
             self.slideMenuController()?.changeMainViewController(self.documentPickerViewController, close: true)
-            break
         case .FaceTimeCall:
             self.slideMenuController()?.changeMainViewController(self.phoneCallViaFaceTimeViewController, close: true)
-            break
         case .Settings:
             self.slideMenuController()?.changeMainViewController(self.settingsViewController, close: true)
-            break
         case .About:
             self.slideMenuController()?.changeMainViewController(self.aboutViewController, close: true)
-            break
         }
     }
 }
 
-extension MainMenuViewController
-{
-    func facebookLogIn(){
-        AILogInManager.sharedInstance().logInWithFacebookWithViewControoler(self, completionBlock: {(loginState: AILoginState) in
-            if loginState == OperationIsRanSuccessfully{
-                NSLog("Logged In!")
-            } else {
-                NSLog("Failed log in!")
-            }
-        })
+// MARK: - Log In
+
+extension MainMenuViewController{
+    func logInOperation(){
+        let userHasConnected: Bool = SODataBaseFactory.sharedInstance.dataBase.currentUserHasLoggedIn()
+        if userHasConnected{
+            SODataBaseFactory.sharedInstance.dataBase.logOut(self, completionBlock: { (error) -> Void in
+                if error == nil{
+                    self.tableView.reloadData()
+                }
+            })
+        } else {
+            SODataBaseFactory.sharedInstance.dataBase.logIn(self, completionBlock: { (error) -> Void in
+                if error == nil{
+                    self.tableView.reloadData()
+                }
+            })
+        }
     }
 }

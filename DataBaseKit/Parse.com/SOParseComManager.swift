@@ -80,10 +80,13 @@ public class SOParseComManager: NSObject {
         
         return true
     }
-    
-    //--------------------------------------
-    // MARK: Push Notifications
-    //--------------------------------------
+}
+
+//--------------------------------------
+// MARK: Push Notifications
+//--------------------------------------
+
+extension SOParseComManager{
     
     public class func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData) {
         let installation = PFInstallation.currentInstallation()
@@ -122,10 +125,13 @@ public class SOParseComManager: NSObject {
             } else if application.applicationState == UIApplicationState.Background {
             }
     }
-    
-    //--------------------------------------
-    // MARK: Facebook SDK Integration
-    //--------------------------------------
+}
+
+//--------------------------------------
+// MARK: Facebook SDK Integration
+//--------------------------------------
+
+extension SOParseComManager{
     
     public class func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject?) -> Bool {
         ///////////////////////////////////////////////////////////
@@ -134,19 +140,22 @@ public class SOParseComManager: NSObject {
         // return FBAppCall.handleOpenURL(url, sourceApplication:sourceApplication, session:PFFacebookUtils.session())
         return true
     }
+}
 
-    class func checkUser(completionBlock: (error: NSError?) -> Void){
+//--------------------------------------
+// MARK: Log In
+//--------------------------------------
+
+extension SOParseComManager{
+    class func currentUserHasLoggedIn() -> Bool{
+
+        
         let currentUser = PFUser.currentUser()
-        if currentUser != nil {
-            completionBlock(error: nil)
-        } else {
-            self.login{(error: NSError?) in
-                completionBlock(error: error)
-            }
-        }
-    }
 
-    class func login(completionBlock: (error: NSError?) -> Void){
+        return currentUser != nil
+    }
+    
+    class func logIn(completionBlock: (error: NSError?) -> Void){
         
         let defaults = SOUserDefault.sharedDefaults()
         var username: String = DefaultUsername
@@ -170,7 +179,6 @@ public class SOParseComManager: NSObject {
                 print("The login failed. \(error?.description)")
             }
         }
+        
     }
-    
 }
-

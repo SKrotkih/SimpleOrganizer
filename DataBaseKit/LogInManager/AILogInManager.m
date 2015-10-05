@@ -45,6 +45,13 @@
 
 #pragma mark - Log In by Facebook
 
+- (BOOL) isCurrentUserLoggedInFacebook
+{
+    FBSDKAccessToken* currentAccessToken = [FBSDKAccessToken currentAccessToken];
+    
+    return currentAccessToken != nil;
+}
+
 - (void) logInWithFacebookWithViewControoler: (UIViewController*) aViewController
                              completionBlock: (void(^)(AILoginState aLoginState)) aCompletionBlock
 {
@@ -95,7 +102,10 @@
 
                  _facebookIsLoggedIn = YES;
 
-                 NSString* userName = anUser[@"name"];
+                 SOUser* user = [[SOUser alloc] initWithDict: anUser];
+                 user.isItCurrentUser = YES;
+                 
+                 NSString* userName = user.name;
 
                  NSString* message = [NSString stringWithFormat: @"Welcome, %@", userName];
                  UIActionSheet* sheet = [[UIActionSheet alloc] initWithTitle: message
@@ -136,9 +146,8 @@
              
              return;
          }
-         
-         NSDictionary* user = result;
-         aCompletionBlock(nil, user);
+         NSDictionary* dict = result;
+         aCompletionBlock(nil, dict);
      }];
 }
 
@@ -203,7 +212,7 @@
     {
         __weak AILogInManager* weakSelf = self;
         
-        [self logOutWithSuccessBlock:^{
+        [self logOutWithSuccessBlock: ^{
             weakSelf.completionBlock();
         }];
     }

@@ -59,6 +59,10 @@ In future:
 - make login (at present default user and password are used for login to the backend (parse.com server)).
 - the local database will be on the iCloud.
 
+## WEB site the app
+
+http://thebestplace.krizantos.com/SO/
+
 ## Requirements
 
 - Xcode 6

@@ -39,6 +39,25 @@ public class SOLocalDataBase: SODataBaseProtocol {
     }
 }
 
+
+// MARK: - Log In
+
+extension SOLocalDataBase{
+    public func currentUserHasLoggedIn() -> Bool{
+        return true;
+    }
+
+    public func logIn(viewController: UIViewController, completionBlock: (error: NSError?) -> Void){
+        completionBlock(error: nil)
+    }
+
+    public func logOut(viewController: UIViewController, completionBlock: (error: NSError?) -> Void){
+        completionBlock(error: nil)
+    }
+}
+
+// MARK: -
+
 extension SOLocalDataBase{
     
     private func fillNewObjectWithData<T: SOConcreteObjectsProtocol, T2: AnyObject>(newObject: T, managedObject: T2) -> T{

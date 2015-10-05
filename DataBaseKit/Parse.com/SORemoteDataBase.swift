@@ -57,6 +57,40 @@ public class SORemoteDataBase: SODataBaseProtocol {
     }
 }
 
+// - MARK: -
+// - MARK: Log In
+
+extension SORemoteDataBase{
+
+    public func currentUserHasLoggedIn() -> Bool{
+        return AILogInManager.sharedInstance().isCurrentUserLoggedInFacebook()
+    }
+    
+    public func logIn(viewController: UIViewController, completionBlock: (error: NSError?) -> Void){
+        if self.currentUserHasLoggedIn(){
+            completionBlock(error: nil)
+        } else {
+
+            AILogInManager.sharedInstance().logInWithFacebookWithViewControoler(viewController, completionBlock: {(loginState: AILoginState) in
+                if loginState != OperationIsRanSuccessfully{
+                    return
+                }
+
+                completionBlock(error: nil)
+                
+                //SOParseComManager.logIn(completionBlock)
+                
+            })
+        }
+    }
+    
+    public func logOut(viewController: UIViewController, completionBlock: (error: NSError?) -> Void){
+        AILogInManager.sharedInstance().logOutAlertWithViewController(viewController,  completionBlock: {() in
+            completionBlock(error: nil)
+        })
+    }
+}
+
     // - MARK: -
     // - MARK: Fetch Data
 
@@ -120,33 +154,27 @@ extension SORemoteDataBase{
     }
     
     private func fetchAllDataWithClassName(className: String, completionBlock: (resultBuffer: [AnyObject], error: NSError?) -> Void){
-        SOParseComManager.checkUser { (checkError) -> Void in
-            if let error = checkError{
-                completionBlock(resultBuffer: [], error: error)
+        let query = PFQuery(className: className)
+        query.findObjectsInBackgroundWithBlock {(objects, fetchError) in
+            var resultBuffer: [AnyObject] = []
+            if let anError = fetchError {
+                completionBlock(resultBuffer: resultBuffer, error: anError)
             } else {
-                let query = PFQuery(className: className)
-                query.findObjectsInBackgroundWithBlock {(objects, fetchError) in
-                    var resultBuffer: [AnyObject] = []
-                    if let anError = fetchError {
-                        completionBlock(resultBuffer: resultBuffer, error: anError)
+                if let pfObjects: [PFObject] = objects{
+                    if pfObjects.count > 0{
+                        pfObjects.map({object in
+                            resultBuffer.append(self.newInstanceFactory(object, className: className)!)
+                        })
+                        completionBlock(resultBuffer: resultBuffer, error: nil)
                     } else {
-                        if let pfObjects: [PFObject] = objects{
-                            if pfObjects.count > 0{
-                                pfObjects.map({object in
-                                    resultBuffer.append(self.newInstanceFactory(object, className: className)!)
-                                })
-                                completionBlock(resultBuffer: resultBuffer, error: nil)
+                        self.populateDataBase.populateDefaultData(className, completionBlock: {(populateError: NSError?) -> Void in
+                            
+                            if let anError = populateError{
+                                completionBlock(resultBuffer: resultBuffer, error: anError)
                             } else {
-                                self.populateDataBase.populateDefaultData(className, completionBlock: {(populateError: NSError?) -> Void in
-
-                                    if let anError = populateError{
-                                        completionBlock(resultBuffer: resultBuffer, error: anError)
-                                    } else {
-                                        self.fetchAllDataWithClassName(className, completionBlock: completionBlock)
-                                    }
-                                })
+                                self.fetchAllDataWithClassName(className, completionBlock: completionBlock)
                             }
-                        }
+                        })
                     }
                 }
             }
@@ -197,17 +225,11 @@ extension SORemoteDataBase{
     }
 
     private func saveObject(object: PFObject, completionBlock: (error: NSError?) -> Void){
-        SOParseComManager.checkUser { (checkError) -> Void in
-            if let error = checkError{
-                completionBlock(error: error)
+        object.saveInBackgroundWithBlock {(success: Bool, error: NSError?) -> Void in
+            if (success) {
+                completionBlock(error: nil)
             } else {
-                object.saveInBackgroundWithBlock {(success: Bool, error: NSError?) -> Void in
-                    if (success) {
-                        completionBlock(error: nil)
-                    } else {
-                        completionBlock(error: error)
-                    }
-                }
+                completionBlock(error: error)
             }
         }
     }

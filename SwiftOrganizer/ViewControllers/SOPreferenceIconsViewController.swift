@@ -37,7 +37,7 @@ class SOPreferenceIconsViewController: UIViewController {
         
     }
     
-    private func didSelectRow(aRow: Int){
+    func didSelectRow(aRow: Int){
         let ico: SOIco = self.buffer[aRow] as! SOIco
         let visible: Bool = !ico.visible
         ico.setVisible(visible, completionBlock: {(error: NSError?) in
@@ -53,8 +53,11 @@ class SOPreferenceIconsViewController: UIViewController {
         })
     }
     
-    private func doneButtonWasPressed(){
+    func doneButtonWasPressed(){
         
+        // TODO: Need to implement Mememnto Design Pattern
+        
+        self.navigationController?.popViewControllerAnimated(true)
     }
 }
 

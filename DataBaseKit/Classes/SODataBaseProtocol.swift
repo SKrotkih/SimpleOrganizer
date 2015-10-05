@@ -28,6 +28,10 @@ public protocol SODataBaseProtocol{
     func getRecordIdForTask(task: SOTask?) -> String?
     
     func getObjectForRecordId(recordid: String, entityName: String) -> AnyObject?
+    
+    func currentUserHasLoggedIn() -> Bool
+    func logIn(viewController: UIViewController, completionBlock: (error: NSError?) -> Void)
+    func logOut(viewController: UIViewController, completionBlock: (error: NSError?) -> Void)
 }
 
 public protocol SOConcreteObjectsProtocol: AnyObject{
