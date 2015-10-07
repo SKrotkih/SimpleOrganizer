@@ -7,10 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		256FC6CCB1331B741FF91707 /* Pods_DataBaseKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4A36260F1116405127760BA /* Pods_DataBaseKit.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
-		4240205672659068487B66F5 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A8CDDAD77ECB23A6A0B42F0C /* Pods.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
-		617A5B5DA7B7F2C9E7E1E326 /* Pods_SwiftOrganizer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E951A0642B00ACF8106DB23 /* Pods_SwiftOrganizer.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
-		6AB444685F9971FB89F4283F /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A8CDDAD77ECB23A6A0B42F0C /* Pods.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		256FC6CCB1331B741FF91707 /* Pods_DataBaseKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4A36260F1116405127760BA /* Pods_DataBaseKit.framework */; };
+		4240205672659068487B66F5 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A8CDDAD77ECB23A6A0B42F0C /* Pods.framework */; };
+		617A5B5DA7B7F2C9E7E1E326 /* Pods_SwiftOrganizer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E951A0642B00ACF8106DB23 /* Pods_SwiftOrganizer.framework */; };
+		6AB444685F9971FB89F4283F /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A8CDDAD77ECB23A6A0B42F0C /* Pods.framework */; };
 		7F5DF5481BAD288E00959432 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F5DF5471BAD288E00959432 /* AppDelegate.swift */; };
 		7F5DF54D1BAD288E00959432 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7F5DF54B1BAD288E00959432 /* Main.storyboard */; };
 		7F5DF5521BAD288E00959432 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7F5DF5511BAD288E00959432 /* Assets.xcassets */; };
@@ -156,13 +156,14 @@
 		7F8E16C31BBA71E500FFC16B /* AILogInManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F8E16C11BBA71E500FFC16B /* AILogInManager.m */; settings = {ASSET_TAGS = (); }; };
 		7F8FE1FF1BC4AF9B00180EAD /* LocalUsers.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 7FD8C7BE1BC3F07200E0A8F7 /* LocalUsers.xcdatamodeld */; settings = {ASSET_TAGS = (); }; };
 		7F8FE2001BC4AF9D00180EAD /* LocalUsers.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 7FD8C7BE1BC3F07200E0A8F7 /* LocalUsers.xcdatamodeld */; settings = {ASSET_TAGS = (); }; };
+		7F8FE2031BC530AB00180EAD /* LogIn.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7F8FE2011BC530AB00180EAD /* LogIn.storyboard */; settings = {ASSET_TAGS = (); }; };
+		7F8FE2051BC532E100180EAD /* SOLogInInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F8FE2041BC532E100180EAD /* SOLogInInfoViewController.swift */; settings = {ASSET_TAGS = (); }; };
 		7FD8C7C01BC3F07200E0A8F7 /* LocalUsers.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 7FD8C7BE1BC3F07200E0A8F7 /* LocalUsers.xcdatamodeld */; settings = {ASSET_TAGS = (); }; };
 		7FDF313E1BBA8CBC00AD4127 /* SOUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FDF313D1BBA8CBC00AD4127 /* SOUser.swift */; settings = {ASSET_TAGS = (); }; };
 		7FDF31411BBA949700AD4127 /* Utils.h in Headers */ = {isa = PBXBuildFile; fileRef = 7FDF313F1BBA949700AD4127 /* Utils.h */; settings = {ASSET_TAGS = (); }; };
 		7FDF31421BBA949700AD4127 /* Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 7FDF31401BBA949700AD4127 /* Utils.m */; settings = {ASSET_TAGS = (); }; };
 		7FDF31431BBABA0E00AD4127 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = 7F5DF71E1BAD8B8900959432 /* README.md */; settings = {ASSET_TAGS = (); }; };
 		7FDF31441BBABA4E00AD4127 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 7F5DF71E1BAD8B8900959432 /* README.md */; };
-		9341FA25239FD2A314AF5942 /* (null) in Frameworks */ = {isa = PBXBuildFile; settings = {ATTRIBUTES = (Weak, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -397,6 +398,8 @@
 		7F8E16BB1BB9043A00FFC16B /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		7F8E16C01BBA71E500FFC16B /* AILogInManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AILogInManager.h; sourceTree = "<group>"; };
 		7F8E16C11BBA71E500FFC16B /* AILogInManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AILogInManager.m; sourceTree = "<group>"; };
+		7F8FE2021BC530AB00180EAD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LogIn.storyboard; sourceTree = "<group>"; };
+		7F8FE2041BC532E100180EAD /* SOLogInInfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SOLogInInfoViewController.swift; path = ../DataBaseKit/LogInManager/SOLogInInfoViewController.swift; sourceTree = "<group>"; };
 		7FD8C7BF1BC3F07200E0A8F7 /* LocalUsers.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = LocalUsers.xcdatamodel; sourceTree = "<group>"; };
 		7FDF313D1BBA8CBC00AD4127 /* SOUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SOUser.swift; path = ../Classes/SOUser.swift; sourceTree = "<group>"; };
 		7FDF313F1BBA949700AD4127 /* Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Utils.h; sourceTree = "<group>"; };
@@ -444,7 +447,6 @@
 				7F5DF5D11BAD2FBE00959432 /* AudioToolbox.framework in Frameworks */,
 				7F5DF5CF1BAD2FB300959432 /* MobileCoreServices.framework in Frameworks */,
 				7F5DF5CD1BAD2FA500959432 /* SystemConfiguration.framework in Frameworks */,
-				9341FA25239FD2A314AF5942 /* (null) in Frameworks */,
 				4240205672659068487B66F5 /* Pods.framework in Frameworks */,
 				256FC6CCB1331B741FF91707 /* Pods_DataBaseKit.framework in Frameworks */,
 			);
@@ -545,6 +547,7 @@
 				7F5DF6211BAD669300959432 /* ViewControllers */,
 				7F5DF5F21BAD669300959432 /* Common */,
 				7F5DF6051BAD669300959432 /* iCloud */,
+				7F8FE2061BC533B100180EAD /* LogIn */,
 				7F5DF5471BAD288E00959432 /* AppDelegate.swift */,
 				7F5DF54B1BAD288E00959432 /* Main.storyboard */,
 				7F5DF6971BAD66F100959432 /* LaunchScreen.xib */,
@@ -940,6 +943,15 @@
 			path = LogInManager;
 			sourceTree = "<group>";
 		};
+		7F8FE2061BC533B100180EAD /* LogIn */ = {
+			isa = PBXGroup;
+			children = (
+				7F8FE2041BC532E100180EAD /* SOLogInInfoViewController.swift */,
+				7F8FE2011BC530AB00180EAD /* LogIn.storyboard */,
+			);
+			name = LogIn;
+			sourceTree = "<group>";
+		};
 		7FD8C7BD1BC3DDB300E0A8F7 /* LocalUsersDataBase */ = {
 			isa = PBXGroup;
 			children = (
@@ -1192,6 +1204,7 @@
 				7F5DF65D1BAD669300959432 /* ico12@2x.png in Resources */,
 				7F5DF65C1BAD669300959432 /* ico11@2x.png in Resources */,
 				7F5DF6681BAD669300959432 /* ico6@2x.png in Resources */,
+				7F8FE2031BC530AB00180EAD /* LogIn.storyboard in Resources */,
 				7F5DF66D1BAD669300959432 /* undo@2x.png in Resources */,
 				7F5DF65B1BAD669300959432 /* ico10@2x.png in Resources */,
 				7F5DF6621BAD669300959432 /* ico17@2x.png in Resources */,
@@ -1374,6 +1387,7 @@
 				7F5DF67C1BAD669300959432 /* SOEditTaskFieldBaseViewController.swift in Sources */,
 				7F5DF6791BAD669300959432 /* SOEditDateViewController.swift in Sources */,
 				7F5DF68E1BAD669300959432 /* SOTaskMenuItemActivity.swift in Sources */,
+				7F8FE2051BC532E100180EAD /* SOLogInInfoViewController.swift in Sources */,
 				7F5DF64E1BAD669300959432 /* BaseTableViewCell.swift in Sources */,
 				7F5DF6821BAD669300959432 /* SODocumentsViewController.swift in Sources */,
 				7F5DF6731BAD669300959432 /* SOEditTaskDateCell.swift in Sources */,
@@ -1592,6 +1606,14 @@
 			name = MainInterface.storyboard;
 			sourceTree = "<group>";
 		};
+		7F8FE2011BC530AB00180EAD /* LogIn.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				7F8FE2021BC530AB00180EAD /* Base */,
+			);
+			name = LogIn.storyboard;
+			sourceTree = "<group>";
+		};
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
@@ -1775,6 +1797,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = "";
+				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.skappledev.DataBaseKit;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;

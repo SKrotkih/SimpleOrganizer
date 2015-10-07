@@ -7,8 +7,6 @@ use_frameworks!
 
 link_with 'SwiftOrganizer', 'DataBaseKit'
 
-# Available pods
-
 def available_pods
     pod 'Parse'
     #pod 'ReachabilitySwift', git: 'https://github.com/ashleymills/Reachability.swift'
@@ -22,12 +20,11 @@ target 'DataBaseKit' do
     available_pods
 end
 
+pod 'DateTools'
+
 pod 'FBSDKCoreKit'
 pod 'FBSDKLoginKit'
 pod 'FBSDKShareKit'
-
-pod 'DateTools'
-
 pod 'ParseFacebookUtilsV4'
 pod 'ParseTwitterUtils'
-pod 'ParseUI', :path => '.'
+pod 'ParseUI'

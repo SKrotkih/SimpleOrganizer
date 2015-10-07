@@ -10,7 +10,10 @@
 
 import UIKit
 import Bolts
+import ParseFacebookUtilsV4
+import ParseTwitterUtils
 import Parse
+import ParseUI
 
 let ApplicationId: String = "opRyZz4AOrPBTv2RgKX0s64PNKBS2hT38qeIVQcF"
 let ClientKey: String = "73VaFVVZm2Q8CQp6nYHsSzFcrj2quw7INLtI7KYG"
@@ -28,6 +31,7 @@ public class SOParseComManager: NSObject {
     //--------------------------------------
     
      public class func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+        
         // Enable storing and querying data from Local Datastore.
         // Remove this line if you don't want to use Local Datastore features or want to use cachePolicy.
         Parse.enableLocalDatastore()
@@ -77,6 +81,10 @@ public class SOParseComManager: NSObject {
             application.registerUserNotificationSettings(settings)
             application.registerForRemoteNotifications()
         }
+
+        PFFacebookUtils.initializeFacebookWithApplicationLaunchOptions(launchOptions)
+        
+        PFTwitterUtils.initializeWithConsumerKey("3Q9hMEKqqSg4ie2pibZ2sVJuv", consumerSecret: "IEZ9wv2d1EpXNGFKGp7sAGdxRtyqtPwygyciFZwTHTGhPp4FMj")
         
         return true
     }
@@ -152,30 +160,84 @@ extension SOParseComManager{
         return currentUser != nil
     }
     
-    class func logIn(completionBlock: (error: NSError?) -> Void){
-        
-        let defaults = SOUserDefault.sharedDefaults()
-        var username: String = DefaultUsername
-        var password: String = DefaultUserPassword
-        
-        if let name = defaults.stringForKey(SOUsernameKey)
-        {
-            username = name
-            password = defaults.stringForKey(SOPasswordKey)!
-        }
-        
-        PFUser.logInWithUsernameInBackground(username, password: password){(user: PFUser?, error: NSError?) -> Void in
-            if let currentUser = user {
-                print("Hi, \(currentUser.username!)!")
-                let defaults = SOUserDefault.sharedDefaults()
-                defaults.setObject(username, forKey: SOUsernameKey)
-                defaults.setObject(password, forKey: SOPasswordKey)
-                completionBlock(error: nil)
-            } else {
-                completionBlock(error: error)
-                print("The login failed. \(error?.description)")
+    class func userInfo() -> Dictionary<String, String>? {
+        if let currentUser = PFUser.currentUser(){
+            if let userName: String = currentUser.username{
+                let dict: Dictionary<String, String> = ["name": userName, "photo": ""]
+                return dict
             }
         }
         
+        return nil;
     }
+    
+    class func logIn(viewController: UIViewController, completionBlock: (error: NSError?) -> Void){
+        
+        let logInDelegate = PFLogInDelegate.sharedInstance
+        
+        logInDelegate.completionBlock = completionBlock
+        logInDelegate.viewController = viewController
+        
+        let logInViewController = PFLogInViewController()
+        logInViewController.delegate = logInDelegate
+        logInViewController.fields = [.UsernameAndPassword, .PasswordForgotten, .LogInButton, .Facebook, .Twitter, .SignUpButton, .DismissButton]
+        if let signUpViewController = logInViewController.signUpController {
+            signUpViewController.delegate = logInDelegate
+            signUpViewController.fields = [.UsernameAndPassword, .Email, .Additional, .SignUpButton, .DismissButton]
+        }
+        viewController.navigationController?.pushViewController(logInViewController, animated: true)
+        
+//        let defaults = SOUserDefault.sharedDefaults()
+//        var username: String = DefaultUsername
+//        var password: String = DefaultUserPassword
+//        
+//        if let name = defaults.stringForKey(SOUsernameKey)
+//        {
+//            username = name
+//            password = defaults.stringForKey(SOPasswordKey)!
+//        }
+//        
+//        PFUser.logInWithUsernameInBackground(username, password: password){(user: PFUser?, error: NSError?) -> Void in
+//            if let currentUser = user {
+//                print("Hi, \(currentUser.username!)!")
+//                let defaults = SOUserDefault.sharedDefaults()
+//                defaults.setObject(username, forKey: SOUsernameKey)
+//                defaults.setObject(password, forKey: SOPasswordKey)
+//                completionBlock(error: nil)
+//            } else {
+//                completionBlock(error: error)
+//                print("The login failed. \(error?.description)")
+//            }
+//        }
+        
+    }
+    
+    class func logOut(completionBlock: (error: NSError?) -> Void){
+        PFUser.logOut()
+        completionBlock(error: nil)
+    }
+}
+
+    // - MARK: PFLogInViewControllerDelegate, PFSignUpViewControllerDelegate
+
+public final class PFLogInDelegate: NSObject, PFLogInViewControllerDelegate, PFSignUpViewControllerDelegate {
+
+    var completionBlock: (error: NSError?) -> Void = {(arg) in}
+    var viewController: UIViewController!
+    
+    public class var sharedInstance: PFLogInDelegate {
+        struct SingletonWrapper {
+            static let sharedInstance = PFLogInDelegate()
+        }
+        return SingletonWrapper.sharedInstance;
+    }
+    
+    public func logInViewController(logInController: PFLogInViewController, didLogInUser user: PFUser){
+        self.viewController.navigationController?.popViewControllerAnimated(true)
+    }
+    
+    public func logInViewController(logInController: PFLogInViewController, didFailToLogInWithError error: NSError?){
+        self.completionBlock(error: error)
+    }
+    
 }

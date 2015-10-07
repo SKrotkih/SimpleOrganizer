@@ -36,6 +36,7 @@ class MainMenuViewController : UIViewController {
     var goViewController: UIViewController!
     var aboutViewController: UIViewController!
     var phoneCallViaFaceTimeViewController: UIViewController!
+    var logInInfoViewController: UIViewController!
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -64,6 +65,11 @@ class MainMenuViewController : UIViewController {
         
         let aboutViewController = storyboard.instantiateViewControllerWithIdentifier("SOAboutViewController") as! SOAboutViewController
         self.aboutViewController = UINavigationController(rootViewController: aboutViewController)
+        
+        let logInStoryboard = UIStoryboard(name: "LogIn", bundle: nil)
+        
+        let logInInfoViewController = logInStoryboard.instantiateViewControllerWithIdentifier("logInInfoViewController") as! SOLogInInfoViewController
+        self.logInInfoViewController = UINavigationController(rootViewController: logInInfoViewController)
         
         self.tableView.registerCellClass(BaseTableViewCell.self)
     }
@@ -116,7 +122,7 @@ extension MainMenuViewController: LeftMenuProtocol {
     func changeViewController(menu: LeftMenu) {
         switch menu {
         case .LogIn:
-            self.logInOperation()
+            self.slideMenuController()?.changeMainViewController(self.logInInfoViewController, close: true)
         case .Main:
             self.slideMenuController()?.changeMainViewController(self.mainViewController, close: true)
         case .Preferences:
@@ -131,27 +137,6 @@ extension MainMenuViewController: LeftMenuProtocol {
             self.slideMenuController()?.changeMainViewController(self.settingsViewController, close: true)
         case .About:
             self.slideMenuController()?.changeMainViewController(self.aboutViewController, close: true)
-        }
-    }
-}
-
-// MARK: - Log In
-
-extension MainMenuViewController{
-    func logInOperation(){
-        let userHasBeenConnected: Bool = SODataBaseFactory.sharedInstance.dataBase.currentUserHasLoggedIn()
-        if userHasBeenConnected{
-            SODataBaseFactory.sharedInstance.dataBase.logOut(self, completionBlock: { (error) -> Void in
-                if error == nil{
-                    self.tableView.reloadData()
-                }
-            })
-        } else {
-            SODataBaseFactory.sharedInstance.dataBase.logIn(self, completionBlock: { (error) -> Void in
-                if error == nil{
-                    self.tableView.reloadData()
-                }
-            })
         }
     }
 }

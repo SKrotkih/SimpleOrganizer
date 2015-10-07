@@ -47,6 +47,14 @@ extension SOLocalDataBase{
         return AILogInManager.sharedInstance().isCurrentUserAlreadyLoggedIn()
     }
     
+    public func userInfo() -> Dictionary<String, String>?{
+        if let currentUser = SOLocalUserManager.sharedInstance.currentUser{
+            let dict: Dictionary<String, String> = ["name": currentUser.name, "photo": currentUser.photo_prefix]
+            return dict
+        }
+        return nil
+    }
+    
     public func logIn(viewController: UIViewController, completionBlock: (error: NSError?) -> Void){
         if self.currentUserHasLoggedIn(){
             completionBlock(error: nil)

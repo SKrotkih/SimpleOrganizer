@@ -30,6 +30,7 @@ public protocol SODataBaseProtocol{
     func getObjectForRecordId(recordid: String, entityName: String) -> AnyObject?
     
     func currentUserHasLoggedIn() -> Bool
+    func userInfo() -> Dictionary<String, String>?
     func logIn(viewController: UIViewController, completionBlock: (error: NSError?) -> Void)
     func logOut(viewController: UIViewController, completionBlock: (error: NSError?) -> Void)
 }

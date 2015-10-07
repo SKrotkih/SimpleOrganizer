@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8191" systemVersion="15A284" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
+    </dependencies>
+    <scenes>
+        <!--Log In Info View Controller-->
+        <scene sceneID="P2E-R1-xTX">
+            <objects>
+                <viewController storyboardIdentifier="logInInfoViewController" id="nzL-ar-0e7" customClass="SOLogInInfoViewController" customModule="SwiftOrganizer" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="bmQ-W4-B8P"/>
+                        <viewControllerLayoutGuide type="bottom" id="GjP-wJ-C0d"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="aQs-b9-I74">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="geS-tQ-9lZ">
+                                <rect key="frame" x="232" y="495" width="136" height="30"/>
+                                <animations/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="136" id="7gy-m7-vUK"/>
+                                    <constraint firstAttribute="height" constant="30" id="fkW-OZ-Xw3"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="19"/>
+                                <state key="normal" title="Log Out">
+                                    <color key="titleColor" red="0.0" green="0.0" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="logOutButtonPressed:" destination="nzL-ar-0e7" eventType="touchUpInside" id="cdf-GZ-1Fx"/>
+                                </connections>
+                            </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="fnn-wp-XTm">
+                                <rect key="frame" x="213" y="72" width="175" height="175"/>
+                                <animations/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="175" id="9Fa-0s-E8k"/>
+                                    <constraint firstAttribute="height" constant="175" id="LOW-37-4oZ"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xtB-QM-04n">
+                                <rect key="frame" x="178" y="298" width="244" height="21"/>
+                                <animations/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="244" id="E0Z-Z4-oeJ"/>
+                                    <constraint firstAttribute="height" constant="21" id="Rwc-yK-99a"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Arial-BoldMT" family="Arial" pointSize="17"/>
+                                <color key="textColor" red="0.29803922770000002" green="0.29803922770000002" blue="0.29803922770000002" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <animations/>
+                        <color key="backgroundColor" red="0.60392156862745094" green="0.60392156862745094" blue="0.60392156862745094" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="xtB-QM-04n" firstAttribute="top" secondItem="fnn-wp-XTm" secondAttribute="bottom" constant="51" id="0cJ-Gc-OTG"/>
+                            <constraint firstItem="GjP-wJ-C0d" firstAttribute="top" secondItem="geS-tQ-9lZ" secondAttribute="bottom" constant="75" id="AiT-yh-jVB"/>
+                            <constraint firstItem="geS-tQ-9lZ" firstAttribute="centerX" secondItem="aQs-b9-I74" secondAttribute="centerX" id="Eat-DT-fJp"/>
+                            <constraint firstItem="xtB-QM-04n" firstAttribute="centerX" secondItem="aQs-b9-I74" secondAttribute="centerX" id="IPf-C0-gTF"/>
+                            <constraint firstItem="fnn-wp-XTm" firstAttribute="centerX" secondItem="aQs-b9-I74" secondAttribute="centerX" id="PcL-dg-RK5"/>
+                            <constraint firstItem="fnn-wp-XTm" firstAttribute="top" secondItem="bmQ-W4-B8P" secondAttribute="bottom" constant="52" id="nZz-DM-ffH"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="logOutButton" destination="geS-tQ-9lZ" id="7dd-bn-2kQ"/>
+                        <outlet property="photoImageView" destination="fnn-wp-XTm" id="3p1-Fj-H4D"/>
+                        <outlet property="userNameLabel" destination="xtB-QM-04n" id="TNw-lq-xbW"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="AWm-7u-mXk" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="106" y="374"/>
+        </scene>
+    </scenes>
+</document>

@@ -34,6 +34,21 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>ParseFacebookUtilsV4.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>ParseTwitterUtils.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>ParseUI.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Pods-DataBaseKit.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -52,47 +67,62 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>05C3F20C594D3C5862384050C5FE6D4F</key>
+		<key>44EE7D89AEEE8E4A048D3A41EF41C0AF</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>2F1CAAC570E1CDEF73533097A2CDE8C6</key>
+		<key>4ECC483FB15015791179E5541BFDFF36</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>73FDEF79104B808142AA63C214C71FDC</key>
+		<key>57ADC05E440A960212657DE6DA1FEDD5</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>920E3614F23C0572C1ABB4F51238CE0F</key>
+		<key>5D69761C2CD2A1E5C013537B29CAB4CF</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>A024F2195C612D0A9D85F095DDBFD4EA</key>
+		<key>710A644DBA351C4BED59D9F7DD92EC02</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>BFA1F62A5932E3087EF7FBFD525A6B09</key>
+		<key>94A50FB884552F1E25589DD6EA641782</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>E7E3830CE502386E99522372F7799F1D</key>
+		<key>AFEDA8059B169E4068B6DCC4D2F0B0E9</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>E97E868E96EF80FF008F3C6A46EDEA8D</key>
+		<key>BBDE8D0D28FFC0D80604D3F32AEB5E38</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>FA75C28692CA04C96ACBD7B56E2F17CD</key>
+		<key>BF2769967ABC0126C7A11662C5D8730A</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>C9D4FC636433B837414659AA32997325</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>F5ACF367AE3BD7A7F2AF2D430901DF7B</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>F710EAB41DD6932844C4A82A87A2628F</key>
 		<dict>
 			<key>primary</key>
 			<true/>

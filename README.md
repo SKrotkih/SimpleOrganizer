@@ -35,6 +35,7 @@ Also were implemented the following features:
 - Cocoapods was added for parse framework 
 - Facebook SDK added
 - Log In to loacal database implemented via Facebook 
+- Log In to remote data base implemented by the Parse.com SDK
 
 Were applied the following design patterns:
 - abstract method;
@@ -100,5 +101,6 @@ SwiftOrganizer is available under the MIT license. See the LICENSE file for more
 - 19.09.2015: Fixed parse.com framework double linking. Fixed lots of warnings on runtime.
 - 29.09.2015: Facebook SDK added, registered AppID, login function in Objective-C was implemented. 
 - 02.10.2015: Added the DateTools framework
-- 07.10.2015: Log In to local database is implemented fia Facebook
+- 07.10.2015: Log In to local database is implemented fia Facebook. Database for local user is implemented in a different storage.
+
 

@@ -8,6 +8,7 @@
 
 import UIKit
 import Parse
+import ParseUI
 
 let CategoryClassName = "Category"
 let IcoClassName = "Ico"
@@ -31,7 +32,7 @@ let kCategoryFldName = "name"
 let kIcoFldName = "name"
 let kIcoFldImageName = "imagename"
 
-public class SORemoteDataBase: SODataBaseProtocol {
+public class SORemoteDataBase: NSObject, SODataBaseProtocol {
     private let queue = dispatch_queue_create("remoteDataBaseRequestsQ", DISPATCH_QUEUE_CONCURRENT);
     private var nextDataBase: SODataBaseProtocol?
     let populateDataBase: SOPopulateRemoteDataBase
@@ -65,14 +66,19 @@ extension SORemoteDataBase{
     public func currentUserHasLoggedIn() -> Bool{
         return SOParseComManager.currentUserHasLoggedIn()
     }
+
+    public func userInfo() -> Dictionary<String, String>?{
+        return SOParseComManager.userInfo()
+    }
     
     public func logIn(viewController: UIViewController, completionBlock: (error: NSError?) -> Void){
-        SOParseComManager.logIn(completionBlock)
+        SOParseComManager.logIn(viewController, completionBlock: completionBlock)
     }
     
     public func logOut(viewController: UIViewController, completionBlock: (error: NSError?) -> Void){
-        completionBlock(error: nil)
+        SOParseComManager.logOut(completionBlock)
     }
+
 }
 
     // - MARK: -
