@@ -63,31 +63,15 @@ public class SORemoteDataBase: SODataBaseProtocol {
 extension SORemoteDataBase{
 
     public func currentUserHasLoggedIn() -> Bool{
-        return AILogInManager.sharedInstance().isCurrentUserLoggedInFacebook()
+        return SOParseComManager.currentUserHasLoggedIn()
     }
     
     public func logIn(viewController: UIViewController, completionBlock: (error: NSError?) -> Void){
-        if self.currentUserHasLoggedIn(){
-            completionBlock(error: nil)
-        } else {
-
-            AILogInManager.sharedInstance().logInWithFacebookWithViewControoler(viewController, completionBlock: {(loginState: AILoginState) in
-                if loginState != OperationIsRanSuccessfully{
-                    return
-                }
-
-                completionBlock(error: nil)
-                
-                //SOParseComManager.logIn(completionBlock)
-                
-            })
-        }
+        SOParseComManager.logIn(completionBlock)
     }
     
     public func logOut(viewController: UIViewController, completionBlock: (error: NSError?) -> Void){
-        AILogInManager.sharedInstance().logOutAlertWithViewController(viewController,  completionBlock: {() in
-            completionBlock(error: nil)
-        })
+        completionBlock(error: nil)
     }
 }
 

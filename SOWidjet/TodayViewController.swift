@@ -55,16 +55,14 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     }
     
     func performFetch() -> NCUpdateResult {
-        if SODataBaseFactory.sharedInstance.dataBase.currentUserHasLoggedIn(){
-            SOFetchingData.sharedInstance.allTasks{(allCurrentTasks: [SOTask], fetchError: NSError?) in
-                if let error = fetchError{
-                    print("Error reading tasks data \(error.description)")
-                    self.tasks.removeAll(keepCapacity: true)
-                } else {
-                    self.tasks = allCurrentTasks
-                    self.tableView.reloadData()
-                    self.resetContentSize()
-                }
+        SOFetchingData.sharedInstance.allTasks{(allCurrentTasks: [SOTask], fetchError: NSError?) in
+            if let error = fetchError{
+                print("Error reading tasks data \(error.description)")
+                self.tasks.removeAll(keepCapacity: true)
+            } else {
+                self.tasks = allCurrentTasks
+                self.tableView.reloadData()
+                self.resetContentSize()
             }
         }
         

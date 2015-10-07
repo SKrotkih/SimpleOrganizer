@@ -27,3 +27,7 @@ pod 'FBSDKLoginKit'
 pod 'FBSDKShareKit'
 
 pod 'DateTools'
+
+pod 'ParseFacebookUtilsV4'
+pod 'ParseTwitterUtils'
+pod 'ParseUI', :path => '.'

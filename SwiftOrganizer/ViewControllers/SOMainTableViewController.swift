@@ -31,17 +31,15 @@ class SOMainTableViewController: NSObject{
     }
 
     func reloadData(){
-        if SODataBaseFactory.sharedInstance.dataBase.currentUserHasLoggedIn(){
-            SOFetchingData.sharedInstance.allTasks{(allCurrentTasks: [SOTask], fetchError: NSError?) in
-                if let error = fetchError{
-                    showAlertWithTitle("Failed to fetch data!".localized, message: error.description)
-                } else {
-                    dispatch_async(dispatch_get_main_queue(), {
-                        self.tasks = allCurrentTasks
-                        self.addTasksToReminder(self.tasks)
-                        self.tableView.reloadData()
-                    })
-                }
+        SOFetchingData.sharedInstance.allTasks{(allCurrentTasks: [SOTask], fetchError: NSError?) in
+            if let error = fetchError{
+                showAlertWithTitle("Failed to fetch data!".localized, message: error.description)
+            } else {
+                dispatch_async(dispatch_get_main_queue(), {
+                    self.tasks = allCurrentTasks
+                    self.addTasksToReminder(self.tasks)
+                    self.tableView.reloadData()
+                })
             }
         }
     }

@@ -23,9 +23,9 @@ typedef enum : NSUInteger {
 
 + (AILogInManager*) sharedInstance;
 
-- (BOOL) isCurrentUserLoggedInFacebook;
+- (BOOL) isCurrentUserAlreadyLoggedIn;
 
-- (void) logInWithFacebookWithViewControoler: (UIViewController*) aViewController
+- (void) logInViaFacebookWithViewControoler: (UIViewController*) aViewController
                              completionBlock: (void(^)(AILoginState aLoginState)) aCompletionBlock;
 
 - (void) logOutAlertWithViewController: (UIViewController*) aViewController

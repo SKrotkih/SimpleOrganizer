@@ -70,6 +70,7 @@ class MainMenuViewController : UIViewController {
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
+        self.tableView.reloadData()
     }
     
 }
@@ -104,11 +105,7 @@ extension MainMenuViewController: UITableViewDelegate, UITableViewDataSource{
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         if let menuItem = LeftMenu(rawValue: indexPath.item) {
-            if menuItem == .LogIn{
-                self.logInOperation()
-            } else {
-                self.changeViewController(menuItem)
-            }
+            self.changeViewController(menuItem)
         }
     }
 }
@@ -119,7 +116,7 @@ extension MainMenuViewController: LeftMenuProtocol {
     func changeViewController(menu: LeftMenu) {
         switch menu {
         case .LogIn:
-            break
+            self.logInOperation()
         case .Main:
             self.slideMenuController()?.changeMainViewController(self.mainViewController, close: true)
         case .Preferences:
@@ -142,8 +139,8 @@ extension MainMenuViewController: LeftMenuProtocol {
 
 extension MainMenuViewController{
     func logInOperation(){
-        let userHasConnected: Bool = SODataBaseFactory.sharedInstance.dataBase.currentUserHasLoggedIn()
-        if userHasConnected{
+        let userHasBeenConnected: Bool = SODataBaseFactory.sharedInstance.dataBase.currentUserHasLoggedIn()
+        if userHasBeenConnected{
             SODataBaseFactory.sharedInstance.dataBase.logOut(self, completionBlock: { (error) -> Void in
                 if error == nil{
                     self.tableView.reloadData()

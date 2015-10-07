@@ -14,6 +14,7 @@ let MaxIconsCount = 6
 public class SOTask: NSObject{
 
     public var databaseObject: AnyObject?
+    public var userid: String = ""
     public var title: String = ""
     public var category: String = ""
     public var icons: [String] = [String](count: MaxIconsCount, repeatedValue: "")
@@ -72,6 +73,7 @@ extension SOTask: SOConcreteObjectsProtocol{
 
     public func copyToCoreDataObject(object: AnyObject){
         let theObject = object as! Task
+        theObject.userid = self.userid
         theObject.title = self.title
         theObject.category = self.category
         let icons = self.icons
@@ -91,6 +93,7 @@ extension SOTask: SOConcreteObjectsProtocol{
         let theObject = object as! Task
 
         self.databaseObject = theObject
+        self.userid = theObject.userid
         self.title = theObject.title
         self.category = theObject.category
         self.date = theObject.date
@@ -146,6 +149,7 @@ extension SOTask{
 
     public func clearTask(){
         self.databaseObject = nil
+        self.userid = ""
         self.title = ""
         self.category = ""
         self.icons = [String](count: MaxIconsCount, repeatedValue: "")
@@ -154,6 +158,7 @@ extension SOTask{
     
     public func cloneTask(task: SOTask){
         self.databaseObject = task.databaseObject
+        self.userid = task.userid
         self.title = task.title
         self.category = task.category
         self.icons = task.icons
@@ -164,6 +169,7 @@ extension SOTask{
         if let anotherTask: SOTask = object as? SOTask{
             var isEqual: Bool = true
             isEqual = isEqual && SODataBaseFactory.sharedInstance.dataBase.areObjectsEqual(self.databaseObject, object2: anotherTask.databaseObject)
+            isEqual = isEqual && self.userid == anotherTask.userid
             isEqual = isEqual && self.title == anotherTask.title
             isEqual = isEqual && self.category == anotherTask.category
             

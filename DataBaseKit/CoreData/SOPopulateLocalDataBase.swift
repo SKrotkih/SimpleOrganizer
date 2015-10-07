@@ -13,7 +13,7 @@ public class SOPopulateLocalDataBase {
     private var coreData: SOCoreDataBase
     
     init(){
-        self.coreData = SOCoreDataBase()
+        self.coreData = SOCoreDataBase(dataBaseName: "SwiftOrganizer")
     }
     
     public func populateTasks(){

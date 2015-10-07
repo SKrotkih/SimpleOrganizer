@@ -148,10 +148,7 @@ extension SOParseComManager{
 
 extension SOParseComManager{
     class func currentUserHasLoggedIn() -> Bool{
-
-        
         let currentUser = PFUser.currentUser()
-
         return currentUser != nil
     }
     

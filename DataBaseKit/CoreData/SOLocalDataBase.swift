@@ -18,7 +18,7 @@ public class SOLocalDataBase: SODataBaseProtocol {
     
     required public init(nextDataBase: SODataBaseProtocol?){
         self.nextDataBase = nextDataBase
-        self.coreData = SOCoreDataBase()
+        self.coreData = SOCoreDataBase(dataBaseName: "SwiftOrganizer")
         self.populateDataBase = SOPopulateLocalDataBase()
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "applicationWillTerminate:", name: UIApplicationWillTerminateNotification,  object: nil)
     }
@@ -44,15 +44,31 @@ public class SOLocalDataBase: SODataBaseProtocol {
 
 extension SOLocalDataBase{
     public func currentUserHasLoggedIn() -> Bool{
-        return true;
+        return AILogInManager.sharedInstance().isCurrentUserAlreadyLoggedIn()
     }
-
+    
     public func logIn(viewController: UIViewController, completionBlock: (error: NSError?) -> Void){
-        completionBlock(error: nil)
+        if self.currentUserHasLoggedIn(){
+            completionBlock(error: nil)
+        } else {
+            AILogInManager.sharedInstance().logInViaFacebookWithViewControoler(viewController, completionBlock: {(loginState: AILoginState) in
+                if loginState != OperationIsRanSuccessfully{
+                    var dict = [String: AnyObject]()
+                    dict[NSLocalizedDescriptionKey] = "Failed to Log In via Facebook".localized
+                    dict[NSLocalizedFailureReasonErrorKey] = "Failed to Log In via Facebook".localized
+                    let error2 = NSError(domain: DataBaseErrorDomain, code: 9999, userInfo: dict)
+                    
+                    completionBlock(error: error2)
+                }
+                completionBlock(error: nil)
+            })
+        }
     }
-
+    
     public func logOut(viewController: UIViewController, completionBlock: (error: NSError?) -> Void){
-        completionBlock(error: nil)
+        AILogInManager.sharedInstance().logOutAlertWithViewController(viewController,  completionBlock: {() in
+            completionBlock(error: nil)
+        })
     }
 }
 
@@ -138,13 +154,28 @@ extension SOLocalDataBase{
     
     // MARK: - Tasks
     public func allTasks(completionBlock: (resultBuffer: [SOTask], error: NSError?) -> Void) {
+        let currentUser: SOUser? = SOLocalUserManager.sharedInstance.currentUser
+        
+        if currentUser ==  nil{
+            completionBlock(resultBuffer: [], error: nil)
+            return
+        }
+
         let backgroundContext = NSManagedObjectContext(concurrencyType: NSManagedObjectContextConcurrencyType.PrivateQueueConcurrencyType)
         backgroundContext.persistentStoreCoordinator = self.coreData.persistentStoreCoordinator
         
         backgroundContext.performBlock{[weak self] in
             
             func fetchAllTasks() -> Bool{
+                var userId: String?
+                if let curreentUser = SOLocalUserManager.sharedInstance.currentUser{
+                    userId = curreentUser.userid
+                }
                 let fetchRequest = NSFetchRequest(entityName: TaskEntityName)
+                if userId != nil{
+                    let predicate = NSPredicate(format: "userid == \(userId!)", "")
+                    fetchRequest.predicate = predicate
+                }
                 let tasks = (try! self!.coreData.managedObjectContext!.executeFetchRequest(fetchRequest)) as! [Task]
                 
                 if tasks.count > 0 {
@@ -171,7 +202,6 @@ extension SOLocalDataBase{
                                             iconsSelected = iconsSelected || ico.selected
                                         }
                                     }
-                                    
                                     if categorySelected && iconsSelected{
                                         let sotask = self!.newTask(task)
                                         _allTasks.append(sotask)
@@ -305,16 +335,23 @@ extension SOLocalDataBase{
     
     public func saveTask(task: SOTask, completionBlock: (error: NSError?) -> Void){
         dispatch_sync(self.queue, {() in
+            var userId: String = "777"
+            if let curreentUser = SOLocalUserManager.sharedInstance.currentUser{
+                userId = curreentUser.userid
+            }
+            task.userid = userId
+            
             let taskObject: Task? = task.databaseObject as? Task
             
             if let object = taskObject{
                 task.copyToCoreDataObject(object)
             }
             else{
-                let object = self.coreData.newManagedObject("Task") as! Task
+                let object = self.coreData.newManagedObject(TaskEntityName) as! Task
                 task.databaseObject = object
                 task.copyToCoreDataObject(object)
             }
+            
             self.coreData.saveContext()
         })
         

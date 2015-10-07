@@ -18,7 +18,6 @@
 
 @implementation AILogInManager
 {
-    BOOL _facebookIsLoggedIn;
     UIActionSheet* _logOutSheet;
 }
 
@@ -45,14 +44,12 @@
 
 #pragma mark - Log In by Facebook
 
-- (BOOL) isCurrentUserLoggedInFacebook
+- (BOOL) isCurrentUserAlreadyLoggedIn
 {
-    FBSDKAccessToken* currentAccessToken = [FBSDKAccessToken currentAccessToken];
-    
-    return currentAccessToken != nil;
+    return SOLocalUserManager.sharedInstance.currentUser != nil;
 }
 
-- (void) logInWithFacebookWithViewControoler: (UIViewController*) aViewController
+- (void) logInViaFacebookWithViewControoler: (UIViewController*) aViewController
                              completionBlock: (void(^)(AILoginState aLoginState)) aCompletionBlock
 {
 
@@ -85,7 +82,7 @@
          }
          else
          {
-             [self facebookUserInfoWithCompletionBlock: ^(NSError* anError, NSDictionary* anUser){
+             [self facebookUserInfoWithCompletionBlock: ^(NSError* anError, NSDictionary* anUserDict){
                  
                  if (anError)
                  {
@@ -99,23 +96,10 @@
                      
                      return;
                  }
-
-                 _facebookIsLoggedIn = YES;
-
-                 SOUser* user = [[SOUser alloc] initWithDict: anUser];
-                 user.isItCurrentUser = YES;
-                 
-                 NSString* userName = user.name;
-
-                 NSString* message = [NSString stringWithFormat: @"Welcome, %@", userName];
-                 UIActionSheet* sheet = [[UIActionSheet alloc] initWithTitle: message
-                                                                    delegate: self
-                                                           cancelButtonTitle: NSLocalizedString(@"OK", nil)
-                                                      destructiveButtonTitle: nil
-                                                           otherButtonTitles: nil, nil];
-                 [sheet showInView: aViewController.view];
-
-                 aCompletionBlock(OperationIsRanSuccessfully);
+                 [SOLocalUserManager.sharedInstance setUpLoggedInUserData: anUserDict];
+                 dispatch_async(dispatch_get_main_queue(), ^{
+                     aCompletionBlock(OperationIsRanSuccessfully);
+                 });
              }];
          }
      }];
@@ -155,31 +139,23 @@
 
 - (void) logOutWithSuccessBlock: (void(^)()) aCompletionBlock
 {
-    SOUser* currentUser = [SOUser currentUser];
+    SOUser* currentUser = SOLocalUserManager.sharedInstance.currentUser;
     
     if (!currentUser)
     {
         return;
     }
-    
     currentUser.isItCurrentUser = NO;
-    
-    if (_facebookIsLoggedIn)
-    {
-        FBSDKLoginManager* login = [[FBSDKLoginManager alloc] init];
-        [login logOut];
-        
-        _facebookIsLoggedIn = NO;
-    }
-    
+    SOLocalUserManager.sharedInstance.currentUser = currentUser;
+    FBSDKLoginManager* login = [[FBSDKLoginManager alloc] init];
+    [login logOut];
     aCompletionBlock();
-    
 }
 
 - (void) logOutAlertWithViewController: (UIViewController*) aViewController
                        completionBlock: (void(^)()) aCompletionBlock
 {
-    SOUser* currentUser = [SOUser currentUser];
+    SOUser* currentUser = SOLocalUserManager.sharedInstance.currentUser;
     
     if (currentUser)
     {

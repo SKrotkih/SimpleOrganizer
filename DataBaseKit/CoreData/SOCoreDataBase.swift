@@ -9,7 +9,6 @@
 import UIKit
 import CoreData
 
-let DatabaseName = "SwiftOrganizer"
 let DataBaseErrorDomain = "SwiftOrganizerErrorDomain"
 
 protocol SOCoreDataProtocol{
@@ -24,10 +23,15 @@ protocol SOCoreDataProtocol{
 }
 
 public class SOCoreDataBase: SOCoreDataProtocol {
+    let databaseName: String
+
+    required public init(dataBaseName: String){
+        databaseName = dataBaseName
+    }
     
     private lazy var managedObjectModel: NSManagedObjectModel = {
         // The managed object model for the application. This property is not optional. It is a fatal error for the application not to be able to find and load its model.
-        let modelURL = NSBundle.mainBundle().URLForResource(DatabaseName, withExtension: "momd")!
+        let modelURL = NSBundle.mainBundle().URLForResource(self.databaseName, withExtension: "momd")!
         return NSManagedObjectModel(contentsOfURL: modelURL)!
         }()
     
@@ -49,7 +53,7 @@ public class SOCoreDataBase: SOCoreDataProtocol {
         
         var coordinator: NSPersistentStoreCoordinator? = NSPersistentStoreCoordinator(managedObjectModel: self.managedObjectModel)
         
-        if let url = persistentStoreDirectory?.URLByAppendingPathComponent("\(DatabaseName).sqlite"){
+        if let url = persistentStoreDirectory?.URLByAppendingPathComponent("\(self.databaseName).sqlite"){
             var error: NSError? = nil
             do {
                 try coordinator!.addPersistentStoreWithType(NSSQLiteStoreType, configuration: nil, URL: url, options: options)
@@ -91,7 +95,6 @@ public class SOCoreDataBase: SOCoreDataProtocol {
         let urls = NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask)
         return urls[urls.count-1] 
         }()
-
     
     private func subscribeToChangeStoreCoordinator(coordinator: NSPersistentStoreCoordinator){
         
@@ -132,7 +135,6 @@ public class SOCoreDataBase: SOCoreDataProtocol {
     
 }
 
-// MARK: -
 // MARK: - Update Data
 
 extension SOCoreDataBase{
@@ -168,7 +170,7 @@ extension SOCoreDataBase{
 }
 
 
-//- MARK: Other local functions
+// MARK: - Other local functions
 
 extension SOCoreDataBase{
     public func reportAnyErrorWeGot(error: NSError?){

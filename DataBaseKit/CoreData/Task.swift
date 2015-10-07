@@ -11,7 +11,7 @@ import CoreData
 
 @objc(Task)
 class Task: NSManagedObject {
-
+    @NSManaged var userid: String
     @NSManaged var category: String
     @NSManaged var ico1: String
     @NSManaged var ico2: String

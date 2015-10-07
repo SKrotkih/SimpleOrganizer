@@ -154,6 +154,9 @@
 		7F8E16BD1BB9043A00FFC16B /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F8E16BB1BB9043A00FFC16B /* User.swift */; settings = {ASSET_TAGS = (); }; };
 		7F8E16C21BBA71E500FFC16B /* AILogInManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 7F8E16C01BBA71E500FFC16B /* AILogInManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		7F8E16C31BBA71E500FFC16B /* AILogInManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F8E16C11BBA71E500FFC16B /* AILogInManager.m */; settings = {ASSET_TAGS = (); }; };
+		7F8FE1FF1BC4AF9B00180EAD /* LocalUsers.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 7FD8C7BE1BC3F07200E0A8F7 /* LocalUsers.xcdatamodeld */; settings = {ASSET_TAGS = (); }; };
+		7F8FE2001BC4AF9D00180EAD /* LocalUsers.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 7FD8C7BE1BC3F07200E0A8F7 /* LocalUsers.xcdatamodeld */; settings = {ASSET_TAGS = (); }; };
+		7FD8C7C01BC3F07200E0A8F7 /* LocalUsers.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 7FD8C7BE1BC3F07200E0A8F7 /* LocalUsers.xcdatamodeld */; settings = {ASSET_TAGS = (); }; };
 		7FDF313E1BBA8CBC00AD4127 /* SOUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FDF313D1BBA8CBC00AD4127 /* SOUser.swift */; settings = {ASSET_TAGS = (); }; };
 		7FDF31411BBA949700AD4127 /* Utils.h in Headers */ = {isa = PBXBuildFile; fileRef = 7FDF313F1BBA949700AD4127 /* Utils.h */; settings = {ASSET_TAGS = (); }; };
 		7FDF31421BBA949700AD4127 /* Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 7FDF31401BBA949700AD4127 /* Utils.m */; settings = {ASSET_TAGS = (); }; };
@@ -394,7 +397,8 @@
 		7F8E16BB1BB9043A00FFC16B /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		7F8E16C01BBA71E500FFC16B /* AILogInManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AILogInManager.h; sourceTree = "<group>"; };
 		7F8E16C11BBA71E500FFC16B /* AILogInManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AILogInManager.m; sourceTree = "<group>"; };
-		7FDF313D1BBA8CBC00AD4127 /* SOUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SOUser.swift; sourceTree = "<group>"; };
+		7FD8C7BF1BC3F07200E0A8F7 /* LocalUsers.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = LocalUsers.xcdatamodel; sourceTree = "<group>"; };
+		7FDF313D1BBA8CBC00AD4127 /* SOUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SOUser.swift; path = ../Classes/SOUser.swift; sourceTree = "<group>"; };
 		7FDF313F1BBA949700AD4127 /* Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Utils.h; sourceTree = "<group>"; };
 		7FDF31401BBA949700AD4127 /* Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Utils.m; sourceTree = "<group>"; };
 		9E951A0642B00ACF8106DB23 /* Pods_SwiftOrganizer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SwiftOrganizer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -582,7 +586,8 @@
 				7F5DF5C81BAD2E1600959432 /* Constants.swift */,
 				7F8E16BF1BBA71E500FFC16B /* LogInManager */,
 				7F5DF5AE1BAD2CF300959432 /* ObserverManager */,
-				7F5DF5A51BAD2CF300959432 /* CoreData */,
+				7FD8C7BD1BC3DDB300E0A8F7 /* LocalUsersDataBase */,
+				7F5DF5A51BAD2CF300959432 /* SwiftOrganizerCoreDataBase */,
 				7F5DF5B01BAD2CF300959432 /* Parse.com */,
 				7F5DF59B1BAD2CF300959432 /* Classes */,
 				7F5DF5E71BAD33AD00959432 /* Objective-C */,
@@ -610,7 +615,6 @@
 				7F5DF59F1BAD2CF300959432 /* SODataBaseProtocol.swift */,
 				7F5DF5A01BAD2CF300959432 /* SOFetchingData.swift */,
 				7F5DF5A21BAD2CF300959432 /* SOTask.swift */,
-				7FDF313D1BBA8CBC00AD4127 /* SOUser.swift */,
 				7F5DF59D1BAD2CF300959432 /* SOCategory.swift */,
 				7F5DF5A11BAD2CF300959432 /* SOIco.swift */,
 				7F5DF59C1BAD2CF300959432 /* SOCatalog.swift */,
@@ -618,11 +622,9 @@
 			path = Classes;
 			sourceTree = "<group>";
 		};
-		7F5DF5A51BAD2CF300959432 /* CoreData */ = {
+		7F5DF5A51BAD2CF300959432 /* SwiftOrganizerCoreDataBase */ = {
 			isa = PBXGroup;
 			children = (
-				7F8E16BA1BB9043A00FFC16B /* User+CoreDataProperties.swift */,
-				7F8E16BB1BB9043A00FFC16B /* User.swift */,
 				7F4882391BADB64C00D4D45B /* readme.txt */,
 				7F5DF5AC1BAD2CF300959432 /* TaskCategory.swift */,
 				7F5DF5AD1BAD2CF300959432 /* TaskIco.swift */,
@@ -632,6 +634,7 @@
 				7F5DF5A81BAD2CF300959432 /* SOPopulateLocalDataBase.swift */,
 				7F5DF5A91BAD2CF300959432 /* SwiftOrganizer.xcdatamodeld */,
 			);
+			name = SwiftOrganizerCoreDataBase;
 			path = CoreData;
 			sourceTree = "<group>";
 		};
@@ -935,6 +938,18 @@
 				7F8E16C11BBA71E500FFC16B /* AILogInManager.m */,
 			);
 			path = LogInManager;
+			sourceTree = "<group>";
+		};
+		7FD8C7BD1BC3DDB300E0A8F7 /* LocalUsersDataBase */ = {
+			isa = PBXGroup;
+			children = (
+				7F8E16BA1BB9043A00FFC16B /* User+CoreDataProperties.swift */,
+				7F8E16BB1BB9043A00FFC16B /* User.swift */,
+				7FDF313D1BBA8CBC00AD4127 /* SOUser.swift */,
+				7FD8C7BE1BC3F07200E0A8F7 /* LocalUsers.xcdatamodeld */,
+			);
+			name = LocalUsersDataBase;
+			path = CoreData;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1355,6 +1370,7 @@
 				7F5DF6591BAD669300959432 /* SOiCloudManager.swift in Sources */,
 				7F5DF67E1BAD669300959432 /* RightViewController.swift in Sources */,
 				7F5DF67B1BAD669300959432 /* SOEditIconsViewController.swift in Sources */,
+				7F8FE1FF1BC4AF9B00180EAD /* LocalUsers.xcdatamodeld in Sources */,
 				7F5DF67C1BAD669300959432 /* SOEditTaskFieldBaseViewController.swift in Sources */,
 				7F5DF6791BAD669300959432 /* SOEditDateViewController.swift in Sources */,
 				7F5DF68E1BAD669300959432 /* SOTaskMenuItemActivity.swift in Sources */,
@@ -1431,6 +1447,7 @@
 				7F5DF5B61BAD2CF300959432 /* SODataBaseFactory.swift in Sources */,
 				7F5DF5C61BAD2CF300959432 /* SOPopulateRemoteDataBase.swift in Sources */,
 				7F5DF5E21BAD32CF00959432 /* Reachability.swift in Sources */,
+				7FD8C7C01BC3F07200E0A8F7 /* LocalUsers.xcdatamodeld in Sources */,
 				7F5DF5B71BAD2CF300959432 /* SODataBaseProtocol.swift in Sources */,
 				7F5DF5B81BAD2CF300959432 /* SOFetchingData.swift in Sources */,
 				7F5DF5C41BAD2CF300959432 /* SOObserversManager.swift in Sources */,
@@ -1472,6 +1489,7 @@
 				7F5DF7051BAD851200959432 /* TodayViewController.swift in Sources */,
 				7F5DF71D1BAD89F700959432 /* SwiftOrganizer.xcdatamodeld in Sources */,
 				7F5DF7131BAD857B00959432 /* SOWidgetTableViewCell.swift in Sources */,
+				7F8FE2001BC4AF9D00180EAD /* LocalUsers.xcdatamodeld in Sources */,
 				7F5DF7151BAD859F00959432 /* StringExtension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1951,6 +1969,17 @@
 			);
 			currentVersion = 7F5DF5AA1BAD2CF300959432 /* SwiftOrganizer.xcdatamodel */;
 			path = SwiftOrganizer.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+		7FD8C7BE1BC3F07200E0A8F7 /* LocalUsers.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				7FD8C7BF1BC3F07200E0A8F7 /* LocalUsers.xcdatamodel */,
+			);
+			currentVersion = 7FD8C7BF1BC3F07200E0A8F7 /* LocalUsers.xcdatamodel */;
+			name = LocalUsers.xcdatamodeld;
+			path = LocalUsersDataBase/LocalUsers.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};
