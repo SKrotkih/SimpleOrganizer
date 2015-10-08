@@ -47,24 +47,50 @@ class SOLogInInfoViewController: UIViewController {
     }
     
     private func fillContent(){
+        self.userNameLabel.hidden = true
+        self.photoImageView.hidden = true
         let userHasBeenConnected: Bool = SODataBaseFactory.sharedInstance.dataBase.currentUserHasLoggedIn()
         if userHasBeenConnected{
             logOutButton.setTitle("Log Out", forState: .Normal)
-            
             if let dict = SODataBaseFactory.sharedInstance.dataBase.userInfo(){
                 self.userNameLabel.text = dict["name"]
                 self.userNameLabel.hidden = false
-            } else {
-                self.userNameLabel.hidden = true
+                if let photoURLstr: String = dict["photo"]{
+                    if photoURLstr.compare("") != .OrderedSame{
+                        if let photoURL: NSURL = NSURL(string: photoURLstr){
+                            self.downloadImage(photoURL) {(data: NSData?) in
+                                self.photoImageView.image = UIImage(data: data!)
+                                self.photoImageView.hidden = false
+                            }
+                        }
+                    }
+                }
             }
         } else {
             logOutButton.setTitle("Log In", forState: .Normal)
-            self.userNameLabel.hidden = true
         }
     }
     
 }
 
+// MARK: Download Image
+
+extension SOLogInInfoViewController{
+
+    func getDataFromUrl(url:NSURL, completion: ((data: NSData?) -> Void)) {
+        NSURLSession.sharedSession().dataTaskWithURL(url) { (data, response, error) in
+            completion(data: data)
+            }.resume()
+    }
+    
+    func downloadImage(url: NSURL, completionBlock: (data: NSData?) -> Void){
+        getDataFromUrl(url) { data in
+            dispatch_async(dispatch_get_main_queue()) {
+                completionBlock(data: data)
+            }
+        }
+    }
+}
 
 // MARK: Alert View Controller
 

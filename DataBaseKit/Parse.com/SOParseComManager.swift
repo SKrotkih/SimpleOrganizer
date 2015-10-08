@@ -15,15 +15,6 @@ import ParseTwitterUtils
 import Parse
 import ParseUI
 
-let ApplicationId: String = "opRyZz4AOrPBTv2RgKX0s64PNKBS2hT38qeIVQcF"
-let ClientKey: String = "73VaFVVZm2Q8CQp6nYHsSzFcrj2quw7INLtI7KYG"
-
-let DefaultUsername = "organizer"
-let DefaultUserPassword = "1234"
-
-let SOUsernameKey = "UsernameKey"
-let SOPasswordKey = "PasswordKey"
-
 public class SOParseComManager: NSObject {
     
     //--------------------------------------
@@ -41,7 +32,7 @@ public class SOParseComManager: NSObject {
         // ParseCrashReporting.enable()
         //
         
-        Parse.setApplicationId(ApplicationId, clientKey: ClientKey)
+        Parse.setApplicationId(ParseDataKeys.ApplicationId, clientKey: ParseDataKeys.ClientKey)
         
         //
         // If you are using Facebook, uncomment and add your FacebookAppID to your bundle's plist as
@@ -84,7 +75,7 @@ public class SOParseComManager: NSObject {
 
         PFFacebookUtils.initializeFacebookWithApplicationLaunchOptions(launchOptions)
         
-        PFTwitterUtils.initializeWithConsumerKey("3Q9hMEKqqSg4ie2pibZ2sVJuv", consumerSecret: "IEZ9wv2d1EpXNGFKGp7sAGdxRtyqtPwygyciFZwTHTGhPp4FMj")
+        PFTwitterUtils.initializeWithConsumerKey(TwitterDataKeys.ConsumerKey, consumerSecret: TwitterDataKeys.ConsumerSecret)
         
         return true
     }
@@ -186,30 +177,6 @@ extension SOParseComManager{
             signUpViewController.fields = [.UsernameAndPassword, .Email, .Additional, .SignUpButton, .DismissButton]
         }
         viewController.navigationController?.pushViewController(logInViewController, animated: true)
-        
-//        let defaults = SOUserDefault.sharedDefaults()
-//        var username: String = DefaultUsername
-//        var password: String = DefaultUserPassword
-//        
-//        if let name = defaults.stringForKey(SOUsernameKey)
-//        {
-//            username = name
-//            password = defaults.stringForKey(SOPasswordKey)!
-//        }
-//        
-//        PFUser.logInWithUsernameInBackground(username, password: password){(user: PFUser?, error: NSError?) -> Void in
-//            if let currentUser = user {
-//                print("Hi, \(currentUser.username!)!")
-//                let defaults = SOUserDefault.sharedDefaults()
-//                defaults.setObject(username, forKey: SOUsernameKey)
-//                defaults.setObject(password, forKey: SOPasswordKey)
-//                completionBlock(error: nil)
-//            } else {
-//                completionBlock(error: error)
-//                print("The login failed. \(error?.description)")
-//            }
-//        }
-        
     }
     
     class func logOut(completionBlock: (error: NSError?) -> Void){
