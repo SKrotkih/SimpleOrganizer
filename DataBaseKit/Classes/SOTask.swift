@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import Parse
 
 let MaxIconsCount = 6
 
@@ -19,6 +18,25 @@ public class SOTask: NSObject{
     public var category: String = ""
     public var icons: [String] = [String](count: MaxIconsCount, repeatedValue: "")
     public var date: NSDate?
+
+    convenience init(object: AnyObject?, userid: String?, title: String, category: String, date: NSDate?, icons: [String]) {
+        self.init()
+        
+        self.databaseObject = object
+        self.userid = ""
+        if let theUserid = userid{
+            self.userid = theUserid
+        }
+        self.title = title
+        self.category = category
+        self.date = date
+        self.icons[0] = icons[0]
+        self.icons[1] = icons[1]
+        self.icons[2] = icons[2]
+        self.icons[3] = icons[3]
+        self.icons[4] = icons[4]
+        self.icons[5] = icons[5]
+    }
     
     public var maxIconsCount: Int{
         return MaxIconsCount;
@@ -38,73 +56,6 @@ public class SOTask: NSObject{
         return SODataBaseFactory.sharedInstance.dataBase.getRecordIdForTask(self)
     }
     
-}
-
-extension SOTask: SOConcreteObjectsProtocol{
-
-    public func initWithParseObject(object: AnyObject)
-    {
-        let theObject = object as! PFObject
-        self.databaseObject = theObject
-        self.title = theObject[kTaskFldTitle] as! String
-        self.category = theObject[kTaskFldCategory] as! String
-        self.icons[0] = theObject[kTaskFldIco1] as! String
-        self.icons[1] = theObject[kTaskFldIco2] as! String
-        self.icons[2] = theObject[kTaskFldIco3] as! String
-        self.icons[3] = theObject[kTaskFldIco4] as! String
-        self.icons[4] = theObject[kTaskFldIco5] as! String
-        self.icons[5] = theObject[kTaskFldIco6] as! String
-        self.date = theObject[kTaskFldDate] as! NSDate?
-    }
-    
-    public func copyToParseObject(object: AnyObject){
-        let theObject = object as! PFObject
-        theObject[kTaskFldTitle] = self.title
-        theObject[kTaskFldCategory] = self.category
-        let icons = self.icons
-        theObject[kTaskFldIco1] = icons[0]
-        theObject[kTaskFldIco2] = icons[1]
-        theObject[kTaskFldIco3] = icons[2]
-        theObject[kTaskFldIco4] = icons[3]
-        theObject[kTaskFldIco5] = icons[4]
-        theObject[kTaskFldIco6] = icons[5]
-        theObject[kTaskFldDate] = self.date
-    }
-
-    public func copyToCoreDataObject(object: AnyObject){
-        let theObject = object as! Task
-        theObject.userid = self.userid
-        theObject.title = self.title
-        theObject.category = self.category
-        let icons = self.icons
-        theObject.ico1 = icons[0]
-        theObject.ico2 = icons[1]
-        theObject.ico3 = icons[2]
-        theObject.ico4 = icons[3]
-        theObject.ico5 = icons[4]
-        theObject.ico6 = icons[5]
-        if let date = self.date{
-            theObject.date = date
-        }
-    }
-    
-    public func initWithCoreDataObject(object: AnyObject)
-    {
-        let theObject = object as! Task
-
-        self.databaseObject = theObject
-        self.userid = theObject.userid
-        self.title = theObject.title
-        self.category = theObject.category
-        self.date = theObject.date
-        
-        let taskIcons = [theObject.ico1, theObject.ico2, theObject.ico3, theObject.ico4, theObject.ico5, theObject.ico6]
-        var _icons = [String](count: MaxIconsCount, repeatedValue: "")
-        for i in 0..<MaxIconsCount{
-            _icons[i] = taskIcons[i]
-        }
-        self.icons = _icons
-    }
 }
 
 extension SOTask{

@@ -152,14 +152,14 @@ extension SOParseComManager{
     }
     
     class func userInfo() -> Dictionary<String, String>? {
-        if let currentUser = PFUser.currentUser(){
-            if let userName: String = currentUser.username{
-                let dict: Dictionary<String, String> = ["name": userName, "photo": ""]
-                return dict
-            }
+        guard let currentUser = PFUser.currentUser(),
+            let userName: String = currentUser.username else{
+                return nil;
         }
         
-        return nil;
+        let dict: Dictionary<String, String> = ["name": userName, "photo": ""]
+
+        return dict
     }
     
     class func logIn(viewController: UIViewController, completionBlock: (error: NSError?) -> Void){

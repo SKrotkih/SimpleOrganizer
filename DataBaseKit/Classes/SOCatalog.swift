@@ -9,7 +9,7 @@
 import UIKit
 import Parse
 
-public class SOCatalog: NSObject, SOConcreteObjectsProtocol {
+public class SOCatalog: NSObject{
 
     public var databaseObject: AnyObject?
     public var recordid: String = ""
@@ -23,30 +23,6 @@ public class SOCatalog: NSObject, SOConcreteObjectsProtocol {
     
     public var entityName: String{
         return ""
-    }
-
-    //- MARK: -
-    //- MARK: SOConcreteObjectsProtocol
-    
-    public func initWithParseObject(object: AnyObject)
-    {
-        let theObject = object as! PFObject
-        self.databaseObject = theObject
-        self.recordid = theObject[kFldRecordId] as! String
-        self.selected = theObject[kFldSelected] as! Bool
-        self.visible = theObject[kFldVisible] as! Bool
-    }
-    
-    public func copyToParseObject(object: AnyObject){
-    }
-    
-    public func initWithCoreDataObject(object: AnyObject)
-    {
-        let theObject = object as! NSManagedObject
-        self.databaseObject = theObject
-        self.recordid = theObject.valueForKey(kFldRecordId) as! String
-        self.selected = theObject.valueForKey(kFldSelected) as! Bool
-        self.visible = theObject.valueForKey(kFldVisible) as! Bool
     }
 }
 

@@ -53,22 +53,22 @@ public class SOCoreDataBase: SOCoreDataProtocol {
         
         var coordinator: NSPersistentStoreCoordinator? = NSPersistentStoreCoordinator(managedObjectModel: self.managedObjectModel)
         
-        if let url = persistentStoreDirectory?.URLByAppendingPathComponent("\(self.databaseName).sqlite"){
-            var error: NSError? = nil
-            do {
-                try coordinator!.addPersistentStoreWithType(NSSQLiteStoreType, configuration: nil, URL: url, options: options)
-            } catch var error1 as NSError {
-                error = error1
-                coordinator = nil
-                self.reportAnyErrorWeGot(error)
-            } catch {
-                fatalError()
-            }
-        } else {
-            coordinator = nil
+        guard let url = persistentStoreDirectory?.URLByAppendingPathComponent("\(self.databaseName).sqlite") else{
             var dict = [String: AnyObject]()
             let error: NSError? = NSError(domain: DataBaseErrorDomain, code: 9998, userInfo: dict)
             self.reportAnyErrorWeGot(error)
+            return nil
+        }
+
+        var error: NSError? = nil
+        do {
+            try coordinator!.addPersistentStoreWithType(NSSQLiteStoreType, configuration: nil, URL: url, options: options)
+        } catch var error1 as NSError {
+            error = error1
+            coordinator = nil
+            self.reportAnyErrorWeGot(error)
+        } catch {
+            fatalError()
         }
         
         return coordinator
@@ -76,15 +76,15 @@ public class SOCoreDataBase: SOCoreDataProtocol {
     
     public lazy var managedObjectContext: NSManagedObjectContext? = {
         // Returns the managed object context for the application (which is already bound to the persistent store coordinator for the application.) This property is optional since there are legitimate error conditions that could cause the creation of the context to fail.
-        let coordinator = self.persistentStoreCoordinator
-        if coordinator == nil {
+        guard let coordinator = self.persistentStoreCoordinator else{
             return nil
         }
+
         var managedObjectContext = NSManagedObjectContext()
         managedObjectContext.persistentStoreCoordinator = coordinator
         
         if self.isiCloudEnabled(){
-            self.subscribeToChangeStoreCoordinator(coordinator!)
+            self.subscribeToChangeStoreCoordinator(coordinator)
         }
         
         return managedObjectContext
@@ -140,11 +140,9 @@ public class SOCoreDataBase: SOCoreDataProtocol {
 extension SOCoreDataBase{
     public func deleteObject(objectForDeleting: NSManagedObject?)
     {
-        if let moc = self.managedObjectContext {
-            if let object = objectForDeleting{
-                moc.deleteObject(object)
-                self.saveContext()
-            }
+        if let moc = self.managedObjectContext, let object = objectForDeleting{
+            moc.deleteObject(object)
+            self.saveContext()
         }
     }
     

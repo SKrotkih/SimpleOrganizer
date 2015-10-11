@@ -1,16 +1,16 @@
 # SwiftOrganizer
 ============
 
-This is a simple organizer application for an iPhone and for an iPad. 
-Was implemented for getting some practice of using the Swift.
+This is a simple organizer application for both iPhone and iPad. 
+Was implemented for getting some practice of using the new language from Apple Swift.
 
 ## Implements
 
-Were implemented two types of database:
+There were implemented two types of database:
 - Local database on Core Data
 - Remote database on the Parse.com server
 
-Also were implemented the following features:
+Also implemented the following features:
 - auto layout (on Interface Builder Level only)
 - switching of the database types from Core Data to remote database and vice versa
 - used iCloud key-value storage for switching database types (if you change database type on your iPad, then on your iPhone is changing after some seconds too)
@@ -25,7 +25,8 @@ Also were implemented the following features:
 - Document Picker - access to files on remote storage like iCloud, DropBox and etc with a download to the local Documents folder.
 - extension
 - today widget
-- all database function are in the DataBaseKit.framework.
+- 
+
 - make phone call via FaceTime and by Phone.
 - undo for task edit data
 - local notifications

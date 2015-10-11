@@ -83,13 +83,6 @@ extension SOLocalDataBase{
 // MARK: -
 
 extension SOLocalDataBase{
-    
-    private func fillNewObjectWithData<T: SOConcreteObjectsProtocol, T2: AnyObject>(newObject: T, managedObject: T2) -> T{
-        newObject.initWithCoreDataObject(managedObject)
-        
-        return newObject
-    }
-    
     // TODO: - I tried to make generic for allCategories and the allIcons function but faced some principal problems
     // MARK: Categories
     public func allCategories(completionBlock: (resultBuffer: [SOCategory], error: NSError?) -> Void){
@@ -116,7 +109,13 @@ extension SOLocalDataBase{
             
             if objects.count > 0{
                 objects.map({object in
-                    _allCategories.append(self.fillNewObjectWithData(SOCategory(), managedObject: object))
+                    let theObject = object as NSManagedObject
+                    let recordid = theObject.valueForKey(kFldRecordId) as! String
+                    let selected = theObject.valueForKey(kFldSelected) as! Bool
+                    let visible = theObject.valueForKey(kFldVisible) as! Bool
+                    let name = theObject.valueForKey(kCategoryFldName) as! String
+                    let category = SOCategory(object: objects, id: recordid, selected: selected, visible: visible, name: name)
+                    _allCategories.append(category)
                 })
             } else {
                 self.populateDataBase.populateCategories()
@@ -144,7 +143,14 @@ extension SOLocalDataBase{
             
             if objects.count > 0{
                 objects.map({object in
-                    _allIcon.append(self.fillNewObjectWithData(SOIco(), managedObject: object))
+                    let theObject = object as NSManagedObject
+                    let recordid = theObject.valueForKey(kFldRecordId) as! String
+                    let selected = theObject.valueForKey(kFldSelected) as! Bool
+                    let visible = theObject.valueForKey(kFldVisible) as! Bool
+                    let name = theObject.valueForKey(kIcoFldName) as! String
+                    let imageName = theObject.valueForKey(kIcoFldImageName) as! String
+                    let ico = SOIco(object: objects, id: recordid, selected: selected, visible: visible, name: name, imageName: imageName)
+                    _allIcon.append(ico)
                 })
             } else {
                 self.populateDataBase.populateIcons()
@@ -205,8 +211,7 @@ extension SOLocalDataBase{
                                     var iconsSelected: Bool = false
                                     
                                     for iconId in icons{
-                                        let iconOpt: SOIco? = SOFetchingData.sharedInstance.iconById(iconId)
-                                        if let ico = iconOpt{
+                                        if let ico = SOFetchingData.sharedInstance.iconById(iconId){
                                             iconsSelected = iconsSelected || ico.selected
                                         }
                                     }
@@ -287,23 +292,30 @@ extension SOLocalDataBase{
     }
     
     private func newTask(task: Task) -> SOTask{
-        let newTask: SOTask = SOTask()
-        newTask.initWithCoreDataObject(task)
+        let userid = task.userid
+        let title = task.title
+        let category = task.category
+        let date = task.date
+        let taskIcons = [task.ico1, task.ico2, task.ico3, task.ico4, task.ico5, task.ico6]
+        var _icons = [String](count: MaxIconsCount, repeatedValue: "")
+        for i in 0..<MaxIconsCount{
+            _icons[i] = taskIcons[i]
+        }
+        
+        let newTask: SOTask = SOTask(object: task, userid: userid, title: title, category: category, date: date, icons: _icons)
         
         return newTask
     }
     
     public func getRecordIdForTask(task: SOTask?) -> String?{
-        if let theTtask = task{
-            if let object = theTtask.databaseObject as? Task{
-                let instanceURL: NSURL = object.objectID.URIRepresentation()
-                let recordId = instanceURL.lastPathComponent
-                
-                return recordId
-            }
+        guard let theTtask = task, let object = theTtask.databaseObject as? Task else
+        {
+            return nil
         }
+        let instanceURL: NSURL = object.objectID.URIRepresentation()
+        let recordId = instanceURL.lastPathComponent
         
-        return nil
+        return recordId
     }
     
     public func getObjectForRecordId(recordid: String, entityName: String) -> AnyObject?{
@@ -349,15 +361,27 @@ extension SOLocalDataBase{
             }
             task.userid = userId
             
-            let taskObject: Task? = task.databaseObject as? Task
+            let taskObject: Task!
             
-            if let object = taskObject{
-                task.copyToCoreDataObject(object)
+            if let object = task.databaseObject as? Task{
+                taskObject = object
             }
             else{
-                let object = self.coreData.newManagedObject(TaskEntityName) as! Task
-                task.databaseObject = object
-                task.copyToCoreDataObject(object)
+                taskObject = self.coreData.newManagedObject(TaskEntityName) as! Task
+                task.databaseObject = taskObject
+            }
+            taskObject.userid = task.userid
+            taskObject.title = task.title
+            taskObject.category = task.category
+            let icons = task.icons
+            taskObject.ico1 = icons[0]
+            taskObject.ico2 = icons[1]
+            taskObject.ico3 = icons[2]
+            taskObject.ico4 = icons[3]
+            taskObject.ico5 = icons[4]
+            taskObject.ico6 = icons[5]
+            if let date = task.date{
+                taskObject.date = date
             }
             
             self.coreData.saveContext()

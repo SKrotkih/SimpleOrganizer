@@ -46,10 +46,9 @@ class SOLocalNotificationsCenter: NSObject {
         }
         
         if let alertBody = notification.alertBody{
-            if let userInfo = notification.userInfo{
-                if let message = userInfo[self.kTaskIdKeyName()] as? String {
+            if let userInfo = notification.userInfo,
+                let message = userInfo[self.kTaskIdKeyName()] as? String {
                     showAlertWithTitle("Reminder".localized, message: message)
-                }
             } else {
                 showAlertWithTitle("Notification".localized, message: alertBody)
             }

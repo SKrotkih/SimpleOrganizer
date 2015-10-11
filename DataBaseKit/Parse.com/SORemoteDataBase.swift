@@ -172,20 +172,37 @@ extension SORemoteDataBase{
     }
     
     private func newInstanceFactory(object: PFObject, className: String) -> AnyObject?{
-        var newInstance: SOConcreteObjectsProtocol
+        var newInstance: AnyObject?
         
         switch className{
         case IcoClassName:
-            newInstance = SOIco()
+            let recordid = object[kFldRecordId] as! String
+            let selected = object[kFldSelected] as! Bool
+            let visible = object[kFldVisible] as! Bool
+            let name = object[kIcoFldName] as! String
+            let imageName = object[kIcoFldImageName] as! String
+            newInstance = SOIco(object: object, id: recordid, selected: selected, visible: visible, name: name, imageName: imageName)
         case CategoryClassName:
-            newInstance = SOCategory()
+            let recordid = object[kFldRecordId] as! String
+            let selected = object[kFldSelected] as! Bool
+            let visible = object[kFldVisible] as! Bool
+            let name = object[kCategoryFldName] as! String
+            newInstance = SOCategory(object: object, id: recordid, selected: selected, visible: visible, name: name)
         case TaskClassName:
-            newInstance = SOTask()
+            let title = object[kTaskFldTitle] as! String
+            let category = object[kTaskFldCategory] as! String
+            let date = object[kTaskFldDate] as! NSDate?
+            var icons: [String] = [String](count: MaxIconsCount, repeatedValue: "")
+            icons[0] = object[kTaskFldIco1] as! String
+            icons[1] = object[kTaskFldIco2] as! String
+            icons[2] = object[kTaskFldIco3] as! String
+            icons[3] = object[kTaskFldIco4] as! String
+            icons[4] = object[kTaskFldIco5] as! String
+            icons[5] = object[kTaskFldIco6] as! String
+            newInstance = SOTask(object: object, userid: nil, title: title, category: category, date: date, icons: icons)
         default:
-            return nil
+            break
         }
-        
-        newInstance.initWithParseObject(object)
         
         return newInstance
     }
@@ -198,15 +215,25 @@ extension SORemoteDataBase{
     
     public func saveTask(task: SOTask, completionBlock: (error: NSError?) -> Void){
         dispatch_sync(self.queue, {[weak self] in
-            var object: PFObject? = task.databaseObject as? PFObject
+            var object: PFObject!
             
-            if let taskObject = object{
-                task.copyToParseObject(taskObject)
+            if let taskObject = task.databaseObject as? PFObject{
+                object = taskObject
             } else {
                 object = PFObject(className: TaskClassName)
                 task.databaseObject = object
-                task.copyToParseObject(object!)
             }
+
+            object[kTaskFldTitle] = task.title
+            object[kTaskFldCategory] = task.category
+            object[kTaskFldDate] = task.date
+            let icons = task.icons
+            object[kTaskFldIco1] = icons[0]
+            object[kTaskFldIco2] = icons[1]
+            object[kTaskFldIco3] = icons[2]
+            object[kTaskFldIco4] = icons[3]
+            object[kTaskFldIco5] = icons[4]
+            object[kTaskFldIco6] = icons[5]
             
             self!.saveObject(object!, completionBlock: {(error: NSError?) in
                 completionBlock(error: error)

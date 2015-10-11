@@ -34,9 +34,3 @@ public protocol SODataBaseProtocol{
     func logIn(viewController: UIViewController, completionBlock: (error: NSError?) -> Void)
     func logOut(viewController: UIViewController, completionBlock: (error: NSError?) -> Void)
 }
-
-public protocol SOConcreteObjectsProtocol: AnyObject{
-    func initWithParseObject(object: AnyObject)
-    func copyToParseObject(object: AnyObject)
-    func initWithCoreDataObject(object: AnyObject)
-}

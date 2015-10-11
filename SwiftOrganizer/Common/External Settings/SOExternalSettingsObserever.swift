@@ -29,16 +29,13 @@ class SOExternalSettingsObserever{
     @objc class func handleSettingsChanged(notification: NSNotification){
         let userDefaults = NSUserDefaults.standardUserDefaults()
         // See enabled_preference id in Settings.bundle
-        if let useRemoteDataBase = userDefaults.stringForKey("enabled_preference"){
-            if let newIndexOfDBType = Int(useRemoteDataBase){
+        if let useRemoteDataBase = userDefaults.stringForKey("enabled_preference"),
+            let newIndexOfDBType = Int(useRemoteDataBase){
                 let indexOfCurrectDBType = SOTypeDataBaseSwitcher.currentDataBaseIndex().rawValue
-
                 if newIndexOfDBType != indexOfCurrectDBType{
                     SOTypeDataBaseSwitcher.switchToNextDataBase()
                 }
-            }
         }
-        
     }
     
     class func openTheSettingsApp(){

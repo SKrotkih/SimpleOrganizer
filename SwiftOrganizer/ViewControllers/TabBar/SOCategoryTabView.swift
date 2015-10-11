@@ -44,15 +44,17 @@ class SOCategoryTabView: UIView {
     }
     
     @IBAction func buttonPressedHandler(sender: AnyObject) {
-        if let delegate = self.filterStateDelegate, category = _category{
-            let newValue: Bool = !self.selected
-            delegate.didSelectCategory(category, select: newValue, completionBlock: {(error: NSError?) in
-                if error == nil{
-                    category.selected = newValue
-                    self.selected = newValue
-                }
-            })
+        guard let delegate = self.filterStateDelegate, category = _category else{
+            return
         }
+
+        let newValue: Bool = !self.selected
+        delegate.didSelectCategory(category, select: newValue, completionBlock: {(error: NSError?) in
+            if error == nil{
+                category.selected = newValue
+                self.selected = newValue
+            }
+        })
     }
 
 }

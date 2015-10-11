@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import Parse
 
 let IcoEntityName = "TaskIco"
 
@@ -16,41 +15,20 @@ public class SOIco: SOCatalog {
     public var name: String = ""
     public var imageName: String = ""
 
-    convenience init(id: String, name: String, imageName: String, selected: Bool) {
+    convenience init(object: AnyObject?, id: String, selected: Bool, visible: Bool, name: String, imageName: String) {
         self.init()
         
+        self.databaseObject = object
         self.recordid = id
         self.selected = selected
+        self.visible = visible
         
         self.name = name
         self.imageName = imageName
+
     }
     
     public override var entityName: String{
         return IcoEntityName
     }
-
-    //- MARK: -
-    //- MARK: SOConcreteObjectsProtocol
-    
-    public override func initWithParseObject(object: AnyObject)
-    {
-        let theObject = object as! PFObject
-        super.initWithParseObject(theObject)
-        self.name = theObject[kIcoFldName] as! String
-        self.imageName = theObject[kIcoFldImageName] as! String
-    }
-    
-    public override func copyToParseObject(object: AnyObject){
-        super.copyToParseObject(object)
-    }
-    
-    public override func initWithCoreDataObject(object: AnyObject)
-    {
-        super.initWithCoreDataObject(object)
-        let theObject = object as! NSManagedObject
-        self.name = theObject.valueForKey(kIcoFldName) as! String
-        self.imageName = theObject.valueForKey(kIcoFldImageName) as! String
-    }
 }
-
