@@ -72,12 +72,9 @@ class SOMakeCallViewController: UIViewController {
         }
     }
     
-    
     @IBAction func callPhoneButtonPressed(sender: AnyObject) {
-        
         let phoneNumber = self.phoneNumber.text
         var isValidOk: Bool = false
-        
         if phoneNumber!.characters.count > 0{
             if self.emailSwitch.on {
                 isValidOk = phoneNumber!.isValidEmail()
@@ -85,9 +82,12 @@ class SOMakeCallViewController: UIViewController {
                 isValidOk = phoneNumber!.isValidPhoneNumber()
             }
         }
-        
         if isValidOk {
-            self.facetime(phoneNumber!)
+            if self.faceTimeSwitch.on{
+                self.makeCallViaFacetime(phoneNumber!)
+            } else {
+                self.makeCallViaTelPrompt(phoneNumber!)
+            }
         } else {
             let message = "Please enter a valid".localized
             let messageOpt = self.emailSwitch.on ? "e-mail" : "phone number".localized
@@ -104,15 +104,37 @@ class SOMakeCallViewController: UIViewController {
     @IBAction func emailSwitchChanged(sender: AnyObject) {
         self.setUpEmailModeState()
     }
+}
+
+extension SOMakeCallViewController{
+
+    private func makeCallViaFacetime(phoneNumber: String) {
+        let shcheme = "facetime"
+        if let URL: NSURL = NSURL(string: "\(shcheme)://\(phoneNumber)") {
+            self.openURL(URL)
+        }
+    }
     
-    private func facetime(phoneNumber: String) {
-        let shcheme: String = self.faceTimeSwitch.on ? "facetime" : "telprompt"
-        
-        if let facetimeURL: NSURL = NSURL(string: "\(shcheme)://\(phoneNumber)") {
-            let application: UIApplication = UIApplication.sharedApplication()
-            if (application.canOpenURL(facetimeURL)) {
-                application.openURL(facetimeURL);
-            }
+    private func makeCallViaTelPrompt(phoneNumber: String) {
+        let shcheme = "telprompt"
+        if let URL: NSURL = NSURL(string: "\(shcheme)://\(phoneNumber)") {
+            self.openURL(URL)
+        }
+    }
+    
+    /// Dial on phone number using the system dialer.
+    private func makeCallViaSystemDialer(phoneNumber: String) {
+        let shcheme = "tel"
+        let sanitizedPhoneNumber = phoneNumber.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet())!
+        if let URL: NSURL = NSURL(string: "\(shcheme):\(sanitizedPhoneNumber)") {
+            self.openURL(URL)
+        }
+    }
+    
+    private func openURL(anURL: NSURL) {
+        let application: UIApplication = UIApplication.sharedApplication()
+        if (application.canOpenURL(anURL)) {
+            application.openURL(anURL);
         }
     }
 }

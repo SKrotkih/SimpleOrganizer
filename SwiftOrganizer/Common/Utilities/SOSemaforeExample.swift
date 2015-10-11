@@ -13,7 +13,7 @@ protocol HttpHeaderRequest {
 }
 
 class HttpHeaderRequestProxy : HttpHeaderRequest {
-
+    
     private let semaphore = dispatch_semaphore_create(0);
     
     func getHeader(url: String, header: String) -> String? {
@@ -34,3 +34,30 @@ class HttpHeaderRequestProxy : HttpHeaderRequest {
         return headerValue;
     }
 }
+
+
+// MARK: - Exception Handler Example
+
+/*
+
+public enum JSONDecodingError: ErrorType {
+    case MissingAttribute(String)
+}
+
+
+public init(json: [NSObject: AnyObject]) throws {
+    guard let objectId = json["objectId"] as? String else {
+        throw JSONDecodingError.MissingAttribute("objectId")
+    }
+}
+
+do {
+    let employee = try Employee(json: dict)
+    employees.append(employee)
+} catch JSONDecodingError.MissingAttribute(let missingAttribute) {
+    print("Unable to load employee, missing attribute: \(missingAttribute)")
+} catch {
+    fatalError("Something's gone terribly wrong: \(error)")
+}
+phone
+*/
