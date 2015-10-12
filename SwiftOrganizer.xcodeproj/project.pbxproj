@@ -400,6 +400,7 @@
 		7F8E16C11BBA71E500FFC16B /* AILogInManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AILogInManager.m; sourceTree = "<group>"; };
 		7F8FE2021BC530AB00180EAD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LogIn.storyboard; sourceTree = "<group>"; };
 		7F8FE2041BC532E100180EAD /* SOLogInInfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SOLogInInfoViewController.swift; path = ../DataBaseKit/LogInManager/SOLogInInfoViewController.swift; sourceTree = "<group>"; };
+		7FCD13611BCBD9C3001778E9 /* SwiftOrganizer v2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "SwiftOrganizer v2.xcdatamodel"; sourceTree = "<group>"; };
 		7FD8C7BF1BC3F07200E0A8F7 /* LocalUsers.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = LocalUsers.xcdatamodel; sourceTree = "<group>"; };
 		7FDF313D1BBA8CBC00AD4127 /* SOUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SOUser.swift; path = ../Classes/SOUser.swift; sourceTree = "<group>"; };
 		7FDF313F1BBA949700AD4127 /* Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Utils.h; sourceTree = "<group>"; };
@@ -1988,9 +1989,10 @@
 		7F5DF5A91BAD2CF300959432 /* SwiftOrganizer.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				7FCD13611BCBD9C3001778E9 /* SwiftOrganizer v2.xcdatamodel */,
 				7F5DF5AA1BAD2CF300959432 /* SwiftOrganizer.xcdatamodel */,
 			);
-			currentVersion = 7F5DF5AA1BAD2CF300959432 /* SwiftOrganizer.xcdatamodel */;
+			currentVersion = 7FCD13611BCBD9C3001778E9 /* SwiftOrganizer v2.xcdatamodel */;
 			path = SwiftOrganizer.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

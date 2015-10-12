@@ -9,19 +9,34 @@
 import UIKit
 
 let TaskEntityName = "Task"
+let LocalDataBaseName = "SwiftOrganizer"
 
-public class SOLocalDataBase: SODataBaseProtocol {
+public class SOLocalDataBase: NSObject, SODataBaseProtocol{
     private let queue = dispatch_queue_create("localDataBaseRequestsQ", DISPATCH_QUEUE_CONCURRENT);
     private var nextDataBase: SODataBaseProtocol?
-    private var coreData: SOCoreDataProtocol
-    private var populateDataBase: SOPopulateLocalDataBase
-    
+
     required public init(nextDataBase: SODataBaseProtocol?){
         self.nextDataBase = nextDataBase
-        self.coreData = SOCoreDataBase(dataBaseName: "SwiftOrganizer")
-        self.populateDataBase = SOPopulateLocalDataBase()
+        super.init()
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "applicationWillTerminate:", name: UIApplicationWillTerminateNotification,  object: nil)
     }
+    
+    lazy var populateDataBase: SOPopulateLocalDataBase = {
+        return SOPopulateLocalDataBase(coreData: self.coreData)
+    }()
+    
+    lazy var coreData: SOCoreDataProtocol = {
+        var options: Dictionary<String, AnyObject> = [NSMigratePersistentStoresAutomaticallyOption: true, NSInferMappingModelAutomaticallyOption: true
+        ]
+        let iCloudEnabled = self.isiCloudEnabled()
+        if iCloudEnabled{
+            options[NSPersistentStoreUbiquitousContentNameKey]  = "Store"
+        }
+        let coreData = SOCoreDataBase(dataBaseName: LocalDataBaseName, options: nil, iCloudEnabled: iCloudEnabled)
+
+        return coreData
+    }()
+    
     
     public func chainResponsibility(dataBaseIndex: DataBaseIndex) -> SODataBaseProtocol{
         if dataBaseIndex == .CoreDataIndex{
@@ -36,6 +51,70 @@ public class SOLocalDataBase: SODataBaseProtocol {
     
     deinit{
         NSNotificationCenter.defaultCenter().removeObserver(self)
+    }
+
+    private func isiCloudEnabled() -> Bool{
+        let defaults = SOUserDefault.sharedDefaults()
+        let useiCloudOpt: Bool? = defaults.boolForKey(DefaultsDataKeys.SOEnableiCloudForCoreDataKey)
+        
+        if let useiCloud = useiCloudOpt{
+            return useiCloud
+        }
+        
+        return false
+    }
+    
+    lazy var categoriesController: NSFetchedResultsController = {
+        let request = NSFetchRequest(entityName: CategoryEntityName)
+        request.sortDescriptors = [NSSortDescriptor(key: "name", ascending: true)]
+        
+        let categoriesController = NSFetchedResultsController(fetchRequest: request, managedObjectContext: self.coreData.managedObjectContext!, sectionNameKeyPath: nil, cacheName: nil)
+        categoriesController.delegate = self
+        return categoriesController
+        }()
+
+    
+    lazy var iconsController: NSFetchedResultsController = {
+        let request = NSFetchRequest(entityName: IcoEntityName)
+        request.sortDescriptors = [NSSortDescriptor(key: "recordid", ascending: true)]
+        
+        let categoriesController = NSFetchedResultsController(fetchRequest: request, managedObjectContext: self.coreData.managedObjectContext!, sectionNameKeyPath: nil, cacheName: nil)
+        categoriesController.delegate = self
+        return categoriesController
+        }()
+}
+
+// MARK: - Log In
+
+extension SOLocalDataBase: NSFetchedResultsControllerDelegate {
+
+    public func controllerWillChangeContent(controller: NSFetchedResultsController) {
+    }
+
+    public func controllerDidChangeContent(controller: NSFetchedResultsController) {
+    }
+    
+    public func controller(controller: NSFetchedResultsController, didChangeObject anObject: AnyObject, atIndexPath indexPath: NSIndexPath?, forChangeType type: NSFetchedResultsChangeType, newIndexPath: NSIndexPath?) {
+
+        /*
+        let indexPathsFromOptionals: (NSIndexPath?) -> [NSIndexPath] = { indexPath in
+            if let indexPath = indexPath {
+                return [indexPath]
+            }
+            return []
+        }
+        
+        switch type
+        {
+        case .Insert:
+            tableView.insertRowsAtIndexPaths(indexPathsFromOptionals(newIndexPath), withRowAnimation: .Automatic)
+        case .Delete:
+            tableView.deleteRowsAtIndexPaths(indexPathsFromOptionals(indexPath), withRowAnimation: .Automatic)
+        default:
+            break
+        }
+        */
+        
     }
 }
 
@@ -83,9 +162,46 @@ extension SOLocalDataBase{
 // MARK: -
 
 extension SOLocalDataBase{
+
+    public func allCategories(completionBlock: (resultBuffer: [SOCategory], error: NSError?) -> Void){
+        var _allCategories: [SOCategory] = []
+        var _needRecursiveCall: Bool = false
+        
+        do {
+            try categoriesController.performFetch()
+        } catch let error as NSError {
+            print("Error fetching category data \(error)")
+        }
+        
+        if let objects = categoriesController.fetchedObjects
+        {
+            if objects.count > 0{
+                objects.map({object in
+                    let theObject = object as! TaskCategory
+                    let recordid = theObject.valueForKey(kFldRecordId) as! String
+                    let selected = theObject.valueForKey(kFldSelected) as! Bool
+                    let visible = theObject.valueForKey(kFldVisible) as! Bool
+                    let name = theObject.valueForKey(kCategoryFldName) as! String
+                    let category = SOCategory(object: objects, id: recordid, selected: selected, visible: visible, name: name)
+                    _allCategories.append(category)
+                })
+            } else {
+                self.populateDataBase.populateCategories()
+                _needRecursiveCall = true
+            }
+        }
+        
+        if _needRecursiveCall{
+            return self.allCategories(completionBlock)
+        }
+        
+        completionBlock(resultBuffer: _allCategories, error: nil)
+    }
+    
+    
     // TODO: - I tried to make generic for allCategories and the allIcons function but faced some principal problems
     // MARK: Categories
-    public func allCategories(completionBlock: (resultBuffer: [SOCategory], error: NSError?) -> Void){
+    public func allCategories_(completionBlock: (resultBuffer: [SOCategory], error: NSError?) -> Void){
         var _allCategories: [SOCategory] = []
         var _needRecursiveCall: Bool = false
         
@@ -136,14 +252,16 @@ extension SOLocalDataBase{
         var _allIcon: [SOIco] = []
         var _needRecursiveCall: Bool = false
         
-        dispatch_sync(self.queue, {() in
-            let fetchRequest = NSFetchRequest(entityName: IcoEntityName)
-            
-            let objects = (try! self.coreData.managedObjectContext!.executeFetchRequest(fetchRequest)) as! [TaskIco]
-            
+        do {
+            try iconsController.performFetch()
+        } catch let error as NSError {
+            print("Error fetching category data \(error)")
+        }
+        
+        if let objects = iconsController.fetchedObjects{
             if objects.count > 0{
                 objects.map({object in
-                    let theObject = object as NSManagedObject
+                    let theObject = object as! NSManagedObject
                     let recordid = theObject.valueForKey(kFldRecordId) as! String
                     let selected = theObject.valueForKey(kFldSelected) as! Bool
                     let visible = theObject.valueForKey(kFldVisible) as! Bool
@@ -157,7 +275,7 @@ extension SOLocalDataBase{
                 
                 _needRecursiveCall = true
             }
-        })
+        }
         
         if _needRecursiveCall{
             return self.allIcons(completionBlock)

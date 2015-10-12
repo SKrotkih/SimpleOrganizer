@@ -25,8 +25,7 @@ Also implemented the following features:
 - Document Picker - access to files on remote storage like iCloud, DropBox and etc with a download to the local Documents folder.
 - extension
 - today widget
-- 
-
+- all database function are in the DataBaseKit.framework.
 - make phone call via FaceTime and by Phone.
 - undo for task edit data
 - local notifications
@@ -37,6 +36,7 @@ Also implemented the following features:
 - Facebook SDK added
 - Log In to loacal database implemented via Facebook 
 - Log In to remote data base implemented by the Parse.com SDK
+- migration data after changing data model 
 
 Were applied the following design patterns:
 - abstract method;

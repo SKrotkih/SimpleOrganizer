@@ -38,7 +38,7 @@ public class SOLocalUserManager: NSObject {
     }
 
     override init() {
-        self.coreData = SOCoreDataBase(dataBaseName: DataBaseName)
+        self.coreData = SOCoreDataBase(dataBaseName: DataBaseName, options: nil, iCloudEnabled: false)
         
         super.init()
     }

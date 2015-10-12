@@ -24,9 +24,13 @@ protocol SOCoreDataProtocol{
 
 public class SOCoreDataBase: SOCoreDataProtocol {
     let databaseName: String
-
-    required public init(dataBaseName: String){
-        databaseName = dataBaseName
+    var options: Dictionary<String, AnyObject>? = nil
+    var isiCloudEnabled: Bool
+    
+    required public init(dataBaseName: String, options: Dictionary<String, AnyObject>?, iCloudEnabled: Bool){
+        self.databaseName = dataBaseName
+        self.options = options
+        self.isiCloudEnabled = iCloudEnabled
     }
     
     private lazy var managedObjectModel: NSManagedObjectModel = {
@@ -36,13 +40,6 @@ public class SOCoreDataBase: SOCoreDataProtocol {
         }()
     
     public lazy var persistentStoreCoordinator: NSPersistentStoreCoordinator? = {
-        
-        var options: Dictionary<String, String>? = nil
-        
-        if self.isiCloudEnabled(){
-            options = [NSPersistentStoreUbiquitousContentNameKey: "Store"]
-        }
-        
         var persistentStoreDirectory: NSURL?
         
         if let directory = NSFileManager.defaultManager().containerURLForSecurityApplicationGroupIdentifier(AppGroupsId){
@@ -62,7 +59,7 @@ public class SOCoreDataBase: SOCoreDataProtocol {
 
         var error: NSError? = nil
         do {
-            try coordinator!.addPersistentStoreWithType(NSSQLiteStoreType, configuration: nil, URL: url, options: options)
+            try coordinator!.addPersistentStoreWithType(NSSQLiteStoreType, configuration: nil, URL: url, options: self.options)
         } catch var error1 as NSError {
             error = error1
             coordinator = nil
@@ -83,7 +80,7 @@ public class SOCoreDataBase: SOCoreDataProtocol {
         var managedObjectContext = NSManagedObjectContext()
         managedObjectContext.persistentStoreCoordinator = coordinator
         
-        if self.isiCloudEnabled(){
+        if self.isiCloudEnabled{
             self.subscribeToChangeStoreCoordinator(coordinator)
         }
         
@@ -183,17 +180,4 @@ extension SOCoreDataBase{
         NSLog("Unresolved error \(error2), \(error2.userInfo)")
         abort()
     }
-    
-    func isiCloudEnabled() -> Bool{
-        let defaults = SOUserDefault.sharedDefaults()
-        let useiCloudOpt: Bool? = defaults.boolForKey(DefaultsDataKeys.SOEnableiCloudForCoreDataKey)
-        
-        if let useiCloud = useiCloudOpt{
-            return useiCloud
-        }
-        
-        return false
-    }
-    
 }
-

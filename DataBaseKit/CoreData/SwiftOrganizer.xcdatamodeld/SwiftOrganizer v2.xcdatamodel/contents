@@ -9,7 +9,6 @@
         <attribute name="ico4" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="ico5" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="ico6" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="ico7" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="userid" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="taskcategory" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="TaskCategory" inverseName="tasks" inverseEntity="TaskCategory" syncable="YES"/>
@@ -29,7 +28,7 @@
         <attribute name="visible" optional="YES" attributeType="Boolean" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Task" positionX="-63" positionY="-18" width="128" height="225"/>
+        <element name="Task" positionX="-63" positionY="-18" width="128" height="210"/>
         <element name="TaskCategory" positionX="-36" positionY="63" width="128" height="120"/>
         <element name="TaskIco" positionX="-54" positionY="54" width="128" height="120"/>
     </elements>

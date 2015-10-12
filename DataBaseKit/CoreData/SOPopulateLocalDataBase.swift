@@ -10,10 +10,10 @@ import UIKit
 
 public class SOPopulateLocalDataBase {
 
-    private var coreData: SOCoreDataBase
+    private var coreData: SOCoreDataProtocol
     
-    init(){
-        self.coreData = SOCoreDataBase(dataBaseName: "SwiftOrganizer")
+    init(coreData: SOCoreDataProtocol){
+        self.coreData = coreData
     }
     
     public func populateTasks(){
