@@ -17,7 +17,7 @@ class SOCategoryTabBarController: SOTabBarController {
             self.tabsCount = 0
             
             if let error = fetchError{
-                showAlertWithTitle("Failed to read of categories data".localized, message: error.description)
+                showAlertWithTitle("Failed to read of categories data".localized, message: error.localizedDescription)
                 return
             }
             if categories.count > 0{

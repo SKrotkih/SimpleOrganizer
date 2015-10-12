@@ -84,7 +84,7 @@ public class SOLocalDataBase: NSObject, SODataBaseProtocol{
         }()
 }
 
-// MARK: - Log In
+// MARK: - NSFetchedResultsControllerDelegate
 
 extension SOLocalDataBase: NSFetchedResultsControllerDelegate {
 
@@ -289,7 +289,11 @@ extension SOLocalDataBase{
         let currentUser: SOUser? = SOLocalUserManager.sharedInstance.currentUser
         
         if currentUser ==  nil{
-            completionBlock(resultBuffer: [], error: nil)
+            var dict = [String: AnyObject]()
+            dict[NSLocalizedDescriptionKey] = "Data doesn't accessible\nPlease log in to continue".localized
+            let error: NSError? = NSError(domain: DataBaseErrorDomain, code: 9998, userInfo: dict)
+            completionBlock(resultBuffer: [], error: error)
+
             return
         }
 

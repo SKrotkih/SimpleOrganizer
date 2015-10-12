@@ -103,5 +103,5 @@ SwiftOrganizer is available under the MIT license. See the LICENSE file for more
 - 29.09.2015: Facebook SDK added, registered AppID, login function in Objective-C was implemented. 
 - 02.10.2015: Added the DateTools framework
 - 07.10.2015: Log In to local database is implemented fia Facebook. Database for local user is implemented in a different storage.
-
+- 12.10.2015: Implemented data migration for core data for new model data
 

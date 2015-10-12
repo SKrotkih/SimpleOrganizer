@@ -100,6 +100,16 @@ extension SORemoteDataBase{
     }
     
     public func allTasks(completionBlock: (resultBuffer: [SOTask], error: NSError?) -> Void) {
+
+        if PFUser.currentUser() == nil{
+            var dict = [String: AnyObject]()
+            dict[NSLocalizedDescriptionKey] = "Data doesn't accessible\nPlease log in to continue".localized
+            let error: NSError? = NSError(domain: DataBaseErrorDomain, code: 9998, userInfo: dict)
+            completionBlock(resultBuffer: [], error: error)
+            
+            return
+        }
+        
         self.fetchAllDataWithClassName(TaskClassName, completionBlock: {(resultBuffer: [AnyObject], fetchError: NSError?) in
             if let error = fetchError{
                 completionBlock(resultBuffer: [], error: error)
@@ -144,6 +154,15 @@ extension SORemoteDataBase{
     }
     
     private func fetchAllDataWithClassName(className: String, completionBlock: (resultBuffer: [AnyObject], error: NSError?) -> Void){
+        if PFUser.currentUser() == nil{
+            var dict = [String: AnyObject]()
+            dict[NSLocalizedDescriptionKey] = "Data doesn't accessible\nPlease log in to continue".localized
+            let error: NSError? = NSError(domain: DataBaseErrorDomain, code: 9998, userInfo: dict)
+            completionBlock(resultBuffer: [], error: error)
+            
+            return
+        }
+        
         let query = PFQuery(className: className)
         query.findObjectsInBackgroundWithBlock {(objects, fetchError) in
             var resultBuffer: [AnyObject] = []

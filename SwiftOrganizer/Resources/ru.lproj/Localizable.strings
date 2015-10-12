@@ -42,3 +42,4 @@
 "Failed to fetch data!"="Ошибка чтения данных!";
 "Failed to fetch data"="Не удалось прочитать данные";
 "Failed to save data"="Данные не удалось сохранить";
+"Data doesn't accessible\nPlease log in to continue"="Данные не доступны!\nПожалуйста, залогиньтесь в системе";

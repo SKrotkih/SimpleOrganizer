@@ -40,14 +40,10 @@ public final class SOFetchingData : SOFetchingDataProtocol{
     }
 
     public func allCategories(completionBlock: (resultBuffer: [SOCategory], error: NSError?) -> Void){
-        
-        
         SODataBaseFactory.sharedInstance.dataBase.allCategories{(categories: [SOCategory], error: NSError?) in
             self._allCategories = categories
             completionBlock(resultBuffer: categories, error: error)
         }
-        
-        
     }
     
     public func allIcons(completionBlock: (resultBuffer: [SOIco], error: NSError?) -> Void){
