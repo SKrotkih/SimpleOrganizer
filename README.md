@@ -37,6 +37,7 @@ Also implemented the following features:
 - Log In to loacal database implemented via Facebook 
 - Log In to remote data base implemented by the Parse.com SDK
 - migration data after changing data model 
+- multi tasking ready
 
 Were applied the following design patterns:
 - abstract method;

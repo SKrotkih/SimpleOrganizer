@@ -17,61 +17,90 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="geS-tQ-9lZ">
-                                <rect key="frame" x="232" y="495" width="136" height="30"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="D26-D2-VcO" customClass="SOBorderedImageView" customModule="SwiftOrganizer" customModuleProvider="target">
+                                <rect key="frame" x="225" y="51" width="150" height="150"/>
                                 <animations/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="136" id="7gy-m7-vUK"/>
-                                    <constraint firstAttribute="height" constant="30" id="fkW-OZ-Xw3"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="19"/>
-                                <state key="normal" title="Log Out">
-                                    <color key="titleColor" red="0.0" green="0.0" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
-                                </state>
-                                <connections>
-                                    <action selector="logOutButtonPressed:" destination="nzL-ar-0e7" eventType="touchUpInside" id="cdf-GZ-1Fx"/>
-                                </connections>
-                            </button>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="fnn-wp-XTm">
-                                <rect key="frame" x="213" y="72" width="175" height="175"/>
-                                <animations/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="175" id="9Fa-0s-E8k"/>
-                                    <constraint firstAttribute="height" constant="175" id="LOW-37-4oZ"/>
+                                    <constraint firstAttribute="width" constant="150" id="gDt-zF-GQy"/>
+                                    <constraint firstAttribute="height" constant="150" id="kGq-fw-OcG"/>
                                 </constraints>
                                 <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                        <integer key="value" value="40"/>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                        <color key="value" red="0.0" green="0.0" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
                                     </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="borderRadius">
+                                        <real key="value" value="30"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                        <real key="value" value="3"/>
+                                    </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xtB-QM-04n">
-                                <rect key="frame" x="178" y="298" width="244" height="21"/>
+                                <rect key="frame" x="178" y="259" width="244" height="21"/>
                                 <animations/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="244" id="E0Z-Z4-oeJ"/>
-                                    <constraint firstAttribute="height" constant="21" id="Rwc-yK-99a"/>
+                                    <constraint firstAttribute="height" constant="21" id="YkX-2p-gZv"/>
+                                    <constraint firstAttribute="width" constant="244" id="pj8-zf-qFH"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="Arial-BoldMT" family="Arial" pointSize="17"/>
-                                <color key="textColor" red="0.29803922770000002" green="0.29803922770000002" blue="0.29803922770000002" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Iim-up-a1D" customClass="SOBorderedView" customModule="SwiftOrganizer" customModuleProvider="target">
+                                <rect key="frame" x="219" y="491" width="162" height="38"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="geS-tQ-9lZ">
+                                        <rect key="frame" x="13" y="4" width="136" height="30"/>
+                                        <animations/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="30" id="GLq-AD-Qtq"/>
+                                            <constraint firstAttribute="width" constant="136" id="Xz9-Qa-hqP"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="19"/>
+                                        <state key="normal" title="Log Out">
+                                            <color key="titleColor" red="0.0" green="0.0" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="logOutButtonPressed:" destination="nzL-ar-0e7" eventType="touchUpInside" id="cdf-GZ-1Fx"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <animations/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="162" id="LbA-0T-uTm"/>
+                                    <constraint firstItem="geS-tQ-9lZ" firstAttribute="centerY" secondItem="Iim-up-a1D" secondAttribute="centerY" id="Vf2-gR-3Iz"/>
+                                    <constraint firstAttribute="height" constant="38" id="fKI-1R-Fb8"/>
+                                    <constraint firstItem="geS-tQ-9lZ" firstAttribute="centerX" secondItem="Iim-up-a1D" secondAttribute="centerX" id="fqD-gm-zvS"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                        <color key="value" red="0.0" green="0.0" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="borderRadius">
+                                        <real key="value" value="10"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                        <real key="value" value="2"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
                         </subviews>
                         <animations/>
                         <color key="backgroundColor" red="0.60392156862745094" green="0.60392156862745094" blue="0.60392156862745094" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstItem="xtB-QM-04n" firstAttribute="top" secondItem="fnn-wp-XTm" secondAttribute="bottom" constant="51" id="0cJ-Gc-OTG"/>
-                            <constraint firstItem="GjP-wJ-C0d" firstAttribute="top" secondItem="geS-tQ-9lZ" secondAttribute="bottom" constant="75" id="AiT-yh-jVB"/>
-                            <constraint firstItem="geS-tQ-9lZ" firstAttribute="centerX" secondItem="aQs-b9-I74" secondAttribute="centerX" id="Eat-DT-fJp"/>
-                            <constraint firstItem="xtB-QM-04n" firstAttribute="centerX" secondItem="aQs-b9-I74" secondAttribute="centerX" id="IPf-C0-gTF"/>
-                            <constraint firstItem="fnn-wp-XTm" firstAttribute="centerX" secondItem="aQs-b9-I74" secondAttribute="centerX" id="PcL-dg-RK5"/>
-                            <constraint firstItem="fnn-wp-XTm" firstAttribute="top" secondItem="bmQ-W4-B8P" secondAttribute="bottom" constant="52" id="nZz-DM-ffH"/>
+                            <constraint firstItem="D26-D2-VcO" firstAttribute="centerX" secondItem="aQs-b9-I74" secondAttribute="centerX" id="0ak-Pf-42e"/>
+                            <constraint firstItem="Iim-up-a1D" firstAttribute="centerX" secondItem="aQs-b9-I74" secondAttribute="centerX" id="3Po-xq-1Wo"/>
+                            <constraint firstItem="xtB-QM-04n" firstAttribute="centerX" secondItem="aQs-b9-I74" secondAttribute="centerX" id="9XD-Mu-Izg"/>
+                            <constraint firstItem="xtB-QM-04n" firstAttribute="top" secondItem="D26-D2-VcO" secondAttribute="bottom" constant="58" id="VuH-AB-jKo"/>
+                            <constraint firstItem="GjP-wJ-C0d" firstAttribute="top" secondItem="Iim-up-a1D" secondAttribute="bottom" constant="71" id="ivN-VN-r87"/>
+                            <constraint firstItem="D26-D2-VcO" firstAttribute="top" secondItem="bmQ-W4-B8P" secondAttribute="bottom" constant="31" id="zSE-Em-SxM"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="logOutButton" destination="geS-tQ-9lZ" id="7dd-bn-2kQ"/>
-                        <outlet property="photoImageView" destination="fnn-wp-XTm" id="3p1-Fj-H4D"/>
+                        <outlet property="photoImageView" destination="D26-D2-VcO" id="Zuh-kH-Yul"/>
                         <outlet property="userNameLabel" destination="xtB-QM-04n" id="TNw-lq-xbW"/>
                     </connections>
                 </viewController>

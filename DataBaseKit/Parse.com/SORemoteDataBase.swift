@@ -171,7 +171,7 @@ extension SORemoteDataBase{
             } else {
                 if let pfObjects: [PFObject] = objects{
                     if pfObjects.count > 0{
-                        pfObjects.map({object in
+                        let _ = pfObjects.map({object in
                             resultBuffer.append(self.newInstanceFactory(object, className: className)!)
                         })
                         completionBlock(resultBuffer: resultBuffer, error: nil)

@@ -23,7 +23,7 @@ class SOTabBarController: NSObject {
 
     func clearTabs(){
         if let containerView = self.containerView{
-            containerView.subviews.map({$0.removeFromSuperview()})
+            let _ = containerView.subviews.map({$0.removeFromSuperview()})
         }
     }
     

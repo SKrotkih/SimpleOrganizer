@@ -159,6 +159,9 @@
 		7F8FE2031BC530AB00180EAD /* LogIn.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7F8FE2011BC530AB00180EAD /* LogIn.storyboard */; settings = {ASSET_TAGS = (); }; };
 		7F8FE2051BC532E100180EAD /* SOLogInInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F8FE2041BC532E100180EAD /* SOLogInInfoViewController.swift */; settings = {ASSET_TAGS = (); }; };
 		7FCD13641BCBEACE001778E9 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FCD13631BCBEACE001778E9 /* Utils.swift */; settings = {ASSET_TAGS = (); }; };
+		7FCD13681BCCF756001778E9 /* SOBorderedImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FCD13661BCCF756001778E9 /* SOBorderedImageView.swift */; settings = {ASSET_TAGS = (); }; };
+		7FCD13691BCCF756001778E9 /* SOBorderedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FCD13671BCCF756001778E9 /* SOBorderedView.swift */; settings = {ASSET_TAGS = (); }; };
+		7FCD136B1BCCF884001778E9 /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FCD136A1BCCF884001778E9 /* UIColorExtension.swift */; settings = {ASSET_TAGS = (); }; };
 		7FD8C7C01BC3F07200E0A8F7 /* LocalUsers.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 7FD8C7BE1BC3F07200E0A8F7 /* LocalUsers.xcdatamodeld */; settings = {ASSET_TAGS = (); }; };
 		7FDF313E1BBA8CBC00AD4127 /* SOUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FDF313D1BBA8CBC00AD4127 /* SOUser.swift */; settings = {ASSET_TAGS = (); }; };
 		7FDF31411BBA949700AD4127 /* Utils.h in Headers */ = {isa = PBXBuildFile; fileRef = 7FDF313F1BBA949700AD4127 /* Utils.h */; settings = {ASSET_TAGS = (); }; };
@@ -403,6 +406,9 @@
 		7F8FE2041BC532E100180EAD /* SOLogInInfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SOLogInInfoViewController.swift; path = ../DataBaseKit/LogInManager/SOLogInInfoViewController.swift; sourceTree = "<group>"; };
 		7FCD13611BCBD9C3001778E9 /* SwiftOrganizer v2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "SwiftOrganizer v2.xcdatamodel"; sourceTree = "<group>"; };
 		7FCD13631BCBEACE001778E9 /* Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Utils.swift; path = Utils/Utils.swift; sourceTree = "<group>"; };
+		7FCD13661BCCF756001778E9 /* SOBorderedImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SOBorderedImageView.swift; sourceTree = "<group>"; };
+		7FCD13671BCCF756001778E9 /* SOBorderedView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SOBorderedView.swift; sourceTree = "<group>"; };
+		7FCD136A1BCCF884001778E9 /* UIColorExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UIColorExtension.swift; path = Extensions/UIColorExtension.swift; sourceTree = SOURCE_ROOT; };
 		7FD8C7BF1BC3F07200E0A8F7 /* LocalUsers.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = LocalUsers.xcdatamodel; sourceTree = "<group>"; };
 		7FDF313D1BBA8CBC00AD4127 /* SOUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SOUser.swift; path = ../Classes/SOUser.swift; sourceTree = "<group>"; };
 		7FDF313F1BBA949700AD4127 /* Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Utils.h; sourceTree = "<group>"; };
@@ -713,6 +719,7 @@
 		7F5DF5F21BAD669300959432 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				7FCD13651BCCF756001778E9 /* Custom Views */,
 				7F5DF5F31BAD669300959432 /* BaseClasses */,
 				7F5DF5F61BAD669300959432 /* Extensions */,
 				7F5DF5FC1BAD669300959432 /* External Settings */,
@@ -742,6 +749,7 @@
 		7F5DF5F61BAD669300959432 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				7FCD136A1BCCF884001778E9 /* UIColorExtension.swift */,
 				7F5DF5F71BAD669300959432 /* ArrayExtension.swift */,
 				7F5DF5F81BAD669300959432 /* NSDateExtension.swift */,
 				7F5DF5FA1BAD669300959432 /* UITableViewExtension.swift */,
@@ -962,6 +970,15 @@
 				7FCD13631BCBEACE001778E9 /* Utils.swift */,
 			);
 			name = Utils;
+			sourceTree = "<group>";
+		};
+		7FCD13651BCCF756001778E9 /* Custom Views */ = {
+			isa = PBXGroup;
+			children = (
+				7FCD13661BCCF756001778E9 /* SOBorderedImageView.swift */,
+				7FCD13671BCCF756001778E9 /* SOBorderedView.swift */,
+			);
+			path = "Custom Views";
 			sourceTree = "<group>";
 		};
 		7FD8C7BD1BC3DDB300E0A8F7 /* LocalUsersDataBase */ = {
@@ -1381,6 +1398,7 @@
 				7F5DF68A1BAD669300959432 /* SOPreferenceIconsViewController.swift in Sources */,
 				7F5DF6881BAD669300959432 /* SOMakeCallViewController.swift in Sources */,
 				7F5DF68F1BAD669300959432 /* SOCategoryTabBarController.swift in Sources */,
+				7FCD13681BCCF756001778E9 /* SOBorderedImageView.swift in Sources */,
 				7F5DF6871BAD669300959432 /* SOMainViewController.swift in Sources */,
 				7F5DF67D1BAD669300959432 /* MainMenuViewController.swift in Sources */,
 				7F5DF6531BAD669300959432 /* UIViewControllerExtension.swift in Sources */,
@@ -1391,6 +1409,7 @@
 				7F5DF6841BAD669300959432 /* SOEditTaskViewController.swift in Sources */,
 				7F5DF6891BAD669300959432 /* SOPreferenceCategoriesViewController.swift in Sources */,
 				7F5DF6751BAD669300959432 /* SOEditTaskIconsCell.swift in Sources */,
+				7FCD136B1BCCF884001778E9 /* UIColorExtension.swift in Sources */,
 				7F5DF6521BAD669300959432 /* UITableViewExtension.swift in Sources */,
 				7F5DF6591BAD669300959432 /* SOiCloudManager.swift in Sources */,
 				7F5DF67E1BAD669300959432 /* RightViewController.swift in Sources */,
@@ -1403,6 +1422,7 @@
 				7F5DF64E1BAD669300959432 /* BaseTableViewCell.swift in Sources */,
 				7F5DF6821BAD669300959432 /* SODocumentsViewController.swift in Sources */,
 				7F5DF6731BAD669300959432 /* SOEditTaskDateCell.swift in Sources */,
+				7FCD13691BCCF756001778E9 /* SOBorderedView.swift in Sources */,
 				7F5DF5E51BAD330C00959432 /* StringExtension.swift in Sources */,
 				7F5DF6811BAD669300959432 /* SODocumentPickerViewController.swift in Sources */,
 				7F5DF6781BAD669300959432 /* SOEditCategoryViewController.swift in Sources */,
@@ -1727,6 +1747,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.skappledev.SwiftOrganizer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/SwiftOrganizer/SwiftOrganizer-Bridging-Header.h";
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -1744,6 +1765,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.skappledev.SwiftOrganizer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/SwiftOrganizer/SwiftOrganizer-Bridging-Header.h";
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};

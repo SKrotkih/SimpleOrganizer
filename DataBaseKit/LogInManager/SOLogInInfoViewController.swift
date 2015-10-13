@@ -10,7 +10,7 @@ import UIKit
 
 class SOLogInInfoViewController: UIViewController {
     @IBOutlet weak var logOutButton: UIButton!
-    @IBOutlet weak var photoImageView: UIImageView!
+    @IBOutlet weak var photoImageView: SOBorderedImageView!
     @IBOutlet weak var userNameLabel: UILabel!
 
     override func viewDidLoad() {

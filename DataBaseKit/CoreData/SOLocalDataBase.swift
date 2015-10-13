@@ -176,7 +176,7 @@ extension SOLocalDataBase{
         if let objects = categoriesController.fetchedObjects
         {
             if objects.count > 0{
-                objects.map({object in
+                let _ = objects.map({object in
                     let theObject = object as! TaskCategory
                     let recordid = theObject.valueForKey(kFldRecordId) as! String
                     let selected = theObject.valueForKey(kFldSelected) as! Bool
@@ -224,7 +224,7 @@ extension SOLocalDataBase{
             let objects = (try! self.coreData.managedObjectContext!.executeFetchRequest(fetchRequest)) as! [TaskCategory]
             
             if objects.count > 0{
-                objects.map({object in
+                let _ = objects.map({object in
                     let theObject = object as NSManagedObject
                     let recordid = theObject.valueForKey(kFldRecordId) as! String
                     let selected = theObject.valueForKey(kFldSelected) as! Bool
@@ -260,7 +260,7 @@ extension SOLocalDataBase{
         
         if let objects = iconsController.fetchedObjects{
             if objects.count > 0{
-                objects.map({object in
+                let _ = objects.map({object in
                     let theObject = object as! NSManagedObject
                     let recordid = theObject.valueForKey(kFldRecordId) as! String
                     let selected = theObject.valueForKey(kFldSelected) as! Bool

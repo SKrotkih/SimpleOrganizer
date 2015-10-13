@@ -9,13 +9,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "DataBaseKit/Classes/SOFetchingData.swift"
-            timestampString = "466350575.272816"
+            filePath = "SwiftOrganizer/Common/Custom Views/BorderedImageView.swift"
+            timestampString = "466419292.401034"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "38"
-            endingLineNumber = "38"
-            landmarkName = "allTasks(_:)"
+            startingLineNumber = "16"
+            endingLineNumber = "16"
+            landmarkName = "layoutSubviews()"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

@@ -89,7 +89,7 @@ public class SOLocalUserManager: NSObject {
         let objects = (try! self.coreData.managedObjectContext!.executeFetchRequest(fetchRequest)) as! [User]
         if objects.count > 0{
             let currUser: SOUser = SOUser()
-            objects.map({object in
+            let _ = objects.map({object in
                 let theObject: User = object as User
                 currUser.databaseObject = theObject
                 currUser.firstname = theObject.valueForKey("firstname") as! String

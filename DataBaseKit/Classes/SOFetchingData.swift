@@ -21,7 +21,6 @@ public protocol SOFetchingDataProtocol{
 public final class SOFetchingData : SOFetchingDataProtocol{
     private lazy var _allCategories = [SOCategory]()
     private lazy var _allIcons = [SOIco]()
-    private var collectionQueue = dispatch_queue_create("fetchDataQ", DISPATCH_QUEUE_CONCURRENT);
 
     public class var sharedInstance: SOFetchingDataProtocol {
         struct SingletonWrapper {
