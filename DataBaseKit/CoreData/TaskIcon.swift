@@ -1,5 +1,5 @@
 //
-//  Task.swift
+//  TaskIcon.swift
 //  SwiftOrganizer
 //
 //  Created by Sergey Krotkih on 10/16/15.
@@ -9,8 +9,8 @@
 import Foundation
 import CoreData
 
-@objc(Task)
-class Task: NSManagedObject {
+@objc(TaskIcon)
+class TaskIcon: NSManagedObject {
 
 // Insert code here to add functionality to your managed object subclass
 

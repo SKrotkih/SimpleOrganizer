@@ -11,54 +11,11 @@ import UIKit
 public class SOPopulateLocalDataBase {
 
     private var coreData: SOCoreDataProtocol
+    private var localaDataBase: SOLocalDataBase
     
-    init(coreData: SOCoreDataProtocol){
-        self.coreData = coreData
-    }
-    
-    public func populateTasks(){
-        let task  = self.coreData.newManagedObject("Task") as! Task
-        task.category = "1"
-        task.ico1 = "1"
-        task.ico2 = "3"
-        task.ico3 = "6"
-        task.ico4 = "2"
-        task.ico5 = ""
-        task.ico6 = ""
-        task.title = "ToDo task"
-        
-        
-        let task2  = self.coreData.newManagedObject("Task") as! Task
-        task2.category = "2"
-        task2.ico1 = "6"
-        task2.ico2 = "4"
-        task2.ico3 = "3"
-        task2.ico4 = "2"
-        task2.ico5 = "1"
-        task2.ico6 = ""
-        task2.title = "Event task"
-        
-        let task3  = self.coreData.newManagedObject("Task") as! Task
-        task3.category = "3"
-        task3.ico1 = "10"
-        task3.ico2 = "12"
-        task3.ico3 = "3"
-        task3.ico4 = "2"
-        task3.ico5 = ""
-        task3.ico6 = ""
-        task3.title = "Life task"
-        
-        let task4  = self.coreData.newManagedObject("Task") as! Task
-        task4.category = "4"
-        task4.ico1 = "1"
-        task4.ico2 = "17"
-        task4.ico3 = ""
-        task4.ico4 = "2"
-        task4.ico5 = ""
-        task4.ico6 = ""
-        task4.title = "Work task"
-        
-        self.coreData.saveContext()
+    init(localDataBase: SOLocalDataBase){
+        self.localaDataBase = localDataBase
+        self.coreData = localDataBase.coreData
     }
     
     public func populateIcons(){
@@ -79,10 +36,10 @@ public class SOPopulateLocalDataBase {
             ["id":"15","name":"ico15","img":"ico15"],
             ["id":"16","name":"ico16","img":"ico16"],
             ["id":"17","name":"ico17","img":"ico17"]]
-        let entityName = NSStringFromClass(TaskIco.classForCoder())
+        let entityName = NSStringFromClass(Icon.classForCoder())
         
         for dict in icons{
-            let ico = NSEntityDescription.insertNewObjectForEntityForName(entityName, inManagedObjectContext: self.coreData.managedObjectContext!) as! TaskIco
+            let ico = NSEntityDescription.insertNewObjectForEntityForName(entityName, inManagedObjectContext: self.coreData.managedObjectContext!) as! Icon
             ico.recordid = dict["id"]!
             ico.name = dict["name"]!
             ico.imagename = dict["img"]!
@@ -96,10 +53,10 @@ public class SOPopulateLocalDataBase {
     public func populateCategories(){
         let categories = ["ToDo".localized, "Events".localized, "Life".localized, "Work".localized]
         var categoryId = 1
-        let entityName = NSStringFromClass(TaskCategory.classForCoder())
+        let entityName = NSStringFromClass(Category.classForCoder())
         
         for catagoryName in categories{
-            let category = NSEntityDescription.insertNewObjectForEntityForName(entityName, inManagedObjectContext: self.coreData.managedObjectContext!) as! TaskCategory
+            let category = NSEntityDescription.insertNewObjectForEntityForName(entityName, inManagedObjectContext: self.coreData.managedObjectContext!) as! Category
             let newCategoryId = "\(categoryId++)"
             category.recordid = newCategoryId
             category.name = catagoryName as String
@@ -109,7 +66,34 @@ public class SOPopulateLocalDataBase {
         
         self.coreData.saveContext()
     }
-   
     
+    public func populateTask(title: String, category: String, icons: [String]){
+        var userId: String?
+        if let curreentUser = SOLocalUserManager.sharedInstance.currentUser{
+            userId = curreentUser.userid
+        }
+        let task  = self.coreData.newManagedObject("Task") as! Task
+        task.category = category
+        task.title = title
+        if let theUserId = userId{
+            task.userid = theUserId
+        }
+        for iconId: String in icons{
+            if let icon: Icon = self.localaDataBase.iconWithId(iconId){
+                let taskIcon  = self.coreData.newManagedObject("TaskIcon") as! TaskIcon
+                taskIcon.task = task
+                taskIcon.icon = icon
+            }
+            
+        }
+        self.coreData.saveContext()        
+    }
+    
+    public func populateTasks(){
+        self.populateTask("ToDo task", category: "1", icons: ["1", "3", "6", "2"])
+        self.populateTask("Event task", category: "2", icons: ["6", "4", "3", "2", "1"])
+        self.populateTask("Life task", category: "3", icons: ["10", "12", "3", "2"])
+        self.populateTask("Work task", category: "4", icons: ["1", "17", "2"])
+    }
     
 }

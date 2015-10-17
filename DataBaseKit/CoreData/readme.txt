@@ -1,5 +1,5 @@
-@objc(TaskCategory)
-class TaskCategory: NSManagedObject {
+@objc(Category)
+class Category: NSManagedObject {
 
 @NSManaged var recordid: String
 ...

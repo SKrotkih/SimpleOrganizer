@@ -139,7 +139,6 @@ extension SOCoreDataBase{
     {
         if let moc = self.managedObjectContext, let object = objectForDeleting{
             moc.deleteObject(object)
-            self.saveContext()
         }
     }
     

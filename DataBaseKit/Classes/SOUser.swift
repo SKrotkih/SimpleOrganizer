@@ -13,7 +13,7 @@ let DataBaseName = "LocalUsers"
 let UserEntityName = "User"
 
 public class SOUser: NSObject {
-    public var databaseObject: NSManagedObject?
+    public var databaseObject: NSManagedObjectID?
     public var firstname: String = ""
     public var lastname: String = ""
     public var gender: String = ""
@@ -26,9 +26,10 @@ public class SOUser: NSObject {
 }
 
 public class SOLocalUserManager: NSObject {
+
     private var coreData: SOCoreDataProtocol
-    
     public var isItCurrentUser: Bool = false
+    private var _currentUser: SOUser?
 
     public class var sharedInstance: SOLocalUserManager {
         struct SingletonWrapper {
@@ -44,69 +45,104 @@ public class SOLocalUserManager: NSObject {
     }
     
     public func setUpLoggedInUserData(dict: Dictionary<String, AnyObject>){
-        var userObject: User!
+        var managedObject: User!
         
         if let currentUser = self.user{
-            userObject = currentUser.databaseObject as! User
-        } else {
-            userObject = self.coreData.newManagedObject(UserEntityName) as! User
+            if let theObject = self.coreData.managedObjectContext?.objectWithID(currentUser.databaseObject!) as? User{
+                managedObject = theObject
+            }
         }
-        userObject.firstname = dict["first_name"] as? String
-        userObject.lastname = dict["last_name"] as? String
-        userObject.gender = dict["gender"] as? String
-        userObject.email = dict["email"] as? String
-        let picture: Dictionary<String, AnyObject> = dict["picture"] as! Dictionary<String, AnyObject>
-        let picture_data: Dictionary<String, AnyObject>  = picture["data"] as! Dictionary<String, AnyObject>
-        userObject.photo_prefix = picture_data["url"] as? String
-        userObject.name = dict["name"] as? String
-        userObject.fb_id = dict["id"] as? String
-        userObject.userid = dict["id"] as? String
-        userObject.currentUser = true
-        
-        self.coreData.saveContext()
+        if managedObject == nil {
+            managedObject = self.coreData.newManagedObject(UserEntityName) as! User
+        }
+        self.saveAsManagedObject(dict, managedObject: managedObject)
     }
     
     public var currentUser: SOUser?{
         get{
-            if let currentUser = self.user{
+            if let currentUser = _currentUser{
+                if currentUser.isItCurrentUser{
+                    return currentUser
+                }
+            } else if let currentUser = self.user {
                 if currentUser.isItCurrentUser{
                     return currentUser
                 }
             }
+
             return nil
         }
         set {
             if let currentUser = newValue{
-                let userObject = currentUser.databaseObject as? User
-                userObject!.currentUser = currentUser.isItCurrentUser
-                self.coreData.saveContext()
+                if let managedObject = self.coreData.managedObjectContext?.objectWithID(currentUser.databaseObject!) as? User{
+                    managedObject.currentUser = currentUser.isItCurrentUser
+                    _currentUser = self.object(managedObject)
+                    self.coreData.saveContext()
+                }
             }
         }
     }
+
+    lazy var usersFetchedResultController: NSFetchedResultsController = {
+        let request = NSFetchRequest(entityName: UserEntityName)
+        request.sortDescriptors = []
+        let fetchedResultsController = NSFetchedResultsController(fetchRequest: request, managedObjectContext: self.coreData.managedObjectContext!, sectionNameKeyPath: nil, cacheName: "users")
+        return fetchedResultsController
+        }()
     
     var user: SOUser?{
-        let fetchRequest = NSFetchRequest(entityName: UserEntityName)
-        let objects = (try! self.coreData.managedObjectContext!.executeFetchRequest(fetchRequest)) as! [User]
-        if objects.count > 0{
-            let currUser: SOUser = SOUser()
-            let _ = objects.map({object in
-                let theObject: User = object as User
-                currUser.databaseObject = theObject
-                currUser.firstname = theObject.valueForKey("firstname") as! String
-                currUser.lastname = theObject.valueForKey("lastname") as! String
-                currUser.gender = theObject.valueForKey("gender") as! String
-                currUser.email = theObject.valueForKey("email") as! String
-                currUser.photo_prefix = theObject.valueForKey("photo_prefix") as! String
-                currUser.name = theObject.valueForKey("name") as! String
-                currUser.fb_id = theObject.valueForKey("fb_id") as! String
-                currUser.userid = theObject.valueForKey("userid") as! String
-                currUser.isItCurrentUser = theObject.valueForKey("currentUser") as! Bool
-            })
-            
-            return currUser
+        do {
+            try usersFetchedResultController.performFetch()
+
+            if let objects = usersFetchedResultController.fetchedObjects
+            {
+                if objects.count > 0{
+                    var currUser: SOUser?
+                    let _ = objects.map({object in
+                        let managedObject = object as! User
+                        currUser = self.object(managedObject)
+                    })
+                    
+                    return currUser
+                }
+            }
+        } catch let error as NSError {
+            print("Failed to fetch user data \(error)")
         }
+
         return nil
     }
     
+    private func object(managedObject: User) -> SOUser{
+        let object: SOUser = SOUser()
+        object.databaseObject = managedObject.objectID
+        object.firstname = managedObject.valueForKey("firstname") as! String
+        object.lastname = managedObject.valueForKey("lastname") as! String
+        object.gender = managedObject.valueForKey("gender") as! String
+        object.email = managedObject.valueForKey("email") as! String
+        object.photo_prefix = managedObject.valueForKey("photo_prefix") as! String
+        object.name = managedObject.valueForKey("name") as! String
+        object.fb_id = managedObject.valueForKey("fb_id") as! String
+        object.userid = managedObject.valueForKey("userid") as! String
+        object.isItCurrentUser = managedObject.valueForKey("currentUser") as! Bool
+
+        return object
+    }
+
+    private func saveAsManagedObject(dict: Dictionary<String, AnyObject>, managedObject: User){
+        managedObject.firstname = dict["first_name"] as? String
+        managedObject.lastname = dict["last_name"] as? String
+        managedObject.gender = dict["gender"] as? String
+        managedObject.email = dict["email"] as? String
+        let picture: Dictionary<String, AnyObject> = dict["picture"] as! Dictionary<String, AnyObject>
+        let picture_data: Dictionary<String, AnyObject>  = picture["data"] as! Dictionary<String, AnyObject>
+        managedObject.photo_prefix = picture_data["url"] as? String
+        managedObject.name = dict["name"] as? String
+        managedObject.fb_id = dict["id"] as? String
+        managedObject.userid = dict["id"] as? String
+        managedObject.currentUser = true
+        
+        self.coreData.saveContext()
+    }
     
 }

@@ -9,6 +9,7 @@
 import UIKit
 
 let TaskEntityName = "Task"
+let TaskIconEntityName = "TaskIcon"
 let LocalDataBaseName = "SwiftOrganizer"
 
 public class SOLocalDataBase: NSObject, SODataBaseProtocol{
@@ -22,7 +23,7 @@ public class SOLocalDataBase: NSObject, SODataBaseProtocol{
     }
     
     lazy var populateDataBase: SOPopulateLocalDataBase = {
-        return SOPopulateLocalDataBase(coreData: self.coreData)
+        return SOPopulateLocalDataBase(localDataBase: self)
     }()
     
     lazy var coreData: SOCoreDataProtocol = {
@@ -68,9 +69,9 @@ public class SOLocalDataBase: NSObject, SODataBaseProtocol{
         let request = NSFetchRequest(entityName: CategoryEntityName)
         request.sortDescriptors = [NSSortDescriptor(key: "name", ascending: true)]
         
-        let categoriesController = NSFetchedResultsController(fetchRequest: request, managedObjectContext: self.coreData.managedObjectContext!, sectionNameKeyPath: nil, cacheName: nil)
-        categoriesController.delegate = self
-        return categoriesController
+        let fetchedResultsController = NSFetchedResultsController(fetchRequest: request, managedObjectContext: self.coreData.managedObjectContext!, sectionNameKeyPath: nil, cacheName: "categories")
+        fetchedResultsController.delegate = self
+        return fetchedResultsController
         }()
 
     
@@ -78,9 +79,9 @@ public class SOLocalDataBase: NSObject, SODataBaseProtocol{
         let request = NSFetchRequest(entityName: IcoEntityName)
         request.sortDescriptors = [NSSortDescriptor(key: "recordid", ascending: true)]
         
-        let categoriesController = NSFetchedResultsController(fetchRequest: request, managedObjectContext: self.coreData.managedObjectContext!, sectionNameKeyPath: nil, cacheName: nil)
-        categoriesController.delegate = self
-        return categoriesController
+        let fetchedResultsController = NSFetchedResultsController(fetchRequest: request, managedObjectContext: self.coreData.managedObjectContext!, sectionNameKeyPath: nil, cacheName: "icons")
+        fetchedResultsController.delegate = self
+        return fetchedResultsController
         }()
 }
 
@@ -170,14 +171,14 @@ extension SOLocalDataBase{
         do {
             try categoriesController.performFetch()
         } catch let error as NSError {
-            print("Error fetching category data \(error)")
+            print("Failed to fetching category data \(error)")
         }
         
         if let objects = categoriesController.fetchedObjects
         {
             if objects.count > 0{
                 let _ = objects.map({object in
-                    let theObject = object as! TaskCategory
+                    let theObject = object as! Category
                     let recordid = theObject.valueForKey(kFldRecordId) as! String
                     let selected = theObject.valueForKey(kFldSelected) as! Bool
                     let visible = theObject.valueForKey(kFldVisible) as! Bool
@@ -190,54 +191,6 @@ extension SOLocalDataBase{
                 _needRecursiveCall = true
             }
         }
-        
-        if _needRecursiveCall{
-            return self.allCategories(completionBlock)
-        }
-        
-        completionBlock(resultBuffer: _allCategories, error: nil)
-    }
-    
-    
-    // TODO: - I tried to make generic for allCategories and the allIcons function but faced some principal problems
-    // MARK: Categories
-    public func allCategories_(completionBlock: (resultBuffer: [SOCategory], error: NSError?) -> Void){
-        var _allCategories: [SOCategory] = []
-        var _needRecursiveCall: Bool = false
-        
-        dispatch_sync(self.queue, {() in
-            let fetchRequest = NSFetchRequest(entityName: CategoryEntityName)
-
-            
-            /*
-            // Example of filtering and sorting:
-            
-            let predicate = NSPredicate(format: "title='The first book'")
-            let lengthSort = NSSortDescriptor(key: "length", ascending: true)
-            let alphaSort = NSSortDescriptor(key: "text", ascending: false)
-            fetchRequest.predicate = predicate
-            fetchRequest.sortDescriptors = [lengthSort, alphaSort]
-            
-            */
-            
-            
-            let objects = (try! self.coreData.managedObjectContext!.executeFetchRequest(fetchRequest)) as! [TaskCategory]
-            
-            if objects.count > 0{
-                let _ = objects.map({object in
-                    let theObject = object as NSManagedObject
-                    let recordid = theObject.valueForKey(kFldRecordId) as! String
-                    let selected = theObject.valueForKey(kFldSelected) as! Bool
-                    let visible = theObject.valueForKey(kFldVisible) as! Bool
-                    let name = theObject.valueForKey(kCategoryFldName) as! String
-                    let category = SOCategory(object: objects, id: recordid, selected: selected, visible: visible, name: name)
-                    _allCategories.append(category)
-                })
-            } else {
-                self.populateDataBase.populateCategories()
-                _needRecursiveCall = true
-            }
-        })
         
         if _needRecursiveCall{
             return self.allCategories(completionBlock)
@@ -307,6 +260,7 @@ extension SOLocalDataBase{
                 if let curreentUser = SOLocalUserManager.sharedInstance.currentUser{
                     userId = curreentUser.userid
                 }
+                
                 let fetchRequest = NSFetchRequest(entityName: TaskEntityName)
                 if userId != nil{
                     let predicate = NSPredicate(format: "userid == \(userId!)", "")
@@ -325,18 +279,22 @@ extension SOLocalDataBase{
                                 for task: Task in tasks{
                                     var categorySelected: Bool = false
                                     
-                                    if let category = SOFetchingData.sharedInstance.categoryById(task.category){
+                                    if let category = SOFetchingData.sharedInstance.categoryById(task.category!){
                                         categorySelected = category.selected
                                     }
                                     
-                                    let icons = [task.ico1, task.ico2, task.ico3, task.ico4, task.ico5, task.ico6]
                                     var iconsSelected: Bool = false
                                     
-                                    for iconId in icons{
-                                        if let ico = SOFetchingData.sharedInstance.iconById(iconId){
-                                            iconsSelected = iconsSelected || ico.selected
+                                    if let icons = task.icons{
+                                        let arr = icons.allObjects
+                                        
+                                        for anyObject: AnyObject in arr {
+                                            let taskIcon = anyObject as! TaskIcon
+                                            let ico = taskIcon.icon
+                                            iconsSelected = ico.selected as! Bool
                                         }
                                     }
+                                    
                                     if categorySelected && iconsSelected{
                                         let sotask = self!.newTask(task)
                                         _allTasks.append(sotask)
@@ -418,13 +376,24 @@ extension SOLocalDataBase{
         let title = task.title
         let category = task.category
         let date = task.date
-        let taskIcons = [task.ico1, task.ico2, task.ico3, task.ico4, task.ico5, task.ico6]
         var _icons = [String](count: MaxIconsCount, repeatedValue: "")
-        for i in 0..<MaxIconsCount{
-            _icons[i] = taskIcons[i]
+
+        if let icons = task.icons{
+            let arr = icons.allObjects
+            var i: Int = 0
+            
+            for anyObject: AnyObject in arr {
+                let taskIcon = anyObject as! TaskIcon
+                let ico = taskIcon.icon
+                if let recirdid = ico.recordid{
+                    if i < MaxIconsCount{
+                        _icons[i++] = recirdid
+                    }
+                }
+            }
         }
-        
-        let newTask: SOTask = SOTask(object: task, userid: userid, title: title, category: category, date: date, icons: _icons)
+        let objectID: NSManagedObjectID = task.objectID
+        let newTask: SOTask = SOTask(object: objectID, userid: userid, title: title!, category: category!, date: date, icons: _icons)
         
         return newTask
     }
@@ -445,7 +414,7 @@ extension SOLocalDataBase{
         
         dispatch_sync(self.queue, {() in
             let fetchRequest = NSFetchRequest(entityName: entityName)
-            let predicate = NSPredicate(format: "recordid == %@", recordid)
+            let predicate = NSPredicate(format: "recordid == \"%@\"", recordid)
             fetchRequest.predicate = predicate
             var requestError: NSError?
             let fetchedData: [AnyObject]?
@@ -469,6 +438,16 @@ extension SOLocalDataBase{
         
         return databaseObject
     }
+    
+    func currentUserId() -> String?{
+        var userId: String?
+
+        if let curreentUser = SOLocalUserManager.sharedInstance.currentUser{
+            userId = curreentUser.userid
+        }
+        return userId
+    }
+    
 }
 
 // MARK: - Save Objects
@@ -476,17 +455,18 @@ extension SOLocalDataBase{
 extension SOLocalDataBase{
     
     public func saveTask(task: SOTask, completionBlock: (error: NSError?) -> Void){
+        guard let userId = currentUserId() else{
+            completionBlock(error: nil)
+
+            return
+        }
         dispatch_sync(self.queue, {() in
-            var userId: String = "777"
-            if let curreentUser = SOLocalUserManager.sharedInstance.currentUser{
-                userId = curreentUser.userid
-            }
             task.userid = userId
             
             let taskObject: Task!
             
-            if let object = task.databaseObject as? Task{
-                taskObject = object
+            if let objectID = task.databaseObject as? NSManagedObjectID{
+                taskObject = self.coreData.managedObjectContext!.objectWithID(objectID) as! Task
             }
             else{
                 taskObject = self.coreData.newManagedObject(TaskEntityName) as! Task
@@ -495,17 +475,24 @@ extension SOLocalDataBase{
             taskObject.userid = task.userid
             taskObject.title = task.title
             taskObject.category = task.category
-            let icons = task.icons
-            taskObject.ico1 = icons[0]
-            taskObject.ico2 = icons[1]
-            taskObject.ico3 = icons[2]
-            taskObject.ico4 = icons[3]
-            taskObject.ico5 = icons[4]
-            taskObject.ico6 = icons[5]
             if let date = task.date{
                 taskObject.date = date
             }
+            let icons = task.icons
             
+            if let arr = taskObject?.icons?.allObjects{
+                for anyObject: AnyObject in arr {
+                    let taskIcon = anyObject as! TaskIcon
+                    self.coreData.deleteObject(taskIcon)
+                }
+            }
+            for iconId: String in icons{
+                if let icon: Icon = self.iconWithId(iconId){
+                    let taskIcon  = self.coreData.newManagedObject(TaskIconEntityName) as! TaskIcon
+                    taskIcon.task = taskObject
+                    taskIcon.icon = icon
+                }
+            }
             self.coreData.saveContext()
         })
         
@@ -560,9 +547,38 @@ extension SOLocalDataBase{
         dispatch_barrier_sync(self.queue, { () in
             let taskObject: Task? = task.databaseObject as? Task
             self.coreData.deleteObject(taskObject)
+            self.coreData.saveContext()
         })
     }
     
+}
+
+// MARK: - Other functions
+
+extension SOLocalDataBase{
+    func iconWithId(iconId: String) -> Icon? {
+        if iconId.isEmpty{
+            return nil
+        }
+        
+        let request = NSFetchRequest(entityName: "Icon")
+        request.predicate = NSPredicate(format: "recordid == \"\(iconId)\"", "")
+        request.sortDescriptors = []
+        let controller = NSFetchedResultsController(fetchRequest: request, managedObjectContext: self.coreData.managedObjectContext!, sectionNameKeyPath: nil, cacheName: nil)
+        do {
+            try controller.performFetch()
+
+            if let objects = controller.fetchedObjects{
+                if objects.count > 0{
+                    return objects[0] as! Icon
+                }
+            }
+        } catch let error as NSError {
+            print("Failed to fetching Icon data \(error)")
+        }
+        
+        return nil
+    }
 }
 
 // MARK: - Other functions

@@ -8,7 +8,7 @@
 
 import UIKit
 
-let CategoryEntityName = "TaskCategory"
+let CategoryEntityName = "Category"
 
 public class SOCategory: SOCatalog {
     

@@ -71,7 +71,7 @@ extension SOTask{
     }
     
     func update(){
-        //       let batch = NSBatchUpdateRequest(entityName: "TaskCategory")
+        //       let batch = NSBatchUpdateRequest(entityName: "Category")
         //        batch.propertiesToUpdate = [fieldName: value]
         //        // Predicate
         //        batch.predicate = NSPredicate(format: "id = %@", category.id)

@@ -8,7 +8,7 @@
 
 import UIKit
 
-let IcoEntityName = "TaskIco"
+let IcoEntityName = "Icon"
 
 public class SOIco: SOCatalog {
 

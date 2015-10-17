@@ -35,9 +35,6 @@
 		7F5DF5BE1BAD2CF300959432 /* SOLocalDataBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F5DF5A71BAD2CF300959432 /* SOLocalDataBase.swift */; settings = {ASSET_TAGS = (); }; };
 		7F5DF5BF1BAD2CF300959432 /* SOPopulateLocalDataBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F5DF5A81BAD2CF300959432 /* SOPopulateLocalDataBase.swift */; settings = {ASSET_TAGS = (); }; };
 		7F5DF5C01BAD2CF300959432 /* SwiftOrganizer.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 7F5DF5A91BAD2CF300959432 /* SwiftOrganizer.xcdatamodeld */; settings = {ASSET_TAGS = (); }; };
-		7F5DF5C11BAD2CF300959432 /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F5DF5AB1BAD2CF300959432 /* Task.swift */; settings = {ASSET_TAGS = (); }; };
-		7F5DF5C21BAD2CF300959432 /* TaskCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F5DF5AC1BAD2CF300959432 /* TaskCategory.swift */; settings = {ASSET_TAGS = (); }; };
-		7F5DF5C31BAD2CF300959432 /* TaskIco.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F5DF5AD1BAD2CF300959432 /* TaskIco.swift */; settings = {ASSET_TAGS = (); }; };
 		7F5DF5C41BAD2CF300959432 /* SOObserversManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F5DF5AF1BAD2CF300959432 /* SOObserversManager.swift */; settings = {ASSET_TAGS = (); }; };
 		7F5DF5C51BAD2CF300959432 /* SOParseComManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F5DF5B11BAD2CF300959432 /* SOParseComManager.swift */; settings = {ASSET_TAGS = (); }; };
 		7F5DF5C61BAD2CF300959432 /* SOPopulateRemoteDataBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F5DF5B21BAD2CF300959432 /* SOPopulateRemoteDataBase.swift */; settings = {ASSET_TAGS = (); }; };
@@ -150,6 +147,14 @@
 		7F66C0831BBE7326006C998F /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F5DF5C81BAD2E1600959432 /* Constants.swift */; settings = {ASSET_TAGS = (); }; };
 		7F66C0841BBE74FC006C998F /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F5DF5C81BAD2E1600959432 /* Constants.swift */; settings = {ASSET_TAGS = (); }; };
 		7F66C0851BBE74FE006C998F /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F5DF5C81BAD2E1600959432 /* Constants.swift */; settings = {ASSET_TAGS = (); }; };
+		7F89DDA51BD12226003C57BD /* Category+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F89DD9D1BD12226003C57BD /* Category+CoreDataProperties.swift */; settings = {ASSET_TAGS = (); }; };
+		7F89DDA61BD12226003C57BD /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F89DD9E1BD12226003C57BD /* Category.swift */; settings = {ASSET_TAGS = (); }; };
+		7F89DDA71BD12226003C57BD /* Icon+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F89DD9F1BD12226003C57BD /* Icon+CoreDataProperties.swift */; settings = {ASSET_TAGS = (); }; };
+		7F89DDA81BD12226003C57BD /* Icon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F89DDA01BD12226003C57BD /* Icon.swift */; settings = {ASSET_TAGS = (); }; };
+		7F89DDA91BD12226003C57BD /* Task+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F89DDA11BD12226003C57BD /* Task+CoreDataProperties.swift */; settings = {ASSET_TAGS = (); }; };
+		7F89DDAA1BD12226003C57BD /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F89DDA21BD12226003C57BD /* Task.swift */; settings = {ASSET_TAGS = (); }; };
+		7F89DDAB1BD12226003C57BD /* TaskIcon+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F89DDA31BD12226003C57BD /* TaskIcon+CoreDataProperties.swift */; settings = {ASSET_TAGS = (); }; };
+		7F89DDAC1BD12226003C57BD /* TaskIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F89DDA41BD12226003C57BD /* TaskIcon.swift */; settings = {ASSET_TAGS = (); }; };
 		7F8E16BC1BB9043A00FFC16B /* User+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F8E16BA1BB9043A00FFC16B /* User+CoreDataProperties.swift */; settings = {ASSET_TAGS = (); }; };
 		7F8E16BD1BB9043A00FFC16B /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F8E16BB1BB9043A00FFC16B /* User.swift */; settings = {ASSET_TAGS = (); }; };
 		7F8E16C21BBA71E500FFC16B /* AILogInManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 7F8E16C01BBA71E500FFC16B /* AILogInManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -162,6 +167,7 @@
 		7FCD13681BCCF756001778E9 /* SOBorderedImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FCD13661BCCF756001778E9 /* SOBorderedImageView.swift */; settings = {ASSET_TAGS = (); }; };
 		7FCD13691BCCF756001778E9 /* SOBorderedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FCD13671BCCF756001778E9 /* SOBorderedView.swift */; settings = {ASSET_TAGS = (); }; };
 		7FCD136B1BCCF884001778E9 /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FCD136A1BCCF884001778E9 /* UIColorExtension.swift */; settings = {ASSET_TAGS = (); }; };
+		7FD3879F1BD0B60D00E31A92 /* UIImageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FD3879E1BD0B60D00E31A92 /* UIImageExtension.swift */; settings = {ASSET_TAGS = (); }; };
 		7FD8C7C01BC3F07200E0A8F7 /* LocalUsers.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 7FD8C7BE1BC3F07200E0A8F7 /* LocalUsers.xcdatamodeld */; settings = {ASSET_TAGS = (); }; };
 		7FDF313E1BBA8CBC00AD4127 /* SOUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FDF313D1BBA8CBC00AD4127 /* SOUser.swift */; settings = {ASSET_TAGS = (); }; };
 		7FDF31411BBA949700AD4127 /* Utils.h in Headers */ = {isa = PBXBuildFile; fileRef = 7FDF313F1BBA949700AD4127 /* Utils.h */; settings = {ASSET_TAGS = (); }; };
@@ -286,9 +292,6 @@
 		7F5DF5A71BAD2CF300959432 /* SOLocalDataBase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SOLocalDataBase.swift; sourceTree = "<group>"; };
 		7F5DF5A81BAD2CF300959432 /* SOPopulateLocalDataBase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SOPopulateLocalDataBase.swift; sourceTree = "<group>"; };
 		7F5DF5AA1BAD2CF300959432 /* SwiftOrganizer.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = SwiftOrganizer.xcdatamodel; sourceTree = "<group>"; };
-		7F5DF5AB1BAD2CF300959432 /* Task.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
-		7F5DF5AC1BAD2CF300959432 /* TaskCategory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskCategory.swift; sourceTree = "<group>"; };
-		7F5DF5AD1BAD2CF300959432 /* TaskIco.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskIco.swift; sourceTree = "<group>"; };
 		7F5DF5AF1BAD2CF300959432 /* SOObserversManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SOObserversManager.swift; sourceTree = "<group>"; };
 		7F5DF5B11BAD2CF300959432 /* SOParseComManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SOParseComManager.swift; sourceTree = "<group>"; };
 		7F5DF5B21BAD2CF300959432 /* SOPopulateRemoteDataBase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SOPopulateRemoteDataBase.swift; sourceTree = "<group>"; };
@@ -398,6 +401,14 @@
 		7F5DF7181BAD869E00959432 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		7F5DF71A1BAD882300959432 /* SwiftOrganizer.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = SwiftOrganizer.entitlements; sourceTree = "<group>"; };
 		7F5DF71E1BAD8B8900959432 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = SOURCE_ROOT; };
+		7F89DD9D1BD12226003C57BD /* Category+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Category+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		7F89DD9E1BD12226003C57BD /* Category.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
+		7F89DD9F1BD12226003C57BD /* Icon+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Icon+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		7F89DDA01BD12226003C57BD /* Icon.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Icon.swift; sourceTree = "<group>"; };
+		7F89DDA11BD12226003C57BD /* Task+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Task+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		7F89DDA21BD12226003C57BD /* Task.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
+		7F89DDA31BD12226003C57BD /* TaskIcon+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "TaskIcon+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		7F89DDA41BD12226003C57BD /* TaskIcon.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskIcon.swift; sourceTree = "<group>"; };
 		7F8E16BA1BB9043A00FFC16B /* User+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "User+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		7F8E16BB1BB9043A00FFC16B /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		7F8E16C01BBA71E500FFC16B /* AILogInManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AILogInManager.h; sourceTree = "<group>"; };
@@ -409,6 +420,7 @@
 		7FCD13661BCCF756001778E9 /* SOBorderedImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SOBorderedImageView.swift; sourceTree = "<group>"; };
 		7FCD13671BCCF756001778E9 /* SOBorderedView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SOBorderedView.swift; sourceTree = "<group>"; };
 		7FCD136A1BCCF884001778E9 /* UIColorExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UIColorExtension.swift; path = Extensions/UIColorExtension.swift; sourceTree = SOURCE_ROOT; };
+		7FD3879E1BD0B60D00E31A92 /* UIImageExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UIImageExtension.swift; path = Extensions/UIImageExtension.swift; sourceTree = SOURCE_ROOT; };
 		7FD8C7BF1BC3F07200E0A8F7 /* LocalUsers.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = LocalUsers.xcdatamodel; sourceTree = "<group>"; };
 		7FDF313D1BBA8CBC00AD4127 /* SOUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SOUser.swift; path = ../Classes/SOUser.swift; sourceTree = "<group>"; };
 		7FDF313F1BBA949700AD4127 /* Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Utils.h; sourceTree = "<group>"; };
@@ -638,10 +650,15 @@
 		7F5DF5A51BAD2CF300959432 /* SwiftOrganizerCoreDataBase */ = {
 			isa = PBXGroup;
 			children = (
+				7F89DD9D1BD12226003C57BD /* Category+CoreDataProperties.swift */,
+				7F89DD9E1BD12226003C57BD /* Category.swift */,
+				7F89DD9F1BD12226003C57BD /* Icon+CoreDataProperties.swift */,
+				7F89DDA01BD12226003C57BD /* Icon.swift */,
+				7F89DDA11BD12226003C57BD /* Task+CoreDataProperties.swift */,
+				7F89DDA21BD12226003C57BD /* Task.swift */,
+				7F89DDA31BD12226003C57BD /* TaskIcon+CoreDataProperties.swift */,
+				7F89DDA41BD12226003C57BD /* TaskIcon.swift */,
 				7F4882391BADB64C00D4D45B /* readme.txt */,
-				7F5DF5AC1BAD2CF300959432 /* TaskCategory.swift */,
-				7F5DF5AD1BAD2CF300959432 /* TaskIco.swift */,
-				7F5DF5AB1BAD2CF300959432 /* Task.swift */,
 				7F5DF5A61BAD2CF300959432 /* SOCoreDataBase.swift */,
 				7F5DF5A71BAD2CF300959432 /* SOLocalDataBase.swift */,
 				7F5DF5A81BAD2CF300959432 /* SOPopulateLocalDataBase.swift */,
@@ -750,6 +767,7 @@
 			isa = PBXGroup;
 			children = (
 				7FCD136A1BCCF884001778E9 /* UIColorExtension.swift */,
+				7FD3879E1BD0B60D00E31A92 /* UIImageExtension.swift */,
 				7F5DF5F71BAD669300959432 /* ArrayExtension.swift */,
 				7F5DF5F81BAD669300959432 /* NSDateExtension.swift */,
 				7F5DF5FA1BAD669300959432 /* UITableViewExtension.swift */,
@@ -1415,6 +1433,7 @@
 				7F5DF67E1BAD669300959432 /* RightViewController.swift in Sources */,
 				7F5DF67B1BAD669300959432 /* SOEditIconsViewController.swift in Sources */,
 				7F8FE1FF1BC4AF9B00180EAD /* LocalUsers.xcdatamodeld in Sources */,
+				7FD3879F1BD0B60D00E31A92 /* UIImageExtension.swift in Sources */,
 				7F5DF67C1BAD669300959432 /* SOEditTaskFieldBaseViewController.swift in Sources */,
 				7F5DF6791BAD669300959432 /* SOEditDateViewController.swift in Sources */,
 				7F5DF68E1BAD669300959432 /* SOTaskMenuItemActivity.swift in Sources */,
@@ -1478,23 +1497,28 @@
 				7F5DF5C91BAD2E1600959432 /* Constants.swift in Sources */,
 				7F5DF5BF1BAD2CF300959432 /* SOPopulateLocalDataBase.swift in Sources */,
 				7FDF31421BBA949700AD4127 /* Utils.m in Sources */,
-				7F5DF5C21BAD2CF300959432 /* TaskCategory.swift in Sources */,
-				7F5DF5C31BAD2CF300959432 /* TaskIco.swift in Sources */,
 				7F8E16BD1BB9043A00FFC16B /* User.swift in Sources */,
 				7F5DF5BE1BAD2CF300959432 /* SOLocalDataBase.swift in Sources */,
 				7F5DF5BD1BAD2CF300959432 /* SOCoreDataBase.swift in Sources */,
+				7F89DDA81BD12226003C57BD /* Icon.swift in Sources */,
 				7F5DF5C01BAD2CF300959432 /* SwiftOrganizer.xcdatamodeld in Sources */,
-				7F5DF5C11BAD2CF300959432 /* Task.swift in Sources */,
+				7F89DDA71BD12226003C57BD /* Icon+CoreDataProperties.swift in Sources */,
+				7F89DDA91BD12226003C57BD /* Task+CoreDataProperties.swift in Sources */,
 				7F5DF5C51BAD2CF300959432 /* SOParseComManager.swift in Sources */,
+				7F89DDAA1BD12226003C57BD /* Task.swift in Sources */,
+				7F89DDA61BD12226003C57BD /* Category.swift in Sources */,
 				7F8E16BC1BB9043A00FFC16B /* User+CoreDataProperties.swift in Sources */,
 				7F5DF5BC1BAD2CF300959432 /* SOUserDefault.swift in Sources */,
 				7F5DF5C71BAD2CF300959432 /* SORemoteDataBase.swift in Sources */,
+				7F89DDAB1BD12226003C57BD /* TaskIcon+CoreDataProperties.swift in Sources */,
 				7F5DF5B51BAD2CF300959432 /* SOCategory.swift in Sources */,
 				7F5DF5B61BAD2CF300959432 /* SODataBaseFactory.swift in Sources */,
+				7F89DDA51BD12226003C57BD /* Category+CoreDataProperties.swift in Sources */,
 				7F5DF5C61BAD2CF300959432 /* SOPopulateRemoteDataBase.swift in Sources */,
 				7F5DF5E21BAD32CF00959432 /* Reachability.swift in Sources */,
 				7FD8C7C01BC3F07200E0A8F7 /* LocalUsers.xcdatamodeld in Sources */,
 				7F5DF5B71BAD2CF300959432 /* SODataBaseProtocol.swift in Sources */,
+				7F89DDAC1BD12226003C57BD /* TaskIcon.swift in Sources */,
 				7F5DF5B81BAD2CF300959432 /* SOFetchingData.swift in Sources */,
 				7F5DF5C41BAD2CF300959432 /* SOObserversManager.swift in Sources */,
 				7FCD13641BCBEACE001778E9 /* Utils.swift in Sources */,

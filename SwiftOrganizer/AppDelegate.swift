@@ -19,6 +19,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     // MARK: didFinishLaunching
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+        
+        
+        NSLog("\n\nMy Dir is: \n%@\n\n", self.applicationDocumentsDirectory)
+        
         self.createOfSlidingViewControllers()
         
         SOTypeDataBaseSwitcher.startInternetObserver()
@@ -57,6 +61,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         return true
     }
+    
+    internal lazy var applicationDocumentsDirectory: NSURL = {
+        // The directory the application uses to store the Core Data store file. This code uses a directory named "com.domenicosolazzo.swift.Reading_data_from_CoreData" in the application's documents Application Support directory.
+        let urls = NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask)
+        return urls[urls.count-1]
+        }()
 }
 
 // MARK: -
