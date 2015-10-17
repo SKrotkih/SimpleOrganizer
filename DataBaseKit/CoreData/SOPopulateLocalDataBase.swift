@@ -73,7 +73,10 @@ public class SOPopulateLocalDataBase {
             userId = curreentUser.userid
         }
         let task  = self.coreData.newManagedObject("Task") as! Task
-        task.category = category
+        
+        if let category: Category = self.localaDataBase.categoryWithId(category){
+            task.category = category
+        }
         task.title = title
         if let theUserId = userId{
             task.userid = theUserId

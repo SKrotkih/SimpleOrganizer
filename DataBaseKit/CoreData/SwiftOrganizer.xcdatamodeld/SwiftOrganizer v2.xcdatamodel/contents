@@ -5,6 +5,7 @@
         <attribute name="recordid" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="selected" optional="YES" attributeType="Boolean" syncable="YES"/>
         <attribute name="visible" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <relationship name="task" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Task" inverseName="category" inverseEntity="Task" syncable="YES"/>
     </entity>
     <entity name="Icon" representedClassName="Icon" syncable="YES">
         <attribute name="imagename" optional="YES" attributeType="String" syncable="YES"/>
@@ -15,10 +16,10 @@
         <relationship name="taskicon" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="TaskIcon" inverseName="icon" inverseEntity="TaskIcon" syncable="YES"/>
     </entity>
     <entity name="Task" representedClassName="Task" syncable="YES">
-        <attribute name="category" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="date" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="userid" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="category" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Category" inverseName="task" inverseEntity="Category" syncable="YES"/>
         <relationship name="icons" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="TaskIcon" inverseName="task" inverseEntity="TaskIcon" syncable="YES"/>
     </entity>
     <entity name="TaskIcon" representedClassName="TaskIcon" syncable="YES">
@@ -27,7 +28,7 @@
         <relationship name="task" maxCount="1" deletionRule="No Action" destinationEntity="Task" inverseName="icons" inverseEntity="Task" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Category" positionX="-36" positionY="63" width="128" height="103"/>
+        <element name="Category" positionX="-263" positionY="-198" width="128" height="118"/>
         <element name="Icon" positionX="-252" positionY="54" width="128" height="133"/>
         <element name="Task" positionX="-470" positionY="-100" width="128" height="118"/>
         <element name="TaskIcon" positionX="-261" positionY="-72" width="128" height="88"/>

@@ -18,5 +18,6 @@ extension Category {
     @NSManaged var recordid: String?
     @NSManaged var selected: NSNumber?
     @NSManaged var visible: NSNumber?
+    @NSManaged var task: Task    
 
 }
