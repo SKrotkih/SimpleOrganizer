@@ -26,9 +26,7 @@ public class SOUser: NSObject {
 }
 
 public class SOLocalUserManager: NSObject {
-
     private var coreData: SOCoreDataProtocol
-    public var isItCurrentUser: Bool = false
     private var _currentUser: SOUser?
 
     public class var sharedInstance: SOLocalUserManager {
@@ -40,83 +38,87 @@ public class SOLocalUserManager: NSObject {
 
     override init() {
         self.coreData = SOCoreDataBase(dataBaseName: DataBaseName, options: nil, iCloudEnabled: false)
-        
         super.init()
     }
     
-    public func setUpLoggedInUserData(dict: Dictionary<String, AnyObject>){
-        var managedObject: User!
-        
-        if let currentUser = self.user{
-            if let theObject = self.coreData.managedObjectContext?.objectWithID(currentUser.databaseObject!) as? User{
-                managedObject = theObject
-            }
-        }
-        if managedObject == nil {
-            managedObject = self.coreData.newManagedObject(UserEntityName) as! User
-        }
-        self.saveAsManagedObject(dict, managedObject: managedObject)
-    }
-    
-    public var currentUser: SOUser?{
-        get{
-            if let currentUser = _currentUser{
-                if currentUser.isItCurrentUser{
-                    return currentUser
-                }
-            } else if let currentUser = self.user {
-                if currentUser.isItCurrentUser{
-                    return currentUser
-                }
-            }
-
-            return nil
-        }
-        set {
-            if let currentUser = newValue{
-                if let managedObject = self.coreData.managedObjectContext?.objectWithID(currentUser.databaseObject!) as? User{
-                    managedObject.currentUser = currentUser.isItCurrentUser
-                    _currentUser = self.object(managedObject)
-                    self.coreData.saveContext()
-                }
-            }
-        }
-    }
-
-    lazy var usersFetchedResultController: NSFetchedResultsController = {
+    lazy var usersFetchedResultsController: NSFetchedResultsController = {
         let request = NSFetchRequest(entityName: UserEntityName)
         request.sortDescriptors = []
         let fetchedResultsController = NSFetchedResultsController(fetchRequest: request, managedObjectContext: self.coreData.managedObjectContext!, sectionNameKeyPath: nil, cacheName: "users")
         return fetchedResultsController
         }()
-    
-    var user: SOUser?{
-        do {
-            try usersFetchedResultController.performFetch()
 
-            if let objects = usersFetchedResultController.fetchedObjects
+    private var managedObject: User?{
+        do {
+            try usersFetchedResultsController.performFetch()
+            
+            if let objects = usersFetchedResultsController.fetchedObjects
             {
                 if objects.count > 0{
-                    var currUser: SOUser?
-                    let _ = objects.map({object in
-                        let managedObject = object as! User
-                        currUser = self.object(managedObject)
-                    })
-                    
-                    return currUser
+                    let managedObject = objects[0] as? User
+                    return managedObject
                 }
             }
         } catch let error as NSError {
             print("Failed to fetch user data \(error)")
         }
-
+        
         return nil
     }
     
-    private func object(managedObject: User) -> SOUser{
+    var user: SOUser?{
+        if let managedObject = self.managedObject {
+            return self.createObject(managedObject)
+        }
+        return nil
+    }
+    
+    public func logInWithFacebookUserData(dict: Dictionary<String, AnyObject>){
+        var managedObject: User?
+        if let theManagedObject = self.managedObject {
+            managedObject = theManagedObject
+        } else {
+            managedObject = self.coreData.newManagedObject(UserEntityName) as? User
+        }
+        self.saveDataToManagedObject(dict, managedObject: &managedObject!)
+        let user: SOUser = self.createObject(managedObject!)
+        self.coreData.saveContext()
+        self.currentUser = user
+    }
+    
+    public var currentUser: SOUser?{
+        get{
+            var currentUser: SOUser?
+            
+            if let theCurrentUser = _currentUser{
+                currentUser = theCurrentUser
+            } else if let theCurrentUser = self.user {
+                currentUser = theCurrentUser
+            } else {
+                return nil
+            }
+            return currentUser!.isItCurrentUser ? currentUser : nil
+        }
+        set {
+            if let managedObject = self.managedObject {
+                if let _ = newValue{
+                    managedObject.currentUser = true
+                } else {
+                    managedObject.currentUser = false
+                }
+                _currentUser = self.createObject(managedObject)
+                self.coreData.saveContext()
+            }
+        }
+    }
+    
+    private func createObject(managedObject: User) -> SOUser{
         let object: SOUser = SOUser()
         object.databaseObject = managedObject.objectID
-        object.firstname = managedObject.valueForKey("firstname") as! String
+        
+        let firstname = managedObject.valueForKey("firstname") as! String
+        
+        object.firstname = firstname
         object.lastname = managedObject.valueForKey("lastname") as! String
         object.gender = managedObject.valueForKey("gender") as! String
         object.email = managedObject.valueForKey("email") as! String
@@ -129,7 +131,7 @@ public class SOLocalUserManager: NSObject {
         return object
     }
 
-    private func saveAsManagedObject(dict: Dictionary<String, AnyObject>, managedObject: User){
+    private func saveDataToManagedObject(dict: Dictionary<String, AnyObject>, inout managedObject: User){
         managedObject.firstname = dict["first_name"] as? String
         managedObject.lastname = dict["last_name"] as? String
         managedObject.gender = dict["gender"] as? String
@@ -140,9 +142,7 @@ public class SOLocalUserManager: NSObject {
         managedObject.name = dict["name"] as? String
         managedObject.fb_id = dict["id"] as? String
         managedObject.userid = dict["id"] as? String
-        managedObject.currentUser = true
-        
-        self.coreData.saveContext()
+        managedObject.currentUser = false
     }
     
 }

@@ -483,13 +483,23 @@ extension SOLocalDataBase{
             if let date = task.date{
                 taskObject.date = date
             }
-            let icons = task.icons
-            if let arr = taskObject?.icons?.allObjects{
+
+            if let currentIcons = taskObject?.mutableSetValueForKey("icons"){
+                let arr = currentIcons.allObjects
                 for anyObject: AnyObject in arr {
                     let taskIcon = anyObject as! TaskIcon
+                    let taskIcons = taskIcon.icon.mutableSetValueForKey("taskicon")
+                    for anyObject: AnyObject in taskIcons.allObjects {
+                        let taskIcon = anyObject as! TaskIcon
+                        self.coreData.deleteObject(taskIcon)
+                    }
+                    taskIcons.removeAllObjects()
                     self.coreData.deleteObject(taskIcon)
                 }
+                currentIcons.removeAllObjects()
             }
+
+            let icons = task.icons
             for iconId: String in icons{
                 if let icon: Icon = self.iconWithId(iconId){
                     let taskIcon  = self.coreData.newManagedObject(TaskIconEntityName) as! TaskIcon
@@ -574,7 +584,7 @@ extension SOLocalDataBase{
 
             if let objects = controller.fetchedObjects{
                 if objects.count > 0{
-                    return objects[0] as! Icon
+                    return objects[0] as? Icon
                 }
             }
         } catch let error as NSError {
@@ -598,7 +608,7 @@ extension SOLocalDataBase{
             
             if let objects = controller.fetchedObjects{
                 if objects.count > 0{
-                    return objects[0] as! Category
+                    return objects[0] as? Category
                 }
             }
         } catch let error as NSError {

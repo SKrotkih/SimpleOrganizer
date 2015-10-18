@@ -31,6 +31,6 @@
         <element name="Category" positionX="-263" positionY="-198" width="128" height="118"/>
         <element name="Icon" positionX="-252" positionY="54" width="128" height="133"/>
         <element name="Task" positionX="-470" positionY="-100" width="128" height="118"/>
-        <element name="TaskIcon" positionX="-261" positionY="-72" width="128" height="88"/>
+        <element name="TaskIcon" positionX="-261" positionY="-72" width="128" height="90"/>
     </elements>
 </model>

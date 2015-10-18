@@ -137,7 +137,7 @@ public class SOCoreDataBase: SOCoreDataProtocol {
 extension SOCoreDataBase{
     public func deleteObject(objectForDeleting: NSManagedObject?)
     {
-        if let moc = self.managedObjectContext, let object = objectForDeleting{
+        if let object = objectForDeleting, let moc = object.managedObjectContext {
             moc.deleteObject(object)
         }
     }

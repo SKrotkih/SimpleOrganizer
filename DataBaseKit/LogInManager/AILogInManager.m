@@ -96,7 +96,7 @@
                      
                      return;
                  }
-                 [SOLocalUserManager.sharedInstance setUpLoggedInUserData: anUserDict];
+                 [SOLocalUserManager.sharedInstance logInWithFacebookUserData: anUserDict];
                  dispatch_async(dispatch_get_main_queue(), ^{
                      aCompletionBlock(OperationIsRanSuccessfully);
                  });
@@ -140,15 +140,14 @@
 - (void) logOutWithSuccessBlock: (void(^)()) aCompletionBlock
 {
     SOUser* currentUser = SOLocalUserManager.sharedInstance.currentUser;
-    
-    if (!currentUser)
+
+    if (currentUser == nil)
     {
         return;
     }
-    currentUser.isItCurrentUser = NO;
-    SOLocalUserManager.sharedInstance.currentUser = currentUser;
-    FBSDKLoginManager* login = [[FBSDKLoginManager alloc] init];
-    [login logOut];
+    SOLocalUserManager.sharedInstance.currentUser = nil;
+    FBSDKLoginManager* loginManager = [[FBSDKLoginManager alloc] init];
+    [loginManager logOut];
     aCompletionBlock();
 }
 
