@@ -24,8 +24,8 @@
     </entity>
     <entity name="TaskIcon" representedClassName="TaskIcon" syncable="YES">
         <attribute name="empty" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="icon" maxCount="1" deletionRule="No Action" destinationEntity="Icon" inverseName="taskicon" inverseEntity="Icon" syncable="YES"/>
-        <relationship name="task" maxCount="1" deletionRule="No Action" destinationEntity="Task" inverseName="icons" inverseEntity="Task" syncable="YES"/>
+        <relationship name="icon" maxCount="1" deletionRule="Nullify" destinationEntity="Icon" inverseName="taskicon" inverseEntity="Icon" syncable="YES"/>
+        <relationship name="task" maxCount="1" deletionRule="Nullify" destinationEntity="Task" inverseName="icons" inverseEntity="Task" syncable="YES"/>
     </entity>
     <elements>
         <element name="Category" positionX="-263" positionY="-198" width="128" height="118"/>

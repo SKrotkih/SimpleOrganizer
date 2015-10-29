@@ -1770,6 +1770,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.skappledev.SwiftOrganizer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				RUN_CLANG_STATIC_ANALYZER = NO;
 				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/SwiftOrganizer/SwiftOrganizer-Bridging-Header.h";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

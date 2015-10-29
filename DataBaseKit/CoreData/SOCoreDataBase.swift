@@ -57,12 +57,12 @@ public class SOCoreDataBase: SOCoreDataProtocol {
             return nil
         }
 
-        var error: NSError? = nil
+        var error: NSError? = .None
         do {
             try coordinator!.addPersistentStoreWithType(NSSQLiteStoreType, configuration: nil, URL: url, options: self.options)
         } catch var error1 as NSError {
             error = error1
-            coordinator = nil
+            coordinator = .None
             self.reportAnyErrorWeGot(error)
         } catch {
             fatalError()
@@ -144,7 +144,7 @@ extension SOCoreDataBase{
     
     public func saveContext() {
         if let moc = self.managedObjectContext {
-            var error: NSError? = nil
+            var error: NSError? = .None
             
             if moc.hasChanges{
                 
