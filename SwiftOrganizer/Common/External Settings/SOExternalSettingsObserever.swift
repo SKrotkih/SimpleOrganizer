@@ -23,7 +23,7 @@ class SOExternalSettingsObserever{
     
     class func startObserver(){
         self.prepareDefaultSettings()
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "handleSettingsChanged:", name: NSUserDefaultsDidChangeNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(SOExternalSettingsObserever.handleSettingsChanged(_:)), name: NSUserDefaultsDidChangeNotification, object: nil)
     }
 
     @objc class func handleSettingsChanged(notification: NSNotification){

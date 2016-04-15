@@ -18,7 +18,7 @@ class SOEditDescriptionViewController: SOEditTaskFieldBaseViewController {
         
         self.title = "Description".localized                        
 
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardDidShow:", name: UIKeyboardDidShowNotification,  object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(SOEditDescriptionViewController.keyboardDidShow(_:)), name: UIKeyboardDidShowNotification,  object: nil)
     }
 
     deinit {
@@ -29,7 +29,7 @@ class SOEditDescriptionViewController: SOEditTaskFieldBaseViewController {
         super.viewWillAppear(animated)
         
         let rightButtonImage : UIImage! = UIImage(named: "save_task")
-        let rightButton: UIBarButtonItem = UIBarButtonItem(image: rightButtonImage, style: UIBarButtonItemStyle.Plain, target: self, action: "doneButtonWasPressed")
+        let rightButton: UIBarButtonItem = UIBarButtonItem(image: rightButtonImage, style: UIBarButtonItemStyle.Plain, target: self, action: #selector(SOEditDescriptionViewController.doneButtonWasPressed))
         navigationItem.rightBarButtonItem = rightButton;
 
         self.automaticallyAdjustsScrollViewInsets = false

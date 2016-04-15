@@ -38,7 +38,7 @@ class SOCategoryTabBarController: SOTabBarController {
                         }
                         tabView.category = category
                         tabView.selected = category.selected
-                        self.tabsCount++
+                        self.tabsCount += 1
                     }
                 }
                 super.reloadTabs{(error: NSError?) in

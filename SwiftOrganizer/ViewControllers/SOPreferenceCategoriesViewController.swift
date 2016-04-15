@@ -18,7 +18,7 @@ class SOPreferenceCategoriesViewController: UIViewController {
         self.title = "Categories".localized
         
         let rightButtonImage : UIImage! = UIImage(named: "save_task")
-        let rightButton: UIBarButtonItem = UIBarButtonItem(image: rightButtonImage, style: UIBarButtonItemStyle.Plain, target: self, action: "doneButtonWasPressed")
+        let rightButton: UIBarButtonItem = UIBarButtonItem(image: rightButtonImage, style: UIBarButtonItemStyle.Plain, target: self, action: #selector(SOPreferenceCategoriesViewController.doneButtonWasPressed))
         navigationItem.rightBarButtonItem = rightButton;
         
         self.slideMenuController()?.removeLeftGestures()

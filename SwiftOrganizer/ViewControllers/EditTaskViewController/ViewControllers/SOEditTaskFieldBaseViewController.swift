@@ -18,7 +18,7 @@ class SOEditTaskFieldBaseViewController: UIViewController {
         super.viewWillAppear(animated)
         
         let leftButtonImage: UIImage! = UIImage(named: "back_button")
-        let leftButton: UIBarButtonItem = UIBarButtonItem(image: leftButtonImage, style: UIBarButtonItemStyle.Plain, target: self, action: "closeButtonWasPressed")
+        let leftButton: UIBarButtonItem = UIBarButtonItem(image: leftButtonImage, style: UIBarButtonItemStyle.Plain, target: self, action: #selector(SOEditTaskFieldBaseViewController.closeButtonWasPressed))
         navigationItem.leftBarButtonItem = leftButton;
         
         self.slideMenuController()?.removeLeftGestures()

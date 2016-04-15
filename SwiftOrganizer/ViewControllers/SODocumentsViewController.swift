@@ -23,7 +23,7 @@ class SODocumentsViewController: UITableViewController {
         self.addLeftBarButtonWithImage(UIImage(named: "ic_menu_black_24dp")!)
         self.slideMenuController()?.removeLeftGestures()
         self.slideMenuController()?.removeRightGestures()
-        rightButton = UIBarButtonItem(title: "Add".localized, style: UIBarButtonItemStyle.Plain, target: self, action: "createDocument:")
+        rightButton = UIBarButtonItem(title: "Add".localized, style: UIBarButtonItemStyle.Plain, target: self, action: #selector(SODocumentsViewController.createDocument(_:)))
         navigationItem.rightBarButtonItem = rightButton;
         
         self.updateFileList()

@@ -23,7 +23,7 @@ class SOEditDocumentViewController: UIViewController {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
-        rightButton = UIBarButtonItem(title: "Done".localized, style: UIBarButtonItemStyle.Plain, target: self, action: "doneButtonPressed:")
+        rightButton = UIBarButtonItem(title: "Done".localized, style: UIBarButtonItemStyle.Plain, target: self, action: #selector(SOEditDocumentViewController.doneButtonPressed(_:)))
         navigationItem.rightBarButtonItem = rightButton;
         
         self.textView.becomeFirstResponder()

@@ -38,7 +38,7 @@ class SOEditTaskIconsCell: SOEditTaskCell {
                 else
                 {
                     imageView.image = nil
-                    count++
+                    count += 1
                 }
                 
                 if count == imagesView.count{

@@ -34,7 +34,7 @@ class SOMakeCallViewController: UIViewController {
         self.slideMenuController()?.removeLeftGestures()
         self.slideMenuController()?.removeRightGestures()
         
-        rightButton = UIBarButtonItem(title: "Done".localized, style: UIBarButtonItemStyle.Plain, target: self, action: "doneButtonPressed:")
+        rightButton = UIBarButtonItem(title: "Done".localized, style: UIBarButtonItemStyle.Plain, target: self, action: #selector(SOMakeCallViewController.doneButtonPressed(_:)))
         navigationItem.rightBarButtonItem = rightButton;
         self.phoneNumber.resignFirstResponder()
         self.rightButton.enabled = false

@@ -53,7 +53,7 @@ class SOMainViewController: UIViewController{
         
         /* Create the refresh control */
         refreshControl = UIRefreshControl()
-        refreshControl!.addTarget(self, action: "handleRefresh:", forControlEvents: .ValueChanged)
+        refreshControl!.addTarget(self, action: #selector(SOMainViewController.handleRefresh(_:)), forControlEvents: .ValueChanged)
         mainTableView.addSubview(refreshControl!)
         
         self.titleActualize()
@@ -67,9 +67,9 @@ class SOMainViewController: UIViewController{
         self.slideMenuController()?.removeRightGestures()
 
         let addTaskImage : UIImage! = UIImage(named: "add_task")
-        let addTaskButton: UIBarButtonItem = UIBarButtonItem(image: addTaskImage, style: UIBarButtonItemStyle.Plain, target: self, action: "addNewTask")
+        let addTaskButton: UIBarButtonItem = UIBarButtonItem(image: addTaskImage, style: UIBarButtonItemStyle.Plain, target: self, action: #selector(SOMainViewController.addNewTask))
         let activityImage : UIImage! = UIImage(named: "activity")
-        let activityButton: UIBarButtonItem = UIBarButtonItem(image: activityImage, style: UIBarButtonItemStyle.Plain, target: self, action: "startActivityViewController")
+        let activityButton: UIBarButtonItem = UIBarButtonItem(image: activityImage, style: UIBarButtonItemStyle.Plain, target: self, action: #selector(SOMainViewController.startActivityViewController))
         navigationItem.rightBarButtonItems = [addTaskButton, activityButton]
         
         //rightButton = UIBarButtonItem(title: "Activity".localized, style: UIBarButtonItemStyle.Plain, target: self, action: "startActivityViewController")

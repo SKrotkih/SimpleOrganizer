@@ -19,7 +19,7 @@ public class SOLocalDataBase: NSObject, SODataBaseProtocol{
     required public init(nextDataBase: SODataBaseProtocol?){
         self.nextDataBase = nextDataBase
         super.init()
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "applicationWillTerminate:", name: UIApplicationWillTerminateNotification,  object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(UIApplicationDelegate.applicationWillTerminate(_:)), name: UIApplicationWillTerminateNotification,  object: nil)
     }
     
     lazy var populateDataBase: SOPopulateLocalDataBase = {
@@ -390,7 +390,8 @@ extension SOLocalDataBase{
                 let ico = taskIcon.icon
                 if let recordid = ico.recordid{
                     if i < MaxIconsCount{
-                        _icons[i++] = recordid
+                        i += 1
+                        _icons[i] = recordid
                     }
                 }
             }

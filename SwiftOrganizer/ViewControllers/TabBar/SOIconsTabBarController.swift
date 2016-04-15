@@ -38,7 +38,7 @@ class SOIconsTabBarController: SOTabBarController {
                         }
                         tabView.ico = ico
                         tabView.selected = ico.selected
-                        self.tabsCount++
+                        self.tabsCount += 1
                     }
                 }
                 super.reloadTabs{(error: NSError?) in

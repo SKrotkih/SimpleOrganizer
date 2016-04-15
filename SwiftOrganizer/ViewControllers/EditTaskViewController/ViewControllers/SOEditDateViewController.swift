@@ -44,7 +44,7 @@ class SOEditDateViewController: SOEditTaskFieldBaseViewController {
         super.viewWillAppear(animated)
         
         let rightButtonImage : UIImage! = UIImage(named: "save_task")
-        let rightButton: UIBarButtonItem = UIBarButtonItem(image: rightButtonImage, style: UIBarButtonItemStyle.Plain, target: self, action: "doneButtonWasPressed")
+        let rightButton: UIBarButtonItem = UIBarButtonItem(image: rightButtonImage, style: UIBarButtonItemStyle.Plain, target: self, action: #selector(SOEditDateViewController.doneButtonWasPressed))
         navigationItem.rightBarButtonItem = rightButton;
         
         if let currTaskDate = self.date{

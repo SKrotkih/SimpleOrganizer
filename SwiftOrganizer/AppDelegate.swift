@@ -189,7 +189,7 @@ extension AppDelegate{
                 var arr = host.characters.split {$0 == "."}.map { String($0) }
                 
                 if arr.count == 2{
-                    if let taskId: String = arr[1] as? String{
+                    if let taskId: String = arr[1] as String{
                         print("Task Id = \(taskId)")
                     }
                 }

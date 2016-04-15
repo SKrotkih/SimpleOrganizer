@@ -20,7 +20,7 @@ class SOEditIconsViewController: SOEditTaskFieldBaseViewController {
         
         self.title = "Icons".localized
         let rightButtonImage : UIImage! = UIImage(named: "save_task")
-        let rightButton: UIBarButtonItem = UIBarButtonItem(image: rightButtonImage, style: UIBarButtonItemStyle.Plain, target: self, action: "doneButtonWasPressed")
+        let rightButton: UIBarButtonItem = UIBarButtonItem(image: rightButtonImage, style: UIBarButtonItemStyle.Plain, target: self, action: #selector(SOEditIconsViewController.doneButtonWasPressed))
         navigationItem.rightBarButtonItem = rightButton;
     }
 
@@ -52,7 +52,7 @@ class SOEditIconsViewController: SOEditTaskFieldBaseViewController {
                         needAsk = true
                         break
                     }
-                    countIcons++
+                    countIcons += 1
                 }
             }
             

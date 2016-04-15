@@ -96,14 +96,14 @@ class SOEditTaskViewController: UIViewController {
         }
         
         let leftButtonImage: UIImage! = UIImage(named: "back_button")
-        let leftButton: UIBarButtonItem = UIBarButtonItem(image: leftButtonImage, style: UIBarButtonItemStyle.Plain, target: self, action: "closeButtonWasPressed")
+        let leftButton: UIBarButtonItem = UIBarButtonItem(image: leftButtonImage, style: UIBarButtonItemStyle.Plain, target: self, action: #selector(SOEditTaskViewController.closeButtonWasPressed))
         navigationItem.leftBarButtonItem = leftButton;
         
         let rightButtonImage : UIImage! = UIImage(named: "save_task")
-        let rightButton: UIBarButtonItem = UIBarButtonItem(image: rightButtonImage, style: UIBarButtonItemStyle.Plain, target: self, action: "doneButtonWasPressed")
+        let rightButton: UIBarButtonItem = UIBarButtonItem(image: rightButtonImage, style: UIBarButtonItemStyle.Plain, target: self, action: #selector(SOEditTaskViewController.doneButtonWasPressed))
 
         let undoButtonImage : UIImage! = UIImage(named: "undo")
-        let undoButton: UIBarButtonItem = UIBarButtonItem(image: undoButtonImage, style: UIBarButtonItemStyle.Plain, target: self, action: "undoButtonWasPressed")
+        let undoButton: UIBarButtonItem = UIBarButtonItem(image: undoButtonImage, style: UIBarButtonItemStyle.Plain, target: self, action: #selector(SOEditTaskViewController.undoButtonWasPressed))
         
         navigationItem.rightBarButtonItems = [undoButton, rightButton];
         
@@ -368,7 +368,7 @@ extension SOEditTaskViewController: UITableViewDelegate{
 extension SOEditTaskViewController: SOEditTaskUndoDelegateProtocol{
 
     func addToUndoBuffer(dict: NSDictionary){
-        _undoManager.registerUndoWithTarget(self, selector: "undoData:", object: dict);
+        _undoManager.registerUndoWithTarget(self, selector: #selector(SOEditTaskViewController.undoData(_:)), object: dict);
     }
 
     @objc func undoData(data: [String: AnyObject]) {

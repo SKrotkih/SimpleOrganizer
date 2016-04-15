@@ -200,13 +200,13 @@ class SlideMenuController: UIViewController, UIGestureRecognizerDelegate {
     
         if (leftViewController != nil) {
             if leftPanGesture == nil {
-                leftPanGesture = UIPanGestureRecognizer(target: self, action: "handleLeftPanGesture:")
+                leftPanGesture = UIPanGestureRecognizer(target: self, action: #selector(SlideMenuController.handleLeftPanGesture(_:)))
                 leftPanGesture!.delegate = self
                 view.addGestureRecognizer(leftPanGesture!)
             }
             
             if leftTapGetsture == nil {
-                leftTapGetsture = UITapGestureRecognizer(target: self, action: "toggleLeft")
+                leftTapGetsture = UITapGestureRecognizer(target: self, action: #selector(UIViewController.toggleLeft))
                 leftTapGetsture!.delegate = self
                 view.addGestureRecognizer(leftTapGetsture!)
             }
@@ -217,13 +217,13 @@ class SlideMenuController: UIViewController, UIGestureRecognizerDelegate {
         
         if (rightViewController != nil) {
             if rightPanGesture == nil {
-                rightPanGesture = UIPanGestureRecognizer(target: self, action: "handleRightPanGesture:")
+                rightPanGesture = UIPanGestureRecognizer(target: self, action: #selector(SlideMenuController.handleRightPanGesture(_:)))
                 rightPanGesture!.delegate = self
                 view.addGestureRecognizer(rightPanGesture!)
             }
             
             if rightTapGesture == nil {
-                rightTapGesture = UITapGestureRecognizer(target: self, action: "toggleRight")
+                rightTapGesture = UITapGestureRecognizer(target: self, action: #selector(UIViewController.toggleRight))
                 rightTapGesture!.delegate = self
                 view.addGestureRecognizer(rightTapGesture!)
             }
@@ -868,12 +868,12 @@ extension UIViewController {
     }
     
     func addLeftBarButtonWithImage(buttonImage: UIImage) {
-        let leftButton: UIBarButtonItem = UIBarButtonItem(image: buttonImage, style: UIBarButtonItemStyle.Plain, target: self, action: "toggleLeft")
+        let leftButton: UIBarButtonItem = UIBarButtonItem(image: buttonImage, style: UIBarButtonItemStyle.Plain, target: self, action: #selector(UIViewController.toggleLeft))
         navigationItem.leftBarButtonItem = leftButton;
     }
     
     func addRightBarButtonWithImage(buttonImage: UIImage) {
-        let rightButton: UIBarButtonItem = UIBarButtonItem(image: buttonImage, style: UIBarButtonItemStyle.Plain, target: self, action: "toggleRight")
+        let rightButton: UIBarButtonItem = UIBarButtonItem(image: buttonImage, style: UIBarButtonItemStyle.Plain, target: self, action: #selector(UIViewController.toggleRight))
         navigationItem.rightBarButtonItem = rightButton;
     }
     

@@ -23,7 +23,7 @@ class SOPreferenceIconsViewController: UIViewController {
         super.viewWillAppear(animated)
 
         let rightButtonImage : UIImage! = UIImage(named: "save_task")
-        let rightButton: UIBarButtonItem = UIBarButtonItem(image: rightButtonImage, style: UIBarButtonItemStyle.Plain, target: self, action: "doneButtonWasPressed")
+        let rightButton: UIBarButtonItem = UIBarButtonItem(image: rightButtonImage, style: UIBarButtonItemStyle.Plain, target: self, action: #selector(SOPreferenceIconsViewController.doneButtonWasPressed))
         navigationItem.rightBarButtonItem = rightButton;
         
         self.slideMenuController()?.removeLeftGestures()

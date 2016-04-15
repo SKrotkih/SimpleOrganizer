@@ -38,7 +38,7 @@ public final class SOiCloudManager {
     func prepareKeyValueStoreObserver(){
         let kvStore: NSUbiquitousKeyValueStore = NSUbiquitousKeyValueStore.defaultStore();
         let notificationsCenter: NSNotificationCenter = NSNotificationCenter.defaultCenter()
-        notificationsCenter.addObserver(self, selector: "keyValueStoreDidChange:", name: NSUbiquitousKeyValueStoreDidChangeExternallyNotification, object: kvStore)
+        notificationsCenter.addObserver(self, selector: #selector(SOiCloudManager.keyValueStoreDidChange(_:)), name: NSUbiquitousKeyValueStoreDidChangeExternallyNotification, object: kvStore)
         
         syncKeyValueStore()
     }

@@ -22,7 +22,7 @@ class SODocumentPickerViewController: UIViewController {
         self.addLeftBarButtonWithImage(UIImage(named: "ic_menu_black_24dp")!)
         self.slideMenuController()?.removeLeftGestures()
         self.slideMenuController()?.removeRightGestures()
-        rightButton = UIBarButtonItem(title: "Open".localized, style: UIBarButtonItemStyle.Plain, target: self, action: "importAction:")
+        rightButton = UIBarButtonItem(title: "Open".localized, style: UIBarButtonItemStyle.Plain, target: self, action: #selector(SODocumentPickerViewController.importAction(_:)))
         navigationItem.rightBarButtonItem = rightButton;
     }
 

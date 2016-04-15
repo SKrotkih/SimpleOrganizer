@@ -57,7 +57,8 @@ public class SOPopulateLocalDataBase {
         
         for catagoryName in categories{
             let category = NSEntityDescription.insertNewObjectForEntityForName(entityName, inManagedObjectContext: self.coreData.managedObjectContext!) as! Category
-            let newCategoryId = "\(categoryId++)"
+            categoryId += 1
+            let newCategoryId = "\(categoryId)"
             category.recordid = newCategoryId
             category.name = catagoryName as String
             category.selected = true
