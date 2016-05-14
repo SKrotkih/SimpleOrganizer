@@ -23,7 +23,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         
         
-        NSLog("\n\nMy Dir is: \n%@\n\n", self.applicationDocumentsDirectory)
+        NSLog("\n\nDocument Directory: \n%@\n\n", self.applicationDocumentsDirectory)
         
         self.createOfSlidingViewControllers()
         
@@ -40,16 +40,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         retBoolValue = retBoolValue || FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
         
         self.applicationIconBadgeNumber = 0
-        
-        // Configure tracker from GoogleService-Info.plist.
-        var configureError:NSError?
-        GGLContext.sharedInstance().configureWithError(&configureError)
-        assert(configureError == nil, "Error configuring Google services: \(configureError)")
-        
-        // Optional: configure GAI options.
-        let gai = GAI.sharedInstance()
-        gai.trackUncaughtExceptions = true  // report uncaught exceptions
-        gai.logger.logLevel = GAILogLevel.Verbose  // remove before app release
         
         Fabric.with([Crashlytics.self])
         
@@ -264,11 +254,12 @@ extension AppDelegate{
 }
 
     // MARK: -
-    // MARK: Utility
+    // MARK: Alert View Controller
 
 extension AppDelegate{
     
     func showAlertWithTitle(title:String, message:String){
-        self.mainViewController.showAlertWithTitle(title, message: message)
+        self.mainViewController.showAlertWithTitle(title, message: message, addActions: nil, completionBlock: nil)
     }
 }
+

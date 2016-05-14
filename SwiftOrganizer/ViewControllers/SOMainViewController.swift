@@ -57,6 +57,8 @@ class SOMainViewController: UIViewController{
         mainTableView.addSubview(refreshControl!)
         
         self.titleActualize()
+        
+        self.googleAnaliticsConfigure()
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -215,9 +217,41 @@ extension SOMainViewController: SOObserverProtocol{
     // MARK: Alert View Controller
 
 extension SOMainViewController{
-    func showAlertWithTitle(title:String, message:String){
+    func showAlertWithTitle(title: String, message: String, addActions: ((controller: UIAlertController) -> Void)?, completionBlock: (() -> Void)?){
         let controller = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.Alert)
-        controller.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
-        presentViewController(controller, animated: true, completion: nil)
+        if addActions != nil {
+            addActions!(controller: controller)
+        } else {
+            controller.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
+        }
+        presentViewController(controller, animated: true, completion: completionBlock)
     }
 }
+
+
+// MARK: Configure Google Analytics
+
+extension SOMainViewController{
+    
+    func googleAnaliticsConfigure() {
+        // Configure tracker from GoogleService-Info.plist.
+        var configureError:NSError?
+        GGLContext.sharedInstance().configureWithError(&configureError)
+        assert(configureError == nil, "Error configuring Google services: \(configureError)")
+        
+        // Optional: configure GAI options.
+        let gai = GAI.sharedInstance()
+        gai.trackUncaughtExceptions = true  // report uncaught exceptions
+        gai.logger.logLevel = GAILogLevel.Verbose  // remove before app release
+        
+        self.showAlertWithTitle("Google Analitics", message: "With your permission usage information will be collected to improve the application.", addActions: { (controller: UIAlertController) in
+            controller.addAction(UIAlertAction(title: "Opt Out", style: UIAlertActionStyle.Default,
+                handler: {(alert: UIAlertAction!) in GAI.sharedInstance().optOut = true }))
+            controller.addAction(UIAlertAction(title: "Opt In", style: UIAlertActionStyle.Default,
+                handler: {(alert: UIAlertAction!) in GAI.sharedInstance().optOut = false }))
+            },
+                                                   completionBlock: nil)
+    }
+    
+}
+
