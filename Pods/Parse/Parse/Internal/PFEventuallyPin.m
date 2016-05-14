@@ -22,13 +22,13 @@
 
 NSString *const PFEventuallyPinPinName = @"_eventuallyPin";
 
-NSString *const PFEventuallyPinKeyUUID = @"uuid";
-NSString *const PFEventuallyPinKeyTime = @"time";
-NSString *const PFEventuallyPinKeyType = @"type";
-NSString *const PFEventuallyPinKeyObject = @"object";
-NSString *const PFEventuallyPinKeyOperationSetUUID = @"operationSetUUID";
-NSString *const PFEventuallyPinKeySessionToken = @"sessionToken";
-NSString *const PFEventuallyPinKeyCommand = @"command";
+static NSString *const PFEventuallyPinKeyUUID = @"uuid";
+static NSString *const PFEventuallyPinKeyTime = @"time";
+static NSString *const PFEventuallyPinKeyType = @"type";
+static NSString *const PFEventuallyPinKeyObject = @"object";
+static NSString *const PFEventuallyPinKeyOperationSetUUID = @"operationSetUUID";
+static NSString *const PFEventuallyPinKeySessionToken = @"sessionToken";
+static NSString *const PFEventuallyPinKeyCommand = @"command";
 
 @implementation PFEventuallyPin
 
@@ -87,7 +87,7 @@ NSString *const PFEventuallyPinKeyCommand = @"command";
 ///--------------------------------------
 
 + (BFTask *)pinEventually:(PFObject *)object forCommand:(id<PFNetworkCommand>)command {
-    return [self pinEventually:object forCommand:command withUUID:[[NSUUID UUID] UUIDString]];
+    return [self pinEventually:object forCommand:command withUUID:[NSUUID UUID].UUIDString];
 }
 
 + (BFTask *)pinEventually:(PFObject *)object forCommand:(id<PFNetworkCommand>)command withUUID:(NSString *)uuid {
@@ -172,8 +172,8 @@ NSString *const PFEventuallyPinKeyCommand = @"command";
 
 + (PFEventuallyPinType)_pinTypeForCommand:(id<PFNetworkCommand>)command {
     PFEventuallyPinType type = PFEventuallyPinTypeCommand;
-    NSString *path = [(PFRESTCommand *)command httpPath];
-    NSString *method = [(PFRESTCommand *)command httpMethod];
+    NSString *path = ((PFRESTCommand *)command).httpPath;
+    NSString *method = ((PFRESTCommand *)command).httpMethod;
     if ([path hasPrefix:@"classes"]) {
         if ([method isEqualToString:PFHTTPRequestMethodPOST] ||
             [method isEqualToString:PFHTTPRequestMethodPUT]) {

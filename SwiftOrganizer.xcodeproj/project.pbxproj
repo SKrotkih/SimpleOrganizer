@@ -161,6 +161,13 @@
 		7F8FE2001BC4AF9D00180EAD /* LocalUsers.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 7FD8C7BE1BC3F07200E0A8F7 /* LocalUsers.xcdatamodeld */; };
 		7F8FE2031BC530AB00180EAD /* LogIn.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7F8FE2011BC530AB00180EAD /* LogIn.storyboard */; };
 		7F8FE2051BC532E100180EAD /* SOLogInInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F8FE2041BC532E100180EAD /* SOLogInInfoViewController.swift */; };
+		7FA249781CE70EFD0060F6CE /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7FA249771CE70EFD0060F6CE /* GoogleService-Info.plist */; };
+		7FA249791CE70EFD0060F6CE /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7FA249771CE70EFD0060F6CE /* GoogleService-Info.plist */; };
+		7FA2497A1CE70EFD0060F6CE /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7FA249771CE70EFD0060F6CE /* GoogleService-Info.plist */; };
+		7FA2497B1CE70EFD0060F6CE /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7FA249771CE70EFD0060F6CE /* GoogleService-Info.plist */; };
+		7FA2497C1CE70EFD0060F6CE /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7FA249771CE70EFD0060F6CE /* GoogleService-Info.plist */; };
+		7FA2497D1CE70EFD0060F6CE /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7FA249771CE70EFD0060F6CE /* GoogleService-Info.plist */; };
+		7FA2497E1CE70EFD0060F6CE /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7FA249771CE70EFD0060F6CE /* GoogleService-Info.plist */; };
 		7FCD13641BCBEACE001778E9 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FCD13631BCBEACE001778E9 /* Utils.swift */; };
 		7FCD13681BCCF756001778E9 /* SOBorderedImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FCD13661BCCF756001778E9 /* SOBorderedImageView.swift */; };
 		7FCD13691BCCF756001778E9 /* SOBorderedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FCD13671BCCF756001778E9 /* SOBorderedView.swift */; };
@@ -412,6 +419,8 @@
 		7F8E16C11BBA71E500FFC16B /* AILogInManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AILogInManager.m; sourceTree = "<group>"; };
 		7F8FE2021BC530AB00180EAD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LogIn.storyboard; sourceTree = "<group>"; };
 		7F8FE2041BC532E100180EAD /* SOLogInInfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SOLogInInfoViewController.swift; path = ../DataBaseKit/LogInManager/SOLogInInfoViewController.swift; sourceTree = "<group>"; };
+		7FA249771CE70EFD0060F6CE /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		7FA2497F1CE713630060F6CE /* libGoogleAnalytics.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libGoogleAnalytics.a; path = Pods/GoogleAnalytics/Libraries/libGoogleAnalytics.a; sourceTree = "<group>"; };
 		7FCD13611BCBD9C3001778E9 /* SwiftOrganizer v2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "SwiftOrganizer v2.xcdatamodel"; sourceTree = "<group>"; };
 		7FCD13631BCBEACE001778E9 /* Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Utils.swift; path = Utils/Utils.swift; sourceTree = "<group>"; };
 		7FCD13661BCCF756001778E9 /* SOBorderedImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SOBorderedImageView.swift; sourceTree = "<group>"; };
@@ -512,6 +521,7 @@
 		44B77F50E16F827876F3818D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				7FA2497F1CE713630060F6CE /* libGoogleAnalytics.a */,
 				7F5DF6A31BAD73A500959432 /* Social.framework */,
 				7F5DF5D61BAD2FFE00959432 /* libsqlite3.tbd */,
 				7F5DF5D41BAD2FEB00959432 /* libstdc++.6.tbd */,
@@ -570,6 +580,7 @@
 				7F5DF5511BAD288E00959432 /* Assets.xcassets */,
 				7F5DF5531BAD288E00959432 /* LaunchScreen.storyboard */,
 				7F5DF5561BAD288E00959432 /* Info.plist */,
+				7FA249771CE70EFD0060F6CE /* GoogleService-Info.plist */,
 				7F5DF71E1BAD8B8900959432 /* README.md */,
 				7F5DF71A1BAD882300959432 /* SwiftOrganizer.entitlements */,
 				7F5DF6A71BAD74C500959432 /* SwiftOrganizer-Bridging-Header.h */,
@@ -1256,6 +1267,7 @@
 				7F5DF6661BAD669300959432 /* ico4@2x.png in Resources */,
 				7F5DF6611BAD669300959432 /* ico16@2x.png in Resources */,
 				7F5DF6631BAD669300959432 /* ico1@2x.png in Resources */,
+				7FA249781CE70EFD0060F6CE /* GoogleService-Info.plist in Resources */,
 				7F5DF66C1BAD669300959432 /* phone.png in Resources */,
 				7F5DF5551BAD288E00959432 /* LaunchScreen.storyboard in Resources */,
 				7FDF31441BBABA4E00AD4127 /* README.md in Resources */,
@@ -1278,6 +1290,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7FA249791CE70EFD0060F6CE /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1285,6 +1298,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7FA2497A1CE70EFD0060F6CE /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1292,6 +1306,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7FA2497B1CE70EFD0060F6CE /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1299,6 +1314,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7FA2497C1CE70EFD0060F6CE /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1307,6 +1323,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7F5DF6F01BAD83B200959432 /* MainInterface.storyboard in Resources */,
+				7FA2497D1CE70EFD0060F6CE /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1316,6 +1333,7 @@
 			files = (
 				7F5DF7141BAD857B00959432 /* SOWidjet.entitlements in Resources */,
 				7F5DF7081BAD851200959432 /* MainInterface.storyboard in Resources */,
+				7FA2497E1CE70EFD0060F6CE /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1762,6 +1780,10 @@
 				INFOPLIST_FILE = SwiftOrganizer/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Pods/GoogleAnalytics/Libraries",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.skappledev.SwiftOrganizer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				RUN_CLANG_STATIC_ANALYZER = NO;
@@ -1781,6 +1803,10 @@
 				INFOPLIST_FILE = SwiftOrganizer/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Pods/GoogleAnalytics/Libraries",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.skappledev.SwiftOrganizer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/SwiftOrganizer/SwiftOrganizer-Bridging-Header.h";
@@ -1850,7 +1876,10 @@
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				LIBRARY_SEARCH_PATHS = "";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Pods/GoogleAnalytics/Libraries",
+				);
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.skappledev.DataBaseKit;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1875,7 +1904,10 @@
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				LIBRARY_SEARCH_PATHS = "";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Pods/GoogleAnalytics/Libraries",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.skappledev.DataBaseKit;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;

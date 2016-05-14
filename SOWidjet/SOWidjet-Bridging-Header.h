@@ -7,5 +7,6 @@
 
 #import <Parse/Parse.h>
 #import <DataBaseKit/DataBaseKit.h>
+#import <Google/Analytics.h>
 
 #endif

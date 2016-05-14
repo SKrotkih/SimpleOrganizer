@@ -2,7 +2,7 @@
 ============
 
 This is a simple organizer application for both iPhone and iPad. 
-Was implemented for getting some practice of using the new language from Apple Swift.
+For getting some practice of using Swift has been implemented.
 
 ## Implements
 
@@ -10,7 +10,7 @@ There were implemented two types of database:
 - Local database on Core Data
 - Remote database on the Parse.com server
 
-Also implemented the following features:
+The following features has been implemented:
 - auto layout (on Interface Builder Level only)
 - switching of the database types from Core Data to remote database and vice versa
 - used iCloud key-value storage for switching database types (if you change database type on your iPad, then on your iPhone is changing after some seconds too)
@@ -33,11 +33,11 @@ Also implemented the following features:
 - Observing of changes in Settings app for application's preferences.
 - Work with Objective-C in the Swift project
 - Cocoapods was added for parse framework 
-- Facebook SDK added
+- Facebook SDK was added
 - Log In to loacal database implemented via Facebook 
 - Log In to remote data base implemented by the Parse.com SDK
 - migration data after changing data model 
-- multi tasking ready
+- multi tasking is ready
 
 Were applied the following design patterns:
 - abstract method;
@@ -69,8 +69,8 @@ http://thebestplace.krizantos.com/SO/
 
 ## Requirements
 
-- Xcode 6
-- iOS 8
+- Xcode 6 or later
+- iOS 8 or later
 
 ## Author
 
@@ -85,24 +85,27 @@ SwiftOrganizer is available under the MIT license. See the LICENSE file for more
 
 ## Update
 
-- 16.07.2015: Added task list menu 'Activity'. Have used UIActivityViewController for that. Have made three menu items:  Erase Task, New Task, and Switch DB type.
-- 17.07.2015: Added Sharing Extension
-- 18.07.2015: Added Today Widget
-- 19.07.2015: Created DataBaseKit.framework. All database methods were moved to the framework. All ready to make Today widget with current actual tasks.
-- 20.07.2015: Updated Today Widget (works only with local DataBase). Implemented task list and type of the database switcher
-- 30.07.2015: Added sharing via SLComposeViewController; added feature to call phone via FaceTime
-- 03.08.2015: Implemented undo for task editor view controller
-- 04.08.2015: Added feature to make call by Phone
+- 16.07.2015: Task list menu 'Activity' is added. Have used UIActivityViewController for that. Have made three menu items:  Erase Task, New Task, and Switch DB type.
+- 17.07.2015: Sharing Extension added.
+- 18.07.2015: Today Widget added.
+- 19.07.2015: DataBaseKit.framework is created. All database methods are moved to the framework. All ready for making Today widget with current actual tasks.
+- 20.07.2015: Today Widget (works only with local DataBase) updated. Task list and type of the database switcher is implemented.
+- 30.07.2015: Sharing via SLComposeViewController and feature to call phone via FaceTime are added
+- 03.08.2015: Undo for task editor view controller is implemented.
+- 04.08.2015: Feature to make call by Phone is added.
 - 07.08.2015: Local notifications for task reminder implemented
 - 08.08.2015: Reachability the Internet observer implemented: auto switch to local data base when the Internet is disconnected
-- 09.08.2015: If the current database is remote and the Internet is disconnected, then app switches to the local database and goes to the main table. 
-- 09.08.2015: Settings app is used for enter some data. Settings changes added observing. 
-- 01.09.2015: Fixed "Attempting to badge the application icon but haven't received permission from the user to badge the application" run-time error message
-- 03.09.2015: Added Preferences menu. There are a possibility select favorite categories and icons for tab bar.
-- 17.09.2015: Fixed build for Xcode 7.0 according Swift 2.0 requirements.
-- 19.09.2015: Fixed parse.com framework double linking. Fixed lots of warnings on runtime.
-- 29.09.2015: Facebook SDK added, registered AppID, login function in Objective-C was implemented. 
-- 02.10.2015: Added the DateTools framework
-- 07.10.2015: Log In to local database is implemented fia Facebook. Database for local user is implemented in a different storage.
-- 12.10.2015: Implemented data migration for core data for new model data
-- 17.10.2015: Noramalization of the local data base. 
+- 09.08.2015: If the current database is in remote mode and the Internet is disconnected, then app switches to the local database and goes to the main table at now. 
+- 09.08.2015: Settings app is used for enter some data. Settings changes added to observing. 
+- 01.09.2015: "Attempting to badge the application icon but haven't received permission from the user to badge the application" run-time error message is fixed
+- 03.09.2015: Preferences menu is added. There are a possibility select favorite categories and icons for the tabbar.
+- 17.09.2015: Build for Xcode 7.0 according Swift 2.0 requirements is fixed.
+- 19.09.2015: Parse.com framework double linking and a lot of warnings on tuntime are fixed.
+- 29.09.2015: Facebook SDK is added, AppID is registered, login function in Objective-C is implemented. 
+- 02.10.2015: DateTools framework is added.
+- 07.10.2015: Log In to the local database fia Facebook is implemented. Database for local user in a different storage  is implemented.
+- 12.10.2015: Data migration for core data for new model data implemented. 
+- 17.10.2015: The Local Database is normalized.
+- 14.05.2016: Google Analytics is added.
+
+

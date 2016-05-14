@@ -10,11 +10,10 @@
 #import <Foundation/Foundation.h>
 
 #import <Parse/PFConstants.h>
+#import <Parse/PFObject.h>
+#import <Parse/PFSubclassing.h>
 
-#import "PFObject.h"
-#import "PFSubclassing.h"
-
-@class BFTask PF_GENERIC(__covariant BFGenericType);
+@class BFTask<__covariant BFGenericType>;
 @protocol PFNetworkCommand;
 
 extern NSString *const PFEventuallyPinPinName;
@@ -26,7 +25,7 @@ typedef NS_ENUM(NSUInteger, PFEventuallyPinType) {
     PFEventuallyPinTypeCommand
 };
 
-/*!
+/**
  PFEventuallyPin represents PFCommand that's save locally so that it can be executed eventually.
 
  Properties of PFEventuallyPin:
@@ -59,12 +58,12 @@ typedef NS_ENUM(NSUInteger, PFEventuallyPinType) {
 #pragma mark - Eventually Pin
 ///--------------------------------------
 
-/*!
+/**
  Wrap given PFObject and PFCommand in a PFEventuallyPin with auto-generated UUID.
  */
 + (BFTask *)pinEventually:(PFObject *)object forCommand:(id<PFNetworkCommand>)command;
 
-/*!
+/**
  Wrap given PFObject and PFCommand in a PFEventuallyPin with given UUID.
  */
 + (BFTask *)pinEventually:(PFObject *)object forCommand:(id<PFNetworkCommand>)command withUUID:(NSString *)uuid;
