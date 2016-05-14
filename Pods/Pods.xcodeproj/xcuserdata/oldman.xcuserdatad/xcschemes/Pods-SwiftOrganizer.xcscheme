@@ -14,7 +14,7 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = 'C91E648BACF11370C02D36EF'
+               BlueprintIdentifier = 'C47E0C2844CBB6E4B2DACB9D'
                BlueprintName = 'Pods-SwiftOrganizer'
                ReferencedContainer = 'container:Pods.xcodeproj'
                BuildableName = 'Pods_SwiftOrganizer.framework'>

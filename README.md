@@ -38,6 +38,8 @@ The following features has been implemented:
 - Log In to remote data base implemented by the Parse.com SDK
 - migration data after changing data model 
 - multi tasking is ready
+- Google Analitics
+- Crashlitics
 
 Were applied the following design patterns:
 - abstract method;
@@ -107,5 +109,4 @@ SwiftOrganizer is available under the MIT license. See the LICENSE file for more
 - 12.10.2015: Data migration for core data for new model data implemented. 
 - 17.10.2015: The Local Database is normalized.
 - 14.05.2016: Google Analytics is added.
-
-
+- 14.05.2016: Crashlitics added.

@@ -1045,6 +1045,7 @@
 				7F5DF6F81BAD83B200959432 /* Embed App Extensions */,
 				3EACADD11F6030C6BB5E253F /* Embed Pods Frameworks */,
 				77566DD44CAF35C7345066E3 /* Copy Pods Resources */,
+				7FA249821CE78EA30060F6CE /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -1384,6 +1385,19 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SwiftOrganizer/Pods-SwiftOrganizer-resources.sh\"\n";
 			showEnvVarsInLog = 0;
+		};
+		7FA249821CE78EA30060F6CE /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Fabric/run\" a8631cc5966d92bbb4d071399217f4597b08e9a9 b8b55f8f83db048b2cbe5da3afb626cd8e20e47f7c58a9afe4bfa35f73541f19\n";
 		};
 		9D0BF728FBE467727847F946 /* Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
