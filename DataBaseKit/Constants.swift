@@ -8,8 +8,11 @@
 
 import UIKit
 
-public let AppGroupsId = "group.skappleid.SOWidget"
-public let WidgetUrlScheme = "widget"
+public struct Defaults {
+    static let AppGroupsId = "group.skappleid.SOWidget"
+    static let WidgetUrlScheme = "widget"
+    static let KeyInURLAsTaskId = "taskid."
+}
 
 public struct DefaultsDataKeys {
     static let SODataBaseTypeKey = "DataBaseType"
@@ -19,8 +22,6 @@ public struct DefaultsDataKeys {
 public struct WidgetDataKeys {
     static let KeyInURLAsSwitchDataBase = "switchdbto."
 }
-
-public let KeyInURLAsTaskId = "taskid."
 
 // Facebook
 // https://developers.facebook.com/apps/538129673003368/settings/

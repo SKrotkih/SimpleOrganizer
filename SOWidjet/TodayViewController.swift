@@ -31,7 +31,7 @@ class TodayViewController: UIViewController, NCWidgetProviding {
         let index = typeOfDataBaseSwitcher.selectedSegmentIndex
         SOTypeDataBaseSwitcher.switchToIndex(DataBaseIndex(rawValue: index)!)
 
-        let urlAsString = "\(WidgetUrlScheme)://\(WidgetDataKeys.KeyInURLAsSwitchDataBase)\(index)"
+        let urlAsString = "\(Defaults.WidgetUrlScheme)://\(WidgetDataKeys.KeyInURLAsSwitchDataBase)\(index)"
         let url = NSURL(string: urlAsString)
         self.extensionContext!.openURL(url!, completionHandler: nil)
     }
@@ -113,7 +113,7 @@ extension TodayViewController: UITableViewDataSource, UITableViewDelegate {
         let task: SOTask = self.tasks[row]
         
         if let taskId = task.taskId{
-            let urlAsString = "\(WidgetUrlScheme)://\(KeyInURLAsTaskId)\(taskId)"
+            let urlAsString = "\(Defaults.WidgetUrlScheme)://\(Defaults.KeyInURLAsTaskId)\(taskId)"
             let url = NSURL(string: urlAsString)
             self.extensionContext!.openURL(url!, completionHandler: nil)
         }

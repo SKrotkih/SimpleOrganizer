@@ -59,7 +59,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(application: UIApplication, handleOpenURL url: NSURL) -> Bool {
         
-        if url.scheme == WidgetUrlScheme {
+        if url.scheme == Defaults.WidgetUrlScheme {
             self.todayWidgetHandleOpenURL(url)
         }
         
@@ -163,6 +163,13 @@ extension AppDelegate{
     func application(application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: NSError) {
         SOPushNotificationsCenter.didFailToRegisterForRemoteNotificationsWithError(application, error: error)
     }
+
+    /*
+     Note that application:didReceiveRemoteNotification: is called only when appli‐ cation is in foreground 
+     where as application:didReceiveRemoteNotification:fetchCompletionHandler:,
+     if implemented, can be called even if the app is in background and can even start the app if not already running. 
+     Such notifications are known as Silent Push Notifications.
+     */
     
     func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject]) {
         SOPushNotificationsCenter.didReceiveRemoteNotification(application, userInfo: userInfo)
@@ -171,6 +178,12 @@ extension AppDelegate{
     func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject], fetchCompletionHandler completionHandler: (UIBackgroundFetchResult) -> Void) {
         SOPushNotificationsCenter.didReceiveRemoteNotification(application, userInfo: userInfo, completionHandler: completionHandler)
     }
+    
+//    func application(application: UIApplication, performFetchWithHandler:{
+//        SOPushNotificationsCenter.didRegisterForRemoteNotificationsWithDeviceToken(application, deviceToken: deviceToken)
+//    }
+    
+    
 }
 
 // MARK: -
@@ -189,7 +202,7 @@ extension AppDelegate{
                         SOTypeDataBaseSwitcher.switchToIndex(DataBaseIndex(rawValue: index)!)
                     }
                 }
-            } else if NSString(string: host).containsString(KeyInURLAsTaskId) {
+            } else if NSString(string: host).containsString(Defaults.KeyInURLAsTaskId) {
                 var arr = host.characters.split {$0 == "."}.map { String($0) }
                 
                 if arr.count == 2{

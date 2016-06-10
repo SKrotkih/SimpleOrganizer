@@ -42,7 +42,7 @@ public class SOCoreDataBase: SOCoreDataProtocol {
     public lazy var persistentStoreCoordinator: NSPersistentStoreCoordinator? = {
         var persistentStoreDirectory: NSURL?
         
-        if let directory = NSFileManager.defaultManager().containerURLForSecurityApplicationGroupIdentifier(AppGroupsId){
+        if let directory = NSFileManager.defaultManager().containerURLForSecurityApplicationGroupIdentifier(Defaults.AppGroupsId){
             persistentStoreDirectory = directory
         } else {
             persistentStoreDirectory = self.applicationDocumentsDirectory

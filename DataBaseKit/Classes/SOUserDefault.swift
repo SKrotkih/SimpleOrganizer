@@ -12,7 +12,7 @@ public class SOUserDefault{
     public class func sharedDefaults() -> NSUserDefaults{
         var sharedDefaults: NSUserDefaults!
         
-        if let defaults = NSUserDefaults(suiteName: AppGroupsId){
+        if let defaults = NSUserDefaults(suiteName: Defaults.AppGroupsId){
             sharedDefaults = defaults
         } else {
             sharedDefaults = NSUserDefaults.standardUserDefaults()
