@@ -70,7 +70,7 @@ enum SODataBaseType: String{
 public class SOTypeDataBaseSwitcher{
 
     public class func currentDataBaseIndex() -> DataBaseIndex{
-        let defaults = SOUserDefault.sharedDefaults()
+        let defaults = DefaultsUser.sharedDefaults()
         return SODataBaseType.indexByName(defaults.stringForKey(DefaultsDataKeys.SODataBaseTypeKey))
     }
     
@@ -78,7 +78,7 @@ public class SOTypeDataBaseSwitcher{
         let newDataBaseName: String = SODataBaseType.nameByIndex(newDataBaseIndex)
         
         if newDataBaseIndex != self.currentDataBaseIndex(){
-            let defaults = SOUserDefault.sharedDefaults()
+            let defaults = DefaultsUser.sharedDefaults()
             defaults.setObject(newDataBaseName, forKey: DefaultsDataKeys.SODataBaseTypeKey)
             defaults.synchronize()
         }
@@ -104,14 +104,14 @@ public class SOTypeDataBaseSwitcher{
 extension SOTypeDataBaseSwitcher{
     
     public class func setUpOfUsingICloud(usingICloud: Bool){
-        let defaults = SOUserDefault.sharedDefaults()
+        let defaults = DefaultsUser.sharedDefaults()
         defaults.setBool(usingICloud, forKey: DefaultsDataKeys.SOEnableiCloudForCoreDataKey)
         defaults.synchronize()
     }
     
     public class func usingICloudCurrentState() -> Bool{
         var retValue: Bool!
-        let defaults = SOUserDefault.sharedDefaults()
+        let defaults = DefaultsUser.sharedDefaults()
         let useiCloudOpt: Bool? = defaults.boolForKey(DefaultsDataKeys.SOEnableiCloudForCoreDataKey)
         
         if let useiCloud = useiCloudOpt{

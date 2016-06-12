@@ -141,13 +141,13 @@ extension SOLocalNotificationsCenter{
 extension SOLocalNotificationsCenter{
     
     private class func setAreAllowedTheLocalNotifications(newValue: Bool){
-        let userDefaults: NSUserDefaults = SOUserDefault.sharedDefaults()
+        let userDefaults: NSUserDefaults = DefaultsUser.sharedDefaults()
         userDefaults.setBool(newValue, forKey: kAreAllowedTheLocalNotivicationsKey())
         userDefaults.synchronize()
     }
     
     private class func areAllowedTheLocalNotifications() -> Bool{
-        let userDefaults: NSUserDefaults = SOUserDefault.sharedDefaults()
+        let userDefaults: NSUserDefaults = DefaultsUser.sharedDefaults()
         let areAllowed: Bool? = userDefaults.boolForKey(kAreAllowedTheLocalNotivicationsKey())
         
         if let theareAllowed = areAllowed{

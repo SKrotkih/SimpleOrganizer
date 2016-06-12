@@ -46,7 +46,7 @@
 
 - (BOOL) isCurrentUserAlreadyLoggedIn
 {
-    return SOLocalUserManager.sharedInstance.currentUser != nil;
+    return UsersWorker.sharedInstance.currentUser != nil;
 }
 
 - (void) logInViaFacebookWithViewControoler: (UIViewController*) aViewController
@@ -96,7 +96,7 @@
                      
                      return;
                  }
-                 [SOLocalUserManager.sharedInstance logInWithFacebookUserData: anUserDict];
+                 [UsersWorker.sharedInstance logInWithUserData: anUserDict];
                  dispatch_async(dispatch_get_main_queue(), ^{
                      aCompletionBlock(OperationIsRanSuccessfully);
                  });
@@ -139,13 +139,13 @@
 
 - (void) logOutWithSuccessBlock: (void(^)()) aCompletionBlock
 {
-    SOUser* currentUser = SOLocalUserManager.sharedInstance.currentUser;
+    User* currentUser = UsersWorker.sharedInstance.currentUser;
 
     if (currentUser == nil)
     {
         return;
     }
-    SOLocalUserManager.sharedInstance.currentUser = nil;
+    UsersWorker.sharedInstance.currentUser = nil;
     FBSDKLoginManager* loginManager = [[FBSDKLoginManager alloc] init];
     [loginManager logOut];
     aCompletionBlock();
@@ -154,7 +154,7 @@
 - (void) logOutAlertWithViewController: (UIViewController*) aViewController
                        completionBlock: (void(^)()) aCompletionBlock
 {
-    SOUser* currentUser = SOLocalUserManager.sharedInstance.currentUser;
+    User* currentUser = UsersWorker.sharedInstance.currentUser;
     
     if (currentUser)
     {

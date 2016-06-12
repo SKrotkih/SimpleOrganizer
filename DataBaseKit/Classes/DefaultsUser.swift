@@ -1,5 +1,5 @@
 //
-//  SOUserDefault.swift
+//  DefaultsUser.swift
 //  SwiftOrganizer
 //
 //  Created by Sergey Krotkih on 7/19/15.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-public class SOUserDefault{
+public class DefaultsUser{
     public class func sharedDefaults() -> NSUserDefaults{
         var sharedDefaults: NSUserDefaults!
         

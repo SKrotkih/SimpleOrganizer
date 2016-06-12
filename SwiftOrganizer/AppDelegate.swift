@@ -25,6 +25,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         NSLog("\n\nDocument Directory: \n%@\n\n", self.applicationDocumentsDirectory)
         
+        UsersConfigurator.sharedInstance.configure()
+        
+        
         self.createOfSlidingViewControllers()
         
         SOTypeDataBaseSwitcher.startInternetObserver()

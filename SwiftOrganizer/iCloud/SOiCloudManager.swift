@@ -59,7 +59,7 @@ public final class SOiCloudManager {
                 
                 if let changedKeys: Array<String> = changedKeysObject as? Array<String>{
                     let kvStore: NSUbiquitousKeyValueStore = NSUbiquitousKeyValueStore.defaultStore();
-                    let userDefaults: NSUserDefaults = SOUserDefault.sharedDefaults()
+                    let userDefaults: NSUserDefaults = DefaultsUser.sharedDefaults()
                     
                     for key: String in changedKeys{
                         let valueObject: AnyObject? = kvStore.objectForKey(key)

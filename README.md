@@ -110,3 +110,5 @@ SwiftOrganizer is available under the MIT license. See the LICENSE file for more
 - 17.10.2015: The Local Database is normalized.
 - 14.05.2016: Google Analytics is added.
 - 14.05.2016: Crashlitics added.
+- 12.06.2016: Was partially reorganized "User" use case according of the VIPER architecture requirements  
+

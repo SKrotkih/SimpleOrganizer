@@ -30,7 +30,7 @@
 		7F5DF5B91BAD2CF300959432 /* SOIco.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F5DF5A11BAD2CF300959432 /* SOIco.swift */; };
 		7F5DF5BA1BAD2CF300959432 /* SOTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F5DF5A21BAD2CF300959432 /* SOTask.swift */; };
 		7F5DF5BB1BAD2CF300959432 /* SOTypeDataBaseSwitcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F5DF5A31BAD2CF300959432 /* SOTypeDataBaseSwitcher.swift */; };
-		7F5DF5BC1BAD2CF300959432 /* SOUserDefault.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F5DF5A41BAD2CF300959432 /* SOUserDefault.swift */; };
+		7F5DF5BC1BAD2CF300959432 /* DefaultsUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F5DF5A41BAD2CF300959432 /* DefaultsUser.swift */; };
 		7F5DF5BD1BAD2CF300959432 /* SOCoreDataBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F5DF5A61BAD2CF300959432 /* SOCoreDataBase.swift */; };
 		7F5DF5BE1BAD2CF300959432 /* SOLocalDataBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F5DF5A71BAD2CF300959432 /* SOLocalDataBase.swift */; };
 		7F5DF5BF1BAD2CF300959432 /* SOPopulateLocalDataBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F5DF5A81BAD2CF300959432 /* SOPopulateLocalDataBase.swift */; };
@@ -153,8 +153,8 @@
 		7F89DDAA1BD12226003C57BD /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F89DDA21BD12226003C57BD /* Task.swift */; };
 		7F89DDAB1BD12226003C57BD /* TaskIcon+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F89DDA31BD12226003C57BD /* TaskIcon+CoreDataProperties.swift */; };
 		7F89DDAC1BD12226003C57BD /* TaskIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F89DDA41BD12226003C57BD /* TaskIcon.swift */; };
-		7F8E16BC1BB9043A00FFC16B /* User+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F8E16BA1BB9043A00FFC16B /* User+CoreDataProperties.swift */; };
-		7F8E16BD1BB9043A00FFC16B /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F8E16BB1BB9043A00FFC16B /* User.swift */; };
+		7F8E16BC1BB9043A00FFC16B /* ManagedUser+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F8E16BA1BB9043A00FFC16B /* ManagedUser+CoreDataProperties.swift */; };
+		7F8E16BD1BB9043A00FFC16B /* ManagedUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F8E16BB1BB9043A00FFC16B /* ManagedUser.swift */; };
 		7F8E16C21BBA71E500FFC16B /* AILogInManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 7F8E16C01BBA71E500FFC16B /* AILogInManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		7F8E16C31BBA71E500FFC16B /* AILogInManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F8E16C11BBA71E500FFC16B /* AILogInManager.m */; };
 		7F8FE1FF1BC4AF9B00180EAD /* LocalUsers.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 7FD8C7BE1BC3F07200E0A8F7 /* LocalUsers.xcdatamodeld */; };
@@ -168,17 +168,20 @@
 		7FA2497C1CE70EFD0060F6CE /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7FA249771CE70EFD0060F6CE /* GoogleService-Info.plist */; };
 		7FA2497D1CE70EFD0060F6CE /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7FA249771CE70EFD0060F6CE /* GoogleService-Info.plist */; };
 		7FA2497E1CE70EFD0060F6CE /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7FA249771CE70EFD0060F6CE /* GoogleService-Info.plist */; };
+		7FC653B11D0C841700D2FFCD /* UsersCoreDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FC653B01D0C841700D2FFCD /* UsersCoreDataStore.swift */; };
+		7FC653B41D0C8A3200D2FFCD /* UsersConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FC653B31D0C8A3200D2FFCD /* UsersConfigurator.swift */; };
 		7FCD13641BCBEACE001778E9 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FCD13631BCBEACE001778E9 /* Utils.swift */; };
 		7FCD13681BCCF756001778E9 /* SOBorderedImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FCD13661BCCF756001778E9 /* SOBorderedImageView.swift */; };
 		7FCD13691BCCF756001778E9 /* SOBorderedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FCD13671BCCF756001778E9 /* SOBorderedView.swift */; };
 		7FCD136B1BCCF884001778E9 /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FCD136A1BCCF884001778E9 /* UIColorExtension.swift */; };
 		7FD3879F1BD0B60D00E31A92 /* UIImageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FD3879E1BD0B60D00E31A92 /* UIImageExtension.swift */; };
 		7FD8C7C01BC3F07200E0A8F7 /* LocalUsers.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 7FD8C7BE1BC3F07200E0A8F7 /* LocalUsers.xcdatamodeld */; };
-		7FDF313E1BBA8CBC00AD4127 /* SOUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FDF313D1BBA8CBC00AD4127 /* SOUser.swift */; };
+		7FDF313E1BBA8CBC00AD4127 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FDF313D1BBA8CBC00AD4127 /* User.swift */; };
 		7FDF31411BBA949700AD4127 /* Utils.h in Headers */ = {isa = PBXBuildFile; fileRef = 7FDF313F1BBA949700AD4127 /* Utils.h */; };
 		7FDF31421BBA949700AD4127 /* Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 7FDF31401BBA949700AD4127 /* Utils.m */; };
 		7FDF31431BBABA0E00AD4127 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = 7F5DF71E1BAD8B8900959432 /* README.md */; };
 		7FDF31441BBABA4E00AD4127 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 7F5DF71E1BAD8B8900959432 /* README.md */; };
+		7FE7CD281D0B0A200023D4BE /* UsersWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FE7CD271D0B0A200023D4BE /* UsersWorker.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -265,7 +268,7 @@
 		7F042C161BB8EDEC0035533D /* Pods-DataBaseKit.release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = "Pods-DataBaseKit.release.xcconfig"; path = "Pods/Target Support Files/Pods-DataBaseKit/Pods-DataBaseKit.release.xcconfig"; sourceTree = "<group>"; };
 		7F042C171BB8EE090035533D /* Pods-SwiftOrganizer.debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = "Pods-SwiftOrganizer.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SwiftOrganizer/Pods-SwiftOrganizer.debug.xcconfig"; sourceTree = "<group>"; };
 		7F042C181BB8EE090035533D /* Pods-SwiftOrganizer.release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = "Pods-SwiftOrganizer.release.xcconfig"; path = "Pods/Target Support Files/Pods-SwiftOrganizer/Pods-SwiftOrganizer.release.xcconfig"; sourceTree = "<group>"; };
-		7F4882391BADB64C00D4D45B /* readme.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = readme.txt; sourceTree = "<group>"; };
+		7F4882391BADB64C00D4D45B /* readme.txt */ = {isa = PBXFileReference; lastKnownFileType = text; name = readme.txt; path = CoreData/readme.txt; sourceTree = "<group>"; };
 		7F5DF5441BAD288E00959432 /* SwiftOrganizer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwiftOrganizer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7F5DF5471BAD288E00959432 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7F5DF54C1BAD288E00959432 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -292,10 +295,10 @@
 		7F5DF5A11BAD2CF300959432 /* SOIco.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SOIco.swift; sourceTree = "<group>"; };
 		7F5DF5A21BAD2CF300959432 /* SOTask.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SOTask.swift; sourceTree = "<group>"; };
 		7F5DF5A31BAD2CF300959432 /* SOTypeDataBaseSwitcher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SOTypeDataBaseSwitcher.swift; sourceTree = "<group>"; };
-		7F5DF5A41BAD2CF300959432 /* SOUserDefault.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SOUserDefault.swift; sourceTree = "<group>"; };
-		7F5DF5A61BAD2CF300959432 /* SOCoreDataBase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SOCoreDataBase.swift; sourceTree = "<group>"; };
-		7F5DF5A71BAD2CF300959432 /* SOLocalDataBase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SOLocalDataBase.swift; sourceTree = "<group>"; };
-		7F5DF5A81BAD2CF300959432 /* SOPopulateLocalDataBase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SOPopulateLocalDataBase.swift; sourceTree = "<group>"; };
+		7F5DF5A41BAD2CF300959432 /* DefaultsUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultsUser.swift; sourceTree = "<group>"; };
+		7F5DF5A61BAD2CF300959432 /* SOCoreDataBase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SOCoreDataBase.swift; path = CoreData/SOCoreDataBase.swift; sourceTree = "<group>"; };
+		7F5DF5A71BAD2CF300959432 /* SOLocalDataBase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SOLocalDataBase.swift; path = CoreData/SOLocalDataBase.swift; sourceTree = "<group>"; };
+		7F5DF5A81BAD2CF300959432 /* SOPopulateLocalDataBase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SOPopulateLocalDataBase.swift; path = CoreData/SOPopulateLocalDataBase.swift; sourceTree = "<group>"; };
 		7F5DF5AA1BAD2CF300959432 /* SwiftOrganizer.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = SwiftOrganizer.xcdatamodel; sourceTree = "<group>"; };
 		7F5DF5AF1BAD2CF300959432 /* SOObserversManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SOObserversManager.swift; sourceTree = "<group>"; };
 		7F5DF5B11BAD2CF300959432 /* SOParseComManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SOParseComManager.swift; sourceTree = "<group>"; };
@@ -413,14 +416,16 @@
 		7F89DDA21BD12226003C57BD /* Task.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
 		7F89DDA31BD12226003C57BD /* TaskIcon+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "TaskIcon+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		7F89DDA41BD12226003C57BD /* TaskIcon.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskIcon.swift; sourceTree = "<group>"; };
-		7F8E16BA1BB9043A00FFC16B /* User+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "User+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		7F8E16BB1BB9043A00FFC16B /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		7F8E16BA1BB9043A00FFC16B /* ManagedUser+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ManagedUser+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		7F8E16BB1BB9043A00FFC16B /* ManagedUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ManagedUser.swift; sourceTree = "<group>"; };
 		7F8E16C01BBA71E500FFC16B /* AILogInManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AILogInManager.h; sourceTree = "<group>"; };
 		7F8E16C11BBA71E500FFC16B /* AILogInManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AILogInManager.m; sourceTree = "<group>"; };
 		7F8FE2021BC530AB00180EAD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LogIn.storyboard; sourceTree = "<group>"; };
 		7F8FE2041BC532E100180EAD /* SOLogInInfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SOLogInInfoViewController.swift; path = ../DataBaseKit/LogInManager/SOLogInInfoViewController.swift; sourceTree = "<group>"; };
 		7FA249771CE70EFD0060F6CE /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		7FA2497F1CE713630060F6CE /* libGoogleAnalytics.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libGoogleAnalytics.a; path = Pods/GoogleAnalytics/Libraries/libGoogleAnalytics.a; sourceTree = "<group>"; };
+		7FC653B01D0C841700D2FFCD /* UsersCoreDataStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UsersCoreDataStore.swift; path = Classes/UsersCoreDataStore.swift; sourceTree = "<group>"; };
+		7FC653B31D0C8A3200D2FFCD /* UsersConfigurator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UsersConfigurator.swift; path = Classes/UsersConfigurator.swift; sourceTree = "<group>"; };
 		7FCD13611BCBD9C3001778E9 /* SwiftOrganizer v2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "SwiftOrganizer v2.xcdatamodel"; sourceTree = "<group>"; };
 		7FCD13631BCBEACE001778E9 /* Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Utils.swift; path = Utils/Utils.swift; sourceTree = "<group>"; };
 		7FCD13661BCCF756001778E9 /* SOBorderedImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SOBorderedImageView.swift; sourceTree = "<group>"; };
@@ -428,9 +433,10 @@
 		7FCD136A1BCCF884001778E9 /* UIColorExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UIColorExtension.swift; path = Extensions/UIColorExtension.swift; sourceTree = SOURCE_ROOT; };
 		7FD3879E1BD0B60D00E31A92 /* UIImageExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UIImageExtension.swift; path = Extensions/UIImageExtension.swift; sourceTree = SOURCE_ROOT; };
 		7FD8C7BF1BC3F07200E0A8F7 /* LocalUsers.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = LocalUsers.xcdatamodel; sourceTree = "<group>"; };
-		7FDF313D1BBA8CBC00AD4127 /* SOUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SOUser.swift; path = ../Classes/SOUser.swift; sourceTree = "<group>"; };
+		7FDF313D1BBA8CBC00AD4127 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = User.swift; path = ../Classes/User.swift; sourceTree = "<group>"; };
 		7FDF313F1BBA949700AD4127 /* Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Utils.h; sourceTree = "<group>"; };
 		7FDF31401BBA949700AD4127 /* Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Utils.m; sourceTree = "<group>"; };
+		7FE7CD271D0B0A200023D4BE /* UsersWorker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UsersWorker.swift; path = DataBaseKit/Classes/UsersWorker.swift; sourceTree = SOURCE_ROOT; };
 		9E951A0642B00ACF8106DB23 /* Pods_SwiftOrganizer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SwiftOrganizer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A8CDDAD77ECB23A6A0B42F0C /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D4A36260F1116405127760BA /* Pods_DataBaseKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DataBaseKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -611,14 +617,15 @@
 		7F5DF57E1BAD2BBB00959432 /* DataBaseKit */ = {
 			isa = PBXGroup;
 			children = (
+				7FE7CD261D0AFDBE0023D4BE /* Models */,
+				7FE7CD2F1D0B205D0023D4BE /* Services */,
+				7FE7CD291D0B1F9D0023D4BE /* Workers */,
+				7FC653B21D0C8A0600D2FFCD /* Configurators */,
 				7FCD13621BCBEA85001778E9 /* Utils */,
 				7F5DF57F1BAD2BBB00959432 /* DataBaseKit.h */,
 				7F5DF5C81BAD2E1600959432 /* Constants.swift */,
 				7F8E16BF1BBA71E500FFC16B /* LogInManager */,
 				7F5DF5AE1BAD2CF300959432 /* ObserverManager */,
-				7FD8C7BD1BC3DDB300E0A8F7 /* LocalUsersDataBase */,
-				7F5DF5A51BAD2CF300959432 /* SwiftOrganizerCoreDataBase */,
-				7F5DF5B01BAD2CF300959432 /* Parse.com */,
 				7F5DF59B1BAD2CF300959432 /* Classes */,
 				7F5DF5E71BAD33AD00959432 /* Objective-C */,
 				7F5DF5E31BAD32E800959432 /* Extensions */,
@@ -652,27 +659,6 @@
 			path = Classes;
 			sourceTree = "<group>";
 		};
-		7F5DF5A51BAD2CF300959432 /* SwiftOrganizerCoreDataBase */ = {
-			isa = PBXGroup;
-			children = (
-				7F89DD9D1BD12226003C57BD /* Category+CoreDataProperties.swift */,
-				7F89DD9E1BD12226003C57BD /* Category.swift */,
-				7F89DD9F1BD12226003C57BD /* Icon+CoreDataProperties.swift */,
-				7F89DDA01BD12226003C57BD /* Icon.swift */,
-				7F89DDA11BD12226003C57BD /* Task+CoreDataProperties.swift */,
-				7F89DDA21BD12226003C57BD /* Task.swift */,
-				7F89DDA31BD12226003C57BD /* TaskIcon+CoreDataProperties.swift */,
-				7F89DDA41BD12226003C57BD /* TaskIcon.swift */,
-				7F4882391BADB64C00D4D45B /* readme.txt */,
-				7F5DF5A61BAD2CF300959432 /* SOCoreDataBase.swift */,
-				7F5DF5A71BAD2CF300959432 /* SOLocalDataBase.swift */,
-				7F5DF5A81BAD2CF300959432 /* SOPopulateLocalDataBase.swift */,
-				7F5DF5A91BAD2CF300959432 /* SwiftOrganizer.xcdatamodeld */,
-			);
-			name = SwiftOrganizerCoreDataBase;
-			path = CoreData;
-			sourceTree = "<group>";
-		};
 		7F5DF5AE1BAD2CF300959432 /* ObserverManager */ = {
 			isa = PBXGroup;
 			children = (
@@ -695,7 +681,7 @@
 			isa = PBXGroup;
 			children = (
 				7F5DF5A31BAD2CF300959432 /* SOTypeDataBaseSwitcher.swift */,
-				7F5DF5A41BAD2CF300959432 /* SOUserDefault.swift */,
+				7F5DF5A41BAD2CF300959432 /* DefaultsUser.swift */,
 			);
 			name = "Type of DataBase Switcher";
 			path = Classes;
@@ -987,6 +973,14 @@
 			name = LogIn;
 			sourceTree = "<group>";
 		};
+		7FC653B21D0C8A0600D2FFCD /* Configurators */ = {
+			isa = PBXGroup;
+			children = (
+				7FC653B31D0C8A3200D2FFCD /* UsersConfigurator.swift */,
+			);
+			name = Configurators;
+			sourceTree = "<group>";
+		};
 		7FCD13621BCBEA85001778E9 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
@@ -1004,16 +998,86 @@
 			path = "Custom Views";
 			sourceTree = "<group>";
 		};
-		7FD8C7BD1BC3DDB300E0A8F7 /* LocalUsersDataBase */ = {
+		7FE7CD261D0AFDBE0023D4BE /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				7F8E16BA1BB9043A00FFC16B /* User+CoreDataProperties.swift */,
-				7F8E16BB1BB9043A00FFC16B /* User.swift */,
-				7FDF313D1BBA8CBC00AD4127 /* SOUser.swift */,
+				7FE7CD2E1D0B201F0023D4BE /* TaskIcon */,
+				7FE7CD2D1D0B20140023D4BE /* Task */,
+				7FE7CD2C1D0B20060023D4BE /* Icon */,
+				7FE7CD2B1D0B1FFA0023D4BE /* Category */,
+				7FE7CD2A1D0B1FE00023D4BE /* User */,
+			);
+			name = Models;
+			path = CoreData;
+			sourceTree = "<group>";
+		};
+		7FE7CD291D0B1F9D0023D4BE /* Workers */ = {
+			isa = PBXGroup;
+			children = (
+				7FE7CD271D0B0A200023D4BE /* UsersWorker.swift */,
+			);
+			name = Workers;
+			sourceTree = "<group>";
+		};
+		7FE7CD2A1D0B1FE00023D4BE /* User */ = {
+			isa = PBXGroup;
+			children = (
+				7F8E16BA1BB9043A00FFC16B /* ManagedUser+CoreDataProperties.swift */,
+				7F8E16BB1BB9043A00FFC16B /* ManagedUser.swift */,
+				7FDF313D1BBA8CBC00AD4127 /* User.swift */,
 				7FD8C7BE1BC3F07200E0A8F7 /* LocalUsers.xcdatamodeld */,
 			);
-			name = LocalUsersDataBase;
-			path = CoreData;
+			name = User;
+			sourceTree = "<group>";
+		};
+		7FE7CD2B1D0B1FFA0023D4BE /* Category */ = {
+			isa = PBXGroup;
+			children = (
+				7F89DD9D1BD12226003C57BD /* Category+CoreDataProperties.swift */,
+				7F89DD9E1BD12226003C57BD /* Category.swift */,
+			);
+			name = Category;
+			sourceTree = "<group>";
+		};
+		7FE7CD2C1D0B20060023D4BE /* Icon */ = {
+			isa = PBXGroup;
+			children = (
+				7F89DD9F1BD12226003C57BD /* Icon+CoreDataProperties.swift */,
+				7F89DDA01BD12226003C57BD /* Icon.swift */,
+			);
+			name = Icon;
+			sourceTree = "<group>";
+		};
+		7FE7CD2D1D0B20140023D4BE /* Task */ = {
+			isa = PBXGroup;
+			children = (
+				7F89DDA11BD12226003C57BD /* Task+CoreDataProperties.swift */,
+				7F89DDA21BD12226003C57BD /* Task.swift */,
+			);
+			name = Task;
+			sourceTree = "<group>";
+		};
+		7FE7CD2E1D0B201F0023D4BE /* TaskIcon */ = {
+			isa = PBXGroup;
+			children = (
+				7F89DDA31BD12226003C57BD /* TaskIcon+CoreDataProperties.swift */,
+				7F89DDA41BD12226003C57BD /* TaskIcon.swift */,
+			);
+			name = TaskIcon;
+			sourceTree = "<group>";
+		};
+		7FE7CD2F1D0B205D0023D4BE /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				7F5DF5B01BAD2CF300959432 /* Parse.com */,
+				7F5DF5A91BAD2CF300959432 /* SwiftOrganizer.xcdatamodeld */,
+				7F4882391BADB64C00D4D45B /* readme.txt */,
+				7FC653B01D0C841700D2FFCD /* UsersCoreDataStore.swift */,
+				7F5DF5A61BAD2CF300959432 /* SOCoreDataBase.swift */,
+				7F5DF5A71BAD2CF300959432 /* SOLocalDataBase.swift */,
+				7F5DF5A81BAD2CF300959432 /* SOPopulateLocalDataBase.swift */,
+			);
+			name = Services;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1523,8 +1587,9 @@
 				7F5DF5C91BAD2E1600959432 /* Constants.swift in Sources */,
 				7F5DF5BF1BAD2CF300959432 /* SOPopulateLocalDataBase.swift in Sources */,
 				7FDF31421BBA949700AD4127 /* Utils.m in Sources */,
-				7F8E16BD1BB9043A00FFC16B /* User.swift in Sources */,
+				7F8E16BD1BB9043A00FFC16B /* ManagedUser.swift in Sources */,
 				7F5DF5BE1BAD2CF300959432 /* SOLocalDataBase.swift in Sources */,
+				7FC653B11D0C841700D2FFCD /* UsersCoreDataStore.swift in Sources */,
 				7F5DF5BD1BAD2CF300959432 /* SOCoreDataBase.swift in Sources */,
 				7F89DDA81BD12226003C57BD /* Icon.swift in Sources */,
 				7F5DF5C01BAD2CF300959432 /* SwiftOrganizer.xcdatamodeld in Sources */,
@@ -1533,8 +1598,9 @@
 				7F5DF5C51BAD2CF300959432 /* SOParseComManager.swift in Sources */,
 				7F89DDAA1BD12226003C57BD /* Task.swift in Sources */,
 				7F89DDA61BD12226003C57BD /* Category.swift in Sources */,
-				7F8E16BC1BB9043A00FFC16B /* User+CoreDataProperties.swift in Sources */,
-				7F5DF5BC1BAD2CF300959432 /* SOUserDefault.swift in Sources */,
+				7F8E16BC1BB9043A00FFC16B /* ManagedUser+CoreDataProperties.swift in Sources */,
+				7F5DF5BC1BAD2CF300959432 /* DefaultsUser.swift in Sources */,
+				7FE7CD281D0B0A200023D4BE /* UsersWorker.swift in Sources */,
 				7F5DF5C71BAD2CF300959432 /* SORemoteDataBase.swift in Sources */,
 				7F89DDAB1BD12226003C57BD /* TaskIcon+CoreDataProperties.swift in Sources */,
 				7F5DF5B51BAD2CF300959432 /* SOCategory.swift in Sources */,
@@ -1554,8 +1620,9 @@
 				7F5DF5BA1BAD2CF300959432 /* SOTask.swift in Sources */,
 				7F8E16C31BBA71E500FFC16B /* AILogInManager.m in Sources */,
 				7F5DF5BB1BAD2CF300959432 /* SOTypeDataBaseSwitcher.swift in Sources */,
-				7FDF313E1BBA8CBC00AD4127 /* SOUser.swift in Sources */,
+				7FDF313E1BBA8CBC00AD4127 /* User.swift in Sources */,
 				7F5DF5EB1BAD33AD00959432 /* KVOTryCatchException.m in Sources */,
+				7FC653B41D0C8A3200D2FFCD /* UsersConfigurator.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2092,7 +2159,8 @@
 				7F5DF5AA1BAD2CF300959432 /* SwiftOrganizer.xcdatamodel */,
 			);
 			currentVersion = 7FCD13611BCBD9C3001778E9 /* SwiftOrganizer v2.xcdatamodel */;
-			path = SwiftOrganizer.xcdatamodeld;
+			name = SwiftOrganizer.xcdatamodeld;
+			path = CoreData/SwiftOrganizer.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};

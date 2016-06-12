@@ -70,7 +70,7 @@ public class SOPopulateLocalDataBase {
     
     public func populateTask(title: String, category: String, icons: [String]){
         var userId: String?
-        if let curreentUser = SOLocalUserManager.sharedInstance.currentUser{
+        if let curreentUser = UsersWorker.sharedInstance.currentUser{
             userId = curreentUser.userid
         }
         let task  = self.coreData.newManagedObject("Task") as! Task

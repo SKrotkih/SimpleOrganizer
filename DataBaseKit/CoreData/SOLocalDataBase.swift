@@ -55,7 +55,7 @@ public class SOLocalDataBase: NSObject, SODataBaseProtocol{
     }
 
     private func isiCloudEnabled() -> Bool{
-        let defaults = SOUserDefault.sharedDefaults()
+        let defaults = DefaultsUser.sharedDefaults()
         let useiCloudOpt: Bool? = defaults.boolForKey(DefaultsDataKeys.SOEnableiCloudForCoreDataKey)
         
         if let useiCloud = useiCloudOpt{
@@ -128,7 +128,7 @@ extension SOLocalDataBase{
     }
     
     public func userInfo() -> Dictionary<String, String>?{
-        if let currentUser = SOLocalUserManager.sharedInstance.currentUser{
+        if let currentUser = UsersWorker.sharedInstance.currentUser{
             let dict: Dictionary<String, String> = ["name": currentUser.name, "photo": currentUser.photo_prefix]
             return dict
         }
@@ -239,7 +239,7 @@ extension SOLocalDataBase{
     
     // MARK: - Tasks
     public func allTasks(completionBlock: (resultBuffer: [SOTask], error: NSError?) -> Void) {
-        let currentUser: SOUser? = SOLocalUserManager.sharedInstance.currentUser
+        let currentUser: User? = UsersWorker.sharedInstance.currentUser
         
         if currentUser ==  nil{
             var dict = [String: AnyObject]()
@@ -257,7 +257,7 @@ extension SOLocalDataBase{
             
             func fetchAllTasks() -> Bool{
                 var userId: String?
-                if let curreentUser = SOLocalUserManager.sharedInstance.currentUser{
+                if let curreentUser = UsersWorker.sharedInstance.currentUser{
                     userId = curreentUser.userid
                 }
                 
@@ -446,7 +446,7 @@ extension SOLocalDataBase{
     func currentUserId() -> String?{
         var userId: String?
 
-        if let curreentUser = SOLocalUserManager.sharedInstance.currentUser{
+        if let curreentUser = UsersWorker.sharedInstance.currentUser{
             userId = curreentUser.userid
         }
         return userId

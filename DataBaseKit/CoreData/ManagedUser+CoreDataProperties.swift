@@ -12,7 +12,7 @@
 import Foundation
 import CoreData
 
-extension User {
+extension ManagedUser {
 
     @NSManaged var contact: String?
     @NSManaged var currentUser: NSNumber?
