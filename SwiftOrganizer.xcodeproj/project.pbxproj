@@ -160,7 +160,15 @@
 		7F8FE1FF1BC4AF9B00180EAD /* LocalUsers.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 7FD8C7BE1BC3F07200E0A8F7 /* LocalUsers.xcdatamodeld */; };
 		7F8FE2001BC4AF9D00180EAD /* LocalUsers.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 7FD8C7BE1BC3F07200E0A8F7 /* LocalUsers.xcdatamodeld */; };
 		7F8FE2031BC530AB00180EAD /* LogIn.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7F8FE2011BC530AB00180EAD /* LogIn.storyboard */; };
-		7F8FE2051BC532E100180EAD /* SOLogInInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F8FE2041BC532E100180EAD /* SOLogInInfoViewController.swift */; };
+		7F8FE2051BC532E100180EAD /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F8FE2041BC532E100180EAD /* LoginViewController.swift */; };
+		7F9DC3D61D0D75B800454B67 /* LoginConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F9DC3D51D0D75B800454B67 /* LoginConfigurator.swift */; };
+		7F9DC3D81D0D75D200454B67 /* LoginInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F9DC3D71D0D75D200454B67 /* LoginInteractor.swift */; };
+		7F9DC3DA1D0D75EF00454B67 /* LoginPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F9DC3D91D0D75EF00454B67 /* LoginPresenter.swift */; };
+		7F9DC3DC1D0D760900454B67 /* LoginRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F9DC3DB1D0D760900454B67 /* LoginRouter.swift */; };
+		7F9DC3E11D0D975F00454B67 /* LoginWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F9DC3E01D0D975F00454B67 /* LoginWorker.swift */; };
+		7F9DC3E31D0D983700454B67 /* LoginCoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F9DC3E21D0D983700454B67 /* LoginCoreData.swift */; };
+		7F9DC3E51D0D9BCA00454B67 /* LoginRemoteDataBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F9DC3E41D0D9BCA00454B67 /* LoginRemoteDataBase.swift */; };
+		7F9DC3E71D0D9D2E00454B67 /* UsersRemoteDataBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F9DC3E61D0D9D2E00454B67 /* UsersRemoteDataBase.swift */; };
 		7FA249781CE70EFD0060F6CE /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7FA249771CE70EFD0060F6CE /* GoogleService-Info.plist */; };
 		7FA249791CE70EFD0060F6CE /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7FA249771CE70EFD0060F6CE /* GoogleService-Info.plist */; };
 		7FA2497A1CE70EFD0060F6CE /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7FA249771CE70EFD0060F6CE /* GoogleService-Info.plist */; };
@@ -169,7 +177,7 @@
 		7FA2497D1CE70EFD0060F6CE /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7FA249771CE70EFD0060F6CE /* GoogleService-Info.plist */; };
 		7FA2497E1CE70EFD0060F6CE /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7FA249771CE70EFD0060F6CE /* GoogleService-Info.plist */; };
 		7FC653B11D0C841700D2FFCD /* UsersCoreDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FC653B01D0C841700D2FFCD /* UsersCoreDataStore.swift */; };
-		7FC653B41D0C8A3200D2FFCD /* UsersConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FC653B31D0C8A3200D2FFCD /* UsersConfigurator.swift */; };
+		7FC653B41D0C8A3200D2FFCD /* CoreConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FC653B31D0C8A3200D2FFCD /* CoreConfigurator.swift */; };
 		7FCD13641BCBEACE001778E9 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FCD13631BCBEACE001778E9 /* Utils.swift */; };
 		7FCD13681BCCF756001778E9 /* SOBorderedImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FCD13661BCCF756001778E9 /* SOBorderedImageView.swift */; };
 		7FCD13691BCCF756001778E9 /* SOBorderedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FCD13671BCCF756001778E9 /* SOBorderedView.swift */; };
@@ -421,11 +429,19 @@
 		7F8E16C01BBA71E500FFC16B /* AILogInManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AILogInManager.h; sourceTree = "<group>"; };
 		7F8E16C11BBA71E500FFC16B /* AILogInManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AILogInManager.m; sourceTree = "<group>"; };
 		7F8FE2021BC530AB00180EAD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LogIn.storyboard; sourceTree = "<group>"; };
-		7F8FE2041BC532E100180EAD /* SOLogInInfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SOLogInInfoViewController.swift; path = ../DataBaseKit/LogInManager/SOLogInInfoViewController.swift; sourceTree = "<group>"; };
+		7F8FE2041BC532E100180EAD /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LoginViewController.swift; path = ../DataBaseKit/LogInManager/LoginViewController.swift; sourceTree = "<group>"; };
+		7F9DC3D51D0D75B800454B67 /* LoginConfigurator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LoginConfigurator.swift; path = Scenes/Login/LoginConfigurator.swift; sourceTree = "<group>"; };
+		7F9DC3D71D0D75D200454B67 /* LoginInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LoginInteractor.swift; path = Scenes/Login/LoginInteractor.swift; sourceTree = "<group>"; };
+		7F9DC3D91D0D75EF00454B67 /* LoginPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LoginPresenter.swift; path = Scenes/Login/LoginPresenter.swift; sourceTree = "<group>"; };
+		7F9DC3DB1D0D760900454B67 /* LoginRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LoginRouter.swift; path = Scenes/Login/LoginRouter.swift; sourceTree = "<group>"; };
+		7F9DC3E01D0D975F00454B67 /* LoginWorker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LoginWorker.swift; path = Classes/LoginWorker.swift; sourceTree = "<group>"; };
+		7F9DC3E21D0D983700454B67 /* LoginCoreData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LoginCoreData.swift; path = Classes/LoginCoreData.swift; sourceTree = "<group>"; };
+		7F9DC3E41D0D9BCA00454B67 /* LoginRemoteDataBase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginRemoteDataBase.swift; sourceTree = "<group>"; };
+		7F9DC3E61D0D9D2E00454B67 /* UsersRemoteDataBase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UsersRemoteDataBase.swift; sourceTree = "<group>"; };
 		7FA249771CE70EFD0060F6CE /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		7FA2497F1CE713630060F6CE /* libGoogleAnalytics.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libGoogleAnalytics.a; path = Pods/GoogleAnalytics/Libraries/libGoogleAnalytics.a; sourceTree = "<group>"; };
 		7FC653B01D0C841700D2FFCD /* UsersCoreDataStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UsersCoreDataStore.swift; path = Classes/UsersCoreDataStore.swift; sourceTree = "<group>"; };
-		7FC653B31D0C8A3200D2FFCD /* UsersConfigurator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UsersConfigurator.swift; path = Classes/UsersConfigurator.swift; sourceTree = "<group>"; };
+		7FC653B31D0C8A3200D2FFCD /* CoreConfigurator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CoreConfigurator.swift; path = Classes/CoreConfigurator.swift; sourceTree = "<group>"; };
 		7FCD13611BCBD9C3001778E9 /* SwiftOrganizer v2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "SwiftOrganizer v2.xcdatamodel"; sourceTree = "<group>"; };
 		7FCD13631BCBEACE001778E9 /* Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Utils.swift; path = Utils/Utils.swift; sourceTree = "<group>"; };
 		7FCD13661BCCF756001778E9 /* SOBorderedImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SOBorderedImageView.swift; sourceTree = "<group>"; };
@@ -575,10 +591,10 @@
 		7F5DF5461BAD288E00959432 /* SwiftOrganizer */ = {
 			isa = PBXGroup;
 			children = (
+				7F9DC3D31D0D751B00454B67 /* Scenes */,
 				7F5DF6211BAD669300959432 /* ViewControllers */,
 				7F5DF5F21BAD669300959432 /* Common */,
 				7F5DF6051BAD669300959432 /* iCloud */,
-				7F8FE2061BC533B100180EAD /* LogIn */,
 				7F5DF5471BAD288E00959432 /* AppDelegate.swift */,
 				7F5DF54B1BAD288E00959432 /* Main.storyboard */,
 				7F5DF6971BAD66F100959432 /* LaunchScreen.xib */,
@@ -670,9 +686,11 @@
 		7F5DF5B01BAD2CF300959432 /* Parse.com */ = {
 			isa = PBXGroup;
 			children = (
+				7F5DF5B21BAD2CF300959432 /* SOPopulateRemoteDataBase.swift */,
 				7F5DF5B11BAD2CF300959432 /* SOParseComManager.swift */,
 				7F5DF5B31BAD2CF300959432 /* SORemoteDataBase.swift */,
-				7F5DF5B21BAD2CF300959432 /* SOPopulateRemoteDataBase.swift */,
+				7F9DC3E41D0D9BCA00454B67 /* LoginRemoteDataBase.swift */,
+				7F9DC3E61D0D9D2E00454B67 /* UsersRemoteDataBase.swift */,
 			);
 			path = Parse.com;
 			sourceTree = "<group>";
@@ -964,19 +982,45 @@
 			path = LogInManager;
 			sourceTree = "<group>";
 		};
-		7F8FE2061BC533B100180EAD /* LogIn */ = {
+		7F9DC3D31D0D751B00454B67 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
-				7F8FE2041BC532E100180EAD /* SOLogInInfoViewController.swift */,
+				7F9DC3D41D0D753600454B67 /* Login */,
+			);
+			name = Scenes;
+			sourceTree = "<group>";
+		};
+		7F9DC3D41D0D753600454B67 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				7F9DC3D51D0D75B800454B67 /* LoginConfigurator.swift */,
+				7F9DC3D71D0D75D200454B67 /* LoginInteractor.swift */,
+				7F9DC3D91D0D75EF00454B67 /* LoginPresenter.swift */,
+				7F9DC3DB1D0D760900454B67 /* LoginRouter.swift */,
+				7F8FE2041BC532E100180EAD /* LoginViewController.swift */,
 				7F8FE2011BC530AB00180EAD /* LogIn.storyboard */,
 			);
-			name = LogIn;
+			name = Login;
+			sourceTree = "<group>";
+		};
+		7F9DC3DF1D0D95AF00454B67 /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				7F5DF5A91BAD2CF300959432 /* SwiftOrganizer.xcdatamodeld */,
+				7F4882391BADB64C00D4D45B /* readme.txt */,
+				7F5DF5A81BAD2CF300959432 /* SOPopulateLocalDataBase.swift */,
+				7FC653B01D0C841700D2FFCD /* UsersCoreDataStore.swift */,
+				7F9DC3E21D0D983700454B67 /* LoginCoreData.swift */,
+				7F5DF5A61BAD2CF300959432 /* SOCoreDataBase.swift */,
+				7F5DF5A71BAD2CF300959432 /* SOLocalDataBase.swift */,
+			);
+			name = CoreData;
 			sourceTree = "<group>";
 		};
 		7FC653B21D0C8A0600D2FFCD /* Configurators */ = {
 			isa = PBXGroup;
 			children = (
-				7FC653B31D0C8A3200D2FFCD /* UsersConfigurator.swift */,
+				7FC653B31D0C8A3200D2FFCD /* CoreConfigurator.swift */,
 			);
 			name = Configurators;
 			sourceTree = "<group>";
@@ -1015,6 +1059,7 @@
 			isa = PBXGroup;
 			children = (
 				7FE7CD271D0B0A200023D4BE /* UsersWorker.swift */,
+				7F9DC3E01D0D975F00454B67 /* LoginWorker.swift */,
 			);
 			name = Workers;
 			sourceTree = "<group>";
@@ -1070,12 +1115,7 @@
 			isa = PBXGroup;
 			children = (
 				7F5DF5B01BAD2CF300959432 /* Parse.com */,
-				7F5DF5A91BAD2CF300959432 /* SwiftOrganizer.xcdatamodeld */,
-				7F4882391BADB64C00D4D45B /* readme.txt */,
-				7FC653B01D0C841700D2FFCD /* UsersCoreDataStore.swift */,
-				7F5DF5A61BAD2CF300959432 /* SOCoreDataBase.swift */,
-				7F5DF5A71BAD2CF300959432 /* SOLocalDataBase.swift */,
-				7F5DF5A81BAD2CF300959432 /* SOPopulateLocalDataBase.swift */,
+				7F9DC3DF1D0D95AF00454B67 /* CoreData */,
 			);
 			name = Services;
 			sourceTree = "<group>";
@@ -1527,8 +1567,10 @@
 				7F5DF67C1BAD669300959432 /* SOEditTaskFieldBaseViewController.swift in Sources */,
 				7F5DF6791BAD669300959432 /* SOEditDateViewController.swift in Sources */,
 				7F5DF68E1BAD669300959432 /* SOTaskMenuItemActivity.swift in Sources */,
-				7F8FE2051BC532E100180EAD /* SOLogInInfoViewController.swift in Sources */,
+				7F8FE2051BC532E100180EAD /* LoginViewController.swift in Sources */,
+				7F9DC3D81D0D75D200454B67 /* LoginInteractor.swift in Sources */,
 				7F5DF64E1BAD669300959432 /* BaseTableViewCell.swift in Sources */,
+				7F9DC3DA1D0D75EF00454B67 /* LoginPresenter.swift in Sources */,
 				7F5DF6821BAD669300959432 /* SODocumentsViewController.swift in Sources */,
 				7F5DF6731BAD669300959432 /* SOEditTaskDateCell.swift in Sources */,
 				7FCD13691BCCF756001778E9 /* SOBorderedView.swift in Sources */,
@@ -1536,6 +1578,7 @@
 				7F5DF6811BAD669300959432 /* SODocumentPickerViewController.swift in Sources */,
 				7F5DF6781BAD669300959432 /* SOEditCategoryViewController.swift in Sources */,
 				7F5DF6801BAD669300959432 /* SOAboutViewController.swift in Sources */,
+				7F9DC3DC1D0D760900454B67 /* LoginRouter.swift in Sources */,
 				7F5DF71C1BAD89F100959432 /* SwiftOrganizer.xcdatamodeld in Sources */,
 				7F5DF6541BAD669300959432 /* SOExternalSettingsObserever.swift in Sources */,
 				7F5DF6741BAD669300959432 /* SOEditTaskDescriptionCell.swift in Sources */,
@@ -1557,6 +1600,7 @@
 				7F5DF6581BAD669300959432 /* SOUtilities.swift in Sources */,
 				7F5DF67F1BAD669300959432 /* SlideMenuController.swift in Sources */,
 				7F5DF6561BAD669300959432 /* SOPushNotificationsCenter.swift in Sources */,
+				7F9DC3D61D0D75B800454B67 /* LoginConfigurator.swift in Sources */,
 				7F5DF6921BAD669300959432 /* SOIconsTabBarController.swift in Sources */,
 				7F5DF6901BAD669300959432 /* SOCategoryTabView.swift in Sources */,
 				7F66C0831BBE7326006C998F /* Constants.swift in Sources */,
@@ -1589,6 +1633,7 @@
 				7FDF31421BBA949700AD4127 /* Utils.m in Sources */,
 				7F8E16BD1BB9043A00FFC16B /* ManagedUser.swift in Sources */,
 				7F5DF5BE1BAD2CF300959432 /* SOLocalDataBase.swift in Sources */,
+				7F9DC3E31D0D983700454B67 /* LoginCoreData.swift in Sources */,
 				7FC653B11D0C841700D2FFCD /* UsersCoreDataStore.swift in Sources */,
 				7F5DF5BD1BAD2CF300959432 /* SOCoreDataBase.swift in Sources */,
 				7F89DDA81BD12226003C57BD /* Icon.swift in Sources */,
@@ -1601,6 +1646,8 @@
 				7F8E16BC1BB9043A00FFC16B /* ManagedUser+CoreDataProperties.swift in Sources */,
 				7F5DF5BC1BAD2CF300959432 /* DefaultsUser.swift in Sources */,
 				7FE7CD281D0B0A200023D4BE /* UsersWorker.swift in Sources */,
+				7F9DC3E71D0D9D2E00454B67 /* UsersRemoteDataBase.swift in Sources */,
+				7F9DC3E51D0D9BCA00454B67 /* LoginRemoteDataBase.swift in Sources */,
 				7F5DF5C71BAD2CF300959432 /* SORemoteDataBase.swift in Sources */,
 				7F89DDAB1BD12226003C57BD /* TaskIcon+CoreDataProperties.swift in Sources */,
 				7F5DF5B51BAD2CF300959432 /* SOCategory.swift in Sources */,
@@ -1616,13 +1663,14 @@
 				7FCD13641BCBEACE001778E9 /* Utils.swift in Sources */,
 				7F5DF5B41BAD2CF300959432 /* SOCatalog.swift in Sources */,
 				7F5DF5E61BAD330C00959432 /* StringExtension.swift in Sources */,
+				7F9DC3E11D0D975F00454B67 /* LoginWorker.swift in Sources */,
 				7F5DF5B91BAD2CF300959432 /* SOIco.swift in Sources */,
 				7F5DF5BA1BAD2CF300959432 /* SOTask.swift in Sources */,
 				7F8E16C31BBA71E500FFC16B /* AILogInManager.m in Sources */,
 				7F5DF5BB1BAD2CF300959432 /* SOTypeDataBaseSwitcher.swift in Sources */,
 				7FDF313E1BBA8CBC00AD4127 /* User.swift in Sources */,
 				7F5DF5EB1BAD33AD00959432 /* KVOTryCatchException.m in Sources */,
-				7FC653B41D0C8A3200D2FFCD /* UsersConfigurator.swift in Sources */,
+				7FC653B41D0C8A3200D2FFCD /* CoreConfigurator.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

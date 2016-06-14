@@ -8,9 +8,9 @@
 
 import Foundation
 
-protocol UsersStoreProtocol {
+public protocol UsersStoreProtocol {
     var currentUser: User? { get set}
-    func logInWithUserData(dict: Dictionary<String, AnyObject>)
+    func saveUserData(dict: Dictionary<String, AnyObject>)
 }
 
 public class UsersWorker: NSObject {
@@ -33,8 +33,8 @@ public class UsersWorker: NSObject {
         }
     }
 
-    public func logInWithUserData(dict: Dictionary<String, AnyObject>) {
-        usersStore?.logInWithUserData(dict)
+    public func saveUserData(dict: Dictionary<String, AnyObject>) {
+        usersStore?.saveUserData(dict)
     }
     
 }

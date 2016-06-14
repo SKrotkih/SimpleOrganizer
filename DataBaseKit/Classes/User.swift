@@ -9,16 +9,16 @@
 import UIKit
 
 public class User: NSObject {
-    var databaseObject: NSManagedObjectID?
-    var firstname: String = ""
-    var lastname: String = ""
-    var gender: String = ""
-    var email: String = ""
-    var photo_prefix: String = ""
-    var name: String = ""
-    var fb_id: String = ""
-    var userid: String = ""
-    var isItCurrentUser: Bool = false
+    public var databaseObject: NSManagedObjectID?
+    public var firstname: String = ""
+    public var lastname: String = ""
+    public var gender: String = ""
+    public var email: String = ""
+    public var photo_prefix: String = ""
+    public var name: String = ""
+    public var fb_id: String = ""
+    public var userid: String = ""
+    public var isItCurrentUser: Bool = false
 }
 
 public func ==(lhs: User, rhs: User) -> Bool

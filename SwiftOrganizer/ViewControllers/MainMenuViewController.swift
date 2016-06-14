@@ -68,7 +68,7 @@ class MainMenuViewController : UIViewController {
         
         let logInStoryboard = UIStoryboard(name: "LogIn", bundle: nil)
         
-        let logInInfoViewController = logInStoryboard.instantiateViewControllerWithIdentifier("logInInfoViewController") as! SOLogInInfoViewController
+        let logInInfoViewController = logInStoryboard.instantiateViewControllerWithIdentifier("logInInfoViewController") as! LoginViewController
         self.logInInfoViewController = UINavigationController(rootViewController: logInInfoViewController)
         
         self.tableView.registerCellClass(BaseTableViewCell.self)
@@ -99,7 +99,7 @@ extension MainMenuViewController: UITableViewDelegate, UITableViewDataSource{
         let menuItem: LeftMenu = LeftMenu(rawValue: row)!
         
         if menuItem == .LogIn{
-            let userHasConnected: Bool = SODataBaseFactory.sharedInstance.dataBase.currentUserHasLoggedIn()
+            let userHasConnected: Bool = LoginWorker.sharedInstance.currentUserHasLoggedIn()
             title = userHasConnected ? "Log Out" : "Log In"
         } else {
             title = menus[row]

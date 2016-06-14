@@ -58,29 +58,6 @@ public class SORemoteDataBase: NSObject, SODataBaseProtocol {
     }
 }
 
-// - MARK: -
-// - MARK: Log In
-
-extension SORemoteDataBase{
-
-    public func currentUserHasLoggedIn() -> Bool{
-        return SOParseComManager.currentUserHasLoggedIn()
-    }
-
-    public func userInfo() -> Dictionary<String, String>?{
-        return SOParseComManager.userInfo()
-    }
-    
-    public func logIn(viewController: UIViewController, completionBlock: (error: NSError?) -> Void){
-        SOParseComManager.logIn(viewController, completionBlock: completionBlock)
-    }
-    
-    public func logOut(viewController: UIViewController, completionBlock: (error: NSError?) -> Void){
-        SOParseComManager.logOut(completionBlock)
-    }
-
-}
-
     // - MARK: -
     // - MARK: Fetch Data
 

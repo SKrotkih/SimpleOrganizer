@@ -64,7 +64,7 @@ class UsersCoreDataStore: UsersStoreProtocol {
         }
     }
     
-    func logInWithUserData(dict: Dictionary<String, AnyObject>){
+    func saveUserData(dict: Dictionary<String, AnyObject>){
         var managedUser: ManagedUser?
         if let theManagedObject = self.managedUser {
             managedUser = theManagedObject

@@ -96,10 +96,8 @@
                      
                      return;
                  }
-                 [UsersWorker.sharedInstance logInWithUserData: anUserDict];
-                 dispatch_async(dispatch_get_main_queue(), ^{
-                     aCompletionBlock(OperationIsRanSuccessfully);
-                 });
+                 [UsersWorker.sharedInstance saveUserData: anUserDict];
+                 aCompletionBlock(OperationIsRanSuccessfully);
              }];
          }
      }];

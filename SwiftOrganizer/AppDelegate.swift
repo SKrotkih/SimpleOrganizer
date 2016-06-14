@@ -25,7 +25,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         NSLog("\n\nDocument Directory: \n%@\n\n", self.applicationDocumentsDirectory)
         
-        UsersConfigurator.sharedInstance.configure()
+        CoreConfigurator.sharedInstance.configure()
         
         
         self.createOfSlidingViewControllers()
