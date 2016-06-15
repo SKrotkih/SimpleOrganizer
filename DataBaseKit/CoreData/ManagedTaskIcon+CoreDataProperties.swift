@@ -1,5 +1,5 @@
 //
-//  Task+CoreDataProperties.swift
+//  TaskIcon+CoreDataProperties.swift
 //  SwiftOrganizer
 //
 //  Created by Sergey Krotkih on 10/16/15.
@@ -12,12 +12,10 @@
 import Foundation
 import CoreData
 
-extension Task {
+extension ManagedTaskIcon {
 
-    @NSManaged var date: NSDate?
-    @NSManaged var title: String?
-    @NSManaged var userid: String?
-    @NSManaged var icons: NSSet?
-    @NSManaged var category: Category?
+    @NSManaged var empty: String?
+    @NSManaged var task: ManagedTask
+    @NSManaged var icon: ManagedIcon
 
 }

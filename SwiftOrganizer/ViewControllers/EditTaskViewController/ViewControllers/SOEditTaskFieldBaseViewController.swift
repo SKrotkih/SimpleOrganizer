@@ -11,7 +11,7 @@ import DataBaseKit
 
 class SOEditTaskFieldBaseViewController: UIViewController {
     
-    var task: SOTask?
+    var task: Task?
     var undoDelegate: SOEditTaskUndoDelegateProtocol?
     
     override func viewWillAppear(animated: Bool) {

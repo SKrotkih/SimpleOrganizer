@@ -9,8 +9,8 @@
 import UIKit
 
 protocol SOChangeFilterStateDelegate{
-    func didSelectCategory(category: SOCategory, select: Bool, completionBlock: (error: NSError?) -> Void)
-    func didSelectIcon(icon: SOIco, select: Bool, completionBlock: (error: NSError?) -> Void)
+    func didSelectCategory(category: TaskCategory, select: Bool, completionBlock: (error: NSError?) -> Void)
+    func didSelectIcon(icon: TaskIco, select: Bool, completionBlock: (error: NSError?) -> Void)
 }
 
 class SOMainTableViewController: NSObject{
@@ -18,7 +18,7 @@ class SOMainTableViewController: NSObject{
     let tableView : UITableView
     var taskEditingDelegate: SOEditTaskController
     
-    var tasks : [SOTask] = []
+    var tasks : [Task] = []
     
     init(tableView aTavleView: UITableView, delegate: SOEditTaskController){
         self.tableView = aTavleView
@@ -31,7 +31,7 @@ class SOMainTableViewController: NSObject{
     }
 
     func reloadData(){
-        SOFetchingData.sharedInstance.allTasks{(allCurrentTasks: [SOTask], fetchError: NSError?) in
+        SOFetchingData.sharedInstance.allTasks{(allCurrentTasks: [Task], fetchError: NSError?) in
             if let error = fetchError{
                 showAlertWithTitle("Failed to fetch data!".localized, message: error.localizedDescription)
             }
@@ -43,11 +43,11 @@ class SOMainTableViewController: NSObject{
         }
     }
     
-    func addTasksToReminder(tasks: [SOTask]){
+    func addTasksToReminder(tasks: [Task]){
 
         SOLocalNotificationsCenter.cancelAllNotifications()
 
-        for task: SOTask in tasks{
+        for task: Task in tasks{
             if let date = task.date{
                 if date.compare(NSDate()) == NSComparisonResult.OrderedDescending{
                     let userInfo: [NSObject : AnyObject] = [
@@ -59,7 +59,7 @@ class SOMainTableViewController: NSObject{
         }
     }
     
-    private func forReminderMessageTask(task: SOTask, date: NSDate) -> String{
+    private func forReminderMessageTask(task: Task, date: NSDate) -> String{
         let dateFormatter = NSDateFormatter()
         dateFormatter.dateFormat = "dd-MM-yyyy HH:mm:ss"
         let  message = "\(task.categoryName):\n\(task.title)\nat \(dateFormatter.stringFromDate(date))"
@@ -73,7 +73,7 @@ class SOMainTableViewController: NSObject{
 
 extension SOMainTableViewController: SOChangeFilterStateDelegate{
 
-    func didSelectCategory(category: SOCategory, select: Bool, completionBlock: (error: NSError?) -> Void){
+    func didSelectCategory(category: TaskCategory, select: Bool, completionBlock: (error: NSError?) -> Void){
         category.setSelected(select, completionBlock: { (error) -> Void in
             if error == nil {
                 dispatch_async(dispatch_get_main_queue(), {
@@ -86,7 +86,7 @@ extension SOMainTableViewController: SOChangeFilterStateDelegate{
         })
     }
     
-    func didSelectIcon(icon: SOIco, select: Bool, completionBlock: (error: NSError?) -> Void){
+    func didSelectIcon(icon: TaskIco, select: Bool, completionBlock: (error: NSError?) -> Void){
         icon.setSelected(select, completionBlock: { (error) -> Void in
             if error == nil {
                 dispatch_async(dispatch_get_main_queue(), {[weak self] in
@@ -103,7 +103,7 @@ extension SOMainTableViewController: SOChangeFilterStateDelegate{
     // MARK: SORemoveTaskDelegate
 
 extension SOMainTableViewController: SORemoveTaskDelegate{
-    func removeTask(task: SOTask!){
+    func removeTask(task: Task!){
         self.taskEditingDelegate.editTaskList()
     }
 }
@@ -119,7 +119,7 @@ extension SOMainTableViewController: UITableViewDataSource {
     @objc func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = self.tableView.dequeueReusableCellWithIdentifier(self.mainTableViewCellIdentifier()) as! SOMainTableViewCell
         let row = indexPath.row
-        let currentTask : SOTask = self.tasks[row]
+        let currentTask : Task = self.tasks[row]
         cell.fillTaskData(currentTask)
         cell.removeTaskDelegate = self
         
@@ -151,7 +151,7 @@ extension SOMainTableViewController: UITableViewDelegate {
         if editingStyle == .Delete{
             self.tableView.beginUpdates()
             let row = indexPath.row
-            let currentTask : SOTask = self.tasks[row]
+            let currentTask : Task = self.tasks[row]
             currentTask.remove()
             self.tasks.removeAtIndex(row)
             self.tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Automatic)
@@ -167,7 +167,7 @@ extension SOMainTableViewController: UITableViewDelegate {
     // After the row is selected
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let row = indexPath.row
-        let currentTask : SOTask = self.tasks[row]
+        let currentTask : Task = self.tasks[row]
         self.taskEditingDelegate.startEditingTask(currentTask)
     }
     

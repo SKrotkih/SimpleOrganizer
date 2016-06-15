@@ -10,7 +10,7 @@ import UIKit
 import DataBaseKit
 
 protocol SOEditTaskController{
-    func startEditingTask(task: SOTask?)
+    func startEditingTask(task: Task?)
     func editTaskList()
 }
 
@@ -25,8 +25,8 @@ class SOMainViewController: UIViewController{
     @IBOutlet weak var iconsTabBarView: SOTabBarContainerView!
     @IBOutlet weak var iconsScrollView: UIScrollView!
     
-    var categoryTabBarController: SOCategoryTabBarController!
-    var iconsTabBarController: SOIconsTabBarController!
+    var categoryTabBarController: TaskCategoryTabBarController!
+    var iconsTabBarController: TaskIconsTabBarController!
 
     var rightButton: UIBarButtonItem!
 
@@ -40,8 +40,8 @@ class SOMainViewController: UIViewController{
         
         allTimes.append(NSDate())
         
-        categoryTabBarController = SOCategoryTabBarController(scrollView: categoryScrollView, containerView: categoryTabBarView)
-        iconsTabBarController = SOIconsTabBarController(scrollView: iconsScrollView, containerView: iconsTabBarView)
+        categoryTabBarController = TaskCategoryTabBarController(scrollView: categoryScrollView, containerView: categoryTabBarView)
+        iconsTabBarController = TaskIconsTabBarController(scrollView: iconsScrollView, containerView: iconsTabBarView)
         
         mainTableViewController = SOMainTableViewController(tableView: self.mainTableView, delegate: self)
         
@@ -135,7 +135,7 @@ class SOMainViewController: UIViewController{
             self.mainTableView.editing = false
             self.rightButton.title = "Activity".localized
         } else {
-            let editTaskListActivity = SOTaskMenuItemActivity()
+            let editTaskListActivity = TaskMenuItemActivity()
             editTaskListActivity.name = "EditTaskListActivity"
             editTaskListActivity.title = "Erase Task".localized
             editTaskListActivity.imageName = "ico12@2x"
@@ -143,7 +143,7 @@ class SOMainViewController: UIViewController{
                 self.editTaskList()
             }
             
-            let newTaskActivity = SOTaskMenuItemActivity()
+            let newTaskActivity = TaskMenuItemActivity()
             newTaskActivity.name = "NewTaskActivity"
             newTaskActivity.title = "New Task".localized
             newTaskActivity.imageName = "add_task"
@@ -151,7 +151,7 @@ class SOMainViewController: UIViewController{
                 self.addNewTask()
             }
             
-            let switchDBtypeActivity = SOTaskMenuItemActivity()
+            let switchDBtypeActivity = TaskMenuItemActivity()
             switchDBtypeActivity.name = "SwitchDBtypeActivity"
             switchDBtypeActivity.title = "Switch DB".localized
             switchDBtypeActivity.imageName = "ico10@2x"
@@ -182,7 +182,7 @@ class SOMainViewController: UIViewController{
         self.startEditingTask(nil)
     }
 
-    func editTask(task: SOTask?){
+    func editTask(task: Task?){
         self.startEditingTask(task)
     }
 }
@@ -190,7 +190,7 @@ class SOMainViewController: UIViewController{
     // MARK: Start editing task
 
 extension SOMainViewController: SOEditTaskController{
-    func startEditingTask(task: SOTask?){
+    func startEditingTask(task: Task?){
         self.editTaskViewController.task = task
         self.navigationController!.pushViewController(self.editTaskViewController, animated: true)
     }

@@ -9,8 +9,8 @@
 import Foundation
 import CoreData
 
-@objc(Icon)
-class Icon: NSManagedObject {
+@objc(ManagedIcon)
+class ManagedIcon: NSManagedObject {
 
 // Insert code here to add functionality to your managed object subclass
 

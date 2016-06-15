@@ -12,7 +12,7 @@ class SOEditTaskDateCell: SOEditTaskCell {
 
     @IBOutlet weak var dateTextLabel: UILabel!
     
-    override var task: SOTask{
+    override var task: Task{
         get{
             return super.task
         }

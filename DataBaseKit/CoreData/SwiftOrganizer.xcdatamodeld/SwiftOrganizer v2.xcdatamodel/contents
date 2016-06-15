@@ -1,36 +1,36 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="8195" systemVersion="15A284" minimumToolsVersion="Xcode 4.3">
-    <entity name="Category" representedClassName="Category" syncable="YES">
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="10174" systemVersion="15F34" minimumToolsVersion="Xcode 4.3">
+    <entity name="ManagedCategory" representedClassName="ManagedCategory" syncable="YES">
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="recordid" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="selected" optional="YES" attributeType="Boolean" syncable="YES"/>
         <attribute name="visible" optional="YES" attributeType="Boolean" syncable="YES"/>
-        <relationship name="task" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Task" inverseName="category" inverseEntity="Task" syncable="YES"/>
+        <relationship name="task" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="ManagedTask" inverseName="category" inverseEntity="ManagedTask" syncable="YES"/>
     </entity>
-    <entity name="Icon" representedClassName="Icon" syncable="YES">
+    <entity name="ManagedIcon" representedClassName="ManagedIcon" syncable="YES">
         <attribute name="imagename" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="recordid" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="selected" optional="YES" attributeType="Boolean" syncable="YES"/>
         <attribute name="visible" optional="YES" attributeType="Boolean" syncable="YES"/>
-        <relationship name="taskicon" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="TaskIcon" inverseName="icon" inverseEntity="TaskIcon" syncable="YES"/>
+        <relationship name="taskicon" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="ManagedTaskIcon" inverseName="icon" inverseEntity="ManagedTaskIcon" syncable="YES"/>
     </entity>
-    <entity name="Task" representedClassName="Task" syncable="YES">
+    <entity name="ManagedTask" representedClassName="ManagedTask" syncable="YES">
         <attribute name="date" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="userid" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="category" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Category" inverseName="task" inverseEntity="Category" syncable="YES"/>
-        <relationship name="icons" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="TaskIcon" inverseName="task" inverseEntity="TaskIcon" syncable="YES"/>
+        <relationship name="category" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ManagedCategory" inverseName="task" inverseEntity="ManagedCategory" syncable="YES"/>
+        <relationship name="icons" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="ManagedTaskIcon" inverseName="task" inverseEntity="ManagedTaskIcon" syncable="YES"/>
     </entity>
-    <entity name="TaskIcon" representedClassName="TaskIcon" syncable="YES">
+    <entity name="ManagedTaskIcon" representedClassName="ManagedTaskIcon" syncable="YES">
         <attribute name="empty" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="icon" maxCount="1" deletionRule="Nullify" destinationEntity="Icon" inverseName="taskicon" inverseEntity="Icon" syncable="YES"/>
-        <relationship name="task" maxCount="1" deletionRule="Nullify" destinationEntity="Task" inverseName="icons" inverseEntity="Task" syncable="YES"/>
+        <relationship name="icon" maxCount="1" deletionRule="Nullify" destinationEntity="ManagedIcon" inverseName="taskicon" inverseEntity="ManagedIcon" syncable="YES"/>
+        <relationship name="task" maxCount="1" deletionRule="Nullify" destinationEntity="ManagedTask" inverseName="icons" inverseEntity="ManagedTask" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Category" positionX="-263" positionY="-198" width="128" height="118"/>
-        <element name="Icon" positionX="-252" positionY="54" width="128" height="133"/>
-        <element name="Task" positionX="-470" positionY="-100" width="128" height="118"/>
-        <element name="TaskIcon" positionX="-261" positionY="-72" width="128" height="90"/>
+        <element name="ManagedCategory" positionX="-263" positionY="-198" width="128" height="120"/>
+        <element name="ManagedIcon" positionX="-252" positionY="54" width="128" height="135"/>
+        <element name="ManagedTask" positionX="-470" positionY="-100" width="128" height="120"/>
+        <element name="ManagedTaskIcon" positionX="-261" positionY="-72" width="128" height="90"/>
     </elements>
 </model>

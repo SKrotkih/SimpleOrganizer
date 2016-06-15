@@ -1,5 +1,5 @@
 //
-//  SOTask.swift
+//  Task.swift
 //  SwiftOrganizer
 //
 //  Created by Sergey Krotkih on 5/29/15.
@@ -10,7 +10,7 @@ import UIKit
 
 let MaxIconsCount = 6
 
-public class SOTask: NSObject{
+public class Task: NSObject{
 
     public var databaseObject: AnyObject?
     public var userid: String = ""
@@ -58,7 +58,7 @@ public class SOTask: NSObject{
     
 }
 
-extension SOTask{
+extension Task{
 
     public func save(completionBlock: (error: NSError?) -> Void){
         SODataBaseFactory.sharedInstance.dataBase.saveTask(self, completionBlock: {(error: NSError?) in
@@ -71,7 +71,7 @@ extension SOTask{
     }
     
     func update(){
-        //       let batch = NSBatchUpdateRequest(entityName: "Category")
+        //       let batch = NSBatchUpdateRequest(entityName: "ManagedCategory")
         //        batch.propertiesToUpdate = [fieldName: value]
         //        // Predicate
         //        batch.predicate = NSPredicate(format: "id = %@", category.id)
@@ -96,7 +96,7 @@ extension SOTask{
 
 }
 
-extension SOTask{
+extension Task{
 
     public func clearTask(){
         self.databaseObject = nil
@@ -107,7 +107,7 @@ extension SOTask{
         self.date = nil
     }
     
-    public func cloneTask(task: SOTask){
+    public func cloneTask(task: Task){
         self.databaseObject = task.databaseObject
         self.userid = task.userid
         self.title = task.title
@@ -117,7 +117,7 @@ extension SOTask{
     }
     
     override public func isEqual(object: AnyObject?) -> Bool {
-        if let anotherTask: SOTask = object as? SOTask{
+        if let anotherTask: Task = object as? Task{
             var isEqual: Bool = true
             isEqual = isEqual && SODataBaseFactory.sharedInstance.dataBase.areObjectsEqual(self.databaseObject, object2: anotherTask.databaseObject)
             isEqual = isEqual && self.userid == anotherTask.userid
@@ -148,12 +148,12 @@ extension SOTask{
 
     // MARK: Icons
 
-extension SOTask{
+extension Task{
     public func iconImage(index: Int) -> UIImage?{
         if index < icons.count{
             let icoId = icons[index]
             
-            let ico: SOIco? = SOFetchingData.sharedInstance.iconById(icoId)
+            let ico: TaskIco? = SOFetchingData.sharedInstance.iconById(icoId)
             if let theIco = ico{
                 let imageName : String = theIco.imageName
 

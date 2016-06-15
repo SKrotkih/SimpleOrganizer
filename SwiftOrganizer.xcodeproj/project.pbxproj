@@ -23,12 +23,12 @@
 		7F5DF5921BAD2BBB00959432 /* DataBaseKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F5DF57D1BAD2BBB00959432 /* DataBaseKit.framework */; };
 		7F5DF5931BAD2BBB00959432 /* DataBaseKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 7F5DF57D1BAD2BBB00959432 /* DataBaseKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		7F5DF5B41BAD2CF300959432 /* SOCatalog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F5DF59C1BAD2CF300959432 /* SOCatalog.swift */; };
-		7F5DF5B51BAD2CF300959432 /* SOCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F5DF59D1BAD2CF300959432 /* SOCategory.swift */; };
+		7F5DF5B51BAD2CF300959432 /* TaskCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F5DF59D1BAD2CF300959432 /* TaskCategory.swift */; };
 		7F5DF5B61BAD2CF300959432 /* SODataBaseFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F5DF59E1BAD2CF300959432 /* SODataBaseFactory.swift */; };
 		7F5DF5B71BAD2CF300959432 /* SODataBaseProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F5DF59F1BAD2CF300959432 /* SODataBaseProtocol.swift */; };
 		7F5DF5B81BAD2CF300959432 /* SOFetchingData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F5DF5A01BAD2CF300959432 /* SOFetchingData.swift */; };
-		7F5DF5B91BAD2CF300959432 /* SOIco.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F5DF5A11BAD2CF300959432 /* SOIco.swift */; };
-		7F5DF5BA1BAD2CF300959432 /* SOTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F5DF5A21BAD2CF300959432 /* SOTask.swift */; };
+		7F5DF5B91BAD2CF300959432 /* TaskIco.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F5DF5A11BAD2CF300959432 /* TaskIco.swift */; };
+		7F5DF5BA1BAD2CF300959432 /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F5DF5A21BAD2CF300959432 /* Task.swift */; };
 		7F5DF5BB1BAD2CF300959432 /* SOTypeDataBaseSwitcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F5DF5A31BAD2CF300959432 /* SOTypeDataBaseSwitcher.swift */; };
 		7F5DF5BC1BAD2CF300959432 /* DefaultsUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F5DF5A41BAD2CF300959432 /* DefaultsUser.swift */; };
 		7F5DF5BD1BAD2CF300959432 /* SOCoreDataBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F5DF5A61BAD2CF300959432 /* SOCoreDataBase.swift */; };
@@ -115,12 +115,12 @@
 		7F5DF68C1BAD669300959432 /* SOSampleDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F5DF6421BAD669300959432 /* SOSampleDocument.swift */; };
 		7F5DF68D1BAD669300959432 /* SOSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F5DF6431BAD669300959432 /* SOSettingsViewController.swift */; };
 		7F5DF68E1BAD669300959432 /* SOTaskMenuItemActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F5DF6441BAD669300959432 /* SOTaskMenuItemActivity.swift */; };
-		7F5DF68F1BAD669300959432 /* SOCategoryTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F5DF6461BAD669300959432 /* SOCategoryTabBarController.swift */; };
-		7F5DF6901BAD669300959432 /* SOCategoryTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F5DF6471BAD669300959432 /* SOCategoryTabView.swift */; };
-		7F5DF6911BAD669300959432 /* SOCategoryTabView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7F5DF6481BAD669300959432 /* SOCategoryTabView.xib */; };
-		7F5DF6921BAD669300959432 /* SOIconsTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F5DF6491BAD669300959432 /* SOIconsTabBarController.swift */; };
-		7F5DF6931BAD669300959432 /* SOIconTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F5DF64A1BAD669300959432 /* SOIconTabView.swift */; };
-		7F5DF6941BAD669300959432 /* SOIconTabView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7F5DF64B1BAD669300959432 /* SOIconTabView.xib */; };
+		7F5DF68F1BAD669300959432 /* TaskCategoryTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F5DF6461BAD669300959432 /* TaskCategoryTabBarController.swift */; };
+		7F5DF6901BAD669300959432 /* TaskCategoryTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F5DF6471BAD669300959432 /* TaskCategoryTabView.swift */; };
+		7F5DF6911BAD669300959432 /* TaskCategoryTabView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7F5DF6481BAD669300959432 /* TaskCategoryTabView.xib */; };
+		7F5DF6921BAD669300959432 /* TaskIconsTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F5DF6491BAD669300959432 /* TaskIconsTabBarController.swift */; };
+		7F5DF6931BAD669300959432 /* TaskIconTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F5DF64A1BAD669300959432 /* TaskIconTabView.swift */; };
+		7F5DF6941BAD669300959432 /* TaskIconTabView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7F5DF64B1BAD669300959432 /* TaskIconTabView.xib */; };
 		7F5DF6951BAD669300959432 /* SOTabBarContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F5DF64C1BAD669300959432 /* SOTabBarContainerView.swift */; };
 		7F5DF6961BAD669300959432 /* SOTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F5DF64D1BAD669300959432 /* SOTabBarController.swift */; };
 		7F5DF69B1BAD66F100959432 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7F5DF6971BAD66F100959432 /* LaunchScreen.xib */; };
@@ -145,14 +145,14 @@
 		7F66C0831BBE7326006C998F /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F5DF5C81BAD2E1600959432 /* Constants.swift */; };
 		7F66C0841BBE74FC006C998F /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F5DF5C81BAD2E1600959432 /* Constants.swift */; };
 		7F66C0851BBE74FE006C998F /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F5DF5C81BAD2E1600959432 /* Constants.swift */; };
-		7F89DDA51BD12226003C57BD /* Category+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F89DD9D1BD12226003C57BD /* Category+CoreDataProperties.swift */; };
-		7F89DDA61BD12226003C57BD /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F89DD9E1BD12226003C57BD /* Category.swift */; };
-		7F89DDA71BD12226003C57BD /* Icon+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F89DD9F1BD12226003C57BD /* Icon+CoreDataProperties.swift */; };
-		7F89DDA81BD12226003C57BD /* Icon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F89DDA01BD12226003C57BD /* Icon.swift */; };
-		7F89DDA91BD12226003C57BD /* Task+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F89DDA11BD12226003C57BD /* Task+CoreDataProperties.swift */; };
-		7F89DDAA1BD12226003C57BD /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F89DDA21BD12226003C57BD /* Task.swift */; };
-		7F89DDAB1BD12226003C57BD /* TaskIcon+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F89DDA31BD12226003C57BD /* TaskIcon+CoreDataProperties.swift */; };
-		7F89DDAC1BD12226003C57BD /* TaskIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F89DDA41BD12226003C57BD /* TaskIcon.swift */; };
+		7F89DDA51BD12226003C57BD /* ManagedCategory+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F89DD9D1BD12226003C57BD /* ManagedCategory+CoreDataProperties.swift */; };
+		7F89DDA61BD12226003C57BD /* ManagedCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F89DD9E1BD12226003C57BD /* ManagedCategory.swift */; };
+		7F89DDA71BD12226003C57BD /* ManagedIcon+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F89DD9F1BD12226003C57BD /* ManagedIcon+CoreDataProperties.swift */; };
+		7F89DDA81BD12226003C57BD /* ManagedIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F89DDA01BD12226003C57BD /* ManagedIcon.swift */; };
+		7F89DDA91BD12226003C57BD /* ManagedTask+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F89DDA11BD12226003C57BD /* ManagedTask+CoreDataProperties.swift */; };
+		7F89DDAA1BD12226003C57BD /* ManagedTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F89DDA21BD12226003C57BD /* ManagedTask.swift */; };
+		7F89DDAB1BD12226003C57BD /* ManagedTaskIcon+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F89DDA31BD12226003C57BD /* ManagedTaskIcon+CoreDataProperties.swift */; };
+		7F89DDAC1BD12226003C57BD /* ManagedTaskIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F89DDA41BD12226003C57BD /* ManagedTaskIcon.swift */; };
 		7F8E16BC1BB9043A00FFC16B /* ManagedUser+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F8E16BA1BB9043A00FFC16B /* ManagedUser+CoreDataProperties.swift */; };
 		7F8E16BD1BB9043A00FFC16B /* ManagedUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F8E16BB1BB9043A00FFC16B /* ManagedUser.swift */; };
 		7F8E16C21BBA71E500FFC16B /* AILogInManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 7F8E16C01BBA71E500FFC16B /* AILogInManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -296,12 +296,12 @@
 		7F5DF58D1BAD2BBB00959432 /* DataBaseKitTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBaseKitTests.swift; sourceTree = "<group>"; };
 		7F5DF58F1BAD2BBB00959432 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7F5DF59C1BAD2CF300959432 /* SOCatalog.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SOCatalog.swift; sourceTree = "<group>"; };
-		7F5DF59D1BAD2CF300959432 /* SOCategory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SOCategory.swift; sourceTree = "<group>"; };
+		7F5DF59D1BAD2CF300959432 /* TaskCategory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TaskCategory.swift; path = ../Classes/TaskCategory.swift; sourceTree = "<group>"; };
 		7F5DF59E1BAD2CF300959432 /* SODataBaseFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SODataBaseFactory.swift; sourceTree = "<group>"; };
 		7F5DF59F1BAD2CF300959432 /* SODataBaseProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SODataBaseProtocol.swift; sourceTree = "<group>"; };
 		7F5DF5A01BAD2CF300959432 /* SOFetchingData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SOFetchingData.swift; sourceTree = "<group>"; };
-		7F5DF5A11BAD2CF300959432 /* SOIco.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SOIco.swift; sourceTree = "<group>"; };
-		7F5DF5A21BAD2CF300959432 /* SOTask.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SOTask.swift; sourceTree = "<group>"; };
+		7F5DF5A11BAD2CF300959432 /* TaskIco.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TaskIco.swift; path = ../Classes/TaskIco.swift; sourceTree = "<group>"; };
+		7F5DF5A21BAD2CF300959432 /* Task.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Task.swift; path = ../Classes/Task.swift; sourceTree = "<group>"; };
 		7F5DF5A31BAD2CF300959432 /* SOTypeDataBaseSwitcher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SOTypeDataBaseSwitcher.swift; sourceTree = "<group>"; };
 		7F5DF5A41BAD2CF300959432 /* DefaultsUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultsUser.swift; sourceTree = "<group>"; };
 		7F5DF5A61BAD2CF300959432 /* SOCoreDataBase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SOCoreDataBase.swift; path = CoreData/SOCoreDataBase.swift; sourceTree = "<group>"; };
@@ -388,12 +388,12 @@
 		7F5DF6421BAD669300959432 /* SOSampleDocument.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SOSampleDocument.swift; sourceTree = "<group>"; };
 		7F5DF6431BAD669300959432 /* SOSettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SOSettingsViewController.swift; sourceTree = "<group>"; };
 		7F5DF6441BAD669300959432 /* SOTaskMenuItemActivity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SOTaskMenuItemActivity.swift; sourceTree = "<group>"; };
-		7F5DF6461BAD669300959432 /* SOCategoryTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SOCategoryTabBarController.swift; sourceTree = "<group>"; };
-		7F5DF6471BAD669300959432 /* SOCategoryTabView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SOCategoryTabView.swift; sourceTree = "<group>"; };
-		7F5DF6481BAD669300959432 /* SOCategoryTabView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SOCategoryTabView.xib; sourceTree = "<group>"; };
-		7F5DF6491BAD669300959432 /* SOIconsTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SOIconsTabBarController.swift; sourceTree = "<group>"; };
-		7F5DF64A1BAD669300959432 /* SOIconTabView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SOIconTabView.swift; sourceTree = "<group>"; };
-		7F5DF64B1BAD669300959432 /* SOIconTabView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SOIconTabView.xib; sourceTree = "<group>"; };
+		7F5DF6461BAD669300959432 /* TaskCategoryTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskCategoryTabBarController.swift; sourceTree = "<group>"; };
+		7F5DF6471BAD669300959432 /* TaskCategoryTabView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskCategoryTabView.swift; sourceTree = "<group>"; };
+		7F5DF6481BAD669300959432 /* TaskCategoryTabView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TaskCategoryTabView.xib; sourceTree = "<group>"; };
+		7F5DF6491BAD669300959432 /* TaskIconsTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskIconsTabBarController.swift; sourceTree = "<group>"; };
+		7F5DF64A1BAD669300959432 /* TaskIconTabView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskIconTabView.swift; sourceTree = "<group>"; };
+		7F5DF64B1BAD669300959432 /* TaskIconTabView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TaskIconTabView.xib; sourceTree = "<group>"; };
 		7F5DF64C1BAD669300959432 /* SOTabBarContainerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SOTabBarContainerView.swift; sourceTree = "<group>"; };
 		7F5DF64D1BAD669300959432 /* SOTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SOTabBarController.swift; sourceTree = "<group>"; };
 		7F5DF6981BAD66F100959432 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
@@ -416,14 +416,14 @@
 		7F5DF7121BAD857B00959432 /* SOWidjet.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = SOWidjet.entitlements; sourceTree = "<group>"; };
 		7F5DF71A1BAD882300959432 /* SwiftOrganizer.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = SwiftOrganizer.entitlements; sourceTree = "<group>"; };
 		7F5DF71E1BAD8B8900959432 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = SOURCE_ROOT; };
-		7F89DD9D1BD12226003C57BD /* Category+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Category+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		7F89DD9E1BD12226003C57BD /* Category.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
-		7F89DD9F1BD12226003C57BD /* Icon+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Icon+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		7F89DDA01BD12226003C57BD /* Icon.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Icon.swift; sourceTree = "<group>"; };
-		7F89DDA11BD12226003C57BD /* Task+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Task+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		7F89DDA21BD12226003C57BD /* Task.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
-		7F89DDA31BD12226003C57BD /* TaskIcon+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "TaskIcon+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		7F89DDA41BD12226003C57BD /* TaskIcon.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskIcon.swift; sourceTree = "<group>"; };
+		7F89DD9D1BD12226003C57BD /* ManagedCategory+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ManagedCategory+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		7F89DD9E1BD12226003C57BD /* ManagedCategory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ManagedCategory.swift; sourceTree = "<group>"; };
+		7F89DD9F1BD12226003C57BD /* ManagedIcon+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ManagedIcon+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		7F89DDA01BD12226003C57BD /* ManagedIcon.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ManagedIcon.swift; sourceTree = "<group>"; };
+		7F89DDA11BD12226003C57BD /* ManagedTask+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ManagedTask+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		7F89DDA21BD12226003C57BD /* ManagedTask.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ManagedTask.swift; sourceTree = "<group>"; };
+		7F89DDA31BD12226003C57BD /* ManagedTaskIcon+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ManagedTaskIcon+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		7F89DDA41BD12226003C57BD /* ManagedTaskIcon.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ManagedTaskIcon.swift; sourceTree = "<group>"; };
 		7F8E16BA1BB9043A00FFC16B /* ManagedUser+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ManagedUser+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		7F8E16BB1BB9043A00FFC16B /* ManagedUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ManagedUser.swift; sourceTree = "<group>"; };
 		7F8E16C01BBA71E500FFC16B /* AILogInManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AILogInManager.h; sourceTree = "<group>"; };
@@ -667,9 +667,6 @@
 				7F5DF59E1BAD2CF300959432 /* SODataBaseFactory.swift */,
 				7F5DF59F1BAD2CF300959432 /* SODataBaseProtocol.swift */,
 				7F5DF5A01BAD2CF300959432 /* SOFetchingData.swift */,
-				7F5DF5A21BAD2CF300959432 /* SOTask.swift */,
-				7F5DF59D1BAD2CF300959432 /* SOCategory.swift */,
-				7F5DF5A11BAD2CF300959432 /* SOIco.swift */,
 				7F5DF59C1BAD2CF300959432 /* SOCatalog.swift */,
 			);
 			path = Classes;
@@ -937,12 +934,12 @@
 		7F5DF6451BAD669300959432 /* TabBar */ = {
 			isa = PBXGroup;
 			children = (
-				7F5DF6461BAD669300959432 /* SOCategoryTabBarController.swift */,
-				7F5DF6471BAD669300959432 /* SOCategoryTabView.swift */,
-				7F5DF6481BAD669300959432 /* SOCategoryTabView.xib */,
-				7F5DF6491BAD669300959432 /* SOIconsTabBarController.swift */,
-				7F5DF64A1BAD669300959432 /* SOIconTabView.swift */,
-				7F5DF64B1BAD669300959432 /* SOIconTabView.xib */,
+				7F5DF6461BAD669300959432 /* TaskCategoryTabBarController.swift */,
+				7F5DF6471BAD669300959432 /* TaskCategoryTabView.swift */,
+				7F5DF6481BAD669300959432 /* TaskCategoryTabView.xib */,
+				7F5DF6491BAD669300959432 /* TaskIconsTabBarController.swift */,
+				7F5DF64A1BAD669300959432 /* TaskIconTabView.swift */,
+				7F5DF64B1BAD669300959432 /* TaskIconTabView.xib */,
 				7F5DF64C1BAD669300959432 /* SOTabBarContainerView.swift */,
 				7F5DF64D1BAD669300959432 /* SOTabBarController.swift */,
 			);
@@ -1078,8 +1075,9 @@
 		7FE7CD2B1D0B1FFA0023D4BE /* Category */ = {
 			isa = PBXGroup;
 			children = (
-				7F89DD9D1BD12226003C57BD /* Category+CoreDataProperties.swift */,
-				7F89DD9E1BD12226003C57BD /* Category.swift */,
+				7F89DD9D1BD12226003C57BD /* ManagedCategory+CoreDataProperties.swift */,
+				7F89DD9E1BD12226003C57BD /* ManagedCategory.swift */,
+				7F5DF59D1BAD2CF300959432 /* TaskCategory.swift */,
 			);
 			name = Category;
 			sourceTree = "<group>";
@@ -1087,8 +1085,9 @@
 		7FE7CD2C1D0B20060023D4BE /* Icon */ = {
 			isa = PBXGroup;
 			children = (
-				7F89DD9F1BD12226003C57BD /* Icon+CoreDataProperties.swift */,
-				7F89DDA01BD12226003C57BD /* Icon.swift */,
+				7F89DD9F1BD12226003C57BD /* ManagedIcon+CoreDataProperties.swift */,
+				7F89DDA01BD12226003C57BD /* ManagedIcon.swift */,
+				7F5DF5A11BAD2CF300959432 /* TaskIco.swift */,
 			);
 			name = Icon;
 			sourceTree = "<group>";
@@ -1096,8 +1095,9 @@
 		7FE7CD2D1D0B20140023D4BE /* Task */ = {
 			isa = PBXGroup;
 			children = (
-				7F89DDA11BD12226003C57BD /* Task+CoreDataProperties.swift */,
-				7F89DDA21BD12226003C57BD /* Task.swift */,
+				7F89DDA11BD12226003C57BD /* ManagedTask+CoreDataProperties.swift */,
+				7F89DDA21BD12226003C57BD /* ManagedTask.swift */,
+				7F5DF5A21BAD2CF300959432 /* Task.swift */,
 			);
 			name = Task;
 			sourceTree = "<group>";
@@ -1105,8 +1105,8 @@
 		7FE7CD2E1D0B201F0023D4BE /* TaskIcon */ = {
 			isa = PBXGroup;
 			children = (
-				7F89DDA31BD12226003C57BD /* TaskIcon+CoreDataProperties.swift */,
-				7F89DDA41BD12226003C57BD /* TaskIcon.swift */,
+				7F89DDA31BD12226003C57BD /* ManagedTaskIcon+CoreDataProperties.swift */,
+				7F89DDA41BD12226003C57BD /* ManagedTaskIcon.swift */,
 			);
 			name = TaskIcon;
 			sourceTree = "<group>";
@@ -1365,7 +1365,7 @@
 				7F5DF66D1BAD669300959432 /* undo@2x.png in Resources */,
 				7F5DF65B1BAD669300959432 /* ico10@2x.png in Resources */,
 				7F5DF6621BAD669300959432 /* ico17@2x.png in Resources */,
-				7F5DF6941BAD669300959432 /* SOIconTabView.xib in Resources */,
+				7F5DF6941BAD669300959432 /* TaskIconTabView.xib in Resources */,
 				7F5DF6601BAD669300959432 /* ico15@2x.png in Resources */,
 				7F5DF6651BAD669300959432 /* ico3@2x.png in Resources */,
 				7F5DF6671BAD669300959432 /* ico5@2x.png in Resources */,
@@ -1384,7 +1384,7 @@
 				7F5DF66A1BAD669300959432 /* ico8@2x.png in Resources */,
 				7F5DF65A1BAD669300959432 /* Localizable.strings in Resources */,
 				7F5DF69C1BAD66F100959432 /* Preferences.storyboard in Resources */,
-				7F5DF6911BAD669300959432 /* SOCategoryTabView.xib in Resources */,
+				7F5DF6911BAD669300959432 /* TaskCategoryTabView.xib in Resources */,
 				7F5DF5521BAD288E00959432 /* Assets.xcassets in Resources */,
 				7F5DF54D1BAD288E00959432 /* Main.storyboard in Resources */,
 				7F5DF65F1BAD669300959432 /* ico14@2x.png in Resources */,
@@ -1545,7 +1545,7 @@
 				7F5DF6501BAD669300959432 /* NSDateExtension.swift in Sources */,
 				7F5DF68A1BAD669300959432 /* SOPreferenceIconsViewController.swift in Sources */,
 				7F5DF6881BAD669300959432 /* SOMakeCallViewController.swift in Sources */,
-				7F5DF68F1BAD669300959432 /* SOCategoryTabBarController.swift in Sources */,
+				7F5DF68F1BAD669300959432 /* TaskCategoryTabBarController.swift in Sources */,
 				7FCD13681BCCF756001778E9 /* SOBorderedImageView.swift in Sources */,
 				7F5DF6871BAD669300959432 /* SOMainViewController.swift in Sources */,
 				7F5DF67D1BAD669300959432 /* MainMenuViewController.swift in Sources */,
@@ -1595,14 +1595,14 @@
 				7F5DF68B1BAD669300959432 /* SOPreferencesViewController.swift in Sources */,
 				7F5DF6711BAD669300959432 /* SOEditTaskCategoryCell.swift in Sources */,
 				7F5DF6551BAD669300959432 /* SOLocalNotificationsCenter.swift in Sources */,
-				7F5DF6931BAD669300959432 /* SOIconTabView.swift in Sources */,
+				7F5DF6931BAD669300959432 /* TaskIconTabView.swift in Sources */,
 				7F5DF6851BAD669300959432 /* SOMainTableViewCell.swift in Sources */,
 				7F5DF6581BAD669300959432 /* SOUtilities.swift in Sources */,
 				7F5DF67F1BAD669300959432 /* SlideMenuController.swift in Sources */,
 				7F5DF6561BAD669300959432 /* SOPushNotificationsCenter.swift in Sources */,
 				7F9DC3D61D0D75B800454B67 /* LoginConfigurator.swift in Sources */,
-				7F5DF6921BAD669300959432 /* SOIconsTabBarController.swift in Sources */,
-				7F5DF6901BAD669300959432 /* SOCategoryTabView.swift in Sources */,
+				7F5DF6921BAD669300959432 /* TaskIconsTabBarController.swift in Sources */,
+				7F5DF6901BAD669300959432 /* TaskCategoryTabView.swift in Sources */,
 				7F66C0831BBE7326006C998F /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1636,36 +1636,36 @@
 				7F9DC3E31D0D983700454B67 /* LoginCoreData.swift in Sources */,
 				7FC653B11D0C841700D2FFCD /* UsersCoreDataStore.swift in Sources */,
 				7F5DF5BD1BAD2CF300959432 /* SOCoreDataBase.swift in Sources */,
-				7F89DDA81BD12226003C57BD /* Icon.swift in Sources */,
+				7F89DDA81BD12226003C57BD /* ManagedIcon.swift in Sources */,
 				7F5DF5C01BAD2CF300959432 /* SwiftOrganizer.xcdatamodeld in Sources */,
-				7F89DDA71BD12226003C57BD /* Icon+CoreDataProperties.swift in Sources */,
-				7F89DDA91BD12226003C57BD /* Task+CoreDataProperties.swift in Sources */,
+				7F89DDA71BD12226003C57BD /* ManagedIcon+CoreDataProperties.swift in Sources */,
+				7F89DDA91BD12226003C57BD /* ManagedTask+CoreDataProperties.swift in Sources */,
 				7F5DF5C51BAD2CF300959432 /* SOParseComManager.swift in Sources */,
-				7F89DDAA1BD12226003C57BD /* Task.swift in Sources */,
-				7F89DDA61BD12226003C57BD /* Category.swift in Sources */,
+				7F89DDAA1BD12226003C57BD /* ManagedTask.swift in Sources */,
+				7F89DDA61BD12226003C57BD /* ManagedCategory.swift in Sources */,
 				7F8E16BC1BB9043A00FFC16B /* ManagedUser+CoreDataProperties.swift in Sources */,
 				7F5DF5BC1BAD2CF300959432 /* DefaultsUser.swift in Sources */,
 				7FE7CD281D0B0A200023D4BE /* UsersWorker.swift in Sources */,
 				7F9DC3E71D0D9D2E00454B67 /* UsersRemoteDataBase.swift in Sources */,
 				7F9DC3E51D0D9BCA00454B67 /* LoginRemoteDataBase.swift in Sources */,
 				7F5DF5C71BAD2CF300959432 /* SORemoteDataBase.swift in Sources */,
-				7F89DDAB1BD12226003C57BD /* TaskIcon+CoreDataProperties.swift in Sources */,
-				7F5DF5B51BAD2CF300959432 /* SOCategory.swift in Sources */,
+				7F89DDAB1BD12226003C57BD /* ManagedTaskIcon+CoreDataProperties.swift in Sources */,
+				7F5DF5B51BAD2CF300959432 /* TaskCategory.swift in Sources */,
 				7F5DF5B61BAD2CF300959432 /* SODataBaseFactory.swift in Sources */,
-				7F89DDA51BD12226003C57BD /* Category+CoreDataProperties.swift in Sources */,
+				7F89DDA51BD12226003C57BD /* ManagedCategory+CoreDataProperties.swift in Sources */,
 				7F5DF5C61BAD2CF300959432 /* SOPopulateRemoteDataBase.swift in Sources */,
 				7F5DF5E21BAD32CF00959432 /* Reachability.swift in Sources */,
 				7FD8C7C01BC3F07200E0A8F7 /* LocalUsers.xcdatamodeld in Sources */,
 				7F5DF5B71BAD2CF300959432 /* SODataBaseProtocol.swift in Sources */,
-				7F89DDAC1BD12226003C57BD /* TaskIcon.swift in Sources */,
+				7F89DDAC1BD12226003C57BD /* ManagedTaskIcon.swift in Sources */,
 				7F5DF5B81BAD2CF300959432 /* SOFetchingData.swift in Sources */,
 				7F5DF5C41BAD2CF300959432 /* SOObserversManager.swift in Sources */,
 				7FCD13641BCBEACE001778E9 /* Utils.swift in Sources */,
 				7F5DF5B41BAD2CF300959432 /* SOCatalog.swift in Sources */,
 				7F5DF5E61BAD330C00959432 /* StringExtension.swift in Sources */,
 				7F9DC3E11D0D975F00454B67 /* LoginWorker.swift in Sources */,
-				7F5DF5B91BAD2CF300959432 /* SOIco.swift in Sources */,
-				7F5DF5BA1BAD2CF300959432 /* SOTask.swift in Sources */,
+				7F5DF5B91BAD2CF300959432 /* TaskIco.swift in Sources */,
+				7F5DF5BA1BAD2CF300959432 /* Task.swift in Sources */,
 				7F8E16C31BBA71E500FFC16B /* AILogInManager.m in Sources */,
 				7F5DF5BB1BAD2CF300959432 /* SOTypeDataBaseSwitcher.swift in Sources */,
 				7FDF313E1BBA8CBC00AD4127 /* User.swift in Sources */,

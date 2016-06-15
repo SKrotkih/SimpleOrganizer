@@ -1,5 +1,5 @@
 //
-//  SOCategory.swift
+//  Ico.swift
 //  SwiftOrganizer
 //
 //  Created by Sergey Krotkih on 5/29/15.
@@ -8,13 +8,14 @@
 
 import UIKit
 
-let CategoryEntityName = "Category"
+let IcoEntityName = "ManagedIcon"
 
-public class SOCategory: SOCatalog {
-    
+public class TaskIco: SOCatalog {
+
     public var name: String = ""
-    
-    convenience init(object: AnyObject?, id: String, selected: Bool, visible: Bool, name: String) {
+    public var imageName: String = ""
+
+    convenience init(object: AnyObject?, id: String, selected: Bool, visible: Bool, name: String, imageName: String) {
         self.init()
         
         self.databaseObject = object
@@ -23,9 +24,11 @@ public class SOCategory: SOCatalog {
         self.visible = visible
         
         self.name = name
+        self.imageName = imageName
+
     }
     
     public override var entityName: String{
-        return CategoryEntityName
+        return IcoEntityName
     }
 }

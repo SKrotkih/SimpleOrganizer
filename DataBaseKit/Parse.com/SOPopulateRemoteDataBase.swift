@@ -56,13 +56,13 @@ public class SOPopulateRemoteDataBase {
     
     private func populateNextCategoryInBackground(completionBlock: (error: NSError?) -> Void) -> Bool{
         let defaultCategories = [
-            SOCategory(object: nil, id:"1", selected: true, visible: true, name:"ToDo".localized),
-            SOCategory(object: nil, id:"2", selected: true, visible: true, name:"Events".localized),
-            SOCategory(object: nil, id:"3", selected: true, visible: true, name:"Life".localized),
-            SOCategory(object: nil, id:"4", selected: true, visible: true, name:"Work".localized)]
+            TaskCategory(object: nil, id:"1", selected: true, visible: true, name:"ToDo".localized),
+            TaskCategory(object: nil, id:"2", selected: true, visible: true, name:"Events".localized),
+            TaskCategory(object: nil, id:"3", selected: true, visible: true, name:"Life".localized),
+            TaskCategory(object: nil, id:"4", selected: true, visible: true, name:"Work".localized)]
         
         if self.currentCategoryIndex < defaultCategories.count{
-            let category: SOCategory = defaultCategories[self.currentCategoryIndex++]
+            let category: TaskCategory = defaultCategories[self.currentCategoryIndex++]
             let object = PFObject(className: CategoryClassName)
             object[kFldRecordId] = category.recordid
             object[kCategoryFldName] = category.name
@@ -104,26 +104,26 @@ public class SOPopulateRemoteDataBase {
     
     private func populateNextIcoInBackground(completionBlock: (error: NSError?) -> Void) -> Bool{
         let defaultIcons = [
-            SOIco(object: nil, id:"1", selected: true, visible: true, name:"ico1".localized, imageName: "ico1"),
-            SOIco(object: nil, id:"2", selected: true, visible: true, name:"ico2".localized, imageName: "ico2"),
-            SOIco(object: nil, id:"3", selected: true, visible: true, name:"ico3".localized, imageName: "ico3"),
-            SOIco(object: nil, id:"4", selected: true, visible: true, name:"ico4".localized, imageName: "ico4"),
-            SOIco(object: nil, id:"5", selected: true, visible: true, name:"ico5".localized, imageName: "ico5"),
-            SOIco(object: nil, id:"6", selected: true, visible: true, name:"ico6".localized, imageName: "ico6"),
-            SOIco(object: nil, id:"7", selected: true, visible: true, name:"ico7".localized, imageName: "ico7"),
-            SOIco(object: nil, id:"8", selected: true, visible: true, name:"ico8".localized, imageName: "ico8"),
-            SOIco(object: nil, id:"9", selected: true, visible: true, name:"ico9".localized, imageName: "ico9"),
-            SOIco(object: nil, id:"10", selected: true, visible: true, name:"ico10".localized, imageName: "ico10"),
-            SOIco(object: nil, id:"11", selected: true, visible: true, name:"ico11".localized, imageName: "ico11"),
-            SOIco(object: nil, id:"12", selected: true, visible: true, name:"ico12".localized, imageName: "ico12"),
-            SOIco(object: nil, id:"13", selected: true, visible: true, name:"ico13".localized, imageName: "ico13"),
-            SOIco(object: nil, id:"14", selected: true, visible: true, name:"ico14".localized, imageName: "ico14"),
-            SOIco(object: nil, id:"15", selected: true, visible: true, name:"ico15".localized, imageName: "ico15"),
-            SOIco(object: nil, id:"16", selected: true, visible: true, name:"ico16".localized, imageName: "ico16"),
-            SOIco(object: nil, id:"17", selected: true, visible: true, name:"ico17".localized, imageName: "ico17")]
+            TaskIco(object: nil, id:"1", selected: true, visible: true, name:"ico1".localized, imageName: "ico1"),
+            TaskIco(object: nil, id:"2", selected: true, visible: true, name:"ico2".localized, imageName: "ico2"),
+            TaskIco(object: nil, id:"3", selected: true, visible: true, name:"ico3".localized, imageName: "ico3"),
+            TaskIco(object: nil, id:"4", selected: true, visible: true, name:"ico4".localized, imageName: "ico4"),
+            TaskIco(object: nil, id:"5", selected: true, visible: true, name:"ico5".localized, imageName: "ico5"),
+            TaskIco(object: nil, id:"6", selected: true, visible: true, name:"ico6".localized, imageName: "ico6"),
+            TaskIco(object: nil, id:"7", selected: true, visible: true, name:"ico7".localized, imageName: "ico7"),
+            TaskIco(object: nil, id:"8", selected: true, visible: true, name:"ico8".localized, imageName: "ico8"),
+            TaskIco(object: nil, id:"9", selected: true, visible: true, name:"ico9".localized, imageName: "ico9"),
+            TaskIco(object: nil, id:"10", selected: true, visible: true, name:"ico10".localized, imageName: "ico10"),
+            TaskIco(object: nil, id:"11", selected: true, visible: true, name:"ico11".localized, imageName: "ico11"),
+            TaskIco(object: nil, id:"12", selected: true, visible: true, name:"ico12".localized, imageName: "ico12"),
+            TaskIco(object: nil, id:"13", selected: true, visible: true, name:"ico13".localized, imageName: "ico13"),
+            TaskIco(object: nil, id:"14", selected: true, visible: true, name:"ico14".localized, imageName: "ico14"),
+            TaskIco(object: nil, id:"15", selected: true, visible: true, name:"ico15".localized, imageName: "ico15"),
+            TaskIco(object: nil, id:"16", selected: true, visible: true, name:"ico16".localized, imageName: "ico16"),
+            TaskIco(object: nil, id:"17", selected: true, visible: true, name:"ico17".localized, imageName: "ico17")]
         
         if self.currentIcoIndex < defaultIcons.count{
-            let ico: SOIco = defaultIcons[self.currentIcoIndex++]
+            let ico: TaskIco = defaultIcons[self.currentIcoIndex++]
             let object = PFObject(className: IcoClassName)
             object[kFldRecordId] = ico.recordid
             object[kFldSelected] = ico.selected

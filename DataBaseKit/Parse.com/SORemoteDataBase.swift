@@ -53,7 +53,7 @@ public class SORemoteDataBase: NSObject, SODataBaseProtocol {
         return nil
     }
     
-    public func getRecordIdForTask(task: SOTask?) -> String?{
+    public func getRecordIdForTask(task: Task?) -> String?{
         return nil
     }
 }
@@ -62,21 +62,21 @@ public class SORemoteDataBase: NSObject, SODataBaseProtocol {
     // - MARK: Fetch Data
 
 extension SORemoteDataBase{
-    public func allCategories(completionBlock: (resultBuffer: [SOCategory], error: NSError?) -> Void){
+    public func allCategories(completionBlock: (resultBuffer: [TaskCategory], error: NSError?) -> Void){
         self.fetchAllDataWithClassName(CategoryClassName, completionBlock: {(resultBuffer: [AnyObject], error: NSError?) in
-            let buffer = resultBuffer as! [SOCategory]
+            let buffer = resultBuffer as! [TaskCategory]
             completionBlock(resultBuffer: buffer, error: error)
         })
     }
     
-    public func allIcons(completionBlock: (resultBuffer: [SOIco], error: NSError?) -> Void){
+    public func allIcons(completionBlock: (resultBuffer: [TaskIco], error: NSError?) -> Void){
         self.fetchAllDataWithClassName(IcoClassName, completionBlock: {(resultBuffer: [AnyObject], error: NSError?) in
-            let buffer: [SOIco] = resultBuffer as! [SOIco]
+            let buffer: [TaskIco] = resultBuffer as! [TaskIco]
             completionBlock(resultBuffer: buffer, error: error)
         })
     }
     
-    public func allTasks(completionBlock: (resultBuffer: [SOTask], error: NSError?) -> Void) {
+    public func allTasks(completionBlock: (resultBuffer: [Task], error: NSError?) -> Void) {
 
         if PFUser.currentUser() == nil{
             var dict = [String: AnyObject]()
@@ -92,12 +92,12 @@ extension SORemoteDataBase{
                 completionBlock(resultBuffer: [], error: error)
             }
             
-            let tasks = resultBuffer as! [SOTask]
+            let tasks = resultBuffer as! [Task]
             
             if tasks.count > 0 {
                 dispatch_async(dispatch_get_main_queue(), {
                     
-                    var _allTasks: [SOTask] = []
+                    var _allTasks: [Task] = []
                     
                     for task in tasks{
                         var categorySelected: Bool = false
@@ -110,7 +110,7 @@ extension SORemoteDataBase{
                         var iconsSelected: Bool = false
                         
                         for iconId in icons{
-                            let iconOpt: SOIco? = SOFetchingData.sharedInstance.iconById(iconId)
+                            let iconOpt: TaskIco? = SOFetchingData.sharedInstance.iconById(iconId)
                             if let ico = iconOpt{
                                 iconsSelected = iconsSelected || ico.selected
                             }
@@ -177,13 +177,13 @@ extension SORemoteDataBase{
             let visible = object[kFldVisible] as! Bool
             let name = object[kIcoFldName] as! String
             let imageName = object[kIcoFldImageName] as! String
-            newInstance = SOIco(object: object, id: recordid, selected: selected, visible: visible, name: name, imageName: imageName)
+            newInstance = TaskIco(object: object, id: recordid, selected: selected, visible: visible, name: name, imageName: imageName)
         case CategoryClassName:
             let recordid = object[kFldRecordId] as! String
             let selected = object[kFldSelected] as! Bool
             let visible = object[kFldVisible] as! Bool
             let name = object[kCategoryFldName] as! String
-            newInstance = SOCategory(object: object, id: recordid, selected: selected, visible: visible, name: name)
+            newInstance = TaskCategory(object: object, id: recordid, selected: selected, visible: visible, name: name)
         case TaskClassName:
             let title = object[kTaskFldTitle] as! String
             let category = object[kTaskFldCategory] as! String
@@ -195,7 +195,7 @@ extension SORemoteDataBase{
             icons[3] = object[kTaskFldIco4] as! String
             icons[4] = object[kTaskFldIco5] as! String
             icons[5] = object[kTaskFldIco6] as! String
-            newInstance = SOTask(object: object, userid: nil, title: title, category: category, date: date, icons: icons)
+            newInstance = Task(object: object, userid: nil, title: title, category: category, date: date, icons: icons)
         default:
             break
         }
@@ -209,7 +209,7 @@ extension SORemoteDataBase{
 
 extension SORemoteDataBase{
     
-    public func saveTask(task: SOTask, completionBlock: (error: NSError?) -> Void){
+    public func saveTask(task: Task, completionBlock: (error: NSError?) -> Void){
         dispatch_sync(self.queue, {[weak self] in
             var object: PFObject!
             
@@ -269,7 +269,7 @@ extension SORemoteDataBase{
 
 extension SORemoteDataBase{
     
-    public func removeTask(task: SOTask){
+    public func removeTask(task: Task){
         dispatch_barrier_sync(self.queue, {[weak self] in
             if let taskObject: PFObject = task.databaseObject as? PFObject{
                 self!.deleteObject(taskObject)

@@ -11,7 +11,7 @@ import DataBaseKit
 
 protocol LoginPresenterOutput: class
 {
-    func displayAboutUserData(userData: Dictionary<String, AnyObject>?)
+    func displayFetchedUserData(userData: Dictionary<String, AnyObject>?)
 }
 
 protocol LoginInteractorOutput {
@@ -31,7 +31,7 @@ class LoginPresenter: LoginInteractorOutput {
                             if let imageData = data{
                                 if let photo: UIImage = UIImage(data: imageData){
                                     let dict: Dictionary<String, AnyObject> = ["name": currentUser.name, "photo": photo]
-                                    self?.output.displayAboutUserData(dict)
+                                    self?.output.displayFetchedUserData(dict)
                                     return
                                 }
                             }
@@ -40,9 +40,9 @@ class LoginPresenter: LoginInteractorOutput {
                 }
             }
             let dict: Dictionary<String, AnyObject> = ["name": currentUser.name]
-            output.displayAboutUserData(dict)
+            output.displayFetchedUserData(dict)
         } else {
-            output.displayAboutUserData(nil)
+            output.displayFetchedUserData(nil)
         }
     }
     
@@ -52,17 +52,17 @@ class LoginPresenter: LoginInteractorOutput {
 
 extension LoginPresenter{
     
-    func getDataFromUrl(url:NSURL, completion: ((data: NSData?) -> Void)) {
-        NSURLSession.sharedSession().dataTaskWithURL(url) { (data, response, error) in
-            completion(data: data)
-            }.resume()
-    }
-    
     func downloadImage(url: NSURL, completionBlock: (data: NSData?) -> Void){
         getDataFromUrl(url) { data in
             dispatch_async(dispatch_get_main_queue()) {
                 completionBlock(data: data)
             }
         }
+    }
+    
+    func getDataFromUrl(url:NSURL, completion: ((data: NSData?) -> Void)) {
+        NSURLSession.sharedSession().dataTaskWithURL(url) { (data, response, error) in
+            completion(data: data)
+            }.resume()
     }
 }

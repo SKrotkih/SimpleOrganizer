@@ -8,8 +8,8 @@
 
 import UIKit
 
-let TaskEntityName = "Task"
-let TaskIconEntityName = "TaskIcon"
+let TaskEntityName = "ManagedTask"
+let TaskIconEntityName = "ManagedTaskIcon"
 let LocalDataBaseName = "SwiftOrganizer"
 
 public class SOLocalDataBase: NSObject, SODataBaseProtocol{
@@ -121,8 +121,8 @@ extension SOLocalDataBase: NSFetchedResultsControllerDelegate {
 
 extension SOLocalDataBase{
 
-    public func allCategories(completionBlock: (resultBuffer: [SOCategory], error: NSError?) -> Void){
-        var _allCategories: [SOCategory] = []
+    public func allCategories(completionBlock: (resultBuffer: [TaskCategory], error: NSError?) -> Void){
+        var _allCategories: [TaskCategory] = []
         var _needRecursiveCall: Bool = false
         
         do {
@@ -135,12 +135,12 @@ extension SOLocalDataBase{
         {
             if objects.count > 0{
                 let _ = objects.map({object in
-                    let theObject = object as! Category
-                    let recordid = theObject.valueForKey(kFldRecordId) as! String
-                    let selected = theObject.valueForKey(kFldSelected) as! Bool
-                    let visible = theObject.valueForKey(kFldVisible) as! Bool
-                    let name = theObject.valueForKey(kCategoryFldName) as! String
-                    let category = SOCategory(object: objects, id: recordid, selected: selected, visible: visible, name: name)
+                    let managedCategory = object as! ManagedCategory
+                    let recordid = managedCategory.valueForKey(kFldRecordId) as! String
+                    let selected = managedCategory.valueForKey(kFldSelected) as! Bool
+                    let visible = managedCategory.valueForKey(kFldVisible) as! Bool
+                    let name = managedCategory.valueForKey(kCategoryFldName) as! String
+                    let category = TaskCategory(object: managedCategory, id: recordid, selected: selected, visible: visible, name: name)
                     _allCategories.append(category)
                 })
             } else {
@@ -158,8 +158,8 @@ extension SOLocalDataBase{
     
     // MARK: - Icons
     
-    public func allIcons(completionBlock: (resultBuffer: [SOIco], error: NSError?) -> Void){
-        var _allIcon: [SOIco] = []
+    public func allIcons(completionBlock: (resultBuffer: [TaskIco], error: NSError?) -> Void){
+        var _allIcon: [TaskIco] = []
         var _needRecursiveCall: Bool = false
         
         do {
@@ -177,7 +177,7 @@ extension SOLocalDataBase{
                     let visible = theObject.valueForKey(kFldVisible) as! Bool
                     let name = theObject.valueForKey(kIcoFldName) as! String
                     let imageName = theObject.valueForKey(kIcoFldImageName) as! String
-                    let ico = SOIco(object: objects, id: recordid, selected: selected, visible: visible, name: name, imageName: imageName)
+                    let ico = TaskIco(object: theObject, id: recordid, selected: selected, visible: visible, name: name, imageName: imageName)
                     _allIcon.append(ico)
                 })
             } else {
@@ -195,7 +195,7 @@ extension SOLocalDataBase{
     }
     
     // MARK: - Tasks
-    public func allTasks(completionBlock: (resultBuffer: [SOTask], error: NSError?) -> Void) {
+    public func allTasks(completionBlock: (resultBuffer: [Task], error: NSError?) -> Void) {
         let currentUser: User? = UsersWorker.sharedInstance.currentUser
         
         if currentUser ==  nil{
@@ -223,37 +223,37 @@ extension SOLocalDataBase{
                     let predicate = NSPredicate(format: "userid == \(userId!)", "")
                     fetchRequest.predicate = predicate
                 }
-                let tasks = (try! self!.coreData.managedObjectContext!.executeFetchRequest(fetchRequest)) as! [Task]
+                let managedTasks = (try! self!.coreData.managedObjectContext!.executeFetchRequest(fetchRequest)) as! [ManagedTask]
                 
-                if tasks.count > 0 {
+                if managedTasks.count > 0 {
                     self!.prepareAllDependencies{(fetchError: NSError?) in
                         if let error = fetchError{
                             completionBlock(resultBuffer: [], error: error)
                         } else {
                             dispatch_async(dispatch_get_main_queue(), {
-                                var _allTasks: [SOTask] = []
+                                var _allTasks: [Task] = []
                                 
-                                for task: Task in tasks{
+                                for managedTask: ManagedTask in managedTasks{
                                     var categorySelected: Bool = false
                                     
-                                    if let category: Category = task.category{
-                                        categorySelected = category.selected as! Bool
+                                    if let managedCategory: ManagedCategory = managedTask.category{
+                                        categorySelected = managedCategory.selected as! Bool
                                     }
                                     
                                     var iconsSelected: Bool = false
                                     
-                                    if let icons = task.icons{
+                                    if let icons = managedTask.icons{
                                         let arr = icons.allObjects
                                         
                                         for anyObject: AnyObject in arr {
-                                            let taskIcon = anyObject as! TaskIcon
-                                            let ico = taskIcon.icon
+                                            let managedTaskIcon = anyObject as! ManagedTaskIcon
+                                            let ico = managedTaskIcon.icon
                                             iconsSelected = ico.selected as! Bool
                                         }
                                     }
                                     
                                     if categorySelected && iconsSelected{
-                                        let sotask = self!.newTask(task)
+                                        let sotask = self!.newTask(managedTask)
                                         _allTasks.append(sotask)
                                     }
                                 }
@@ -286,7 +286,7 @@ extension SOLocalDataBase{
         let taskGroup = dispatch_group_create()
         
         dispatch_group_async(taskGroup, serialQueue, {
-            dataSource.allCategories{(categories: [SOCategory], fetchError: NSError?) in
+            dataSource.allCategories{(categories: [TaskCategory], fetchError: NSError?) in
                 if let error = fetchError{
                     completionBlock(error: error)
                 }
@@ -294,7 +294,7 @@ extension SOLocalDataBase{
             });
         
         dispatch_group_async(taskGroup, serialQueue, {
-            dataSource.allIcons{(resultBuffer: [SOIco], fetchError: NSError?) in
+            dataSource.allIcons{(resultBuffer: [TaskIco], fetchError: NSError?) in
                 if let error = fetchError{
                     completionBlock(error: error)
                 }
@@ -309,14 +309,14 @@ extension SOLocalDataBase{
         // MARK: Serial sequence: after fetching Categories are starting Icons fetching
         
         //        dispatch_async(serialQueue, { () in
-        //            dataSource.allCategories{(categories: [SOCategory], fetchError: NSError?) in
+        //            dataSource.allCategories{(categories: [TaskCategory], fetchError: NSError?) in
         //                if let error = fetchError{
         //                    completionBlock(error: error)
         //                }
         //            }
         //        })
         //        dispatch_async(serialQueue, { () in
-        //            dataSource.allIcons{(resultBuffer: [SOIco], fetchError: NSError?) in
+        //            dataSource.allIcons{(resultBuffer: [TaskIco], fetchError: NSError?) in
         //                if let error = fetchError{
         //                    completionBlock(error: error)
         //                } else {
@@ -328,43 +328,43 @@ extension SOLocalDataBase{
         
     }
     
-    private func newTask(task: Task) -> SOTask{
-        let userid = task.userid
-        let title = task.title
+    private func newTask(managedTask: ManagedTask) -> Task{
+        let userid = managedTask.userid
+        let title = managedTask.title
         var categoryId: String = ""
-        if let category = task.category{
+        if let category = managedTask.category{
             categoryId = category.recordid!
         }
-        let date = task.date
+        let date = managedTask.date
         var _icons = [String](count: MaxIconsCount, repeatedValue: "")
 
-        if let icons = task.icons{
+        if let icons = managedTask.icons{
             let arr = icons.allObjects
             var i: Int = 0
             
             for anyObject: AnyObject in arr {
-                let taskIcon = anyObject as! TaskIcon
-                let ico = taskIcon.icon
+                let managedTaskIcon = anyObject as! ManagedTaskIcon
+                let ico = managedTaskIcon.icon
                 if let recordid = ico.recordid{
+                    i += 1
                     if i < MaxIconsCount{
-                        i += 1
                         _icons[i] = recordid
                     }
                 }
             }
         }
-        let objectID: NSManagedObjectID = task.objectID
-        let newTask = SOTask(object: objectID, userid: userid, title: title!, category: categoryId, date: date, icons: _icons)
+        let objectID: NSManagedObjectID = managedTask.objectID
+        let newTask = Task(object: objectID, userid: userid, title: title!, category: categoryId, date: date, icons: _icons)
         
         return newTask
     }
     
-    public func getRecordIdForTask(task: SOTask?) -> String?{
-        guard let theTtask = task, let object = theTtask.databaseObject as? Task else
+    public func getRecordIdForTask(task: Task?) -> String?{
+        guard let theTtask = task, let managedTask = theTtask.databaseObject as? ManagedTask else
         {
             return nil
         }
-        let instanceURL: NSURL = object.objectID.URIRepresentation()
+        let instanceURL: NSURL = managedTask.objectID.URIRepresentation()
         let recordId = instanceURL.lastPathComponent
         
         return recordId
@@ -415,7 +415,7 @@ extension SOLocalDataBase{
 
 extension SOLocalDataBase{
     
-    public func saveTask(task: SOTask, completionBlock: (error: NSError?) -> Void){
+    public func saveTask(task: Task, completionBlock: (error: NSError?) -> Void){
         guard let userId = currentUserId() else{
             completionBlock(error: nil)
 
@@ -424,45 +424,45 @@ extension SOLocalDataBase{
         dispatch_sync(self.queue, {() in
             task.userid = userId
             
-            let taskObject: Task!
+            let managedTask: ManagedTask!
             
             if let objectID = task.databaseObject as? NSManagedObjectID{
-                taskObject = self.coreData.managedObjectContext!.objectWithID(objectID) as! Task
+                managedTask = self.coreData.managedObjectContext!.objectWithID(objectID) as! ManagedTask
             }
             else{
-                taskObject = self.coreData.newManagedObject(TaskEntityName) as! Task
-                task.databaseObject = taskObject
+                managedTask = self.coreData.newManagedObject(TaskEntityName) as! ManagedTask
+                task.databaseObject = managedTask
             }
-            taskObject.userid = task.userid
-            taskObject.title = task.title
-            if let category: Category = self.categoryWithId(task.category){
-                taskObject.category = category
+            managedTask.userid = task.userid
+            managedTask.title = task.title
+            if let managedCategory: ManagedCategory = self.categoryWithId(task.category){
+                managedTask.category = managedCategory
             }
             if let date = task.date{
-                taskObject.date = date
+                managedTask.date = date
             }
 
-            if let currentIcons = taskObject?.mutableSetValueForKey("icons"){
+            if let currentIcons = managedTask?.mutableSetValueForKey("icons"){
                 let arr = currentIcons.allObjects
                 for anyObject: AnyObject in arr {
-                    let taskIcon = anyObject as! TaskIcon
-                    let taskIcons = taskIcon.icon.mutableSetValueForKey("taskicon")
+                    let managedTaskIcon = anyObject as! ManagedTaskIcon
+                    let taskIcons = managedTaskIcon.icon.mutableSetValueForKey("taskicon")
                     for anyObject: AnyObject in taskIcons.allObjects {
-                        let taskIcon = anyObject as! TaskIcon
+                        let taskIcon = anyObject as! ManagedTaskIcon
                         self.coreData.deleteObject(taskIcon)
                     }
                     taskIcons.removeAllObjects()
-                    self.coreData.deleteObject(taskIcon)
+                    self.coreData.deleteObject(managedTaskIcon)
                 }
                 currentIcons.removeAllObjects()
             }
 
             let icons = task.icons
             for iconId: String in icons{
-                if let icon: Icon = self.iconWithId(iconId){
-                    let taskIcon  = self.coreData.newManagedObject(TaskIconEntityName) as! TaskIcon
-                    taskIcon.task = taskObject
-                    taskIcon.icon = icon
+                if let managedIcon: ManagedIcon = self.iconWithId(iconId){
+                    let managedTaskIcon  = self.coreData.newManagedObject(TaskIconEntityName) as! ManagedTaskIcon
+                    managedTaskIcon.task = managedTask
+                    managedTaskIcon.icon = managedIcon
                 }
             }
             self.coreData.saveContext()
@@ -515,10 +515,10 @@ extension SOLocalDataBase{
 
 extension SOLocalDataBase{
     
-    public func removeTask(task: SOTask){
+    public func removeTask(task: Task){
         dispatch_barrier_sync(self.queue, { () in
-            let taskObject: Task? = task.databaseObject as? Task
-            self.coreData.deleteObject(taskObject)
+            let managedTask: ManagedTask? = task.databaseObject as? ManagedTask
+            self.coreData.deleteObject(managedTask)
             self.coreData.saveContext()
         })
     }
@@ -528,12 +528,12 @@ extension SOLocalDataBase{
 // MARK: - Other functions
 
 extension SOLocalDataBase{
-    func iconWithId(iconId: String) -> Icon? {
+    func iconWithId(iconId: String) -> ManagedIcon? {
         if iconId.isEmpty{
             return nil
         }
         
-        let request = NSFetchRequest(entityName: "Icon")
+        let request = NSFetchRequest(entityName: "ManagedIcon")
         request.predicate = NSPredicate(format: "recordid == \"\(iconId)\"", "")
         request.sortDescriptors = []
         let controller = NSFetchedResultsController(fetchRequest: request, managedObjectContext: self.coreData.managedObjectContext!, sectionNameKeyPath: nil, cacheName: nil)
@@ -542,7 +542,7 @@ extension SOLocalDataBase{
 
             if let objects = controller.fetchedObjects{
                 if objects.count > 0{
-                    return objects[0] as? Icon
+                    return objects[0] as? ManagedIcon
                 }
             }
         } catch let error as NSError {
@@ -552,12 +552,12 @@ extension SOLocalDataBase{
         return nil
     }
     
-    func categoryWithId(categoryId: String) -> Category? {
+    func categoryWithId(categoryId: String) -> ManagedCategory? {
         if categoryId.isEmpty{
             return nil
         }
         
-        let request = NSFetchRequest(entityName: "Category")
+        let request = NSFetchRequest(entityName: "ManagedCategory")
         request.predicate = NSPredicate(format: "recordid == \"\(categoryId)\"", "")
         request.sortDescriptors = []
         let controller = NSFetchedResultsController(fetchRequest: request, managedObjectContext: self.coreData.managedObjectContext!, sectionNameKeyPath: nil, cacheName: nil)
@@ -566,7 +566,7 @@ extension SOLocalDataBase{
             
             if let objects = controller.fetchedObjects{
                 if objects.count > 0{
-                    return objects[0] as? Category
+                    return objects[0] as? ManagedCategory
                 }
             }
         } catch let error as NSError {
@@ -582,8 +582,8 @@ extension SOLocalDataBase{
 
 extension SOLocalDataBase{
     public func areObjectsEqual(object1: AnyObject?, object2: AnyObject?) -> Bool{
-        if let obj1: Task = object1 as? Task, let obj2: Task = object2 as? Task{
-            return obj1 == obj2
+        if let managedTask1: ManagedTask = object1 as? ManagedTask, let managedTask2: ManagedTask = object2 as? ManagedTask{
+            return managedTask1 == managedTask2
         }
         
         return true

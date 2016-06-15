@@ -37,7 +37,7 @@ class SOPreferenceCategoriesViewController: UIViewController {
     }
     
     func didSelectRow(aRow: Int){
-        let category: SOCategory = self.buffer[aRow] as! SOCategory
+        let category: TaskCategory = self.buffer[aRow] as! TaskCategory
         let currState: Bool = !category.visible
         category.setVisible(currState, completionBlock: {(error: NSError?) in
             if let theError = error{
@@ -62,7 +62,7 @@ class SOPreferenceCategoriesViewController: UIViewController {
 
 extension SOPreferenceCategoriesViewController{
     private func fetchData(completeBlock: () -> Void ){
-        SOFetchingData.sharedInstance.allCategories{(categories: [SOCategory], fetchError: NSError?) in
+        SOFetchingData.sharedInstance.allCategories{(categories: [TaskCategory], fetchError: NSError?) in
             if let error = fetchError{
                 self.buffer.removeAll(keepCapacity: false)
                 showAlertWithTitle("Failed to fetch data".localized, message: error.description)
@@ -89,7 +89,7 @@ extension SOPreferenceCategoriesViewController: UITableViewDelegate, UITableView
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("CategoryCell") as! SOPreferencesSelectCategoriesCell
 
-        let category: SOCategory = self.buffer[indexPath.row] as! SOCategory
+        let category: TaskCategory = self.buffer[indexPath.row] as! TaskCategory
         
         cell.categoryNameLabel.text = category.name
         

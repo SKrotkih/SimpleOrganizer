@@ -1,5 +1,5 @@
 //
-//  Category.swift
+//  Task.swift
 //  SwiftOrganizer
 //
 //  Created by Sergey Krotkih on 10/16/15.
@@ -9,8 +9,8 @@
 import Foundation
 import CoreData
 
-@objc(Category)
-class Category: NSManagedObject {
+@objc(ManagedTask)
+class ManagedTask: NSManagedObject {
 
 // Insert code here to add functionality to your managed object subclass
 

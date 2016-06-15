@@ -36,10 +36,10 @@ public class SOPopulateLocalDataBase {
             ["id":"15","name":"ico15","img":"ico15"],
             ["id":"16","name":"ico16","img":"ico16"],
             ["id":"17","name":"ico17","img":"ico17"]]
-        let entityName = NSStringFromClass(Icon.classForCoder())
+        let entityName = NSStringFromClass(ManagedIcon.classForCoder())
         
         for dict in icons{
-            let ico = NSEntityDescription.insertNewObjectForEntityForName(entityName, inManagedObjectContext: self.coreData.managedObjectContext!) as! Icon
+            let ico = NSEntityDescription.insertNewObjectForEntityForName(entityName, inManagedObjectContext: self.coreData.managedObjectContext!) as! ManagedIcon
             ico.recordid = dict["id"]!
             ico.name = dict["name"]!
             ico.imagename = dict["img"]!
@@ -53,16 +53,16 @@ public class SOPopulateLocalDataBase {
     public func populateCategories(){
         let categories = ["ToDo".localized, "Events".localized, "Life".localized, "Work".localized]
         var categoryId = 1
-        let entityName = NSStringFromClass(Category.classForCoder())
+        let entityName = NSStringFromClass(ManagedCategory.classForCoder())
         
         for catagoryName in categories{
-            let category = NSEntityDescription.insertNewObjectForEntityForName(entityName, inManagedObjectContext: self.coreData.managedObjectContext!) as! Category
-            categoryId += 1
+            let category = NSEntityDescription.insertNewObjectForEntityForName(entityName, inManagedObjectContext: self.coreData.managedObjectContext!) as! ManagedCategory
             let newCategoryId = "\(categoryId)"
             category.recordid = newCategoryId
             category.name = catagoryName as String
             category.selected = true
             category.visible = true
+            categoryId += 1
         }
         
         self.coreData.saveContext()
@@ -73,20 +73,20 @@ public class SOPopulateLocalDataBase {
         if let curreentUser = UsersWorker.sharedInstance.currentUser{
             userId = curreentUser.userid
         }
-        let task  = self.coreData.newManagedObject("Task") as! Task
+        let managedTask  = self.coreData.newManagedObject("ManagedTask") as! ManagedTask
         
-        if let category: Category = self.localaDataBase.categoryWithId(category){
-            task.category = category
+        if let category: ManagedCategory = self.localaDataBase.categoryWithId(category){
+            managedTask.category = category
         }
-        task.title = title
+        managedTask.title = title
         if let theUserId = userId{
-            task.userid = theUserId
+            managedTask.userid = theUserId
         }
         for iconId: String in icons{
-            if let icon: Icon = self.localaDataBase.iconWithId(iconId){
-                let taskIcon  = self.coreData.newManagedObject("TaskIcon") as! TaskIcon
-                taskIcon.task = task
-                taskIcon.icon = icon
+            if let icon: ManagedIcon = self.localaDataBase.iconWithId(iconId){
+                let managedTaskIcon  = self.coreData.newManagedObject("ManagedTaskIcon") as! ManagedTaskIcon
+                managedTaskIcon.task = managedTask
+                managedTaskIcon.icon = icon
             }
             
         }

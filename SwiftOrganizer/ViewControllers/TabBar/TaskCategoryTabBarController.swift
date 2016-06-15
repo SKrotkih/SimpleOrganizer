@@ -1,5 +1,5 @@
 //
-//  SOCategoryTabBarController.swift
+//  TaskCategoryTabBarController.swift
 //  SwiftOrganizer
 //
 //  Created by Sergey Krotkih on 5/31/15.
@@ -8,12 +8,12 @@
 
 import UIKit
 
-class SOCategoryTabBarController: SOTabBarController {
+class TaskCategoryTabBarController: SOTabBarController {
 
-    private let tabViewXibName = "SOCategoryTabView"
+    private let tabViewXibName = "TaskCategoryTabView"
     
     override func reloadTabs(completionBlock: (error: NSError?) -> Void){
-        SOFetchingData.sharedInstance.allCategories{(categories: [SOCategory], fetchError: NSError?) in
+        SOFetchingData.sharedInstance.allCategories{(categories: [TaskCategory], fetchError: NSError?) in
             self.tabsCount = 0
             
             if let error = fetchError{
@@ -22,16 +22,16 @@ class SOCategoryTabBarController: SOTabBarController {
             }
             if categories.count > 0{
                 for i in 0..<categories.count {
-                    let category: SOCategory = categories[i]
+                    let category: TaskCategory = categories[i]
                     
                     if category.visible{
-                        var tabView: SOCategoryTabView!
+                        var tabView: TaskCategoryTabView!
                         
                         if i < self.tabs.count{
-                            tabView = self.tabs[i] as! SOCategoryTabView
+                            tabView = self.tabs[i] as! TaskCategoryTabView
                         } else {
                             let xibItems: NSArray = NSBundle.mainBundle().loadNibNamed(self.tabViewXibName, owner: nil, options: nil)
-                            tabView = xibItems[0] as! SOCategoryTabView
+                            tabView = xibItems[0] as! TaskCategoryTabView
                             tabView.autoresizingMask = UIViewAutoresizing.FlexibleHeight;
                             tabView.filterStateDelegate = self.filterStateDelegate
                             self.tabs.append(tabView)

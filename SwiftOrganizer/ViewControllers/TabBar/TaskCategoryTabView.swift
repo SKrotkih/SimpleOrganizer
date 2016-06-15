@@ -1,5 +1,5 @@
 //
-//  SOCategoryTabView.swift
+//  TaskCategoryTabView.swift
 //  SwiftOrganizer
 //
 //  Created by Sergey Krotkih on 5/31/15.
@@ -8,15 +8,15 @@
 
 import UIKit
 
-class SOCategoryTabView: UIView {
+class TaskCategoryTabView: UIView {
     @IBOutlet weak var tabBackgroundView: UIView!
     @IBOutlet weak var button: UIButton!
     
     var filterStateDelegate: SOChangeFilterStateDelegate?
     var _selected: Bool = false
-    var _category: SOCategory?
+    var _category: TaskCategory?
     
-    var category: SOCategory? {
+    var category: TaskCategory? {
         get{
             return _category
         }

@@ -9,13 +9,13 @@
 import UIKit
 
 protocol SORemoveTaskDelegate{
-    func removeTask(task: SOTask!)
+    func removeTask(task: Task!)
 }
 
 class SOMainTableViewCell: UITableViewCell {
 
     var removeTaskDelegate: SORemoveTaskDelegate?
-    var task: SOTask?
+    var task: Task?
     
     @IBOutlet weak var swipeGestureView: UIView!
     
@@ -70,7 +70,7 @@ class SOMainTableViewCell: UITableViewCell {
     
     //- MARK: Fill DATA
     
-    func fillTaskData(task: SOTask){
+    func fillTaskData(task: Task){
         self.task = task
         self.titleTextLabel!.text = task.title
         self.categoryNameLabel!.text = task.categoryName

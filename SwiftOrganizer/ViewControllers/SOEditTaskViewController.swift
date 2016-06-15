@@ -49,13 +49,13 @@ public protocol SOEditTaskUndoDelegateProtocol{
 class SOEditTaskViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
 
-    private var _task: SOTask
-    private var _orgTask: SOTask?
+    private var _task: Task
+    private var _orgTask: Task?
     private var isItNewTask: Bool
     private var _cells = [SOEditTaskCell](count: SOEditTaskCellId.Undefined.rawValue, repeatedValue: SOEditTaskCell())
     private let _undoManager = NSUndoManager()
 
-    var task: SOTask?{
+    var task: Task?{
         get{
             return _task
         }
@@ -72,7 +72,7 @@ class SOEditTaskViewController: UIViewController {
     }
     
     required init?(coder aDecoder: NSCoder) {
-        _task = SOTask()
+        _task = Task()
         isItNewTask = true
         
         super.init(coder: aDecoder)
@@ -126,7 +126,7 @@ class SOEditTaskViewController: UIViewController {
         if let orgTask = self._orgTask{
             return !orgTask.isEqual(self.task)
         } else if isItNewTask {
-            let puretask = SOTask()
+            let puretask = Task()
             puretask.clearTask()
             return !puretask.isEqual(self.task)
         }
@@ -144,7 +144,7 @@ class SOEditTaskViewController: UIViewController {
                 orgTask.cloneTask(self.task!)
             } else if self.isItNewTask{
                 self.isItNewTask = false
-                self._orgTask = SOTask()
+                self._orgTask = Task()
                 self._orgTask!.cloneTask(self.task!)
             }
         }

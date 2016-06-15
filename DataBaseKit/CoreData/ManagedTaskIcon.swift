@@ -9,8 +9,8 @@
 import Foundation
 import CoreData
 
-@objc(TaskIcon)
-class TaskIcon: NSManagedObject {
+@objc(ManagedTaskIcon)
+class ManagedTaskIcon: NSManagedObject {
 
 // Insert code here to add functionality to your managed object subclass
 

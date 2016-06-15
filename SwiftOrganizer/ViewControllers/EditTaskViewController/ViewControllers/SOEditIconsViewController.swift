@@ -12,7 +12,7 @@ class SOEditIconsViewController: SOEditTaskFieldBaseViewController {
     
     @IBOutlet weak var tableView: UITableView!
 
-    private var icons = [SOIco]()
+    private var icons = [TaskIco]()
     private var taskIcons = [String]()
     
     override func viewDidLoad() {
@@ -105,12 +105,12 @@ class SOEditIconsViewController: SOEditTaskFieldBaseViewController {
 extension SOEditIconsViewController{
 
     private func fetchData(completeBlock: ()-> Void ){
-        SOFetchingData.sharedInstance.allIcons{(icons: [SOIco], fetchError: NSError?) in
+        SOFetchingData.sharedInstance.allIcons{(icons: [TaskIco], fetchError: NSError?) in
             if let error = fetchError{
                 self.icons.removeAll(keepCapacity: false)
                 showAlertWithTitle("Failed to fetch data".localized, message: error.description)
             } else {
-                self.icons = icons.filter {(ico: SOIco) in ico.visible }
+                self.icons = icons.filter {(ico: TaskIco) in ico.visible }
             }
             completeBlock()
         }
@@ -163,7 +163,7 @@ extension SOEditIconsViewController: UITableViewDataSource{
         let row = indexPath.row
         let cell = self.tableView.dequeueReusableCellWithIdentifier(selectIconsCell) as! SOSelectIconsCell
         
-        let ico: SOIco = icons[row]
+        let ico: TaskIco = icons[row]
         let icoId: String = ico.recordid;
         let icoImageName: String = ico.imageName
         cell.icoImageView.image = UIImage(named: icoImageName)
@@ -190,7 +190,7 @@ extension SOEditIconsViewController: UITableViewDelegate {
 
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let row = indexPath.row
-        let ico: SOIco = icons[row]
+        let ico: TaskIco = icons[row]
         
         let icoId: String = ico.recordid
         var needAdd: Bool = true

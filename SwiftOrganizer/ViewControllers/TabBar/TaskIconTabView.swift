@@ -1,5 +1,5 @@
 //
-//  SOIconTabView.swift
+//  TaskIconTabView.swift
 //  SwiftOrganizer
 //
 //  Created by Sergey Krotkih on 5/31/15.
@@ -8,14 +8,14 @@
 
 import UIKit
 
-class SOIconTabView: UIView {
+class TaskIconTabView: UIView {
     @IBOutlet weak var button: UIButton!
 
     var filterStateDelegate: SOChangeFilterStateDelegate?
     var _selected: Bool = false
-    var _ico: SOIco?
+    var _ico: TaskIco?
     
-    var ico: SOIco? {
+    var ico: TaskIco? {
         get{
             return _ico
         }

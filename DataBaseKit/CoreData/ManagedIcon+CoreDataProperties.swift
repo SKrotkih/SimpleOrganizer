@@ -12,13 +12,13 @@
 import Foundation
 import CoreData
 
-extension Icon {
+extension ManagedIcon {
 
     @NSManaged var imagename: String?
     @NSManaged var name: String?
     @NSManaged var recordid: String?
     @NSManaged var selected: NSNumber?
     @NSManaged var visible: NSNumber?
-    @NSManaged var taskicon: TaskIcon?
+    @NSManaged var taskicon: ManagedTaskIcon?
 
 }

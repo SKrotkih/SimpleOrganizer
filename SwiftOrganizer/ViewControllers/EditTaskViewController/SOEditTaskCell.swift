@@ -10,9 +10,9 @@ import UIKit
 
 class SOEditTaskCell: UITableViewCell {
     
-    private var _task: SOTask!
+    private var _task: Task!
     
-    var task: SOTask{
+    var task: Task{
         get{
             return _task
         }

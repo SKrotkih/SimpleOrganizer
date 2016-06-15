@@ -1,5 +1,5 @@
 //
-//  SOTaskMenuItemActivity.swift
+//  TaskMenuItemActivity.swift
 //  SwiftOrganizer
 //
 //  Created by Sergey Krotkih on 5/28/15.
@@ -10,7 +10,7 @@ import UIKit
 
 typealias SOClosureForActivityType = () -> Void
 
-class SOTaskMenuItemActivity: UIActivity {
+class TaskMenuItemActivity: UIActivity {
     
     var performBlock: SOClosureForActivityType?
     var name: String?

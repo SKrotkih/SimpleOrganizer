@@ -18,7 +18,7 @@ class SOEditTaskIconsCell: SOEditTaskCell {
     @IBOutlet weak var ico5ImageView: UIImageView!
     @IBOutlet weak var ico6ImageView: UIImageView!
     
-    override var task: SOTask{
+    override var task: Task{
         get{
             return super.task
         }

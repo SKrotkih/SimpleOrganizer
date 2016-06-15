@@ -24,7 +24,7 @@ protocol SOCoreDataProtocol{
 
 public class SOCoreDataBase: SOCoreDataProtocol {
     let databaseName: String
-    var options: Dictionary<String, AnyObject>? = nil
+    var options: Dictionary<String, AnyObject>?
     var isiCloudEnabled: Bool
     
     required public init(dataBaseName: String, options: Dictionary<String, AnyObject>?, iCloudEnabled: Bool){

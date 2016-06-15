@@ -38,7 +38,7 @@ class SOPreferenceIconsViewController: UIViewController {
     }
     
     func didSelectRow(aRow: Int){
-        let ico: SOIco = self.buffer[aRow] as! SOIco
+        let ico: TaskIco = self.buffer[aRow] as! TaskIco
         let visible: Bool = !ico.visible
         ico.setVisible(visible, completionBlock: {(error: NSError?) in
             if let theError = error{
@@ -63,7 +63,7 @@ class SOPreferenceIconsViewController: UIViewController {
 
 extension SOPreferenceIconsViewController{
     private func fetchData(completeBlock: ()-> Void ){
-        SOFetchingData.sharedInstance.allIcons{(icons: [SOIco], fetchError: NSError?) in
+        SOFetchingData.sharedInstance.allIcons{(icons: [TaskIco], fetchError: NSError?) in
             if let error = fetchError{
                 self.buffer.removeAll(keepCapacity: false)
                 showAlertWithTitle("Failed to fetch data".localized, message: error.description)
@@ -90,7 +90,7 @@ extension SOPreferenceIconsViewController: UITableViewDelegate, UITableViewDataS
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("IconsCell") as! SOPreferencesSelectIconsCell
         tableView.deselectRowAtIndexPath(indexPath, animated: false)
-        let ico: SOIco = self.buffer[indexPath.row] as! SOIco
+        let ico: TaskIco = self.buffer[indexPath.row] as! TaskIco
 
         let icoImageName = ico.imageName;
         cell.icoImageView.image = UIImage(named: icoImageName)

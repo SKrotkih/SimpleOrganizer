@@ -10,7 +10,7 @@ import UIKit
 
 class SOEditCategoryViewController: SOEditTaskFieldBaseViewController {
 
-    private var categories: [SOCategory] = [SOCategory]()
+    private var categories: [TaskCategory] = [TaskCategory]()
     
     @IBOutlet weak var tableView: UITableView!
     
@@ -44,11 +44,11 @@ class SOEditCategoryViewController: SOEditTaskFieldBaseViewController {
 
 extension SOEditCategoryViewController{
     private func fetchData(completionBlock: ()-> Void){
-        SOFetchingData.sharedInstance.allCategories{(categories: [SOCategory], fetchError: NSError?) in
+        SOFetchingData.sharedInstance.allCategories{(categories: [TaskCategory], fetchError: NSError?) in
             if let error = fetchError{
                 showAlertWithTitle("Failed to fetch data".localized, message: error.description)
             } else {
-                self.categories = categories.filter {(category: SOCategory) in category.visible }
+                self.categories = categories.filter {(category: TaskCategory) in category.visible }
                 completionBlock()
             }
         }

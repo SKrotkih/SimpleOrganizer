@@ -12,7 +12,7 @@ class SOEditTaskCategoryCell: SOEditTaskCell {
 
     @IBOutlet weak var categoryNameLabel: UILabel!
 
-    override var task: SOTask{
+    override var task: Task{
         get{
             return super.task
         }

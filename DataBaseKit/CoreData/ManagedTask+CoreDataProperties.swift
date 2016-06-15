@@ -1,5 +1,5 @@
 //
-//  Category+CoreDataProperties.swift
+//  Task+CoreDataProperties.swift
 //  SwiftOrganizer
 //
 //  Created by Sergey Krotkih on 10/16/15.
@@ -12,12 +12,12 @@
 import Foundation
 import CoreData
 
-extension Category {
+extension ManagedTask {
 
-    @NSManaged var name: String?
-    @NSManaged var recordid: String?
-    @NSManaged var selected: NSNumber?
-    @NSManaged var visible: NSNumber?
-    @NSManaged var task: Task    
+    @NSManaged var date: NSDate?
+    @NSManaged var title: String?
+    @NSManaged var userid: String?
+    @NSManaged var icons: NSSet?
+    @NSManaged var category: ManagedCategory?
 
 }

@@ -12,12 +12,12 @@ public protocol SODataBaseProtocol{
 
     func chainResponsibility(dataBaseIndex: DataBaseIndex) -> SODataBaseProtocol
     
-    func allCategories(completionBlock: (resultBuffer: [SOCategory], error: NSError?) -> Void)
-    func allIcons(completionBlock: (resultBuffer: [SOIco], error: NSError?) -> Void)
-    func allTasks(completionBlock: (resultBuffer: [SOTask], error: NSError?) -> Void)
+    func allCategories(completionBlock: (resultBuffer: [TaskCategory], error: NSError?) -> Void)
+    func allIcons(completionBlock: (resultBuffer: [TaskIco], error: NSError?) -> Void)
+    func allTasks(completionBlock: (resultBuffer: [Task], error: NSError?) -> Void)
 
-    func saveTask(task: SOTask, completionBlock: (error: NSError?) -> Void)
-    func removeTask(task: SOTask)
+    func saveTask(task: Task, completionBlock: (error: NSError?) -> Void)
+    func removeTask(task: Task)
 
     func saveFieldValueToObject(dataBaseObject: AnyObject?, entityName: String, fldName: String, recordId: String?, value: AnyObject, completionBlock: (error: NSError?) -> Void)
     
@@ -25,7 +25,7 @@ public protocol SODataBaseProtocol{
     
     func areObjectsEqual(object1: AnyObject?, object2: AnyObject?) -> Bool
     
-    func getRecordIdForTask(task: SOTask?) -> String?
+    func getRecordIdForTask(task: Task?) -> String?
     
     func getObjectForRecordId(recordid: String, entityName: String) -> AnyObject?
 }

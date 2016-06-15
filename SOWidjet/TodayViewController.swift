@@ -14,7 +14,7 @@ import DataBaseKit
 
 class TodayViewController: UIViewController, NCWidgetProviding {
     /* List of items that we want to display in our table view */
-    private var tasks = [SOTask]()
+    private var tasks = [Task]()
 
     /* The same identifier is saved in our storyboard for the prototype
     cells for this table view controller */
@@ -55,7 +55,7 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     }
     
     func performFetch() -> NCUpdateResult {
-        SOFetchingData.sharedInstance.allTasks{(allCurrentTasks: [SOTask], fetchError: NSError?) in
+        SOFetchingData.sharedInstance.allTasks{(allCurrentTasks: [Task], fetchError: NSError?) in
             if let error = fetchError{
                 print("Error reading tasks data \(error.description)")
                 self.tasks.removeAll(keepCapacity: true)
@@ -91,7 +91,7 @@ extension TodayViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(TableViewConstants.cellIdentifier, forIndexPath: indexPath) as! SOWidgetTableViewCell
         let row = indexPath.row
-        let task: SOTask = self.tasks[row]
+        let task: Task = self.tasks[row]
         let categoryName = task.categoryName
         let taskDescription = task.title
         cell.categoryLabel!.text = categoryName
@@ -110,7 +110,7 @@ extension TodayViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let row = indexPath.row
-        let task: SOTask = self.tasks[row]
+        let task: Task = self.tasks[row]
         
         if let taskId = task.taskId{
             let urlAsString = "\(Defaults.WidgetUrlScheme)://\(Defaults.KeyInURLAsTaskId)\(taskId)"
