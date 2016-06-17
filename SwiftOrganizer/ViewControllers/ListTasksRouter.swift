@@ -1,5 +1,5 @@
 //
-//  MainRouter.swift
+//  ListTasksRouter.swift
 //  SwiftOrganizer
 //
 //  Created by Sergey Krotkih on 6/17/16.
@@ -11,14 +11,14 @@
 
 import UIKit
 
-protocol MainRouterInput
+protocol ListTasksRouterInput
 {
   func navigateToSomewhere()
 }
 
-class MainRouter: MainRouterInput
+class ListTasksRouter: ListTasksRouterInput
 {
-  weak var viewController: MainViewController!
+  weak var viewController: ListTasksViewController!
   
   // MARK: Navigation
   

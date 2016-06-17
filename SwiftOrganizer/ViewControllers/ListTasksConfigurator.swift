@@ -1,5 +1,5 @@
 //
-//  MainConfigurator.swift
+//  ListTasksConfigurator.swift
 //  SwiftOrganizer
 //
 //  Created by Sergey Krotkih on 6/17/16.
@@ -13,23 +13,23 @@ import UIKit
 
 // MARK: Connect View, Interactor, and Presenter
 
-extension MainPresenter: MainInteractorOutput
+extension ListTasksPresenter: ListTasksInteractorOutput
 {
 }
 
-class MainConfigurator
+class ListTasksConfigurator
 {
   // MARK: Object lifecycle
   
-  class var sharedInstance: MainConfigurator
+  class var sharedInstance: ListTasksConfigurator
   {
     struct Static {
-      static var instance: MainConfigurator?
+      static var instance: ListTasksConfigurator?
       static var token: dispatch_once_t = 0
     }
     
     dispatch_once(&Static.token) {
-      Static.instance = MainConfigurator()
+      Static.instance = ListTasksConfigurator()
     }
     
     return Static.instance!
@@ -37,15 +37,15 @@ class MainConfigurator
   
   // MARK: Configuration
   
-  func configure(viewController: MainViewController)
+  func configure(viewController: ListTasksViewController)
   {
-    let router = MainRouter()
+    let router = ListTasksRouter()
     router.viewController = viewController
     
-    let presenter = MainPresenter()
+    let presenter = ListTasksPresenter()
     presenter.output = viewController
     
-    let interactor = MainInteractor()
+    let interactor = ListTasksInteractor()
     interactor.output = presenter
     interactor.viewController = viewController
     

@@ -543,7 +543,7 @@ class SlideMenuController: UIViewController, UIGestureRecognizerDelegate {
         return rightContainerView.frame.origin.x >= CGRectGetWidth(view.bounds)
     }
     
-    func changeMainViewController(mainViewController: UIViewController,  close: Bool) {
+    func changeListTasksViewController(mainViewController: UIViewController,  close: Bool) {
         
         removeViewController(mainViewController)
         self.mainViewController = mainViewController

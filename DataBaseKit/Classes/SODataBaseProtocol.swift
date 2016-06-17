@@ -17,7 +17,7 @@ public protocol SODataBaseProtocol{
     func allTasks(completionBlock: (resultBuffer: [Task], error: NSError?) -> Void)
 
     func saveTask(task: Task, completionBlock: (error: NSError?) -> Void)
-    func removeTask(task: Task)
+    func removeTask(taskID: AnyObject)
 
     func saveFieldValueToObject(dataBaseObject: AnyObject?, entityName: String, fldName: String, recordId: String?, value: AnyObject, completionBlock: (error: NSError?) -> Void)
     

@@ -336,20 +336,16 @@ extension SOLocalDataBase{
             categoryId = category.recordid!
         }
         let date = managedTask.date
-        var _icons = [String](count: MaxIconsCount, repeatedValue: "")
+        var _icons: [String] = []
 
         if let icons = managedTask.icons{
             let arr = icons.allObjects
-            var i: Int = 0
             
             for anyObject: AnyObject in arr {
                 let managedTaskIcon = anyObject as! ManagedTaskIcon
                 let ico = managedTaskIcon.icon
                 if let recordid = ico.recordid{
-                    i += 1
-                    if i < MaxIconsCount{
-                        _icons[i] = recordid
-                    }
+                    _icons.append(recordid)
                 }
             }
         }
@@ -515,11 +511,19 @@ extension SOLocalDataBase{
 
 extension SOLocalDataBase{
     
-    public func removeTask(task: Task){
+    public func removeTask(taskID: AnyObject){
         dispatch_barrier_sync(self.queue, { () in
-            let managedTask: ManagedTask? = task.databaseObject as? ManagedTask
-            self.coreData.deleteObject(managedTask)
-            self.coreData.saveContext()
+            let managedObjectID: NSManagedObjectID = taskID as! NSManagedObjectID
+            do {
+                let managedTask: NSManagedObject = try self.coreData.managedObjectContext!.existingObjectWithID(managedObjectID)
+                    self.coreData.deleteObject(managedTask)
+                    self.coreData.saveContext()
+            } catch{
+                var dict = [String: AnyObject]()
+                dict[NSLocalizedDescriptionKey] = "Can't delete object!".localized
+                let error: NSError? = NSError(domain: DataBaseErrorDomain, code: 9998, userInfo: dict)
+                print(error?.localizedDescription)
+            }
         })
     }
     

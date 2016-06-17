@@ -8,15 +8,13 @@
 
 import UIKit
 
-let MaxIconsCount = 6
-
 public class Task: NSObject{
 
     public var databaseObject: AnyObject?
     public var userid: String = ""
     public var title: String = ""
     public var category: String = ""
-    public var icons: [String] = [String](count: MaxIconsCount, repeatedValue: "")
+    public var icons: [String] = []
     public var date: NSDate?
 
     convenience init(object: AnyObject?, userid: String?, title: String, category: String, date: NSDate?, icons: [String]) {
@@ -30,16 +28,10 @@ public class Task: NSObject{
         self.title = title
         self.category = category
         self.date = date
-        self.icons[0] = icons[0]
-        self.icons[1] = icons[1]
-        self.icons[2] = icons[2]
-        self.icons[3] = icons[3]
-        self.icons[4] = icons[4]
-        self.icons[5] = icons[5]
-    }
-    
-    public var maxIconsCount: Int{
-        return MaxIconsCount;
+        
+        for icon: String in icons {
+            self.icons.append(icon)
+        }
     }
     
     public var categoryName: String{
@@ -64,10 +56,6 @@ extension Task{
         SODataBaseFactory.sharedInstance.dataBase.saveTask(self, completionBlock: {(error: NSError?) in
             completionBlock(error: error)
         })
-    }
-    
-    public func remove(){
-        SODataBaseFactory.sharedInstance.dataBase.removeTask(self)
     }
     
     func update(){
@@ -103,7 +91,7 @@ extension Task{
         self.userid = ""
         self.title = ""
         self.category = ""
-        self.icons = [String](count: MaxIconsCount, repeatedValue: "")
+        self.icons = []
         self.date = nil
     }
     

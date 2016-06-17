@@ -122,21 +122,21 @@ extension MainMenuViewController: LeftMenuProtocol {
     func changeViewController(menu: LeftMenu) {
         switch menu {
         case .LogIn:
-            self.slideMenuController()?.changeMainViewController(self.logInInfoViewController, close: true)
+            self.slideMenuController()?.changeListTasksViewController(self.logInInfoViewController, close: true)
         case .Main:
-            self.slideMenuController()?.changeMainViewController(self.mainViewController, close: true)
+            self.slideMenuController()?.changeListTasksViewController(self.mainViewController, close: true)
         case .Preferences:
-            self.slideMenuController()?.changeMainViewController(self.preferencesViewController, close: true)
+            self.slideMenuController()?.changeListTasksViewController(self.preferencesViewController, close: true)
         case .Documents:
-            self.slideMenuController()?.changeMainViewController(self.documentsViewController, close: true)
+            self.slideMenuController()?.changeListTasksViewController(self.documentsViewController, close: true)
         case .DocumentPicker:
-            self.slideMenuController()?.changeMainViewController(self.documentPickerViewController, close: true)
+            self.slideMenuController()?.changeListTasksViewController(self.documentPickerViewController, close: true)
         case .FaceTimeCall:
-            self.slideMenuController()?.changeMainViewController(self.phoneCallViaFaceTimeViewController, close: true)
+            self.slideMenuController()?.changeListTasksViewController(self.phoneCallViaFaceTimeViewController, close: true)
         case .Settings:
-            self.slideMenuController()?.changeMainViewController(self.settingsViewController, close: true)
+            self.slideMenuController()?.changeListTasksViewController(self.settingsViewController, close: true)
         case .About:
-            self.slideMenuController()?.changeMainViewController(self.aboutViewController, close: true)
+            self.slideMenuController()?.changeListTasksViewController(self.aboutViewController, close: true)
         }
     }
 }

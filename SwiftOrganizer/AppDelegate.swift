@@ -15,7 +15,7 @@ import Crashlytics
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-    var mainViewController: MainViewController!
+    var mainViewController: ListTasksViewController!
 
     // MARK: -
     // MARK: didFinishLaunching
@@ -113,7 +113,7 @@ extension AppDelegate{
         
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         
-        mainViewController = storyboard.instantiateViewControllerWithIdentifier("MainViewController") as! MainViewController
+        mainViewController = storyboard.instantiateViewControllerWithIdentifier("ListTasksViewController") as! ListTasksViewController
         let leftViewController = storyboard.instantiateViewControllerWithIdentifier("MainMenuViewController") as! MainMenuViewController
         let rightViewController = storyboard.instantiateViewControllerWithIdentifier("RightViewController") as! RightViewController
         

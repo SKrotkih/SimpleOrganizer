@@ -1,5 +1,5 @@
 //
-//  SOMainTableViewCell.swift
+//  ListTasksTableViewCell.swift
 //  SwiftOrganizer
 //
 //  Created by Sergey Krotkih on 5/28/15.
@@ -9,13 +9,13 @@
 import UIKit
 
 protocol SORemoveTaskDelegate{
-    func removeTask(task: Task!)
+    func removeTask(taskID: AnyObject!)
 }
 
-class SOMainTableViewCell: UITableViewCell {
+class ListTasksTableViewCell: UITableViewCell {
 
     var removeTaskDelegate: SORemoveTaskDelegate?
-    var task: Task?
+    var task: ListTasks.FetchTasks.ViewModel.DisplayedTask!
     
     @IBOutlet weak var swipeGestureView: UIView!
     
@@ -45,7 +45,7 @@ class SOMainTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
 
-        let horizontal = UISwipeGestureRecognizer(target: self, action: #selector(SOMainTableViewCell.leftSwipeGesture(_:)))
+        let horizontal = UISwipeGestureRecognizer(target: self, action: #selector(ListTasksTableViewCell.leftSwipeGesture(_:)))
         horizontal.direction = .Left
         horizontal.numberOfTouchesRequired = 1
         
@@ -58,7 +58,7 @@ class SOMainTableViewCell: UITableViewCell {
     
     func removeTask(){
         if let removeDelegate = removeTaskDelegate{
-            removeDelegate.removeTask(self.task)
+            removeDelegate.removeTask(self.task.objectID)
         }
     }
     
@@ -70,23 +70,21 @@ class SOMainTableViewCell: UITableViewCell {
     
     //- MARK: Fill DATA
     
-    func fillTaskData(task: Task){
+    func fillTaskData(task: ListTasks.FetchTasks.ViewModel.DisplayedTask){
         self.task = task
         self.titleTextLabel!.text = task.title
         self.categoryNameLabel!.text = task.categoryName
         let imegeViews = [self.icon1ImageView, self.icon2ImageView, self.icon3ImageView, self.icon4ImageView, self.icon5ImageView, self.icon6ImageView]
-
         for i in 0..<imegeViews.count{
             let imageView = imegeViews[i]
-            imageView.image = task.iconImage(i)
+            if i < task.icons.count {
+                if let image: UIImage = task.icons[i]{
+                    imageView.image = image
+                }
+            } else {
+                imageView.image = nil
+            }
         }
-        
-        if let dateEvent = task.date{
-            let dateFormatter = NSDateFormatter()
-            dateFormatter.dateFormat = "dd-MM-yyyy HH:mm:ss"
-            self.dateTextLabel.text = dateFormatter.stringFromDate(dateEvent)
-        } else{
-            self.dateTextLabel.text = ""
-        }
+        self.dateTextLabel.text = task.date
     }
 }

@@ -188,7 +188,7 @@ extension SORemoteDataBase{
             let title = object[kTaskFldTitle] as! String
             let category = object[kTaskFldCategory] as! String
             let date = object[kTaskFldDate] as! NSDate?
-            var icons: [String] = [String](count: MaxIconsCount, repeatedValue: "")
+            var icons: [String] = []
             icons[0] = object[kTaskFldIco1] as! String
             icons[1] = object[kTaskFldIco2] as! String
             icons[2] = object[kTaskFldIco3] as! String
@@ -269,9 +269,9 @@ extension SORemoteDataBase{
 
 extension SORemoteDataBase{
     
-    public func removeTask(task: Task){
+    public func removeTask(taskID: AnyObject){
         dispatch_barrier_sync(self.queue, {[weak self] in
-            if let taskObject: PFObject = task.databaseObject as? PFObject{
+            if let taskObject: PFObject = taskID as? PFObject{
                 self!.deleteObject(taskObject)
             }
             })

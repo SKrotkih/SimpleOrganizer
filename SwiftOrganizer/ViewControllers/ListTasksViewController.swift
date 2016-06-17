@@ -1,5 +1,5 @@
 //
-//  MainViewController.swift
+//  ListTasksViewController.swift
 //  SwiftOrganizer
 //
 //  Created by Sergey Krotkih on 5/28/15.
@@ -24,7 +24,7 @@ let HeaderTableViewCellIdentifier: String = "HeaderTableViewCell"
 let HeightOfTableRow: CGFloat = 47.0
 let HeightOfTableHeader: CGFloat = 28.0
 
-class MainViewController: UIViewController{
+class ListTasksViewController: UIViewController{
 
     @IBOutlet weak var tableView: UITableView!
     
@@ -39,20 +39,20 @@ class MainViewController: UIViewController{
 
     var rightButton: UIBarButtonItem!
     
-    var router: MainRouter!
-    var output: MainInteractor!
+    var router: ListTasksRouter!
+    var output: ListTasksInteractor!
 
     private var _editTaskViewController: SOEditTaskViewController?
     
     var allTimes = [NSDate]()
     private var refreshControl: UIRefreshControl?
     
-    var tasks : [Task] = []
+    var tasks : [ListTasks.FetchTasks.ViewModel.DisplayedTask] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        MainConfigurator.sharedInstance.configure(self)
+        ListTasksConfigurator.sharedInstance.configure(self)
         
         allTimes.append(NSDate())
         
@@ -67,7 +67,7 @@ class MainViewController: UIViewController{
         
         /* Create the refresh control */
         refreshControl = UIRefreshControl()
-        refreshControl!.addTarget(self, action: #selector(MainViewController.handleRefresh(_:)), forControlEvents: .ValueChanged)
+        refreshControl!.addTarget(self, action: #selector(ListTasksViewController.handleRefresh(_:)), forControlEvents: .ValueChanged)
         tableView.addSubview(refreshControl!)
         
         self.titleActualize()
@@ -80,7 +80,7 @@ class MainViewController: UIViewController{
         
         // Google Analitics Tracker
         let tracker = GAI.sharedInstance().defaultTracker
-        tracker.set(kGAIScreenName, value: "MainViewController")
+        tracker.set(kGAIScreenName, value: "ListTasksViewController")
         
         let builder = GAIDictionaryBuilder.createScreenView()
         tracker.send(builder.build() as [NSObject : AnyObject])
@@ -91,12 +91,12 @@ class MainViewController: UIViewController{
         self.slideMenuController()?.removeRightGestures()
 
         let addTaskImage : UIImage! = UIImage(named: "add_task")
-        let addTaskButton: UIBarButtonItem = UIBarButtonItem(image: addTaskImage, style: UIBarButtonItemStyle.Plain, target: self, action: #selector(MainViewController.addNewTask))
+        let addTaskButton: UIBarButtonItem = UIBarButtonItem(image: addTaskImage, style: UIBarButtonItemStyle.Plain, target: self, action: #selector(ListTasksViewController.addNewTask))
         let activityImage : UIImage! = UIImage(named: "activity")
-        let activityButton: UIBarButtonItem = UIBarButtonItem(image: activityImage, style: UIBarButtonItemStyle.Plain, target: self, action: #selector(MainViewController.startActivityViewController))
+        let activityButton: UIBarButtonItem = UIBarButtonItem(image: activityImage, style: UIBarButtonItemStyle.Plain, target: self, action: #selector(ListTasksViewController.startActivityViewController))
         navigationItem.rightBarButtonItems = [addTaskButton, activityButton]
         
-        //rightButton = UIBarButtonItem(title: "Activity".localized, style: UIBarButtonItemStyle.Plain, target: self, action: "startActivityViewController")
+        rightButton = UIBarButtonItem(title: "Activity".localized, style: UIBarButtonItemStyle.Plain, target: self, action: #selector(ListTasksViewController.startActivityViewController))
         //navigationItem.rightBarButtonItem = addTaskButton;
         
         self.reloadData({(error: NSError?) in })
@@ -208,16 +208,16 @@ class MainViewController: UIViewController{
     }
 }
 
-// MARK: MainPresenterOutput
+// MARK: ListTasksPresenterOutput
 
-extension MainViewController: MainPresenterOutput {
+extension ListTasksViewController: ListTasksPresenterOutput {
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?)
     {
         router.passDataToNextScene(segue)
     }
     
-    func displayTasks(tasks: [Task]){
-        self.tasks = tasks
+    func displayFetchedTasks(viewModel: ListTasks.FetchTasks.ViewModel){
+        self.tasks = viewModel.displayedTasks
         dispatch_async(dispatch_get_main_queue(), {
             self.tableView.reloadData()
             self.titleActualize()
@@ -228,7 +228,7 @@ extension MainViewController: MainPresenterOutput {
 
 // MARK: SOChangeFilterStateDelegate
 
-extension MainViewController: SOChangeFilterStateDelegate{
+extension ListTasksViewController: SOChangeFilterStateDelegate{
     func didSelectCategory(category: TaskCategory, select: Bool, completionBlock: (error: NSError?) -> Void){
         self.output.selectCategory(category, select: select, completionBlock: { (error: NSError?) in
             completionBlock(error: error)
@@ -244,15 +244,15 @@ extension MainViewController: SOChangeFilterStateDelegate{
 
 // MARK: SORemoveTaskDelegate
 
-extension MainViewController: SORemoveTaskDelegate{
-    func removeTask(task: Task!){
+extension ListTasksViewController: SORemoveTaskDelegate{
+    func removeTask(taskID: AnyObject!){
         self.editTaskList()
     }
 }
 
     // MARK: Start editing task
 
-extension MainViewController: SOEditTaskController{
+extension ListTasksViewController: SOEditTaskController{
     func startEditingTask(task: Task?){
         self.editTaskViewController.task = task
         self.navigationController!.pushViewController(self.editTaskViewController, animated: true)
@@ -266,7 +266,7 @@ extension MainViewController: SOEditTaskController{
 
     // MARK: SOObserverNotificationTypes Observer notifications handler
 
-extension MainViewController: SOObserverProtocol{
+extension ListTasksViewController: SOObserverProtocol{
     func notify(notification: SOObserverNotification){
         switch notification.type{
         case .SODataBaseTypeChanged, .SODataBaseDidChanged:
@@ -279,26 +279,25 @@ extension MainViewController: SOObserverProtocol{
 
 // MARK: UITableViewDataSource
 
-extension MainViewController: UITableViewDataSource {
+extension ListTasksViewController: UITableViewDataSource {
     
     @objc func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.tasks.count
     }
     
     @objc func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = self.tableView.dequeueReusableCellWithIdentifier(TableViewCellIdentifier) as! SOMainTableViewCell
+        let cell = self.tableView.dequeueReusableCellWithIdentifier(TableViewCellIdentifier) as! ListTasksTableViewCell
         let row = indexPath.row
-        let currentTask : Task = self.tasks[row]
+        let currentTask : ListTasks.FetchTasks.ViewModel.DisplayedTask = self.tasks[row]
         cell.fillTaskData(currentTask)
         cell.removeTaskDelegate = self
-        
         return cell
     }
 }
 
 // MARK: UITableViewDelegate
 
-extension MainViewController: UITableViewDelegate {
+extension ListTasksViewController: UITableViewDelegate {
     
     func tableView(tableView: UITableView, indentationLevelForRowAtIndexPath indexPath: NSIndexPath) -> Int {
         return indexPath.row % 4
@@ -320,8 +319,8 @@ extension MainViewController: UITableViewDelegate {
         if editingStyle == .Delete{
             self.tableView.beginUpdates()
             let row = indexPath.row
-            let currentTask : Task = self.tasks[row]
-            currentTask.remove()
+            let task: ListTasks.FetchTasks.ViewModel.DisplayedTask = self.tasks[row]
+            self.output.removeTask(task)
             self.tasks.removeAtIndex(row)
             self.tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Automatic)
             self.tableView.endUpdates()
@@ -336,8 +335,8 @@ extension MainViewController: UITableViewDelegate {
     // After the row is selected
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let row = indexPath.row
-        let currentTask : Task = self.tasks[row]
-        self.startEditingTask(currentTask)
+        let currentTask : ListTasks.FetchTasks.ViewModel.DisplayedTask = self.tasks[row]
+        //self.startEditingTask(currentTask)
     }
     
     // Customizing the row height
@@ -363,7 +362,7 @@ extension MainViewController: UITableViewDelegate {
 
 // MARK: Alert View Controller
 
-extension MainViewController{
+extension ListTasksViewController{
     func showAlertWithTitle(title: String, message: String, addActions: ((controller: UIAlertController) -> Void)?, completionBlock: (() -> Void)?){
         let controller = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.Alert)
         if addActions != nil {
@@ -377,7 +376,7 @@ extension MainViewController{
 
 // MARK: Configure Google Analytics
 
-extension MainViewController{
+extension ListTasksViewController{
     
     func googleAnaliticsConfigure() {
         // Configure tracker from GoogleService-Info.plist.

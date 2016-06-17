@@ -1,5 +1,5 @@
 //
-//  MainInteractor.swift
+//  ListTasksInteractor.swift
 //  SwiftOrganizer
 //
 //  Created by Sergey Krotkih on 6/17/16.
@@ -11,32 +11,36 @@
 
 import UIKit
 
-protocol MainInteractorInput
+protocol ListTasksInteractorInput
 {
     func fetchTasks()
     func selectCategory(category: TaskCategory, select: Bool, completionBlock: (error: NSError?) -> Void)
     func selectIcon(icon: TaskIco, select: Bool, completionBlock: (error: NSError?) -> Void)
+    func removeTask(task: ListTasks.FetchTasks.ViewModel.DisplayedTask)
 }
 
-protocol MainInteractorOutput
+protocol ListTasksInteractorOutput
 {
-    func presentTasks(tasks: [Task])
+    func presentFetchedTasks(response: ListTasks.FetchTasks.Response)
 }
 
-class MainInteractor: MainInteractorInput
+class ListTasksInteractor: ListTasksInteractorInput
 {
-    var output: MainInteractorOutput!
-    var worker: MainWorker!
+    var output: ListTasksInteractorOutput!
+    var tasksWorker: ListTasksWorker!
     var viewController: UIViewController?
+    var tasks: [Task]?
     
     func fetchTasks(){
-        SOFetchingData.sharedInstance.allTasks{[weak self](allCurrentTasks: [Task], fetchError: NSError?) in
+        SOFetchingData.sharedInstance.allTasks{[weak self](tasks: [Task], fetchError: NSError?) in
             if let error = fetchError{
                 self?.showAlertWithTitle("Failed to fetch data!".localized, message: error.localizedDescription, addActions: nil, completionBlock: {
                 })
             } else {
-                self?.output.presentTasks(allCurrentTasks)
-                self?.addTasksToReminder(allCurrentTasks)
+                self?.tasks = tasks
+                let response = ListTasks.FetchTasks.Response(tasks: tasks)
+                self?.output.presentFetchedTasks(response)
+                self?.addTasksToReminder(tasks)
             }
         }
     }
@@ -95,10 +99,15 @@ class MainInteractor: MainInteractorInput
             })
     }
     
+    func removeTask(task: ListTasks.FetchTasks.ViewModel.DisplayedTask){
+        if let taskID =  task.objectID{
+            SODataBaseFactory.sharedInstance.dataBase.removeTask(taskID)
+        }
+    }
     
 }
 
-extension MainInteractor{
+extension ListTasksInteractor{
     func showAlertWithTitle(title: String, message: String, addActions: ((controller: UIAlertController) -> Void)?, completionBlock: (() -> Void)?){
         let controller = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.Alert)
         if addActions != nil {

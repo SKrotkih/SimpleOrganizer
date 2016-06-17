@@ -112,3 +112,4 @@ SwiftOrganizer is available under the MIT license. See the LICENSE file for more
 - 14.05.2016: Crashlitics added.
 - 12.06.2016: Was partially reorganized "User" use case according of the VIPER architecture requirements  
 - 14.06.2016: "Login" use case reorganized according to the VIPER architecture requirements
+- 17.06.2016: Redesign ListTasksViewController according the Uncle Bob's clean architecture

@@ -1,5 +1,5 @@
 //
-//  MainModels.swift
+//  ListTasksWorker.swift
 //  SwiftOrganizer
 //
 //  Created by Sergey Krotkih on 6/17/16.
@@ -11,14 +11,12 @@
 
 import UIKit
 
-struct MainRequest
+class ListTasksWorker
 {
-}
-
-struct MainResponse
-{
-}
-
-struct MainViewModel
-{
+  // MARK: Business Logic
+  
+  func doSomeWork()
+  {
+    // NOTE: Do the work
+  }
 }

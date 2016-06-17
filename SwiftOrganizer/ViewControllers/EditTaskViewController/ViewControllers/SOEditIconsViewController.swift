@@ -207,7 +207,7 @@ extension SOEditIconsViewController: UITableViewDelegate {
             }
         }
         
-        if needAdd && taskIcons.count <= task?.maxIconsCount{
+        if needAdd{
             taskIcons.append(icoId)
         }
 
