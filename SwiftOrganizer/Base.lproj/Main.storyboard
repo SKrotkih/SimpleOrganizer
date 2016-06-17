@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -291,7 +291,7 @@
         <!--Main View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController storyboardIdentifier="SOMainViewController" id="BYZ-38-t0r" customClass="SOMainViewController" customModule="SwiftOrganizer" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MainViewController" id="BYZ-38-t0r" customClass="MainViewController" customModule="SwiftOrganizer" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -318,7 +318,7 @@
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="90y-b9-9HO">
                                 <rect key="frame" x="20" y="0.0" width="560" height="41"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eck-zB-rFJ" customClass="SOTabBarContainerView" customModule="SwiftOrganizer" customModuleProvider="target">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eck-zB-rFJ" customClass="TabBarContainerView" customModule="SwiftOrganizer" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="560" height="39"/>
                                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
@@ -611,6 +611,10 @@
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="BYZ-38-t0r" id="AZ0-Uc-OeY"/>
+                                    <outlet property="delegate" destination="BYZ-38-t0r" id="8Zx-ZI-AHE"/>
+                                </connections>
                             </tableView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uEy-ip-Typ">
                                 <rect key="frame" x="19" y="559" width="1" height="41"/>
@@ -630,7 +634,7 @@
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QjF-r1-gni">
                                 <rect key="frame" x="20" y="559" width="560" height="41"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RoP-3V-7ol" customClass="SOTabBarContainerView" customModule="SwiftOrganizer" customModuleProvider="target">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RoP-3V-7ol" customClass="TabBarContainerView" customModule="SwiftOrganizer" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="2000" height="41"/>
                                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
@@ -695,7 +699,7 @@
                         <outlet property="categoryTabBarView" destination="eck-zB-rFJ" id="BfR-DF-VNp"/>
                         <outlet property="iconsScrollView" destination="QjF-r1-gni" id="F6C-YV-Jz0"/>
                         <outlet property="iconsTabBarView" destination="RoP-3V-7ol" id="zHp-gi-piy"/>
-                        <outlet property="mainTableView" destination="gpZ-s7-ekZ" id="hWf-Ip-chW"/>
+                        <outlet property="tableView" destination="gpZ-s7-ekZ" id="Krq-yu-3Ox"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

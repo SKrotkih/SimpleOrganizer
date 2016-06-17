@@ -1,5 +1,5 @@
 //
-//  SOMainViewController.swift
+//  MainViewController.swift
 //  SwiftOrganizer
 //
 //  Created by Sergey Krotkih on 5/28/15.
@@ -14,47 +14,61 @@ protocol SOEditTaskController{
     func editTaskList()
 }
 
-class SOMainViewController: UIViewController{
+protocol SOChangeFilterStateDelegate{
+    func didSelectCategory(category: TaskCategory, select: Bool, completionBlock: (error: NSError?) -> Void)
+    func didSelectIcon(icon: TaskIco, select: Bool, completionBlock: (error: NSError?) -> Void)
+}
 
-    @IBOutlet weak var mainTableView: UITableView!
-    var mainTableViewController: SOMainTableViewController!
+let TableViewCellIdentifier: String = "MainTableViewCell"
+let HeaderTableViewCellIdentifier: String = "HeaderTableViewCell"
+let HeightOfTableRow: CGFloat = 47.0
+let HeightOfTableHeader: CGFloat = 28.0
+
+class MainViewController: UIViewController{
+
+    @IBOutlet weak var tableView: UITableView!
     
-    @IBOutlet weak var categoryTabBarView: SOTabBarContainerView!
+    @IBOutlet weak var categoryTabBarView: TabBarContainerView!
     @IBOutlet weak var categoryScrollView: UIScrollView!
     
-    @IBOutlet weak var iconsTabBarView: SOTabBarContainerView!
+    @IBOutlet weak var iconsTabBarView: TabBarContainerView!
     @IBOutlet weak var iconsScrollView: UIScrollView!
     
     var categoryTabBarController: TaskCategoryTabBarController!
     var iconsTabBarController: TaskIconsTabBarController!
 
     var rightButton: UIBarButtonItem!
+    
+    var router: MainRouter!
+    var output: MainInteractor!
 
     private var _editTaskViewController: SOEditTaskViewController?
     
     var allTimes = [NSDate]()
     private var refreshControl: UIRefreshControl?
     
+    var tasks : [Task] = []
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        MainConfigurator.sharedInstance.configure(self)
         
         allTimes.append(NSDate())
         
         categoryTabBarController = TaskCategoryTabBarController(scrollView: categoryScrollView, containerView: categoryTabBarView)
         iconsTabBarController = TaskIconsTabBarController(scrollView: iconsScrollView, containerView: iconsTabBarView)
         
-        mainTableViewController = SOMainTableViewController(tableView: self.mainTableView, delegate: self)
-        
-        categoryTabBarController.filterStateDelegate = mainTableViewController
-        iconsTabBarController.filterStateDelegate = mainTableViewController
+        categoryTabBarController.filterStateDelegate = self
+        iconsTabBarController.filterStateDelegate = self
         
         SOObserversManager.sharedInstance.addObserver(self, type: .SODataBaseTypeChanged)
         SOObserversManager.sharedInstance.addObserver(self, type: .SODataBaseDidChanged)
         
         /* Create the refresh control */
         refreshControl = UIRefreshControl()
-        refreshControl!.addTarget(self, action: #selector(SOMainViewController.handleRefresh(_:)), forControlEvents: .ValueChanged)
-        mainTableView.addSubview(refreshControl!)
+        refreshControl!.addTarget(self, action: #selector(MainViewController.handleRefresh(_:)), forControlEvents: .ValueChanged)
+        tableView.addSubview(refreshControl!)
         
         self.titleActualize()
         
@@ -77,9 +91,9 @@ class SOMainViewController: UIViewController{
         self.slideMenuController()?.removeRightGestures()
 
         let addTaskImage : UIImage! = UIImage(named: "add_task")
-        let addTaskButton: UIBarButtonItem = UIBarButtonItem(image: addTaskImage, style: UIBarButtonItemStyle.Plain, target: self, action: #selector(SOMainViewController.addNewTask))
+        let addTaskButton: UIBarButtonItem = UIBarButtonItem(image: addTaskImage, style: UIBarButtonItemStyle.Plain, target: self, action: #selector(MainViewController.addNewTask))
         let activityImage : UIImage! = UIImage(named: "activity")
-        let activityButton: UIBarButtonItem = UIBarButtonItem(image: activityImage, style: UIBarButtonItemStyle.Plain, target: self, action: #selector(SOMainViewController.startActivityViewController))
+        let activityButton: UIBarButtonItem = UIBarButtonItem(image: activityImage, style: UIBarButtonItemStyle.Plain, target: self, action: #selector(MainViewController.startActivityViewController))
         navigationItem.rightBarButtonItems = [addTaskButton, activityButton]
         
         //rightButton = UIBarButtonItem(title: "Activity".localized, style: UIBarButtonItemStyle.Plain, target: self, action: "startActivityViewController")
@@ -105,23 +119,30 @@ class SOMainViewController: UIViewController{
         
         dispatch_after(popTime, dispatch_get_main_queue(), {[weak self] in
             self!.reloadData({(error: NSError?) in
-                self!.allTimes.append(NSDate())
-                self!.refreshControl!.endRefreshing()
+                if error == nil {
+                    self?.allTimes.append(NSDate())
+                    self?.refreshControl!.endRefreshing()
+                }
             })
         })
     }
     
     private func reloadData(completionBlock: (error: NSError?) -> Void){
-        self.categoryTabBarController.reloadTabs{(error: NSError?) in
-            self.iconsTabBarController.reloadTabs{(error: NSError?) in
-                self.cancelEditTask()
-                self.mainTableViewController.reloadData()
+        self.categoryTabBarController.reloadTabs{[weak self] (error: NSError?) in
+            if error == nil {
+                self?.iconsTabBarController.reloadTabs{[weak self] (error: NSError?) in
+                    if error == nil {
+                        self?.cancelEditTask()
+                        self?.output.fetchTasks()
+                    }
+                    completionBlock(error: error)
+                }
+            } else {
                 completionBlock(error: error)
-                self.titleActualize()
             }
         }
     }
-
+    
     private func titleActualize(){
         let defaultTitle = "Organizer".localized
         let currentDB = SOTypeDataBaseSwitcher.currectDataBaseDescription()
@@ -131,8 +152,8 @@ class SOMainViewController: UIViewController{
     // MARK: Edit Task List
     
     func startActivityViewController(){
-        if self.mainTableView.editing{
-            self.mainTableView.editing = false
+        if self.tableView.editing{
+            self.tableView.editing = false
             self.rightButton.title = "Activity".localized
         } else {
             let editTaskListActivity = TaskMenuItemActivity()
@@ -187,9 +208,51 @@ class SOMainViewController: UIViewController{
     }
 }
 
+// MARK: MainPresenterOutput
+
+extension MainViewController: MainPresenterOutput {
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?)
+    {
+        router.passDataToNextScene(segue)
+    }
+    
+    func displayTasks(tasks: [Task]){
+        self.tasks = tasks
+        dispatch_async(dispatch_get_main_queue(), {
+            self.tableView.reloadData()
+            self.titleActualize()
+        })
+    }
+}
+
+
+// MARK: SOChangeFilterStateDelegate
+
+extension MainViewController: SOChangeFilterStateDelegate{
+    func didSelectCategory(category: TaskCategory, select: Bool, completionBlock: (error: NSError?) -> Void){
+        self.output.selectCategory(category, select: select, completionBlock: { (error: NSError?) in
+            completionBlock(error: error)
+        })
+    }
+    
+    func didSelectIcon(icon: TaskIco, select: Bool, completionBlock: (error: NSError?) -> Void){
+        self.output.selectIcon(icon, select: select, completionBlock: {(error: NSError?) in
+            completionBlock(error: error)
+        })
+    }
+}
+
+// MARK: SORemoveTaskDelegate
+
+extension MainViewController: SORemoveTaskDelegate{
+    func removeTask(task: Task!){
+        self.editTaskList()
+    }
+}
+
     // MARK: Start editing task
 
-extension SOMainViewController: SOEditTaskController{
+extension MainViewController: SOEditTaskController{
     func startEditingTask(task: Task?){
         self.editTaskViewController.task = task
         self.navigationController!.pushViewController(self.editTaskViewController, animated: true)
@@ -197,13 +260,13 @@ extension SOMainViewController: SOEditTaskController{
     
     func editTaskList(){
         self.rightButton.title = "Done".localized
-        self.mainTableView.editing = true
+        self.tableView.editing = true
     }
 }
 
     // MARK: SOObserverNotificationTypes Observer notifications handler
 
-extension SOMainViewController: SOObserverProtocol{
+extension MainViewController: SOObserverProtocol{
     func notify(notification: SOObserverNotification){
         switch notification.type{
         case .SODataBaseTypeChanged, .SODataBaseDidChanged:
@@ -214,9 +277,93 @@ extension SOMainViewController: SOObserverProtocol{
     }
 }
 
-    // MARK: Alert View Controller
+// MARK: UITableViewDataSource
 
-extension SOMainViewController{
+extension MainViewController: UITableViewDataSource {
+    
+    @objc func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return self.tasks.count
+    }
+    
+    @objc func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let cell = self.tableView.dequeueReusableCellWithIdentifier(TableViewCellIdentifier) as! SOMainTableViewCell
+        let row = indexPath.row
+        let currentTask : Task = self.tasks[row]
+        cell.fillTaskData(currentTask)
+        cell.removeTaskDelegate = self
+        
+        return cell
+    }
+}
+
+// MARK: UITableViewDelegate
+
+extension MainViewController: UITableViewDelegate {
+    
+    func tableView(tableView: UITableView, indentationLevelForRowAtIndexPath indexPath: NSIndexPath) -> Int {
+        return indexPath.row % 4
+    }
+    
+    func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+        return true
+    }
+    
+    func tableView(tableView: UITableView, editingStyleForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCellEditingStyle {
+        if (self.tableView.editing) {
+            return .Delete
+        }
+        
+        return .None
+    }
+    
+    func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+        if editingStyle == .Delete{
+            self.tableView.beginUpdates()
+            let row = indexPath.row
+            let currentTask : Task = self.tasks[row]
+            currentTask.remove()
+            self.tasks.removeAtIndex(row)
+            self.tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Automatic)
+            self.tableView.endUpdates()
+        }
+    }
+    
+    // Before the row is selected
+    func tableView(tableView: UITableView, willSelectRowAtIndexPath indexPath: NSIndexPath) -> NSIndexPath? {
+        return indexPath
+    }
+    
+    // After the row is selected
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        let row = indexPath.row
+        let currentTask : Task = self.tasks[row]
+        self.startEditingTask(currentTask)
+    }
+    
+    // Customizing the row height
+    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return HeightOfTableRow
+    }
+    
+    func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat{
+        switch section {
+        case 0:
+            return HeightOfTableHeader
+        default:
+            return 0.0
+        }
+    }
+    
+    func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView?{
+        let headerCell = self.tableView.dequeueReusableCellWithIdentifier(HeaderTableViewCellIdentifier)
+        
+        return headerCell
+    }
+}
+
+// MARK: Alert View Controller
+
+extension MainViewController{
     func showAlertWithTitle(title: String, message: String, addActions: ((controller: UIAlertController) -> Void)?, completionBlock: (() -> Void)?){
         let controller = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.Alert)
         if addActions != nil {
@@ -228,10 +375,9 @@ extension SOMainViewController{
     }
 }
 
-
 // MARK: Configure Google Analytics
 
-extension SOMainViewController{
+extension MainViewController{
     
     func googleAnaliticsConfigure() {
         // Configure tracker from GoogleService-Info.plist.
@@ -250,8 +396,7 @@ extension SOMainViewController{
             controller.addAction(UIAlertAction(title: "Opt In", style: UIAlertActionStyle.Default,
                 handler: {(alert: UIAlertAction!) in GAI.sharedInstance().optOut = false }))
             },
-                                                   completionBlock: nil)
+                                completionBlock: nil)
     }
     
 }
-

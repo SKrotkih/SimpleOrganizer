@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TaskCategoryTabBarController: SOTabBarController {
+class TaskCategoryTabBarController: TabBarController {
 
     private let tabViewXibName = "TaskCategoryTabView"
     

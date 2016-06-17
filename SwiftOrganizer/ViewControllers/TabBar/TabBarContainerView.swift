@@ -1,5 +1,5 @@
 //
-//  SOTabBarContainerView.swift
+//  TabBarContainerView.swift
 //  SwiftOrganizer
 //
 //  Created by Sergey Krotkih on 5/31/15.
@@ -8,6 +8,6 @@
 
 import UIKit
 
-class SOTabBarContainerView: UIView {
+class TabBarContainerView: UIView {
     
 }

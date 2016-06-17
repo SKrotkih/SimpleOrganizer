@@ -11,6 +11,12 @@
 		4240205672659068487B66F5 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A8CDDAD77ECB23A6A0B42F0C /* Pods.framework */; };
 		617A5B5DA7B7F2C9E7E1E326 /* Pods_SwiftOrganizer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E951A0642B00ACF8106DB23 /* Pods_SwiftOrganizer.framework */; };
 		6AB444685F9971FB89F4283F /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A8CDDAD77ECB23A6A0B42F0C /* Pods.framework */; };
+		7F3000491D1377E40033D73D /* MainConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F3000431D1377E40033D73D /* MainConfigurator.swift */; };
+		7F30004A1D1377E40033D73D /* MainInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F3000441D1377E40033D73D /* MainInteractor.swift */; };
+		7F30004B1D1377E40033D73D /* MainModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F3000451D1377E40033D73D /* MainModels.swift */; };
+		7F30004C1D1377E40033D73D /* MainPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F3000461D1377E40033D73D /* MainPresenter.swift */; };
+		7F30004D1D1377E40033D73D /* MainRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F3000471D1377E40033D73D /* MainRouter.swift */; };
+		7F30004E1D1377E40033D73D /* MainWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F3000481D1377E40033D73D /* MainWorker.swift */; };
 		7F5DF5481BAD288E00959432 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F5DF5471BAD288E00959432 /* AppDelegate.swift */; };
 		7F5DF54D1BAD288E00959432 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7F5DF54B1BAD288E00959432 /* Main.storyboard */; };
 		7F5DF5521BAD288E00959432 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7F5DF5511BAD288E00959432 /* Assets.xcassets */; };
@@ -106,8 +112,7 @@
 		7F5DF6831BAD669300959432 /* SOEditDocumentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F5DF6391BAD669300959432 /* SOEditDocumentViewController.swift */; };
 		7F5DF6841BAD669300959432 /* SOEditTaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F5DF63A1BAD669300959432 /* SOEditTaskViewController.swift */; };
 		7F5DF6851BAD669300959432 /* SOMainTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F5DF63B1BAD669300959432 /* SOMainTableViewCell.swift */; };
-		7F5DF6861BAD669300959432 /* SOMainTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F5DF63C1BAD669300959432 /* SOMainTableViewController.swift */; };
-		7F5DF6871BAD669300959432 /* SOMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F5DF63D1BAD669300959432 /* SOMainViewController.swift */; };
+		7F5DF6871BAD669300959432 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F5DF63D1BAD669300959432 /* MainViewController.swift */; };
 		7F5DF6881BAD669300959432 /* SOMakeCallViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F5DF63E1BAD669300959432 /* SOMakeCallViewController.swift */; };
 		7F5DF6891BAD669300959432 /* SOPreferenceCategoriesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F5DF63F1BAD669300959432 /* SOPreferenceCategoriesViewController.swift */; };
 		7F5DF68A1BAD669300959432 /* SOPreferenceIconsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F5DF6401BAD669300959432 /* SOPreferenceIconsViewController.swift */; };
@@ -121,8 +126,8 @@
 		7F5DF6921BAD669300959432 /* TaskIconsTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F5DF6491BAD669300959432 /* TaskIconsTabBarController.swift */; };
 		7F5DF6931BAD669300959432 /* TaskIconTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F5DF64A1BAD669300959432 /* TaskIconTabView.swift */; };
 		7F5DF6941BAD669300959432 /* TaskIconTabView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7F5DF64B1BAD669300959432 /* TaskIconTabView.xib */; };
-		7F5DF6951BAD669300959432 /* SOTabBarContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F5DF64C1BAD669300959432 /* SOTabBarContainerView.swift */; };
-		7F5DF6961BAD669300959432 /* SOTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F5DF64D1BAD669300959432 /* SOTabBarController.swift */; };
+		7F5DF6951BAD669300959432 /* TabBarContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F5DF64C1BAD669300959432 /* TabBarContainerView.swift */; };
+		7F5DF6961BAD669300959432 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F5DF64D1BAD669300959432 /* TabBarController.swift */; };
 		7F5DF69B1BAD66F100959432 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7F5DF6971BAD66F100959432 /* LaunchScreen.xib */; };
 		7F5DF69C1BAD66F100959432 /* Preferences.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7F5DF6991BAD66F100959432 /* Preferences.storyboard */; };
 		7F5DF6A41BAD73A500959432 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F5DF6A31BAD73A500959432 /* Social.framework */; };
@@ -169,6 +174,9 @@
 		7F9DC3E31D0D983700454B67 /* LoginCoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F9DC3E21D0D983700454B67 /* LoginCoreData.swift */; };
 		7F9DC3E51D0D9BCA00454B67 /* LoginRemoteDataBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F9DC3E41D0D9BCA00454B67 /* LoginRemoteDataBase.swift */; };
 		7F9DC3E71D0D9D2E00454B67 /* UsersRemoteDataBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F9DC3E61D0D9D2E00454B67 /* UsersRemoteDataBase.swift */; };
+		7FA23C401D1229ED00728D3F /* TabBarsConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FA23C3F1D1229ED00728D3F /* TabBarsConfigurator.swift */; };
+		7FA23C431D122B1C00728D3F /* TabBarsInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FA23C411D122B1C00728D3F /* TabBarsInteractor.swift */; };
+		7FA23C441D122B1C00728D3F /* TabBarsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FA23C421D122B1C00728D3F /* TabBarsPresenter.swift */; };
 		7FA249781CE70EFD0060F6CE /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7FA249771CE70EFD0060F6CE /* GoogleService-Info.plist */; };
 		7FA249791CE70EFD0060F6CE /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7FA249771CE70EFD0060F6CE /* GoogleService-Info.plist */; };
 		7FA2497A1CE70EFD0060F6CE /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7FA249771CE70EFD0060F6CE /* GoogleService-Info.plist */; };
@@ -276,6 +284,12 @@
 		7F042C161BB8EDEC0035533D /* Pods-DataBaseKit.release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = "Pods-DataBaseKit.release.xcconfig"; path = "Pods/Target Support Files/Pods-DataBaseKit/Pods-DataBaseKit.release.xcconfig"; sourceTree = "<group>"; };
 		7F042C171BB8EE090035533D /* Pods-SwiftOrganizer.debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = "Pods-SwiftOrganizer.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SwiftOrganizer/Pods-SwiftOrganizer.debug.xcconfig"; sourceTree = "<group>"; };
 		7F042C181BB8EE090035533D /* Pods-SwiftOrganizer.release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = "Pods-SwiftOrganizer.release.xcconfig"; path = "Pods/Target Support Files/Pods-SwiftOrganizer/Pods-SwiftOrganizer.release.xcconfig"; sourceTree = "<group>"; };
+		7F3000431D1377E40033D73D /* MainConfigurator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MainConfigurator.swift; path = ViewControllers/MainConfigurator.swift; sourceTree = "<group>"; };
+		7F3000441D1377E40033D73D /* MainInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MainInteractor.swift; path = ViewControllers/MainInteractor.swift; sourceTree = "<group>"; };
+		7F3000451D1377E40033D73D /* MainModels.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MainModels.swift; path = ViewControllers/MainModels.swift; sourceTree = "<group>"; };
+		7F3000461D1377E40033D73D /* MainPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MainPresenter.swift; path = ViewControllers/MainPresenter.swift; sourceTree = "<group>"; };
+		7F3000471D1377E40033D73D /* MainRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MainRouter.swift; path = ViewControllers/MainRouter.swift; sourceTree = "<group>"; };
+		7F3000481D1377E40033D73D /* MainWorker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MainWorker.swift; path = ViewControllers/MainWorker.swift; sourceTree = "<group>"; };
 		7F4882391BADB64C00D4D45B /* readme.txt */ = {isa = PBXFileReference; lastKnownFileType = text; name = readme.txt; path = CoreData/readme.txt; sourceTree = "<group>"; };
 		7F5DF5441BAD288E00959432 /* SwiftOrganizer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwiftOrganizer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7F5DF5471BAD288E00959432 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -356,8 +370,8 @@
 		7F5DF61E1BAD669300959432 /* undo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "undo@2x.png"; sourceTree = "<group>"; };
 		7F5DF61F1BAD669300959432 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
 		7F5DF6201BAD669300959432 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
-		7F5DF6231BAD669300959432 /* SOPreferencesSelectCategoriesCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SOPreferencesSelectCategoriesCell.swift; sourceTree = "<group>"; };
-		7F5DF6241BAD669300959432 /* SOPreferencesSelectIconsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SOPreferencesSelectIconsCell.swift; sourceTree = "<group>"; };
+		7F5DF6231BAD669300959432 /* SOPreferencesSelectCategoriesCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SOPreferencesSelectCategoriesCell.swift; path = ViewControllers/EditPreferences/SOPreferencesSelectCategoriesCell.swift; sourceTree = "<group>"; };
+		7F5DF6241BAD669300959432 /* SOPreferencesSelectIconsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SOPreferencesSelectIconsCell.swift; path = ViewControllers/EditPreferences/SOPreferencesSelectIconsCell.swift; sourceTree = "<group>"; };
 		7F5DF6261BAD669300959432 /* SOEditTaskCategoryCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SOEditTaskCategoryCell.swift; sourceTree = "<group>"; };
 		7F5DF6271BAD669300959432 /* SOEditTaskCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SOEditTaskCell.swift; sourceTree = "<group>"; };
 		7F5DF6281BAD669300959432 /* SOEditTaskDateCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SOEditTaskDateCell.swift; sourceTree = "<group>"; };
@@ -370,32 +384,31 @@
 		7F5DF6301BAD669300959432 /* SOEditDescriptionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SOEditDescriptionViewController.swift; sourceTree = "<group>"; };
 		7F5DF6311BAD669300959432 /* SOEditIconsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SOEditIconsViewController.swift; sourceTree = "<group>"; };
 		7F5DF6321BAD669300959432 /* SOEditTaskFieldBaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SOEditTaskFieldBaseViewController.swift; sourceTree = "<group>"; };
-		7F5DF6331BAD669300959432 /* MainMenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainMenuViewController.swift; sourceTree = "<group>"; };
-		7F5DF6341BAD669300959432 /* RightViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RightViewController.swift; sourceTree = "<group>"; };
-		7F5DF6351BAD669300959432 /* SlideMenuController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlideMenuController.swift; sourceTree = "<group>"; };
-		7F5DF6361BAD669300959432 /* SOAboutViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SOAboutViewController.swift; sourceTree = "<group>"; };
-		7F5DF6371BAD669300959432 /* SODocumentPickerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SODocumentPickerViewController.swift; sourceTree = "<group>"; };
-		7F5DF6381BAD669300959432 /* SODocumentsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SODocumentsViewController.swift; sourceTree = "<group>"; };
-		7F5DF6391BAD669300959432 /* SOEditDocumentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SOEditDocumentViewController.swift; sourceTree = "<group>"; };
-		7F5DF63A1BAD669300959432 /* SOEditTaskViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SOEditTaskViewController.swift; sourceTree = "<group>"; };
-		7F5DF63B1BAD669300959432 /* SOMainTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SOMainTableViewCell.swift; sourceTree = "<group>"; };
-		7F5DF63C1BAD669300959432 /* SOMainTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SOMainTableViewController.swift; sourceTree = "<group>"; };
-		7F5DF63D1BAD669300959432 /* SOMainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SOMainViewController.swift; sourceTree = "<group>"; };
-		7F5DF63E1BAD669300959432 /* SOMakeCallViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SOMakeCallViewController.swift; sourceTree = "<group>"; };
-		7F5DF63F1BAD669300959432 /* SOPreferenceCategoriesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SOPreferenceCategoriesViewController.swift; sourceTree = "<group>"; };
-		7F5DF6401BAD669300959432 /* SOPreferenceIconsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SOPreferenceIconsViewController.swift; sourceTree = "<group>"; };
-		7F5DF6411BAD669300959432 /* SOPreferencesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SOPreferencesViewController.swift; sourceTree = "<group>"; };
-		7F5DF6421BAD669300959432 /* SOSampleDocument.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SOSampleDocument.swift; sourceTree = "<group>"; };
-		7F5DF6431BAD669300959432 /* SOSettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SOSettingsViewController.swift; sourceTree = "<group>"; };
-		7F5DF6441BAD669300959432 /* SOTaskMenuItemActivity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SOTaskMenuItemActivity.swift; sourceTree = "<group>"; };
-		7F5DF6461BAD669300959432 /* TaskCategoryTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskCategoryTabBarController.swift; sourceTree = "<group>"; };
-		7F5DF6471BAD669300959432 /* TaskCategoryTabView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskCategoryTabView.swift; sourceTree = "<group>"; };
-		7F5DF6481BAD669300959432 /* TaskCategoryTabView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TaskCategoryTabView.xib; sourceTree = "<group>"; };
-		7F5DF6491BAD669300959432 /* TaskIconsTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskIconsTabBarController.swift; sourceTree = "<group>"; };
-		7F5DF64A1BAD669300959432 /* TaskIconTabView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskIconTabView.swift; sourceTree = "<group>"; };
-		7F5DF64B1BAD669300959432 /* TaskIconTabView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TaskIconTabView.xib; sourceTree = "<group>"; };
-		7F5DF64C1BAD669300959432 /* SOTabBarContainerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SOTabBarContainerView.swift; sourceTree = "<group>"; };
-		7F5DF64D1BAD669300959432 /* SOTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SOTabBarController.swift; sourceTree = "<group>"; };
+		7F5DF6331BAD669300959432 /* MainMenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MainMenuViewController.swift; path = ViewControllers/MainMenuViewController.swift; sourceTree = "<group>"; };
+		7F5DF6341BAD669300959432 /* RightViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RightViewController.swift; path = ViewControllers/RightViewController.swift; sourceTree = "<group>"; };
+		7F5DF6351BAD669300959432 /* SlideMenuController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SlideMenuController.swift; path = ViewControllers/SlideMenuController.swift; sourceTree = "<group>"; };
+		7F5DF6361BAD669300959432 /* SOAboutViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SOAboutViewController.swift; path = ViewControllers/SOAboutViewController.swift; sourceTree = "<group>"; };
+		7F5DF6371BAD669300959432 /* SODocumentPickerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SODocumentPickerViewController.swift; path = ViewControllers/SODocumentPickerViewController.swift; sourceTree = "<group>"; };
+		7F5DF6381BAD669300959432 /* SODocumentsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SODocumentsViewController.swift; path = ViewControllers/SODocumentsViewController.swift; sourceTree = "<group>"; };
+		7F5DF6391BAD669300959432 /* SOEditDocumentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SOEditDocumentViewController.swift; path = ViewControllers/SOEditDocumentViewController.swift; sourceTree = "<group>"; };
+		7F5DF63A1BAD669300959432 /* SOEditTaskViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SOEditTaskViewController.swift; path = ../../SOEditTaskViewController.swift; sourceTree = "<group>"; };
+		7F5DF63B1BAD669300959432 /* SOMainTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SOMainTableViewCell.swift; path = ViewControllers/SOMainTableViewCell.swift; sourceTree = "<group>"; };
+		7F5DF63D1BAD669300959432 /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MainViewController.swift; path = ViewControllers/MainViewController.swift; sourceTree = "<group>"; };
+		7F5DF63E1BAD669300959432 /* SOMakeCallViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SOMakeCallViewController.swift; path = ViewControllers/SOMakeCallViewController.swift; sourceTree = "<group>"; };
+		7F5DF63F1BAD669300959432 /* SOPreferenceCategoriesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SOPreferenceCategoriesViewController.swift; path = ViewControllers/SOPreferenceCategoriesViewController.swift; sourceTree = "<group>"; };
+		7F5DF6401BAD669300959432 /* SOPreferenceIconsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SOPreferenceIconsViewController.swift; path = ViewControllers/SOPreferenceIconsViewController.swift; sourceTree = "<group>"; };
+		7F5DF6411BAD669300959432 /* SOPreferencesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SOPreferencesViewController.swift; path = ViewControllers/SOPreferencesViewController.swift; sourceTree = "<group>"; };
+		7F5DF6421BAD669300959432 /* SOSampleDocument.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SOSampleDocument.swift; path = ViewControllers/SOSampleDocument.swift; sourceTree = "<group>"; };
+		7F5DF6431BAD669300959432 /* SOSettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SOSettingsViewController.swift; path = ViewControllers/SOSettingsViewController.swift; sourceTree = "<group>"; };
+		7F5DF6441BAD669300959432 /* SOTaskMenuItemActivity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SOTaskMenuItemActivity.swift; path = ViewControllers/SOTaskMenuItemActivity.swift; sourceTree = "<group>"; };
+		7F5DF6461BAD669300959432 /* TaskCategoryTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TaskCategoryTabBarController.swift; path = ViewControllers/TabBar/TaskCategoryTabBarController.swift; sourceTree = "<group>"; };
+		7F5DF6471BAD669300959432 /* TaskCategoryTabView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TaskCategoryTabView.swift; path = ViewControllers/TabBar/TaskCategoryTabView.swift; sourceTree = "<group>"; };
+		7F5DF6481BAD669300959432 /* TaskCategoryTabView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = TaskCategoryTabView.xib; path = ViewControllers/TabBar/TaskCategoryTabView.xib; sourceTree = "<group>"; };
+		7F5DF6491BAD669300959432 /* TaskIconsTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TaskIconsTabBarController.swift; path = ViewControllers/TabBar/TaskIconsTabBarController.swift; sourceTree = "<group>"; };
+		7F5DF64A1BAD669300959432 /* TaskIconTabView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TaskIconTabView.swift; path = ViewControllers/TabBar/TaskIconTabView.swift; sourceTree = "<group>"; };
+		7F5DF64B1BAD669300959432 /* TaskIconTabView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = TaskIconTabView.xib; path = ViewControllers/TabBar/TaskIconTabView.xib; sourceTree = "<group>"; };
+		7F5DF64C1BAD669300959432 /* TabBarContainerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TabBarContainerView.swift; path = ViewControllers/TabBar/TabBarContainerView.swift; sourceTree = "<group>"; };
+		7F5DF64D1BAD669300959432 /* TabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TabBarController.swift; path = ViewControllers/TabBar/TabBarController.swift; sourceTree = "<group>"; };
 		7F5DF6981BAD66F100959432 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		7F5DF69A1BAD66F100959432 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Preferences.storyboard; sourceTree = "<group>"; };
 		7F5DF6A31BAD73A500959432 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
@@ -438,6 +451,9 @@
 		7F9DC3E21D0D983700454B67 /* LoginCoreData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LoginCoreData.swift; path = Classes/LoginCoreData.swift; sourceTree = "<group>"; };
 		7F9DC3E41D0D9BCA00454B67 /* LoginRemoteDataBase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginRemoteDataBase.swift; sourceTree = "<group>"; };
 		7F9DC3E61D0D9D2E00454B67 /* UsersRemoteDataBase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UsersRemoteDataBase.swift; sourceTree = "<group>"; };
+		7FA23C3F1D1229ED00728D3F /* TabBarsConfigurator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TabBarsConfigurator.swift; path = ViewControllers/TabBar/TabBarsConfigurator.swift; sourceTree = "<group>"; };
+		7FA23C411D122B1C00728D3F /* TabBarsInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TabBarsInteractor.swift; path = ViewControllers/TabBar/TabBarsInteractor.swift; sourceTree = "<group>"; };
+		7FA23C421D122B1C00728D3F /* TabBarsPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TabBarsPresenter.swift; path = ViewControllers/TabBar/TabBarsPresenter.swift; sourceTree = "<group>"; };
 		7FA249771CE70EFD0060F6CE /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		7FA2497F1CE713630060F6CE /* libGoogleAnalytics.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libGoogleAnalytics.a; path = Pods/GoogleAnalytics/Libraries/libGoogleAnalytics.a; sourceTree = "<group>"; };
 		7FC653B01D0C841700D2FFCD /* UsersCoreDataStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UsersCoreDataStore.swift; path = Classes/UsersCoreDataStore.swift; sourceTree = "<group>"; };
@@ -592,11 +608,9 @@
 			isa = PBXGroup;
 			children = (
 				7F9DC3D31D0D751B00454B67 /* Scenes */,
-				7F5DF6211BAD669300959432 /* ViewControllers */,
 				7F5DF5F21BAD669300959432 /* Common */,
 				7F5DF6051BAD669300959432 /* iCloud */,
 				7F5DF5471BAD288E00959432 /* AppDelegate.swift */,
-				7F5DF54B1BAD288E00959432 /* Main.storyboard */,
 				7F5DF6971BAD66F100959432 /* LaunchScreen.xib */,
 				7F5DF6991BAD66F100959432 /* Preferences.storyboard */,
 				7F5DF5511BAD288E00959432 /* Assets.xcassets */,
@@ -867,44 +881,7 @@
 			path = Icons;
 			sourceTree = "<group>";
 		};
-		7F5DF6211BAD669300959432 /* ViewControllers */ = {
-			isa = PBXGroup;
-			children = (
-				7F5DF6221BAD669300959432 /* EditPreferences */,
-				7F5DF6251BAD669300959432 /* EditTaskViewController */,
-				7F5DF6331BAD669300959432 /* MainMenuViewController.swift */,
-				7F5DF6341BAD669300959432 /* RightViewController.swift */,
-				7F5DF6351BAD669300959432 /* SlideMenuController.swift */,
-				7F5DF6361BAD669300959432 /* SOAboutViewController.swift */,
-				7F5DF6371BAD669300959432 /* SODocumentPickerViewController.swift */,
-				7F5DF6381BAD669300959432 /* SODocumentsViewController.swift */,
-				7F5DF6391BAD669300959432 /* SOEditDocumentViewController.swift */,
-				7F5DF63A1BAD669300959432 /* SOEditTaskViewController.swift */,
-				7F5DF63B1BAD669300959432 /* SOMainTableViewCell.swift */,
-				7F5DF63C1BAD669300959432 /* SOMainTableViewController.swift */,
-				7F5DF63D1BAD669300959432 /* SOMainViewController.swift */,
-				7F5DF63E1BAD669300959432 /* SOMakeCallViewController.swift */,
-				7F5DF63F1BAD669300959432 /* SOPreferenceCategoriesViewController.swift */,
-				7F5DF6401BAD669300959432 /* SOPreferenceIconsViewController.swift */,
-				7F5DF6411BAD669300959432 /* SOPreferencesViewController.swift */,
-				7F5DF6421BAD669300959432 /* SOSampleDocument.swift */,
-				7F5DF6431BAD669300959432 /* SOSettingsViewController.swift */,
-				7F5DF6441BAD669300959432 /* SOTaskMenuItemActivity.swift */,
-				7F5DF6451BAD669300959432 /* TabBar */,
-			);
-			path = ViewControllers;
-			sourceTree = "<group>";
-		};
-		7F5DF6221BAD669300959432 /* EditPreferences */ = {
-			isa = PBXGroup;
-			children = (
-				7F5DF6231BAD669300959432 /* SOPreferencesSelectCategoriesCell.swift */,
-				7F5DF6241BAD669300959432 /* SOPreferencesSelectIconsCell.swift */,
-			);
-			path = EditPreferences;
-			sourceTree = "<group>";
-		};
-		7F5DF6251BAD669300959432 /* EditTaskViewController */ = {
+		7F5DF6251BAD669300959432 /* EditingTask */ = {
 			isa = PBXGroup;
 			children = (
 				7F5DF6261BAD669300959432 /* SOEditTaskCategoryCell.swift */,
@@ -916,12 +893,14 @@
 				7F5DF62C1BAD669300959432 /* SOSelectIconsCell.swift */,
 				7F5DF62D1BAD669300959432 /* ViewControllers */,
 			);
-			path = EditTaskViewController;
+			name = EditingTask;
+			path = ViewControllers/EditTaskViewController;
 			sourceTree = "<group>";
 		};
 		7F5DF62D1BAD669300959432 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				7F5DF63A1BAD669300959432 /* SOEditTaskViewController.swift */,
 				7F5DF62E1BAD669300959432 /* SOEditCategoryViewController.swift */,
 				7F5DF62F1BAD669300959432 /* SOEditDateViewController.swift */,
 				7F5DF6301BAD669300959432 /* SOEditDescriptionViewController.swift */,
@@ -929,21 +908,6 @@
 				7F5DF6321BAD669300959432 /* SOEditTaskFieldBaseViewController.swift */,
 			);
 			path = ViewControllers;
-			sourceTree = "<group>";
-		};
-		7F5DF6451BAD669300959432 /* TabBar */ = {
-			isa = PBXGroup;
-			children = (
-				7F5DF6461BAD669300959432 /* TaskCategoryTabBarController.swift */,
-				7F5DF6471BAD669300959432 /* TaskCategoryTabView.swift */,
-				7F5DF6481BAD669300959432 /* TaskCategoryTabView.xib */,
-				7F5DF6491BAD669300959432 /* TaskIconsTabBarController.swift */,
-				7F5DF64A1BAD669300959432 /* TaskIconTabView.swift */,
-				7F5DF64B1BAD669300959432 /* TaskIconTabView.xib */,
-				7F5DF64C1BAD669300959432 /* SOTabBarContainerView.swift */,
-				7F5DF64D1BAD669300959432 /* SOTabBarController.swift */,
-			);
-			path = TabBar;
 			sourceTree = "<group>";
 		};
 		7F5DF6EB1BAD83B200959432 /* SwiftExtension */ = {
@@ -982,7 +946,16 @@
 		7F9DC3D31D0D751B00454B67 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				7FA23C3C1D1225E500728D3F /* Menu */,
 				7F9DC3D41D0D753600454B67 /* Login */,
+				7FA23C301D12205500728D3F /* TasksBrowser */,
+				7F5DF6251BAD669300959432 /* EditingTask */,
+				7FA23C331D1223BF00728D3F /* Preferences */,
+				7FA23C341D1223CF00728D3F /* My Documents */,
+				7FA23C351D1223DD00728D3F /* External Documents */,
+				7FA23C361D1223EA00728D3F /* Make Call */,
+				7FA23C371D1223F300728D3F /* Settings */,
+				7FA23C381D1223FB00728D3F /* About */,
 			);
 			name = Scenes;
 			sourceTree = "<group>";
@@ -1012,6 +985,138 @@
 				7F5DF5A71BAD2CF300959432 /* SOLocalDataBase.swift */,
 			);
 			name = CoreData;
+			sourceTree = "<group>";
+		};
+		7FA23C301D12205500728D3F /* TasksBrowser */ = {
+			isa = PBXGroup;
+			children = (
+				7F5DF63D1BAD669300959432 /* MainViewController.swift */,
+				7F3000431D1377E40033D73D /* MainConfigurator.swift */,
+				7F3000441D1377E40033D73D /* MainInteractor.swift */,
+				7F3000451D1377E40033D73D /* MainModels.swift */,
+				7F3000461D1377E40033D73D /* MainPresenter.swift */,
+				7F3000471D1377E40033D73D /* MainRouter.swift */,
+				7F3000481D1377E40033D73D /* MainWorker.swift */,
+				7F5DF54B1BAD288E00959432 /* Main.storyboard */,
+				7F5DF63B1BAD669300959432 /* SOMainTableViewCell.swift */,
+				7FA23C391D12258700728D3F /* TabBars */,
+			);
+			name = TasksBrowser;
+			sourceTree = "<group>";
+		};
+		7FA23C331D1223BF00728D3F /* Preferences */ = {
+			isa = PBXGroup;
+			children = (
+				7F5DF6411BAD669300959432 /* SOPreferencesViewController.swift */,
+				7FA23C3E1D12279600728D3F /* Icons */,
+				7FA23C3D1D12278C00728D3F /* Categories */,
+			);
+			name = Preferences;
+			sourceTree = "<group>";
+		};
+		7FA23C341D1223CF00728D3F /* My Documents */ = {
+			isa = PBXGroup;
+			children = (
+				7F5DF6371BAD669300959432 /* SODocumentPickerViewController.swift */,
+				7F5DF6381BAD669300959432 /* SODocumentsViewController.swift */,
+				7F5DF6391BAD669300959432 /* SOEditDocumentViewController.swift */,
+				7F5DF6421BAD669300959432 /* SOSampleDocument.swift */,
+			);
+			name = "My Documents";
+			sourceTree = "<group>";
+		};
+		7FA23C351D1223DD00728D3F /* External Documents */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = "External Documents";
+			sourceTree = "<group>";
+		};
+		7FA23C361D1223EA00728D3F /* Make Call */ = {
+			isa = PBXGroup;
+			children = (
+				7F5DF63E1BAD669300959432 /* SOMakeCallViewController.swift */,
+			);
+			name = "Make Call";
+			sourceTree = "<group>";
+		};
+		7FA23C371D1223F300728D3F /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				7F5DF6431BAD669300959432 /* SOSettingsViewController.swift */,
+			);
+			name = Settings;
+			sourceTree = "<group>";
+		};
+		7FA23C381D1223FB00728D3F /* About */ = {
+			isa = PBXGroup;
+			children = (
+				7F5DF6361BAD669300959432 /* SOAboutViewController.swift */,
+			);
+			name = About;
+			sourceTree = "<group>";
+		};
+		7FA23C391D12258700728D3F /* TabBars */ = {
+			isa = PBXGroup;
+			children = (
+				7FA23C3F1D1229ED00728D3F /* TabBarsConfigurator.swift */,
+				7FA23C411D122B1C00728D3F /* TabBarsInteractor.swift */,
+				7FA23C421D122B1C00728D3F /* TabBarsPresenter.swift */,
+				7F5DF64D1BAD669300959432 /* TabBarController.swift */,
+				7F5DF64C1BAD669300959432 /* TabBarContainerView.swift */,
+				7FA23C3B1D1225B200728D3F /* Icons */,
+				7FA23C3A1D1225A800728D3F /* Categories */,
+			);
+			name = TabBars;
+			sourceTree = "<group>";
+		};
+		7FA23C3A1D1225A800728D3F /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+				7F5DF6461BAD669300959432 /* TaskCategoryTabBarController.swift */,
+				7F5DF6471BAD669300959432 /* TaskCategoryTabView.swift */,
+				7F5DF6481BAD669300959432 /* TaskCategoryTabView.xib */,
+			);
+			name = Categories;
+			sourceTree = "<group>";
+		};
+		7FA23C3B1D1225B200728D3F /* Icons */ = {
+			isa = PBXGroup;
+			children = (
+				7F5DF6491BAD669300959432 /* TaskIconsTabBarController.swift */,
+				7F5DF64A1BAD669300959432 /* TaskIconTabView.swift */,
+				7F5DF64B1BAD669300959432 /* TaskIconTabView.xib */,
+			);
+			name = Icons;
+			sourceTree = "<group>";
+		};
+		7FA23C3C1D1225E500728D3F /* Menu */ = {
+			isa = PBXGroup;
+			children = (
+				7F5DF6331BAD669300959432 /* MainMenuViewController.swift */,
+				7F5DF6341BAD669300959432 /* RightViewController.swift */,
+				7F5DF6351BAD669300959432 /* SlideMenuController.swift */,
+				7F5DF6441BAD669300959432 /* SOTaskMenuItemActivity.swift */,
+			);
+			name = Menu;
+			sourceTree = "<group>";
+		};
+		7FA23C3D1D12278C00728D3F /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+				7F5DF63F1BAD669300959432 /* SOPreferenceCategoriesViewController.swift */,
+				7F5DF6231BAD669300959432 /* SOPreferencesSelectCategoriesCell.swift */,
+			);
+			name = Categories;
+			sourceTree = "<group>";
+		};
+		7FA23C3E1D12279600728D3F /* Icons */ = {
+			isa = PBXGroup;
+			children = (
+				7F5DF6241BAD669300959432 /* SOPreferencesSelectIconsCell.swift */,
+				7F5DF6401BAD669300959432 /* SOPreferenceIconsViewController.swift */,
+			);
+			name = Icons;
 			sourceTree = "<group>";
 		};
 		7FC653B21D0C8A0600D2FFCD /* Configurators */ = {
@@ -1545,15 +1650,18 @@
 				7F5DF6501BAD669300959432 /* NSDateExtension.swift in Sources */,
 				7F5DF68A1BAD669300959432 /* SOPreferenceIconsViewController.swift in Sources */,
 				7F5DF6881BAD669300959432 /* SOMakeCallViewController.swift in Sources */,
+				7F30004C1D1377E40033D73D /* MainPresenter.swift in Sources */,
 				7F5DF68F1BAD669300959432 /* TaskCategoryTabBarController.swift in Sources */,
+				7FA23C441D122B1C00728D3F /* TabBarsPresenter.swift in Sources */,
 				7FCD13681BCCF756001778E9 /* SOBorderedImageView.swift in Sources */,
-				7F5DF6871BAD669300959432 /* SOMainViewController.swift in Sources */,
+				7F5DF6871BAD669300959432 /* MainViewController.swift in Sources */,
 				7F5DF67D1BAD669300959432 /* MainMenuViewController.swift in Sources */,
 				7F5DF6531BAD669300959432 /* UIViewControllerExtension.swift in Sources */,
-				7F5DF6861BAD669300959432 /* SOMainTableViewController.swift in Sources */,
 				7F5DF64F1BAD669300959432 /* ArrayExtension.swift in Sources */,
+				7FA23C431D122B1C00728D3F /* TabBarsInteractor.swift in Sources */,
 				7F5DF6721BAD669300959432 /* SOEditTaskCell.swift in Sources */,
 				7FDF31431BBABA0E00AD4127 /* README.md in Sources */,
+				7F30004A1D1377E40033D73D /* MainInteractor.swift in Sources */,
 				7F5DF6841BAD669300959432 /* SOEditTaskViewController.swift in Sources */,
 				7F5DF6891BAD669300959432 /* SOPreferenceCategoriesViewController.swift in Sources */,
 				7F5DF6751BAD669300959432 /* SOEditTaskIconsCell.swift in Sources */,
@@ -1570,6 +1678,7 @@
 				7F8FE2051BC532E100180EAD /* LoginViewController.swift in Sources */,
 				7F9DC3D81D0D75D200454B67 /* LoginInteractor.swift in Sources */,
 				7F5DF64E1BAD669300959432 /* BaseTableViewCell.swift in Sources */,
+				7FA23C401D1229ED00728D3F /* TabBarsConfigurator.swift in Sources */,
 				7F9DC3DA1D0D75EF00454B67 /* LoginPresenter.swift in Sources */,
 				7F5DF6821BAD669300959432 /* SODocumentsViewController.swift in Sources */,
 				7F5DF6731BAD669300959432 /* SOEditTaskDateCell.swift in Sources */,
@@ -1583,21 +1692,25 @@
 				7F5DF6541BAD669300959432 /* SOExternalSettingsObserever.swift in Sources */,
 				7F5DF6741BAD669300959432 /* SOEditTaskDescriptionCell.swift in Sources */,
 				7F5DF6761BAD669300959432 /* SOSelectCategoryCell.swift in Sources */,
+				7F3000491D1377E40033D73D /* MainConfigurator.swift in Sources */,
 				7F5DF5481BAD288E00959432 /* AppDelegate.swift in Sources */,
 				7F5DF6771BAD669300959432 /* SOSelectIconsCell.swift in Sources */,
 				7F5DF6831BAD669300959432 /* SOEditDocumentViewController.swift in Sources */,
 				7F5DF6571BAD669300959432 /* SOSemaforeExample.swift in Sources */,
-				7F5DF6961BAD669300959432 /* SOTabBarController.swift in Sources */,
-				7F5DF6951BAD669300959432 /* SOTabBarContainerView.swift in Sources */,
+				7F5DF6961BAD669300959432 /* TabBarController.swift in Sources */,
+				7F5DF6951BAD669300959432 /* TabBarContainerView.swift in Sources */,
 				7F5DF66F1BAD669300959432 /* SOPreferencesSelectCategoriesCell.swift in Sources */,
 				7F5DF68D1BAD669300959432 /* SOSettingsViewController.swift in Sources */,
 				7F5DF6701BAD669300959432 /* SOPreferencesSelectIconsCell.swift in Sources */,
 				7F5DF68B1BAD669300959432 /* SOPreferencesViewController.swift in Sources */,
+				7F30004E1D1377E40033D73D /* MainWorker.swift in Sources */,
+				7F30004D1D1377E40033D73D /* MainRouter.swift in Sources */,
 				7F5DF6711BAD669300959432 /* SOEditTaskCategoryCell.swift in Sources */,
 				7F5DF6551BAD669300959432 /* SOLocalNotificationsCenter.swift in Sources */,
 				7F5DF6931BAD669300959432 /* TaskIconTabView.swift in Sources */,
 				7F5DF6851BAD669300959432 /* SOMainTableViewCell.swift in Sources */,
 				7F5DF6581BAD669300959432 /* SOUtilities.swift in Sources */,
+				7F30004B1D1377E40033D73D /* MainModels.swift in Sources */,
 				7F5DF67F1BAD669300959432 /* SlideMenuController.swift in Sources */,
 				7F5DF6561BAD669300959432 /* SOPushNotificationsCenter.swift in Sources */,
 				7F9DC3D61D0D75B800454B67 /* LoginConfigurator.swift in Sources */,
