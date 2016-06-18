@@ -42,7 +42,7 @@ class ListTasksViewController: UIViewController{
     var router: ListTasksRouter!
     var output: ListTasksInteractor!
 
-    private var _editTaskViewController: SOEditTaskViewController?
+    private var _editTaskViewController: EditTaskViewController?
     
     var allTimes = [NSDate]()
     private var refreshControl: UIRefreshControl?
@@ -185,12 +185,12 @@ class ListTasksViewController: UIViewController{
         }
     }
     
-    private var editTaskViewController: SOEditTaskViewController{
+    private var editTaskViewController: EditTaskViewController{
         if _editTaskViewController != nil {
             return _editTaskViewController!
         }
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        _editTaskViewController = storyboard.instantiateViewControllerWithIdentifier("SOEditTaskViewController") as? SOEditTaskViewController
+        _editTaskViewController = storyboard.instantiateViewControllerWithIdentifier("EditTaskViewController") as? EditTaskViewController
         
         return _editTaskViewController!
     }
@@ -332,12 +332,12 @@ extension ListTasksViewController: UITableViewDelegate {
         return indexPath
     }
     
-    // After the row is selected
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        let row = indexPath.row
-        let currentTask : ListTasks.FetchTasks.ViewModel.DisplayedTask = self.tasks[row]
-        //self.startEditingTask(currentTask)
-    }
+//    // After the row is selected
+//    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+//        let row = indexPath.row
+//        let currentTask : ListTasks.FetchTasks.ViewModel.DisplayedTask = self.tasks[row]
+//        //self.startEditingTask(currentTask)
+//    }
     
     // Customizing the row height
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {

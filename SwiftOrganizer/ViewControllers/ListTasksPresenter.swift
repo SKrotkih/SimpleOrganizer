@@ -24,6 +24,15 @@ protocol ListTasksPresenterOutput: class
 class ListTasksPresenter: ListTasksPresenterInput
 {
     weak var output: ListTasksPresenterOutput!
+
+    let dateFormatter: NSDateFormatter = {
+//        let dateFormatter = NSDateFormatter()
+//        dateFormatter.dateFormat = "dd-MM-yyyy HH:mm:ss"
+        let dateFormatter = NSDateFormatter()
+        dateFormatter.dateStyle = .ShortStyle
+        dateFormatter.timeStyle = NSDateFormatterStyle.NoStyle
+        return dateFormatter
+    }()
     
     func presentFetchedTasks(response: ListTasks.FetchTasks.Response){
 
@@ -37,9 +46,7 @@ class ListTasksPresenter: ListTasksPresenterInput
             }
             var date: String = ""
             if let dateEvent = task.date{
-                let dateFormatter = NSDateFormatter()
-                dateFormatter.dateFormat = "dd-MM-yyyy HH:mm:ss"
-                date = dateFormatter.stringFromDate(dateEvent)
+                date = self.dateFormatter.stringFromDate(dateEvent)
             }
             let displayedTask = ListTasks.FetchTasks.ViewModel.DisplayedTask(objectID: task.databaseObject, title: task.title, date: date, categoryName: task.categoryName, icons: icons)
             

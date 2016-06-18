@@ -45,18 +45,17 @@ class ListTasksRouter: ListTasksRouterInput
   
   func passDataToNextScene(segue: UIStoryboardSegue)
   {
-    // NOTE: Teach the router which scenes it can communicate with
-    
-    if segue.identifier == "ShowSomewhereScene" {
-      passDataToSomewhereScene(segue)
+    if segue.identifier == "EditTaskViewController" {
+      passDataToEditTaskScene(segue)
     }
   }
   
-  func passDataToSomewhereScene(segue: UIStoryboardSegue)
+  func passDataToEditTaskScene(segue: UIStoryboardSegue)
   {
-    // NOTE: Teach the router how to pass data to the next scene
-    
-    // let someWhereViewController = segue.destinationViewController as! SomeWhereViewController
-    // someWhereViewController.output.name = viewController.output.name
+    if let selectedIndexPath = viewController.tableView.indexPathForSelectedRow {
+        let selectedTask = viewController.tasks[selectedIndexPath.row]
+        let editTaskViewController = segue.destinationViewController as! EditTaskViewController
+        editTaskViewController.output.taskID = selectedTask.objectID!
+    }
   }
 }

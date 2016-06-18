@@ -209,6 +209,14 @@ extension SORemoteDataBase{
 
 extension SORemoteDataBase{
     
+    public func taskForObjectID(objectID: AnyObject) -> Task?{
+        if let taskObject: PFObject  = objectID as? PFObject{
+            let task = newInstanceFactory(taskObject, className: TaskClassName) as! Task
+            return task
+        }
+        return nil
+    }
+    
     public func saveTask(task: Task, completionBlock: (error: NSError?) -> Void){
         dispatch_sync(self.queue, {[weak self] in
             var object: PFObject!

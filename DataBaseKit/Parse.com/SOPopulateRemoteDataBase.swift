@@ -62,7 +62,8 @@ public class SOPopulateRemoteDataBase {
             TaskCategory(object: nil, id:"4", selected: true, visible: true, name:"Work".localized)]
         
         if self.currentCategoryIndex < defaultCategories.count{
-            let category: TaskCategory = defaultCategories[self.currentCategoryIndex++]
+            self.currentCategoryIndex += 1
+            let category: TaskCategory = defaultCategories[self.currentCategoryIndex]
             let object = PFObject(className: CategoryClassName)
             object[kFldRecordId] = category.recordid
             object[kCategoryFldName] = category.name
@@ -123,7 +124,8 @@ public class SOPopulateRemoteDataBase {
             TaskIco(object: nil, id:"17", selected: true, visible: true, name:"ico17".localized, imageName: "ico17")]
         
         if self.currentIcoIndex < defaultIcons.count{
-            let ico: TaskIco = defaultIcons[self.currentIcoIndex++]
+            self.currentIcoIndex += 1
+            let ico: TaskIco = defaultIcons[self.currentIcoIndex]
             let object = PFObject(className: IcoClassName)
             object[kFldRecordId] = ico.recordid
             object[kFldSelected] = ico.selected
@@ -193,7 +195,8 @@ public class SOPopulateRemoteDataBase {
         
         if self.currentTaskIndex < defaultTasks.count{
             let object = PFObject(className: TaskClassName)
-            let dict: Dictionary<String, String> = defaultTasks[self.currentTaskIndex++]
+            self.currentTaskIndex += 1
+            let dict: Dictionary<String, String> = defaultTasks[self.currentTaskIndex]
             object[kTaskFldCategory] = dict[kTaskFldCategory]
             object[kTaskFldIco1] = dict[kTaskFldIco1]
             object[kTaskFldIco2] = dict[kTaskFldIco2]

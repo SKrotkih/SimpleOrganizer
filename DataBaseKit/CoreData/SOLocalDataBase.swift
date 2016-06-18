@@ -410,6 +410,15 @@ extension SOLocalDataBase{
 // MARK: - Save Objects
 
 extension SOLocalDataBase{
+
+    public func taskForObjectID(objectID: AnyObject) -> Task?{
+        if let objectID = objectID as? NSManagedObjectID{
+            let managedTask = self.coreData.managedObjectContext!.objectWithID(objectID) as! ManagedTask
+            let task = self.newTask(managedTask)
+            return task
+        }
+        return nil
+    }
     
     public func saveTask(task: Task, completionBlock: (error: NSError?) -> Void){
         guard let userId = currentUserId() else{

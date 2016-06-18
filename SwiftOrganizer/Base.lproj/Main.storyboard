@@ -608,6 +608,7 @@
                                             <outlet property="icon6ImageView" destination="44s-DF-VBK" id="AQf-nM-rRh"/>
                                             <outlet property="swipeGestureView" destination="AFY-DG-FwG" id="kB7-DJ-wMc"/>
                                             <outlet property="titleTextLabel" destination="BZW-jO-0OQ" id="ZtL-BE-IHO"/>
+                                            <segue destination="TvI-C9-lSF" kind="push" identifier="EditTaskViewController" id="Mgh-rN-ikw"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -920,7 +921,7 @@
         <!--Edit Task View Controller-->
         <scene sceneID="4cK-mI-MCG">
             <objects>
-                <viewController storyboardIdentifier="SOEditTaskViewController" id="TvI-C9-lSF" customClass="SOEditTaskViewController" customModule="SwiftOrganizer" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="EditTaskViewController" id="TvI-C9-lSF" customClass="EditTaskViewController" customModule="SwiftOrganizer" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="qOh-Be-bJ9"/>
                         <viewControllerLayoutGuide type="bottom" id="yPA-d7-Ile"/>
