@@ -48,7 +48,7 @@ class UsersCoreDataStore: UsersStoreProtocol {
     var currentUser: User?{
         get{
             if let currentUser = self.managedUser?.toUser(){
-                return currentUser.isItCurrentUser ? currentUser : nil
+                return (currentUser.isItCurrentUser != nil) ? currentUser : nil
             }
             return nil
         }

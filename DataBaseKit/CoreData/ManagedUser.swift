@@ -16,17 +16,17 @@ class ManagedUser: NSManagedObject {
         let user: User = User()
         user.databaseObject = objectID
         
-        let firstname = valueForKey("firstname") as! String
+        let firstname = valueForKey("firstname") as? String
         
         user.firstname = firstname
-        user.lastname = valueForKey("lastname") as! String
-        user.gender = valueForKey("gender") as! String
-        user.email = valueForKey("email") as! String
-        user.photo_prefix = valueForKey("photo_prefix") as! String
-        user.name = valueForKey("name") as! String
-        user.fb_id = valueForKey("fb_id") as! String
-        user.userid = valueForKey("userid") as! String
-        user.isItCurrentUser = valueForKey("currentUser") as! Bool
+        user.lastname = valueForKey("lastname") as? String
+        user.gender = valueForKey("gender") as? String
+        user.email = valueForKey("email") as? String
+        user.photo_prefix = valueForKey("photo_prefix") as? String
+        user.name = valueForKey("name") as? String
+        user.fb_id = valueForKey("fb_id") as? String
+        user.userid = valueForKey("userid") as? String
+        user.isItCurrentUser = valueForKey("currentUser") as? Bool
         
         return user
     }

@@ -63,7 +63,7 @@ class SOEditIconsViewController: SOEditTaskFieldBaseViewController {
         }
 
         if needAsk{
-            let controller = UIAlertController(title: "Data were chenged!".localized, message: nil, preferredStyle: .ActionSheet)
+            let controller = UIAlertController(title: "Data was chenged!".localized, message: nil, preferredStyle: .ActionSheet)
             let skeepDateAction = UIAlertAction(title: "Discard".localized, style: .Cancel, handler: { action in
                 self.reloadData()
                 super.closeButtonWasPressed()

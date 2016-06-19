@@ -55,7 +55,7 @@ class ListTasksRouter: ListTasksRouterInput
     if let selectedIndexPath = viewController.tableView.indexPathForSelectedRow {
         let selectedTask = viewController.tasks[selectedIndexPath.row]
         let editTaskViewController = segue.destinationViewController as! EditTaskViewController
-        editTaskViewController.output.taskID = selectedTask.objectID!
+        editTaskViewController.input.taskID = selectedTask.objectID!
     }
   }
 }

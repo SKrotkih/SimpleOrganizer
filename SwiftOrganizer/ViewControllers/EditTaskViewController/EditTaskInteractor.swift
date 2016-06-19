@@ -13,25 +13,78 @@ import UIKit
 
 protocol EditTaskInteractorInput
 {
-  func sendRequestData()
+    func addNewTask()
+    func prepareTaskData()
+    func wasDataChanged() -> Bool
+    func saveTask()
+    var taskID: AnyObject? {get set}
+    var task: Task? {get set}
 }
 
 protocol EditTaskInteractorOutput
 {
     func didReceiveData()
-    var task: Task? {get set}
+    var title: String? {get set}
 }
 
 class EditTaskInteractor: EditTaskInteractorInput
 {
     var output: EditTaskInteractorOutput!
     var worker: EditTaskWorker!
-    var taskID: AnyObject!
     
-    func sendRequestData()
-    {
-        let task: Task = SODataBaseFactory.sharedInstance.dataBase.taskForObjectID(self.taskID)!
-        output.task = task
-        output.didReceiveData()
+    var taskID: AnyObject?
+    var task: Task?
+    var originalTask: Task?
+    
+    func addNewTask(){
+        self.taskID = nil
     }
+    
+    func prepareTaskData()
+    {
+        if let taskID = self.taskID {
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), {
+                let task: Task = SODataBaseFactory.sharedInstance.dataBase.taskForObjectID(taskID)!
+                self.task = task
+                self.originalTask = Task()
+                self.originalTask!.cloneTask(task)
+                self.output.didReceiveData()
+                self.output.title = "Edit Task".localized
+            })
+        } else {
+            self.task = Task()
+            self.task!.clearTask()
+            self.originalTask = nil
+            self.output.didReceiveData()
+            self.output.title = "New Task".localized
+        }
+    }
+    
+    func wasDataChanged() -> Bool{
+        if let orgTask = self.originalTask{
+            return !orgTask.isEqual(self.task)
+        } else {
+            let pureTask = Task()
+            pureTask.clearTask()
+            return !pureTask.isEqual(self.task)
+        }
+    }
+    
+    // This method builds an object, which properties were changed before in separated views
+    // Builder is presented by just one class
+    func saveTask(){
+        if let task = self.task {
+            task.save{(error: NSError?) in
+                if let saveError = error{
+                    showAlertWithTitle("Update task error".localized, message: saveError.description)
+                } else if let orgTask = self.originalTask{
+                    orgTask.cloneTask(self.task!)
+                } else{
+                    self.originalTask = Task()
+                    self.originalTask!.cloneTask(self.task!)
+                }
+            }
+        }
+    }
+    
 }

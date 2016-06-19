@@ -31,7 +31,7 @@ class SOEditTaskFieldBaseViewController: UIViewController {
     
     func closeButtonWasPressed() {
         if self.willFinishEditing(){
-            self.navigationController?.popViewControllerAnimated(true)
+            self.performSegueWithIdentifier("unwindToEditTaskViewController", sender: self)
         }
     }
 }

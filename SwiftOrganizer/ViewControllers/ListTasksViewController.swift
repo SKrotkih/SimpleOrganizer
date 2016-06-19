@@ -10,7 +10,7 @@ import UIKit
 import DataBaseKit
 
 protocol SOEditTaskController{
-    func startEditingTask(task: Task?)
+    func addNewTask()
     func editTaskList()
 }
 
@@ -196,15 +196,7 @@ class ListTasksViewController: UIViewController{
     }
     
     func cancelEditTask(){
-        self.editTaskViewController.cancelEdit()
-    }
-    
-    func addNewTask(){
-        self.startEditingTask(nil)
-    }
-
-    func editTask(task: Task?){
-        self.startEditingTask(task)
+        self.editTaskViewController.cancelToEdit()
     }
 }
 
@@ -253,8 +245,8 @@ extension ListTasksViewController: SORemoveTaskDelegate{
     // MARK: Start editing task
 
 extension ListTasksViewController: SOEditTaskController{
-    func startEditingTask(task: Task?){
-        self.editTaskViewController.task = task
+    func addNewTask(){
+        self.editTaskViewController.input.addNewTask()
         self.navigationController!.pushViewController(self.editTaskViewController, animated: true)
     }
     
@@ -332,12 +324,9 @@ extension ListTasksViewController: UITableViewDelegate {
         return indexPath
     }
     
-//    // After the row is selected
-//    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-//        let row = indexPath.row
-//        let currentTask : ListTasks.FetchTasks.ViewModel.DisplayedTask = self.tasks[row]
-//        //self.startEditingTask(currentTask)
-//    }
+    // After the row is selected
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    }
     
     // Customizing the row height
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {

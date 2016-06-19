@@ -13,10 +13,6 @@ import UIKit
 
 // MARK: Connect View, Interactor, and Presenter
 
-extension EditTaskInteractor: EditTaskViewControllerOutput
-{
-}
-
 class EditTaskConfigurator
 {
   // MARK: Object lifecycle
@@ -45,7 +41,7 @@ class EditTaskConfigurator
     let interactor = EditTaskInteractor()
     interactor.output = viewController
     
-    viewController.output = interactor
+    viewController.input = interactor
     viewController.router = router
   }
 }

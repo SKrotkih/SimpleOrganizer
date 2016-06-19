@@ -30,7 +30,7 @@ class LoginPresenter: LoginInteractorOutput {
                         self.downloadImage(photoURL) {[weak self](data: NSData?) in
                             if let imageData = data{
                                 if let photo: UIImage = UIImage(data: imageData){
-                                    let dict: Dictionary<String, AnyObject> = ["name": currentUser.name, "photo": photo]
+                                    let dict: Dictionary<String, AnyObject> = ["name": currentUser.name!, "photo": photo]
                                     self?.output.displayFetchedUserData(dict)
                                     return
                                 }
@@ -39,7 +39,7 @@ class LoginPresenter: LoginInteractorOutput {
                     }
                 }
             }
-            let dict: Dictionary<String, AnyObject> = ["name": currentUser.name]
+            let dict: Dictionary<String, AnyObject> = ["name": currentUser.name!]
             output.displayFetchedUserData(dict)
         } else {
             output.displayFetchedUserData(nil)

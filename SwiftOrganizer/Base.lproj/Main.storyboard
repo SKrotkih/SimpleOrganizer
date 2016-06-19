@@ -789,9 +789,11 @@
                     </view>
                     <connections>
                         <outlet property="tableView" destination="gLW-wo-xom" id="3Z1-Po-Cx0"/>
+                        <segue destination="evt-Nk-lfm" kind="unwind" identifier="unwindToEditTaskViewController" unwindAction="unwindToEditTaskViewController:" id="Tic-hv-qZR"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Cza-O8-Yff" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="evt-Nk-lfm" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="181" y="-82"/>
         </scene>
@@ -1344,9 +1346,11 @@
                     </view>
                     <connections>
                         <outlet property="tableView" destination="g8C-0P-gPa" id="J0j-kJ-1GD"/>
+                        <segue destination="2YH-Wt-H0d" kind="unwind" identifier="unwindToEditTaskViewController" unwindAction="unwindToEditTaskViewController:" id="aTo-Kr-mmw"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mob-ah-PzR" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="2YH-Wt-H0d" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="1402" y="-725"/>
         </scene>
@@ -1459,9 +1463,11 @@
                         <outlet property="datePicker" destination="Rvd-Nc-2wN" id="7cR-1o-S2j"/>
                         <outlet property="needRememberLabel" destination="gXq-eX-Yrq" id="iHO-CC-IfH"/>
                         <outlet property="needRememberSwitch" destination="dJz-cZ-KsE" id="Pz1-pG-xxS"/>
+                        <segue destination="mY2-1A-3Ru" kind="unwind" identifier="unwindToEditTaskViewController" unwindAction="unwindToEditTaskViewController:" id="Jb2-AQ-ycQ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Iyk-FN-BqE" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="mY2-1A-3Ru" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="790" y="-82"/>
         </scene>
@@ -1498,9 +1504,11 @@
                     <connections>
                         <outlet property="heightTextViewConstraint" destination="lGQ-tV-bTx" id="Ikr-mZ-KvL"/>
                         <outlet property="textView" destination="hs4-Xr-dLd" id="Oce-jX-qiB"/>
+                        <segue destination="zKf-sI-QpS" kind="unwind" identifier="unwindToEditTaskViewController" unwindAction="unwindToEditTaskViewController:" id="rNc-8O-6Kf"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QQq-GA-qZ8" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="zKf-sI-QpS" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="1402" y="-83"/>
         </scene>

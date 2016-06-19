@@ -41,7 +41,7 @@ class SOEditDescriptionViewController: SOEditTaskFieldBaseViewController {
     override func willFinishEditing() -> Bool{
         if let theTask = self.task{
             if theTask.title != textView.text{
-                let controller = UIAlertController(title: "Data were chenged!".localized, message: nil, preferredStyle: .ActionSheet)
+                let controller = UIAlertController(title: "Data was chenged!".localized, message: nil, preferredStyle: .ActionSheet)
                 let skeepDateAction = UIAlertAction(title: "Discard".localized, style: .Cancel, handler: { action in
                     self.textView.text = self.task?.title
                     super.closeButtonWasPressed()

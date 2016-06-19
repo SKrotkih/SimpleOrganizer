@@ -10,15 +10,29 @@ import UIKit
 
 public class User: NSObject {
     public var databaseObject: NSManagedObjectID?
-    public var firstname: String = ""
-    public var lastname: String = ""
-    public var gender: String = ""
-    public var email: String = ""
-    public var photo_prefix: String = ""
-    public var name: String = ""
-    public var fb_id: String = ""
-    public var userid: String = ""
-    public var isItCurrentUser: Bool = false
+    public var firstname: String?
+    public var lastname: String?
+    public var gender: String?
+    public var email: String?
+    public var photo_prefix: String?
+    public var name: String?
+    public var fb_id: String?
+    public var userid: String?
+    public var isItCurrentUser: Bool?
+    
+    override init(){
+        databaseObject = nil
+        firstname = ""
+        lastname = ""
+        gender = ""
+        email = ""
+        photo_prefix = ""
+        name = ""
+        fb_id = ""
+        userid = ""
+        isItCurrentUser = false
+    }
+    
 }
 
 public func ==(lhs: User, rhs: User) -> Bool

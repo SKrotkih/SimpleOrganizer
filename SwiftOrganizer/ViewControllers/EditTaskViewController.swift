@@ -46,41 +46,17 @@ public protocol SOEditTaskUndoDelegateProtocol{
     func addToUndoBuffer(dict: NSDictionary)
 }
 
-protocol EditTaskViewControllerOutput
-{
-    func sendRequestData()
-    var taskID: AnyObject! {get set}
-}
-
-class EditTaskViewController: UIViewController, EditTaskInteractorOutput {
+class EditTaskViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     
-    var output: EditTaskViewControllerOutput!  // Interactor
+    var input: EditTaskInteractorInput!
     var router: EditTaskRouter!
-
-    private var _task: Task!
-    private var _orgTask: Task?
-    private var isItNewTask: Bool = true
+    
+    var needToReloadData: Bool = true
     
     private var _cells = [SOEditTaskCell](count: SOEditTaskCellId.Undefined.rawValue, repeatedValue: SOEditTaskCell())
     private let _undoManager = NSUndoManager()
 
-    var task: Task?{
-        get{
-            return _task
-        }
-        set{
-            isItNewTask = (newValue == nil)
-            
-            if isItNewTask{
-                _task.clearTask()
-            } else {
-                self._orgTask = newValue
-                _task.cloneTask(newValue!)
-            }
-        }
-    }
-    
     override func awakeFromNib()
     {
         super.awakeFromNib()
@@ -89,29 +65,34 @@ class EditTaskViewController: UIViewController, EditTaskInteractorOutput {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        self.title = ""
-        _task = Task()
-        isItNewTask = true
         _undoManager.prepareWithInvocationTarget(self)
+        self.prepareView()
     }
 
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-
-        if isItNewTask{
-            self.title = "New Task".localized
+        if needToReloadData {
+            self.input.prepareTaskData()
         } else {
-            self.title = "Edit Task".localized
+           needToReloadData = true
         }
-        
+    }
+
+    @IBAction func unwindToEditTaskViewController(segue: UIStoryboardSegue) {
+        needToReloadData = false
+        dispatch_async(dispatch_get_main_queue(), {
+            self.tableView.reloadData()
+        })
+    }
+    
+    func prepareView(){
         let leftButtonImage: UIImage! = UIImage(named: "back_button")
         let leftButton: UIBarButtonItem = UIBarButtonItem(image: leftButtonImage, style: UIBarButtonItemStyle.Plain, target: self, action: #selector(EditTaskViewController.closeButtonWasPressed))
         navigationItem.leftBarButtonItem = leftButton;
         
         let rightButtonImage : UIImage! = UIImage(named: "save_task")
         let rightButton: UIBarButtonItem = UIBarButtonItem(image: rightButtonImage, style: UIBarButtonItemStyle.Plain, target: self, action: #selector(EditTaskViewController.doneButtonWasPressed))
-
+        
         let undoButtonImage : UIImage! = UIImage(named: "undo")
         let undoButton: UIBarButtonItem = UIBarButtonItem(image: undoButtonImage, style: UIBarButtonItemStyle.Plain, target: self, action: #selector(EditTaskViewController.undoButtonWasPressed))
         
@@ -119,19 +100,7 @@ class EditTaskViewController: UIViewController, EditTaskInteractorOutput {
         
         self.slideMenuController()?.removeLeftGestures()
         self.slideMenuController()?.removeRightGestures()
-        
-        self.sendRequestData()
     }
-
-
-    func sendRequestData(){
-        self.output.sendRequestData()
-    }
-
-    func didReceiveData() {
-        self.tableView.reloadData()
-    }
-    
     
     // MARK: UNDO
     
@@ -140,125 +109,35 @@ class EditTaskViewController: UIViewController, EditTaskInteractorOutput {
         self.tableView.reloadData()
     }
     
-    // MARK: Edit data
-    
-    func dataWasChanged() -> Bool{
-        if let orgTask = self._orgTask{
-            return !orgTask.isEqual(self.task)
-        } else if isItNewTask {
-            let puretask = Task()
-            puretask.clearTask()
-            return !puretask.isEqual(self.task)
-        }
-        
-        return false
-    }
-    
-    // This method builds an object, which properties were changed before in separated views
-    // Builder is presented by just one class
-    private func buildObject(){
-        self.task!.save{(error: NSError?) in
-            if let saveError = error{
-                showAlertWithTitle("Update task error".localized, message: saveError.description)
-            } else if let orgTask = self._orgTask{
-                orgTask.cloneTask(self.task!)
-            } else if self.isItNewTask{
-                self.isItNewTask = false
-                self._orgTask = Task()
-                self._orgTask!.cloneTask(self.task!)
-            }
-        }
-    }
-    
-    // - MARK:
+    // - MARK: Sharing Tasks on Button press handlers
+
     @IBAction func shareButtonPressed(sender: AnyObject) {
-        var text: String = "SwiftOrganizer: "
-        
-        for cell in _cells{
-            let str = cell.stringData()
-            
-            if str.characters.count > 0{
-                text += str + "; "
-            }
-        }
-        
-        let activity = UIActivityViewController(activityItems: [text], applicationActivities: nil)
-        self.presentViewController(activity, animated: true, completion: nil)
+        self.pressOnShareButtonHandler()
     }
 
     @IBAction func shareComposeFacebookButtonPressed(sender: AnyObject) {
-        var text: String = "SwiftOrganizer: "
-        
-        for cell in _cells{
-            let str = cell.stringData()
-            
-            if str.characters.count > 0{
-                text += str + "; "
-            }
-        }
-        
-        let serviceType = SLServiceTypeFacebook
-        
-        if SLComposeViewController.isAvailableForServiceType(serviceType){
-            let controller = SLComposeViewController(forServiceType: serviceType)
-            controller.setInitialText(text)
-            controller.addImage(UIImage(named: "ico1@2x"))
-            controller.addURL(NSURL(string: "http://www.apple.com/safari/"))
-            controller.completionHandler = {(result: SLComposeViewControllerResult) in
-                print("Completed")
-            }
-            presentViewController(controller, animated: true, completion: nil)
-
-        } else {
-            print("The Facebook service is not available".localized)
-        }
+        self.shareComposeFacebook()
     }
     
     @IBAction func shareComposeTwitterButtonPressed(sender: AnyObject) {
-        var text: String = "SwiftOrganizer: "
-        
-        for cell in _cells{
-            let str = cell.stringData()
-            
-            if str.characters.count > 0{
-                text += str + "; "
-            }
-        }
-        
-        let serviceType = SLServiceTypeTwitter
-        
-        if SLComposeViewController.isAvailableForServiceType(serviceType){
-            let controller = SLComposeViewController(forServiceType: serviceType)
-            controller.setInitialText(text)
-            controller.addImage(UIImage(named: "ico1@2x"))
-            controller.addURL(NSURL(string: "http://www.apple.com/safari/"))
-            controller.completionHandler = {(result: SLComposeViewControllerResult) in
-                print("Completed")
-            }
-            presentViewController(controller, animated: true, completion: nil)
-            
-        } else {
-            print("The Facebook service is not available".localized)
-        }
-        
-        
+        self.shareComposeTwitter()
     }
     
     // - MARK: Exit with close window
     
     func doneButtonWasPressed() {
-        self.buildObject()
+        self.input.saveTask()
     }
     
     func closeButtonWasPressed() {
-        if dataWasChanged() {
+        if self.input.wasDataChanged() {
             
             let controller = UIAlertController(title: "Data was changed!".localized, message: nil, preferredStyle: .ActionSheet)
             let skeepDateAction = UIAlertAction(title: "Discard".localized, style: .Cancel, handler: { action in
                 self.closeWindow()
             })
             let saveDateAction = UIAlertAction(title: "Save".localized, style: .Default, handler: { action in
-                self.buildObject()
+                self.input.saveTask()
                 self.closeWindow()
             })
             controller.addAction(skeepDateAction)
@@ -272,11 +151,10 @@ class EditTaskViewController: UIViewController, EditTaskInteractorOutput {
     
     func closeWindow() {
         self.navigationController?.popViewControllerAnimated(true)
-
         _undoManager.removeAllActions()
     }
     
-    func cancelEdit(){
+    func cancelToEdit(){
         if let navController = self.navigationController{
             let currentTopViewController = topViewController(navController)
             
@@ -291,7 +169,17 @@ class EditTaskViewController: UIViewController, EditTaskInteractorOutput {
             }
         }
     }
-    
+}
+
+    // MARK: EditTaskInteractorOutput (interactor calls)
+
+extension EditTaskViewController: EditTaskInteractorOutput {
+
+    func didReceiveData() {
+        dispatch_async(dispatch_get_main_queue(), {
+            self.tableView.reloadData()
+        })
+    }
 }
 
     // MARK: - UITableViewDataSource
@@ -311,6 +199,7 @@ extension EditTaskViewController: UITableViewDataSource {
     @objc func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let row: SOEditTaskCellId = SOEditTaskCellId(rawValue: indexPath.row)!
         let cellId: String = row.toString()
+        let task = self.input.task
         
         switch row{
         case .CategoryCell:
@@ -346,11 +235,14 @@ extension EditTaskViewController: UITableViewDataSource {
     }
 }
 
-extension EditTaskViewController: UITableViewDelegate{
+    // MARK: UITableViewDelegate
+
+extension EditTaskViewController: UITableViewDelegate {
 
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         var viewController: UIViewController!
+        let task = self.input.task
         
         let row: SOEditTaskCellId = SOEditTaskCellId(rawValue: indexPath.row)!
         switch row{
@@ -393,26 +285,104 @@ extension EditTaskViewController: SOEditTaskUndoDelegateProtocol{
 
     @objc func undoData(data: [String: AnyObject]) {
         if let fldName = data.keys.first{
+            let task = self.input.task
+            
             switch fldName{
             case SOEditTaskFiledName.CategoryFldName.rawValue:
                 let prevCategory = data[fldName] as! String
-                self.task?.category = prevCategory
+                task?.category = prevCategory
             case SOEditTaskFiledName.IconsFldName.rawValue:
                 let prevIcons = data[fldName] as! NSArray
-                self.task?.icons = prevIcons as! [String]
+                task?.icons = prevIcons as! [String]
             case SOEditTaskFiledName.DateFldName.rawValue:
                 let prevDate = data[fldName] as! String
                 let dateFormatter = NSDateFormatter()
                 dateFormatter.dateFormat = "dd-MM-yyyy HH:mm:ss"
                 let date = dateFormatter.dateFromString(prevDate)
-                self.task?.date = date
+                task?.date = date
             case SOEditTaskFiledName.DescriptionFldName.rawValue:
                 let prevDescription = data[fldName] as! String
-                self.task?.title = prevDescription
+                task?.title = prevDescription
             default:
                 print("Error: Something wrong with undo buffer keys!")
             }
         }
     }
     
+}
+
+    // MARK: Share Compose
+
+extension EditTaskViewController {
+    
+    func pressOnShareButtonHandler() {
+        var text: String = "SwiftOrganizer: "
+        
+        for cell in _cells{
+            let str = cell.stringData()
+            
+            if str.characters.count > 0{
+                text += str + "; "
+            }
+        }
+        
+        let activity = UIActivityViewController(activityItems: [text], applicationActivities: nil)
+        self.presentViewController(activity, animated: true, completion: nil)
+    }
+    
+    func shareComposeFacebook() {
+        var text: String = "SwiftOrganizer: "
+        
+        for cell in _cells{
+            let str = cell.stringData()
+            
+            if str.characters.count > 0{
+                text += str + "; "
+            }
+        }
+        
+        let serviceType = SLServiceTypeFacebook
+        
+        if SLComposeViewController.isAvailableForServiceType(serviceType){
+            let controller = SLComposeViewController(forServiceType: serviceType)
+            controller.setInitialText(text)
+            controller.addImage(UIImage(named: "ico1@2x"))
+            controller.addURL(NSURL(string: "http://www.apple.com/safari/"))
+            controller.completionHandler = {(result: SLComposeViewControllerResult) in
+                print("Completed")
+            }
+            presentViewController(controller, animated: true, completion: nil)
+            
+        } else {
+            print("The Facebook service is not available".localized)
+        }
+    }
+    
+    func shareComposeTwitter() {
+        var text: String = "SwiftOrganizer: "
+        
+        for cell in _cells{
+            let str = cell.stringData()
+            
+            if str.characters.count > 0{
+                text += str + "; "
+            }
+        }
+        
+        let serviceType = SLServiceTypeTwitter
+        
+        if SLComposeViewController.isAvailableForServiceType(serviceType){
+            let controller = SLComposeViewController(forServiceType: serviceType)
+            controller.setInitialText(text)
+            controller.addImage(UIImage(named: "ico1@2x"))
+            controller.addURL(NSURL(string: "http://www.apple.com/safari/"))
+            controller.completionHandler = {(result: SLComposeViewControllerResult) in
+                print("Completed")
+            }
+            presentViewController(controller, animated: true, completion: nil)
+            
+        } else {
+            print("The Facebook service is not available".localized)
+        }
+    }
 }
