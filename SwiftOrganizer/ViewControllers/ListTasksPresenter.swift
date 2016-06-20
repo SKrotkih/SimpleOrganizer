@@ -26,11 +26,8 @@ class ListTasksPresenter: ListTasksPresenterInput
     weak var output: ListTasksPresenterOutput!
 
     let dateFormatter: NSDateFormatter = {
-//        let dateFormatter = NSDateFormatter()
-//        dateFormatter.dateFormat = "dd-MM-yyyy HH:mm:ss"
         let dateFormatter = NSDateFormatter()
-        dateFormatter.dateStyle = .ShortStyle
-        dateFormatter.timeStyle = NSDateFormatterStyle.NoStyle
+        dateFormatter.dateFormat = "dd-MM-yyyy HH:mm:ss"
         return dateFormatter
     }()
     

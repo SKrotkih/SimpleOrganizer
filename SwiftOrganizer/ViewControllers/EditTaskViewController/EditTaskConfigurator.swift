@@ -35,13 +35,9 @@ class EditTaskConfigurator
   
   func configure(viewController: EditTaskViewController)
   {
-    let router = EditTaskRouter()
-    router.viewController = viewController
-    
     let interactor = EditTaskInteractor()
     interactor.output = viewController
     
     viewController.input = interactor
-    viewController.router = router
   }
 }

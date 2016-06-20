@@ -1,5 +1,5 @@
 //
-//  SOEditTaskIconsCell.swift
+//  EditTaskIconsCell.swift
 //  SwiftOrganizer
 //
 //  Created by Sergey Krotkih on 6/2/15.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SOEditTaskIconsCell: SOEditTaskCell {
+class EditTaskIconsCell: EditTaskDetailCell {
     @IBOutlet weak var iconsBackgroundView: UIView!
     @IBOutlet weak var textBackgroundLabel: UILabel!
     @IBOutlet weak var ico1ImageView: UIImageView!
@@ -18,18 +18,13 @@ class SOEditTaskIconsCell: SOEditTaskCell {
     @IBOutlet weak var ico5ImageView: UIImageView!
     @IBOutlet weak var ico6ImageView: UIImageView!
     
-    override var task: Task{
-        get{
-            return super.task
-        }
-        set{
-            super.task = newValue
-            
+    override func displayContent(){
+        if let task: Task = self.delegate.input.task{
             let imagesView = [self.ico1ImageView, self.ico2ImageView, self.ico3ImageView, self.ico4ImageView, self.ico5ImageView, self.ico6ImageView]
             var count: Int = 0;
             
             for i in 0...(imagesView.count - 1) {
-                let currImage: UIImage? = newValue.iconImage(i)
+                let currImage: UIImage? = task.iconImage(i)
                 let imageView: UIImageView = imagesView[i]
                 
                 if let image = currImage{
@@ -50,7 +45,10 @@ class SOEditTaskIconsCell: SOEditTaskCell {
                     textBackgroundLabel.hidden = true
                 }
             }
+        } else {
+            assert(false, "")
         }
+        
     }
 
     override func stringData() -> String{

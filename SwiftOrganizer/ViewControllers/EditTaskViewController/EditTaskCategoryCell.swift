@@ -1,5 +1,5 @@
 //
-//  SOEditTaskCategoryCell.swift
+//  EditTaskCategoryCell.swift
 //  SwiftOrganizer
 //
 //  Created by Sergey Krotkih on 6/2/15.
@@ -8,23 +8,20 @@
 
 import UIKit
 
-class SOEditTaskCategoryCell: SOEditTaskCell {
+class EditTaskCategoryCell: EditTaskDetailCell {
 
     @IBOutlet weak var categoryNameLabel: UILabel!
-
-    override var task: Task{
-        get{
-            return super.task
-        }
-        set{
-            super.task = newValue
-            
-            if newValue.categoryName == "" {
+    
+    override func displayContent(){
+        if let task: Task = self.delegate.input.task{
+            if task.categoryName == "" {
                 self.categoryNameLabel.text = "Category".localized
             }
             else{
-                self.categoryNameLabel.text = newValue.categoryName
+                self.categoryNameLabel.text = task.categoryName
             }
+        } else {
+            self.categoryNameLabel.text = "Undefined".localized
         }
     }
     

@@ -1,5 +1,5 @@
 //
-//  SOEditTaskDescriptionCell.swift
+//  EditTaskDescriptionCell.swift
 //  SwiftOrganizer
 //
 //  Created by Sergey Krotkih on 6/2/15.
@@ -8,23 +8,20 @@
 
 import UIKit
 
-class SOEditTaskDescriptionCell: SOEditTaskCell {
+class EditTaskDescriptionCell: EditTaskDetailCell {
     
     @IBOutlet weak var descriptionTasklabel: UILabel!
-
-    override var task: Task{
-        get{
-            return super.task
-        }
-        set{
-            super.task = newValue
-            
-            if newValue.title == "" {
+    
+    override func displayContent(){
+        if let task: Task = self.delegate.input.task{
+            if task.title == "" {
                 self.descriptionTasklabel.text = "Description".localized
             }
             else{
-                self.descriptionTasklabel.text = newValue.title
+                self.descriptionTasklabel.text = task.title
             }
+        } else {
+                self.descriptionTasklabel.text = "Undefined".localized
         }
     }
     

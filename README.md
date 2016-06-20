@@ -40,6 +40,7 @@ The following features has been implemented:
 - multi tasking is ready
 - Google Analitics
 - Crashlitics
+- implemented according Uncle Bob's clean architecture requarements
 
 Were applied the following design patterns:
 - abstract method;

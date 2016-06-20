@@ -1,5 +1,5 @@
 //
-//  SOEditTaskDateCell.swift
+//  EditTaskDateCell.swift
 //  SwiftOrganizer
 //
 //  Created by Sergey Krotkih on 6/2/15.
@@ -8,24 +8,21 @@
 
 import UIKit
 
-class SOEditTaskDateCell: SOEditTaskCell {
+class EditTaskDateCell: EditTaskDetailCell {
 
     @IBOutlet weak var dateTextLabel: UILabel!
     
-    override var task: Task{
-        get{
-            return super.task
-        }
-        set{
-            super.task = newValue
-            
-            if let dateEvent = newValue.date{
+    override func displayContent(){
+        if let task: Task = self.delegate.input.task{
+            if let dateEvent = task.date{
                 let dateFormatter = NSDateFormatter()
                 dateFormatter.dateFormat = "dd-MM-yyyy HH:mm:ss"
                 self.dateTextLabel.text = dateFormatter.stringFromDate(dateEvent)
             } else{
                 self.dateTextLabel.text = ""
             }
+        } else {
+            self.dateTextLabel.text = "Undefined".localized            
         }
     }
 

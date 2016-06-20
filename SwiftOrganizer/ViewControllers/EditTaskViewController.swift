@@ -16,7 +16,7 @@ enum EditTaskViewControllerId: String {
     case Description = "EnterDescriptionVC"
 }
 
-enum SOEditTaskCellId: Int {
+enum EditTaskDetailCellId: Int {
     case CategoryCell = 0
     case IconsCell, DateCell, DescriptionCell, Undefined
     func toString() -> String{
@@ -46,15 +46,24 @@ public protocol SOEditTaskUndoDelegateProtocol{
     func addToUndoBuffer(dict: NSDictionary)
 }
 
+protocol DetailsViewControllerDelegate {
+    var input: EditTaskInteractorInput! {get set}
+}
+
+extension EditTaskViewController: DetailsViewControllerDelegate{
+    
+}
+
+    // MARK: Class EditTaskViewController
+
 class EditTaskViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     
     var input: EditTaskInteractorInput!
-    var router: EditTaskRouter!
     
     var needToReloadData: Bool = true
     
-    private var _cells = [SOEditTaskCell](count: SOEditTaskCellId.Undefined.rawValue, repeatedValue: SOEditTaskCell())
+    private var _cells = [EditTaskDetailCell](count: EditTaskDetailCellId.Undefined.rawValue, repeatedValue: EditTaskDetailCell())
     private let _undoManager = NSUndoManager()
 
     override func awakeFromNib()
@@ -187,7 +196,7 @@ extension EditTaskViewController: EditTaskInteractorOutput {
 extension EditTaskViewController: UITableViewDataSource {
 
     @objc func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return SOEditTaskCellId.Undefined.rawValue
+        return EditTaskDetailCellId.Undefined.rawValue
     }
     
     // Customizing the row height
@@ -197,38 +206,41 @@ extension EditTaskViewController: UITableViewDataSource {
     }
     
     @objc func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let row: SOEditTaskCellId = SOEditTaskCellId(rawValue: indexPath.row)!
+        let row: EditTaskDetailCellId = EditTaskDetailCellId(rawValue: indexPath.row)!
         let cellId: String = row.toString()
-        let task = self.input.task
         
         switch row{
         case .CategoryCell:
-            _cells[0] = self.tableView.dequeueReusableCellWithIdentifier(cellId) as! SOEditTaskCategoryCell
-            _cells[0].task = task!
+            _cells[0] = self.tableView.dequeueReusableCellWithIdentifier(cellId) as! EditTaskCategoryCell
+            _cells[0].delegate = self
+            _cells[0].displayContent()
             
             return _cells[0]
             
         case .IconsCell:
-            _cells[1] = self.tableView.dequeueReusableCellWithIdentifier(cellId) as! SOEditTaskIconsCell
-            _cells[1].task = task!
+            _cells[1] = self.tableView.dequeueReusableCellWithIdentifier(cellId) as! EditTaskIconsCell
+            _cells[1].delegate = self
+            _cells[1].displayContent()
             
             return _cells[1]
             
         case .DateCell:
-            _cells[2] = self.tableView.dequeueReusableCellWithIdentifier(cellId) as! SOEditTaskDateCell
-            _cells[2].task = task!
+            _cells[2] = self.tableView.dequeueReusableCellWithIdentifier(cellId) as! EditTaskDateCell
+            _cells[2].delegate = self
+            _cells[2].displayContent()
             
             return _cells[2]
             
         case .DescriptionCell:
-            _cells[3] = self.tableView.dequeueReusableCellWithIdentifier(cellId) as! SOEditTaskDescriptionCell
-            _cells[3].task = task!
+            _cells[3] = self.tableView.dequeueReusableCellWithIdentifier(cellId) as! EditTaskDescriptionCell
+            _cells[3].delegate = self
+            _cells[3].displayContent()
             
             return _cells[3]
             
         default:
             assert(false, "Rows is too much!")
-            let cell = self.tableView.dequeueReusableCellWithIdentifier(SOEditTaskCellId.Undefined.toString()) as? SOEditTaskCategoryCell
+            let cell = self.tableView.dequeueReusableCellWithIdentifier(EditTaskDetailCellId.Undefined.toString()) as? EditTaskCategoryCell
             
             return cell!
         }
@@ -244,7 +256,7 @@ extension EditTaskViewController: UITableViewDelegate {
         var viewController: UIViewController!
         let task = self.input.task
         
-        let row: SOEditTaskCellId = SOEditTaskCellId(rawValue: indexPath.row)!
+        let row: EditTaskDetailCellId = EditTaskDetailCellId(rawValue: indexPath.row)!
         switch row{
         case .CategoryCell:
             let enterCategoryVC = storyboard.instantiateViewControllerWithIdentifier(EditTaskViewControllerId.Category.rawValue) as! SOEditCategoryViewController
