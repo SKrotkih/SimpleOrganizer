@@ -1,5 +1,5 @@
 //
-//  SOEditIconsViewController.swift
+//  EditTaskconsViewController.swift
 //  SwiftOrganizer
 //
 //  Created by Sergey Krotkih on 6/2/15.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SOEditIconsViewController: SOEditTaskFieldBaseViewController {
+class EditTaskconsViewController: EditTaskDetailViewController {
     
     @IBOutlet weak var tableView: UITableView!
 
@@ -20,7 +20,7 @@ class SOEditIconsViewController: SOEditTaskFieldBaseViewController {
         
         self.title = "Icons".localized
         let rightButtonImage : UIImage! = UIImage(named: "save_task")
-        let rightButton: UIBarButtonItem = UIBarButtonItem(image: rightButtonImage, style: UIBarButtonItemStyle.Plain, target: self, action: #selector(SOEditIconsViewController.doneButtonWasPressed))
+        let rightButton: UIBarButtonItem = UIBarButtonItem(image: rightButtonImage, style: UIBarButtonItemStyle.Plain, target: self, action: #selector(EditTaskconsViewController.doneButtonWasPressed))
         navigationItem.rightBarButtonItem = rightButton;
     }
 
@@ -38,7 +38,7 @@ class SOEditIconsViewController: SOEditTaskFieldBaseViewController {
     override func willFinishEditing() -> Bool{
         var needAsk: Bool = false
 
-        if let theTask = self.task{
+        if let theTask = self.delegate?.input.task{
             let icons = theTask.icons
             var countIcons: Int = 0
             
@@ -82,7 +82,7 @@ class SOEditIconsViewController: SOEditTaskFieldBaseViewController {
     }
     
     func doneButtonWasPressed() {
-        if let theTask = self.task{
+        if let theTask = self.delegate?.input.task{
             let icons = theTask.icons
             for i in 0..<icons.count{
                 var newIconValue = ""
@@ -102,7 +102,7 @@ class SOEditIconsViewController: SOEditTaskFieldBaseViewController {
     }
 }
 
-extension SOEditIconsViewController{
+extension EditTaskconsViewController{
 
     private func fetchData(completeBlock: ()-> Void ){
         SOFetchingData.sharedInstance.allIcons{(icons: [TaskIco], fetchError: NSError?) in
@@ -117,7 +117,7 @@ extension SOEditIconsViewController{
     }
     
     private func reloadData(){
-        if let theTask = self.task{
+        if let theTask = self.delegate?.input.task{
             taskIcons.removeAll(keepCapacity: false)
             let icons = theTask.icons
             
@@ -132,7 +132,7 @@ extension SOEditIconsViewController{
     }
     
     func fillIconsBuffer() -> [String]{
-        if let theTask = self.task{
+        if let theTask = self.delegate?.input.task{
             let iconsCount = theTask.icons.count
             var buffer = [String](count: iconsCount, repeatedValue: "")
             
@@ -151,7 +151,7 @@ extension SOEditIconsViewController{
 
     // MARK: UITableViewDataSource
 
-extension SOEditIconsViewController: UITableViewDataSource{
+extension EditTaskconsViewController: UITableViewDataSource{
     
     @objc func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return icons.count
@@ -186,7 +186,7 @@ extension SOEditIconsViewController: UITableViewDataSource{
 
     // MARK: UITableViewDelegate
 
-extension SOEditIconsViewController: UITableViewDelegate {
+extension EditTaskconsViewController: UITableViewDelegate {
 
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let row = indexPath.row

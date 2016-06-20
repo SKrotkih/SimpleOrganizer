@@ -1,5 +1,5 @@
 //
-//  SOEditCategoryViewController.swift
+//  EditTaskCategoryViewController.swift
 //  SwiftOrganizer
 //
 //  Created by Sergey Krotkih on 6/2/15.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SOEditCategoryViewController: SOEditTaskFieldBaseViewController {
+class EditTaskCategoryViewController: EditTaskDetailViewController {
 
     private var categories: [TaskCategory] = [TaskCategory]()
     
@@ -42,7 +42,7 @@ class SOEditCategoryViewController: SOEditTaskFieldBaseViewController {
 
     // MARK: -
 
-extension SOEditCategoryViewController{
+extension EditTaskCategoryViewController{
     private func fetchData(completionBlock: ()-> Void){
         SOFetchingData.sharedInstance.allCategories{(categories: [TaskCategory], fetchError: NSError?) in
             if let error = fetchError{
@@ -57,7 +57,7 @@ extension SOEditCategoryViewController{
 
     // MARK: UITableViewDataSource
 
-extension SOEditCategoryViewController: UITableViewDataSource {
+extension EditTaskCategoryViewController: UITableViewDataSource {
 
     @objc func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return categories.count
@@ -77,7 +77,7 @@ extension SOEditCategoryViewController: UITableViewDataSource {
         cell.categoryNameLabel.text = categoryName
         cell.accessoryType = .None
         
-        if let theTask = self.task{
+        if let theTask = self.delegate?.input.task{
             if theTask.category == categoryId{
                 cell.accessoryType = .Checkmark
             }
@@ -89,10 +89,10 @@ extension SOEditCategoryViewController: UITableViewDataSource {
 
     // MARK: UITableViewDelegate
 
-extension SOEditCategoryViewController: UITableViewDelegate {
+extension EditTaskCategoryViewController: UITableViewDelegate {
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
 
-        if let theTask = self.task{
+        if let theTask = self.delegate?.input.task{
             let dict = NSDictionary(objects: [theTask.category], forKeys: ["category"])
             self.undoDelegate?.addToUndoBuffer(dict)
             

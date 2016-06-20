@@ -1,5 +1,5 @@
 //
-//  SOEditDescriptionViewController.swift
+//  EditTaskDescriptionViewController.swift
 //  SwiftOrganizer
 //
 //  Created by Sergey Krotkih on 6/2/15.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SOEditDescriptionViewController: SOEditTaskFieldBaseViewController {
+class EditTaskDescriptionViewController: EditTaskDetailViewController {
     
     @IBOutlet weak var textView: UITextView!
     @IBOutlet weak var heightTextViewConstraint: NSLayoutConstraint!
@@ -18,7 +18,7 @@ class SOEditDescriptionViewController: SOEditTaskFieldBaseViewController {
         
         self.title = "Description".localized                        
 
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(SOEditDescriptionViewController.keyboardDidShow(_:)), name: UIKeyboardDidShowNotification,  object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(EditTaskDescriptionViewController.keyboardDidShow(_:)), name: UIKeyboardDidShowNotification,  object: nil)
     }
 
     deinit {
@@ -29,21 +29,26 @@ class SOEditDescriptionViewController: SOEditTaskFieldBaseViewController {
         super.viewWillAppear(animated)
         
         let rightButtonImage : UIImage! = UIImage(named: "save_task")
-        let rightButton: UIBarButtonItem = UIBarButtonItem(image: rightButtonImage, style: UIBarButtonItemStyle.Plain, target: self, action: #selector(SOEditDescriptionViewController.doneButtonWasPressed))
+        let rightButton: UIBarButtonItem = UIBarButtonItem(image: rightButtonImage, style: UIBarButtonItemStyle.Plain, target: self, action: #selector(EditTaskDescriptionViewController.doneButtonWasPressed))
         navigationItem.rightBarButtonItem = rightButton;
 
         self.automaticallyAdjustsScrollViewInsets = false
-        textView.text = self.task?.title
+        
+        if let theTask = self.delegate?.input.task{
+            textView.text = theTask.title
+        }
 
         textView.becomeFirstResponder()
     }
     
     override func willFinishEditing() -> Bool{
-        if let theTask = self.task{
+        if let theTask = self.delegate?.input.task{
             if theTask.title != textView.text{
                 let controller = UIAlertController(title: "Data was chenged!".localized, message: nil, preferredStyle: .ActionSheet)
                 let skeepDateAction = UIAlertAction(title: "Discard".localized, style: .Cancel, handler: { action in
-                    self.textView.text = self.task?.title
+                    if let theTask = self.delegate?.input.task{
+                        self.textView.text = theTask.title
+                    }
                     super.closeButtonWasPressed()
                 })
                 let saveDateAction = UIAlertAction(title: "Save".localized, style: .Default, handler: { action in
@@ -61,7 +66,7 @@ class SOEditDescriptionViewController: SOEditTaskFieldBaseViewController {
     }
     
     func doneButtonWasPressed() {
-        if let theTask = self.task{
+        if let theTask = self.delegate?.input.task{
             let dict = NSDictionary(objects: [theTask.title], forKeys: ["title"])
             self.undoDelegate?.addToUndoBuffer(dict)
             

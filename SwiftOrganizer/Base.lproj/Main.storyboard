@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
@@ -706,10 +707,10 @@
             </objects>
             <point key="canvasLocation" x="182" y="-723"/>
         </scene>
-        <!--Edit Icons View Controller-->
+        <!--Edit Taskcons View Controller-->
         <scene sceneID="wPZ-kX-jUY">
             <objects>
-                <viewController storyboardIdentifier="EnterIconsVC" id="ZZB-EF-G2O" customClass="SOEditIconsViewController" customModule="SwiftOrganizer" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="EnterIconsVC" id="ZZB-EF-G2O" customClass="EditTaskconsViewController" customModule="SwiftOrganizer" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="nS4-u9-MfF"/>
                         <viewControllerLayoutGuide type="bottom" id="HMS-AB-SwM"/>
@@ -786,6 +787,7 @@
                             <constraint firstAttribute="trailingMargin" secondItem="gLW-wo-xom" secondAttribute="trailing" id="XHY-Zm-qLk"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="dIB-9X-FaI"/>
                     <connections>
                         <outlet property="tableView" destination="gLW-wo-xom" id="3Z1-Po-Cx0"/>
                         <segue destination="evt-Nk-lfm" kind="unwind" identifier="unwindToEditTaskViewController" unwindAction="unwindToEditTaskViewController:" id="Tic-hv-qZR"/>
@@ -936,7 +938,7 @@
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="tintColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="gray" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="categoryCell" rowHeight="44" id="AGg-Vd-QtQ" customClass="SOEditTaskCategoryCell" customModule="SwiftOrganizer" customModuleProvider="target">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="gray" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="categoryCell" rowHeight="44" id="AGg-Vd-QtQ" customClass="EditTaskCategoryCell" customModule="SwiftOrganizer" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="22" width="560" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="AGg-Vd-QtQ" id="0TK-E7-saS">
@@ -984,6 +986,7 @@
                                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                         <connections>
                                             <outlet property="categoryNameLabel" destination="L1l-uN-CSf" id="8Fj-RP-1Ig"/>
+                                            <segue destination="d5z-aT-xtB" kind="push" identifier="EditTaskCategory" id="iFw-1k-mI8"/>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="gray" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="iconsCell" id="z20-5r-DFW" customClass="EditTaskIconsCell" customModule="SwiftOrganizer" customModuleProvider="target">
@@ -1098,6 +1101,7 @@
                                             <outlet property="ico6ImageView" destination="b2e-Vo-74a" id="ser-TD-39o"/>
                                             <outlet property="iconsBackgroundView" destination="HUv-ys-wRd" id="EDS-A2-K8t"/>
                                             <outlet property="textBackgroundLabel" destination="PPn-Z5-fz3" id="QYe-Hg-RUG"/>
+                                            <segue destination="ZZB-EF-G2O" kind="push" identifier="EditTaskIcons" id="ckg-M8-1Km"/>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="gray" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="dateCell" id="JmC-s7-Qwd" customClass="EditTaskDateCell" customModule="SwiftOrganizer" customModuleProvider="target">
@@ -1136,6 +1140,7 @@
                                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                         <connections>
                                             <outlet property="dateTextLabel" destination="aXq-HI-YGX" id="fBM-IL-4CB"/>
+                                            <segue destination="ZPv-0M-s6H" kind="push" identifier="EditTaskDate" id="a06-CV-O4r"/>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="gray" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="descriptionCell" id="mmc-Rc-MeI" customClass="EditTaskDescriptionCell" customModule="SwiftOrganizer" customModuleProvider="target">
@@ -1174,6 +1179,7 @@
                                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                         <connections>
                                             <outlet property="descriptionTasklabel" destination="S44-4V-Xng" id="Bz5-ZE-DTX"/>
+                                            <segue destination="n5j-fl-08P" kind="push" identifier="EditTaskDescription" id="rMC-eb-WIv"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -1264,10 +1270,10 @@
             </objects>
             <point key="canvasLocation" x="790" y="-723"/>
         </scene>
-        <!--Edit Category View Controller-->
+        <!--Edit Task Category View Controller-->
         <scene sceneID="BPc-HJ-Q57">
             <objects>
-                <viewController storyboardIdentifier="EnterCategoryVC" id="d5z-aT-xtB" customClass="SOEditCategoryViewController" customModule="SwiftOrganizer" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="EnterCategoryVC" id="d5z-aT-xtB" customClass="EditTaskCategoryViewController" customModule="SwiftOrganizer" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="VuJ-hv-lhg"/>
                         <viewControllerLayoutGuide type="bottom" id="7MS-GQ-0DM"/>
@@ -1343,6 +1349,7 @@
                             <constraint firstItem="7MS-GQ-0DM" firstAttribute="top" secondItem="g8C-0P-gPa" secondAttribute="bottom" id="btQ-gX-hUS"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="4O5-g8-2zQ"/>
                     <connections>
                         <outlet property="tableView" destination="g8C-0P-gPa" id="J0j-kJ-1GD"/>
                         <segue destination="2YH-Wt-H0d" kind="unwind" identifier="unwindToEditTaskViewController" unwindAction="unwindToEditTaskViewController:" id="aTo-Kr-mmw"/>
@@ -1353,10 +1360,10 @@
             </objects>
             <point key="canvasLocation" x="1402" y="-725"/>
         </scene>
-        <!--Edit Date View Controller-->
+        <!--Edit Task Date View Controller-->
         <scene sceneID="Y8A-Tu-odx">
             <objects>
-                <viewController storyboardIdentifier="EnterDateVC" id="ZPv-0M-s6H" customClass="SOEditDateViewController" customModule="SwiftOrganizer" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="EnterDateVC" id="ZPv-0M-s6H" customClass="EditTaskDateViewController" customModule="SwiftOrganizer" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="a5y-AI-L7M"/>
                         <viewControllerLayoutGuide type="bottom" id="NXl-hd-Tq2"/>
@@ -1376,6 +1383,9 @@
                                 <date key="maximumDate" timeIntervalSinceReferenceDate="599482800">
                                     <!--2019-12-31 11:00:00 +0000-->
                                 </date>
+                                <variation key="widthClass=compact" misplaced="YES">
+                                    <rect key="frame" x="20" y="90" width="360" height="216"/>
+                                </variation>
                             </datePicker>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Hqg-2q-nBP">
                                 <rect key="frame" x="124" y="20" width="353" height="65"/>
@@ -1446,6 +1456,9 @@
                                     <constraint firstItem="iWm-wM-yf0" firstAttribute="leading" secondItem="Hqg-2q-nBP" secondAttribute="leading" constant="2" id="rgg-EM-O5p"/>
                                     <constraint firstItem="iWm-wM-yf0" firstAttribute="top" secondItem="Hqg-2q-nBP" secondAttribute="top" constant="1" id="whU-NX-xWO"/>
                                 </constraints>
+                                <variation key="widthClass=compact" misplaced="YES">
+                                    <rect key="frame" x="24" y="20" width="353" height="65"/>
+                                </variation>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
@@ -1457,6 +1470,7 @@
                             <constraint firstAttribute="centerX" secondItem="Hqg-2q-nBP" secondAttribute="centerX" constant="-0.5" id="zLr-hY-rWN"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="B5x-TS-EUQ"/>
                     <connections>
                         <outlet property="caveEventToCalendarButton" destination="UXo-Or-4Pz" id="BNU-fz-ZDu"/>
                         <outlet property="datePicker" destination="Rvd-Nc-2wN" id="7cR-1o-S2j"/>
@@ -1470,10 +1484,10 @@
             </objects>
             <point key="canvasLocation" x="790" y="-82"/>
         </scene>
-        <!--Edit Description View Controller-->
+        <!--Edit Task Description View Controller-->
         <scene sceneID="fgm-A3-TZn">
             <objects>
-                <viewController storyboardIdentifier="EnterDescriptionVC" id="n5j-fl-08P" customClass="SOEditDescriptionViewController" customModule="SwiftOrganizer" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="EnterDescriptionVC" id="n5j-fl-08P" customClass="EditTaskDescriptionViewController" customModule="SwiftOrganizer" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="oEP-rl-Ize"/>
                         <viewControllerLayoutGuide type="bottom" id="zAu-fn-Df6"/>
@@ -1491,6 +1505,9 @@
                                 <color key="textColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-CondensedBold" family="Helvetica Neue" pointSize="16"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                <variation key="widthClass=compact" misplaced="YES">
+                                    <rect key="frame" x="20" y="28" width="360" height="422"/>
+                                </variation>
                             </textView>
                         </subviews>
                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
@@ -1500,6 +1517,7 @@
                             <constraint firstItem="hs4-Xr-dLd" firstAttribute="leading" secondItem="ww9-LH-sre" secondAttribute="leadingMargin" id="yAo-3r-Wy7"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="Qux-w2-bhU"/>
                     <connections>
                         <outlet property="heightTextViewConstraint" destination="lGQ-tV-bTx" id="Ikr-mZ-KvL"/>
                         <outlet property="textView" destination="hs4-Xr-dLd" id="Oce-jX-qiB"/>

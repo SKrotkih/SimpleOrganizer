@@ -23,30 +23,26 @@ class EditTaskIconsCell: EditTaskDetailCell {
             let imagesView = [self.ico1ImageView, self.ico2ImageView, self.ico3ImageView, self.ico4ImageView, self.ico5ImageView, self.ico6ImageView]
             var count: Int = 0;
             
-            for i in 0...(imagesView.count - 1) {
-                let currImage: UIImage? = task.iconImage(i)
+            for i in 0..<imagesView.count {
                 let imageView: UIImageView = imagesView[i]
-                
-                if let image = currImage{
-                    imageView.image = image
-                }
-                else
-                {
+
+                if let currImage: UIImage = task.iconImage(i){
+                    imageView.image = currImage
+                } else {
                     imageView.image = nil
                     count += 1
                 }
-                
-                if count == imagesView.count{
-                    iconsBackgroundView.hidden = true
-                    textBackgroundLabel.hidden = false
-                }
-                else{
-                    iconsBackgroundView.hidden = false
-                    textBackgroundLabel.hidden = true
-                }
+            }
+            if count >= imagesView.count{
+                iconsBackgroundView.hidden = true
+                textBackgroundLabel.hidden = false
+            }
+            else{
+                iconsBackgroundView.hidden = false
+                textBackgroundLabel.hidden = true
             }
         } else {
-            assert(false, "")
+            assert(false, "The Task has to be defined!")
         }
         
     }

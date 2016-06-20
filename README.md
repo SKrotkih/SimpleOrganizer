@@ -1,10 +1,11 @@
 # SwiftOrganizer
 ============
 
-This is a simple organizer application for both iPhone and iPad. 
-For getting some practice of using Swift has been implemented.
+This is an organizer application in Swift for both iPhone and iPad. 
 
 ## Implements
+
+Was used VIPER approach architecture.
 
 There were implemented two types of database:
 - Local database on Core Data

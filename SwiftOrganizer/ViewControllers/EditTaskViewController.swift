@@ -60,6 +60,7 @@ class EditTaskViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     
     var input: EditTaskInteractorInput!
+    var router: EditTaskRouter!
     
     var needToReloadData: Bool = true
     
@@ -169,8 +170,8 @@ class EditTaskViewController: UIViewController {
             
             if currentTopViewController == self{
                 closeButtonWasPressed()
-            } else if currentTopViewController!.isKindOfClass(SOEditTaskFieldBaseViewController){
-                let editTaskFieldViewController = currentTopViewController as! SOEditTaskFieldBaseViewController
+            } else if currentTopViewController!.isKindOfClass(EditTaskDetailViewController){
+                let editTaskFieldViewController = currentTopViewController as! EditTaskDetailViewController
                 editTaskFieldViewController.closeButtonWasPressed()
                 dispatch_async(dispatch_get_main_queue(), {
                     self.closeButtonWasPressed()
@@ -178,6 +179,12 @@ class EditTaskViewController: UIViewController {
             }
         }
     }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?)
+    {
+        router.passDataToNextScene(segue)
+    }
+    
 }
 
     // MARK: EditTaskInteractorOutput (interactor calls)
@@ -200,91 +207,25 @@ extension EditTaskViewController: UITableViewDataSource {
     }
     
     // Customizing the row height
-    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) ->
-        CGFloat {
+    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
             return 44
     }
     
     @objc func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let row: EditTaskDetailCellId = EditTaskDetailCellId(rawValue: indexPath.row)!
-        let cellId: String = row.toString()
-        
-        switch row{
-        case .CategoryCell:
-            _cells[0] = self.tableView.dequeueReusableCellWithIdentifier(cellId) as! EditTaskCategoryCell
-            _cells[0].delegate = self
-            _cells[0].displayContent()
-            
-            return _cells[0]
-            
-        case .IconsCell:
-            _cells[1] = self.tableView.dequeueReusableCellWithIdentifier(cellId) as! EditTaskIconsCell
-            _cells[1].delegate = self
-            _cells[1].displayContent()
-            
-            return _cells[1]
-            
-        case .DateCell:
-            _cells[2] = self.tableView.dequeueReusableCellWithIdentifier(cellId) as! EditTaskDateCell
-            _cells[2].delegate = self
-            _cells[2].displayContent()
-            
-            return _cells[2]
-            
-        case .DescriptionCell:
-            _cells[3] = self.tableView.dequeueReusableCellWithIdentifier(cellId) as! EditTaskDescriptionCell
-            _cells[3].delegate = self
-            _cells[3].displayContent()
-            
-            return _cells[3]
-            
-        default:
-            assert(false, "Rows is too much!")
-            let cell = self.tableView.dequeueReusableCellWithIdentifier(EditTaskDetailCellId.Undefined.toString()) as? EditTaskCategoryCell
-            
-            return cell!
-        }
+        let row = indexPath.row
+        let optionalRow: EditTaskDetailCellId = EditTaskDetailCellId(rawValue: row)!
+        let cellId: String = optionalRow.toString()
+        let cell = self.tableView.dequeueReusableCellWithIdentifier(cellId) as! EditTaskDetailCell
+        cell.delegate = self
+        cell.displayContent()
+        _cells[row] = cell
+        return cell
     }
 }
 
     // MARK: UITableViewDelegate
 
 extension EditTaskViewController: UITableViewDelegate {
-
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        var viewController: UIViewController!
-        let task = self.input.task
-        
-        let row: EditTaskDetailCellId = EditTaskDetailCellId(rawValue: indexPath.row)!
-        switch row{
-        case .CategoryCell:
-            let enterCategoryVC = storyboard.instantiateViewControllerWithIdentifier(EditTaskViewControllerId.Category.rawValue) as! SOEditCategoryViewController
-            enterCategoryVC.task = task
-            enterCategoryVC.undoDelegate = self
-            viewController = enterCategoryVC
-        case .IconsCell:
-            let enterIconsVC = storyboard.instantiateViewControllerWithIdentifier(EditTaskViewControllerId.Icons.rawValue) as! SOEditIconsViewController
-            enterIconsVC.task = task
-            enterIconsVC.undoDelegate = self
-            viewController = enterIconsVC
-        case .DateCell:
-            let enterDateVC = storyboard.instantiateViewControllerWithIdentifier(EditTaskViewControllerId.Date.rawValue) as! SOEditDateViewController
-            enterDateVC.task = task
-            enterDateVC.undoDelegate = self
-            enterDateVC.date = task?.date
-            viewController = enterDateVC
-        case .DescriptionCell:
-            let enterDescrVC = storyboard.instantiateViewControllerWithIdentifier(EditTaskViewControllerId.Description.rawValue) as! SOEditDescriptionViewController
-            enterDescrVC.task = task
-            enterDescrVC.undoDelegate = self
-            viewController = enterDescrVC
-        default:
-            assert(false, "Rows is too much!")
-        }
-        
-        self.navigationController!.pushViewController(viewController, animated: true)
-    }
 }
 
     // MARK: Undo task data implementation

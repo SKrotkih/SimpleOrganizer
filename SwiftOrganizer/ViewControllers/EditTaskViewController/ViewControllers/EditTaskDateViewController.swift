@@ -1,5 +1,5 @@
 //
-//  SOEditDateViewController.swift
+//  EditTaskDateViewController.swift
 //  SwiftOrganizer
 //
 //  Created by Sergey Krotkih on 6/2/15.
@@ -9,7 +9,7 @@
 import UIKit
 import EventKit
 
-class SOEditDateViewController: SOEditTaskFieldBaseViewController {
+class EditTaskDateViewController: EditTaskDetailViewController {
     private var _date: NSDate?
     @IBOutlet weak var datePicker: UIDatePicker!
     @IBOutlet weak var needRememberSwitch: UISwitch!
@@ -44,7 +44,7 @@ class SOEditDateViewController: SOEditTaskFieldBaseViewController {
         super.viewWillAppear(animated)
         
         let rightButtonImage : UIImage! = UIImage(named: "save_task")
-        let rightButton: UIBarButtonItem = UIBarButtonItem(image: rightButtonImage, style: UIBarButtonItemStyle.Plain, target: self, action: #selector(SOEditDateViewController.doneButtonWasPressed))
+        let rightButton: UIBarButtonItem = UIBarButtonItem(image: rightButtonImage, style: UIBarButtonItemStyle.Plain, target: self, action: #selector(EditTaskDateViewController.doneButtonWasPressed))
         navigationItem.rightBarButtonItem = rightButton;
         
         if let currTaskDate = self.date{
@@ -96,7 +96,7 @@ class SOEditDateViewController: SOEditTaskFieldBaseViewController {
                     theEvent.calendar = eventCalendars[0]
                     theEvent.startDate = self.datePicker.date
                     theEvent.endDate = self.datePicker.date
-                    theEvent.title = self.task!.title
+                    theEvent.title = (self.delegate?.input.task!.title)!
                     var error : NSError? = nil
                     do {
                         try store.saveEvent(theEvent, span: .ThisEvent, commit: true)
@@ -140,7 +140,7 @@ class SOEditDateViewController: SOEditTaskFieldBaseViewController {
     }
 
     private func saveData(){
-        if let theTask = self.task{
+        if let theTask = self.delegate?.input.task{
             var dateString: String!
             
             if let oldDate = theTask.date{
