@@ -11,7 +11,7 @@ import DataBaseKit
 
 class EditTaskDetailViewController: UIViewController {
     
-    var delegate: DetailsViewControllerDelegate?
+    var input: EditTask.FetchTask.Response!
     var undoDelegate: SOEditTaskUndoDelegateProtocol?
     
     override func viewWillAppear(animated: Bool) {

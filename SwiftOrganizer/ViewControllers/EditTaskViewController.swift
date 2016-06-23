@@ -66,7 +66,7 @@ class EditTaskViewController: UIViewController {
     
     private var _cells = [EditTaskDetailCell](count: EditTaskDetailCellId.Undefined.rawValue, repeatedValue: EditTaskDetailCell())
     private let _undoManager = NSUndoManager()
-
+    
     override func awakeFromNib()
     {
         super.awakeFromNib()
@@ -82,7 +82,7 @@ class EditTaskViewController: UIViewController {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         if needToReloadData {
-            self.input.prepareTaskData()
+            self.input.fetchTask()
         } else {
            needToReloadData = true
         }
@@ -191,7 +191,7 @@ class EditTaskViewController: UIViewController {
 
 extension EditTaskViewController: EditTaskInteractorOutput {
 
-    func didReceiveData() {
+    func displayTask() {
         dispatch_async(dispatch_get_main_queue(), {
             self.tableView.reloadData()
         })
@@ -213,10 +213,10 @@ extension EditTaskViewController: UITableViewDataSource {
     
     @objc func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let row = indexPath.row
-        let optionalRow: EditTaskDetailCellId = EditTaskDetailCellId(rawValue: row)!
+        let optionalRow = EditTaskDetailCellId(rawValue: row)!
         let cellId: String = optionalRow.toString()
         let cell = self.tableView.dequeueReusableCellWithIdentifier(cellId) as! EditTaskDetailCell
-        cell.delegate = self
+        cell.input = self.input.responce
         cell.displayContent()
         _cells[row] = cell
         return cell
@@ -238,24 +238,23 @@ extension EditTaskViewController: SOEditTaskUndoDelegateProtocol{
 
     @objc func undoData(data: [String: AnyObject]) {
         if let fldName = data.keys.first{
-            let task = self.input.task
-            
+            let task: Task = self.input.responce.task
             switch fldName{
             case SOEditTaskFiledName.CategoryFldName.rawValue:
                 let prevCategory = data[fldName] as! String
-                task?.category = prevCategory
+                task.category = prevCategory
             case SOEditTaskFiledName.IconsFldName.rawValue:
                 let prevIcons = data[fldName] as! NSArray
-                task?.icons = prevIcons as! [String]
+                task.icons = prevIcons as! [String]
             case SOEditTaskFiledName.DateFldName.rawValue:
                 let prevDate = data[fldName] as! String
                 let dateFormatter = NSDateFormatter()
                 dateFormatter.dateFormat = "dd-MM-yyyy HH:mm:ss"
                 let date = dateFormatter.dateFromString(prevDate)
-                task?.date = date
+                task.date = date
             case SOEditTaskFiledName.DescriptionFldName.rawValue:
                 let prevDescription = data[fldName] as! String
-                task?.title = prevDescription
+                task.title = prevDescription
             default:
                 print("Error: Something wrong with undo buffer keys!")
             }

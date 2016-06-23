@@ -9,8 +9,7 @@
 import UIKit
 
 class EditTaskDetailCell: UITableViewCell {
-    
-    var delegate: DetailsViewControllerDelegate!
+    var input: EditTask.FetchTask.Response!
     
     func displayContent(){
         assert(false, "You need to override this method in the child class!")    

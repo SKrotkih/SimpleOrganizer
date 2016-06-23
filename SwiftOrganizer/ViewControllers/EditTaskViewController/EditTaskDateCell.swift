@@ -13,16 +13,14 @@ class EditTaskDateCell: EditTaskDetailCell {
     @IBOutlet weak var dateTextLabel: UILabel!
     
     override func displayContent(){
-        if let task: Task = self.delegate.input.task{
-            if let dateEvent = task.date{
-                let dateFormatter = NSDateFormatter()
-                dateFormatter.dateFormat = "dd-MM-yyyy HH:mm:ss"
-                self.dateTextLabel.text = dateFormatter.stringFromDate(dateEvent)
-            } else{
-                self.dateTextLabel.text = ""
-            }
-        } else {
-            self.dateTextLabel.text = "Undefined".localized            
+        let task: Task = self.input.task
+
+        if let dateEvent = task.date{
+            let dateFormatter = NSDateFormatter()
+            dateFormatter.dateFormat = "dd-MM-yyyy HH:mm:ss"
+            self.dateTextLabel.text = dateFormatter.stringFromDate(dateEvent)
+        } else{
+            self.dateTextLabel.text = ""
         }
     }
 

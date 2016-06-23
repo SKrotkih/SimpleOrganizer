@@ -34,21 +34,16 @@ class EditTaskDescriptionViewController: EditTaskDetailViewController {
 
         self.automaticallyAdjustsScrollViewInsets = false
         
-        if let theTask = self.delegate?.input.task{
-            textView.text = theTask.title
-        }
+        textView.text = input.task.title
 
         textView.becomeFirstResponder()
     }
     
     override func willFinishEditing() -> Bool{
-        if let theTask = self.delegate?.input.task{
-            if theTask.title != textView.text{
+            if input.task.title != textView.text{
                 let controller = UIAlertController(title: "Data was chenged!".localized, message: nil, preferredStyle: .ActionSheet)
                 let skeepDateAction = UIAlertAction(title: "Discard".localized, style: .Cancel, handler: { action in
-                    if let theTask = self.delegate?.input.task{
-                        self.textView.text = theTask.title
-                    }
+                    self.textView.text = self.input.task.title
                     super.closeButtonWasPressed()
                 })
                 let saveDateAction = UIAlertAction(title: "Save".localized, style: .Default, handler: { action in
@@ -60,19 +55,15 @@ class EditTaskDescriptionViewController: EditTaskDetailViewController {
                 
                 return false
             }
-        }
         
         return super.willFinishEditing()
     }
     
     func doneButtonWasPressed() {
-        if let theTask = self.delegate?.input.task{
-            let dict = NSDictionary(objects: [theTask.title], forKeys: ["title"])
-            self.undoDelegate?.addToUndoBuffer(dict)
-            
-            theTask.title = textView.text
-        }
+        let dict = NSDictionary(objects: [self.input.task.title], forKeys: ["title"])
+        self.undoDelegate?.addToUndoBuffer(dict)
         
+        self.input.task.title = textView.text
         super.closeButtonWasPressed()
     }
     

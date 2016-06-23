@@ -14,75 +14,63 @@ import UIKit
 protocol EditTaskInteractorInput
 {
     func addNewTask()
-    func prepareTaskData()
+    func fetchTask()
     func wasDataChanged() -> Bool
     func saveTask()
     var taskID: AnyObject? {get set}
-    var task: Task? {get set}
+    var responce: EditTask.FetchTask.Response! {get}
 }
 
 protocol EditTaskInteractorOutput
 {
-    func didReceiveData()
+    func displayTask()
     var title: String? {get set}
 }
 
 class EditTaskInteractor: EditTaskInteractorInput
 {
     var output: EditTaskInteractorOutput!
-    var worker: EditTaskWorker!
-    
     var taskID: AnyObject?
-    var task: Task?
-    var originalTask: Task?
+    var originalTask: Task!
+    var responce: EditTask.FetchTask.Response!
     
     func addNewTask(){
         self.taskID = nil
     }
     
-    func prepareTaskData()
+    func fetchTask()
     {
         if let taskID = self.taskID {
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), {
                 let task: Task = SODataBaseFactory.sharedInstance.dataBase.taskForObjectID(taskID)!
-                self.task = task
+                self.responce = EditTask.FetchTask.Response(task: task)
                 self.originalTask = Task()
-                self.originalTask!.cloneTask(task)
-                self.output.didReceiveData()
+                self.originalTask.cloneTask(task)
+                self.output.displayTask()
                 self.output.title = "Edit Task".localized
             })
         } else {
-            self.task = Task()
-            self.task!.clearTask()
+            let task = Task()
+            task.clearTask()
+            self.responce = EditTask.FetchTask.Response(task: task)
             self.originalTask = nil
-            self.output.didReceiveData()
+            self.output.displayTask()
             self.output.title = "New Task".localized
         }
     }
     
     func wasDataChanged() -> Bool{
-        if let orgTask = self.originalTask{
-            return !orgTask.isEqual(self.task)
-        } else {
-            let pureTask = Task()
-            pureTask.clearTask()
-            return !pureTask.isEqual(self.task)
-        }
+        return !self.originalTask.isEqual(self.responce.task)
     }
     
     // This method builds an object, which properties were changed before in separated views
     // Builder is presented by just one class
     func saveTask(){
-        if let task = self.task {
-            task.save{(error: NSError?) in
-                if let saveError = error{
-                    showAlertWithTitle("Update task error".localized, message: saveError.description)
-                } else if let orgTask = self.originalTask{
-                    orgTask.cloneTask(self.task!)
-                } else{
-                    self.originalTask = Task()
-                    self.originalTask!.cloneTask(self.task!)
-                }
+        self.responce.task.save{(error: NSError?) in
+            if let saveError = error{
+                showAlertWithTitle("Failed updating task. Please repeat later.".localized, message: saveError.description)
+            } else{
+                self.originalTask.cloneTask(self.responce.task)
             }
         }
     }

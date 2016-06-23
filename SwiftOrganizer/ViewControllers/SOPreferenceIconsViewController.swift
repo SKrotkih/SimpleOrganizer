@@ -62,14 +62,14 @@ class SOPreferenceIconsViewController: UIViewController {
 }
 
 extension SOPreferenceIconsViewController{
-    private func fetchData(completeBlock: ()-> Void ){
+    private func fetchData(completionBlock: ()-> Void ){
         SOFetchingData.sharedInstance.allIcons{(icons: [TaskIco], fetchError: NSError?) in
             if let error = fetchError{
                 self.buffer.removeAll(keepCapacity: false)
                 showAlertWithTitle("Failed to fetch data".localized, message: error.description)
             } else {
                 self.buffer = icons
-                completeBlock()
+                completionBlock()
             }
         }
     }

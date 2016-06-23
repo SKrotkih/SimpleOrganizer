@@ -13,15 +13,13 @@ class EditTaskCategoryCell: EditTaskDetailCell {
     @IBOutlet weak var categoryNameLabel: UILabel!
     
     override func displayContent(){
-        if let task: Task = self.delegate.input.task{
-            if task.categoryName == "" {
-                self.categoryNameLabel.text = "Category".localized
-            }
-            else{
-                self.categoryNameLabel.text = task.categoryName
-            }
-        } else {
-            self.categoryNameLabel.text = "Undefined".localized
+        let task: Task = self.input.task
+
+        if task.categoryName == "" {
+            self.categoryNameLabel.text = "Category".localized
+        }
+        else{
+            self.categoryNameLabel.text = task.categoryName
         }
     }
     

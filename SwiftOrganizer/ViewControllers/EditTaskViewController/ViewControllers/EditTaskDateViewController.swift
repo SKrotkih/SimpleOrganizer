@@ -96,7 +96,7 @@ class EditTaskDateViewController: EditTaskDetailViewController {
                     theEvent.calendar = eventCalendars[0]
                     theEvent.startDate = self.datePicker.date
                     theEvent.endDate = self.datePicker.date
-                    theEvent.title = (self.delegate?.input.task!.title)!
+                    theEvent.title = self.input.task.title
                     var error : NSError? = nil
                     do {
                         try store.saveEvent(theEvent, span: .ThisEvent, commit: true)
@@ -140,27 +140,17 @@ class EditTaskDateViewController: EditTaskDetailViewController {
     }
 
     private func saveData(){
-        if let theTask = self.delegate?.input.task{
-            var dateString: String!
-            
-            if let oldDate = theTask.date{
-                let dateFormatter = NSDateFormatter()
-                dateFormatter.dateFormat = "dd-MM-yyyy HH:mm:ss"
-                dateString = dateFormatter.stringFromDate(oldDate)
-            } else {
-                dateString = ""
-            }
-            let dict = NSDictionary(objects: [dateString], forKeys: ["date"])
-            self.undoDelegate?.addToUndoBuffer(dict)
-
-            
-            theTask.date = self.date
+        var dateString: String!
+        
+        if let oldDate = self.input.task.date{
+            let dateFormatter = NSDateFormatter()
+            dateFormatter.dateFormat = "dd-MM-yyyy HH:mm:ss"
+            dateString = dateFormatter.stringFromDate(oldDate)
         } else {
-            let msg = "Warning"
-            let controller = UIAlertController(title: "Something is going wrong!", message: msg, preferredStyle: .Alert)
-            let cancelAction = UIAlertAction(title: "OK", style: .Cancel, handler: nil)
-            controller.addAction(cancelAction)
-            self.presentViewController(controller, animated: true, completion: nil)
+            dateString = ""
         }
+        let dict = NSDictionary(objects: [dateString], forKeys: ["date"])
+        self.undoDelegate?.addToUndoBuffer(dict)
+        self.input.task.date = self.date
     }
 }

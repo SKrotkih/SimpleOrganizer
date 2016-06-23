@@ -21,6 +21,6 @@ class EditTaskRouter
     {
         let editTaskDetailsViewController = segue.destinationViewController as! EditTaskDetailViewController
         editTaskDetailsViewController.undoDelegate = viewController
-        editTaskDetailsViewController.delegate = viewController
+        editTaskDetailsViewController.input = viewController.input.responce
     }
 }

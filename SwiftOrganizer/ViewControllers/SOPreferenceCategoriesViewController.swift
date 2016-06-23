@@ -61,14 +61,14 @@ class SOPreferenceCategoriesViewController: UIViewController {
 }
 
 extension SOPreferenceCategoriesViewController{
-    private func fetchData(completeBlock: () -> Void ){
+    private func fetchData(completionBlock: () -> Void ){
         SOFetchingData.sharedInstance.allCategories{(categories: [TaskCategory], fetchError: NSError?) in
             if let error = fetchError{
                 self.buffer.removeAll(keepCapacity: false)
                 showAlertWithTitle("Failed to fetch data".localized, message: error.description)
             } else {
                 self.buffer = categories
-                completeBlock()
+                completionBlock()
             }
         }
     }
