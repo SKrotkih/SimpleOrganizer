@@ -33,7 +33,7 @@ class TaskIconsTabBarController: TabBarController {
                 let ico: TaskIco = icons[i]
                 
                 if ico.visible{
-                    var tabView: TaskIconTabView!
+                    var tabView: TaskIconTabView
                     
                     if i < self.tabs.count{
                         tabView = self.tabs[i] as! TaskIconTabView

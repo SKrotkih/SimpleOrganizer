@@ -33,18 +33,12 @@ class TaskIconTabView: UIView {
         }
         set{
             _selected = newValue
-            
-            if _selected == true{
-                self.backgroundColor = colorWithRGBHex(0xF39030)
-            }
-            else
-            {
-                self.backgroundColor = colorWithRGBHex(0xCCCCCC)
-            }
+            let rgbHex: UInt32 = _selected ? 0xF39030 : 0xCCCCCC
+            self.backgroundColor = colorWithRGBHex(rgbHex)
         }
     }
     
-    @IBAction func buttonPressedHandler(sender: AnyObject) {
+    @IBAction func tabButtonTapped(sender: AnyObject) {
         if let delegate = self.filterStateDelegate, ico = _ico{
             let newValue: Bool = !self.selected
             delegate.didSelectIcon(ico, select: newValue, completionBlock: {(error: NSError?) in

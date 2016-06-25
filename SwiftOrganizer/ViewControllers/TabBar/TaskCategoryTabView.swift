@@ -22,7 +22,7 @@ class TaskCategoryTabView: UIView {
         }
         set{
             _category = newValue
-            self.button.setTitle( newValue?.name, forState: .Normal)
+            self.button.setTitle( _category?.name, forState: .Normal)
         }
     }
     
@@ -32,19 +32,13 @@ class TaskCategoryTabView: UIView {
         }
         set{
             _selected = newValue
-            
-            if _selected == true{
-                self.tabBackgroundView.backgroundColor = colorWithRGBHex(0xF39030)
-            }
-            else
-            {
-                self.tabBackgroundView.backgroundColor = colorWithRGBHex(0xCCCCCC)
-            }
+            let rgbHex: UInt32 = _selected ? 0xF39030 : 0xCCCCCC
+            self.tabBackgroundView.backgroundColor = colorWithRGBHex(rgbHex)
         }
     }
     
-    @IBAction func buttonPressedHandler(sender: AnyObject) {
-        guard let delegate = self.filterStateDelegate, category = _category else{
+    @IBAction func tabButtonTapped(sender: AnyObject) {
+        guard let delegate = self.filterStateDelegate, category = self.category else{
             return
         }
 

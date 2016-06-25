@@ -1069,11 +1069,11 @@
 		7FA23C391D12258700728D3F /* TabBars */ = {
 			isa = PBXGroup;
 			children = (
+				7F5DF64C1BAD669300959432 /* TabBarContainerView.swift */,
+				7F5DF64D1BAD669300959432 /* TabBarController.swift */,
 				7FA23C3F1D1229ED00728D3F /* TabBarsConfigurator.swift */,
 				7FA23C411D122B1C00728D3F /* TabBarsInteractor.swift */,
 				7FA23C421D122B1C00728D3F /* TabBarsPresenter.swift */,
-				7F5DF64D1BAD669300959432 /* TabBarController.swift */,
-				7F5DF64C1BAD669300959432 /* TabBarContainerView.swift */,
 				7FA23C3B1D1225B200728D3F /* Icons */,
 				7FA23C3A1D1225A800728D3F /* Categories */,
 			);
@@ -1682,7 +1682,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Fabric/run\" a8631cc5966d92bbb4d071399217f4597b08e9a9 b8b55f8f83db048b2cbe5da3afb626cd8e20e47f7c58a9afe4bfa35f73541f19\n";
+			shellScript = "\"${PODS_ROOT}/Fabric/run\" 035db1a4e0d3c179e80df692327554fe1b21398a 73ca9af70afcb161b3e6c488816bc368ce3c45de2eda27718dce324169ef3656\n";
 		};
 		9D0BF728FBE467727847F946 /* Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;

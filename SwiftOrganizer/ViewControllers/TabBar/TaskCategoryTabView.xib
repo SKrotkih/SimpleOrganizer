@@ -28,7 +28,7 @@
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
                             <connections>
-                                <action selector="buttonPressedHandler:" destination="bKz-iJ-Zvc" eventType="touchUpInside" id="YYT-Sp-p3f"/>
+                                <action selector="tabButtonTapped:" destination="bKz-iJ-Zvc" eventType="touchUpInside" id="YYT-Sp-p3f"/>
                             </connections>
                         </button>
                     </subviews>

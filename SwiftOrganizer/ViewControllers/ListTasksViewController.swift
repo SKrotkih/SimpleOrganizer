@@ -8,6 +8,7 @@
 
 import UIKit
 import DataBaseKit
+import Crashlytics
 
 protocol SOEditTaskController{
     func addNewTask()
@@ -42,8 +43,6 @@ class ListTasksViewController: UIViewController{
     var router: ListTasksRouter!
     var output: ListTasksInteractor!
 
-    private var _editTaskViewController: EditTaskViewController?
-    
     var allTimes = [NSDate]()
     private var refreshControl: UIRefreshControl?
     
@@ -54,25 +53,17 @@ class ListTasksViewController: UIViewController{
         
         ListTasksConfigurator.sharedInstance.configure(self)
         
-        allTimes.append(NSDate())
+        self.allTimes.append(NSDate())
         
-        categoryTabBarController = TaskCategoryTabBarController(scrollView: categoryScrollView, containerView: categoryTabBarView)
-        iconsTabBarController = TaskIconsTabBarController(scrollView: iconsScrollView, containerView: iconsTabBarView)
+        self.setUpTabBarControllers()
         
-        categoryTabBarController.filterStateDelegate = self
-        iconsTabBarController.filterStateDelegate = self
-        
-        SOObserversManager.sharedInstance.addObserver(self, type: .SODataBaseTypeChanged)
-        SOObserversManager.sharedInstance.addObserver(self, type: .SODataBaseDidChanged)
-        
-        /* Create the refresh control */
-        refreshControl = UIRefreshControl()
-        refreshControl!.addTarget(self, action: #selector(ListTasksViewController.handleRefresh(_:)), forControlEvents: .ValueChanged)
-        tableView.addSubview(refreshControl!)
+        self.registerEventsOnObservers()
+    
+        self.setUpRefreshControl()
         
         self.titleActualize()
         
-        self.googleAnaliticsConfigure()
+        self.configureGoogleAnalitics()
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -86,25 +77,13 @@ class ListTasksViewController: UIViewController{
         tracker.send(builder.build() as [NSObject : AnyObject])
         //
         
-        self.addLeftBarButtonWithImage(UIImage(named: "ic_menu_black_24dp")!)
-        self.slideMenuController()?.removeLeftGestures()
-        self.slideMenuController()?.removeRightGestures()
-
-        let addTaskImage : UIImage! = UIImage(named: "add_task")
-        let addTaskButton: UIBarButtonItem = UIBarButtonItem(image: addTaskImage, style: UIBarButtonItemStyle.Plain, target: self, action: #selector(ListTasksViewController.addNewTask))
-        let activityImage : UIImage! = UIImage(named: "activity")
-        let activityButton: UIBarButtonItem = UIBarButtonItem(image: activityImage, style: UIBarButtonItemStyle.Plain, target: self, action: #selector(ListTasksViewController.startActivityViewController))
-        navigationItem.rightBarButtonItems = [addTaskButton, activityButton]
-        
-        rightButton = UIBarButtonItem(title: "Activity".localized, style: UIBarButtonItemStyle.Plain, target: self, action: #selector(ListTasksViewController.startActivityViewController))
-        //navigationItem.rightBarButtonItem = addTaskButton;
-        
+        self.prepareBarButtonItems()
+       
         self.reloadData({(error: NSError?) in })
     }
-
+    
     deinit {
-        SOObserversManager.sharedInstance.removeObserver(self, type: .SODataBaseTypeChanged)
-        SOObserversManager.sharedInstance.removeObserver(self, type: .SODataBaseDidChanged)
+        self.removeEventsFromObservers()
     }
     
     override func didReceiveMemoryWarning() {
@@ -143,12 +122,6 @@ class ListTasksViewController: UIViewController{
         }
     }
     
-    private func titleActualize(){
-        let defaultTitle = "Organizer".localized
-        let currentDB = SOTypeDataBaseSwitcher.currectDataBaseDescription()
-        self.title = "\(defaultTitle) (\(currentDB))"
-    }
-    
     // MARK: Edit Task List
     
     func startActivityViewController(){
@@ -185,18 +158,52 @@ class ListTasksViewController: UIViewController{
         }
     }
     
-    private var editTaskViewController: EditTaskViewController{
-        if _editTaskViewController != nil {
-            return _editTaskViewController!
-        }
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        _editTaskViewController = storyboard.instantiateViewControllerWithIdentifier("EditTaskViewController") as? EditTaskViewController
-        
-        return _editTaskViewController!
+    func cancelEditTask(){
+        //self.editTaskViewController.cancelToEdit()
     }
     
-    func cancelEditTask(){
-        self.editTaskViewController.cancelToEdit()
+    private func prepareBarButtonItems() {
+        self.addLeftBarButtonWithImage(UIImage(named: "ic_menu_black_24dp")!)
+        self.slideMenuController()?.removeLeftGestures()
+        self.slideMenuController()?.removeRightGestures()
+        
+        let addTaskImage : UIImage! = UIImage(named: "add_task")
+        let addTaskButton: UIBarButtonItem = UIBarButtonItem(image: addTaskImage, style: UIBarButtonItemStyle.Plain, target: self, action: #selector(ListTasksViewController.addNewTask))
+        
+        rightButton = UIBarButtonItem(title: "Activity".localized, style: UIBarButtonItemStyle.Plain, target: self, action: #selector(ListTasksViewController.startActivityViewController))
+        
+        navigationItem.rightBarButtonItems = [addTaskButton, rightButton]
+    }
+    
+    private func titleActualize(){
+        let defaultTitle = "Organizer".localized
+        let currentDB = SOTypeDataBaseSwitcher.currectDataBaseDescription()
+        self.title = "\(defaultTitle) (\(currentDB))"
+    }
+    
+    private func registerEventsOnObservers() {
+        SOObserversManager.sharedInstance.addObserver(self, type: .SODataBaseTypeChanged)
+        SOObserversManager.sharedInstance.addObserver(self, type: .SODataBaseDidChanged)
+    }
+    
+    private func removeEventsFromObservers() {
+        SOObserversManager.sharedInstance.removeObserver(self, type: .SODataBaseTypeChanged)
+        SOObserversManager.sharedInstance.removeObserver(self, type: .SODataBaseDidChanged)
+    }
+    
+    private func setUpTabBarControllers() {
+        categoryTabBarController = TaskCategoryTabBarController(scrollView: categoryScrollView, containerView: categoryTabBarView)
+        iconsTabBarController = TaskIconsTabBarController(scrollView: iconsScrollView, containerView: iconsTabBarView)
+        
+        categoryTabBarController.filterStateDelegate = self
+        iconsTabBarController.filterStateDelegate = self
+    }
+    
+    private func setUpRefreshControl() {
+        /* Create the refresh control */
+        refreshControl = UIRefreshControl()
+        refreshControl!.addTarget(self, action: #selector(ListTasksViewController.handleRefresh(_:)), forControlEvents: .ValueChanged)
+        tableView.addSubview(refreshControl!)
     }
 }
 
@@ -246,8 +253,11 @@ extension ListTasksViewController: SORemoveTaskDelegate{
 
 extension ListTasksViewController: SOEditTaskController{
     func addNewTask(){
-        self.editTaskViewController.input.addNewTask()
-        self.navigationController!.pushViewController(self.editTaskViewController, animated: true)
+        
+        //Here some code for testing Crashlitics:
+        //Crashlytics.sharedInstance().crash()
+        
+        self.performSegueWithIdentifier("EditTaskViewController", sender: self)
     }
     
     func editTaskList(){
@@ -326,6 +336,7 @@ extension ListTasksViewController: UITableViewDelegate {
     
     // After the row is selected
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        self.performSegueWithIdentifier("EditTaskViewController", sender: self)        
     }
     
     // Customizing the row height
@@ -367,7 +378,7 @@ extension ListTasksViewController{
 
 extension ListTasksViewController{
     
-    func googleAnaliticsConfigure() {
+    private func configureGoogleAnalitics() {
         // Configure tracker from GoogleService-Info.plist.
         var configureError:NSError?
         GGLContext.sharedInstance().configureWithError(&configureError)

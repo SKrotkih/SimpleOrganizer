@@ -44,8 +44,7 @@ class TabBarController: NSObject {
             self.clearTabs()
             var x : CGFloat = 0
             
-            for i in 0..<self.tabsCount{
-                let view: UIView = self.tabs[i]
+            for view in self.tabs{
                 var frame = view.frame
                 let w: CGFloat = CGRectGetWidth(frame)
                 frame.origin.x = x

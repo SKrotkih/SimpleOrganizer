@@ -53,7 +53,8 @@ class EditTaskInteractor: EditTaskInteractorInput
             let task = Task()
             task.clearTask()
             self.responce = EditTask.FetchTask.Response(task: task)
-            self.originalTask = nil
+            self.originalTask = Task()
+            self.originalTask.cloneTask(task)
             self.output.displayTask()
             self.output.title = "New Task".localized
         }
@@ -70,6 +71,7 @@ class EditTaskInteractor: EditTaskInteractorInput
             if let saveError = error{
                 showAlertWithTitle("Failed updating task. Please repeat later.".localized, message: saveError.description)
             } else{
+                self.originalTask = Task()
                 self.originalTask.cloneTask(self.responce.task)
             }
         }
