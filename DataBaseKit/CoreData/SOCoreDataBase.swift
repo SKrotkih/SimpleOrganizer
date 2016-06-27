@@ -101,7 +101,7 @@ public class SOCoreDataBase: SOCoreDataProtocol {
             usingBlock: { (notification) in
                 if let moc = self.managedObjectContext {
                     moc.mergeChangesFromContextDidSaveNotification(notification)
-                    let notification: SOObserverNotification = SOObserverNotification(type: .SODataBaseDidChanged, data: nil)
+                    let notification: SOObserverNotification = SOObserverNotification(type: .SODataBaseDidChange, data: nil)
                     SOObserversManager.sharedInstance.sendNotification(notification)
                 }
         })
@@ -110,7 +110,7 @@ public class SOCoreDataBase: SOCoreDataProtocol {
             object: coordinator,
             queue: NSOperationQueue.mainQueue(),
             usingBlock: { (notification) in
-                let notification: SOObserverNotification = SOObserverNotification(type: .SODataBaseDidChanged, data: nil)
+                let notification: SOObserverNotification = SOObserverNotification(type: .SODataBaseDidChange, data: nil)
                 SOObserversManager.sharedInstance.sendNotification(notification)
         })
         

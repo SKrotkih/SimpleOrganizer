@@ -16,7 +16,6 @@
 		7F30004B1D1377E40033D73D /* ListTasksModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F3000451D1377E40033D73D /* ListTasksModels.swift */; };
 		7F30004C1D1377E40033D73D /* ListTasksPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F3000461D1377E40033D73D /* ListTasksPresenter.swift */; };
 		7F30004D1D1377E40033D73D /* ListTasksRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F3000471D1377E40033D73D /* ListTasksRouter.swift */; };
-		7F30004E1D1377E40033D73D /* ListTasksWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F3000481D1377E40033D73D /* ListTasksWorker.swift */; };
 		7F5DF5481BAD288E00959432 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F5DF5471BAD288E00959432 /* AppDelegate.swift */; };
 		7F5DF54D1BAD288E00959432 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7F5DF54B1BAD288E00959432 /* Main.storyboard */; };
 		7F5DF5521BAD288E00959432 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7F5DF5511BAD288E00959432 /* Assets.xcassets */; };
@@ -120,14 +119,10 @@
 		7F5DF68C1BAD669300959432 /* SOSampleDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F5DF6421BAD669300959432 /* SOSampleDocument.swift */; };
 		7F5DF68D1BAD669300959432 /* SOSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F5DF6431BAD669300959432 /* SOSettingsViewController.swift */; };
 		7F5DF68E1BAD669300959432 /* SOTaskMenuItemActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F5DF6441BAD669300959432 /* SOTaskMenuItemActivity.swift */; };
-		7F5DF68F1BAD669300959432 /* TaskCategoryTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F5DF6461BAD669300959432 /* TaskCategoryTabBarController.swift */; };
-		7F5DF6901BAD669300959432 /* TaskCategoryTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F5DF6471BAD669300959432 /* TaskCategoryTabView.swift */; };
-		7F5DF6911BAD669300959432 /* TaskCategoryTabView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7F5DF6481BAD669300959432 /* TaskCategoryTabView.xib */; };
-		7F5DF6921BAD669300959432 /* TaskIconsTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F5DF6491BAD669300959432 /* TaskIconsTabBarController.swift */; };
-		7F5DF6931BAD669300959432 /* TaskIconTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F5DF64A1BAD669300959432 /* TaskIconTabView.swift */; };
-		7F5DF6941BAD669300959432 /* TaskIconTabView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7F5DF64B1BAD669300959432 /* TaskIconTabView.xib */; };
-		7F5DF6951BAD669300959432 /* TabBarContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F5DF64C1BAD669300959432 /* TabBarContainerView.swift */; };
-		7F5DF6961BAD669300959432 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F5DF64D1BAD669300959432 /* TabBarController.swift */; };
+		7F5DF6901BAD669300959432 /* CategoryTabBarItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F5DF6471BAD669300959432 /* CategoryTabBarItemView.swift */; };
+		7F5DF6911BAD669300959432 /* CategoryTabBarItemView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7F5DF6481BAD669300959432 /* CategoryTabBarItemView.xib */; };
+		7F5DF6931BAD669300959432 /* IconTabBarItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F5DF64A1BAD669300959432 /* IconTabBarItemView.swift */; };
+		7F5DF6941BAD669300959432 /* IconTabBarItemView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7F5DF64B1BAD669300959432 /* IconTabBarItemView.xib */; };
 		7F5DF69B1BAD66F100959432 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7F5DF6971BAD66F100959432 /* LaunchScreen.xib */; };
 		7F5DF69C1BAD66F100959432 /* Preferences.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7F5DF6991BAD66F100959432 /* Preferences.storyboard */; };
 		7F5DF6A41BAD73A500959432 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F5DF6A31BAD73A500959432 /* Social.framework */; };
@@ -166,6 +161,13 @@
 		7F8FE2001BC4AF9D00180EAD /* LocalUsers.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 7FD8C7BE1BC3F07200E0A8F7 /* LocalUsers.xcdatamodeld */; };
 		7F8FE2031BC530AB00180EAD /* LogIn.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7F8FE2011BC530AB00180EAD /* LogIn.storyboard */; };
 		7F8FE2051BC532E100180EAD /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F8FE2041BC532E100180EAD /* LoginViewController.swift */; };
+		7F979D051D1FF35D004D47ED /* IconsTabBarConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F979D021D1FF35D004D47ED /* IconsTabBarConfigurator.swift */; };
+		7F979D061D1FF35D004D47ED /* IconsTabBarInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F979D031D1FF35D004D47ED /* IconsTabBarInteractor.swift */; };
+		7F979D071D1FF35D004D47ED /* IconsTabBarPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F979D041D1FF35D004D47ED /* IconsTabBarPresenter.swift */; };
+		7F979D091D202C0C004D47ED /* TabBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F979D081D202C0C004D47ED /* TabBarView.swift */; };
+		7F979D0B1D202ED1004D47ED /* CategoriesTabBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F979D0A1D202ED1004D47ED /* CategoriesTabBarView.swift */; };
+		7F979D0D1D202EFF004D47ED /* IconsTabBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F979D0C1D202EFF004D47ED /* IconsTabBarView.swift */; };
+		7F979D0F1D2030FB004D47ED /* CategoriesTabBarConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F979D0E1D2030FB004D47ED /* CategoriesTabBarConfigurator.swift */; };
 		7F9BF0971D1AF6BE0044FB54 /* EditTaskCategoryConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F9BF0931D1AF6BE0044FB54 /* EditTaskCategoryConfigurator.swift */; };
 		7F9BF0981D1AF6BE0044FB54 /* EditTaskCategoryInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F9BF0941D1AF6BE0044FB54 /* EditTaskCategoryInteractor.swift */; };
 		7F9BF0991D1AF6BE0044FB54 /* EditTaskCategoryModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F9BF0951D1AF6BE0044FB54 /* EditTaskCategoryModels.swift */; };
@@ -182,9 +184,7 @@
 		7FA1FF6A1D18732D00B68B3B /* EditTaskIconsInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FA1FF641D18732D00B68B3B /* EditTaskIconsInteractor.swift */; };
 		7FA1FF6B1D18732D00B68B3B /* EditTaskIconsModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FA1FF651D18732D00B68B3B /* EditTaskIconsModels.swift */; };
 		7FA1FF6C1D18732D00B68B3B /* EditTaskIconsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FA1FF661D18732D00B68B3B /* EditTaskIconsPresenter.swift */; };
-		7FA23C401D1229ED00728D3F /* TabBarsConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FA23C3F1D1229ED00728D3F /* TabBarsConfigurator.swift */; };
-		7FA23C431D122B1C00728D3F /* TabBarsInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FA23C411D122B1C00728D3F /* TabBarsInteractor.swift */; };
-		7FA23C441D122B1C00728D3F /* TabBarsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FA23C421D122B1C00728D3F /* TabBarsPresenter.swift */; };
+		7FA23C431D122B1C00728D3F /* CategoriesTabBarInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FA23C411D122B1C00728D3F /* CategoriesTabBarInteractor.swift */; };
 		7FA249781CE70EFD0060F6CE /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7FA249771CE70EFD0060F6CE /* GoogleService-Info.plist */; };
 		7FA249791CE70EFD0060F6CE /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7FA249771CE70EFD0060F6CE /* GoogleService-Info.plist */; };
 		7FA2497A1CE70EFD0060F6CE /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7FA249771CE70EFD0060F6CE /* GoogleService-Info.plist */; };
@@ -198,6 +198,11 @@
 		7FA8DD431D17FB4700439A0A /* EditTaskRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FA8DD421D17FB4700439A0A /* EditTaskRouter.swift */; };
 		7FC653B11D0C841700D2FFCD /* UsersCoreDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FC653B01D0C841700D2FFCD /* UsersCoreDataStore.swift */; };
 		7FC653B41D0C8A3200D2FFCD /* CoreConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FC653B31D0C8A3200D2FFCD /* CoreConfigurator.swift */; };
+		7FC73BD41D2113AC009B1665 /* CategoriesTabBarPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FC73BD31D2113AC009B1665 /* CategoriesTabBarPresenter.swift */; };
+		7FC73BD91D2133D2009B1665 /* IconTabBarItemConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FC73BD71D2133D2009B1665 /* IconTabBarItemConfigurator.swift */; };
+		7FC73BDA1D2133D2009B1665 /* IconTabBarItemInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FC73BD81D2133D2009B1665 /* IconTabBarItemInteractor.swift */; };
+		7FC73BDD1D216877009B1665 /* CategoryTabBarItemConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FC73BDB1D216877009B1665 /* CategoryTabBarItemConfigurator.swift */; };
+		7FC73BDE1D216877009B1665 /* CategoryTabBarItemInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FC73BDC1D216877009B1665 /* CategoryTabBarItemInteractor.swift */; };
 		7FCD13641BCBEACE001778E9 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FCD13631BCBEACE001778E9 /* Utils.swift */; };
 		7FCD13681BCCF756001778E9 /* SOBorderedImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FCD13661BCCF756001778E9 /* SOBorderedImageView.swift */; };
 		7FCD13691BCCF756001778E9 /* SOBorderedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FCD13671BCCF756001778E9 /* SOBorderedView.swift */; };
@@ -301,7 +306,6 @@
 		7F3000451D1377E40033D73D /* ListTasksModels.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ListTasksModels.swift; path = ViewControllers/ListTasksModels.swift; sourceTree = "<group>"; };
 		7F3000461D1377E40033D73D /* ListTasksPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ListTasksPresenter.swift; path = ViewControllers/ListTasksPresenter.swift; sourceTree = "<group>"; };
 		7F3000471D1377E40033D73D /* ListTasksRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ListTasksRouter.swift; path = ViewControllers/ListTasksRouter.swift; sourceTree = "<group>"; };
-		7F3000481D1377E40033D73D /* ListTasksWorker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ListTasksWorker.swift; path = ViewControllers/ListTasksWorker.swift; sourceTree = "<group>"; };
 		7F4882391BADB64C00D4D45B /* readme.txt */ = {isa = PBXFileReference; lastKnownFileType = text; name = readme.txt; path = CoreData/readme.txt; sourceTree = "<group>"; };
 		7F5DF5441BAD288E00959432 /* SwiftOrganizer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwiftOrganizer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7F5DF5471BAD288E00959432 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -413,14 +417,10 @@
 		7F5DF6421BAD669300959432 /* SOSampleDocument.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SOSampleDocument.swift; path = ViewControllers/SOSampleDocument.swift; sourceTree = "<group>"; };
 		7F5DF6431BAD669300959432 /* SOSettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SOSettingsViewController.swift; path = ViewControllers/SOSettingsViewController.swift; sourceTree = "<group>"; };
 		7F5DF6441BAD669300959432 /* SOTaskMenuItemActivity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SOTaskMenuItemActivity.swift; path = ViewControllers/SOTaskMenuItemActivity.swift; sourceTree = "<group>"; };
-		7F5DF6461BAD669300959432 /* TaskCategoryTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TaskCategoryTabBarController.swift; path = ViewControllers/TabBar/TaskCategoryTabBarController.swift; sourceTree = "<group>"; };
-		7F5DF6471BAD669300959432 /* TaskCategoryTabView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TaskCategoryTabView.swift; path = ViewControllers/TabBar/TaskCategoryTabView.swift; sourceTree = "<group>"; };
-		7F5DF6481BAD669300959432 /* TaskCategoryTabView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = TaskCategoryTabView.xib; path = ViewControllers/TabBar/TaskCategoryTabView.xib; sourceTree = "<group>"; };
-		7F5DF6491BAD669300959432 /* TaskIconsTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TaskIconsTabBarController.swift; path = ViewControllers/TabBar/TaskIconsTabBarController.swift; sourceTree = "<group>"; };
-		7F5DF64A1BAD669300959432 /* TaskIconTabView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TaskIconTabView.swift; path = ViewControllers/TabBar/TaskIconTabView.swift; sourceTree = "<group>"; };
-		7F5DF64B1BAD669300959432 /* TaskIconTabView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = TaskIconTabView.xib; path = ViewControllers/TabBar/TaskIconTabView.xib; sourceTree = "<group>"; };
-		7F5DF64C1BAD669300959432 /* TabBarContainerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TabBarContainerView.swift; path = ViewControllers/TabBar/TabBarContainerView.swift; sourceTree = "<group>"; };
-		7F5DF64D1BAD669300959432 /* TabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TabBarController.swift; path = ViewControllers/TabBar/TabBarController.swift; sourceTree = "<group>"; };
+		7F5DF6471BAD669300959432 /* CategoryTabBarItemView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CategoryTabBarItemView.swift; path = ViewControllers/TabBar/CategoryTabBarItemView.swift; sourceTree = "<group>"; };
+		7F5DF6481BAD669300959432 /* CategoryTabBarItemView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = CategoryTabBarItemView.xib; path = ViewControllers/TabBar/CategoryTabBarItemView.xib; sourceTree = "<group>"; };
+		7F5DF64A1BAD669300959432 /* IconTabBarItemView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = IconTabBarItemView.swift; path = ViewControllers/TabBar/IconTabBarItemView.swift; sourceTree = "<group>"; };
+		7F5DF64B1BAD669300959432 /* IconTabBarItemView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = IconTabBarItemView.xib; path = ViewControllers/TabBar/IconTabBarItemView.xib; sourceTree = "<group>"; };
 		7F5DF6981BAD66F100959432 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		7F5DF69A1BAD66F100959432 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Preferences.storyboard; sourceTree = "<group>"; };
 		7F5DF6A31BAD73A500959432 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
@@ -455,6 +455,13 @@
 		7F8E16C11BBA71E500FFC16B /* AILogInManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AILogInManager.m; sourceTree = "<group>"; };
 		7F8FE2021BC530AB00180EAD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LogIn.storyboard; sourceTree = "<group>"; };
 		7F8FE2041BC532E100180EAD /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LoginViewController.swift; path = ../DataBaseKit/LogInManager/LoginViewController.swift; sourceTree = "<group>"; };
+		7F979D021D1FF35D004D47ED /* IconsTabBarConfigurator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = IconsTabBarConfigurator.swift; path = ViewControllers/TabBar/IconsTabBarConfigurator.swift; sourceTree = "<group>"; };
+		7F979D031D1FF35D004D47ED /* IconsTabBarInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = IconsTabBarInteractor.swift; path = ViewControllers/TabBar/IconsTabBarInteractor.swift; sourceTree = "<group>"; };
+		7F979D041D1FF35D004D47ED /* IconsTabBarPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = IconsTabBarPresenter.swift; path = ViewControllers/TabBar/IconsTabBarPresenter.swift; sourceTree = "<group>"; };
+		7F979D081D202C0C004D47ED /* TabBarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TabBarView.swift; path = ViewControllers/TabBar/TabBarView.swift; sourceTree = "<group>"; };
+		7F979D0A1D202ED1004D47ED /* CategoriesTabBarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CategoriesTabBarView.swift; path = ViewControllers/TabBar/CategoriesTabBarView.swift; sourceTree = "<group>"; };
+		7F979D0C1D202EFF004D47ED /* IconsTabBarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = IconsTabBarView.swift; path = ViewControllers/TabBar/IconsTabBarView.swift; sourceTree = "<group>"; };
+		7F979D0E1D2030FB004D47ED /* CategoriesTabBarConfigurator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CategoriesTabBarConfigurator.swift; path = ViewControllers/TabBar/CategoriesTabBarConfigurator.swift; sourceTree = "<group>"; };
 		7F9BF0931D1AF6BE0044FB54 /* EditTaskCategoryConfigurator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EditTaskCategoryConfigurator.swift; path = ViewControllers/EditTaskCategoryConfigurator.swift; sourceTree = "<group>"; };
 		7F9BF0941D1AF6BE0044FB54 /* EditTaskCategoryInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EditTaskCategoryInteractor.swift; path = ViewControllers/EditTaskCategoryInteractor.swift; sourceTree = "<group>"; };
 		7F9BF0951D1AF6BE0044FB54 /* EditTaskCategoryModels.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EditTaskCategoryModels.swift; path = ViewControllers/EditTaskCategoryModels.swift; sourceTree = "<group>"; };
@@ -471,9 +478,7 @@
 		7FA1FF641D18732D00B68B3B /* EditTaskIconsInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EditTaskIconsInteractor.swift; path = ViewControllers/EditTaskIconsInteractor.swift; sourceTree = "<group>"; };
 		7FA1FF651D18732D00B68B3B /* EditTaskIconsModels.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EditTaskIconsModels.swift; path = ViewControllers/EditTaskIconsModels.swift; sourceTree = "<group>"; };
 		7FA1FF661D18732D00B68B3B /* EditTaskIconsPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EditTaskIconsPresenter.swift; path = ViewControllers/EditTaskIconsPresenter.swift; sourceTree = "<group>"; };
-		7FA23C3F1D1229ED00728D3F /* TabBarsConfigurator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TabBarsConfigurator.swift; path = ViewControllers/TabBar/TabBarsConfigurator.swift; sourceTree = "<group>"; };
-		7FA23C411D122B1C00728D3F /* TabBarsInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TabBarsInteractor.swift; path = ViewControllers/TabBar/TabBarsInteractor.swift; sourceTree = "<group>"; };
-		7FA23C421D122B1C00728D3F /* TabBarsPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TabBarsPresenter.swift; path = ViewControllers/TabBar/TabBarsPresenter.swift; sourceTree = "<group>"; };
+		7FA23C411D122B1C00728D3F /* CategoriesTabBarInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CategoriesTabBarInteractor.swift; path = ViewControllers/TabBar/CategoriesTabBarInteractor.swift; sourceTree = "<group>"; };
 		7FA249771CE70EFD0060F6CE /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		7FA2497F1CE713630060F6CE /* libGoogleAnalytics.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libGoogleAnalytics.a; path = Pods/GoogleAnalytics/Libraries/libGoogleAnalytics.a; sourceTree = "<group>"; };
 		7FA54CF81D153F6F0053B87D /* EditTaskConfigurator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditTaskConfigurator.swift; sourceTree = "<group>"; };
@@ -482,6 +487,11 @@
 		7FA8DD421D17FB4700439A0A /* EditTaskRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditTaskRouter.swift; sourceTree = "<group>"; };
 		7FC653B01D0C841700D2FFCD /* UsersCoreDataStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UsersCoreDataStore.swift; path = Classes/UsersCoreDataStore.swift; sourceTree = "<group>"; };
 		7FC653B31D0C8A3200D2FFCD /* CoreConfigurator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CoreConfigurator.swift; path = Classes/CoreConfigurator.swift; sourceTree = "<group>"; };
+		7FC73BD31D2113AC009B1665 /* CategoriesTabBarPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CategoriesTabBarPresenter.swift; path = ViewControllers/TabBar/CategoriesTabBarPresenter.swift; sourceTree = "<group>"; };
+		7FC73BD71D2133D2009B1665 /* IconTabBarItemConfigurator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = IconTabBarItemConfigurator.swift; path = ViewControllers/TabBar/IconTabBarItemConfigurator.swift; sourceTree = "<group>"; };
+		7FC73BD81D2133D2009B1665 /* IconTabBarItemInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = IconTabBarItemInteractor.swift; path = ViewControllers/TabBar/IconTabBarItemInteractor.swift; sourceTree = "<group>"; };
+		7FC73BDB1D216877009B1665 /* CategoryTabBarItemConfigurator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CategoryTabBarItemConfigurator.swift; path = ViewControllers/TabBar/CategoryTabBarItemConfigurator.swift; sourceTree = "<group>"; };
+		7FC73BDC1D216877009B1665 /* CategoryTabBarItemInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CategoryTabBarItemInteractor.swift; path = ViewControllers/TabBar/CategoryTabBarItemInteractor.swift; sourceTree = "<group>"; };
 		7FCD13611BCBD9C3001778E9 /* SwiftOrganizer v2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "SwiftOrganizer v2.xcdatamodel"; sourceTree = "<group>"; };
 		7FCD13631BCBEACE001778E9 /* Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Utils.swift; path = Utils/Utils.swift; sourceTree = "<group>"; };
 		7FCD13661BCCF756001778E9 /* SOBorderedImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SOBorderedImageView.swift; sourceTree = "<group>"; };
@@ -1007,7 +1017,6 @@
 				7F3000451D1377E40033D73D /* ListTasksModels.swift */,
 				7F3000461D1377E40033D73D /* ListTasksPresenter.swift */,
 				7F3000471D1377E40033D73D /* ListTasksRouter.swift */,
-				7F3000481D1377E40033D73D /* ListTasksWorker.swift */,
 				7F5DF54B1BAD288E00959432 /* Main.storyboard */,
 				7F5DF63B1BAD669300959432 /* ListTasksTableViewCell.swift */,
 			);
@@ -1069,35 +1078,35 @@
 		7FA23C391D12258700728D3F /* TabBars */ = {
 			isa = PBXGroup;
 			children = (
-				7F5DF64C1BAD669300959432 /* TabBarContainerView.swift */,
-				7F5DF64D1BAD669300959432 /* TabBarController.swift */,
-				7FA23C3F1D1229ED00728D3F /* TabBarsConfigurator.swift */,
-				7FA23C411D122B1C00728D3F /* TabBarsInteractor.swift */,
-				7FA23C421D122B1C00728D3F /* TabBarsPresenter.swift */,
-				7FA23C3B1D1225B200728D3F /* Icons */,
-				7FA23C3A1D1225A800728D3F /* Categories */,
+				7F979D081D202C0C004D47ED /* TabBarView.swift */,
+				7FA23C3B1D1225B200728D3F /* IconsTabBarScene */,
+				7FA23C3A1D1225A800728D3F /* CategoriesTabBarScene */,
 			);
 			name = TabBars;
 			sourceTree = "<group>";
 		};
-		7FA23C3A1D1225A800728D3F /* Categories */ = {
+		7FA23C3A1D1225A800728D3F /* CategoriesTabBarScene */ = {
 			isa = PBXGroup;
 			children = (
-				7F5DF6461BAD669300959432 /* TaskCategoryTabBarController.swift */,
-				7F5DF6471BAD669300959432 /* TaskCategoryTabView.swift */,
-				7F5DF6481BAD669300959432 /* TaskCategoryTabView.xib */,
+				7F979D0A1D202ED1004D47ED /* CategoriesTabBarView.swift */,
+				7F979D0E1D2030FB004D47ED /* CategoriesTabBarConfigurator.swift */,
+				7FA23C411D122B1C00728D3F /* CategoriesTabBarInteractor.swift */,
+				7FC73BD31D2113AC009B1665 /* CategoriesTabBarPresenter.swift */,
+				7FC73BD61D213324009B1665 /* CategoryTabBarItemScene */,
 			);
-			name = Categories;
+			name = CategoriesTabBarScene;
 			sourceTree = "<group>";
 		};
-		7FA23C3B1D1225B200728D3F /* Icons */ = {
+		7FA23C3B1D1225B200728D3F /* IconsTabBarScene */ = {
 			isa = PBXGroup;
 			children = (
-				7F5DF6491BAD669300959432 /* TaskIconsTabBarController.swift */,
-				7F5DF64A1BAD669300959432 /* TaskIconTabView.swift */,
-				7F5DF64B1BAD669300959432 /* TaskIconTabView.xib */,
+				7F979D0C1D202EFF004D47ED /* IconsTabBarView.swift */,
+				7F979D021D1FF35D004D47ED /* IconsTabBarConfigurator.swift */,
+				7F979D031D1FF35D004D47ED /* IconsTabBarInteractor.swift */,
+				7F979D041D1FF35D004D47ED /* IconsTabBarPresenter.swift */,
+				7FC73BD51D213303009B1665 /* IconTabBarItemScene */,
 			);
-			name = Icons;
+			name = IconsTabBarScene;
 			sourceTree = "<group>";
 		};
 		7FA23C3C1D1225E500728D3F /* Menu */ = {
@@ -1201,6 +1210,28 @@
 				7FC653B31D0C8A3200D2FFCD /* CoreConfigurator.swift */,
 			);
 			name = Configurators;
+			sourceTree = "<group>";
+		};
+		7FC73BD51D213303009B1665 /* IconTabBarItemScene */ = {
+			isa = PBXGroup;
+			children = (
+				7F5DF64A1BAD669300959432 /* IconTabBarItemView.swift */,
+				7F5DF64B1BAD669300959432 /* IconTabBarItemView.xib */,
+				7FC73BD71D2133D2009B1665 /* IconTabBarItemConfigurator.swift */,
+				7FC73BD81D2133D2009B1665 /* IconTabBarItemInteractor.swift */,
+			);
+			name = IconTabBarItemScene;
+			sourceTree = "<group>";
+		};
+		7FC73BD61D213324009B1665 /* CategoryTabBarItemScene */ = {
+			isa = PBXGroup;
+			children = (
+				7F5DF6471BAD669300959432 /* CategoryTabBarItemView.swift */,
+				7F5DF6481BAD669300959432 /* CategoryTabBarItemView.xib */,
+				7FC73BDB1D216877009B1665 /* CategoryTabBarItemConfigurator.swift */,
+				7FC73BDC1D216877009B1665 /* CategoryTabBarItemInteractor.swift */,
+			);
+			name = CategoryTabBarItemScene;
 			sourceTree = "<group>";
 		};
 		7FCD13621BCBEA85001778E9 /* Utils */ = {
@@ -1546,7 +1577,7 @@
 				7F5DF66D1BAD669300959432 /* undo@2x.png in Resources */,
 				7F5DF65B1BAD669300959432 /* ico10@2x.png in Resources */,
 				7F5DF6621BAD669300959432 /* ico17@2x.png in Resources */,
-				7F5DF6941BAD669300959432 /* TaskIconTabView.xib in Resources */,
+				7F5DF6941BAD669300959432 /* IconTabBarItemView.xib in Resources */,
 				7F5DF6601BAD669300959432 /* ico15@2x.png in Resources */,
 				7F5DF6651BAD669300959432 /* ico3@2x.png in Resources */,
 				7F5DF6671BAD669300959432 /* ico5@2x.png in Resources */,
@@ -1565,7 +1596,7 @@
 				7F5DF66A1BAD669300959432 /* ico8@2x.png in Resources */,
 				7F5DF65A1BAD669300959432 /* Localizable.strings in Resources */,
 				7F5DF69C1BAD66F100959432 /* Preferences.storyboard in Resources */,
-				7F5DF6911BAD669300959432 /* TaskCategoryTabView.xib in Resources */,
+				7F5DF6911BAD669300959432 /* CategoryTabBarItemView.xib in Resources */,
 				7F5DF5521BAD288E00959432 /* Assets.xcassets in Resources */,
 				7F5DF54D1BAD288E00959432 /* Main.storyboard in Resources */,
 				7F5DF65F1BAD669300959432 /* ico14@2x.png in Resources */,
@@ -1728,14 +1759,14 @@
 				7F5DF6881BAD669300959432 /* SOMakeCallViewController.swift in Sources */,
 				7F30004C1D1377E40033D73D /* ListTasksPresenter.swift in Sources */,
 				7FA1FF691D18732D00B68B3B /* EditTaskIconsConfigurator.swift in Sources */,
-				7F5DF68F1BAD669300959432 /* TaskCategoryTabBarController.swift in Sources */,
-				7FA23C441D122B1C00728D3F /* TabBarsPresenter.swift in Sources */,
+				7F979D0B1D202ED1004D47ED /* CategoriesTabBarView.swift in Sources */,
 				7FCD13681BCCF756001778E9 /* SOBorderedImageView.swift in Sources */,
 				7F5DF6871BAD669300959432 /* ListTasksViewController.swift in Sources */,
 				7F5DF67D1BAD669300959432 /* MainMenuViewController.swift in Sources */,
+				7F979D0D1D202EFF004D47ED /* IconsTabBarView.swift in Sources */,
 				7F5DF6531BAD669300959432 /* UIViewControllerExtension.swift in Sources */,
 				7F5DF64F1BAD669300959432 /* ArrayExtension.swift in Sources */,
-				7FA23C431D122B1C00728D3F /* TabBarsInteractor.swift in Sources */,
+				7FA23C431D122B1C00728D3F /* CategoriesTabBarInteractor.swift in Sources */,
 				7FA1FF6A1D18732D00B68B3B /* EditTaskIconsInteractor.swift in Sources */,
 				7F5DF6721BAD669300959432 /* EditTaskDetailCell.swift in Sources */,
 				7FDF31431BBABA0E00AD4127 /* README.md in Sources */,
@@ -1751,16 +1782,17 @@
 				7F5DF67B1BAD669300959432 /* EditTaskIconsViewController.swift in Sources */,
 				7F8FE1FF1BC4AF9B00180EAD /* LocalUsers.xcdatamodeld in Sources */,
 				7FD3879F1BD0B60D00E31A92 /* UIImageExtension.swift in Sources */,
+				7FC73BD41D2113AC009B1665 /* CategoriesTabBarPresenter.swift in Sources */,
 				7FA8DD431D17FB4700439A0A /* EditTaskRouter.swift in Sources */,
 				7F5DF67C1BAD669300959432 /* EditTaskDetailViewController.swift in Sources */,
 				7F5DF6791BAD669300959432 /* EditTaskDateViewController.swift in Sources */,
 				7F5DF68E1BAD669300959432 /* SOTaskMenuItemActivity.swift in Sources */,
+				7F979D091D202C0C004D47ED /* TabBarView.swift in Sources */,
 				7FA1FF6C1D18732D00B68B3B /* EditTaskIconsPresenter.swift in Sources */,
 				7F8FE2051BC532E100180EAD /* LoginViewController.swift in Sources */,
 				7FA54D001D153F6F0053B87D /* EditTaskInteractor.swift in Sources */,
 				7F9DC3D81D0D75D200454B67 /* LoginInteractor.swift in Sources */,
 				7F5DF64E1BAD669300959432 /* BaseTableViewCell.swift in Sources */,
-				7FA23C401D1229ED00728D3F /* TabBarsConfigurator.swift in Sources */,
 				7F9DC3DA1D0D75EF00454B67 /* LoginPresenter.swift in Sources */,
 				7F5DF6821BAD669300959432 /* SODocumentsViewController.swift in Sources */,
 				7F5DF6731BAD669300959432 /* EditTaskDateCell.swift in Sources */,
@@ -1777,33 +1809,37 @@
 				7F5DF6741BAD669300959432 /* EditTaskDescriptionCell.swift in Sources */,
 				7F5DF6761BAD669300959432 /* SOSelectCategoryCell.swift in Sources */,
 				7F3000491D1377E40033D73D /* ListTasksConfigurator.swift in Sources */,
+				7FC73BDE1D216877009B1665 /* CategoryTabBarItemInteractor.swift in Sources */,
 				7F9BF0981D1AF6BE0044FB54 /* EditTaskCategoryInteractor.swift in Sources */,
 				7F5DF5481BAD288E00959432 /* AppDelegate.swift in Sources */,
 				7F5DF6771BAD669300959432 /* SOSelectIconsCell.swift in Sources */,
 				7F5DF6831BAD669300959432 /* SOEditDocumentViewController.swift in Sources */,
 				7F5DF6571BAD669300959432 /* SOSemaforeExample.swift in Sources */,
-				7F5DF6961BAD669300959432 /* TabBarController.swift in Sources */,
-				7F5DF6951BAD669300959432 /* TabBarContainerView.swift in Sources */,
+				7F979D051D1FF35D004D47ED /* IconsTabBarConfigurator.swift in Sources */,
 				7F5DF66F1BAD669300959432 /* SOPreferencesSelectCategoriesCell.swift in Sources */,
 				7F5DF68D1BAD669300959432 /* SOSettingsViewController.swift in Sources */,
+				7FC73BDD1D216877009B1665 /* CategoryTabBarItemConfigurator.swift in Sources */,
 				7F9BF09A1D1AF6BE0044FB54 /* EditTaskCategoryPresenter.swift in Sources */,
+				7F979D061D1FF35D004D47ED /* IconsTabBarInteractor.swift in Sources */,
 				7F5DF6701BAD669300959432 /* SOPreferencesSelectIconsCell.swift in Sources */,
 				7F5DF68B1BAD669300959432 /* SOPreferencesViewController.swift in Sources */,
-				7F30004E1D1377E40033D73D /* ListTasksWorker.swift in Sources */,
 				7F30004D1D1377E40033D73D /* ListTasksRouter.swift in Sources */,
 				7F5DF6711BAD669300959432 /* EditTaskCategoryCell.swift in Sources */,
+				7F979D071D1FF35D004D47ED /* IconsTabBarPresenter.swift in Sources */,
 				7F5DF6551BAD669300959432 /* SOLocalNotificationsCenter.swift in Sources */,
-				7F5DF6931BAD669300959432 /* TaskIconTabView.swift in Sources */,
+				7F5DF6931BAD669300959432 /* IconTabBarItemView.swift in Sources */,
 				7F5DF6851BAD669300959432 /* ListTasksTableViewCell.swift in Sources */,
 				7F5DF6581BAD669300959432 /* SOUtilities.swift in Sources */,
 				7F30004B1D1377E40033D73D /* ListTasksModels.swift in Sources */,
 				7F5DF67F1BAD669300959432 /* SlideMenuController.swift in Sources */,
+				7F979D0F1D2030FB004D47ED /* CategoriesTabBarConfigurator.swift in Sources */,
+				7FC73BDA1D2133D2009B1665 /* IconTabBarItemInteractor.swift in Sources */,
 				7F9BF0991D1AF6BE0044FB54 /* EditTaskCategoryModels.swift in Sources */,
+				7FC73BD91D2133D2009B1665 /* IconTabBarItemConfigurator.swift in Sources */,
 				7F5DF6561BAD669300959432 /* SOPushNotificationsCenter.swift in Sources */,
 				7F9DC3D61D0D75B800454B67 /* LoginConfigurator.swift in Sources */,
-				7F5DF6921BAD669300959432 /* TaskIconsTabBarController.swift in Sources */,
 				7FA1FF6B1D18732D00B68B3B /* EditTaskIconsModels.swift in Sources */,
-				7F5DF6901BAD669300959432 /* TaskCategoryTabView.swift in Sources */,
+				7F5DF6901BAD669300959432 /* CategoryTabBarItemView.swift in Sources */,
 				7F66C0831BBE7326006C998F /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

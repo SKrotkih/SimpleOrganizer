@@ -13,18 +13,11 @@ import UIKit
 
 protocol ListTasksRouterInput
 {
-  func navigateToSomewhere()
 }
 
 class ListTasksRouter: ListTasksRouterInput
 {
   weak var viewController: ListTasksViewController!
-  
-  // MARK: Navigation
-  
-  func navigateToSomewhere()
-  {
-  }
   
   // MARK: Communication
   

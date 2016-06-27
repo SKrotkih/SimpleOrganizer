@@ -15,8 +15,6 @@ class EditTaskRouter
 {
     weak var viewController: EditTaskViewController!
     
-    // MARK: Communication
-    
     func passDataToNextScene(segue: UIStoryboardSegue)
     {
         let editTaskDetailsViewController = segue.destinationViewController as! EditTaskDetailViewController

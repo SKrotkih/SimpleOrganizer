@@ -14,8 +14,6 @@ import UIKit
 protocol ListTasksInteractorInput
 {
     func fetchTasks()
-    func selectCategory(category: TaskCategory, select: Bool, completionBlock: (error: NSError?) -> Void)
-    func selectIcon(icon: TaskIco, select: Bool, completionBlock: (error: NSError?) -> Void)
     func removeTask(task: ListTasks.FetchTasks.ViewModel.DisplayedTask)
 }
 
@@ -27,7 +25,6 @@ protocol ListTasksInteractorOutput
 class ListTasksInteractor: ListTasksInteractorInput
 {
     var output: ListTasksInteractorOutput!
-    var tasksWorker: ListTasksWorker!
     var viewController: UIViewController?
     var tasks: [Task]?
     
@@ -69,36 +66,6 @@ class ListTasksInteractor: ListTasksInteractorInput
         return message
     }
     
-    func selectCategory(category: TaskCategory, select: Bool, completionBlock: (error: NSError?) -> Void){
-        category.setSelected(select, completionBlock: {[weak self] (error) -> Void in
-            if error == nil {
-                self?.fetchTasks()
-                dispatch_async(dispatch_get_main_queue(), {
-                    completionBlock(error: nil)
-                })
-            } else {
-                self?.showAlertWithTitle("Error of saving data".localized, message: error!.localizedDescription, addActions: nil, completionBlock: {
-                    completionBlock(error: error)
-                })
-            }
-            })
-    }
-    
-    func selectIcon(icon: TaskIco, select: Bool, completionBlock: (error: NSError?) -> Void){
-        icon.setSelected(select, completionBlock: {[weak self] (error) -> Void in
-            if error == nil {
-                self?.fetchTasks()
-                dispatch_async(dispatch_get_main_queue(), {
-                    completionBlock(error: nil)
-                    })
-            } else {
-                self?.showAlertWithTitle("Error of saving data".localized, message: error!.localizedDescription, addActions: nil, completionBlock: {
-                    completionBlock(error: error)
-                })
-            }
-            })
-    }
-    
     func removeTask(task: ListTasks.FetchTasks.ViewModel.DisplayedTask){
         if let taskID =  task.objectID{
             SODataBaseFactory.sharedInstance.dataBase.removeTask(taskID)
@@ -107,7 +74,7 @@ class ListTasksInteractor: ListTasksInteractorInput
     
 }
 
-extension ListTasksInteractor{
+extension ListTasksInteractor {
     func showAlertWithTitle(title: String, message: String, addActions: ((controller: UIAlertController) -> Void)?, completionBlock: (() -> Void)?){
         let controller = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.Alert)
         if addActions != nil {

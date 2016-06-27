@@ -315,27 +315,43 @@
                                     <constraint firstAttribute="width" constant="1" id="Tgi-wf-94z"/>
                                 </constraints>
                             </view>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="90y-b9-9HO">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Sp1-TQ-Yz7" customClass="CategoriesTabBarView" customModule="SwiftOrganizer" customModuleProvider="target">
                                 <rect key="frame" x="20" y="0.0" width="560" height="41"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eck-zB-rFJ" customClass="TabBarContainerView" customModule="SwiftOrganizer" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="560" height="39"/>
-                                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                    <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="90y-b9-9HO">
+                                        <rect key="frame" x="0.0" y="0.0" width="560" height="41"/>
+                                        <subviews>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eck-zB-rFJ">
+                                                <rect key="frame" x="0.0" y="0.0" width="560" height="39"/>
+                                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="560" id="RCn-pj-NPq"/>
+                                                    <constraint firstAttribute="height" constant="39" id="XMu-82-WCf"/>
+                                                </constraints>
+                                            </view>
+                                        </subviews>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="560" id="RCn-pj-NPq"/>
-                                            <constraint firstAttribute="height" constant="39" id="XMu-82-WCf"/>
+                                            <constraint firstItem="eck-zB-rFJ" firstAttribute="trailing" secondItem="90y-b9-9HO" secondAttribute="trailingMargin" id="7R9-LW-JiL"/>
+                                            <constraint firstAttribute="height" constant="41" id="Xlb-Dh-zyb"/>
+                                            <constraint firstItem="eck-zB-rFJ" firstAttribute="leading" secondItem="90y-b9-9HO" secondAttribute="leading" id="dYs-t4-eht"/>
+                                            <constraint firstAttribute="bottom" secondItem="eck-zB-rFJ" secondAttribute="bottom" constant="2" id="hZJ-Yn-rux"/>
+                                            <constraint firstItem="eck-zB-rFJ" firstAttribute="top" secondItem="90y-b9-9HO" secondAttribute="top" id="hcO-Td-u8K"/>
                                         </constraints>
-                                    </view>
+                                    </scrollView>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstItem="eck-zB-rFJ" firstAttribute="trailing" secondItem="90y-b9-9HO" secondAttribute="trailingMargin" id="7R9-LW-JiL"/>
-                                    <constraint firstAttribute="height" constant="41" id="Xlb-Dh-zyb"/>
-                                    <constraint firstItem="eck-zB-rFJ" firstAttribute="leading" secondItem="90y-b9-9HO" secondAttribute="leading" id="dYs-t4-eht"/>
-                                    <constraint firstAttribute="bottom" secondItem="eck-zB-rFJ" secondAttribute="bottom" constant="2" id="hZJ-Yn-rux"/>
-                                    <constraint firstItem="eck-zB-rFJ" firstAttribute="top" secondItem="90y-b9-9HO" secondAttribute="top" id="hcO-Td-u8K"/>
+                                    <constraint firstAttribute="height" constant="41" id="A2X-rL-8gt"/>
+                                    <constraint firstAttribute="trailing" secondItem="90y-b9-9HO" secondAttribute="trailing" id="SV5-Jn-Hjx"/>
+                                    <constraint firstItem="90y-b9-9HO" firstAttribute="leading" secondItem="Sp1-TQ-Yz7" secondAttribute="leading" id="vdN-EC-EVT"/>
+                                    <constraint firstItem="90y-b9-9HO" firstAttribute="top" secondItem="Sp1-TQ-Yz7" secondAttribute="top" id="xTx-C5-pbZ"/>
                                 </constraints>
-                            </scrollView>
+                                <connections>
+                                    <outlet property="containerView" destination="eck-zB-rFJ" id="p73-5X-XVP"/>
+                                    <outlet property="scrollView" destination="90y-b9-9HO" id="BN9-va-w9e"/>
+                                </connections>
+                            </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Cff-bV-Tsw">
                                 <rect key="frame" x="20" y="42" width="560" height="1"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -631,27 +647,42 @@
                                     <constraint firstAttribute="height" constant="1" id="RNq-Bt-MN4"/>
                                 </constraints>
                             </view>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QjF-r1-gni">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="c9p-GE-SZ1" customClass="IconsTabBarView" customModule="SwiftOrganizer" customModuleProvider="target">
                                 <rect key="frame" x="20" y="559" width="560" height="41"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RoP-3V-7ol" customClass="TabBarContainerView" customModule="SwiftOrganizer" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="2000" height="41"/>
-                                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                    <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kWV-Gp-IcV">
+                                        <rect key="frame" x="0.0" y="0.0" width="560" height="41"/>
+                                        <subviews>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RoP-3V-7ol">
+                                                <rect key="frame" x="0.0" y="0.0" width="560" height="39"/>
+                                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="560" id="klZ-6W-lg7"/>
+                                                    <constraint firstAttribute="height" constant="39" id="syU-TO-92c"/>
+                                                </constraints>
+                                            </view>
+                                        </subviews>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="2000" id="KAC-vP-XXE"/>
+                                            <constraint firstAttribute="trailing" secondItem="RoP-3V-7ol" secondAttribute="trailing" id="5JX-U0-cwc"/>
+                                            <constraint firstItem="RoP-3V-7ol" firstAttribute="top" secondItem="kWV-Gp-IcV" secondAttribute="top" id="KkS-2j-dOK"/>
+                                            <constraint firstItem="RoP-3V-7ol" firstAttribute="leading" secondItem="kWV-Gp-IcV" secondAttribute="leading" id="dz7-S2-wrJ"/>
+                                            <constraint firstAttribute="bottom" secondItem="RoP-3V-7ol" secondAttribute="bottom" constant="2" id="mgu-A5-EXv"/>
                                         </constraints>
-                                    </view>
+                                    </scrollView>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="trailing" secondItem="RoP-3V-7ol" secondAttribute="trailing" constant="-1432" id="8Vm-oo-t5t"/>
-                                    <constraint firstAttribute="height" constant="41" id="K8g-lY-31Z"/>
-                                    <constraint firstAttribute="bottom" secondItem="RoP-3V-7ol" secondAttribute="bottom" id="KvK-ap-1z0"/>
-                                    <constraint firstItem="RoP-3V-7ol" firstAttribute="centerY" secondItem="QjF-r1-gni" secondAttribute="centerY" id="PvI-om-XWv"/>
-                                    <constraint firstItem="RoP-3V-7ol" firstAttribute="top" secondItem="QjF-r1-gni" secondAttribute="top" id="lbe-qH-J8m"/>
-                                    <constraint firstItem="RoP-3V-7ol" firstAttribute="leading" secondItem="QjF-r1-gni" secondAttribute="leading" id="s6I-4o-hhz"/>
+                                    <constraint firstItem="kWV-Gp-IcV" firstAttribute="top" secondItem="c9p-GE-SZ1" secondAttribute="top" id="D2u-4n-QgB"/>
+                                    <constraint firstAttribute="height" constant="41" id="Nuh-p5-cXR"/>
+                                    <constraint firstAttribute="trailing" secondItem="kWV-Gp-IcV" secondAttribute="trailing" id="ftl-z1-iKN"/>
+                                    <constraint firstAttribute="bottom" secondItem="kWV-Gp-IcV" secondAttribute="bottom" id="lVZ-7p-5W9"/>
+                                    <constraint firstItem="kWV-Gp-IcV" firstAttribute="leading" secondItem="c9p-GE-SZ1" secondAttribute="leading" id="mSh-Py-sLY"/>
                                 </constraints>
-                            </scrollView>
+                                <connections>
+                                    <outlet property="containerView" destination="RoP-3V-7ol" id="CzL-5v-6bc"/>
+                                    <outlet property="scrollView" destination="kWV-Gp-IcV" id="hdB-Kv-ASg"/>
+                                </connections>
+                            </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sJX-oj-5Lc">
                                 <rect key="frame" x="20" y="599" width="560" height="1"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -662,30 +693,29 @@
                         </subviews>
                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="Cff-bV-Tsw" firstAttribute="top" secondItem="Sp1-TQ-Yz7" secondAttribute="bottom" constant="1" id="3t2-6W-JPr"/>
                             <constraint firstItem="mUF-GA-1MU" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="topMargin" constant="1" id="4Cq-2T-CJE"/>
-                            <constraint firstItem="Cff-bV-Tsw" firstAttribute="top" secondItem="90y-b9-9HO" secondAttribute="bottom" constant="1" id="6AF-fZ-7co"/>
+                            <constraint firstItem="c9p-GE-SZ1" firstAttribute="top" secondItem="0Ul-XK-Jrh" secondAttribute="bottom" id="7Ge-zq-aAO"/>
                             <constraint firstAttribute="trailingMargin" secondItem="0Ul-XK-Jrh" secondAttribute="trailing" id="DY3-Co-dMa"/>
                             <constraint firstAttribute="trailingMargin" secondItem="sJX-oj-5Lc" secondAttribute="trailing" id="Dm2-qo-sLj"/>
                             <constraint firstItem="gpZ-s7-ekZ" firstAttribute="top" secondItem="Cff-bV-Tsw" secondAttribute="bottom" id="GUv-to-e91"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="Sp1-TQ-Yz7" secondAttribute="trailing" id="Kp2-SP-d9R"/>
                             <constraint firstItem="uEy-ip-Typ" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="-1" id="N6X-54-BGx"/>
                             <constraint firstItem="gpZ-s7-ekZ" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="NFE-MM-wWI"/>
+                            <constraint firstAttribute="leadingMargin" secondItem="Sp1-TQ-Yz7" secondAttribute="leading" id="OQS-gh-He1"/>
+                            <constraint firstAttribute="leadingMargin" secondItem="c9p-GE-SZ1" secondAttribute="leading" id="P5s-tq-ldV"/>
                             <constraint firstItem="sJX-oj-5Lc" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="QJQ-1v-YmY"/>
-                            <constraint firstItem="90y-b9-9HO" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="UP0-It-TLk"/>
                             <constraint firstAttribute="bottomMargin" secondItem="uEy-ip-Typ" secondAttribute="bottom" id="VIY-hx-TLa"/>
                             <constraint firstAttribute="trailingMargin" secondItem="gpZ-s7-ekZ" secondAttribute="trailing" id="XNb-Un-di8"/>
                             <constraint firstItem="Cff-bV-Tsw" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="Z48-OH-axX"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="QjF-r1-gni" secondAttribute="trailing" id="aS6-f6-8x5"/>
-                            <constraint firstItem="Cff-bV-Tsw" firstAttribute="top" secondItem="90y-b9-9HO" secondAttribute="bottom" constant="1" id="bJv-cX-UIq"/>
-                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="QjF-r1-gni" secondAttribute="bottom" id="bgI-15-tfL"/>
-                            <constraint firstItem="90y-b9-9HO" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="dgh-wV-yRF"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="c9p-GE-SZ1" secondAttribute="trailing" id="cAV-DD-mfF"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="sJX-oj-5Lc" secondAttribute="bottom" id="ebU-za-naN"/>
                             <constraint firstAttribute="trailingMargin" secondItem="JUo-MS-f7k" secondAttribute="trailing" id="fd6-bd-a4p"/>
                             <constraint firstItem="JUo-MS-f7k" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="gAa-xR-TBw"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="90y-b9-9HO" secondAttribute="trailing" id="jLQ-k8-Xpe"/>
                             <constraint firstItem="mUF-GA-1MU" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="jav-N1-Rgv"/>
                             <constraint firstItem="0Ul-XK-Jrh" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="m0Y-hP-Ngf"/>
-                            <constraint firstItem="QjF-r1-gni" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="oDw-m3-Dtn"/>
-                            <constraint firstItem="QjF-r1-gni" firstAttribute="top" secondItem="0Ul-XK-Jrh" secondAttribute="bottom" id="qkY-Wg-kN4"/>
+                            <constraint firstItem="Sp1-TQ-Yz7" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="psQ-GL-01t"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="c9p-GE-SZ1" secondAttribute="bottom" id="qxf-tq-7yx"/>
                             <constraint firstAttribute="trailingMargin" secondItem="Cff-bV-Tsw" secondAttribute="trailing" id="w0d-Tq-mro"/>
                             <constraint firstItem="JUo-MS-f7k" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="wOJ-4H-Nyn"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="gpZ-s7-ekZ" secondAttribute="bottom" constant="41" id="yyF-0a-Pzh"/>
@@ -695,10 +725,6 @@
                     <nil key="simulatedTopBarMetrics"/>
                     <nil key="simulatedBottomBarMetrics"/>
                     <connections>
-                        <outlet property="categoryScrollView" destination="90y-b9-9HO" id="vsM-58-8GA"/>
-                        <outlet property="categoryTabBarView" destination="eck-zB-rFJ" id="BfR-DF-VNp"/>
-                        <outlet property="iconsScrollView" destination="QjF-r1-gni" id="F6C-YV-Jz0"/>
-                        <outlet property="iconsTabBarView" destination="RoP-3V-7ol" id="zHp-gi-piy"/>
                         <outlet property="tableView" destination="gpZ-s7-ekZ" id="Krq-yu-3Ox"/>
                         <segue destination="TvI-C9-lSF" kind="push" identifier="EditTaskViewController" id="ux5-jy-UbZ"/>
                     </connections>

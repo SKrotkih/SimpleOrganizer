@@ -18,7 +18,7 @@ public protocol SOObserverProtocol: class{
 
 public enum SOObserverNotificationTypes: String{
     case SODataBaseTypeChanged = "DataBaseTypeChanged"
-    case SODataBaseDidChanged = "DataBaseCloudDidChanged"
+    case SODataBaseDidChange = "DataBaseCloudDidChanged"
 }
 
 public class SOObserverNotification {
@@ -72,7 +72,7 @@ public class SOObserversManager {
                     
                     return priority0 > priority1
                 })
-            case .SODataBaseDidChanged:
+            case .SODataBaseDidChange:
                 self._dataBaseDidChangeObservers.append(dict);
                 
                 // Sort array
@@ -96,7 +96,7 @@ public class SOObserversManager {
                     let weakref: WeakObserverReference = dict[kObjectKey] as! WeakObserverReference
                     return weakref.observer != nil && weakref.observer !== observer;
                 })
-            case .SODataBaseDidChanged:
+            case .SODataBaseDidChange:
                 self._dataBaseDidChangeObservers = self._dataBaseDidChangeObservers.filter({ dict in
                     let weakref: WeakObserverReference = dict[kObjectKey] as! WeakObserverReference
                     return weakref.observer != nil && weakref.observer !== observer;
@@ -112,7 +112,7 @@ public class SOObserversManager {
                 for dict in self._dataBaseTypeChangeObservers {
                     self.notifyObserver(dict, notification: notification)
                 }
-            case .SODataBaseDidChanged:
+            case .SODataBaseDidChange:
                 for dict in self._dataBaseDidChangeObservers {
                     self.notifyObserver(dict, notification: notification)
                 }

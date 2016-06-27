@@ -15,11 +15,6 @@ protocol SOEditTaskController{
     func editTaskList()
 }
 
-protocol SOChangeFilterStateDelegate{
-    func didSelectCategory(category: TaskCategory, select: Bool, completionBlock: (error: NSError?) -> Void)
-    func didSelectIcon(icon: TaskIco, select: Bool, completionBlock: (error: NSError?) -> Void)
-}
-
 let TableViewCellIdentifier: String = "MainTableViewCell"
 let HeaderTableViewCellIdentifier: String = "HeaderTableViewCell"
 let HeightOfTableRow: CGFloat = 47.0
@@ -29,15 +24,6 @@ class ListTasksViewController: UIViewController{
 
     @IBOutlet weak var tableView: UITableView!
     
-    @IBOutlet weak var categoryTabBarView: TabBarContainerView!
-    @IBOutlet weak var categoryScrollView: UIScrollView!
-    
-    @IBOutlet weak var iconsTabBarView: TabBarContainerView!
-    @IBOutlet weak var iconsScrollView: UIScrollView!
-    
-    var categoryTabBarController: TaskCategoryTabBarController!
-    var iconsTabBarController: TaskIconsTabBarController!
-
     var rightButton: UIBarButtonItem!
     
     var router: ListTasksRouter!
@@ -54,8 +40,6 @@ class ListTasksViewController: UIViewController{
         ListTasksConfigurator.sharedInstance.configure(self)
         
         self.allTimes.append(NSDate())
-        
-        self.setUpTabBarControllers()
         
         self.registerEventsOnObservers()
     
@@ -75,7 +59,6 @@ class ListTasksViewController: UIViewController{
         
         let builder = GAIDictionaryBuilder.createScreenView()
         tracker.send(builder.build() as [NSObject : AnyObject])
-        //
         
         self.prepareBarButtonItems()
        
@@ -107,19 +90,9 @@ class ListTasksViewController: UIViewController{
     }
     
     private func reloadData(completionBlock: (error: NSError?) -> Void){
-        self.categoryTabBarController.reloadTabs{[weak self] (error: NSError?) in
-            if error == nil {
-                self?.iconsTabBarController.reloadTabs{[weak self] (error: NSError?) in
-                    if error == nil {
-                        self?.cancelEditTask()
-                        self?.output.fetchTasks()
-                    }
-                    completionBlock(error: error)
-                }
-            } else {
-                completionBlock(error: error)
-            }
-        }
+        self.cancelEditTask()
+        self.output.fetchTasks()
+        completionBlock(error: nil)
     }
     
     // MARK: Edit Task List
@@ -183,20 +156,12 @@ class ListTasksViewController: UIViewController{
     
     private func registerEventsOnObservers() {
         SOObserversManager.sharedInstance.addObserver(self, type: .SODataBaseTypeChanged)
-        SOObserversManager.sharedInstance.addObserver(self, type: .SODataBaseDidChanged)
+        SOObserversManager.sharedInstance.addObserver(self, type: .SODataBaseDidChange)
     }
     
     private func removeEventsFromObservers() {
         SOObserversManager.sharedInstance.removeObserver(self, type: .SODataBaseTypeChanged)
-        SOObserversManager.sharedInstance.removeObserver(self, type: .SODataBaseDidChanged)
-    }
-    
-    private func setUpTabBarControllers() {
-        categoryTabBarController = TaskCategoryTabBarController(scrollView: categoryScrollView, containerView: categoryTabBarView)
-        iconsTabBarController = TaskIconsTabBarController(scrollView: iconsScrollView, containerView: iconsTabBarView)
-        
-        categoryTabBarController.filterStateDelegate = self
-        iconsTabBarController.filterStateDelegate = self
+        SOObserversManager.sharedInstance.removeObserver(self, type: .SODataBaseDidChange)
     }
     
     private func setUpRefreshControl() {
@@ -220,23 +185,6 @@ extension ListTasksViewController: ListTasksPresenterOutput {
         dispatch_async(dispatch_get_main_queue(), {
             self.tableView.reloadData()
             self.titleActualize()
-        })
-    }
-}
-
-
-// MARK: SOChangeFilterStateDelegate
-
-extension ListTasksViewController: SOChangeFilterStateDelegate{
-    func didSelectCategory(category: TaskCategory, select: Bool, completionBlock: (error: NSError?) -> Void){
-        self.output.selectCategory(category, select: select, completionBlock: { (error: NSError?) in
-            completionBlock(error: error)
-        })
-    }
-    
-    func didSelectIcon(icon: TaskIco, select: Bool, completionBlock: (error: NSError?) -> Void){
-        self.output.selectIcon(icon, select: select, completionBlock: {(error: NSError?) in
-            completionBlock(error: error)
         })
     }
 }
@@ -271,9 +219,8 @@ extension ListTasksViewController: SOEditTaskController{
 extension ListTasksViewController: SOObserverProtocol{
     func notify(notification: SOObserverNotification){
         switch notification.type{
-        case .SODataBaseTypeChanged, .SODataBaseDidChanged:
+        case .SODataBaseTypeChanged, .SODataBaseDidChange:
             self.reloadData({(error: NSError?) in
-                
             })
         }
     }
@@ -362,7 +309,8 @@ extension ListTasksViewController: UITableViewDelegate {
 
 // MARK: Alert View Controller
 
-extension ListTasksViewController{
+extension ListTasksViewController {
+
     func showAlertWithTitle(title: String, message: String, addActions: ((controller: UIAlertController) -> Void)?, completionBlock: (() -> Void)?){
         let controller = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.Alert)
         if addActions != nil {
@@ -376,7 +324,7 @@ extension ListTasksViewController{
 
 // MARK: Configure Google Analytics
 
-extension ListTasksViewController{
+extension ListTasksViewController {
     
     private func configureGoogleAnalitics() {
         // Configure tracker from GoogleService-Info.plist.
