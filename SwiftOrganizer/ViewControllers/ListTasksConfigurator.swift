@@ -47,7 +47,6 @@ class ListTasksConfigurator
     
     let interactor = ListTasksInteractor()
     interactor.output = presenter
-    interactor.viewController = viewController
     
     viewController.output = interactor
     viewController.router = router

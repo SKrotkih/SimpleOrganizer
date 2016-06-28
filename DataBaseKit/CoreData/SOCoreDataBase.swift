@@ -151,6 +151,12 @@ extension SOCoreDataBase{
                 do {
                     try moc.save()
                     moc.reset()
+                    
+                    if !self.isiCloudEnabled {
+                        let notification: SOObserverNotification = SOObserverNotification(type: .SODataBaseDidChange, data: nil)
+                        SOObserversManager.sharedInstance.sendNotification(notification)
+                    }
+                    
                 } catch let error1 as NSError {
                     error = error1
                     // Replace this implementation with code to handle the error appropriately.

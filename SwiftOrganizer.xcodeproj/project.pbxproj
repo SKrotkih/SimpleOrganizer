@@ -215,6 +215,11 @@
 		7FDF31431BBABA0E00AD4127 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = 7F5DF71E1BAD8B8900959432 /* README.md */; };
 		7FDF31441BBABA4E00AD4127 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 7F5DF71E1BAD8B8900959432 /* README.md */; };
 		7FE7CD281D0B0A200023D4BE /* UsersWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FE7CD271D0B0A200023D4BE /* UsersWorker.swift */; };
+		7FEA79281D22709200F3587B /* FilterTasksByIcons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FEA79271D22709200F3587B /* FilterTasksByIcons.swift */; };
+		7FEA792A1D2270C200F3587B /* FilterTasksByCategories.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FEA79291D2270C200F3587B /* FilterTasksByCategories.swift */; };
+		7FEA792C1D22715A00F3587B /* FilterTasksProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FEA792B1D22715A00F3587B /* FilterTasksProtocol.swift */; };
+		7FEA792E1D22746400F3587B /* FilterTasksANDcriteria.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FEA792D1D22746400F3587B /* FilterTasksANDcriteria.swift */; };
+		7FEA79301D22747C00F3587B /* FilterTasksORcriteria.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FEA792F1D22747C00F3587B /* FilterTasksORcriteria.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -503,6 +508,11 @@
 		7FDF313F1BBA949700AD4127 /* Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Utils.h; sourceTree = "<group>"; };
 		7FDF31401BBA949700AD4127 /* Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Utils.m; sourceTree = "<group>"; };
 		7FE7CD271D0B0A200023D4BE /* UsersWorker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UsersWorker.swift; path = DataBaseKit/Classes/UsersWorker.swift; sourceTree = SOURCE_ROOT; };
+		7FEA79271D22709200F3587B /* FilterTasksByIcons.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FilterTasksByIcons.swift; path = ViewControllers/ListTasksFilter/FilterTasksByIcons.swift; sourceTree = "<group>"; };
+		7FEA79291D2270C200F3587B /* FilterTasksByCategories.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FilterTasksByCategories.swift; path = ViewControllers/ListTasksFilter/FilterTasksByCategories.swift; sourceTree = "<group>"; };
+		7FEA792B1D22715A00F3587B /* FilterTasksProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FilterTasksProtocol.swift; path = ViewControllers/ListTasksFilter/FilterTasksProtocol.swift; sourceTree = "<group>"; };
+		7FEA792D1D22746400F3587B /* FilterTasksANDcriteria.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FilterTasksANDcriteria.swift; path = ViewControllers/ListTasksFilter/FilterTasksANDcriteria.swift; sourceTree = "<group>"; };
+		7FEA792F1D22747C00F3587B /* FilterTasksORcriteria.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FilterTasksORcriteria.swift; path = ViewControllers/ListTasksFilter/FilterTasksORcriteria.swift; sourceTree = "<group>"; };
 		9E951A0642B00ACF8106DB23 /* Pods_SwiftOrganizer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SwiftOrganizer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A8CDDAD77ECB23A6A0B42F0C /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D4A36260F1116405127760BA /* Pods_DataBaseKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DataBaseKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1019,6 +1029,7 @@
 				7F3000471D1377E40033D73D /* ListTasksRouter.swift */,
 				7F5DF54B1BAD288E00959432 /* Main.storyboard */,
 				7F5DF63B1BAD669300959432 /* ListTasksTableViewCell.swift */,
+				7FEA79261D226F8500F3587B /* ListTasksFilter */,
 			);
 			name = ListTasksScene;
 			sourceTree = "<group>";
@@ -1330,6 +1341,18 @@
 				7F9DC3DF1D0D95AF00454B67 /* CoreData */,
 			);
 			name = Services;
+			sourceTree = "<group>";
+		};
+		7FEA79261D226F8500F3587B /* ListTasksFilter */ = {
+			isa = PBXGroup;
+			children = (
+				7FEA792B1D22715A00F3587B /* FilterTasksProtocol.swift */,
+				7FEA79271D22709200F3587B /* FilterTasksByIcons.swift */,
+				7FEA79291D2270C200F3587B /* FilterTasksByCategories.swift */,
+				7FEA792D1D22746400F3587B /* FilterTasksANDcriteria.swift */,
+				7FEA792F1D22747C00F3587B /* FilterTasksORcriteria.swift */,
+			);
+			name = ListTasksFilter;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1774,6 +1797,7 @@
 				7FA54D011D153F6F0053B87D /* EditTaskModels.swift in Sources */,
 				7F5DF6841BAD669300959432 /* EditTaskViewController.swift in Sources */,
 				7F5DF6891BAD669300959432 /* SOPreferenceCategoriesViewController.swift in Sources */,
+				7FEA792E1D22746400F3587B /* FilterTasksANDcriteria.swift in Sources */,
 				7F5DF6751BAD669300959432 /* EditTaskIconsCell.swift in Sources */,
 				7FCD136B1BCCF884001778E9 /* UIColorExtension.swift in Sources */,
 				7F5DF6521BAD669300959432 /* UITableViewExtension.swift in Sources */,
@@ -1792,7 +1816,9 @@
 				7F8FE2051BC532E100180EAD /* LoginViewController.swift in Sources */,
 				7FA54D001D153F6F0053B87D /* EditTaskInteractor.swift in Sources */,
 				7F9DC3D81D0D75D200454B67 /* LoginInteractor.swift in Sources */,
+				7FEA79281D22709200F3587B /* FilterTasksByIcons.swift in Sources */,
 				7F5DF64E1BAD669300959432 /* BaseTableViewCell.swift in Sources */,
+				7FEA792A1D2270C200F3587B /* FilterTasksByCategories.swift in Sources */,
 				7F9DC3DA1D0D75EF00454B67 /* LoginPresenter.swift in Sources */,
 				7F5DF6821BAD669300959432 /* SODocumentsViewController.swift in Sources */,
 				7F5DF6731BAD669300959432 /* EditTaskDateCell.swift in Sources */,
@@ -1825,6 +1851,7 @@
 				7F5DF68B1BAD669300959432 /* SOPreferencesViewController.swift in Sources */,
 				7F30004D1D1377E40033D73D /* ListTasksRouter.swift in Sources */,
 				7F5DF6711BAD669300959432 /* EditTaskCategoryCell.swift in Sources */,
+				7FEA79301D22747C00F3587B /* FilterTasksORcriteria.swift in Sources */,
 				7F979D071D1FF35D004D47ED /* IconsTabBarPresenter.swift in Sources */,
 				7F5DF6551BAD669300959432 /* SOLocalNotificationsCenter.swift in Sources */,
 				7F5DF6931BAD669300959432 /* IconTabBarItemView.swift in Sources */,
@@ -1840,6 +1867,7 @@
 				7F9DC3D61D0D75B800454B67 /* LoginConfigurator.swift in Sources */,
 				7FA1FF6B1D18732D00B68B3B /* EditTaskIconsModels.swift in Sources */,
 				7F5DF6901BAD669300959432 /* CategoryTabBarItemView.swift in Sources */,
+				7FEA792C1D22715A00F3587B /* FilterTasksProtocol.swift in Sources */,
 				7F66C0831BBE7326006C998F /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

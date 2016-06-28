@@ -217,8 +217,10 @@ extension ListTasksViewController: SOEditTaskController{
     // MARK: SOObserverNotificationTypes Observer notifications handler
 
 extension ListTasksViewController: SOObserverProtocol{
+    
     func notify(notification: SOObserverNotification){
-        switch notification.type{
+        
+        switch notification.type {
         case .SODataBaseTypeChanged, .SODataBaseDidChange:
             self.reloadData({(error: NSError?) in
             })

@@ -25,23 +25,44 @@ protocol ListTasksInteractorOutput
 class ListTasksInteractor: ListTasksInteractorInput
 {
     var output: ListTasksInteractorOutput!
-    var viewController: UIViewController?
-    var tasks: [Task]?
+    var tasks: [Task]!
     
     func fetchTasks(){
         SOFetchingData.sharedInstance.allTasks{[weak self](tasks: [Task], fetchError: NSError?) in
             if let error = fetchError{
-                self?.showAlertWithTitle("Failed to fetch data!".localized, message: error.localizedDescription, addActions: nil, completionBlock: {
-                })
+                showAlertWithTitle("Failed to fetch tasks data!".localized, message: error.localizedDescription)
             } else {
-                self?.tasks = tasks
-                let response = ListTasks.FetchTasks.Response(tasks: tasks)
-                self?.output.presentFetchedTasks(response)
-                self?.addTasksToReminder(tasks)
+                SODataBaseFactory.sharedInstance.dataBase.allCategories{(categories: [TaskCategory], error: NSError?) in
+                    if let _error = error{
+                        showAlertWithTitle("Failed to fetch categories data!".localized, message: _error.localizedDescription)
+                    } else {
+                        SODataBaseFactory.sharedInstance.dataBase.allIcons{(icons: [TaskIco], error: NSError?) in
+                            if let _error = error {
+                                showAlertWithTitle("Failed to fetch icons data!".localized, message: _error.localizedDescription)
+                            } else {
+                                let iconsCriteria: FilterTasksByIcons = FilterTasksByIcons(icons)
+                                let categoriesCriteria: FilterTasksByCategories = FilterTasksByCategories(categories)
+                                let iconsAndCategories: FilterTasksANDcriteria = FilterTasksANDcriteria(iconsCriteria, categoriesCriteria)
+                                self?.tasks = iconsAndCategories.meetCriteria(tasks)
+                                let response = ListTasks.FetchTasks.Response(tasks: (self?.tasks)!)
+                                self?.output.presentFetchedTasks(response)
+                                self?.addTasksToReminder((self?.tasks)!)
+                            }
+                        }
+                    }
+                }
             }
         }
     }
     
+    func removeTask(task: ListTasks.FetchTasks.ViewModel.DisplayedTask){
+        if let taskID = task.objectID{
+            SODataBaseFactory.sharedInstance.dataBase.removeTask(taskID)
+        }
+    }
+}
+
+extension ListTasksInteractor {
     private func addTasksToReminder(tasks: [Task]){
         
         SOLocalNotificationsCenter.cancelAllNotifications()
@@ -65,24 +86,4 @@ class ListTasksInteractor: ListTasksInteractorInput
         
         return message
     }
-    
-    func removeTask(task: ListTasks.FetchTasks.ViewModel.DisplayedTask){
-        if let taskID =  task.objectID{
-            SODataBaseFactory.sharedInstance.dataBase.removeTask(taskID)
-        }
-    }
-    
 }
-
-extension ListTasksInteractor {
-    func showAlertWithTitle(title: String, message: String, addActions: ((controller: UIAlertController) -> Void)?, completionBlock: (() -> Void)?){
-        let controller = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.Alert)
-        if addActions != nil {
-            addActions!(controller: controller)
-        } else {
-            controller.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
-        }
-        viewController?.presentViewController(controller, animated: true, completion: completionBlock)
-    }
-}
-

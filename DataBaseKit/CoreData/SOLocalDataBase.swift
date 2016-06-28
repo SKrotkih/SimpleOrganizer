@@ -232,36 +232,14 @@ extension SOLocalDataBase{
                         } else {
                             dispatch_async(dispatch_get_main_queue(), {
                                 var _allTasks: [Task] = []
-                                
                                 for managedTask: ManagedTask in managedTasks{
-                                    var categorySelected: Bool = false
-                                    
-                                    if let managedCategory: ManagedCategory = managedTask.category{
-                                        categorySelected = managedCategory.selected as! Bool
-                                    }
-                                    
-                                    var iconsSelected: Bool = false
-                                    
-                                    if let icons = managedTask.icons{
-                                        let arr = icons.allObjects
-                                        
-                                        for anyObject: AnyObject in arr {
-                                            let managedTaskIcon = anyObject as! ManagedTaskIcon
-                                            let ico = managedTaskIcon.icon
-                                            iconsSelected = ico.selected as! Bool
-                                        }
-                                    }
-                                    
-                                    if categorySelected && iconsSelected{
-                                        let sotask = self!.newTask(managedTask)
-                                        _allTasks.append(sotask)
-                                    }
+                                    let sotask = self!.newTask(managedTask)
+                                    _allTasks.append(sotask)
                                 }
                                 completionBlock(resultBuffer: _allTasks, error: nil)
                             })
                         }
                     }
-                    
                     return true
                 }
                 else {
@@ -371,7 +349,7 @@ extension SOLocalDataBase{
         
         dispatch_sync(self.queue, {() in
             let fetchRequest = NSFetchRequest(entityName: entityName)
-            let predicate = NSPredicate(format: "recordid == \"%@\"", recordid)
+            let predicate = NSPredicate(format: "recordid == \"\(recordid)\"", "")
             fetchRequest.predicate = predicate
             var requestError: NSError?
             let fetchedData: [AnyObject]?
@@ -482,7 +460,6 @@ extension SOLocalDataBase{
         if let object = managedObject{
             dispatch_async(dispatch_get_main_queue(), {[weak self] in
                 let tryCatchException = KVOTryCatchException()
-                //object.setValue(value, forKey: fieldName);
                 if  let error: NSError = tryCatchException.trySetKeyValueForObject(object, forKeyPath: fieldName, value: value){
                     completionBlock(error: error)
                 }
