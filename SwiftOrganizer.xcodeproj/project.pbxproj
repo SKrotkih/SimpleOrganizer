@@ -1020,7 +1020,7 @@
 		7FA23C301D12205500728D3F /* ListTasksScene */ = {
 			isa = PBXGroup;
 			children = (
-				7FA23C391D12258700728D3F /* TabBars */,
+				7FA23C391D12258700728D3F /* FilterTabBar */,
 				7F5DF63D1BAD669300959432 /* ListTasksViewController.swift */,
 				7F3000431D1377E40033D73D /* ListTasksConfigurator.swift */,
 				7F3000441D1377E40033D73D /* ListTasksInteractor.swift */,
@@ -1029,7 +1029,7 @@
 				7F3000471D1377E40033D73D /* ListTasksRouter.swift */,
 				7F5DF54B1BAD288E00959432 /* Main.storyboard */,
 				7F5DF63B1BAD669300959432 /* ListTasksTableViewCell.swift */,
-				7FEA79261D226F8500F3587B /* ListTasksFilter */,
+				7FEA79261D226F8500F3587B /* FilterTasks */,
 			);
 			name = ListTasksScene;
 			sourceTree = "<group>";
@@ -1086,14 +1086,14 @@
 			name = About;
 			sourceTree = "<group>";
 		};
-		7FA23C391D12258700728D3F /* TabBars */ = {
+		7FA23C391D12258700728D3F /* FilterTabBar */ = {
 			isa = PBXGroup;
 			children = (
 				7F979D081D202C0C004D47ED /* TabBarView.swift */,
 				7FA23C3B1D1225B200728D3F /* IconsTabBarScene */,
 				7FA23C3A1D1225A800728D3F /* CategoriesTabBarScene */,
 			);
-			name = TabBars;
+			name = FilterTabBar;
 			sourceTree = "<group>";
 		};
 		7FA23C3A1D1225A800728D3F /* CategoriesTabBarScene */ = {
@@ -1343,7 +1343,7 @@
 			name = Services;
 			sourceTree = "<group>";
 		};
-		7FEA79261D226F8500F3587B /* ListTasksFilter */ = {
+		7FEA79261D226F8500F3587B /* FilterTasks */ = {
 			isa = PBXGroup;
 			children = (
 				7FEA792B1D22715A00F3587B /* FilterTasksProtocol.swift */,
@@ -1352,7 +1352,7 @@
 				7FEA792D1D22746400F3587B /* FilterTasksANDcriteria.swift */,
 				7FEA792F1D22747C00F3587B /* FilterTasksORcriteria.swift */,
 			);
-			name = ListTasksFilter;
+			name = FilterTasks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

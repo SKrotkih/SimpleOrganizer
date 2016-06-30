@@ -11,13 +11,11 @@
 
 import UIKit
 
-// MARK: Connect View, Interactor, and Presenter
-
 extension EditTaskIconsViewController: EditTaskIconsPresenterOutput
 {
-  override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?)
-  {
-  }
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?)
+    {
+    }
 }
 
 extension EditTaskIconsPresenter: EditTaskIconsInteractorOutput
@@ -26,31 +24,22 @@ extension EditTaskIconsPresenter: EditTaskIconsInteractorOutput
 
 class EditTaskIconsConfigurator
 {
-  class var sharedInstance: EditTaskIconsConfigurator
-  {
-    struct Static {
-      static var instance: EditTaskIconsConfigurator?
-      static var token: dispatch_once_t = 0
+    class var sharedInstance: EditTaskIconsConfigurator {
+        struct SingletonWrapper {
+            static let sharedInstance = EditTaskIconsConfigurator()
+        }
+        return SingletonWrapper.sharedInstance;
     }
     
-    dispatch_once(&Static.token) {
-      Static.instance = EditTaskIconsConfigurator()
+    func configure(viewController: EditTaskIconsViewController)
+    {
+        let presenter = EditTaskIconsPresenter()
+        presenter.output = viewController
+        
+        let interactor = EditTaskIconsInteractor()
+        interactor.input = viewController.input
+        interactor.output = presenter
+        
+        viewController.output = interactor
     }
-    
-    return Static.instance!
-  }
-  
-  // MARK: Configuration
-  
-  func configure(viewController: EditTaskIconsViewController)
-  {
-    let presenter = EditTaskIconsPresenter()
-    presenter.output = viewController
-    
-    let interactor = EditTaskIconsInteractor()
-    interactor.input = viewController.input
-    interactor.output = presenter
-    
-    viewController.output = interactor
-  }
 }

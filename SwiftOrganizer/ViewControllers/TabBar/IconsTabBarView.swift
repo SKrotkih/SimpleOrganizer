@@ -12,7 +12,16 @@ class IconsTabBarView: TabBarView {
     var output: IconsTabBarInteractorInput!
     
     override func awakeFromNib(){
+        super.awakeFromNib()
+
         IconsTabBarConfigurator.sharedInstance.configure(self)
         self.output.fetchIcons()
     }
+    
+    override func notify(notification: SOObserverNotification) {
+        if notification.type == .SODataBaseTypeChanged || notification.type == .SODataBaseDidChange {
+            self.output.fetchIcons()
+        }
+    }
+    
 }

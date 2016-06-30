@@ -8,11 +8,34 @@
 
 import UIKit
 
-class TabBarView: UIView {
+class TabBarView: UIView, SOObserverProtocol {
 
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var containerView: UIView!
+    @IBOutlet weak var widthContainerConstraint: NSLayoutConstraint?
+
     var tabs: [UIView] = []
+    
+    override func awakeFromNib(){
+        registerEventsOnObservers()
+    }
+
+    deinit {
+        removeEventsFromObservers()
+    }
+    
+    private func registerEventsOnObservers() {
+        SOObserversManager.sharedInstance.addObserver(self, type: .SODataBaseTypeChanged)
+        SOObserversManager.sharedInstance.addObserver(self, type: .SODataBaseDidChange)
+    }
+    
+    private func removeEventsFromObservers() {
+        SOObserversManager.sharedInstance.removeObserver(self, type: .SODataBaseTypeChanged)
+        SOObserversManager.sharedInstance.removeObserver(self, type: .SODataBaseDidChange)
+    }
+
+    func notify(notification: SOObserverNotification) {
+    }
 }
 
 extension TabBarView: TabBarPresenterOutput {
@@ -48,6 +71,7 @@ extension TabBarView: TabBarPresenterOutput {
             containerFrame.size = contentSize
             containerView.frame = containerFrame
             scrollView.contentSize = contentSize
+            self.widthContainerConstraint?.constant = contentSize.width
         })
     }
     

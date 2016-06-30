@@ -10,19 +10,11 @@ import Foundation
 
 class CategoriesTabBarConfigurator
 {
-    
-    class var sharedInstance: CategoriesTabBarConfigurator
-    {
-        struct Static {
-            static var instance: CategoriesTabBarConfigurator?
-            static var token: dispatch_once_t = 0
+    class var sharedInstance: CategoriesTabBarConfigurator {
+        struct SingletonWrapper {
+            static let sharedInstance = CategoriesTabBarConfigurator()
         }
-        
-        dispatch_once(&Static.token) {
-            Static.instance = CategoriesTabBarConfigurator()
-        }
-        
-        return Static.instance!
+        return SingletonWrapper.sharedInstance;
     }
     
     func configure(viewController: CategoriesTabBarView)

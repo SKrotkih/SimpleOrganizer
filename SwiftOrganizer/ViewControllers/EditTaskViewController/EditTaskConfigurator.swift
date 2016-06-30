@@ -11,37 +11,24 @@
 
 import UIKit
 
-// MARK: Connect View, Interactor, and Presenter
-
 class EditTaskConfigurator
 {
-  // MARK: Object lifecycle
-  
-  class var sharedInstance: EditTaskConfigurator
-  {
-    struct Static {
-      static var instance: EditTaskConfigurator?
-      static var token: dispatch_once_t = 0
+    class var sharedInstance: EditTaskConfigurator {
+        struct SingletonWrapper {
+            static let sharedInstance = EditTaskConfigurator()
+        }
+        return SingletonWrapper.sharedInstance;
     }
     
-    dispatch_once(&Static.token) {
-      Static.instance = EditTaskConfigurator()
+    func configure(viewController: EditTaskViewController)
+    {
+        let router = EditTaskRouter()
+        router.viewController = viewController
+        
+        let interactor = EditTaskInteractor()
+        interactor.output = viewController
+        
+        viewController.input = interactor
+        viewController.router = router
     }
-    
-    return Static.instance!
-  }
-  
-  // MARK: Configuration
-  
-  func configure(viewController: EditTaskViewController)
-  {
-    let router = EditTaskRouter()
-    router.viewController = viewController
-    
-    let interactor = EditTaskInteractor()
-    interactor.output = viewController
-    
-    viewController.input = interactor
-    viewController.router = router
-  }
 }

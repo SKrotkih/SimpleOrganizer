@@ -350,6 +350,7 @@
                                 <connections>
                                     <outlet property="containerView" destination="eck-zB-rFJ" id="p73-5X-XVP"/>
                                     <outlet property="scrollView" destination="90y-b9-9HO" id="BN9-va-w9e"/>
+                                    <outlet property="widthContainerConstraint" destination="RCn-pj-NPq" id="53m-DE-ljx"/>
                                 </connections>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Cff-bV-Tsw">
@@ -663,11 +664,19 @@
                                             </view>
                                         </subviews>
                                         <constraints>
-                                            <constraint firstAttribute="trailing" secondItem="RoP-3V-7ol" secondAttribute="trailing" id="5JX-U0-cwc"/>
+                                            <constraint firstAttribute="trailing" secondItem="RoP-3V-7ol" secondAttribute="trailing" constant="-1000" id="5JX-U0-cwc"/>
                                             <constraint firstItem="RoP-3V-7ol" firstAttribute="top" secondItem="kWV-Gp-IcV" secondAttribute="top" id="KkS-2j-dOK"/>
+                                            <constraint firstAttribute="trailing" secondItem="RoP-3V-7ol" secondAttribute="trailing" id="a2H-O1-PSf"/>
                                             <constraint firstItem="RoP-3V-7ol" firstAttribute="leading" secondItem="kWV-Gp-IcV" secondAttribute="leading" id="dz7-S2-wrJ"/>
                                             <constraint firstAttribute="bottom" secondItem="RoP-3V-7ol" secondAttribute="bottom" constant="2" id="mgu-A5-EXv"/>
+                                            <constraint firstItem="RoP-3V-7ol" firstAttribute="leading" secondItem="kWV-Gp-IcV" secondAttribute="leading" id="ocu-DA-GoJ"/>
                                         </constraints>
+                                        <variation key="default">
+                                            <mask key="constraints">
+                                                <exclude reference="5JX-U0-cwc"/>
+                                                <exclude reference="dz7-S2-wrJ"/>
+                                            </mask>
+                                        </variation>
                                     </scrollView>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -681,6 +690,7 @@
                                 <connections>
                                     <outlet property="containerView" destination="RoP-3V-7ol" id="CzL-5v-6bc"/>
                                     <outlet property="scrollView" destination="kWV-Gp-IcV" id="hdB-Kv-ASg"/>
+                                    <outlet property="widthContainerConstraint" destination="klZ-6W-lg7" id="vN4-Zh-fde"/>
                                 </connections>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sJX-oj-5Lc">

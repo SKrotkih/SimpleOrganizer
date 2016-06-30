@@ -10,19 +10,11 @@ import Foundation
 
 class IconTabBarItemConfigurator
 {
-
-    class var sharedInstance: IconTabBarItemConfigurator
-    {
-        struct Static {
-            static var instance: IconTabBarItemConfigurator?
-            static var token: dispatch_once_t = 0
+    class var sharedInstance: IconTabBarItemConfigurator {
+        struct SingletonWrapper {
+            static let sharedInstance = IconTabBarItemConfigurator()
         }
-        
-        dispatch_once(&Static.token) {
-            Static.instance = IconTabBarItemConfigurator()
-        }
-        
-        return Static.instance!
+        return SingletonWrapper.sharedInstance;
     }
     
     func configure(viewController: IconTabBarItemView, ico: TaskIco)

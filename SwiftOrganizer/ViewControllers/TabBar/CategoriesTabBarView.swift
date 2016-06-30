@@ -12,7 +12,16 @@ class CategoriesTabBarView: TabBarView {
     var output: CategoriesTabBarInteractorInput!
     
     override func awakeFromNib(){
+        super.awakeFromNib()
+        
         CategoriesTabBarConfigurator.sharedInstance.configure(self)
         self.output.fetchCategories()
     }
+    
+    override func notify(notification: SOObserverNotification) {
+        if notification.type == .SODataBaseTypeChanged || notification.type == .SODataBaseDidChange {
+            self.output.fetchCategories()
+        }
+    }
+    
 }

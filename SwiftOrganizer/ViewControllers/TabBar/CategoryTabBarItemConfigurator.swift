@@ -10,21 +10,13 @@ import Foundation
 
 class CategoryTabBarItemConfigurator
 {
-
-    class var sharedInstance: CategoryTabBarItemConfigurator
-    {
-        struct Static {
-            static var instance: CategoryTabBarItemConfigurator?
-            static var token: dispatch_once_t = 0
+    class var sharedInstance: CategoryTabBarItemConfigurator {
+        struct SingletonWrapper {
+            static let sharedInstance = CategoryTabBarItemConfigurator()
         }
-        
-        dispatch_once(&Static.token) {
-            Static.instance = CategoryTabBarItemConfigurator()
-        }
-        
-        return Static.instance!
+        return SingletonWrapper.sharedInstance;
     }
-    
+
     func configure(viewController: CategoryTabBarItemView, category: TaskCategory)
     {
         let interactor = CategoryTabBarItemInteractor()

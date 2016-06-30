@@ -48,6 +48,7 @@ Were applied the following design patterns:
 - observer;
 - singleton;
 - builder;
+- filter;
 - chain responsibility;
 
 Please pay attention to the following details:

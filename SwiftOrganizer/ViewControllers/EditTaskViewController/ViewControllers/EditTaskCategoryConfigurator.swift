@@ -11,13 +11,11 @@
 
 import UIKit
 
-// MARK: Connect View, Interactor, and Presenter
-
 extension EditTaskCategoryViewController: EditTaskCategoryPresenterOutput
 {
-  override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?)
-  {
-  }
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?)
+    {
+    }
 }
 
 extension EditTaskCategoryPresenter: EditTaskCategoryInteractorOutput
@@ -26,31 +24,22 @@ extension EditTaskCategoryPresenter: EditTaskCategoryInteractorOutput
 
 class EditTaskCategoryConfigurator
 {
-  class var sharedInstance: EditTaskCategoryConfigurator
-  {
-    struct Static {
-      static var instance: EditTaskCategoryConfigurator?
-      static var token: dispatch_once_t = 0
+    class var sharedInstance: EditTaskCategoryConfigurator {
+        struct SingletonWrapper {
+            static let sharedInstance = EditTaskCategoryConfigurator()
+        }
+        return SingletonWrapper.sharedInstance;
     }
     
-    dispatch_once(&Static.token) {
-      Static.instance = EditTaskCategoryConfigurator()
+    func configure(viewController: EditTaskCategoryViewController)
+    {
+        let presenter = EditTaskCategoryPresenter()
+        presenter.output = viewController
+        
+        let interactor = EditTaskCategoryInteractor()
+        interactor.input = viewController.input
+        interactor.output = presenter
+        
+        viewController.output = interactor
     }
-    
-    return Static.instance!
-  }
-  
-  // MARK: Configuration
-  
-  func configure(viewController: EditTaskCategoryViewController)
-  {
-    let presenter = EditTaskCategoryPresenter()
-    presenter.output = viewController
-    
-    let interactor = EditTaskCategoryInteractor()
-    interactor.input = viewController.input
-    interactor.output = presenter
-    
-    viewController.output = interactor
-  }
 }

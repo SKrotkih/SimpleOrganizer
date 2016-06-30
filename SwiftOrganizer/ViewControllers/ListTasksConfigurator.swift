@@ -11,44 +11,31 @@
 
 import UIKit
 
-// MARK: Connect View, Interactor, and Presenter
-
 extension ListTasksPresenter: ListTasksInteractorOutput
 {
 }
 
 class ListTasksConfigurator
 {
-  // MARK: Object lifecycle
-  
-  class var sharedInstance: ListTasksConfigurator
-  {
-    struct Static {
-      static var instance: ListTasksConfigurator?
-      static var token: dispatch_once_t = 0
+    class var sharedInstance: ListTasksConfigurator {
+        struct SingletonWrapper {
+            static let sharedInstance = ListTasksConfigurator()
+        }
+        return SingletonWrapper.sharedInstance;
     }
     
-    dispatch_once(&Static.token) {
-      Static.instance = ListTasksConfigurator()
+    func configure(viewController: ListTasksViewController)
+    {
+        let router = ListTasksRouter()
+        router.viewController = viewController
+        
+        let presenter = ListTasksPresenter()
+        presenter.output = viewController
+        
+        let interactor = ListTasksInteractor()
+        interactor.output = presenter
+        
+        viewController.output = interactor
+        viewController.router = router
     }
-    
-    return Static.instance!
-  }
-  
-  // MARK: Configuration
-  
-  func configure(viewController: ListTasksViewController)
-  {
-    let router = ListTasksRouter()
-    router.viewController = viewController
-    
-    let presenter = ListTasksPresenter()
-    presenter.output = viewController
-    
-    let interactor = ListTasksInteractor()
-    interactor.output = presenter
-    
-    viewController.output = interactor
-    viewController.router = router
-  }
 }
