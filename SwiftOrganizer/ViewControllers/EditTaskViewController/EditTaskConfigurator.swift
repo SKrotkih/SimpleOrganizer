@@ -20,6 +20,8 @@ class EditTaskConfigurator
         return SingletonWrapper.sharedInstance;
     }
     
+    private init() {}
+    
     func configure(viewController: EditTaskViewController)
     {
         let router = EditTaskRouter()

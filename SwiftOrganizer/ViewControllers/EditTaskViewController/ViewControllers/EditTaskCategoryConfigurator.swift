@@ -30,6 +30,8 @@ class EditTaskCategoryConfigurator
         }
         return SingletonWrapper.sharedInstance;
     }
+
+    private init() {}
     
     func configure(viewController: EditTaskCategoryViewController)
     {

@@ -23,6 +23,8 @@ class LoginConfigurator
         return SingletonWrapper.sharedInstance;
     }
     
+    private init() {}    
+    
     // MARK: Configuration
     
     func configure(viewController: LoginViewController)

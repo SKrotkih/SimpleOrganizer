@@ -17,10 +17,11 @@ public class CoreConfigurator {
         
         return SingletonWrapper.sharedInstance;
     }
+
+    private init() {}    
     
     public func configure()
     {
-
         UsersWorker.sharedInstance.usersStore = UsersCoreDataStore()  // UsersRemoteDataBase()
         LoginWorker.sharedInstance.login = LoginCoreData()  // LoginRemoteDataBase()
     }

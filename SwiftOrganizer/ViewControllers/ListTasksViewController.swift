@@ -132,7 +132,7 @@ class ListTasksViewController: UIViewController{
     }
     
     func cancelEditTask(){
-        //self.editTaskViewController.cancelToEdit()
+        //self.editTaskViewController.cancelEditingMode()
     }
     
     private func prepareBarButtonItems() {

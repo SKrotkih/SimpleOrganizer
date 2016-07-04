@@ -164,19 +164,18 @@ class EditTaskViewController: UIViewController {
         _undoManager.removeAllActions()
     }
     
-    func cancelToEdit(){
-        if let navController = self.navigationController{
-            let currentTopViewController = topViewController(navController)
-            
-            if currentTopViewController == self{
-                closeButtonWasPressed()
-            } else if currentTopViewController!.isKindOfClass(EditTaskDetailViewController){
-                let editTaskFieldViewController = currentTopViewController as! EditTaskDetailViewController
-                editTaskFieldViewController.closeButtonWasPressed()
-                dispatch_async(dispatch_get_main_queue(), {
-                    self.closeButtonWasPressed()
-                })
-            }
+    func cancelEditingMode(){
+        guard let navController = self.navigationController else {return}
+        let currentTopViewController = topViewController(navController)
+        
+        if currentTopViewController == self {
+            closeButtonWasPressed()
+        } else if currentTopViewController!.isKindOfClass(EditTaskDetailViewController){
+            let editTaskFieldViewController = currentTopViewController as! EditTaskDetailViewController
+            editTaskFieldViewController.closeButtonWasPressed()
+            dispatch_async(dispatch_get_main_queue(), {
+                self.closeButtonWasPressed()
+            })
         }
     }
     

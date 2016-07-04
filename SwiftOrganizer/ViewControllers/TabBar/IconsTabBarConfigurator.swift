@@ -17,6 +17,8 @@ class IconsTabBarConfigurator
         return SingletonWrapper.sharedInstance;
     }
     
+    private init() {}    
+    
     func configure(viewController: IconsTabBarView)
     {
         let interactor = IconsTabBarInteractor()

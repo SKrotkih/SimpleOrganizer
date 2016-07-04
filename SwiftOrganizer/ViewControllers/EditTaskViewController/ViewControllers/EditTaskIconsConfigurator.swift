@@ -31,6 +31,8 @@ class EditTaskIconsConfigurator
         return SingletonWrapper.sharedInstance;
     }
     
+    private init() {}
+    
     func configure(viewController: EditTaskIconsViewController)
     {
         let presenter = EditTaskIconsPresenter()

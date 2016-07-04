@@ -23,6 +23,9 @@ class ListTasksConfigurator
         }
         return SingletonWrapper.sharedInstance;
     }
+
+    private init() {
+    }
     
     func configure(viewController: ListTasksViewController)
     {

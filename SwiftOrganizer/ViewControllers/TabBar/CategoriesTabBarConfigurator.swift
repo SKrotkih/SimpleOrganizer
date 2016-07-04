@@ -16,15 +16,16 @@ class CategoriesTabBarConfigurator
         }
         return SingletonWrapper.sharedInstance;
     }
+
+    private init() {}
     
     func configure(viewController: CategoriesTabBarView)
     {
         let interactor = CategoriesTabBarInteractor()
-        viewController.output = interactor
-        
         let presenter = CategoriesTabBarPresenter()
+
         interactor.output = presenter
-        
         presenter.output = viewController
+        viewController.output = interactor
     }
 }

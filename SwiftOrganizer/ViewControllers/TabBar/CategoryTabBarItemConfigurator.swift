@@ -17,12 +17,15 @@ class CategoryTabBarItemConfigurator
         return SingletonWrapper.sharedInstance;
     }
 
+    private init() {}    
+    
     func configure(viewController: CategoryTabBarItemView, category: TaskCategory)
     {
         let interactor = CategoryTabBarItemInteractor()
-        viewController.output = interactor
-        interactor.output = viewController
         interactor.category = category
+
+        interactor.output = viewController
+        viewController.output = interactor
     }
     
 }
