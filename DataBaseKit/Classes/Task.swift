@@ -48,6 +48,12 @@ public class Task: NSObject{
         return SODataBaseFactory.sharedInstance.dataBase.getRecordIdForTask(self)
     }
     
+    public var iconsCount: Int {
+        get {
+            return icons.count
+        }
+    }
+    
 }
 
 extension Task{
@@ -138,19 +144,16 @@ extension Task{
 
 extension Task{
     public func iconImage(index: Int) -> UIImage?{
-        if index < icons.count{
-            let icoId = icons[index]
-            
-            let ico: TaskIco? = SOFetchingData.sharedInstance.iconById(icoId)
-            if let theIco = ico{
-                let imageName : String = theIco.imageName
-
-                if let image : UIImage = UIImage(named: imageName){
-                    return image
-                }
+        if index < 0 || index >= self.iconsCount {
+            return nil
+        }
+        let icoId = icons[index]
+        if let ico = SOFetchingData.sharedInstance.iconById(icoId){
+            let imageName : String = ico.imageName
+            if let image : UIImage = UIImage(named: imageName){
+                return image
             }
         }
-        
         return nil
     }
     

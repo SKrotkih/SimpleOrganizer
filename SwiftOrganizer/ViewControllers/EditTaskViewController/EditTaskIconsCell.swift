@@ -20,24 +20,26 @@ class EditTaskIconsCell: EditTaskDetailCell {
     
     override func displayContent(){
         let task: Task = self.input.task
-        let imagesView = [self.ico1ImageView, self.ico2ImageView, self.ico3ImageView, self.ico4ImageView, self.ico5ImageView, self.ico6ImageView]
-        var count: Int = 0;
-        
-        for i in 0..<imagesView.count {
-            let imageView: UIImageView = imagesView[i]
-            
-            if let currImage: UIImage = task.iconImage(i){
-                imageView.image = currImage
-            } else {
-                imageView.image = nil
-                count += 1
+        let imageViews  = [self.ico1ImageView, self.ico2ImageView, self.ico3ImageView, self.ico4ImageView, self.ico5ImageView, self.ico6ImageView]
+        let _ = imageViews.map({object in
+            let imageView = object as UIImageView
+            imageView.image = nil
+        })
+        iconsBackgroundView.hidden = true
+        textBackgroundLabel.hidden = false
+        var fillControllersCount: Int = 0;
+        for i in 0..<task.iconsCount {
+            if let iconImage: UIImage = task.iconImage(i) {
+                if fillControllersCount < imageViews.count {
+                    let imageView: UIImageView = imageViews[fillControllersCount]
+                    imageView.image = iconImage
+                    fillControllersCount += 1
+                } else {
+                    break
+                }
             }
         }
-        if count >= imagesView.count{
-            iconsBackgroundView.hidden = true
-            textBackgroundLabel.hidden = false
-        }
-        else{
+        if fillControllersCount > 0 {
             iconsBackgroundView.hidden = false
             textBackgroundLabel.hidden = true
         }
@@ -48,4 +50,3 @@ class EditTaskIconsCell: EditTaskDetailCell {
     }
     
 }
-
